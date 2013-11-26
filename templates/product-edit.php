@@ -18,8 +18,6 @@ if ( $term ) {
 <div id="primary" class="content-area col-md-12">
     <div id="content" class="site-content" role="main">
 
-    <p>hello there</p>
-
     <div class="row product-edit-container">
         <div class="col-md-8">
             <div class="tabbable"> <!-- Only required for left/right tabs -->
@@ -37,7 +35,7 @@ if ( $term ) {
                 <div class="tab-content">
                     <div class="tab-pane active" id="edit-product">
 
-                        <form class="form-horizontal" role="form" method="post">
+                        <form class="form" role="form" method="post">
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -59,48 +57,65 @@ if ( $term ) {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
-                                    <input class="" name="post_title" id="post-title" type="text" placeholder="Product name.." value="<?php echo esc_attr( $post->post_title ); ?>">
-                                    <div class="input-prepend">
-                                        <span class="add-on"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                                        <input class="" name="price" id="product-price" type="text" placeholder="9.99" value="<?php echo esc_attr( $woo_product->get_price() ); ?>">
+
+                                    <div class="form-group">
+                                        <input class="form-control" name="post_title" id="post-title" type="text" placeholder="Product name.." value="<?php echo esc_attr( $post->post_title ); ?>">
                                     </div>
 
-                                    <span class="pull-right">
-                                        <label>
-                                            <input type="checkbox" class="_discounted_price"> Discounted Price
-                                        </label>
-                                    </span>
-
-                                    <div class="special-price-container dokan-hide">
-                                        <div class="input-prepend">
-                                            <span class="add-on"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                                            <input class="" name="_sale_price" id="product-price" type="text" placeholder="Special price" value="<?php echo esc_attr( '' ); ?>">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
+                                                <input class="form-control" name="price" id="product-price" type="text" placeholder="9.99" value="<?php echo esc_attr( $woo_product->get_price() ); ?>">
+                                            </div>
                                         </div>
 
-                                        <a href="#" class="sale-schedule">Schedule</a>
 
-                                        <div class="sale-schedule-container dokan-hide">
-                                            From <input type="text" name="_sale_price_dates_from" class="span1">
-                                            To <input type="text" name="_sale_price_dates_to" class="span1">
+                                        <span class="pull-right">
+                                            <label>
+                                                <input type="checkbox" class="_discounted_price"> Discounted Price
+                                            </label>
+                                        </span>
+                                    </div>
+
+                                    <div class="form-group dokan-hide">
+                                        <div class="special-price-container">
+                                            <div class="input-group col-md-6">
+                                                <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
+                                                <input class="form-control" name="_sale_price" id="product-price" type="text" placeholder="Special price" value="<?php echo esc_attr( '' ); ?>">
+                                            </div>
+
+                                            <a href="#" class="sale-schedule">Schedule</a>
+
+                                            <div class="sale-schedule-container dokan-hide">
+                                                From <input type="text" name="_sale_price_dates_from" class="span1">
+                                                To <input type="text" name="_sale_price_dates_to" class="span1">
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <textarea name="post_excerpt" id="post-excerpt" rows="5" class="col-md-4" placeholder="Short description about the product..."><?php echo esc_textarea( $post->post_excerpt ); ?></textarea>
-                                    <?php
-                                    wp_dropdown_categories( array(
-                                        'show_option_none' => __( '- Select a category -', 'dokan' ),
-                                        'hierarchical' => 1,
-                                        'hide_empty' => 0,
-                                        'name' => 'product_cat',
-                                        'id' => 'product_cat',
-                                        'taxonomy' => 'product_cat',
-                                        'title_li' => '',
-                                        'class' => 'product_cat',
-                                        'exclude' => '',
-                                        'selected' => $product_cat,
-                                    ) );
-                                    ?>
+                                    <div class="form-group">
+                                        <textarea name="post_excerpt" id="post-excerpt" rows="5" class="form-control" placeholder="Short description about the product..."><?php echo esc_textarea( $post->post_excerpt ); ?></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <?php
+                                        wp_dropdown_categories( array(
+                                            'show_option_none' => __( '- Select a category -', 'dokan' ),
+                                            'hierarchical' => 1,
+                                            'hide_empty' => 0,
+                                            'name' => 'product_cat',
+                                            'id' => 'product_cat',
+                                            'taxonomy' => 'product_cat',
+                                            'title_li' => '',
+                                            'class' => 'product_cat form-control',
+                                            'exclude' => '',
+                                            'selected' => $product_cat,
+                                        ) );
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
 

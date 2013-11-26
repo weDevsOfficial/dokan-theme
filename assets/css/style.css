@@ -121,6 +121,7 @@ p{margin:0 0 15px 0;}
 #comments ol.commentlist .nocomments{padding:15px;color:#c09853;background-color:#fcf8e3;border-color:#fbeed5;}
 #comments ol.commentlist>li:last-child article.comment{border-bottom:none;}
 #comments ol.commentlist li.bypostauthor>article{background:#ffffff;}
+.product-edit-container .tab-pane{padding:15px 0;}
 .product-edit-container .dokan-feat-image-upload{border:4px dashed #DDDDDD;height:250px;width:250px;margin-bottom:20px;}
 .product-edit-container .instruction-inside{text-align:center;padding-top:110px;color:#aaa;}
 .product-edit-container aside{border:1px solid #eee;margin-bottom:15px;}
