@@ -13,7 +13,7 @@ get_header();
     <div class="col-md-9">
 
         <p>
-            <a href="<?php echo home_url( 'new-product' ); ?>" class="btn btn-large btn-info">Add new product</a>
+            <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-large btn-info">Add new product</a>
         </p>
     </div>
 </div>

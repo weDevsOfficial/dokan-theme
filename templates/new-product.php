@@ -71,7 +71,14 @@ if ( isset( $_POST['add_product'] ) ) {
     }
 }
 
+get_header();
 ?>
+
+<div class="row">
+
+    <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
+
+    <div class="col-md-9">
 
         <?php if ( $errors ) { ?>
             <div class="alert alert-error">
@@ -88,7 +95,7 @@ if ( isset( $_POST['add_product'] ) ) {
         <form class="form-horizontall" method="post">
 
             <div class="row">
-                <div class="span3">
+                <div class="col-md-3">
                     <div class="dokan-feat-image-upload">
                         <div class="instruction-inside">
                             <input type="hidden" name="feat_image_id" value="0">
@@ -96,7 +103,7 @@ if ( isset( $_POST['add_product'] ) ) {
                         </div>
                     </div>
                 </div>
-                <div class="span4">
+                <div class="col-md-4">
                     <input class="span4" name="post_title" id="post-title" type="text" placeholder="Product name.." value="<?php echo dokan_posted_input( 'post_title' ); ?>">
                     <div class="input-prepend">
                         <span class="add-on">$</span>
@@ -129,3 +136,6 @@ if ( isset( $_POST['add_product'] ) ) {
             </div>
 
         </form>
+    </div>
+</div>
+<?php get_footer(); ?>
