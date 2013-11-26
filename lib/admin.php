@@ -7,7 +7,7 @@ require_once dirname( __FILE__ ) . '/class.settings-api.php';
  *
  * @author Tareq Hasan
  */
-class Tareqs_Planet_Admin {
+class Dokan_Admin_Settings {
 
     private $settings_api;
 
@@ -29,14 +29,18 @@ class Tareqs_Planet_Admin {
     }
 
     function admin_menu() {
-        add_theme_page( 'Theme Options', 'Theme Options', 'delete_posts', 'theme-option', array($this, 'plugin_page') );
+        $menu_position = apply_filters( 'doakn_menu_position', 17 );
+        $capability = apply_filters( 'doakn_menu_capability', 'activate_plugins' );
+
+        add_menu_page( __( 'Doakn', 'dokan' ), __( 'Doakn', 'dokan' ), $capability, 'dokan', array($this, 'plugin_page'), null, $menu_position );
+        // add_submenu_page( 'doakn', __( 'Archive', 'dokan' ), __( 'Archive', 'dokan' ), $capability, 'doakn-archives', array($this, 'plugin_page') );
     }
 
     function get_settings_sections() {
         $sections = array(
             array(
-                'id' => 'tp_settings',
-                'title' => __( 'Basic Settings', 'wedevs' )
+                'id' => 'dokan_pages',
+                'title' => __( 'Page Settings', 'dokan' )
             )
         );
         return $sections;
@@ -48,24 +52,72 @@ class Tareqs_Planet_Admin {
      * @return array settings fields
      */
     function get_settings_fields() {
+        $pages_array = array();
+        $pages = get_posts( array('post_type' => 'page', 'numberposts' => -1) );
+
+        if ( $pages ) {
+            foreach ($pages as $page) {
+                $pages_array[$page->ID] = $page->post_title;
+            }
+        }
+
         $settings_fields = array(
-            'tp_settings' => array(
+            'dokan_pages' => array(
                 array(
-                    'name' => 'footer_text',
-                    'label' => __( 'Footer Message', 'wedevs' ),
-                    'type' => 'textarea',
-                    'std' => ''
+                    'name' => 'dashboard',
+                    'label' => __( 'Dashboard', 'dokan' ),
+                    'type' => 'select',
+                    'options' => $pages_array
                 ),
                 array(
-                    'name' => 'footer_js',
-                    'label' => __( 'Footer JS', 'wedevs' ),
-                    'type' => 'textarea'
+                    'name' => 'products',
+                    'label' => __( 'Products Listing', 'dokan' ),
+                    'type' => 'select',
+                    'options' => $pages_array
                 ),
                 array(
-                    'name' => 'footer_css',
-                    'label' => __( 'Footer CSS', 'wedevs' ),
-                    'type' => 'textarea'
-                )
+                    'name' => 'new_product',
+                    'label' => __( 'Create Product Page', 'dokan' ),
+                    'type' => 'select',
+                    'options' => $pages_array
+                ),
+                array(
+                    'name' => 'orders',
+                    'label' => __( 'Orders', 'dokan' ),
+                    'type' => 'select',
+                    'options' => $pages_array
+                ),
+                array(
+                    'name' => 'coupons',
+                    'label' => __( 'Coupons', 'dokan' ),
+                    'type' => 'select',
+                    'options' => $pages_array
+                ),
+                array(
+                    'name' => 'reports',
+                    'label' => __( 'Reports', 'dokan' ),
+                    'type' => 'select',
+                    'options' => $pages_array
+                ),
+                array(
+                    'name' => 'reviews',
+                    'label' => __( 'Reviews', 'dokan' ),
+                    'type' => 'select',
+                    'options' => $pages_array
+                ),
+                array(
+                    'name' => 'withdraw',
+                    'label' => __( 'Withdraw', 'dokan' ),
+                    'type' => 'select',
+                    'options' => $pages_array
+                ),
+                array(
+                    'name' => 'settings',
+                    'label' => __( 'Settings', 'dokan' ),
+                    'type' => 'select',
+                    'options' => $pages_array
+                ),
+
             )
         );
 
@@ -84,4 +136,4 @@ class Tareqs_Planet_Admin {
 
 }
 
-$settings = new Tareqs_Planet_Admin();
+$settings = new Dokan_Admin_Settings();

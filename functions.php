@@ -37,6 +37,8 @@ class WeDevs_Dokan {
         add_action( 'wp_enqueue_scripts', array($this, 'scripts') );
         add_filter( 'posts_where', array($this, 'hide_others_uploads') );
 
+        add_action( 'admin_init', array($this, 'install_theme' ) );
+
         //initalize user roles
         $this->user_roles();
     }
@@ -47,6 +49,12 @@ class WeDevs_Dokan {
         require_once dirname( __FILE__ ) . '/lib/bootstrap-walker.php';
         require_once dirname( __FILE__ ) . '/lib/woo-functions.php';
         require_once dirname( __FILE__ ) . '/lib/woo-template.php';
+        require_once dirname( __FILE__ ) . '/lib/template-tags.php';
+
+        if ( is_admin() ) {
+            require_once dirname( __FILE__ ) . '/lib/admin.php';
+        }
+
 
         $files = array(
             'woo-template.php', //Custom template fixing functions for WooCommerce
@@ -128,6 +136,125 @@ class WeDevs_Dokan {
          * Add support for the Aside Post Formats
          */
         // add_theme_support( 'post-formats', array('aside',) );
+    }
+
+    function install_theme() {
+        global $pagenow;
+
+        if ( is_admin() && isset($_GET['activated'] ) && $pagenow == 'themes.php' ) {
+            $this->setup_pages();
+        }
+    }
+
+    function setup_pages() {
+        $meta_key = '_wp_page_template';
+
+        $pages = array(
+            array(
+                'post_title' => __( 'Dashboard', 'dokan' ),
+                'slug' => 'dashboard',
+                'template' => 'templates/dashboard.php',
+                'page_id' => 'dashboard',
+                'child' => array(
+                    array(
+                        'post_title' => __( 'Products', 'dokan' ),
+                        'slug' => 'products',
+                        'template' => 'templates/products.php',
+                        'page_id' => 'products',
+                    ),
+                    array(
+                        'post_title' => __( 'Create Product', 'dokan' ),
+                        'slug' => 'add-product',
+                        'template' => 'templates/new-product.php',
+                        'page_id' => 'new_product',
+                    ),
+                    array(
+                        'post_title' => __( 'Orders', 'dokan' ),
+                        'slug' => 'orders',
+                        'template' => 'templates/orders.php',
+                        'page_id' => 'orders',
+                    ),
+                    array(
+                        'post_title' => __( 'Coupons', 'dokan' ),
+                        'slug' => 'coupons',
+                        'template' => 'templates/coupons.php',
+                        'page_id' => 'coupons',
+                    ),
+                    array(
+                        'post_title' => __( 'Reports', 'dokan' ),
+                        'slug' => 'reports',
+                        'template' => 'templates/reports.php',
+                        'page_id' => 'reports',
+                    ),
+                    array(
+                        'post_title' => __( 'Reviews', 'dokan' ),
+                        'slug' => 'reviews',
+                        'template' => 'templates/reviews.php',
+                        'page_id' => 'reviews',
+                    ),
+                    array(
+                        'post_title' => __( 'Withdraw', 'dokan' ),
+                        'slug' => 'withdraw',
+                        'template' => 'templates/withdraw.php',
+                        'page_id' => 'withdraw',
+                    ),
+                    array(
+                        'post_title' => __( 'Settings', 'dokan' ),
+                        'slug' => 'settings',
+                        'template' => 'templates/settings.php',
+                        'page_id' => 'settings',
+                    )
+                )
+            )
+        );
+
+        $dokan_page_settings = array();
+
+        if ( $pages ) {
+            foreach ($pages as $page) {
+                $page_id = $this->create_page( $page );
+
+                if ( $page_id ) {
+                    $dokan_page_settings[$page['page_id']] = $page_id;
+
+                    if ( isset( $page['child'] ) && count( $page['child'] ) > 0 ) {
+                        foreach ($page['child'] as $child_page) {
+                            $child_page_id = $this->create_page( $child_page );
+
+                            if ( $child_page_id ) {
+                                $dokan_page_settings[$child_page['page_id']] = $child_page_id;
+
+                                wp_update_post( array( 'ID' => $child_page_id, 'post_parent' => $page_id ) );
+                            }
+                        }
+                    } // if child
+                } // if page_id
+            } // end foreach
+        } // if pages
+
+        update_option( 'dokan_pages', $dokan_page_settings );
+    }
+
+    function create_page( $page ) {
+        $meta_key = '_wp_page_template';
+        $page_obj = get_page_by_path( $page['post_title'] );
+
+        if ( !$page_obj ) {
+            $page_id = wp_insert_post( array(
+                'post_title' => $page['post_title'],
+                'post_name' => $page['slug'],
+                'post_status' => 'publish',
+                'post_type' => 'page',
+            ) );
+
+            if ( $page_id && !is_wp_error( $page_id ) ) {
+                update_post_meta( $page_id, $meta_key, $page['template'] );
+
+                return $page_id;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -536,4 +663,29 @@ function dokan_get_template( $template_name, $args = array() ) {
 
         include_once $template_name;
     }
+}
+
+function dokan_get_page_url( $page ) {
+    $page_id = dokan_get_option( $page, 'dokan_pages' );
+
+    return get_permalink( $page_id );
+}
+
+/**
+ * Get the value of a settings field
+ *
+ * @param string $option settings field name
+ * @param string $section the section name this field belongs to
+ * @param string $default default text if it's not found
+ * @return mixed
+ */
+function dokan_get_option( $option, $section, $default = '' ) {
+
+    $options = get_option( $section );
+
+    if ( isset( $options[$option] ) ) {
+        return $options[$option];
+    }
+
+    return $default;
 }

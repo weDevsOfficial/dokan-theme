@@ -4,8 +4,6 @@
  */
 
 get_header();
-
-$active_plugin = 'hello';
 ?>
 
 <div class="row">
