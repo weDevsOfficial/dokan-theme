@@ -7,7 +7,7 @@ h1,h2,h3{color:#222;}
 h1{font-size:28px;}
 h2{font-size:24px;}
 h3{font-size:18px;}
-body{font-family:'Source Sans Pro',sans-serif;font-size:16px;line-height:150%;color:#444;}
+body{font-family:'Open Sans',sans-serif;font-size:16px;line-height:150%;color:#444;background:#fafafa;}
 a:hover{text-decoration:none;}
 label{font-size:16px;line-height:150%;}
 .required{color:red;}
@@ -121,7 +121,11 @@ p{margin:0 0 15px 0;}
 #comments ol.commentlist .nocomments{padding:15px;color:#c09853;background-color:#fcf8e3;border-color:#fbeed5;}
 #comments ol.commentlist>li:last-child article.comment{border-bottom:none;}
 #comments ol.commentlist li.bypostauthor>article{background:#ffffff;}
+.dokan-dash-sidebar ul.dokan-dashboard-menu{background:#242424;list-style:none;margin:0;padding:0;}.dokan-dash-sidebar ul.dokan-dashboard-menu li{margin:0;border-bottom:1px solid #454545;}.dokan-dash-sidebar ul.dokan-dashboard-menu li a{padding:10px 0 10px 18px;display:block;color:#fff;font-size:14px;font-weight:bold;}.dokan-dash-sidebar ul.dokan-dashboard-menu li a i{font-size:17px;padding-right:15px;}
+.dokan-dash-sidebar ul.dokan-dashboard-menu li.active{background:#f05025;}.dokan-dash-sidebar ul.dokan-dashboard-menu li.active a{color:#fafafa;}
+.dokan-dash-sidebar ul.dokan-dashboard-menu li:hover{background:#f05025;}
 .product-edit-container .tab-pane{padding:15px 0;}
+.product-edit-container label{font-weight:normal;}
 .product-edit-container .dokan-feat-image-upload{border:4px dashed #DDDDDD;height:250px;width:250px;margin-bottom:20px;}
 .product-edit-container .instruction-inside{text-align:center;padding-top:110px;color:#aaa;}
 .product-edit-container aside{border:1px solid #eee;margin-bottom:15px;}

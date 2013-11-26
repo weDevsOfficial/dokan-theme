@@ -166,6 +166,7 @@ class WeDevs_Dokan {
         wp_enqueue_media();
 
         wp_enqueue_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.css', false, null );
+        wp_enqueue_style( 'icomoon', $template_directory . '/assets/css/icomoon.css', false, null );
         wp_enqueue_style( 'dokan-style', $template_directory . '/assets/css/style.css', false, null );
 
         if ( is_single() && comments_open() && get_option( 'thread_comments' ) ) {

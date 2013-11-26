@@ -18,8 +18,10 @@ if ( $term ) {
 <div id="primary" class="content-area col-md-12">
     <div id="content" class="site-content" role="main">
 
+    <?php get_template_part( 'templates/dashboard-nav' ); ?>
+
     <div class="row product-edit-container">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="tabbable"> <!-- Only required for left/right tabs -->
 
                 <ul class="nav nav-tabs">
@@ -80,21 +82,27 @@ if ( $term ) {
                                         </span>
                                     </div>
 
-                                    <div class="form-group dokan-hide">
-                                        <div class="special-price-container">
-                                            <div class="input-group col-md-6">
-                                                <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                                                <input class="form-control" name="_sale_price" id="product-price" type="text" placeholder="Special price" value="<?php echo esc_attr( '' ); ?>">
-                                            </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="special-price-container dokan-hide">
+                                                <div class="input-group col-md-6">
+                                                    <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
+                                                    <input class="form-control" name="_sale_price" id="product-price" type="text" placeholder="Special price" value="<?php echo esc_attr( '' ); ?>">
+                                                </div>
 
-                                            <a href="#" class="sale-schedule">Schedule</a>
+                                                <a href="#" class="sale-schedule">Schedule</a>
 
-                                            <div class="sale-schedule-container dokan-hide">
-                                                From <input type="text" name="_sale_price_dates_from" class="span1">
-                                                To <input type="text" name="_sale_price_dates_to" class="span1">
+                                                <div class="col-md-6">
+                                                    <div class="sale-schedule-container dokan-hide">
+                                                        From <input type="text" name="_sale_price_dates_from" class="span1">
+                                                        To <input type="text" name="_sale_price_dates_to" class="span1">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+
 
                                     <div class="form-group">
                                         <textarea name="post_excerpt" id="post-excerpt" rows="5" class="form-control" placeholder="Short description about the product..."><?php echo esc_textarea( $post->post_excerpt ); ?></textarea>
@@ -419,7 +427,7 @@ if ( $term ) {
 
         <!-- #################### Sidebar ######################### -->
 
-        <div class="col-md-4 dokan-edit-sidebar">
+        <div class="col-md-3 dokan-edit-sidebar">
 
             <div class="form-actions">
                 <input type="submit" name="add_product" class="btn btn-primary" value="Update Product"/>
