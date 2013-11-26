@@ -92,7 +92,7 @@ get_header();
             </div>
         <?php } ?>
 
-        <form class="form-horizontall" method="post">
+        <form class="form" method="post">
 
             <div class="row">
                 <div class="col-md-3">
@@ -104,12 +104,22 @@ get_header();
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <input class="span4" name="post_title" id="post-title" type="text" placeholder="Product name.." value="<?php echo dokan_posted_input( 'post_title' ); ?>">
-                    <div class="input-prepend">
-                        <span class="add-on">$</span>
-                        <input class="span2" name="price" id="product-price" type="text" placeholder="9.99" value="<?php echo dokan_posted_input( 'price' ); ?>">
+                    <div class="form-group">
+                        <input class="form-control" name="post_title" id="post-title" type="text" placeholder="Product name.." value="<?php echo dokan_posted_input( 'post_title' ); ?>">
                     </div>
-                    <textarea name="post_excerpt" id="post-excerpt" rows="5" class="span4" placeholder="Short description about the product..."><?php echo dokan_posted_textarea( 'post_excerpt' ); ?></textarea>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input class="form-control" name="price" id="product-price" type="text" placeholder="9.99" value="<?php echo dokan_posted_input( 'price' ); ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea name="post_excerpt" id="post-excerpt" rows="5" class="form-control" placeholder="Short description about the product..."><?php echo dokan_posted_textarea( 'post_excerpt' ); ?></textarea>
+                    </div>
+
+                    <div class="form-group">
                     <?php
                     wp_dropdown_categories( array(
                         'show_option_none' => __( '- Select a category -', 'dokan' ),
@@ -119,11 +129,12 @@ get_header();
                         'id' => 'product_cat',
                         'taxonomy' => 'product_cat',
                         'title_li' => '',
-                        'class' => 'product_cat',
+                        'class' => 'product_cat form-control',
                         'exclude' => '',
                         'selected' => $product_cat,
                     ) );
                     ?>
+                    </div>
                 </div>
             </div>
 
