@@ -2,11 +2,15 @@
 /**
  * Template Name: Dashboard - Products
  */
+
+get_header();
 ?>
 
 <div class="row">
-    <div class="span3"><?php get_template_part( '/templates/dashboard-nav' ); ?></div>
-    <div class="span9">
+
+    <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
+
+    <div class="col-md-9">
 
         <p>
             <a href="<?php echo home_url( 'new-product' ); ?>" class="btn btn-large btn-info">Add new product</a>
@@ -167,3 +171,5 @@
         ?>
     </div>
 </div>
+
+<?php get_footer(); ?>

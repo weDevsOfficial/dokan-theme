@@ -164,9 +164,9 @@ p {
         // margin-top: 0;
         font-size: 32px;
         font-weight: normal;
-        margin-bottom: 10px;
-        padding-bottom: 10px;
-        margin-top: 13px;
+        margin-bottom: 7px;
+        padding-bottom: 0px;
+        margin-top: 10px;
 
         a {
             color: @mainColor;
@@ -357,9 +357,12 @@ p {
     border-radius: 0;
     margin-bottom: 0;
     padding-bottom: 0;
+    min-height: 40px;
 
     .navbar-nav > li > a {
         font-size: 14px;
+        padding-top: 7px;
+        padding-bottom: 7px;
     }
 }
 
@@ -933,7 +936,24 @@ p {
 
             &.active {
                 background: @orange;
+                position: relative;
                 // border-left: 4px solid @orange;
+
+                &:after {
+                    left: 92%;
+                    top: 50%;
+                    border: transparent solid;
+                    content: " ";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                    // border-color: rgba(213, 60, 36, 0);
+                    border-color: transparent @bodyColor transparent transparent;
+                    border-left-color: #fff; //@orange;
+                    border-width: 16px 16px 16px 0;
+                    margin-top: -16px;
+                }
 
                 a {
                     color: @bodyColor;
@@ -1272,4 +1292,15 @@ p {
     color: #666;
     line-height: 200%;
     font-size: 14px;
+}
+
+/**
+ * HiDPI Displays
+ */
+@media print, (-o-min-device-pixel-ratio: 5/4),
+(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+    .site-header h1.site-title a {
+        background: url('../images/logo@2x.png') no-repeat 0% 0%;
+        background-size: 180px auto;
+    }
 }

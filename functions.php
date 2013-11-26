@@ -528,3 +528,12 @@ function dokan_posted_textarea( $key ) {
 
     return esc_textarea( $value );
 }
+
+function dokan_get_template( $template_name, $args = array() ) {
+
+    if ( file_exists( $template_name ) ) {
+        extract( $args );
+
+        include_once $template_name;
+    }
+}

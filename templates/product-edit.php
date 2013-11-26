@@ -18,9 +18,9 @@ if ( $term ) {
 <div id="primary" class="content-area col-md-12">
     <div id="content" class="site-content" role="main">
 
-    <?php get_template_part( 'templates/dashboard-nav' ); ?>
+    <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
 
-    <div class="row product-edit-container">
+    <div class="product-edit-container row">
         <div class="col-md-7">
             <div class="tabbable"> <!-- Only required for left/right tabs -->
 

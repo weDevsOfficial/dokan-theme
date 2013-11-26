@@ -9,8 +9,10 @@ $active_plugin = 'hello';
 ?>
 
 <div class="row">
-    <div class="span2"><?php include dirname( __FILE__ ) . '/dashboard-nav.php'; ?></div>
-    <div class="span10">
+
+    <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'order' ) ); ?>
+
+    <div class="col-md-10">
 
         <?php $user_orders = dokan_get_seller_orders( get_current_user_id() ); ?>
 
