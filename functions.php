@@ -184,7 +184,7 @@ class WeDevs_Dokan {
         wp_enqueue_script( 'jquery' );
 
         wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
-        wp_enqueue_script( 'bootstrap-plugins', $template_directory . '/assets/js/bootstrap-plugins.js', false, null, true );
+        // wp_enqueue_script( 'bootstrap-plugins', $template_directory . '/assets/js/bootstrap-plugins.js', false, null, true );
         wp_enqueue_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
 
         wp_enqueue_script( 'underscore' );
@@ -479,3 +479,52 @@ add_action( 'wp_ajax_dokan_save_attributes', function() {
 
     die();
 });
+
+
+/**
+ * Some helper functions
+ *
+ * @since Dokan 1.0
+ */
+
+/**
+ * Get all the orders from a specific seller
+ *
+ * @global object $wpdb
+ * @param int $seller_id
+ * @return array
+ */
+function dokan_get_seller_orders( $seller_id ) {
+    global $wpdb;
+
+    $sql = "SELECT oi.order_id FROM {$wpdb->prefix}woocommerce_order_items oi
+            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta oim ON oim.order_item_id = oi.order_item_id
+            LEFT JOIN $wpdb->posts p ON oim.meta_value = p.ID
+            WHERE oim.meta_key = '_product_id'  AND p.post_author = %d";
+
+    return $wpdb->get_results( $wpdb->prepare( $sql, $seller_id ) );
+}
+
+/**
+ * Helper function for input text field
+ *
+ * @param string $key
+ * @return string
+ */
+function dokan_posted_input( $key ) {
+    $value = isset( $_POST[$key] ) ? trim( $_POST[$key] ) : '';
+
+    return esc_attr( $value );
+}
+
+/**
+ * Helper function for input textarea
+ *
+ * @param string $key
+ * @return string
+ */
+function dokan_posted_textarea( $key ) {
+    $value = isset( $_POST[$key] ) ? trim( $_POST[$key] ) : '';
+
+    return esc_textarea( $value );
+}
