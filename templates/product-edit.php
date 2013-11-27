@@ -53,6 +53,15 @@ if ( $term ) {
                                         }
                                         ?>
 
+                                        <div class="instruction-inside">
+                                            <input type="hidden" name="feat_image_id" class="dokan-feat-image-id" value="<?php echo $feat_image_id; ?>">
+                                            <a href="#" class="dokan-feat-image-btn">Upload a product cover image</a>
+                                        </div>
+                                        <div class="image-wrap dokan-hide">
+                                            <a class="close dokan-remove-feat-image">&times;</a>
+                                            <img src="" alt="">
+                                        </div>
+
                                         <div class="instruction-inside<?php echo $feat_class; ?>">
                                             <input type="hidden" name="feat_image_id" value="<?php echo $feat_image_id; ?>">
                                             <a href="#" class="dokan-feat-image-btn">Upload a product cover image</a>
