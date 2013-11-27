@@ -3,7 +3,7 @@ $home_url = home_url();
 $active_class = ' class="active"'
 ?>
 
-<div class="row col-md-2 dokan-dash-sidebar">
+<div class="col-md-2 dokan-dash-sidebar">
     <ul class="dokan-dashboard-menu">
         <li<?php echo ( $active_menu == 'dashboard' ) ? $active_class : ''; ?>><a href="<?php echo dokan_get_page_url('dashboard'); ?>"><i class="icon-dashboard"></i> Dashboard</a></li>
         <li<?php echo ( $active_menu == 'product' ) ? $active_class : ''; ?>><a href="<?php echo dokan_get_page_url('products'); ?>" class=""><i class="icon-briefcase"></i> Products</a></li>
