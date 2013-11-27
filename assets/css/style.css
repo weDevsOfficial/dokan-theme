@@ -7,7 +7,7 @@ h1,h2,h3{color:#222;}
 h1{font-size:28px;}
 h2{font-size:24px;}
 h3{font-size:18px;}
-body{font-family:'Open Sans',sans-serif;font-size:16px;line-height:150%;color:#444;background:#fafafa;}
+body{font-family:'Open Sans',sans-serif;font-size:14px;line-height:150%;color:#444;background:#fafafa;}
 a:hover{text-decoration:none;}
 label{font-size:16px;line-height:150%;}
 .required{color:red;}
@@ -86,7 +86,7 @@ p{margin:0 0 15px 0;}
 .site-header #navigation>ul>li.current-menu-item>a{background:#999999;text-shadow:none;font-weight:bold;}.site-header #navigation>ul>li.current-menu-item>a:hover{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 .site-header #navigation>ul{height:36px;}
 @media (max-width:768px){.menu-toggle{color:#FFFFFF;font-size:22px;line-height:36px;margin:0;padding:0 0 0 5px;}.menu-toggle i.icon-reorder{padding:0 5px 0 0;margin-top:5px;} .site-header #navigation{background:#cccccc;width:100%;overflow:hidden;} #navigation .menu{display:none;} .site-header ul,.site-header li{float:none overflow: hidden;} .site-header #navigation>ul{padding-left:0;float:none;overflow:hidden;} .site-header #navigation li a{background:#cccccc;} .site-header #navigation>ul>li{border-left:none;border-right:none;} #navigation ul li{float:none;display:block;} #navigation ul li ul{position:inherit;visibility:visible;} .site-header #navigation li ul.sub-menu li{height:auto;opacity:1;} .site-header #navigation li ul.sub-menu{opacity:1;margin-left:15px;float:none;}}.site-content{overflow:hidden;}.site-content article{margin-bottom:25px;padding-bottom:15px;position:relative;}.site-content article li{line-height:25px;}
-.site-content .entry-header .entry-title{border-bottom:1px solid #dddddd;padding-bottom:7px;font-weight:bold;line-height:130%;font-size:32px;}.site-content .entry-header .entry-title a{color:#222;}.site-content .entry-header .entry-title a:hover{text-decoration:none;color:#5aabd6;}
+.site-content .entry-header .entry-title{border-bottom:1px solid #dddddd;padding-bottom:10px;margin-bottom:10px;margin-top:0;}.site-content .entry-header .entry-title a{color:#222;}.site-content .entry-header .entry-title a:hover{text-decoration:none;color:#5aabd6;}
 .site-content .entry-content{margin-bottom:15px;}.site-content .entry-content h3{border-bottom:1px solid #c4c4c4;}
 .site-content .entry-meta{margin-bottom:15px;font-size:13px;}.site-content .entry-meta .sep{color:#c4c4c4;}
 .site-content footer.entry-meta{padding-top:10px;border-top:1px solid #dddddd;}
@@ -121,7 +121,7 @@ p{margin:0 0 15px 0;}
 #comments ol.commentlist .nocomments{padding:15px;color:#c09853;background-color:#fcf8e3;border-color:#fbeed5;}
 #comments ol.commentlist>li:last-child article.comment{border-bottom:none;}
 #comments ol.commentlist li.bypostauthor>article{background:#ffffff;}
-.dokan-dash-sidebar ul.dokan-dashboard-menu{background:#242424;list-style:none;margin:0;padding:0;}.dokan-dash-sidebar ul.dokan-dashboard-menu li{margin:0;border-bottom:1px solid #454545;}.dokan-dash-sidebar ul.dokan-dashboard-menu li a{padding:10px 0 10px 18px;display:block;color:#fff;font-size:14px;font-weight:bold;}.dokan-dash-sidebar ul.dokan-dashboard-menu li a i{font-size:17px;padding-right:15px;}
+.dokan-dash-sidebar ul.dokan-dashboard-menu{background:#242424;list-style:none;margin:0 0 20px 0;padding:0;}.dokan-dash-sidebar ul.dokan-dashboard-menu li{margin:0;border-bottom:1px solid #454545;}.dokan-dash-sidebar ul.dokan-dashboard-menu li a{padding:10px 0 10px 18px;display:block;color:#fff;font-size:14px;font-weight:bold;}.dokan-dash-sidebar ul.dokan-dashboard-menu li a i{font-size:17px;padding-right:15px;}
 .dokan-dash-sidebar ul.dokan-dashboard-menu li.active{background:#f05025;position:relative;}.dokan-dash-sidebar ul.dokan-dashboard-menu li.active:after{left:92%;top:50%;border:transparent solid;content:" ";height:0;width:0;position:absolute;pointer-events:none;border-color:transparent #fafafa transparent transparent;border-left-color:#fff;border-width:16px 16px 16px 0;margin-top:-16px;}
 .dokan-dash-sidebar ul.dokan-dashboard-menu li.active a{color:#fafafa;}
 .dokan-dash-sidebar ul.dokan-dashboard-menu li:hover{background:#f05025;}
