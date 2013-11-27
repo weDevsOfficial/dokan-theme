@@ -2,6 +2,7 @@
 
     var variantsHolder = $('#variants-holder');
     var product_gallery_frame;
+    var product_featured_frame;
     var $image_gallery_ids = $('#product_image_gallery');
     var $product_images = $('#product_images_container ul.product_images');
 
@@ -34,7 +35,9 @@
             $('#dokan-product-images').on( 'click', 'a.delete', this.gallery.deleteImage);
             this.gallery.sortable();
 
-            $('.product-edit-container').on('click', 'a.dokan-feat-image-btn', this.featuredImage);
+            // featured image
+            $('.product-edit-container').on('click', 'a.dokan-feat-image-btn', this.featuredImage.addImage);
+            $('.product-edit-container').on('click', 'a.dokan-remove-feat-image', this.featuredImage.removeImage);
 
         },
 
@@ -263,36 +266,62 @@
 
         },
 
-        featuredImage: function(e) {
-            e.preventDefault();
+        featuredImage: {
 
-            var product_featured_frame = false;
+            addImage: function(e) {
+                e.preventDefault();
 
-            if ( product_featured_frame ) {
-                product_featured_frame.open();
-                return;
-            }
+                var self = $(this);
 
-            product_featured_frame = wp.media({
-                // Set the title of the modal.
-                title: 'Upload featured image',
-                button: {
-                    text: 'Set featured image',
+                if ( product_featured_frame ) {
+                    product_featured_frame.open();
+                    return;
                 }
-            });
 
-            product_featured_frame.on('select', function() {
-                var selection = product_featured_frame.state().get('selection');
-
-                selection.map( function( attachment ) {
-                    attachment = attachment.toJSON();
-
-                    console.log(attachment);
-
+                product_featured_frame = wp.media({
+                    // Set the title of the modal.
+                    title: 'Upload featured image',
+                    button: {
+                        text: 'Set featured image',
+                    }
                 });
-            });
 
-            product_featured_frame.open();
+                product_featured_frame.on('select', function() {
+                    var selection = product_featured_frame.state().get('selection');
+
+                    selection.map( function( attachment ) {
+                        attachment = attachment.toJSON();
+
+                        console.log(attachment, self);
+                        // set the image hidden id
+                        self.siblings('input.dokan-feat-image-id').val(attachment.id);
+
+                        // set the image
+                        var instruction = self.closest('.instruction-inside');
+                        var wrap = instruction.siblings('.image-wrap');
+
+                        // wrap.find('img').attr('src', attachment.sizes.thumbnail.url);
+                        wrap.find('img').attr('src', attachment.url);
+
+                        instruction.addClass('dokan-hide');
+                        wrap.removeClass('dokan-hide');
+                    });
+                });
+
+                product_featured_frame.open();
+            },
+
+            removeImage: function(e) {
+                e.preventDefault();
+
+                var self = $(this);
+                var wrap = self.closest('.image-wrap');
+                var instruction = wrap.siblings('.instruction-inside');
+
+                instruction.find('input.dokan-feat-image-id').val('0');
+                wrap.addClass('dokan-hide');
+                instruction.removeClass('dokan-hide');
+            }
         }
     };
 

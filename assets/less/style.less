@@ -982,6 +982,23 @@ p {
         height: 250px;
         width: 250px;
         margin-bottom: 20px;
+        overflow: hidden;
+        position: relative;
+
+        img {
+            max-width: 100%;
+        }
+
+        a.close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: #000;
+            opacity: .8;
+            color: red;
+            text-shadow: none;
+            padding: 3px 8px;
+        }
     }
 
     .instruction-inside {

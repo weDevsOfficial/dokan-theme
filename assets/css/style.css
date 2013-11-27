@@ -127,7 +127,8 @@ p{margin:0 0 15px 0;}
 .dokan-dash-sidebar ul.dokan-dashboard-menu li:hover{background:#f05025;}
 .product-edit-container .tab-pane{padding:15px 0;}
 .product-edit-container label{font-weight:normal;}
-.product-edit-container .dokan-feat-image-upload{border:4px dashed #DDDDDD;height:250px;width:250px;margin-bottom:20px;}
+.product-edit-container .dokan-feat-image-upload{border:4px dashed #DDDDDD;height:250px;width:250px;margin-bottom:20px;overflow:hidden;position:relative;}.product-edit-container .dokan-feat-image-upload img{max-width:100%;}
+.product-edit-container .dokan-feat-image-upload a.close{position:absolute;right:0;top:0;background:#000;opacity:.8;color:red;text-shadow:none;padding:3px 8px;}
 .product-edit-container .instruction-inside{text-align:center;padding-top:110px;color:#aaa;}
 .product-edit-container aside{border:1px solid #eee;margin-bottom:15px;}
 .product-edit-container .dokan-edit-sidebar{margin-top:35px;}.product-edit-container .dokan-edit-sidebar .dokan-side-head{background:#eee;padding:5px 10px;}

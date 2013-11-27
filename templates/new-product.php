@@ -19,6 +19,7 @@ if ( isset( $_POST['add_product'] ) ) {
     $post_excerpt = trim( $_POST['post_excerpt'] );
     $price = floatval( $_POST['price'] );
     $product_cat = intval( $_POST['product_cat'] );
+    $featured_image = absint( $_POST['feat_image_id'] );
 
     if ( empty( $post_title ) ) {
         $errors[] = __( 'Please enter product title', 'dokan' );
@@ -42,32 +43,23 @@ if ( isset( $_POST['add_product'] ) ) {
             'post_excerpt' => $post_excerpt,
         );
 
-        // $product_id = wp_insert_post( $post_data );
+        // var_dump( $post_data, $_POST );
 
-        // if ( $product_id ) {
+        $product_id = wp_insert_post( $post_data );
 
-        //     /** set images **/
-        //     if( isset( $_POST['dokan_image'] ) ) {
+        if ( $product_id ) {
 
-        //         if( isset( $_POST['dokan_image']['feat'] ) ) {
-        //             set_post_thumbnail( $product_id, $_POST['dokan_image']['feat'][0] );
-        //         }
+            /** set images **/
 
-        //         if( isset( $_POST['dokan_image']['gallery'] ) ) {
-        //             foreach ($_POST['dokan_image']['gallery'] as $image_id) {
-        //                 $dokan_feat_image->associate_file( $image_id, $product_id );
-        //             }
-        //         }
-        //     }
+            if( $featured_image ) {
+                set_post_thumbnail( $product_id, $featured_image );
+            }
 
-        //     /** set product category * */
-        //     wp_set_object_terms( $product_id, (int) $_POST['product_cat'], 'product_cat' );
+            /** set product category * */
+            wp_set_object_terms( $product_id, (int) $_POST['product_cat'], 'product_cat' );
 
-        //     /** add product meta * */
-        //     dokan_process_product_meta( $product_id );
-
-        //     wp_redirect( get_permalink( $product_id ) );
-        // }
+            wp_redirect( dokan_edit_product_url( $product_id ) );
+        }
     }
 }
 
@@ -78,10 +70,10 @@ get_header();
 
     <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
 
-    <div class="col-md-9">
+    <div class="col-md-9 product-edit-container">
 
         <?php if ( $errors ) { ?>
-            <div class="alert alert-error">
+            <div class="alert alert-danger">
                 <a class="close" data-dismiss="alert">&times;</a>
 
                 <?php foreach ($errors as $error) { ?>
@@ -95,11 +87,15 @@ get_header();
         <form class="form" method="post">
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="dokan-feat-image-upload">
                         <div class="instruction-inside">
-                            <input type="hidden" name="feat_image_id" value="0">
-                            Upload a product cover image
+                            <input type="hidden" name="feat_image_id" class="dokan-feat-image-id" value="0">
+                            <a href="#" class="dokan-feat-image-btn">Upload a product cover image</a>
+                        </div>
+                        <div class="image-wrap dokan-hide">
+                            <a class="close dokan-remove-feat-image">&times;</a>
+                            <img src="" alt="">
                         </div>
                     </div>
                 </div>
@@ -139,10 +135,12 @@ get_header();
             </div>
 
             <!-- <textarea name="post_content" id="" cols="30" rows="10" class="span7" placeholder="Describe your product..."><?php echo dokan_posted_textarea( 'post_content' ); ?></textarea> -->
-            <?php wp_editor( $post_content, 'post_content', array('editor_height' => 100, 'quicktags' => false, 'media_buttons' => false, 'teeny' => true, 'editor_class' => 'post_content') ); ?>
+            <div class="form-group">
+                <?php wp_editor( $post_content, 'post_content', array('editor_height' => 100, 'quicktags' => false, 'media_buttons' => false, 'teeny' => true, 'editor_class' => 'post_content') ); ?>
+            </div>
 
 
-            <div class="form-actions">
+            <div class="form-group">
                 <input type="submit" name="add_product" class="btn btn-primary" value="Add Product"/>
             </div>
 
