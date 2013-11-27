@@ -288,25 +288,25 @@ class Dokan_withdraw {
         <form class="form-horizontal" role="form" method="post">
             <div class="form-group">
 
-                <label for="inputAmount" class="col-sm-3 control-label">
+                <label for="withdraw-amount" class="col-sm-3 control-label">
                     <?php _e( 'Withdraw Amount' ); ?>
                 </label>
 
                 <div class="col-sm-3">
                     <div class="input-group">
                         <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                        <input name="witdraw_amount" class="form-control" name="price" type="text" placeholder="9.99" value="">
+                        <input name="witdraw_amount" class="form-control" id="withdraw-amount" name="price" type="text" placeholder="9.99" value="">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="inputMethod3" class="col-sm-3 control-label">
+                <label for="withdraw-method" class="col-sm-3 control-label">
                     <?php _e( 'Payment Method', 'dokan' ); ?>
                 </label>
 
                 <div class="col-sm-3">
-                    <select class="form-control" name="withdraw_method">
+                    <select class="form-control" name="withdraw_method" id="withdraw-method">
                         <?php foreach ($payment_methods as $value => $name) { ?>
                             <option value="<?php echo esc_attr( $value ); ?>"><?php echo $name; ?></option>
                         <?php } ?>
