@@ -19,6 +19,8 @@ if ( !defined( '__DIR__' ) ) {
     define( '__DIR__', dirname( __FILE__ ) );
 }
 
+
+
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
