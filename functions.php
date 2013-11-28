@@ -318,8 +318,8 @@ class WeDevs_Dokan {
         wp_enqueue_script( 'jquery' );
 
         wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
-        // wp_enqueue_script( 'bootstrap-plugins', $template_directory . '/assets/js/bootstrap-plugins.js', false, null, true );
         wp_enqueue_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
+        wp_enqueue_script( 'dokan-scripts', $template_directory . '/assets/js/script.js', false, null, true );
 
         wp_enqueue_script( 'underscore' );
         wp_enqueue_script( 'modernizr' );
