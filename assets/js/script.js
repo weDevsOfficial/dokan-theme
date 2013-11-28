@@ -9,7 +9,7 @@ jQuery(function($) {
     });
 
     // set dashboard menu height
-    $('.dokan-dash-sidebar ul.dokan-dashboard-menu').css({
-        'height': $('#main').height()
-    });
+    // $('.dokan-dash-sidebar ul.dokan-dashboard-menu').css({
+    //     'height': $('#main').height()
+    // });
 });

@@ -301,6 +301,7 @@ class WeDevs_Dokan {
 
         wp_enqueue_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.css', false, null );
         wp_enqueue_style( 'icomoon', $template_directory . '/assets/css/icomoon.css', false, null );
+        wp_enqueue_style( 'fontawesome', $template_directory . '/assets/css/font-awesome.css', false, null );
         wp_enqueue_style( 'dokan-style', $template_directory . '/assets/css/style.css', false, null );
 
         if ( is_single() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -316,6 +317,8 @@ class WeDevs_Dokan {
         // wp_register_script( 'tip-tip', $template_directory . '/assets/js/jquery.tipTip.js', false, null, true );
 
         wp_enqueue_script( 'jquery' );
+        wp_enqueue_script( 'jquery-ui' );
+        wp_enqueue_script( 'jquery-ui-autocomplete' );
 
         wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
         wp_enqueue_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
@@ -423,7 +426,7 @@ function dokan_product_seller_tab( $val ) {
 }
 
 function dokan_edit_product_url( $product_id ) {
-    return trailingslashit( get_permalink( $product_id ) ). 'edit';
+    return trailingslashit( get_permalink( $product_id ) ). 'edit/';
 }
 
 /**

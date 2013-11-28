@@ -1,0 +1,45 @@
+/* jQuery UI Autocomplete
+----------------------------------*/
+.ui-autocomplete { position: absolute; cursor: default; }
+.ui-autocomplete-loading { background: white; }
+
+/* workarounds */
+* html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+
+.ui-menu {
+    list-style:none;
+    padding: 2px;
+    margin: 0;
+    display:block;
+
+    .ui-menu {
+        margin-top: -3px;
+    }
+
+    .ui-menu-item {
+        margin:0;
+        padding: 0;
+        width: 100%;
+        background: #fff;
+        border-bottom: 1px solid @borderColor;
+        border-left: 1px solid @borderColor;
+        border-right: 1px solid @borderColor;
+
+        a {
+            text-decoration:none;
+            display:block;
+            padding:.2em .4em;
+            line-height:1.5;
+            zoom:1;
+            color: #333;
+            cursor: pointer;
+        }
+
+        a.ui-state-hover,
+        a.ui-state-active {
+            margin: -1px;
+        }
+    }
+}
+
+.ui-helper-hidden-accessible { display: none; }

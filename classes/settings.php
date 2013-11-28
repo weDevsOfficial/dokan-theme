@@ -19,14 +19,19 @@ class Dokan_Template_Settings{
     }
 
     function insert_settings_info() {
-        if(!isset($_POST['dokan_template_setting']) && !wp_verify_nonce( $_POST['dokan_settings_nonce'], 'dokan_template_settings' ) ) {
+
+        if( !isset( $_POST['dokan_update_profile'] ) ) {
             return;
         }
 
-        $dokan_settings = array( 
+        if( !wp_verify_nonce( $_POST['_wpnonce'], 'dokan_settings_nonce' ) ) {
+            wp_die( __( 'Are you cheating?', 'dokan' ) );
+        }
+
+        $dokan_settings = array(
             'store_name'      => $_POST['dokan_store_name'],
             'social' => array(
-                'fb' => filter_var( $_POST['setting_social_fb'], FILTER_VALIDATE_URL ), 
+                'fb' => filter_var( $_POST['setting_social_fb'], FILTER_VALIDATE_URL ),
                 'gplus' => filter_var( $_POST['setting_social_gol'], FILTER_VALIDATE_URL ),
                 'twitter' => filter_var( $_POST['seting_social_twi'], FILTER_VALIDATE_URL ),
                 'linkedin' => filter_var( $_POST['setting_social_lin'], FILTER_VALIDATE_URL ),
@@ -38,7 +43,7 @@ class Dokan_Template_Settings{
                 'swift_code' => $_POST['setting_bank_swf'],
                 'paypal_email'  => filter_var( $_POST['setting_paypal_email'], FILTER_VALIDATE_EMAIL ),
             ),
-             
+
             'phone'         => $_POST['setting_phone'],
             'address'       => $_POST['setting_address'],
             'location'      => $_POST['location'],
@@ -78,7 +83,7 @@ class Dokan_Template_Settings{
         $swift_code = isset( $profile_info['payment']['swift_code'] ) ? esc_attr( $profile_info['payment']['swift_code'] ) : '';
 
         $phone = isset( $profile_info['phone'] ) ? esc_attr( $profile_info['phone'] ) : '';
-        $address = isset( $profile_info['address'] ) ? esc_attr( $profile_info['address'] ) : '';
+        $address = isset( $profile_info['address'] ) ? esc_textarea( $profile_info['address'] ) : '';
         $map_location = isset( $profile_info['location'] ) ? esc_attr( $profile_info['location'] ) : '';
         $map_address = isset( $profile_info['find_address'] ) ? esc_attr( $profile_info['find_address'] ) : '';
         $dokan_category = isset( $profile_info['dokan_category'] ) ? esc_attr( $profile_info['dokan_category'] ) : '';
@@ -86,180 +91,174 @@ class Dokan_Template_Settings{
 
 
             <form method="post"  action="" class="form-horizontal">
-                <?php wp_nonce_field( 'dokan_template_settings', 'dokan_settings_nonce' ); ?>
+                <?php wp_nonce_field( 'dokan_settings_nonce' ); ?>
 
                 <div class="form-group">
-                  <label class="col-md-3 control-label" for="dokan_store_name"><?php _e('Store Name','dokan'); ?></label>  
-                  <div class="col-md-5">
-                  <input id="dokan_store_name" value="<?php echo $storename; ?>" name="dokan_store_name" placeholder="store name" class="form-control input-md" type="text">
-                    
-                  </div>
-                </div>
+                    <label class="col-md-3 control-label" for="dokan_store_name"><?php _e( 'Store Name', 'dokan' ); ?></label>
+                    <div class="col-md-5">
+                        <input id="dokan_store_name" value="<?php echo $storename; ?>" name="dokan_store_name" placeholder="store name" class="form-control input-md" type="text">
 
-                <!-- Prepended text-->
-                <div class="form-group">
-                  <label class="col-md-3 control-label" for="setting_social_fb"><?php _e('Social Profile','dokan'); ?></label>
-                  <div class="col-md-5">
-                    <div class="input-group">
-                      <span class="input-group-addon">Facebook</span>
-                      <input id="setting_social_fb" value="<?php echo $fb; ?>" name="setting_social_fb" class="form-control" placeholder="http://" type="text">
                     </div>
-                  </div>
                 </div>
 
-                <!-- Prepended text-->
-                <div class="form-group">
-                  <label class="col-md-3 control-label" for="setting_social_gol"></label>
-                  <div class="col-md-5">
-                    <div class="input-group">
-                      <span class="input-group-addon"><?php _e('Google','dokan'); ?></span>
-                      <input id="setting_social_gol" value="<?php echo $gplus; ?>" name="setting_social_gol" class="form-control" placeholder="http://" type="text">
-                    </div>
-
-                  </div>
-                </div>
-
-                <!-- Prepended text-->
-                <div class="form-group">
-                  <label class="col-md-3 control-label" for="seting_social_twi"></label>
-                  <div class="col-md-5">
-                    <div class="input-group">
-                      <span class="input-group-addon"><?php _e('Twitter','dokan'); ?></span>
-                      <input id="seting_social_twi" value="<?php echo $twitter; ?>" name="seting_social_twi" class="form-control" placeholder="http://" type="text">
-                    </div>
-
-                  </div>
-                </div>
-
-                <!-- Prepended text-->
-                <div class="form-group">
-                  <label class="col-md-3 control-label" for="setting_social_lin"></label>
-                  <div class="col-md-5">
-                    <div class="input-group">
-                      <span class="input-group-addon"><?php _e('Linkedin','dokan'); ?></span>
-                      <input id="setting_social_lin" value="<?php echo $linkedin; ?>" name="setting_social_lin" class="form-control" placeholder="http://" type="text">
-                    </div>
-
-                  </div>
-                </div>
-
-                <!-- Prepended text-->
-                <div class="form-group">
-                  <label class="col-md-3 control-label" for="setting_social_you"></label>
-                  <div class="col-md-5">
-                    <div class="input-group">
-                      <span class="input-group-addon"><?php _e('Youtube','dokan'); ?></span>
-                      <input id="setting_social_you" value="<?php echo $youtube; ?>" name="setting_social_you" class="form-control" placeholder="http://" type="text">
-                    </div>
-                  </div>
-                </div>
-
-                <!-- payment tab -->
-                <div class="form-group">
-                  <label class="col-md-3 control-label" for="dokan_setting"><?php _e('Payment Method','dokan'); ?></label>
-                  <div class="col-md-4">
-                    <ul class="nav nav-tabs">
-                        <li><a href="#dokan-paypal" data-toggle="tab"><?php _e('Paypal','dokan'); ?></a></li>
-                        <li><a href="#dokan-bank" data-toggle="tab"><?php _e('Bank','dokan'); ?></a></li>
-                    </ul>
-
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                      <div class="tab-pane active" id="dokan-paypal">
-
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="setting_social_fb"><?php _e( 'Social Profile', 'dokan' ); ?></label>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-facebook-square"></i></span>
+                                    <input id="setting_social_fb" value="<?php echo $fb; ?>" name="setting_social_fb" class="form-control" placeholder="http://" type="text">
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Prepended text-->
                         <div class="form-group">
-                          <div class="col-md-10">
-                            <div class="input-group">
-                              <span class="input-group-addon"><?php _e('E-mail','dokan'); ?></span>
-                              <input id="setting_paypal_email" value="<?php echo $paypal_email; ?>" name="setting_paypal_email" class="form-control" placeholder="email" type="text">
+                            <label class="col-md-3 control-label" for="setting_social_gol"></label>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-google-plus"></i></span>
+                                    <input id="setting_social_gol" value="<?php echo $gplus; ?>" name="setting_social_gol" class="form-control" placeholder="http://" type="text">
+                                </div>
                             </div>
-                          </div>
                         </div>
 
-
-                      </div>
-                      <div class="tab-pane" id="dokan-bank">
-
-
-                            <!-- Prepended text-->
-                            <div class="form-group">
-
-                              <div class="col-md-10">
+                        <!-- Prepended text-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="seting_social_twi"></label>
+                            <div class="col-md-5">
                                 <div class="input-group">
-                                  <span class="input-group-addon"><?php _e('Account No.', 'dokan'); ?></span>
-                                  <input id="settings_bank_acont" value="<?php echo $account_number; ?>" name="settings_bank_acont" class="form-control" placeholder="3784746" type="text">
+                                    <span class="input-group-addon"><i class="fa fa-twitter"></i></span>
+                                    <input id="seting_social_twi" value="<?php echo $twitter; ?>" name="seting_social_twi" class="form-control" placeholder="http://" type="text">
                                 </div>
-                                
-                              </div>
+
                             </div>
+                        </div>
 
-                            <!-- Prepended text-->
-                            <div class="form-group">
-
-                              <div class="col-md-10">
+                        <!-- Prepended text-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="setting_social_lin"></label>
+                            <div class="col-md-5">
                                 <div class="input-group">
-                                  <span class="input-group-addon"><?php _e('Bank Name', 'dokan'); ?></span>
-                                  <input id="setting_bank_name" value="<?php echo $bank_name; ?>" name="setting_bank_name" class="form-control" placeholder="Bangladesh Bank" type="text">
+                                    <span class="input-group-addon"><i class="fa fa-linkedin"></i></span>
+                                    <input id="setting_social_lin" value="<?php echo $linkedin; ?>" name="setting_social_lin" class="form-control" placeholder="http://" type="text">
                                 </div>
-                                
-                              </div>
+
                             </div>
+                        </div>
 
-                            <!-- Prepended text-->
-                            <div class="form-group">
-
-                              <div class="col-md-10">
+                        <!-- Prepended text-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="setting_social_you"></label>
+                            <div class="col-md-5">
                                 <div class="input-group">
-                                  <span class="input-group-addon"><?php _e('Swift Code', 'dokan'); ?></span>
-                                  <input id="setting_bank_swf" value="<?php echo $swift_code; ?>" name="setting_bank_swf" class="form-control" placeholder="0987" type="text">
+                                    <span class="input-group-addon"><i class="fa fa-youtube"></i></span>
+                                    <input id="setting_social_you" value="<?php echo $youtube; ?>" name="setting_social_you" class="form-control" placeholder="http://" type="text">
                                 </div>
-                                
-                              </div>
                             </div>
-                      </div>
-                    </div>    
-                  </div>
-                </div>
+                        </div>
+
+                        <!-- payment tab -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="dokan_setting"><?php _e( 'Payment Method', 'dokan' ); ?></label>
+                            <div class="col-md-6">
+                                <ul class="nav nav-tabs" style="margin-bottom: 10px;">
+                                    <li class="active"><a href="#dokan-paypal" data-toggle="tab"><?php _e( 'Paypal', 'dokan' ); ?></a></li>
+                                    <li><a href="#dokan-bank" data-toggle="tab"><?php _e( 'Bank', 'dokan' ); ?></a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="dokan-paypal">
+
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><?php _e( 'E-mail', 'dokan' ); ?></span>
+                                                    <input id="setting_paypal_email" value="<?php echo $paypal_email; ?>" name="setting_paypal_email" class="form-control" placeholder="you@domain.com" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
 
 
+                                    </div>
+                                    <div class="tab-pane" id="dokan-bank">
 
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-md-3 control-label" for="setting_phone"><?php _e('Phone No', 'dokan'); ?></label>  
-                  <div class="col-md-5">
-                  <input id="setting_phone" value="<?php echo $phone; ?>" name="setting_phone" placeholder="+8817176644.." class="form-control input-md" type="text">
-                    
-                  </div>
-                </div>
+                                        <div class="form-group">
 
-                <!-- Textarea -->
-                <div class="form-group">
-                  <label class="col-md-3 control-label" for="setting_address"><?php _e('Address', 'dokan'); ?></label>
-                  <div class="col-md-4">                     
-                    <textarea class="form-control" id="setting_address" name="setting_address"><?php echo $address; ?></textarea>
-                  </div>
-                </div>
+                                            <div class="col-md-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><?php _e( 'Account No.', 'dokan' ); ?></span>
+                                                    <input id="settings_bank_acont" value="<?php echo $account_number; ?>" name="settings_bank_acont" class="form-control" placeholder="3784746" type="text">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <div class="col-md-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><?php _e( 'Bank Name', 'dokan' ); ?></span>
+                                                    <input id="setting_bank_name" value="<?php echo $bank_name; ?>" name="setting_bank_name" class="form-control" placeholder="Bangladesh Bank" type="text">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <div class="col-md-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><?php _e( 'Swift Code', 'dokan' ); ?></span>
+                                                    <input id="setting_bank_swf" value="<?php echo $swift_code; ?>" name="setting_bank_swf" class="form-control" placeholder="0987" type="text">
+                                                </div>
+                                            </div>
+                                        </div> <!-- .form-group -->
+                                    </div> <!-- .dokan-bank -->
+                                </div> <!-- .tab-content -->
+                            </div> <!-- .col-md-4 -->
+                        </div> <!-- .form-group -->
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="setting_phone"><?php _e( 'Phone No', 'dokan' ); ?></label>
+                            <div class="col-md-5">
+                                <input id="setting_phone" value="<?php echo $phone; ?>" name="setting_phone" placeholder="+123456.." class="form-control input-md" type="text">
+                            </div>
+                        </div>
+
+                        <!-- Textarea -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="setting_address"><?php _e( 'Address', 'dokan' ); ?></label>
+                            <div class="col-md-5">
+                                <textarea class="form-control" rows="4" id="setting_address" name="setting_address"><?php echo $address; ?></textarea>
+                            </div>
+                        </div>
 
                 <!-- Textarea -->
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="setting_map"><?php _e('Map', 'dokan'); ?></label>
-                  <div class="col-md-4">                     
-                    <!-- <textarea class="form-control" id="setting_map" name="setting_map"></textarea> -->
+
+                  <div class="col-md-4">
                     <div class="wpuf-fields">
-    <input id="dokan-map-lat" type="hidden" name="location" value="<?php echo $map_location; ?>" size="30" />
+                        <input id="dokan-map-lat" type="hidden" name="location" value="<?php echo $map_location; ?>" size="30" />
 
-    <input id="dokan-map-add" type="text" value="<?php echo $map_address; ?>" name="find_address" placeholder="<?php _e( 'Type an address to find', 'dokan' ); ?>" size="30" />
-    <button class="button" id="dokan-location-find-btn"><?php _e( 'Find Address', 'dokan' ); ?></button>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <input id="dokan-map-add" type="text" class="form-control" value="<?php echo $map_address; ?>" name="find_address" placeholder="<?php _e( 'Type an address to find', 'dokan' ); ?>" size="30" />
+                                <a href="#" class="btn btn-default" id="dokan-location-find-btn" type="button"><?php _e( 'Find Address', 'dokan' ); ?></a>
+                            </span>
+                        </div><!-- /input-group -->
 
-    <div class="google-map" style="margin: 10px 0; height: 250px; width: 450px;" id="dokan-map"></div>
-</div>
+                        <div class="dokan-google-map" id="dokan-map"></div>
+                    </div>
+
 <script type="text/javascript">
 
     (function($) {
         $(function() {
-            <?php list( $def_lat, $def_long ) = explode(',', $map_location); ?>
+            <?php
+            // list( $def_lat, $def_long ) = explode(',', $map_location);
+            $def_lat = 0;
+            $def_long = 0;
+            ?>
             var def_zoomval = 12;
             var def_longval = <?php echo $def_long ? $def_long : 90.40714300000002; ?>;
             var def_latval = <?php echo $def_lat ? $def_lat : 23.709921; ?>;
@@ -269,7 +268,7 @@ class Dokan_Template_Settings{
                 $input_area = $( '#dokan-map-lat' ),
                 $input_add = $( '#dokan-map-add' ),
                 $find_btn = $( '#dokan-location-find-btn' );
-                
+
             autoCompleteAddress();
 
             $find_btn.on('click', function(e) {
@@ -328,7 +327,7 @@ class Dokan_Template_Settings{
                     }
                 } );
             }
-            
+
             function autoCompleteAddress(){
                 if (!$input_add) return null;
 
@@ -348,7 +347,7 @@ class Dokan_Template_Settings{
                     },
                     select: function(event, ui) {
 
-                        $input_area.val(ui.item.latitude + ',' + ui.item.longitude );       
+                        $input_area.val(ui.item.latitude + ',' + ui.item.longitude );
 
                         var location = new window.google.maps.LatLng(ui.item.latitude, ui.item.longitude);
 
@@ -369,7 +368,7 @@ class Dokan_Template_Settings{
 </script>
                   </div>
                 </div>
-                <?php 
+                <?php
                 $dokan_categories = $this->get_dokan_categories();
                 ?>
 
@@ -394,30 +393,30 @@ class Dokan_Template_Settings{
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="dokan_setting"></label>
                   <div class="col-md-4">
-                    <button id="dokan_setting" name="dokan_template_setting" class="btn btn-primary"><?php _e('Update Settings','dokan'); ?></button>
+                    <input type="submit" name="dokan_update_profile" class="btn btn-primary" value="<?php esc_attr_e('Update Settings','dokan'); ?>">
                   </div>
                 </div>
-                
+
 
                 </form>
 
                 <script type="text/javascript">
 
                 jQuery(function($){
-                    $('#dokan-paypal a').click(function (e) {
-                      e.preventDefault()
-                      $(this).tab('show')
-                    })
-
-                    $('#dokan-bank a').click(function (e) {
-                      e.preventDefault()
-                      $(this).tab('show')
-                    })
+//                    $('#dokan-paypal a').click(function (e) {
+//                      e.preventDefault()
+//                      $(this).tab('show')
+//                    })
+//
+//                    $('#dokan-bank a').click(function (e) {
+//                      e.preventDefault()
+//                      $(this).tab('show')
+//                    })
                 });
                 </script>
 
         <?php
-    } 
+    }
 
     function get_dokan_categories() {
         $dokan_category = array(

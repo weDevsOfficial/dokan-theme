@@ -53,7 +53,7 @@ get_header();
                                 ?>
                                 <tr>
                                     <td><?php echo $product->get_image(); ?></td>
-                                    <td><a href="<?php echo get_permalink(); ?>"><?php echo $product->get_title(); ?></a></td>
+                                    <td><a href="<?php echo dokan_edit_product_url( $post->ID ); ?>"><?php echo $product->get_title(); ?></a></td>
                                     <td>
                                         <?php
                                         if ( $product->get_sku() ) {
