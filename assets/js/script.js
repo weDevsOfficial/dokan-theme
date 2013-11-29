@@ -7,4 +7,9 @@ jQuery(function($) {
     }, function() {
         $(this).removeClass('open');
     });
+
+    // set dashboard menu height
+    $('.dokan-dash-sidebar ul.dokan-dashboard-menu').css({
+        'height': $('#main').height()
+    });
 });
