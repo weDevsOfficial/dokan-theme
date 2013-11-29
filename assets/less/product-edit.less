@@ -23,6 +23,7 @@
             margin: 0;
             // padding: 8px 0;
             border-bottom: 1px solid lighten(#2b2b2b, 10%);
+            position: relative;
 
             a {
                 padding: 10px 0 10px 18px;
@@ -57,14 +58,52 @@
                     border-width: 16px 16px 16px 0;
                     margin-top: -16px;
                 }
-
-                a {
-                    color: @bodyColor;
-                }
             }
 
             &:hover {
                 background: #f05025;
+            }
+
+            ul.sub-menu {
+                background: #fff;
+                margin: 0;
+                list-style: none;
+                padding: 0;
+                position: absolute;
+                right: -100%;
+                top: -4px;
+                z-index: 99;
+                width: 165px;
+                display: none;
+                border-top: 1px solid #ECECEC;
+                border-right: 1px solid #ECECEC;
+                border-bottom: 1px solid #ECECEC;
+
+                a {
+                    padding: 2px 0 2px 10px;
+                    font-size: 13px;
+                    color: #333;
+                    font-weight: normal;
+
+                    &:hover {
+                        background: lighten(@orange, 10%);
+                        color: #fff;
+                    }
+                }
+
+                li {
+                    border-bottom: 1px solid #ccc;
+
+                    &:last-child {
+                        border-bottom: none;
+                    }
+                }
+            }
+
+            &:hover {
+                ul.sub-menu {
+                    // display: block;
+                }
             }
         }
     }
@@ -113,6 +152,7 @@
     aside {
         border: 1px solid #eee;
         margin-bottom: 15px;
+        border-radius: 3px;
     }
 
     .dokan-edit-sidebar {
@@ -165,6 +205,10 @@
 
                 li:before {
                     content: '-';
+                }
+
+                li {
+                    margin-bottom: 8px;
                 }
             }
 

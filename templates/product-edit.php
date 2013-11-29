@@ -3,8 +3,7 @@ get_header();
 
 global $post, $product;
 
-$woo_product = get_product( $post->ID );
-// var_dump( $woo_product );
+// var_dump( $post );
 
 $post_id = $post->ID;
 $product_cat = -1;
@@ -36,6 +35,8 @@ $_height = get_post_meta( $post_id, '_height', true );
 $_downloadable = get_post_meta( $post_id, '_downloadable', true );
 $_stock_status = get_post_meta( $post_id, '_stock_status', true );
 $_visibility = get_post_meta( $post_id, '_visibility', true );
+$_enable_reviews = $post->comment_status;
+$_expiry = '';
 
 
 $term = wp_get_post_terms( $post->ID, 'product_cat', array( 'fields' => 'ids') );
@@ -90,7 +91,10 @@ if ( $term ) {
             <form class="form" role="form" method="post">
 
                 <div class="product-edit-container">
+
                     <div class="col-md-7">
+
+                        <!-- <p><a href="#" class="btn btn-info">&larr; Product listing</a></p> -->
 
                         <div class="tabbable"> <!-- Only required for left/right tabs -->
 
@@ -209,7 +213,7 @@ if ( $term ) {
                                                         'id' => 'product_cat',
                                                         'taxonomy' => 'product_cat',
                                                         'title_li' => '',
-                                                        'class' => 'product_cat form-control',
+                                                        'class' => 'product_cat form-control chosen',
                                                         'exclude' => '',
                                                         'selected' => $product_cat,
                                                     ) );
@@ -228,54 +232,77 @@ if ( $term ) {
                                 </div>
 
                                 <div class="tab-pane" id="product-options">
-                                    <ul class="list-unstyled  label-on-left">
-                                        <li>
-                                            <label>Purchase Note</label>
-                                            <textarea name="_purchase_note" id="" cols="30" rows="3"><?php echo esc_textarea( $_purchase_note ); ?></textarea>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="hidden" name="_enable_reviews" value="false">
-                                                <input type="checkbox" name="_enable_reviews" value="true">
-                                                Enable Reviews
-                                            </label>
 
-                                        </li>
-                                    </ul>
-                                </div>
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="_purchase_note">Purchase Note</label>
+                                            <div class="col-md-6">
+                                                <textarea class="form-control" id="_purchase_note" name="_purchase_note" cols="40" rows="4"><?php echo esc_textarea( $_purchase_note ); ?></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="_enable_reviews">Reviews</label>
+                                            <div class="col-md-4">
+                                                <label class="checkbox-inline" for="_enable_reviews">
+                                                    <input type="hidden" name="_enable_reviews" value="closed">
+                                                    <input name="_enable_reviews" id="_enable_reviews" value="open" type="checkbox"<?php checked( $_enable_reviews, 'open' ); ?>>
+                                                    <?php _e( 'Enable Reviews', 'dokan' ); ?>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div> <!-- .form-horizontal -->
+                                </div> <!-- #product-options -->
 
                                 <div class="tab-pane" id="product-inventory">
-                                    <ul class="list-unstyled  label-on-left">
-                                        <li>
-                                            <label for="_sku">SKU</label>
-                                            <input type="text" name="_sku" value="<?php echo esc_attr( $_sku ); ?>">
-                                        </li>
-                                        <li>
-                                            <label>Manage Stock?</label>
-                                            <input type="checkbox" name="_manage_stock" <?php checked( $_manage_stock, 'yes' ); ?> value="yes">
-                                            <span class="help">Enable stock management at product level</span>
-                                        </li>
-                                        <li>
-                                            <label for="_stock"><?php _e( 'Stock Qty', 'dokan' ); ?></label>
-                                            <input type="text" name="_stock" value="<?php echo esc_attr( $_stock ); ?>">
-                                        </li>
-                                        <li>
-                                            <label for="_stock_status"><?php _e( 'Stock Status', 'dokan' ); ?></label>
-                                            <select name="_stock_status" id="">
-                                                <option value="instock"<?php selected( $_stock_status, 'instock' ); ?>><?php _e( 'In Stock', 'dokan' ); ?></option>
-                                                <option value="outstock"<?php selected( $_stock_status, 'outstock' ); ?>><?php _e( 'Out of Stock', 'dokan' ); ?></option>
-                                            </select>
-                                        </li>
-                                        <li>
-                                            <label for="_sku"><?php _e( 'Allow Backorders?', 'dokan' ); ?></label>
-                                            <select name="_backorders" id="">
-                                                <option value="no"<?php selected( $_backorders, 'no' ); ?>><?php _e( 'Do not allow', 'dokan' ); ?></option>
-                                                <option value="notify"<?php selected( $_backorders, 'notify' ); ?>><?php _e( 'Allow but notify customer', 'dokan' ); ?></option>
-                                                <option value="yes"<?php selected( $_backorders, 'yes' ); ?>><?php _e( 'Allow', 'dokan' ); ?></option>
-                                            </select>
-                                        </li>
-                                    </ul>
-                                </div>
+
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="_sku">SKU</label>
+                                            <div class="col-md-4">
+                                                <input id="_sku" name="_sku" value="<?php echo esc_attr( $_sku ); ?>" placeholder="sku" class="form-control input-md" type="text">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="">Manage Stock?</label>
+                                            <div class="col-md-6">
+                                                <label class="checkbox-inline" for="-0">
+                                                    <input name="_manage_stock" <?php checked( $_manage_stock, 'yes' ); ?> value="yes" type="checkbox">
+                                                    <?php _e( 'Enable stock management at product level', 'dokan' ); ?>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="_stock_qty">Stock Qty</label>
+                                            <div class="col-md-4">
+                                                <input id="_stock_qty" name="_stock" value="<?php echo esc_attr( $_stock ); ?>" placeholder="10" class="form-control input-md" type="text">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="_stock_status">Stock Status</label>
+                                            <div class="col-md-4">
+                                                <select id="_stock_status" name="_stock_status" class="form-control">
+                                                    <option value="instock"<?php selected( $_stock_status, 'instock' ); ?>><?php _e( 'In Stock', 'dokan' ); ?></option>
+                                                    <option value="outofstock"<?php selected( $_stock_status, 'outofstock' ); ?>><?php _e( 'Out of Stock', 'dokan' ); ?></option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="_backorders">Allow Backorders</label>
+                                            <div class="col-md-4">
+                                                <select id="_backorders" name="_backorders" class="form-control">
+                                                    <option value="no"<?php selected( $_backorders, 'no' ); ?>><?php _e( 'Do not allow', 'dokan' ); ?></option>
+                                                    <option value="notify"<?php selected( $_backorders, 'notify' ); ?>><?php _e( 'Allow but notify customer', 'dokan' ); ?></option>
+                                                    <option value="yes"<?php selected( $_backorders, 'yes' ); ?>><?php _e( 'Allow', 'dokan' ); ?></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> <!-- .form-horizontal -->
+                                </div> <!-- #product-inventory -->
 
                                 <!-- ===== Attributes ===== -->
 
@@ -350,7 +377,7 @@ if ( $term ) {
                                                         <div class="attribute-config">
                                                             <ul class="list-unstyled ">
                                                                 <li>
-                                                                    <label>
+                                                                    <label class="checkbox-inline">
                                                                         <input type="checkbox" class="checkbox" <?php
                                                                         $tax = '';
                                                                         // $i = 1;
@@ -364,7 +391,8 @@ if ( $term ) {
                                                                 </li>
 
                                                                 <li class="enable_variation show_if_variable">
-                                                                    <label><input type="checkbox" class="checkbox" <?php
+                                                                    <label class="checkbox-inline">
+                                                                    <input type="checkbox" class="checkbox" <?php
 
                                                                     if ( isset( $attribute['is_variation'] ) )
                                                                         checked( $attribute['is_variation'], 1 );
@@ -428,7 +456,7 @@ if ( $term ) {
 
                                     <p class="toolbar">
                                         <button class="btn btn-success add-variant-category">+ Add a category</button>
-                                        <button type="button" class="btn save_attributes"><?php _e( 'Save attributes', 'woocommerce' ); ?></button>
+                                        <button type="button" class="btn btn-default save_attributes"><?php _e( 'Save attributes', 'woocommerce' ); ?></button>
                                     </p>
 
                                     <?php //include_once dirname( __DIR__ ) . '/lib/edit-panel/attributes.php'; ?>
@@ -445,7 +473,7 @@ if ( $term ) {
                                                 <input type="hidden" name="attribute_position[<%= row %>]]" class="attribute_position" value="<%= row %>" />
 
                                                 <span class="actions">
-                                                    <button class="row-remove button pull-right">Remove</button>
+                                                    <button class="row-remove btn pull-right btn-danger btn-sm">Remove</button>
                                                 </span>
                                             </div>
 
@@ -454,13 +482,13 @@ if ( $term ) {
                                                 <div class="attribute-config">
                                                     <ul class="list-unstyled ">
                                                         <li>
-                                                            <label>
+                                                            <label class="checkbox-inline">
                                                                 <input type="checkbox" class="checkbox" name="attribute_visibility[<%= row %>]" value="1" /> <?php _e( 'Visible on the product page', 'woocommerce' ); ?>
                                                             </label>
                                                         </li>
 
                                                         <li class="enable_variation show_if_variable">
-                                                            <label>
+                                                            <label class="checkbox-inline">
                                                                 <input type="checkbox" class="checkbox" name="attribute_variation[<%= row %>]" value="1" /> <?php _e( 'Used for variations', 'woocommerce' ); ?>
                                                             </label>
                                                         </li>
@@ -521,7 +549,7 @@ if ( $term ) {
                     <div class="col-md-3 dokan-edit-sidebar">
 
                         <div class="form-group">
-                            <input type="submit" name="update_product" class="btn btn-primary" value="Update Product"/>
+                            <input type="submit" name="update_product" class="btn btn-primary btn-lg btn-block" value="<?php esc_attr_e( 'Update Product', 'dokan' ); ?>"/>
                         </div>
 
                         <aside class="product-type">
@@ -552,28 +580,29 @@ if ( $term ) {
 
                         <aside class="downloadable">
                             <div class="dokan-side-head">
-                                <label>
-                                    <span class="title"><?php _e( 'Downloadable Product', 'dokan' ); ?></span>
-
-                                    <span class="checkbox pull-right">
-                                        <input type="checkbox" id="_downloadable" name="_downloadable" value="yes"<?php checked( $_downloadable, 'yes' ); ?>>
-                                    </span>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="_downloadable" name="_downloadable" value="yes"<?php checked( $_downloadable, 'yes' ); ?>>
+                                    <?php _e( 'Downloadable Product', 'dokan' ); ?>
                                 </label>
                             </div> <!-- .dokan-side-head -->
 
-                            <div class="dokan-side-body dokan-hide">
+                            <div class="dokan-side-body<?php echo ($_downloadable == 'yes' ) ? '' : ' dokan-hide'; ?>">
                                 <ul class="list-unstyled ">
-                                    <li>
-                                        <a href="#">Upload File</a><br>
-                                        <textarea name="_files" id="" cols="30" rows="3"></textarea>
+                                    <li class="form-group">
+                                        <p><a href="#" class="btn btn-default btn-sm downloadable_upload_btn"><i class="fa fa-upload"></i> Upload File</a></p>
+                                        <textarea name="_files" id="" cols="25" rows="3" class="form-control" placeholder="<?php esc_attr_e( 'File urls, one per line.', 'dokan' ); ?>"></textarea>
+                                    </li>
+                                    <li class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Limit</span>
+                                            <input class="form-control" name="_limit" type="text" placeholder="<?php esc_attr_e( 'Download Limit. e.g: 4', 'dokan' ); ?>" value="<?php echo esc_attr( $_expiry ); ?>">
+                                        </div>
                                     </li>
                                     <li>
-                                        <label>Limit</label>
-                                        <input type="text" name="_limit" value="">
-                                    </li>
-                                    <li>
-                                        <label>Expiry</label>
-                                        <input type="text" name="_expiry" value="">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Expiry</span>
+                                            <input class="form-control datepicker" name="_expiry" type="text" placeholder="<?php esc_attr_e( 'Expire Date', 'dokan' ); ?>" value="<?php echo esc_attr( $_expiry ); ?>">
+                                        </div>
                                     </li>
                                 </ul>
                             </div> <!-- .dokan-side-body -->
