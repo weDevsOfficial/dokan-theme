@@ -8,6 +8,10 @@ jQuery(function($) {
         $(this).removeClass('open');
     });
 
+    $('.datepicker').datepicker({
+        dateFormat: 'yy-mm-dd'
+    });
+
     // set dashboard menu height
     // $('.dokan-dash-sidebar ul.dokan-dashboard-menu').css({
     //     'height': $('#main').height()

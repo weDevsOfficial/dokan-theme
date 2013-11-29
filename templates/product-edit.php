@@ -6,8 +6,37 @@ global $post, $product;
 $woo_product = get_product( $post->ID );
 // var_dump( $woo_product );
 
+$post_id = $post->ID;
 $product_cat = -1;
 $post_content = __( 'Details about your product...', 'dokan' );
+$_regular_price = get_post_meta( $post->ID, '_regular_price', true );
+$_sale_price = get_post_meta( $post->ID, '_sale_price', true );
+$is_discount = !empty( $_sale_price ) ? true : false;
+$_sale_price_dates_from = get_post_meta( $post_id, '_sale_price_dates_from', true );
+$_sale_price_dates_to = get_post_meta( $post_id, '_sale_price_dates_to', true );
+
+$_sale_price_dates_from = !empty( $_sale_price_dates_from ) ? date_i18n( 'Y-m-d', $_sale_price_dates_from ) : '';
+$_sale_price_dates_to = !empty( $_sale_price_dates_to ) ? date_i18n( 'Y-m-d', $_sale_price_dates_to ) : '';
+$show_schedule = false;
+
+if ( !empty( $_sale_price_dates_from ) && !empty( $_sale_price_dates_to ) ) {
+    $show_schedule = true;
+}
+
+$_purchase_note = get_post_meta( $post_id, '_purchase_note', true );
+$_manage_stock = get_post_meta( $post_id, '_manage_stock', true );
+$_backorders = get_post_meta( $post_id, '_backorders', true );
+$_stock = get_post_meta( $post_id, '_stock', true );
+$_sku = get_post_meta( $post_id, '_sku', true );
+$_featured = get_post_meta( $post_id, '_featured', true );
+$_weight = get_post_meta( $post_id, '_weight', true );
+$_length = get_post_meta( $post_id, '_length', true );
+$_width = get_post_meta( $post_id, '_width', true );
+$_height = get_post_meta( $post_id, '_height', true );
+$_downloadable = get_post_meta( $post_id, '_downloadable', true );
+$_stock_status = get_post_meta( $post_id, '_stock_status', true );
+$_visibility = get_post_meta( $post_id, '_visibility', true );
+
 
 $term = wp_get_post_terms( $post->ID, 'product_cat', array( 'fields' => 'ids') );
 if ( $term ) {
@@ -120,43 +149,45 @@ if ( $term ) {
                                                     <div class="form-group col-md-6">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                                                            <input class="form-control" name="_regular_price" id="product-price" type="text" placeholder="9.99" value="<?php echo esc_attr( $woo_product->get_price() ); ?>">
+                                                            <input class="form-control" name="_regular_price" id="product-price" type="text" placeholder="9.99" value="<?php echo esc_attr( $_regular_price ); ?>">
                                                         </div>
                                                     </div>
 
 
                                                     <span class="pull-right">
                                                         <label>
-                                                            <input type="checkbox" class="_discounted_price"> Discounted Price
+                                                            <input type="checkbox" <?php checked( $is_discount, true ); ?> class="_discounted_price"> Discounted Price
                                                         </label>
                                                     </span>
                                                 </div>
 
-                                                <div class="row form-group clearfix special-price-container dokan-hides">
-                                                    <div class="input-group col-md-6">
-                                                        <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                                                        <input class="form-control" name="_sale_price" id="product-price" type="text" placeholder="Special price" value="<?php echo esc_attr( '' ); ?>">
-                                                    </div>
+                                                <div class="special-price-container<?php echo $is_discount ? '' : ' dokan-hide'; ?>">
+                                                    <div class="row form-group">
+                                                        <div class="input-group col-md-6">
+                                                            <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
+                                                            <input class="form-control" name="_sale_price" id="product-price" type="text" placeholder="<?php esc_attr_e( 'Special price', 'dokan' ); ?>" value="<?php echo esc_attr( $_sale_price ); ?>">
+                                                        </div>
 
-                                                    <div class="col-md-3">
-                                                        <a href="#" class="sale-schedule">Schedule</a>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row sale-schedule-container dokan-hides">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon">From</span>
-                                                                <input type="text" name="_sale_price_dates_from" class="form-control">
-                                                            </div>
+                                                        <div class="col-md-6">
+                                                            <a href="#" class="sale-schedule pull-right"><?php _e( 'Schedule', 'dokan' ); ?></a>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon">To</span>
-                                                                <input type="text" name="_sale_price_dates_to" class="form-control">
+
+                                                    <div class="row sale-schedule-container<?php echo $show_schedule ? '' : ' dokan-hide'; ?>">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><?php _e( 'From', 'dokan' ); ?></span>
+                                                                    <input type="text" name="_sale_price_dates_from" class="form-control datepicker" value="<?php echo esc_attr( $_sale_price_dates_from ); ?>" maxlength="10" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" placeholder="YYYY-MM-DD">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><?php _e( 'To', 'dokan' ); ?></span>
+                                                                    <input type="text" name="_sale_price_dates_to" class="form-control datepicker" value="<?php echo esc_attr( $_sale_price_dates_to ); ?>" maxlength="10" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" placeholder="YYYY-MM-DD">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -189,7 +220,7 @@ if ( $term ) {
 
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <?php wp_editor( esc_textarea( $post->post_content ), 'post_content', array('editor_height' => 500, 'quicktags' => false, 'media_buttons' => false, 'teeny' => true, 'editor_class' => 'post_content') ); ?>
+                                                <?php wp_editor( esc_textarea( $post->post_content ), 'post_content', array('editor_height' => 50, 'quicktags' => false, 'media_buttons' => false, 'teeny' => true, 'editor_class' => 'post_content') ); ?>
                                             </div>
                                         </div>
 
@@ -200,7 +231,7 @@ if ( $term ) {
                                     <ul class="list-unstyled  label-on-left">
                                         <li>
                                             <label>Purchase Note</label>
-                                            <textarea name="_purchase_note" id="" cols="30" rows="3"></textarea>
+                                            <textarea name="_purchase_note" id="" cols="30" rows="3"><?php echo esc_textarea( $_purchase_note ); ?></textarea>
                                         </li>
                                         <li>
                                             <label>
@@ -217,30 +248,30 @@ if ( $term ) {
                                     <ul class="list-unstyled  label-on-left">
                                         <li>
                                             <label for="_sku">SKU</label>
-                                            <input type="text" name="_sku" value="">
+                                            <input type="text" name="_sku" value="<?php echo esc_attr( $_sku ); ?>">
                                         </li>
                                         <li>
                                             <label>Manage Stock?</label>
-                                            <input type="checkbox" name="_manage_stock">
+                                            <input type="checkbox" name="_manage_stock" <?php checked( $_manage_stock, 'yes' ); ?> value="yes">
                                             <span class="help">Enable stock management at product level</span>
                                         </li>
                                         <li>
-                                            <label for="_sku">Stock Qty</label>
-                                            <input type="text" name="_sku" value="">
+                                            <label for="_stock"><?php _e( 'Stock Qty', 'dokan' ); ?></label>
+                                            <input type="text" name="_stock" value="<?php echo esc_attr( $_stock ); ?>">
                                         </li>
                                         <li>
-                                            <label for="_sku">Stock Status</label>
-                                            <select name="stock_status" id="">
-                                                <option value="instock">In Stock</option>
-                                                <option value="outstock">Out of Stock</option>
+                                            <label for="_stock_status"><?php _e( 'Stock Status', 'dokan' ); ?></label>
+                                            <select name="_stock_status" id="">
+                                                <option value="instock"<?php selected( $_stock_status, 'instock' ); ?>><?php _e( 'In Stock', 'dokan' ); ?></option>
+                                                <option value="outstock"<?php selected( $_stock_status, 'outstock' ); ?>><?php _e( 'Out of Stock', 'dokan' ); ?></option>
                                             </select>
                                         </li>
                                         <li>
-                                            <label for="_sku">Allow Backorders?</label>
-                                            <select name="stock_status" id="">
-                                                <option value="instock">Do not allow</option>
-                                                <option value="outstock">Allow but notify customer</option>
-                                                <option value="outstock">Allow</option>
+                                            <label for="_sku"><?php _e( 'Allow Backorders?', 'dokan' ); ?></label>
+                                            <select name="_backorders" id="">
+                                                <option value="no"<?php selected( $_backorders, 'no' ); ?>><?php _e( 'Do not allow', 'dokan' ); ?></option>
+                                                <option value="notify"<?php selected( $_backorders, 'notify' ); ?>><?php _e( 'Allow but notify customer', 'dokan' ); ?></option>
+                                                <option value="yes"<?php selected( $_backorders, 'yes' ); ?>><?php _e( 'Allow', 'dokan' ); ?></option>
                                             </select>
                                         </li>
                                     </ul>
@@ -522,10 +553,10 @@ if ( $term ) {
                         <aside class="downloadable">
                             <div class="dokan-side-head">
                                 <label>
-                                    <span class="title">Downloadable Product</span>
+                                    <span class="title"><?php _e( 'Downloadable Product', 'dokan' ); ?></span>
 
                                     <span class="checkbox pull-right">
-                                        <input type="checkbox" id="_downloadable" name="_downloadable" value="true">
+                                        <input type="checkbox" id="_downloadable" name="_downloadable" value="yes"<?php checked( $_downloadable, 'yes' ); ?>>
                                     </span>
                                 </label>
                             </div> <!-- .dokan-side-head -->
