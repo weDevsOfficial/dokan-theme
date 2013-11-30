@@ -33,8 +33,10 @@ class Dokan_Template_Coupons{
             'post_type'     => 'shop_coupon',
         );
         
-        if( !isset($_POST['post_id']) ) {
+        if( empty($_POST['post_id']) ) {
+            debug($post);
             $post_id = wp_insert_post( $post );
+            
         } else {
             $post_id = $_POST['post_id'];
         }
