@@ -19,6 +19,7 @@ class Dokan_Template_Coupons{
     }
 
     function coupons_create() {
+
         if( !isset($_POST['coupon_creation'] ) ) {
             return; 
         }
@@ -26,19 +27,27 @@ class Dokan_Template_Coupons{
             wp_die( __( 'Are you cheating?', 'dokan' ) );
         }
 
-        $post = array(
-            'post_title'    => $_POST['title'],
-            'post_content'  => $_POST['description'],
-            'post_status'   => 'publish',
-            'post_type'     => 'shop_coupon',
-        );
+       
         
         if( empty($_POST['post_id']) ) {
-            debug($post);
+
+             $post = array(
+                'post_title'    => $_POST['title'],
+                'post_content'  => $_POST['description'],
+                'post_status'   => 'publish',
+                'post_type'     => 'shop_coupon',
+            );
             $post_id = wp_insert_post( $post );
             
         } else {
-            $post_id = $_POST['post_id'];
+             $post = array(
+                'ID'            => $_POST['post_id'],
+                'post_title'    => $_POST['title'],
+                'post_content'  => $_POST['description'],
+                'post_status'   => 'publish',
+                'post_type'     => 'shop_coupon',
+             );
+            $post_id = wp_update_post( $post );
         }
 
         if( !$post_id ) return;
@@ -210,6 +219,7 @@ class Dokan_Template_Coupons{
         $post_id = isset( $post->ID ) ? $post->ID : '';
         $post_title = isset( $post->post_title ) ? $post->post_title : '';
         $description = isset( $post->post_content ) ? $post->post_content : '';
+
         $discount_type = isset( $discount_type ) ? $discount_type : '';
         if(isset($discount_type)) {
             if( $discount_type == 'coupon_percent_product') {
