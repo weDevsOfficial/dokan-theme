@@ -303,6 +303,7 @@ class WeDevs_Dokan {
         wp_enqueue_style( 'icomoon', $template_directory . '/assets/css/icomoon.css', false, null );
         wp_enqueue_style( 'fontawesome', $template_directory . '/assets/css/font-awesome.css', false, null );
         wp_enqueue_style( 'dokan-style', $template_directory . '/assets/css/style.css', false, null );
+        wp_enqueue_style( 'chosen-style', $template_directory . '/assets/css/chosen.min.css', false, null );
 
         if ( is_single() && comments_open() && get_option( 'thread_comments' ) ) {
             wp_enqueue_script( 'comment-reply' );
@@ -328,6 +329,9 @@ class WeDevs_Dokan {
         wp_enqueue_script( 'modernizr' );
         // wp_enqueue_script( 'roots_plugins' );
         // wp_enqueue_script( 'roots_main' );
+         wp_enqueue_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
+
+
     }
 
     /**

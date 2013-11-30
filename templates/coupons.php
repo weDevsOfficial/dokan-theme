@@ -3,6 +3,12 @@
  * Template Name: Dashboard - Coupon
  */
 
+require_once __DIR__ . '/../classes/coupons.php';
+
+$dokan_template_coupons = Dokan_Template_coupons::init();
+$dokan_template_coupons->coupons_create();
+
+
 get_header();
 ?>
 
@@ -22,9 +28,11 @@ get_header();
                 <div class="entry-content">
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
+                <?php $dokan_template_coupons->user_coupons(); ?>
 
+                <?php $dokan_template_coupons->add_coupons_form(); ?>
                 <p>
-                    <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-large btn-info">Add New Coupon</a>
+                   <!-- <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-large btn-info">Add New Coupon</a> -->
                 </p>
 
             </article>
