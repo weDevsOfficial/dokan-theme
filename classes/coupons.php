@@ -8,6 +8,9 @@ error_reporting(E_ALL);
 
 class Dokan_Template_Coupons{
 
+    private $perpage = 2;
+    private $total_query_result;
+
     public static function init() {
         static $instance = false;
 
@@ -16,6 +19,35 @@ class Dokan_Template_Coupons{
         }
 
         return $instance;
+    }
+
+    function coupun_delete() {
+       
+        if( !isset( $_GET['post'] ) || !isset( $_GET['action'] ) ) {
+            return;
+        } else if( $_GET['action'] != 'delete' ) {
+            return;
+        }
+
+        if( !wp_verify_nonce( $_GET['coupon_del_nonce'], '_coupon_del_nonce' ) ) {
+            wp_die( __( 'Are you cheating?', 'dokan' ) );
+        }
+        
+        wp_delete_post( $_GET['post'] );
+
+        delete_post_meta( $_GET['post'], 'discount_type' );
+        delete_post_meta( $_GET['post'], 'coupon_amount' );
+        delete_post_meta( $_GET['post'], 'product_ids' );
+        delete_post_meta( $_GET['post'], 'exclude_product_ids' );
+        delete_post_meta( $_GET['post'], 'usage_limit' );
+        delete_post_meta( $_GET['post'], 'expiry_date' );
+        delete_post_meta( $_GET['post'], 'apply_before_tax' );
+        delete_post_meta( $_GET['post'], 'free_shipping' );
+        delete_post_meta( $_GET['post'], 'exclude_sale_items' );
+        delete_post_meta( $_GET['post'], 'minimum_amount' );
+        delete_post_meta( $_GET['post'], 'customer_email' );
+
+        wp_redirect( add_query_arg( array( 'message' => 'delete_succefully' ) , get_permalink() ) );
     }
 
     function coupons_create() {
@@ -27,10 +59,20 @@ class Dokan_Template_Coupons{
             wp_die( __( 'Are you cheating?', 'dokan' ) );
         }
 
-       
-        
+
         if( empty($_POST['post_id']) ) {
 
+            if( empty($_POST['title']) ) {
+                wp_redirect( add_query_arg( array( 'message' => 'empty_title', 'view' => 'add_coupons' ), get_permalink() ) );
+                exit;
+            } else if( empty( $_POST['amount'] ) ) {
+                wp_redirect( add_query_arg( array( 'message' => 'empty_amount', 'view' => 'add_coupons' ), get_permalink() ) );
+                exit;
+            } else if( !isset( $_POST['product_drop_down'] ) || !count( $_POST['product_drop_down'] ) ) {
+                wp_redirect( add_query_arg( array( 'message' => 'empty_product', 'view' => 'add_coupons' ), get_permalink() ) );
+                exit;
+            }
+            
              $post = array(
                 'post_title'    => $_POST['title'],
                 'post_content'  => $_POST['description'],
@@ -38,8 +80,22 @@ class Dokan_Template_Coupons{
                 'post_type'     => 'shop_coupon',
             );
             $post_id = wp_insert_post( $post );
+
+            $message = 'coupon_saved';
             
         } else {
+
+            if( empty($_POST['title']) ) {
+                wp_redirect( add_query_arg( array( 'message' => 'empty_title', 'view' => 'add_coupons' ), get_permalink() ) );
+                exit;
+            } else if( empty( $_POST['amount'] ) ) {
+                wp_redirect( add_query_arg( array( 'message' => 'empty_amount', 'view' => 'add_coupons' ), get_permalink() ) );
+                exit;
+            } else if( !isset( $_POST['product_drop_down'] ) || !count( $_POST['product_drop_down'] ) ) {
+                wp_redirect( add_query_arg( array( 'message' => 'empty_product', 'view' => 'add_coupons' ), get_permalink() ) );
+                exit;
+            }
+
              $post = array(
                 'ID'            => $_POST['post_id'],
                 'post_title'    => $_POST['title'],
@@ -48,24 +104,25 @@ class Dokan_Template_Coupons{
                 'post_type'     => 'shop_coupon',
              );
             $post_id = wp_update_post( $post );
+            $message = 'coupon_update';
         }
 
         if( !$post_id ) return;
-
-        $customer_email     = array_filter( array_map( 'trim', explode( ',', woocommerce_clean( $_POST['email_restrictions'] ) ) ) );
-        $type               = woocommerce_clean( $_POST['discount_type'] );
-        $amount             = woocommerce_clean( $_POST['amount'] );
+        
+        $customer_email     = array_filter( array_map( 'trim', explode( ',', sanitize_text_field( $_POST['email_restrictions'] ) ) ) );
+        $type               = sanitize_text_field( $_POST['discount_type'] );
+        $amount             = sanitize_text_field( $_POST['amount'] );
         $usage_limit        = empty( $_POST['usage_limit'] ) ? '' : absint( $_POST['usage_limit'] );
-        $expiry_date        = woocommerce_clean( $_POST['expire'] );
+        $expiry_date        = sanitize_text_field( $_POST['expire'] );
 
         $apply_before_tax   = isset( $_POST['apply_before_tax'] ) ? 'yes' : 'no';
         $free_shipping      = isset( $_POST['enable_free_ship'] ) ? 'yes' : 'no';
         $exclude_sale_items = isset( $_POST['exclude_sale_items'] ) ? 'yes' : 'no';
-        $minimum_amount     = woocommerce_clean( $_POST['minium_ammount'] );
+        $minimum_amount     = sanitize_text_field( $_POST['minium_ammount'] );
 
 
 
-        if ( isset( $_POST['product_ids'] ) ) {
+        if ( isset( $_POST['product_drop_down'] ) ) {
             $product_ids = implode( ',', array_filter( array_map( 'intval', (array) $_POST['product_drop_down'] ) ) );
         } else {
             $product_ids = '';
@@ -79,7 +136,6 @@ class Dokan_Template_Coupons{
 
         update_post_meta( $post_id, 'discount_type', $type  );
         update_post_meta( $post_id, 'coupon_amount', $amount  );
-
         update_post_meta( $post_id, 'product_ids', $product_ids );
         update_post_meta( $post_id, 'exclude_product_ids', $exclude_product_ids );
         update_post_meta( $post_id, 'usage_limit', $usage_limit );
@@ -90,30 +146,104 @@ class Dokan_Template_Coupons{
         update_post_meta( $post_id, 'minimum_amount', $minimum_amount );
         update_post_meta( $post_id, 'customer_email', $customer_email );
 
-        wp_redirect( add_query_arg( array( 'message' => 'coupon_saved' ), get_permalink() ) );
+        wp_redirect( add_query_arg( array( 'message' => $message ), get_permalink() ) );
     }
 
+    function message() {
+        if( isset($_GET['message']) && $_GET['message'] == 'delete_succefully' ) {
+            ?>
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><?php _e('Coupon has been delete successfully!','dokan'); ?></strong>
+            </div>
+            <?php
+        }
+
+        if( isset($_GET['message']) && $_GET['message'] == 'coupon_saved' ) {
+            ?>
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><?php _e('Coupon has been save successfully!','dokan'); ?></strong>
+            </div>
+            <?php
+        }
+
+        if( isset($_GET['message']) && $_GET['message'] == 'coupon_update' ) {
+            ?>
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><?php _e('Coupon has been update successfully!','dokan'); ?></strong>
+            </div>
+            <?php
+        } 
+
+        if( isset($_GET['message']) && $_GET['message'] == 'empty_title' ) {
+
+            ?>
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><?php _e('Title field require!','dokan'); ?></strong>
+            </div>
+            <?php
+        } 
+
+        if( isset($_GET['message']) && $_GET['message'] == 'empty_amount' ) {
+            ?>
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><?php _e('Amount field required!','dokan'); ?></strong>
+            </div>
+            <?php
+        } 
+        if( isset($_GET['message']) && $_GET['message'] == 'empty_product' ) {
+            ?>
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><?php _e('Product field required!','dokan'); ?></strong>
+            </div>
+            <?php
+        } 
+    }
+
+
+
     function user_coupons() {
+        //click add coupon then hide this function
+        if( isset( $_GET['view'] ) && $_GET['view'] == 'add_coupons'  ) return;
 
         if( isset($_GET['post']) &&  $_GET['action'] == 'edit' ) {
             return;
         }
 
+        $perpage = $this->perpage;
+        $pagenum = isset( $_GET['pagenum'] ) ? absint( $_GET['pagenum'] ) : 1;
+        $offset = ( $pagenum - 1 ) * $perpage;
+
         $paged = (get_query_var( 'paged' )) ? get_query_var( 'paged' ) : 1;
         $args = array(
             'post_type' => 'shop_coupon',
             'post_status' => array('publish'),
-            'posts_per_page' => 10,
+            'posts_per_page' => $this->perpage,
+            'offset' => $offset,
             'author' => get_current_user_id(),
             'paged' => $paged
         );
 
+
         $query = new WP_Query( $args );
+
         if( !is_array( $query->posts ) || !count($query->posts) ) {
             return;
         }
 
+        //pagination total
+        $this->total_query_result = $query->found_posts;
+
+        //message save, update, delte
+
+        $this->message();
         ?>
+
         <table class="table">
             <tr>
                 <th><?php _e('Code', 'dokan'); ?></th>
@@ -123,6 +253,7 @@ class Dokan_Template_Coupons{
                 <th><?php _e('Product IDs', 'dokan'); ?></th>
                 <th><?php _e('Usage / Limit', 'dokan'); ?></th>
                 <th><?php _e('Expiry date', 'dokan'); ?></th>
+                <th><?php _e('Delete', 'dokan'); ?></th>
             </tr>   
 
         <?php
@@ -132,7 +263,7 @@ class Dokan_Template_Coupons{
             ?>
             <tr>
                 <td>
-                    <?php $url=  wp_nonce_url( add_query_arg( array('post' => $post->ID, 'action' => 'edit'), get_permalink() ), '_coupon_nonce', 'coupon_nonce_url' ); ?>
+                    <?php $url=  wp_nonce_url( add_query_arg( array('post' => $post->ID, 'action' => 'edit', 'view' => 'add_coupons'), get_permalink() ), '_coupon_nonce', 'coupon_nonce_url' ); ?>
                     <a href="<?php echo $url; ?>"><?php echo esc_attr( $post->post_title ); ?></a>
                 </td>
 
@@ -183,16 +314,48 @@ class Dokan_Template_Coupons{
                             echo '&ndash;'; 
                     ?>
                 </td>
+                <td>
+                    <?php $url = wp_nonce_url( add_query_arg( array('post' => $post->ID, 'action' => 'delete'), get_permalink() ) ,'_coupon_del_nonce', 'coupon_del_nonce'); ?>
+                    <a  class="btn btn-large btn-info" href="<?php echo $url; ?>"  onclick="return confirm('Are you sure want to delete');"><?php _e('delete', 'dokan'); ?></a>
+                </td>
             </tr>
             <?php
         }
 
         echo '</table>';
+
+        echo $this->pagination();
     }
 
 
 
+    function pagination() {
+
+        $pagenum = isset( $_GET['pagenum'] ) ? absint( $_GET['pagenum'] ) : 1;
+        $num_of_pages = ceil( $this->total_query_result / $this->perpage );
+
+        $page_links = paginate_links( array(
+            'base' => add_query_arg( 'pagenum', '%#%' ),
+            'format' => '',
+            'prev_text' => __( '&laquo;', 'aag' ),
+            'next_text' => __( '&raquo;', 'aag' ),
+            'total' => $num_of_pages,
+            'current' => $pagenum
+        ) );
+
+        if ( $page_links ) {
+            return '<div class="wpuf-pagination">' . $page_links . '</div>';
+        }
+    }
+
     function add_coupons_form() {
+
+        //intial time hide this function
+        if( !isset( $_GET['view'] ) )  {
+            return;
+        }else if( $_GET['view'] != 'add_coupons') {
+            return;
+        }
 
         if( isset($_GET['post']) &&  $_GET['action'] == 'edit' ) {
             if( !wp_verify_nonce( $_GET['coupon_nonce_url'], '_coupon_nonce') ) {
@@ -251,7 +414,8 @@ class Dokan_Template_Coupons{
         }
         $minimum_amount = isset( $minimum_amount ) ? $minimum_amount : '';
         $customer_email = isset( $customer_email ) ? implode(',', $customer_email) : '';
-        
+        //empty field message
+        $this->message();
         ?>
 
 
@@ -260,7 +424,7 @@ class Dokan_Template_Coupons{
             <?php wp_nonce_field('coupon_nonce','coupon_nonce_field'); ?>
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-3 control-label" for="title"><?php _e('Copon Title', 'dokan'); ?></label>  
+              <label class="col-md-3 control-label" for="title"><?php _e('Copon Title', 'dokan'); ?><span class="required"> *</span></label>  
               <div class="col-md-5">
               <input id="title" name="title" value="<?php echo $post_title; ?>" placeholder="Title" class="form-control input-md" type="text">
                 
@@ -289,7 +453,7 @@ class Dokan_Template_Coupons{
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-3 control-label" for="amount"><?php _e('Amount', 'dokan'); ?></label>  
+              <label class="col-md-3 control-label" for="amount"><?php _e('Amount', 'dokan'); ?><span class="required"> *</span></label>  
               <div class="col-md-5">
               <input id="amount" value="<?php echo $amount; ?>" name="amount" placeholder="Amount" class="form-control input-md" type="text">
                 
@@ -338,15 +502,26 @@ class Dokan_Template_Coupons{
 
                 ?>
 
+                <?php
+
+                    $products_id = str_replace(' ','',$products);
+                    $products_id = explode(',', $products_id);
+                ?>
+
             <!-- Select Basic -->
             <div class="form-group">
-              <label class="col-md-3 control-label" for="product"><?php _e('Product',''); ?></label>
+              <label class="col-md-3 control-label" for="product"><?php _e('Product',''); ?><span class="required"> *</span></label>
               <div class="col-md-5">
                 <select id="product" name="product_drop_down[]" class="form-control" multiple>
                     <?php
                     foreach($query->posts as $key=>$object) {
+                        if( in_array($object->ID, $products_id) ) {
+                            $select = 'selected';
+                        } else {
+                            $select = '';
+                        }
                         ?>
-                        <option  value="<?php echo $object->ID; ?>"><?php _e($object->post_title, 'dokan'); ?></option>
+                        <option <?php echo $select; ?>  value="<?php echo $object->ID; ?>"><?php _e($object->post_title, 'dokan'); ?></option>
 
                         <?php
                         
@@ -404,7 +579,11 @@ class Dokan_Template_Coupons{
               </div>
             </div>
 
+            <?php
 
+                $exclude_products = str_replace( ' ', '', $exclude_products );
+                $exclude_products = explode(',', $exclude_products);
+            ?>
             <!-- Select Basic -->
             <div class="form-group">
               <label class="col-md-3 control-label" for="product"><?php _e('Exclude products','dokan'); ?></label>
@@ -412,8 +591,13 @@ class Dokan_Template_Coupons{
                 <select id="coupon_exclude_categories" name="exclude_product_ids[]" class="form-control" multiple>
                     <?php
                     foreach($query->posts as $key=>$object) {
+                        if( in_array($object->ID, $exclude_products) ) {
+                            $select = 'selected';
+                        } else {
+                            $select = '';
+                        }
                         ?>
-                        <option value="<?php echo $object->ID; ?>"><?php _e($object->post_title, 'dokan'); ?></option>
+                        <option <?php echo $select; ?>  value="<?php echo $object->ID; ?>"><?php _e($object->post_title, 'dokan'); ?></option>
 
                         <?php
                         

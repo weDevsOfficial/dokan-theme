@@ -6,7 +6,10 @@
 require_once __DIR__ . '/../classes/coupons.php';
 
 $dokan_template_coupons = Dokan_Template_coupons::init();
-$dokan_template_coupons->coupons_create();
+if( is_user_logged_in() ) {
+    $dokan_template_coupons->coupons_create();
+    $dokan_template_coupons->coupun_delete();
+}
 
 
 get_header();
@@ -28,12 +31,14 @@ get_header();
                 <div class="entry-content">
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
+    
+                <p>
+                   <a href="<?php echo add_query_arg( array( 'view' => 'add_coupons'), get_permalink() ); ?>" class="btn btn-large btn-info"><?php _e('Add New Coupon','dokan'); ?></a>
+                </p>
+
                 <?php $dokan_template_coupons->user_coupons(); ?>
 
                 <?php $dokan_template_coupons->add_coupons_form(); ?>
-                <p>
-                   <!-- <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-large btn-info">Add New Coupon</a> -->
-                </p>
 
             </article>
 
