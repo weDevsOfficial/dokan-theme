@@ -7,7 +7,12 @@ require_once __DIR__ . '/../classes/coupons.php';
 
 $dokan_template_coupons = Dokan_Template_coupons::init();
 if( is_user_logged_in() ) {
-    $dokan_template_coupons->coupons_create();
+    $validated = $dokan_template_coupons->validate();
+
+    if ( !is_wp_error( $validated ) ) {
+        $dokan_template_coupons->coupons_create();
+    }
+    
     $dokan_template_coupons->coupun_delete();
 }
 
@@ -38,7 +43,21 @@ get_header();
 
                 <?php $dokan_template_coupons->user_coupons(); ?>
 
-                <?php $dokan_template_coupons->add_coupons_form(); ?>
+                <?php
+                if ( is_wp_error( $validated )) {
+                    $messages = $validated->get_error_messages();
+
+                    foreach ($messages as $message) {
+                        ?>
+                        <div class="alert alert-danger" style="width: 40%; margin-left: 25%;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong><?php _e( $message,'dokan'); ?></strong>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+                <?php $dokan_template_coupons->add_coupons_form($validated); ?>
 
             </article>
 

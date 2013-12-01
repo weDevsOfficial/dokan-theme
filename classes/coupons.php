@@ -33,21 +33,39 @@ class Dokan_Template_Coupons{
             wp_die( __( 'Are you cheating?', 'dokan' ) );
         }
         
-        wp_delete_post( $_GET['post'] );
-
-        delete_post_meta( $_GET['post'], 'discount_type' );
-        delete_post_meta( $_GET['post'], 'coupon_amount' );
-        delete_post_meta( $_GET['post'], 'product_ids' );
-        delete_post_meta( $_GET['post'], 'exclude_product_ids' );
-        delete_post_meta( $_GET['post'], 'usage_limit' );
-        delete_post_meta( $_GET['post'], 'expiry_date' );
-        delete_post_meta( $_GET['post'], 'apply_before_tax' );
-        delete_post_meta( $_GET['post'], 'free_shipping' );
-        delete_post_meta( $_GET['post'], 'exclude_sale_items' );
-        delete_post_meta( $_GET['post'], 'minimum_amount' );
-        delete_post_meta( $_GET['post'], 'customer_email' );
+        wp_delete_post( $_GET['post'], true );
 
         wp_redirect( add_query_arg( array( 'message' => 'delete_succefully' ) , get_permalink() ) );
+    }
+
+    function validate() {
+
+        if( !isset($_POST['coupon_creation'] ) ) {
+            return; 
+        }
+        if( !wp_verify_nonce( $_POST['coupon_nonce_field'], 'coupon_nonce') ) {
+            wp_die( __( 'Are you cheating?', 'dokan' ) );
+        }
+
+        $errors = new WP_Error();
+
+        if( empty($_POST['title']) ) {
+            $errors->add('title', __("Required title"));
+        } 
+
+        if( empty( $_POST['amount'] ) ) {
+            $errors->add('amount', __("Required amount"));
+        }
+
+        if( !isset( $_POST['product_drop_down'] ) || !count( $_POST['product_drop_down'] ) ) {
+            $errors->add('products', __("Required product"));
+        }
+
+        if ( $errors->get_error_codes() ) {
+            return $errors;
+        }
+
+        return true;
     }
 
     function coupons_create() {
@@ -61,17 +79,6 @@ class Dokan_Template_Coupons{
 
 
         if( empty($_POST['post_id']) ) {
-
-            if( empty($_POST['title']) ) {
-                wp_redirect( add_query_arg( array( 'message' => 'empty_title', 'view' => 'add_coupons' ), get_permalink() ) );
-                exit;
-            } else if( empty( $_POST['amount'] ) ) {
-                wp_redirect( add_query_arg( array( 'message' => 'empty_amount', 'view' => 'add_coupons' ), get_permalink() ) );
-                exit;
-            } else if( !isset( $_POST['product_drop_down'] ) || !count( $_POST['product_drop_down'] ) ) {
-                wp_redirect( add_query_arg( array( 'message' => 'empty_product', 'view' => 'add_coupons' ), get_permalink() ) );
-                exit;
-            }
             
              $post = array(
                 'post_title'    => $_POST['title'],
@@ -84,17 +91,6 @@ class Dokan_Template_Coupons{
             $message = 'coupon_saved';
             
         } else {
-
-            if( empty($_POST['title']) ) {
-                wp_redirect( add_query_arg( array( 'message' => 'empty_title', 'view' => 'add_coupons' ), get_permalink() ) );
-                exit;
-            } else if( empty( $_POST['amount'] ) ) {
-                wp_redirect( add_query_arg( array( 'message' => 'empty_amount', 'view' => 'add_coupons' ), get_permalink() ) );
-                exit;
-            } else if( !isset( $_POST['product_drop_down'] ) || !count( $_POST['product_drop_down'] ) ) {
-                wp_redirect( add_query_arg( array( 'message' => 'empty_product', 'view' => 'add_coupons' ), get_permalink() ) );
-                exit;
-            }
 
              $post = array(
                 'ID'            => $_POST['post_id'],
@@ -177,32 +173,7 @@ class Dokan_Template_Coupons{
             <?php
         } 
 
-        if( isset($_GET['message']) && $_GET['message'] == 'empty_title' ) {
-
-            ?>
-            <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong><?php _e('Title field require!','dokan'); ?></strong>
-            </div>
-            <?php
-        } 
-
-        if( isset($_GET['message']) && $_GET['message'] == 'empty_amount' ) {
-            ?>
-            <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong><?php _e('Amount field required!','dokan'); ?></strong>
-            </div>
-            <?php
-        } 
-        if( isset($_GET['message']) && $_GET['message'] == 'empty_product' ) {
-            ?>
-            <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong><?php _e('Product field required!','dokan'); ?></strong>
-            </div>
-            <?php
-        } 
+        
     }
 
 
@@ -348,14 +319,15 @@ class Dokan_Template_Coupons{
         }
     }
 
-    function add_coupons_form() {
-
+    function add_coupons_form($validated) {
+        
         //intial time hide this function
         if( !isset( $_GET['view'] ) )  {
             return;
         }else if( $_GET['view'] != 'add_coupons') {
             return;
         }
+        $button_name = 'Create Coupon';
 
         if( isset($_GET['post']) &&  $_GET['action'] == 'edit' ) {
             if( !wp_verify_nonce( $_GET['coupon_nonce_url'], '_coupon_nonce') ) {
@@ -363,7 +335,7 @@ class Dokan_Template_Coupons{
             }
 
             $post = get_post($_GET['post']);
-        
+            $button_name = 'Update Coupon';
 
             $discount_type = get_post_meta( $post->ID, 'discount_type', true  );
             $amount = get_post_meta( $post->ID, 'coupon_amount', true  );
@@ -378,6 +350,8 @@ class Dokan_Template_Coupons{
             $minimum_amount = get_post_meta( $post->ID, 'minimum_amount', true );
             $customer_email = get_post_meta( $post->ID, 'customer_email', true );
         }
+
+
 
         $post_id = isset( $post->ID ) ? $post->ID : '';
         $post_title = isset( $post->post_title ) ? $post->post_title : '';
@@ -414,8 +388,62 @@ class Dokan_Template_Coupons{
         }
         $minimum_amount = isset( $minimum_amount ) ? $minimum_amount : '';
         $customer_email = isset( $customer_email ) ? implode(',', $customer_email) : '';
-        //empty field message
-        $this->message();
+
+        if ( is_wp_error( $validated ) ) {
+            
+            $post_id = $_POST['post_id'];
+            $post_title = $_POST['title'];
+            $description = $_POST['description'];
+
+            $discount_type = $_POST['discount_type'];
+            
+            if( $discount_type == 'coupon_percent_product') {
+                $discount_type = 'selected';
+            }
+             
+            $amount = $_POST['amount'];
+
+
+            if ( isset( $_POST['product_drop_down'] ) ) {
+                $products = implode( ',', array_filter( array_map( 'intval', (array) $_POST['product_drop_down'] ) ) );
+            } else {
+                $products = '';
+            }
+            
+
+            if ( isset( $_POST['exclude_product_ids'] ) ) {
+                $exclude_products = implode( ',', array_filter( array_map( 'intval', (array) $_POST['exclude_product_ids'] ) ) );
+            } else {
+                $exclude_products = '';
+            }
+
+            $usage_limit = $_POST['usage_limit'];
+            $expire = $_POST['expire'];
+
+
+
+            if( isset( $_POST['enable_free_ship'] ) && $_POST['enable_free_ship'] == 'yes') {
+                $free_shipping = 'checked';
+            } else {
+                $free_shipping = '';
+            }
+            if( isset($_POST['apply_before_tax']) && $_POST['apply_before_tax'] == 'yes' ) {
+                $apply_before_tax = 'checked';
+            } else {
+                $apply_before_tax = '';
+            }
+            
+
+            if( isset( $_POST['exclude_sale_items'] ) && $_POST['exclude_sale_items'] == 'yes' ) {
+                $exclide_sale_item = 'checked';
+            } else {
+                $exclide_sale_item = '';
+            }
+            $minimum_amount = $_POST['minium_ammount'];
+            $customer_email = $_POST['email_restrictions'];
+        }
+    
+        
         ?>
 
 
@@ -611,7 +639,7 @@ class Dokan_Template_Coupons{
             <div class="form-group">
               <label class="col-md-3 control-label" for=""></label>
               <div class="col-md-4">
-                <input type="submit" id="" name="coupon_creation" value="<?php _e('Create Coupon','dokan'); ?>" class="btn btn-primary">
+                <input type="submit" id="" name="coupon_creation" value="<?php _e( $button_name,'dokan'); ?>" class="btn btn-primary">
               </div>
             </div>
 
