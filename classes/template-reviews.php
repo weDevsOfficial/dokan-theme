@@ -423,6 +423,9 @@ class Dokan_Template_reviews {
                 <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="spam" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="delete" class="wpuf-cmt-action"><?php _e( 'Delete Permanently', 'wpuf-comment' ); ?></a></li>
 
             <?php } else if ( $page_status == 'trash' ) { ?>
+                
+                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="trash" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="1" class="wpuf-cmt-action"><?php _e( 'Restore', 'wpuf-comment' ); ?></a></li>
+                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="trash" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="delete" class="wpuf-cmt-action"><?php _e( 'Delete Permanently', 'wpuf-comment' ); ?></a></li>
 
             <?php } else { ?>
 
