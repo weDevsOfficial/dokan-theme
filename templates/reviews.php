@@ -3,6 +3,9 @@
  * Template Name: Dashboard - Reviews
  */
 
+$dokan_template_reviews = Dokan_Template_reviews::init();
+$dokan_template_reviews->handle_status();
+
 get_header();
 ?>
 
@@ -21,6 +24,8 @@ get_header();
                 <div class="entry-content">
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
+
+                <?php $dokan_template_reviews->reviews_view();; ?>
 
             </article>
 

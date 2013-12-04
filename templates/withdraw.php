@@ -2,9 +2,8 @@
 /**
  * Template Name: Dashboard - Withdraw
  */
-require_once __DIR__ . '/../classes/withdraw.php';
 
-$dokan_withdraw = Dokan_withdraw::init();
+$dokan_withdraw = Dokan_Template_Withdraw::init();
 
 // perform requests
 $dokan_withdraw->insert_withdraw_info();

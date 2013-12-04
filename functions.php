@@ -1,5 +1,9 @@
 <?php
+error_reporting(E_ALL);
 
+function debug($val) {
+    echo '<pre>'; print_r($val); echo '</pre>';
+}
 /**
  * Dokan functions and definitions
  *
@@ -19,6 +23,27 @@ if ( !defined( '__DIR__' ) ) {
     define( '__DIR__', dirname( __FILE__ ) );
 }
 
+
+/**
+ * Autoload class files on demand
+ *
+ * `WPUF_Form_Posting` becomes => form-posting.php
+ * `WPUF_Dashboard` becomes => dashboard.php
+ *
+ * @param string $class requested class name
+ */
+function dokan_autoload( $class ) {
+    if ( stripos( $class, 'Dokan_' ) !== false ) {
+        $class_name = str_replace( array('Dokan_', '_'), array('', '-'), $class);
+        $file_path = __DIR__ . '/classes/' . strtolower( $class_name ) . '.php';
+
+        if ( file_exists( $file_path ) ) {
+            require_once $file_path;
+        }
+    }
+}
+
+spl_autoload_register( 'dokan_autoload' );
 
 
 /**
@@ -40,6 +65,13 @@ class WeDevs_Dokan {
         add_filter( 'posts_where', array($this, 'hide_others_uploads') );
 
         add_action( 'admin_init', array($this, 'install_theme' ) );
+
+        //for reviews ajax request
+        if ( defined('DOING_AJAX') && DOING_AJAX == true ) {
+
+            $reviews = Dokan_Template_reviews::init();
+            $reviews->dokan_action();
+        }
 
         //initalize user roles
         $this->user_roles();
@@ -305,6 +337,8 @@ class WeDevs_Dokan {
         wp_enqueue_style( 'jquery-ui', $template_directory . '/assets/css/jquery-ui-1.10.0.custom.css', false, null );
         wp_enqueue_style( 'dokan-style', $template_directory . '/assets/css/style.css', false, null );
         wp_enqueue_style( 'chosen-style', $template_directory . '/assets/css/chosen.min.css', false, null );
+        //reviews
+        wp_enqueue_style( 'reviows-style', $template_directory . '/assets/css/reviews.css', false, null );
 
         if ( is_single() && comments_open() && get_option( 'thread_comments' ) ) {
             wp_enqueue_script( 'comment-reply' );
@@ -322,19 +356,22 @@ class WeDevs_Dokan {
         wp_enqueue_script( 'jquery-ui' );
         wp_enqueue_script( 'jquery-ui-autocomplete' );
         wp_enqueue_script( 'jquery-ui-datepicker' );
-
+        wp_enqueue_script( 'underscore' );
+        
         wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
         wp_enqueue_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
+        wp_enqueue_script( 'dokan-reviews', get_stylesheet_directory_uri() . '/assets/js/reviews.js', array('jquery', 'underscore') );
+        
         wp_enqueue_script( 'dokan-scripts', $template_directory . '/assets/js/script.js', false, null, true );
+        wp_localize_script( 'dokan-scripts', 'dokan', array(
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+            'nonce' => wp_create_nonce( 'dokan_reviews' )
+        ) );
 
-        wp_enqueue_script( 'underscore' );
-        wp_enqueue_script( 'modernizr' );
-        // wp_enqueue_script( 'roots_plugins' );
-        // wp_enqueue_script( 'roots_main' );
-         wp_enqueue_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
-
-
+        wp_enqueue_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
     }
+    
+
 
     /**
      * Init dokan user roles
@@ -572,7 +609,7 @@ add_action( 'wp_ajax_dokan_save_attributes', function() {
                     wp_set_object_terms( $post_id, $values, $attribute_names[ $i ] );
                     print_r($values);
                     // var_dump($values);
-                    echo "wp_set_object_terms( $post_id, $values, {$attribute_names[ $i ]} )";
+                    echo "wp_set_object_terms( $post_id, $values, {$attribute_names[$i]} )";
                 }
 
                 if ( $values ) {

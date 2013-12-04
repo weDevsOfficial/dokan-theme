@@ -3,10 +3,14 @@
  * Template Name: Dashboard - Settings
  */
 
-require_once __DIR__ . '/../classes/settings.php';
 
 $dokan_template_settings = Dokan_Template_Settings::init();
-$dokan_template_settings->insert_settings_info();
+
+$validate = $dokan_template_settings->validate();
+
+if( $validate !== false && !is_wp_error( $validate ) ) {
+   $dokan_template_settings->insert_settings_info();
+}
 
 $scheme = is_ssl() ? 'https' : 'http';        
 wp_enqueue_script( 'google-maps', $scheme . '://maps.google.com/maps/api/js?sensor=true' );
@@ -29,7 +33,20 @@ get_header();
                 <div class="entry-content">
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
-                <?php $dokan_template_settings->setting_field(); ?>
+                <?php if( is_wp_error($validate) ) {
+                    $messages = $validate->get_error_messages();
+
+                    foreach( $messages as $message ) {
+                        ?>
+                        <div class="alert alert-danger" style="width: 40%; margin-left: 25%;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong><?php echo $message; ?></strong>
+                        </div>
+
+                        <?php
+                    }
+                } ?>
+                <?php $dokan_template_settings->setting_field($validate); ?>
             </article>
 
         <?php endwhile; // end of the loop. ?>

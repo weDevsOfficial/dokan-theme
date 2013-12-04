@@ -3,18 +3,17 @@
  * Template Name: Dashboard - Coupon
  */
 
-require_once __DIR__ . '/../classes/coupons.php';
 
-$dokan_template_coupons = Dokan_Template_coupons::init();
-if( is_user_logged_in() ) {
-    $validated = $dokan_template_coupons->validate();
+$dokan_template_coupons = Dokan_Template_Coupons::init();
 
-    if ( !is_wp_error( $validated ) ) {
-        $dokan_template_coupons->coupons_create();
-    }
-    
-    $dokan_template_coupons->coupun_delete();
+$validated = $dokan_template_coupons->validate();
+
+if ( !is_wp_error( $validated ) ) {
+    $dokan_template_coupons->coupons_create();
 }
+
+$dokan_template_coupons->coupun_delete();
+
 
 
 get_header();
