@@ -5,8 +5,14 @@
 
 $dokan_withdraw = Dokan_Template_Withdraw::init();
 
-// perform requests
-$dokan_withdraw->insert_withdraw_info();
+$validate = $dokan_withdraw->validate();
+
+if( $validate !== false && !is_wp_error( $validate ) ) {
+    // perform requests
+    $dokan_withdraw->insert_withdraw_info();
+}
+
+
 $dokan_withdraw->cancel_pending();
 
 get_header();
@@ -25,10 +31,24 @@ get_header();
                 </header><!-- .entry-header -->
 
                 <div class="entry-content">
+
+                    <?php if( is_wp_error($validate) ) {
+                    $messages = $validate->get_error_messages();
+
+                    foreach( $messages as $message ) {
+                        ?>
+                        <div class="alert alert-danger" style="width: 40%; margin-left: 25%;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong><?php echo $message; ?></strong>
+                        </div>
+
+                        <?php
+                    }
+                } ?>
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
 
-                <?php $dokan_withdraw->withdraw_form(); ?>
+                <?php $dokan_withdraw->withdraw_form($validate); ?>
 
             </article>
 

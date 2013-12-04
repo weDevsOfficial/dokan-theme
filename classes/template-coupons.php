@@ -448,7 +448,7 @@ class Dokan_Template_Coupons{
 
 
         <form method="post" action="" class="form-horizontal">
-            <input type="text" hidden value="<?php echo $post_id; ?>" name="post_id">
+            <input type="hidden"  value="<?php echo $post_id; ?>" name="post_id">
             <?php wp_nonce_field('coupon_nonce','coupon_nonce_field'); ?>
             <!-- Text input-->
             <div class="form-group">

@@ -41,6 +41,38 @@ class Dokan_Template_Withdraw {
         }
     }
 
+    function validate() {
+
+        if ( !isset( $_POST['withdraw_submit'] ) ) { 
+            return false;
+        }
+
+        if( !wp_verify_nonce( $_POST['dokan_withdraw_nonce'], 'dokan_withdraw' ) ) {
+            wp_die( __( 'Are you cheating?', 'dokan' ) );
+        }
+
+        
+        $error = new WP_Error();
+
+        if( empty($_POST['witdraw_amount']) ) {
+            $error->add('dokan_empty_withdrad', __('Withdraw amount required ', 'dokan' ));
+        } else  {
+            if( $_POST['witdraw_amount'] <= 49 ) {
+                $error->add('dokan_withdraw_amount', __('Withdraw amount must be greater than 49', 'dokan' ));
+            }
+        }
+
+        if( empty($_POST['withdraw_method']) ) {
+            $error->add('dokan_withdraw_method', __('withdraw method required', 'dokan' ));
+        }
+
+        if ( $error->get_error_codes() ) {
+            return $error;
+        }
+
+        return true;
+    }
+
     function update_status( $row_id, $user_id, $status ) {
         global $wpdb;
 
@@ -76,10 +108,6 @@ class Dokan_Template_Withdraw {
     function insert_withdraw_info() {
 
         global $current_user, $wpdb;
-
-        if ( !isset( $_POST['withdraw_submit'] ) || !wp_verify_nonce( $_POST['dokan_withdraw_nonce'], 'dokan_withdraw' ) ) {
-            return;
-        }
 
         $data_info = array(
             'user_id' => $current_user->ID,
@@ -225,7 +253,7 @@ class Dokan_Template_Withdraw {
 
     function get_payment_methods() {
         $method = array(
-            'none' => __( '- Select Method -', 'dokan' ),
+            '' => __( '- Select Method -', 'dokan' ),
             'paypal' => __( 'Paypal', 'dokan' ),
             'bank' => __( 'Bank Transfer', 'dokan' ),
         );
@@ -259,7 +287,7 @@ class Dokan_Template_Withdraw {
         }
     }
 
-    function withdraw_form() {
+    function withdraw_form($validate='') {
         global $current_user;
 
         // show alert messages
@@ -283,6 +311,14 @@ class Dokan_Template_Withdraw {
         }
 
         $payment_methods = $this->get_payment_methods();
+
+        if( is_wp_error($validate) ) {
+            $amount = $_POST['witdraw_amount'];
+            $withdraw_method = $_POST['withdraw_method'];
+        } else {
+            $amount = '';
+            $withdraw_method = '';
+        }
         ?>
 
         <form class="form-horizontal" role="form" method="post">
@@ -295,7 +331,7 @@ class Dokan_Template_Withdraw {
                 <div class="col-sm-3">
                     <div class="input-group">
                         <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                        <input name="witdraw_amount" class="form-control" id="withdraw-amount" name="price" type="text" placeholder="9.99" value="">
+                        <input name="witdraw_amount" class="form-control" id="withdraw-amount" name="price" type="number" placeholder="9.99" value="<?php echo $amount; ?>"  >
                     </div>
                 </div>
             </div>
@@ -308,7 +344,7 @@ class Dokan_Template_Withdraw {
                 <div class="col-sm-3">
                     <select class="form-control" name="withdraw_method" id="withdraw-method">
                         <?php foreach ($payment_methods as $value => $name) { ?>
-                            <option value="<?php echo esc_attr( $value ); ?>"><?php echo $name; ?></option>
+                            <option <?php selected( $withdraw_method, $value );  ?>value="<?php echo esc_attr( $value ); ?>"><?php echo $name; ?></option>
                         <?php } ?>
                     </select>
                 </div>
