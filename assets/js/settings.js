@@ -17,11 +17,11 @@
                     form_data = self.serialize() + '&action=dokan_settings';
 
                 
-                self.find('.ajax_prev').append('<span class="dokan-loading"></span>');
-               // $('span.dokan-loading').css('url','/../assets/images/wpspin_light.gif');
+                self.find('.ajax_prev').append('<span class="dokan-loading"> </span>');
+              
                 $.post(dokan.ajaxurl, form_data, function(resp) {
 
-                   // self.find('span.dokan-loading').remove();
+                   self.find('span.dokan-loading').remove();
                     $('html,body').animate({scrollTop:100});
 
                     if(resp.success) {

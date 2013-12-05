@@ -177,14 +177,7 @@ class Dokan_Template_Settings{
         }
         
         ?>
-            <style>
-                span.dokan-loading{ 
-                   
 
-                    background: url("../assets/images/wpspin_light.gif") no-repeat scroll 0 0 / 16px 16px rgba(0, 0, 0, 0);
-                     
-                }
-            </style>
             <div class="alert  alert-danger" style="display: none;">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <strong></strong>
@@ -347,6 +340,7 @@ class Dokan_Template_Settings{
 
                         <div class="input-group">
                             <span class="input-group-btn">
+
                                 <input id="dokan-map-add" type="text" class="form-control" value="<?php echo $map_address; ?>" name="find_address" placeholder="<?php _e( 'Type an address to find', 'dokan' ); ?>" size="30" />
                                 <a href="#" class="btn btn-default" id="dokan-location-find-btn" type="button"><?php _e( 'Find Address', 'dokan' ); ?></a>
                             </span>
