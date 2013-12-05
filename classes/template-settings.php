@@ -18,6 +18,33 @@ class Dokan_Template_Settings{
         return $instance;
     }
 
+    function ajax_settings() {
+
+        
+
+        if( !wp_verify_nonce( $_POST['_wpnonce'], 'dokan_settings_nonce' ) ) {
+            wp_send_json_error( array('noce_verify' => 'Are you cheating?') );
+        }
+
+        $_POST['dokan_update_profile'] = '';
+
+        $ajax_validate =  $this->validate();
+
+        if( is_wp_error( $ajax_validate ) ) {
+            wp_send_json_error( array('error_message' => $ajax_validate->errors ) );
+        }
+
+        if( !is_wp_error( $ajax_validate ) ) {
+            $save_data = $this->insert_settings_info();
+        }
+
+        
+        wp_send_json_success( array( 'success_save'=> 'Your information has been saved successfully') );
+
+
+    }
+
+
     function validate() {
 
         if( !isset( $_POST['dokan_update_profile'] ) ) {
@@ -85,7 +112,9 @@ class Dokan_Template_Settings{
         );
 
         update_user_meta( get_current_user_id(), 'dokan_profile_settings', $dokan_settings );
-        wp_redirect( add_query_arg( array( 'message' => 'profile_saved' ), get_permalink() ) );
+        if ( !defined('DOING_AJAX') && DOING_AJAX !== true ) {
+            wp_redirect( add_query_arg( array( 'message' => 'profile_saved' ), get_permalink() ) );
+        }
     }
 
 
@@ -148,9 +177,25 @@ class Dokan_Template_Settings{
         }
         
         ?>
+            <style>
+                span.dokan-loading{ 
+                   
 
+                    background: url("../assets/images/wpspin_light.gif") no-repeat scroll 0 0 / 16px 16px rgba(0, 0, 0, 0);
+                     
+                }
+            </style>
+            <div class="alert  alert-danger" style="display: none;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong></strong>
+            </div>
 
-            <form method="post"  action="" class="form-horizontal">
+            <div class="alert  alert-success" style="display: none;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong></strong>
+            </div>
+
+            <form method="post" id="settings-form"  action="" class="form-horizontal">
                 <?php wp_nonce_field( 'dokan_settings_nonce' ); ?>
 
                 <div class="form-group">
@@ -464,7 +509,7 @@ class Dokan_Template_Settings{
                 <!-- Button -->
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="dokan_setting"></label>
-                  <div class="col-md-4">
+                  <div class="col-md-4 ajax_prev">
                     <input type="submit" name="dokan_update_profile" class="btn btn-primary" value="<?php esc_attr_e('Update Settings','dokan'); ?>">
                   </div>
                 </div>
@@ -474,9 +519,10 @@ class Dokan_Template_Settings{
 
                 <script type="text/javascript">
 
-                jQuery(function($){
-                  $('#setting_category').chosen({width: "95%"});
-                })
+                    jQuery(function($){
+                       // $('#setting_category').chosen({width: "95%"});
+                    })
+                
                 </script>
 
         <?php

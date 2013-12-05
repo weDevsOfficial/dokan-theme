@@ -72,7 +72,7 @@ class WeDevs_Dokan {
         add_action( 'admin_init', array($this, 'install_theme' ) );
 
         //for reviews ajax request
-        if ( defined('DOING_AJAX') && DOING_AJAX == true ) {
+        if ( defined('DOING_AJAX') && DOING_AJAX === true ) {
             $ajax = Dokan_Ajax::init();
             $ajax->all_ajax_action();
         }
@@ -365,6 +365,7 @@ class WeDevs_Dokan {
         wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
         wp_enqueue_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
         wp_enqueue_script( 'dokan-reviews', get_stylesheet_directory_uri() . '/assets/js/reviews.js', array('jquery', 'underscore') );
+
         
         wp_enqueue_script( 'dokan-scripts', $template_directory . '/assets/js/script.js', false, null, true );
         wp_localize_script( 'dokan-scripts', 'dokan', array(
@@ -373,6 +374,9 @@ class WeDevs_Dokan {
         ) );
 
         wp_enqueue_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
+        wp_enqueue_script( 'form-validate', get_stylesheet_directory_uri() . '/assets/js/form-validate.js', array('jquery'), null, true  );
+
+        wp_enqueue_script( 'doka-settings', get_stylesheet_directory_uri() . '/assets/js/settings.js', array('jquery', 'form-validate'), null, true  );
     }
     
 

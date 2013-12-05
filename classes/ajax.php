@@ -22,6 +22,10 @@ class Dokan_Ajax{
         add_action( 'wp_ajax_wpuf_comment_status', array( $reviews, 'ajax_comment_status' ) );
         add_action( 'wp_ajax_wpuf_update_comment', array( $reviews, 'ajax_update_comment' ) );
 
+        //withdraw note
+        $settings = Dokan_Template_Settings::init();
+        add_action('wp_ajax_dokan_settings', array( $settings, 'ajax_settings' ) );
+
     }
 
 
