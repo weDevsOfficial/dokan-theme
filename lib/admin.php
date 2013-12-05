@@ -32,8 +32,8 @@ class Dokan_Admin_Settings {
         $menu_position = apply_filters( 'doakn_menu_position', 17 );
         $capability = apply_filters( 'doakn_menu_capability', 'activate_plugins' );
 
-        add_menu_page( __( 'Doakn', 'dokan' ), __( 'Doakn', 'dokan' ), $capability, 'dokan', array($this, 'plugin_page'), null, $menu_position );
-        // add_submenu_page( 'doakn', __( 'Archive', 'dokan' ), __( 'Archive', 'dokan' ), $capability, 'doakn-archives', array($this, 'plugin_page') );
+        add_menu_page( __( 'Doakn', 'dokan' ), __( 'Doakn', 'dokan' ), $capability, 'dokan', array($this, 'settings_page'), null, $menu_position );
+        add_submenu_page( 'dokan', __( 'Withdraw', 'dokan' ), __( 'Withdraw', 'dokan' ), $capability, 'dokan-withdraw', array($this, 'withdraw_page') );
     }
 
     function get_settings_sections() {
@@ -124,7 +124,7 @@ class Dokan_Admin_Settings {
         return $settings_fields;
     }
 
-    function plugin_page() {
+    function settings_page() {
         echo '<div class="wrap">';
         settings_errors();
 
@@ -132,6 +132,11 @@ class Dokan_Admin_Settings {
         $this->settings_api->show_forms();
 
         echo '</div>';
+    }
+
+    function withdraw_page() {
+        $dokan_admin_withdraw = Dokan_Template_Withdraw::init();
+        $dokan_admin_withdraw->admin_withdraw_list();
     }
 
 }

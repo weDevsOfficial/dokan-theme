@@ -23,6 +23,8 @@ class Dokan_Template_Withdraw {
         return $instance;
     }
 
+
+
     function cancel_pending() {
 
         if ( isset( $_GET['action'] ) && $_GET['action'] == 'dokan_cancel_withdrow' ) {
@@ -137,7 +139,7 @@ class Dokan_Template_Withdraw {
                    `date` timestamp NOT NULL,
                    `status` int(1) NOT NULL,
                    `method` varchar(30) NOT NULL,
-                   `notes` text NOT NULL,
+                   `note` text NOT NULL,
                    `ip` varchar(15) NOT NULL,
                   PRIMARY KEY (id)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
@@ -167,15 +169,155 @@ class Dokan_Template_Withdraw {
         return false;
     }
 
-    function get_withdraw_requests( $user_id, $status = 0 ) {
+    function get_withdraw_requests( $user_id='', $status = 0 ) {
         global $wpdb;
+
+        $where = empty( $user_id ) ? '' : sprintf( "user_id ='%d' &&", $user_id ); 
 
         $result = $wpdb->get_results( $wpdb->prepare(
             "SELECT * FROM {$wpdb->dokan_withdraw}
-            WHERE user_id='%d' AND status = $status", $user_id
-        ) );
+            WHERE $where status = %d", $status
+        ));
 
         return $result;
+    }
+
+    
+
+    function admin_withdraw_list() {
+        
+        $result = $this->get_withdraw_requests();
+        var_dump($result);
+        ?>
+        <form method="post" action="">
+            <table class="widefat" style="margin-top: 20px;">
+                <thead>
+                <tr>
+                    <th><?php _e( 'User Name', 'dokan' ); ?></th>
+                    <th><?php _e( 'User Email', 'dokan' ); ?></th>
+                    <th><?php _e( 'Amount', 'dokan' ); ?></th>
+                    <th><?php _e( 'Date', 'dokan' ); ?></th>
+                    <th><?php _e( 'Status', 'dokan' ); ?></th>
+                    <th><?php _e( 'Method', 'dokan' ); ?></th>
+                    <th><?php _e( 'Note', 'dokan' ); ?></th>
+                    <th><?php _e( 'IP', 'dokan' ); ?></th>
+                </tr>
+                </thead>
+
+        <?php
+        foreach( $result as $key=>$result_array ) {
+            $user_data = get_userdata($result_array->user_id);
+            ?>
+
+            <tr>
+                <td><?php echo $user_data->user_login; ?></td>
+                <td><?php echo $user_data->user_email; ?></td>
+                <td><?php echo $result_array->amount; ?></td>
+                <td><?php echo $result_array->date; ?></td>
+                <td>
+                    <?php 
+                        echo $this->request_status( $result_array->status );
+                    ?>
+                </td>
+                <td><?php echo $result_array->method; ?></td>
+                <td >
+                    <div class="dokan-add-note" style="width: 130px;">
+                        <p class="ajax_note"><?php echo $result_array->note; ?></p>
+                        <input type="text" class="dokan-note-text" style="display: none;" name="note">
+                        <a class="dokan-note-submit btn btn-info" style="display: none;" data-admin_url="<?php echo admin_url( 'admin-ajax.php' ); ?>" data-row_id=<?php echo $result_array->id; ?> data-user_id=<?php echo $result_array->user_id; ?> href="#" ><?php _e('Note', 'dokan' ); ?></a>
+                        <a href="#" style="display: none; margin-left: 72px;" class="dokan-note-cancle button"><?php _e('X', 'dokan' ); ?></a>
+                        <a href="#" class="dokan-note-field"><?php _e('Add note', 'dokan' ); ?></a>
+                    </div>
+                    
+                </td>
+                <td><?php echo $result_array->ip; ?></td>
+            </tr>
+            <?php
+
+        }
+        echo '</table>';
+        ?>
+
+
+
+
+        <script type="text/javascript">
+
+        jQuery(function($) {
+            var dokan_admin = {
+                init: function() {
+                    $('div.dokan-add-note').on('click', 'a.dokan-note-field', this.addnote);
+                    $('div.dokan-add-note').on('click', 'a.dokan-note-cancle', this.addnoteCancle);
+                    $('div.dokan-add-note').on('click', 'a.dokan-note-submit', this.noteUpdate);
+                },
+
+                noteUpdate: function(e) {
+                    e.preventDefault();
+
+                    var self = $(this),
+                    row_id = self.data('row_id'),
+                    note = self.siblings('input.dokan-note-text').val(),
+                    ajaxurl = self.data('admin_url');
+                    data = {
+                        'action': 'note',
+                        'row_id': row_id,
+                        'note': note,
+                    };
+                    
+                    $.post( ajaxurl, data, function(resp) {
+                        if(resp.success) {
+                        
+                            self.siblings('p.ajax_note').text(resp.data['note']);
+                            self.hide();
+                            self.siblings('input.dokan-note-text').hide();
+                            self.siblings('a.dokan-note-cancle').hide();
+                            self.siblings('a.dokan-note-field').show();
+                        }
+                    });
+                },
+
+                addnoteCancle: function(e) {
+                    e.preventDefault();
+                    var self = $(this);
+                    self.hide();
+
+                    self.siblings( "a.dokan-note-submit" ).hide();
+                    self.siblings('input.dokan-note-text').hide();
+                    self.siblings('a.dokan-note-field').show();
+
+                },
+
+                addnote: function(e) {
+                    e.preventDefault();
+                    var self = $(this);
+                    
+                    self.hide();
+                    self.siblings( "a.dokan-note-submit" ).show();
+                    self.siblings('input.dokan-note-text').show();
+                    self.siblings('a.dokan-note-cancle').show();
+                
+                }
+            }
+            dokan_admin.init();
+        })
+        </script>
+
+        <?php
+    }
+
+    function note_update() {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'dokan_withdraw';
+        $update = $wpdb->update( $table_name, array('note' => sanitize_text_field( $_POST['note'] ) ), array( 'id' => $_POST['row_id'] ) );
+        if( $update ) {
+            $html = array(
+                'note' => $_POST['note'],
+            );
+            wp_send_json_success( $html);
+        } else {
+            wp_send_json_error();
+        }
+        
     }
 
     function has_withdraw_balance( $user_id ) {

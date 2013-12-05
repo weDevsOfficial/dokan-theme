@@ -23,20 +23,6 @@ class Dokan_Template_reviews {
         return $instance;
     }
 
-    /**
-     * dokan_reviews()
-     *
-     * Initial function of this Class or class controller.
-     */
-    function dokan_action() {
-
-        // ajax
-        add_action( 'wp_ajax_wpuf_comment_status', array($this, 'ajax_comment_status') );
-        add_action( 'wp_ajax_wpuf_update_comment', array($this, 'ajax_update_comment') );
-
-    }
-
-
 
     function ajax_comment_status() {
 

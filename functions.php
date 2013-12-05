@@ -1,9 +1,12 @@
 <?php
+//mishu
 error_reporting(E_ALL);
 
 function debug($val) {
     echo '<pre>'; print_r($val); echo '</pre>';
 }
+
+//close mishu
 /**
  * Dokan functions and definitions
  *
@@ -45,7 +48,9 @@ function dokan_autoload( $class ) {
 
 spl_autoload_register( 'dokan_autoload' );
 
+//mishu start
 
+//mishu end
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -68,9 +73,8 @@ class WeDevs_Dokan {
 
         //for reviews ajax request
         if ( defined('DOING_AJAX') && DOING_AJAX == true ) {
-
-            $reviews = Dokan_Template_reviews::init();
-            $reviews->dokan_action();
+            $ajax = Dokan_Ajax::init();
+            $ajax->all_ajax_action();
         }
 
         //initalize user roles
