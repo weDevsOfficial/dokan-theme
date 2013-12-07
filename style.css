@@ -6,3 +6,16 @@ Author URI: http://tareq.weDevs.com
 Description: An e-commerce marketplace theme for WooCommerce
 Version: 1.0
 */
+
+form#settings-form span.dokan-loading{
+	background: url("assets/images/wpspin_light.gif") no-repeat scroll 0 0 / 16px 16px rgba(0, 0, 0, 0);
+	float: right;
+    height: 16px;
+    margin: 5px 5px 0;
+    opacity: 0.7;
+    width: 16px;
+}
+
+form#settings-form .ajax_prev{
+	width: 200px;
+}
