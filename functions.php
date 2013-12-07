@@ -377,7 +377,7 @@ class WeDevs_Dokan {
         wp_enqueue_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
         wp_enqueue_script( 'form-validate', get_stylesheet_directory_uri() . '/assets/js/form-validate.js', array('jquery'), null, true  );
 
-        wp_enqueue_script( 'doka-settings', get_stylesheet_directory_uri() . '/assets/js/settings.js', array('jquery', 'form-validate'), null, true  );
+        
     }
     
 

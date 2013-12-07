@@ -7,7 +7,7 @@ Description: An e-commerce marketplace theme for WooCommerce
 Version: 1.0
 */
 
-form#settings-form span.dokan-loading{
+form.coupons span.dokan-loading, form.withdraw span.dokan-loading, form#settings-form span.dokan-loading{
 	background: url("assets/images/wpspin_light.gif") no-repeat scroll 0 0 / 16px 16px rgba(0, 0, 0, 0);
 	float: right;
     height: 16px;
@@ -18,4 +18,21 @@ form#settings-form span.dokan-loading{
 
 form#settings-form .ajax_prev{
 	width: 200px;
+}
+
+span.error{
+	color: #BB0000;
+	display: inline-block;
+}
+
+.dokan-banner{
+ 	border: 2px dashed #D8D8D8;
+    height: 216px;
+    margin-bottom: 45px;
+    margin-left: 135px;
+    max-width: 605px;
+    text-align: center;
+}
+.dokan-banner-drag{
+	margin-top: 80px;
 }
