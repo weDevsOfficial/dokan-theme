@@ -1236,23 +1236,24 @@ a:hover {
 /* line 316, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images {
   margin: 0 0 10px 0;
+  padding: 0;
 }
-/* line 319, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 320, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images li.image,
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder {
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
   overflow: hidden;
   float: left;
   box-sizing: border-box;
   position: relative;
-  margin: 9px 9px 0 0;
+  margin: 9px 4px 0 0;
   border: 1px solid #eee;
   border-radius: 2px;
   padding: 2px;
   cursor: move;
 }
-/* line 332, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 333, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images li.image ul.actions,
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder ul.actions {
   position: absolute;
@@ -1261,7 +1262,7 @@ a:hover {
   list-style: none;
   display: none;
 }
-/* line 339, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 340, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images li.image ul.actions li,
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder ul.actions li {
   list-style: none;
@@ -1276,17 +1277,17 @@ a:hover {
   padding: 0 3px;
   font-size: 11px;
 }
-/* line 352, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 353, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images li.image ul.actions li a,
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder ul.actions li a {
   color: #fff;
 }
-/* line 359, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 360, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images li.image:hover ul.actions,
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder:hover ul.actions {
   display: inline-block;
 }
-/* line 365, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 366, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder {
   border: 1px dashed #ccc;
 }

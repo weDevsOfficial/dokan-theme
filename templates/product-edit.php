@@ -1,5 +1,4 @@
 <?php
-get_header();
 
 global $post, $product;
 
@@ -8,6 +7,22 @@ global $post, $product;
 $post_id = $post->ID;
 $product_cat = -1;
 $post_content = __( 'Details about your product...', 'dokan' );
+
+if ( isset( $_POST['update_product']) ) {
+    $product_info = array(
+        'ID' => $post_id,
+        'post_title' => sanitize_text_field( $_POST['post_title'] ),
+        'post_content' => $_POST['post_content'],
+        'post_excerpt' => $_POST['post_excerpt']
+    );
+
+    wp_update_post( $product_info );
+    dokan_process_product_meta( $post_id );
+
+    $edit_url = dokan_edit_product_url( $post_id );
+    wp_redirect( add_query_arg( array( 'message' => 'success' ), $edit_url ) );
+}
+
 $_regular_price = get_post_meta( $post->ID, '_regular_price', true );
 $_sale_price = get_post_meta( $post->ID, '_sale_price', true );
 $is_discount = !empty( $_sale_price ) ? true : false;
@@ -36,54 +51,20 @@ $_downloadable = get_post_meta( $post_id, '_downloadable', true );
 $_stock_status = get_post_meta( $post_id, '_stock_status', true );
 $_visibility = get_post_meta( $post_id, '_visibility', true );
 $_enable_reviews = $post->comment_status;
-$_expiry = '';
+$_download_expiry = get_post_meta( $post_id, '_download_expiry', true );
+$_download_limit = get_post_meta( $post_id, '_download_limit', true );
 
 
 $term = wp_get_post_terms( $post->ID, 'product_cat', array( 'fields' => 'ids') );
 if ( $term ) {
     $product_cat = reset( $term );
 }
+
+get_header();
 ?>
 
 <div id="primary" class="content-area col-md-12">
     <div id="content" class="site-content" role="main">
-
-        <?php
-        if ( isset( $_POST['update_product']) ) {
-            var_dump( $_POST );
-
-            $product_meta = array(
-                '_visibility',
-                '_stock_status',
-                '_downloadable',
-                '_virtual',
-                '_product_image_gallery',
-                '_regular_price',
-                '_sale_price',
-                '_purchase_note',
-                '_featured',
-                '_weight',
-                '_length',
-                '_width',
-                '_height',
-                '_sku',
-                '_product_attributes',
-                '_sale_price_dates_from',
-                '_sale_price_dates_to',
-                '_price',
-                '_sold_individually',
-                '_stock',
-                '_backorders',
-                '_manage_stock'
-            );
-
-            foreach ($product_meta as $meta_key) {
-                if ( isset( $_POST[$meta_key] ) ) {
-                    echo $meta_key . ': ' . $_POST[$meta_key] . '<br>';
-                }
-            }
-        }
-        ?>
 
         <div class="row">
             <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
@@ -94,7 +75,12 @@ if ( $term ) {
 
                     <div class="col-md-7">
 
-                        <!-- <p><a href="#" class="btn btn-info">&larr; Product listing</a></p> -->
+                        <?php if ( isset( $_GET['message'] ) && $_GET['message'] == 'success') { ?>
+                            <div class="alert alert-success">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>Success!</strong> The product has been updated successfully.
+                            </div>
+                        <?php } ?>
 
                         <div class="tabbable"> <!-- Only required for left/right tabs -->
 
@@ -129,7 +115,7 @@ if ( $term ) {
 
                                                     <div class="instruction-inside<?php echo $instruction_class; ?>">
                                                         <input type="hidden" name="feat_image_id" class="dokan-feat-image-id" value="<?php echo $feat_image_id; ?>">
-                                                        <a href="#" class="dokan-feat-image-btn">Upload a product cover image</a>
+                                                        <a href="#" class="dokan-feat-image-btn"><?php _e( 'Upload a product cover image', 'dokan' ); ?></a>
                                                     </div>
                                                     <div class="image-wrap<?php echo $wrap_class; ?>">
                                                         <a class="close dokan-remove-feat-image">&times;</a>
@@ -146,7 +132,7 @@ if ( $term ) {
 
                                                 <div class="form-group">
                                                     <input type="hidden" name="dokan_product_id" value="<?php echo $post->ID; ?>">
-                                                    <input class="form-control" name="post_title" id="post-title" type="text" placeholder="Product name.." value="<?php echo esc_attr( $post->post_title ); ?>">
+                                                    <input class="form-control" name="post_title" id="post-title" type="text" placeholder="<?php _e( 'Product name..', 'dokan' ); ?>" value="<?php echo esc_attr( $post->post_title ); ?>">
                                                 </div>
 
                                                 <div class="row">
@@ -160,7 +146,7 @@ if ( $term ) {
 
                                                     <span class="pull-right">
                                                         <label>
-                                                            <input type="checkbox" <?php checked( $is_discount, true ); ?> class="_discounted_price"> Discounted Price
+                                                            <input type="checkbox" <?php checked( $is_discount, true ); ?> class="_discounted_price"> <?php _e( 'Discounted Price', 'dokan' ); ?>
                                                         </label>
                                                     </span>
                                                 </div>
@@ -595,13 +581,13 @@ if ( $term ) {
                                     <li class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon">Limit</span>
-                                            <input class="form-control" name="_limit" type="text" placeholder="<?php esc_attr_e( 'Download Limit. e.g: 4', 'dokan' ); ?>" value="<?php echo esc_attr( $_expiry ); ?>">
+                                            <input class="form-control" name="_download_limit" type="text" placeholder="<?php esc_attr_e( 'Download Limit. e.g: 4', 'dokan' ); ?>" value="<?php echo esc_attr( $_download_limit ); ?>">
                                         </div>
                                     </li>
                                     <li>
                                         <div class="input-group">
                                             <span class="input-group-addon">Expiry</span>
-                                            <input class="form-control datepicker" name="_expiry" type="text" placeholder="<?php esc_attr_e( 'Expire Date', 'dokan' ); ?>" value="<?php echo esc_attr( $_expiry ); ?>">
+                                            <input class="form-control datepicker" name="_download_expiry" type="text" placeholder="<?php esc_attr_e( 'Expire Date', 'dokan' ); ?>" value="<?php echo esc_attr( $_download_expiry ); ?>">
                                         </div>
                                     </li>
                                 </ul>
@@ -615,9 +601,29 @@ if ( $term ) {
 
                             <div class="dokan-side-body" id="dokan-product-images">
                                 <div id="product_images_container">
-                                    <ul class="product_images clearfix"></ul>
+                                    <ul class="product_images clearfix">
+                                        <?php
+                                        $product_images = get_post_meta( $post_id, '_product_image_gallery', true );
+                                        $gallery = explode( ',', $product_images );
 
-                                    <input type="hidden" id="product_image_gallery" name="product_image_gallery" value="">
+                                        if ( $gallery ) {
+                                            foreach ($gallery as $image_id) {
+                                                $attachment_image = wp_get_attachment_image_src( $image_id, 'thumbnail' );
+                                                ?>
+                                                <li class="image" data-attachment_id="<?php echo $image_id; ?>">
+                                                    <img src="<?php echo $attachment_image[0]; ?>" alt="">
+
+                                                    <ul class="actions">
+                                                        <li><a href="#" class="delete" title="<?php esc_attr_e( 'Delete image', 'dokan' ); ?>"><?php _e( 'Delete', 'dokan' ); ?></a></li>
+                                                    </ul>
+                                                </li>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+                                    </ul>
+
+                                    <input type="hidden" id="product_image_gallery" name="product_image_gallery" value="<?php echo esc_attr( $product_images ); ?>">
                                 </div>
 
                                 <a href="#" class="add-product-images btn btn-success">+ Add product images</a>
