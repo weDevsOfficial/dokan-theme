@@ -959,20 +959,52 @@ a:hover {
   border: 1px solid #dddddd;
   border-radius: 3px;
 }
-/* line 16, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 13, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+.toggle-sidebar-container {
+  padding: 8px 0;
+  border-bottom: 1px solid #DFDFDF;
+  margin-bottom: 15px;
+}
+/* line 22, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+.dokan-toggle-sidebar .dokan-toggle-selected-display {
+  font-weight: bold;
+}
+/* line 26, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+.dokan-toggle-sidebar .dokan-toggle-select-container {
+  padding-bottom: 8px;
+}
+/* line 30, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+.dokan-toggle-sidebar select {
+  border: 1px solid #ccc;
+}
+/* line 34, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+.dokan-toggle-sidebar .btn {
+  padding: 2px 10px;
+}
+/* line 38, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+.dokan-toggle-sidebar a {
+  font-size: 12px;
+  padding-left: 5px;
+}
+/* line 44, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+.update-button-wrap {
+  border-bottom: 1px solid #DFDFDF;
+  padding-bottom: 13px;
+}
+/* line 52, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .dokan-dash-sidebar ul.dokan-dashboard-menu {
   background: #242424;
   list-style: none;
   margin: 0 0 20px 0;
   padding: 0;
 }
-/* line 22, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 58, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .dokan-dash-sidebar ul.dokan-dashboard-menu li {
   margin: 0;
   border-bottom: 1px solid #454545;
   position: relative;
 }
-/* line 28, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 64, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .dokan-dash-sidebar ul.dokan-dashboard-menu li a {
   padding: 10px 0 10px 18px;
   display: block;
@@ -980,17 +1012,17 @@ a:hover {
   font-size: 14px;
   font-weight: bold;
 }
-/* line 35, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 71, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .dokan-dash-sidebar ul.dokan-dashboard-menu li a i {
   font-size: 17px;
   padding-right: 15px;
 }
-/* line 41, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 77, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .dokan-dash-sidebar ul.dokan-dashboard-menu li.active {
   background: #f05025;
   position: relative;
 }
-/* line 46, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 82, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .dokan-dash-sidebar ul.dokan-dashboard-menu li.active:after {
   left: 92%;
   top: 50%;
@@ -1005,11 +1037,11 @@ a:hover {
   border-width: 16px 16px 16px 0;
   margin-top: -16px;
 }
-/* line 63, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 99, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .dokan-dash-sidebar ul.dokan-dashboard-menu li:hover {
   background: #f05025;
 }
-/* line 67, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 103, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu {
   background: #fff;
   margin: 0;
@@ -1025,35 +1057,35 @@ a:hover {
   border-right: 1px solid #ECECEC;
   border-bottom: 1px solid #ECECEC;
 }
-/* line 82, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 118, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu a {
   padding: 2px 0 2px 10px;
   font-size: 13px;
   color: #333;
   font-weight: normal;
 }
-/* line 88, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 124, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu a:hover {
   background: #f37655;
   color: #fff;
 }
-/* line 94, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 130, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu li {
   border-bottom: 1px solid #ccc;
 }
-/* line 97, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 133, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .dokan-dash-sidebar ul.dokan-dashboard-menu li ul.sub-menu li:last-child {
   border-bottom: none;
 }
-/* line 114, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 150, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container .tab-pane {
   padding: 15px 0;
 }
-/* line 118, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 154, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container label {
   font-weight: normal;
 }
-/* line 122, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 158, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container .dokan-feat-image-upload {
   border: 4px dashed #DDDDDD;
   height: 250px;
@@ -1062,11 +1094,11 @@ a:hover {
   overflow: hidden;
   position: relative;
 }
-/* line 130, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 166, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container .dokan-feat-image-upload img {
   max-width: 100%;
 }
-/* line 134, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 170, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container .dokan-feat-image-upload a.close {
   position: absolute;
   right: 0;
@@ -1077,83 +1109,83 @@ a:hover {
   text-shadow: none;
   padding: 3px 8px;
 }
-/* line 146, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 182, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container .instruction-inside {
   text-align: center;
   padding-top: 110px;
   color: #aaa;
 }
-/* line 152, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 188, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container aside {
   border: 1px solid #eee;
   margin-bottom: 15px;
   border-radius: 3px;
 }
-/* line 158, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 194, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container .dokan-edit-sidebar {
   margin-top: 35px;
 }
-/* line 161, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 197, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container .dokan-edit-sidebar .dokan-side-head {
   background: #eee;
   padding: 5px 10px;
 }
-/* line 166, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 202, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container .dokan-edit-sidebar .dokan-side-body {
   padding: 10px;
 }
-/* line 173, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 209, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container ul.label-on-left label {
   min-width: 200px;
   display: inline-block;
 }
-/* line 179, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 215, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container ul.label-on-left li {
   clear: both;
 }
-/* line 185, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 221, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-attributes h4 {
   margin-bottom: 15px;
 }
-/* line 191, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 227, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #variants-holder .inputs-box {
   background: #f5f5f5;
   margin-bottom: 20px;
 }
-/* line 196, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 232, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #variants-holder .inputs-box .box-header {
   background: #e5e5e5;
   padding: 5px 10px;
   font-size: 13px;
   margin-bottom: 10px;
 }
-/* line 203, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 239, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #variants-holder .inputs-box .option-couplet {
   margin-left: 15px;
 }
-/* line 206, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 242, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #variants-holder .inputs-box .option-couplet li:before {
   content: '-';
 }
-/* line 210, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 246, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #variants-holder .inputs-box .option-couplet li {
   margin-bottom: 8px;
 }
-/* line 215, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 251, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #variants-holder .inputs-box .box-inside {
   padding: 10px;
 }
-/* line 218, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 254, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #variants-holder .inputs-box .box-inside .attribute-config {
   width: 35%;
   float: left;
 }
-/* line 223, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 259, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #variants-holder .inputs-box .box-inside .attribute-options {
   float: left;
   width: 60%;
 }
-/* line 231, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 267, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #variants-holder .actions a {
   color: #666;
   padding: 0 4px 2px;
@@ -1162,12 +1194,12 @@ a:hover {
   text-decoration: none;
   background: #fff;
 }
-/* line 239, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 275, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #variants-holder .actions a:hover {
   background: #666;
   color: #fff;
 }
-/* line 249, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 285, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox {
   border-radius: 3px;
   background: #f5f5f5;
@@ -1175,70 +1207,70 @@ a:hover {
   font-size: 13px;
   padding-bottom: 3px;
 }
-/* line 257, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 293, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox h3 {
   background: #e5e5e5;
   padding: 5px 10px;
   font-size: 14px;
 }
-/* line 262, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 298, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox h3 button {
   float: right;
   font-size: 12px;
 }
-/* line 268, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 304, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox table {
   margin: 10px;
 }
-/* line 271, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 307, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox table td {
   vertical-align: top;
   width: 50%;
 }
-/* line 276, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 312, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox table td.upload_image img {
   width: 73px;
 }
-/* line 281, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 317, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox td.data {
   padding: 0 0 0 10px;
   background: #fff;
   margin-left: 20px;
 }
-/* line 287, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 323, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox table.data_table {
   margin: 0;
   width: 100%;
 }
-/* line 291, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 327, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox table.data_table td.dimensions_field input {
   width: 25%;
 }
-/* line 295, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 331, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox table.data_table td {
   padding: 0 6px;
 }
-/* line 299, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 335, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox table.data_table label {
   display: block;
 }
-/* line 304, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 340, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox label,
 .product-edit-container #product-variations .wc-metabox select,
 .product-edit-container #product-variations .wc-metabox input {
   font-size: 12px;
 }
-/* line 308, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 344, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #product-variations .wc-metabox select {
   width: auto;
   display: inline-block;
 }
-/* line 316, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 352, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images {
   margin: 0 0 10px 0;
   padding: 0;
 }
-/* line 320, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 356, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images li.image,
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder {
   width: 75px;
@@ -1253,7 +1285,13 @@ a:hover {
   padding: 2px;
   cursor: move;
 }
-/* line 333, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 369, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+.product-edit-container #dokan-product-images ul.product_images li.image img,
+.product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder img {
+  padding: 0;
+  margin: 0;
+}
+/* line 374, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images li.image ul.actions,
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder ul.actions {
   position: absolute;
@@ -1262,7 +1300,7 @@ a:hover {
   list-style: none;
   display: none;
 }
-/* line 340, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 381, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images li.image ul.actions li,
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder ul.actions li {
   list-style: none;
@@ -1277,19 +1315,25 @@ a:hover {
   padding: 0 3px;
   font-size: 11px;
 }
-/* line 353, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 394, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images li.image ul.actions li a,
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder ul.actions li a {
   color: #fff;
 }
-/* line 360, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 401, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images li.image:hover ul.actions,
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder:hover ul.actions {
   display: inline-block;
 }
-/* line 366, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+/* line 407, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder {
   border: 1px dashed #ccc;
+}
+/* line 414, /Users/tareq/Sites/wprepo/themes/dokan/assets/less/product-edit.less */
+.product-edit-container .product-dimension .form-control {
+  display: inline-block;
+  width: 20%;
+  margin-right: 5px;
 }
 /*--------------------------------------------------
 :: Footer
