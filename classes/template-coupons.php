@@ -21,6 +21,8 @@ class Dokan_Template_Coupons{
         return $instance;
     }
 
+
+
     function coupun_delete() {
        
         if( !isset( $_GET['post'] ) || !isset( $_GET['action'] ) ) {
@@ -43,7 +45,7 @@ class Dokan_Template_Coupons{
         if( !isset($_POST['coupon_creation'] ) ) {
             return; 
         }
-       if( !wp_verify_nonce( $_POST['coupon_nonce_field'], 'coupon_nonce') ) {
+        if( !wp_verify_nonce( $_POST['coupon_nonce_field'], 'coupon_nonce') ) {
             wp_die( __( 'Are you cheating?', 'dokan' ) );
         }
 
@@ -142,7 +144,9 @@ class Dokan_Template_Coupons{
         update_post_meta( $post_id, 'minimum_amount', $minimum_amount );
         update_post_meta( $post_id, 'customer_email', $customer_email );
 
-        wp_redirect( add_query_arg( array( 'message' => $message ), get_permalink() ) );
+        if ( !defined('DOING_AJAX') && DOING_AJAX !== true ) {
+            wp_redirect( add_query_arg( array( 'message' => $message ), get_permalink() ) );
+        }
     }
 
     function message() {
@@ -446,15 +450,24 @@ class Dokan_Template_Coupons{
         
         ?>
 
+        <div class="alert  alert-danger" style="display: none;">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong></strong>
+        </div>
 
-        <form method="post" action="" class="form-horizontal">
+        <div class="alert  alert-success" style="display: none;">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong></strong>
+        </div>
+
+        <form method="post" action="" class="form-horizontal coupons">
             <input type="hidden"  value="<?php echo $post_id; ?>" name="post_id">
             <?php wp_nonce_field('coupon_nonce','coupon_nonce_field'); ?>
             <!-- Text input-->
             <div class="form-group">
               <label class="col-md-3 control-label" for="title"><?php _e('Copon Title', 'dokan'); ?><span class="required"> *</span></label>  
               <div class="col-md-5">
-              <input id="title" name="title" value="<?php echo $post_title; ?>" placeholder="Title" class="form-control input-md" type="text">
+              <input id="title" name="title" required value="<?php echo $post_title; ?>" placeholder="Title" class="form-control input-md" type="text">
                 
               </div>
             </div>
@@ -483,7 +496,7 @@ class Dokan_Template_Coupons{
             <div class="form-group">
               <label class="col-md-3 control-label" for="amount"><?php _e('Amount', 'dokan'); ?><span class="required"> *</span></label>  
               <div class="col-md-5">
-              <input id="amount" value="<?php echo $amount; ?>" name="amount" placeholder="Amount" class="form-control input-md" type="text">
+              <input id="amount" required value="<?php echo $amount; ?>" name="amount" placeholder="Amount" class="form-control input-md" type="text">
                 
               </div>
             </div>
@@ -540,7 +553,7 @@ class Dokan_Template_Coupons{
             <div class="form-group">
               <label class="col-md-3 control-label" for="product"><?php _e('Product',''); ?><span class="required"> *</span></label>
               <div class="col-md-5">
-                <select id="product" name="product_drop_down[]" class="form-control" multiple>
+                <select id="product" required name="product_drop_down[]" class="form-control" multiple>
                     <?php
                     foreach($query->posts as $key=>$object) {
                         if( in_array($object->ID, $products_id) ) {
@@ -638,7 +651,7 @@ class Dokan_Template_Coupons{
             <!-- submit -->
             <div class="form-group">
               <label class="col-md-3 control-label" for=""></label>
-              <div class="col-md-4">
+              <div class="col-md-4 ajax_prev">
                 <input type="submit" id="" name="coupon_creation" value="<?php _e( $button_name,'dokan'); ?>" class="btn btn-primary">
               </div>
             </div>

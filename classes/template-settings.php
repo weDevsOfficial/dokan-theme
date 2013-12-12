@@ -109,6 +109,7 @@ class Dokan_Template_Settings{
             'location'      => $_POST['location'],
             'find_address'   => $_POST['find_address'],
             'dokan_category'  => $_POST['setting_category'],
+            'banner'        => $_POST['dokan_banner'],
         );
 
         update_user_meta( get_current_user_id(), 'dokan_profile_settings', $dokan_settings );
@@ -190,11 +191,17 @@ class Dokan_Template_Settings{
 
             <form method="post" id="settings-form"  action="" class="form-horizontal">
                 <?php wp_nonce_field( 'dokan_settings_nonce' ); ?>
+                <div class="dokan-banner">
+                    <input type="hidden" class="dokan-file-field" value="" name="dokan_banner">
+                    <img height=210 width=600 class="dokan-banner-img" src="">
+                    <a href="#" class="dokan-banner-drag btn btn-info"><?php _e( 'Upload banner', 'dokan' ); ?></a>
+                </div>
+
 
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="dokan_store_name"><?php _e( 'Store Name', 'dokan' ); ?></label>
                     <div class="col-md-5">
-                        <input id="dokan_store_name" value="<?php echo $storename; ?>" name="dokan_store_name" placeholder="store name" class="form-control input-md" type="text">
+                        <input id="dokan_store_name" required value="<?php echo $storename; ?>" name="dokan_store_name" placeholder="store name" class="form-control input-md" type="text">
 
                     </div>
                 </div>
@@ -272,7 +279,7 @@ class Dokan_Template_Settings{
                                             <div class="col-md-10">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><?php _e( 'E-mail', 'dokan' ); ?></span>
-                                                    <input id="setting_paypal_email" value="<?php echo $paypal_email; ?>" name="setting_paypal_email" class="form-control" placeholder="you@domain.com" type="text">
+                                                    <input id="setting_paypal_email"  value="<?php echo $paypal_email; ?>" name="setting_paypal_email" class="form-control email" placeholder="you@domain.com" type="text">
                                                 </div>
                                             </div>
                                         </div>
@@ -476,7 +483,7 @@ class Dokan_Template_Settings{
                   <label class="col-md-3 control-label" for="setting_category"><?php _e('Dokan Type', 'dokan'); ?></label>
                   <div class="col-md-5">
                 
-                    <select id="setting_category" name="setting_category[]" class="form-control" multiple>
+                    <select id="setting_category" required name="setting_category[]" class="form-control" multiple>
                         <?php foreach($dokan_categories as $key => $val) { 
 
 
@@ -497,9 +504,6 @@ class Dokan_Template_Settings{
                 </div>
 
 
-
-
-
                 <!-- Button -->
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="dokan_setting"></label>
@@ -514,7 +518,7 @@ class Dokan_Template_Settings{
                 <script type="text/javascript">
 
                     jQuery(function($){
-                       // $('#setting_category').chosen({width: "95%"});
+                        $('#setting_category').chosen({width: "95%"});
                     })
                 
                 </script>

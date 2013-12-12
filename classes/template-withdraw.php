@@ -91,20 +91,20 @@ class Dokan_Template_Withdraw {
 
     function insert_withdraw( $data = array() ) {
         global $wpdb;
-
+        $wpdb->dokan_withdraw = $wpdb->prefix . 'dokan_withdraw';
         $data = array(
             'user_id' => $data['user_id'],
             'amount' => $data['amount'],
             'date' => current_time( 'mysql' ),
             'status' => $data['status'],
             'method' => $data['method'],
-            'notes' => $data['notes'],
+            'note' => $data['notes'],
             'ip' => $data['ip']
         );
 
         $format = array('%d', '%f', '%s', '%d', '%s', '%s', '%s');
-
-        $wpdb->insert( $wpdb->dokan_withdraw, $data, $format );
+     
+        return $wpdb->insert( $wpdb->dokan_withdraw, $data, $format );
     }
 
     function insert_withdraw_info() {
@@ -120,8 +120,18 @@ class Dokan_Template_Withdraw {
             'notes' => ''
         );
 
-        $this->insert_withdraw( $data_info );
-        wp_redirect( add_query_arg( array( 'message' => 'request_success' ), get_permalink() ) );
+        $update = $this->insert_withdraw( $data_info );
+        if ( !defined('DOING_AJAX') && DOING_AJAX !== true &&  $update) {
+            wp_redirect( add_query_arg( array( 'message' => 'request_success' ), get_permalink() ) );
+        } 
+
+        if ( defined('DOING_AJAX') && DOING_AJAX === true &&  $update) {
+
+            return $update;
+            
+        }
+
+
     }
 
     function withdraw_table() {
@@ -187,7 +197,7 @@ class Dokan_Template_Withdraw {
     function admin_withdraw_list() {
         
         $result = $this->get_withdraw_requests();
-        var_dump($result);
+       // var_dump($result);
         ?>
         <form method="post" action="">
             <table class="widefat" style="margin-top: 20px;">
@@ -413,7 +423,7 @@ class Dokan_Template_Withdraw {
                 ?>
                 <div class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong><?php _e( 'Your request has been cancelled successfully!', 'dokan' ); ?></strong>
+                    <strong><p><?php _e( 'Your request has been cancelled successfully!', 'dokan' ); ?></p></strong>
                 </div>
                 <?php
                 break;
@@ -423,6 +433,14 @@ class Dokan_Template_Withdraw {
                 <div class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong><?php _e( 'Your request has been received successfully and is under review!', 'dokan' ); ?></strong>
+                </div>
+                <?php
+                break;
+            case 'request_error':
+                ?>
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong><?php _e( 'Unknown error!', 'dokan' ); ?></strong>
                 </div>
                 <?php
                 break;
@@ -463,18 +481,30 @@ class Dokan_Template_Withdraw {
         }
         ?>
 
-        <form class="form-horizontal" role="form" method="post">
+
+        <div class="alert  alert-danger" style="display: none;">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="jquery_error_place"></strong>
+        </div>
+
+        <!-- <div class="alert  alert-success" style="display: none;">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong></strong>
+        </div> -->
+        <span class="ajax_table_shown"></span>
+        <form class="form-horizontal withdraw" role="form" method="post">
             <div class="form-group">
 
                 <label for="withdraw-amount" class="col-sm-3 control-label">
                     <?php _e( 'Withdraw Amount' ); ?>
                 </label>
 
-                <div class="col-sm-3">
+                <div class="col-sm-3 ">
                     <div class="input-group">
                         <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                        <input name="witdraw_amount" class="form-control" id="withdraw-amount" name="price" type="number" placeholder="9.99" value="<?php echo $amount; ?>"  >
+                        <input name="witdraw_amount" required number min="50" class="form-control" id="withdraw-amount" name="price" type="number" placeholder="9.99" value="<?php echo $amount; ?>"  >
                     </div>
+
                 </div>
             </div>
 
@@ -484,7 +514,7 @@ class Dokan_Template_Withdraw {
                 </label>
 
                 <div class="col-sm-3">
-                    <select class="form-control" name="withdraw_method" id="withdraw-method">
+                    <select class="form-control" required name="withdraw_method" id="withdraw-method">
                         <?php foreach ($payment_methods as $value => $name) { ?>
                             <option <?php selected( $withdraw_method, $value );  ?>value="<?php echo esc_attr( $value ); ?>"><?php echo $name; ?></option>
                         <?php } ?>
@@ -493,7 +523,7 @@ class Dokan_Template_Withdraw {
             </div>
 
             <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-10">
+                <div class="col-sm-offset-3 col-sm-10 ajax_prev" style="width: 200px;">
                     <?php wp_nonce_field( 'dokan_withdraw', 'dokan_withdraw_nonce' ); ?>
                     <input type="submit" class="btn btn-primary" value="<?php esc_attr_e( 'Submit Request', 'dokan' ); ?>" name="withdraw_submit">
                 </div>
