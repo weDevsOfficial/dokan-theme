@@ -76,7 +76,7 @@ get_header();
                                 </li>
                                 <li><a href="#product-options" data-toggle="tab">Options</a></li>
                                 <li><a href="#product-inventory" data-toggle="tab">Inventory</a></li>
-                                <li><a href="#product-shipping" data-toggle="tab"><?php _e( 'Shipping', 'dokan' ); ?></a></li>
+                                <li class="show_if_simple"><a href="#product-shipping" data-toggle="tab"><?php _e( 'Shipping', 'dokan' ); ?></a></li>
                                 <li><a href="#product-attributes" data-toggle="tab">Attributes</a></li>
                                 <li class="show_if_variable"><a href="#product-variations" data-toggle="tab">Variations</a></li>
                             </ul>
@@ -230,7 +230,7 @@ get_header();
 
                                 <!-- ===== Attributes ===== -->
 
-                                <div class="tab-pane actives" id="product-attributes">
+                                <div class="tab-pane show_if_simple" id="product-attributes">
 
                                     <?php include_once __DIR__ . '/edit/attributes.php'; ?>
                                     <?php include_once __DIR__ . '/edit/templates-js.php'; ?>

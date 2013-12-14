@@ -376,7 +376,7 @@ class WeDevs_Dokan {
         wp_enqueue_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
         wp_enqueue_script( 'form-validate', get_stylesheet_directory_uri() . '/assets/js/form-validate.js', array('jquery'), null, true  );
 
-        
+
     }
 
 
@@ -1183,6 +1183,30 @@ function dokan_get_post_status( $status ) {
             break;
 
         case 'future':
+            return __( 'Scheduled', 'dokan' );
+            break;
+
+        default:
+            return '';
+            break;
+    }
+}
+
+function dokan_get_product_status( $status ) {
+    switch ($status) {
+        case 'simple':
+            return __( 'Simple Product', 'dokan' );
+            break;
+
+        case 'variable':
+            return __( 'Variable Product', 'dokan' );
+            break;
+
+        case 'grouped':
+            return __( 'Grouped Product', 'dokan' );
+            break;
+
+        case 'external':
             return __( 'Scheduled', 'dokan' );
             break;
 

@@ -11,7 +11,7 @@
         <span class="dokan-toggle-selected-display"><?php echo dokan_get_post_status( $post->post_status ); ?></span>
 
         <?php if ( $post->post_status != 'pending' ) { ?>
-            <a class="dokan-toggle-edit" href="#"><?php _e( 'Edit', 'dokan' ); ?></a>
+            <a class="dokan-toggle-edit label label-success" href="#"><?php _e( 'Edit', 'dokan' ); ?></a>
 
             <div class="dokan-toggle-select-container dokan-hide">
 
@@ -35,27 +35,26 @@
     <div class="product-type dokan-toggle-sidebar">
         <label for="product_type"><?php _e( 'Product Type:', 'dokan' ); ?></label>
 
-        <span class="dokan-toggle-selected-display">Simple Product</span>
-        <a class="dokan-toggle-edit" href="#"><?php _e( 'Edit', 'dokan' ); ?></a>
+        <?php
+        $supported_types = array( 'simple', 'variable' );
+        if ( $terms = wp_get_object_terms( $post->ID, 'product_type' ) ) {
+            $product_type = sanitize_title( current( $terms )->name );
+        } else {
+            $product_type = 'simple';
+        }
+
+        if ( !in_array( $product_type, $supported_types ) ) {
+            $product_type = 'simple';
+        }
+        ?>
+
+        <span class="dokan-toggle-selected-display"><?php echo dokan_get_product_status( $product_type ); ?></span>
+        <a class="dokan-toggle-edit label label-success" href="#"><?php _e( 'Edit', 'dokan' ); ?></a>
 
             <div class="dokan-toggle-select-container dokan-hide">
-
-                <?php
-                $supported_types = array( 'simple', 'variable' );
-                if ( $terms = wp_get_object_terms( $post->ID, 'product_type' ) ) {
-                    $product_type = sanitize_title( current( $terms )->name );
-                } else {
-                    $product_type = 'simple';
-                }
-
-                if ( !in_array( $product_type, $supported_types ) ) {
-                    $product_type = 'simple';
-                }
-                ?>
-
                 <select name="_product_type" id="_product_type" class="dokan-toggle-select">
-                    <option value="simple" <?php selected( $product_type, 'simple' ); ?>><?php _e( 'Simple product', 'woocommerce' ); ?></option>
-                    <option value="variable" <?php selected( $product_type, 'variable' ); ?>><?php _e( 'Variable product', 'woocommerce' ); ?></option>
+                    <option value="simple" <?php selected( $product_type, 'simple' ); ?>><?php _e( 'Simple Product', 'woocommerce' ); ?></option>
+                    <option value="variable" <?php selected( $product_type, 'variable' ); ?>><?php _e( 'Variable Product', 'woocommerce' ); ?></option>
                 </select>
 
                 <a class="dokan-toggle-save btn btn-default btn-sm" href="#"><?php _e( 'OK', 'dokan' ); ?></a>
