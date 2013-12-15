@@ -170,19 +170,34 @@
         overflow: hidden;
         position: relative;
 
-        img {
-            max-width: 100%;
-        }
-
         a.close {
+            background: #000000;
+            color: #FF0000;
+            font-size: 100px;
+            height: 242px;
+            opacity: 0.7;
+            padding: 25% 0;
             position: absolute;
             right: 0;
-            top: 0;
-            background: #000;
-            opacity: .8;
-            color: red;
+            text-align: center;
             text-shadow: none;
-            padding: 3px 8px;
+            top: 0;
+            width: 242px;
+            display: none;
+        }
+
+        img {
+            max-width: 100%;
+
+            &:hover {
+                a.close {
+                    display: block;
+                }
+            }
+        }
+
+        .image-wrap :hover a.close {
+            display: block;
         }
     }
 
@@ -190,6 +205,10 @@
         text-align: center;
         padding-top: 110px;
         color: #aaa;
+    }
+
+    .wp-editor-wrap {
+        border: 1px solid #E7E7E7;
     }
 
     aside {

@@ -105,9 +105,14 @@
                 e.preventDefault();
 
                 var row = $('.inputs-box').length ;
-                console.log(row);
                 var category = _.template( $('#tmpl-sc-category').html(), { row: row } );
+
                 variantsHolder.append(category).children(':last').hide().fadeIn();
+
+                if ( product_type === 'simple' ) {
+                    variantsHolder.find('.show_if_variable').hide();
+                }
+
             },
 
             removeCategory: function (e) {

@@ -910,23 +910,37 @@ a:hover {
   overflow: hidden;
   position: relative;
 }
+.product-edit-container .dokan-feat-image-upload a.close {
+  background: #000000;
+  color: #FF0000;
+  font-size: 100px;
+  height: 242px;
+  opacity: 0.7;
+  padding: 25% 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  text-shadow: none;
+  top: 0;
+  width: 242px;
+  display: none;
+}
 .product-edit-container .dokan-feat-image-upload img {
   max-width: 100%;
 }
-.product-edit-container .dokan-feat-image-upload a.close {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background: #000;
-  opacity: .8;
-  color: red;
-  text-shadow: none;
-  padding: 3px 8px;
+.product-edit-container .dokan-feat-image-upload img:hover a.close {
+  display: block;
+}
+.product-edit-container .dokan-feat-image-upload .image-wrap :hover a.close {
+  display: block;
 }
 .product-edit-container .instruction-inside {
   text-align: center;
   padding-top: 110px;
   color: #aaa;
+}
+.product-edit-container .wp-editor-wrap {
+  border: 1px solid #E7E7E7;
 }
 .product-edit-container aside {
   border: 1px solid #eee;
@@ -1166,6 +1180,24 @@ a:hover {
 }
 .ui-helper-hidden-accessible {
   display: none;
+}
+/* Bootstrap Override
+----------------------------------*/
+.alert {
+  padding: 5px 15px;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+.alert-success {
+  color: #333;
+  border: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border-left: 4px solid #7ad03a;
+  background: #fff;
+}
+.alert-success strong {
+  color: #468847;
 }
 .dokan-hide {
   display: none;
