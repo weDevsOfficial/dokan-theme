@@ -1,6 +1,6 @@
 <?php
 //mishu
-error_reporting(E_ALL);
+error_reporting(0);
 
 function debug($val) {
     echo '<pre>'; print_r($val); echo '</pre>';
