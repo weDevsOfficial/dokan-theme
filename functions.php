@@ -376,7 +376,7 @@ class WeDevs_Dokan {
         wp_enqueue_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
         wp_enqueue_script( 'form-validate', get_stylesheet_directory_uri() . '/assets/js/form-validate.js', array('jquery'), null, true  );
 
-        
+
     }
 
 
@@ -934,7 +934,7 @@ function dokan_process_product_meta( $post_id ) {
             } elseif ( isset( $attribute_values[ $i ] ) ) {
 
                 // Text based, separate by pipe
-                $values = implode( ' | ', array_map( 'woocommerce_clean', explode( '|', $attribute_values[ $i ] ) ) );
+                $values = implode( ' | ', array_map( 'woocommerce_clean', $attribute_values[$i] ) );
 
                 // Custom attribute - Add attribute to array and set the values
                 $attributes[ sanitize_title( $attribute_names[ $i ] ) ] = array(
@@ -1111,4 +1111,107 @@ function dokan_process_product_meta( $post_id ) {
 
     // Clear cache/transients
     $woocommerce->clear_product_transients( $post_id );
+}
+
+function dokan_post_input_box( $post_id, $meta_key, $attr = array(), $type = 'text'  ) {
+    $placeholder = isset( $attr['placeholder'] ) ? esc_attr( $attr['placeholder'] ) : '';
+    $class = isset( $attr['class'] ) ? esc_attr( $attr['class'] ) : 'form-control';
+    $name = isset( $attr['name'] ) ? esc_attr( $attr['name'] ) : $meta_key;
+    $value = isset( $attr['value'] ) ? $attr['value'] : get_post_meta( $post_id, $meta_key, true );
+    $size = isset( $attr['size'] ) ? $attr['size'] : 30;
+
+    switch ($type) {
+        case 'text':
+            ?>
+            <input type="text" name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="<?php echo esc_attr( $value ); ?>" class="<?php echo $class; ?>" placeholder="<?php echo $placeholder; ?>">
+            <?php
+            break;
+
+        case 'textarea':
+            $rows = isset( $attr['rows'] ) ? absint( $attr['rows'] ) : 4;
+            ?>
+            <textarea name="<?php echo $name; ?>" id="<?php echo $name; ?>" rows="<?php echo $rows; ?>" class="<?php echo $class; ?>" placeholder="<?php echo $placeholder; ?>"><?php echo esc_textarea( $value ); ?></textarea>
+            <?php
+            break;
+
+        case 'checkbox':
+            $label = isset( $attr['label'] ) ? $attr['label'] : '';
+            ?>
+
+            <label class="checkbox-inline" for="<?php echo $name; ?>">
+                <input name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" type="checkbox"<?php checked( $value, 'yes' ); ?>>
+                <?php echo $label; ?>
+            </label>
+
+            <?php
+            break;
+
+        case 'select':
+            $options = is_array( $attr['options'] ) ? $attr['options'] : array();
+            ?>
+            <select name="<?php echo $name; ?>" id="<?php echo $name; ?>" class="<?php echo $class; ?>">
+                <?php foreach ($options as $key => $label) { ?>
+                    <option value="<?php echo esc_attr( $key ); ?>"<?php selected( $value, $key ); ?>><?php echo $label; ?></option>
+                <?php } ?>
+            </select>
+
+            <?php
+            break;
+
+        case 'number':
+            $min = isset( $attr['min'] ) ? $attr['min'] : 0;
+            $step = isset( $attr['step'] ) ? $attr['step'] : 'any';
+            ?>
+            <input type="number" name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="<?php echo esc_attr( $value ); ?>" class="<?php echo $class; ?>" placeholder="<?php echo $placeholder; ?>" min="<?php echo esc_attr( $min ); ?>" step="<?php echo esc_attr( $step ); ?>" size="<?php echo esc_attr( $size ); ?>">
+            <?php
+            break;
+    }
+}
+
+function dokan_get_post_status( $status ) {
+    switch ($status) {
+        case 'publish':
+            return __( 'Online', 'dokan' );
+            break;
+
+        case 'draft':
+            return __( 'Draft', 'dokan' );
+            break;
+
+        case 'pending':
+            return __( 'Pending Review', 'dokan' );
+            break;
+
+        case 'future':
+            return __( 'Scheduled', 'dokan' );
+            break;
+
+        default:
+            return '';
+            break;
+    }
+}
+
+function dokan_get_product_status( $status ) {
+    switch ($status) {
+        case 'simple':
+            return __( 'Simple Product', 'dokan' );
+            break;
+
+        case 'variable':
+            return __( 'Variable Product', 'dokan' );
+            break;
+
+        case 'grouped':
+            return __( 'Grouped Product', 'dokan' );
+            break;
+
+        case 'external':
+            return __( 'Scheduled', 'dokan' );
+            break;
+
+        default:
+            return '';
+            break;
+    }
 }

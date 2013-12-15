@@ -10,6 +10,48 @@
     border-radius: 3px;
 }
 
+.toggle-sidebar-container {
+    padding: 8px 0;
+    border-bottom: 1px solid #DFDFDF;
+    margin-bottom: 15px;
+}
+
+.dokan-toggle-sidebar {
+    // border-top: 1px solid #FFF;
+
+    .dokan-toggle-selected-display {
+        font-weight: bold;
+    }
+
+    .dokan-toggle-select-container {
+        padding-bottom: 8px;
+    }
+
+    a.dokan-toggle-edit {
+        padding: 1px 6px;
+        font-size: 10px;
+        font-weight: normal;
+    }
+
+    select {
+        border: 1px solid #ccc;
+    }
+
+    .btn {
+        padding: 2px 10px;
+    }
+
+    a {
+        font-size: 12px;
+        padding-left: 5px;
+    }
+}
+
+.update-button-wrap {
+    border-bottom: 1px solid #DFDFDF;
+    padding-bottom: 13px;
+}
+
 .dokan-dash-sidebar {
 
 
@@ -110,6 +152,7 @@
 }
 
 .product-edit-container {
+    font-size: 13px;
 
     .tab-pane {
         padding: 15px 0;
@@ -127,19 +170,34 @@
         overflow: hidden;
         position: relative;
 
-        img {
-            max-width: 100%;
-        }
-
         a.close {
+            background: #000000;
+            color: #FF0000;
+            font-size: 100px;
+            height: 242px;
+            opacity: 0.7;
+            padding: 25% 0;
             position: absolute;
             right: 0;
-            top: 0;
-            background: #000;
-            opacity: .8;
-            color: red;
+            text-align: center;
             text-shadow: none;
-            padding: 3px 8px;
+            top: 0;
+            width: 242px;
+            display: none;
+        }
+
+        img {
+            max-width: 100%;
+
+            &:hover {
+                a.close {
+                    display: block;
+                }
+            }
+        }
+
+        .image-wrap :hover a.close {
+            display: block;
         }
     }
 
@@ -147,6 +205,10 @@
         text-align: center;
         padding-top: 110px;
         color: #aaa;
+    }
+
+    .wp-editor-wrap {
+        border: 1px solid #E7E7E7;
     }
 
     aside {
@@ -330,6 +392,11 @@
                 padding: 2px;
                 cursor: move;
 
+                img {
+                    padding: 0;
+                    margin: 0;
+                }
+
                 ul.actions {
                     position: absolute;
                     top: 0;
@@ -366,6 +433,14 @@
             li.dokan-sortable-placeholder {
                 border: 1px dashed #ccc;
             }
+        }
+    }
+
+    .product-dimension {
+        .form-control {
+            display: inline-block;
+            width: 20%;
+            margin-right: 5px;
         }
     }
 }
