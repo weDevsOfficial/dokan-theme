@@ -53,7 +53,15 @@ get_header();
                                 ?>
                                 <tr>
                                     <td><?php echo $product->get_image(); ?></td>
-                                    <td><a href="<?php echo dokan_edit_product_url( $post->ID ); ?>"><?php echo $product->get_title(); ?></a></td>
+                                    <td>
+                                        <p><a href="<?php echo dokan_edit_product_url( $post->ID ); ?>"><?php echo $product->get_title(); ?></a></p>
+
+                                        <div class="row-actions">
+                                            <span class="edit"><a href="<?php echo dokan_edit_product_url( $post->ID ); ?>"><?php _e( 'Edit', 'dokan' ); ?></a> | </span>
+                                            <span class="delete"><a onclick="return showNotice.warn();" href="post.php?action=delete&amp;post=195&amp;_wpnonce=a201236313"><?php _e( 'Delete Permanently', 'dokan' ); ?></a> | </span>
+                                            <span class="view"><a href="<?php echo get_permalink( $post->ID ); ?>" rel="permalink"><?php _e( 'View', 'dokan' ); ?></a></span>
+                                        </div>
+                                    </td>
                                     <td>
                                         <?php
                                         if ( $product->get_sku() ) {

@@ -61,3 +61,25 @@
         }
     }
 }
+
+// product listing dashboard
+.page-template-templatesproducts-php {
+
+    .row-actions {
+        visibility: hidden;
+        font-size: 12px;
+        color: #ccc;
+
+        .delete a {
+            color: #A05;
+
+            &:hover {
+                color: red;
+            }
+        }
+    }
+
+    tr:hover .row-actions {
+        visibility: visible;
+    }
+}

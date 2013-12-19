@@ -24,8 +24,6 @@ get_header();
 
                 <?php $user_orders = dokan_get_seller_orders( get_current_user_id() ); ?>
 
-                <h3>Orders</h3>
-
                 <?php if ( $user_orders ) { ?>
                     <table class="table table-striped">
                         <thead>
