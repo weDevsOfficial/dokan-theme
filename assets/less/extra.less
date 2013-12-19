@@ -49,14 +49,22 @@
 .alert {
     padding: 5px 15px;
     box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
+    background: #fff;
+    border: none;
+    .border-radius(0);
+    color: #333;
 }
 
 .alert-success {
-    color: #333;
-    border: none;
-    .border-radius(0);
     border-left: 4px solid #7ad03a;
-    background: #fff;
+
+    strong {
+        color: #468847;
+    }
+}
+
+.alert-danger {
+    border-left: 4px solid #b94a48;
 
     strong {
         color: #468847;

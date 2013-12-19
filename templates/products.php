@@ -23,13 +23,13 @@ get_header();
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>SKU</th>
-                            <th>Stock</th>
-                            <th>Price</th>
-                            <th>Type</th>
-                            <th>date</th>
+                            <th><?php _e( 'Image', 'dokan' ); ?></th>
+                            <th><?php _e( 'Name', 'dokan' ); ?></th>
+                            <th><?php _e( 'SKU', 'dokan' ); ?></th>
+                            <th><?php _e( 'Stock', 'dokan' ); ?></th>
+                            <th><?php _e( 'Price', 'dokan' ); ?></th>
+                            <th><?php _e( 'Type', 'dokan' ); ?></th>
+                            <th><?php _e( 'Date', 'dokan' ); ?></th>
                         </tr>
                     </thead>
                     <tbody>

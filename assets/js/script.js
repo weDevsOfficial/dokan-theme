@@ -22,15 +22,18 @@ jQuery(function($) {
 //dokan settings
 
 (function($) {
-    
-    var settings = {
+
+    $.validator.setDefaults({ ignore: ":hidden" })
+
+    var Dokan_Settings = {
         init: function() {
             self = this;
 
             //image upload
             $('a.dokan-banner-drag').on('click', this.imageUpload);
-            
-            self.jqueryValidate(self);
+            $('a.dokan-remove-banner-image').on('click', this.removeBanner);
+
+            this.validateForm(self);
 
             return false;
         },
@@ -38,7 +41,7 @@ jQuery(function($) {
 
         imageUpload: function() {
             var file_frame,
-                click = $(this);     
+                self = $(this);
 
             // If the media frame already exists, reopen it.
             if ( file_frame ) {
@@ -61,10 +64,12 @@ jQuery(function($) {
                 attachment = file_frame.state().get('selection').first().toJSON();
 
                 // Do something with attachment.id and/or attachment.url here
-                console.log(attachment);
-                click.closest('div').find('input.dokan-file-field').val(attachment.id);
-                click.closest('div').find('img.dokan-banner-img').attr('src', attachment.url);
-                $('.dokan-banner-drag').hide();
+                var wrap = self.closest('.dokan-banner');
+                wrap.find('input.dokan-file-field').val(attachment.id);
+                wrap.find('img.dokan-banner-img').attr('src', attachment.url);
+                $('.image-wrap', wrap).removeClass('dokan-hide');
+
+                $('.button-area').addClass('dokan-hide');
             });
 
             // Finally, open the modal
@@ -72,68 +77,46 @@ jQuery(function($) {
 
         },
 
-        serverValidate: function() {
-   
+        submitSettings: function() {
+
             var self = $( "form#settings-form" ),
                 form_data = self.serialize() + '&action=dokan_settings';
 
-            
+
             self.find('.ajax_prev').append('<span class="dokan-loading"> </span>');
-          
             $.post(dokan.ajaxurl, form_data, function(resp) {
 
                self.find('span.dokan-loading').remove();
                 $('html,body').animate({scrollTop:100});
 
-                if(resp.success) {
-                    console.log(resp.data['success_save']);
-                    var alert = $('.alert-success');
-                        prev_alert = $('.alert-danger');
+                if ( resp.success ) {
 
-                    prev_alert.hide().children('strong').children('p').remove();
-                    alert.children('strong').children('p').remove();
-                    alert.show().children('strong').append('<p>'+resp.data['success_save']+'</p>');
+                    $('.dokan-ajax-response').html( $('<div/>', {
+                        class: 'alert alert-success',
+                        html: '<p>' + resp.data + '</p>'
+                    }) );
 
+                } else {
+
+                    $('.dokan-ajax-response').html( $('<div/>', {
+                        class: 'alert alert-danger',
+                        html: '<p>' + resp.data + '</p>'
+                    }) );
                 }
-
-                if(resp.success === false) {
-                    var alert = $('.alert-danger');
-                    
-                    $('.alert-success').hide().children('strong').children('p').remove();
-                    alert.children('strong').children('p').remove();
-
-                    if(resp.data['noce_verify'] ) {
-                        
-                        alert.show().children('strong').append('<p>'+resp.data['noce_verify']+'</p>');
-                    }
-
-                    if( resp.data['error_message'] ) {
-
-                        var error_all= '';
-
-                        $.each(resp.data['error_message'], function( key, message) {
-                            error_all += '<p>'+message[0]+'</p>';
-                        } );
-
-                        alert.show().children('strong').append(error_all);
-                    }
-                }
-            }); 
+            });
         },
 
-        jqueryValidate: function(self) {
-
-
+        validateForm: function(self) {
 
             $("form#settings-form").validate({
                 //errorLabelContainer: '#errors'
                 submitHandler: function(form) {
-                    self.serverValidate();
+                    self.submitSettings();
                 },
                 errorElement: 'span',
                 errorClass: 'error',
                 errorPlacement: function(error, element) {
-        
+
                     var form_group = $(element).closest('.form-group');
                     form_group.addClass('has-error').append(error);
                 },
@@ -141,19 +124,31 @@ jQuery(function($) {
                 success: function(label, element) {
                     $(element).closest('.form-group').removeClass('has-error');
                 }
-            }); 
+            });
 
+        },
+
+        removeBanner: function(e) {
+            e.preventDefault();
+
+            var self = $(this);
+            var wrap = self.closest('.image-wrap');
+            var instruction = wrap.siblings('.button-area');
+
+            wrap.find('input.dokan-file-field').val('0');
+            wrap.addClass('dokan-hide');
+            instruction.removeClass('dokan-hide');
         }
     }
 
-    settings.init();
+    Dokan_Settings.init();
 
 })(jQuery);
 
 //withdraw
 (function($) {
     var withdraw = {
-        
+
         init: function() {
             var self = this;
 
@@ -163,11 +158,11 @@ jQuery(function($) {
         withdrawValidate: function(self) {
             $('form.withdraw').validate({
                 //errorLabelContainer: '#errors'
-                
+
                 errorElement: 'span',
                 errorClass: 'error',
                 errorPlacement: function(error, element) {
-        
+
                     var form_group = $(element).closest('.form-group');
                     form_group.addClass('has-error').append(error);
                 },
@@ -178,7 +173,7 @@ jQuery(function($) {
             })
         }
 
-        
+
     }
 
     withdraw.init();
@@ -189,16 +184,18 @@ jQuery(function($) {
     var coupons = {
         init: function() {
             var self = this;
-            this.couponsValidation(self); 
+            this.couponsValidation(self);
         },
 
         couponsValidation: function(self) {
+
+
             $("form.coupons").validate({
                 //errorLabelContainer: '#errors'
                 errorElement: 'span',
                 errorClass: 'error',
                 errorPlacement: function(error, element) {
-        
+
                     var form_group = $(element).closest('.form-group');
                     form_group.addClass('has-error').append(error);
                 },
@@ -206,7 +203,7 @@ jQuery(function($) {
                 success: function(label, element) {
                     $(element).closest('.form-group').removeClass('has-error');
                 }
-            }); 
+            });
         }
 
 
