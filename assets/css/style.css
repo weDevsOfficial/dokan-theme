@@ -615,6 +615,65 @@ a:hover {
 .page-template-templatesproducts-php tr:hover .row-actions {
   visibility: visible;
 }
+.page-template-templatesorders-php td.thumb img {
+  padding: 2px;
+  margin: 0;
+  border: 1px solid #dfdfdf;
+  vertical-align: middle;
+  width: 46px;
+  height: 46px;
+}
+.page-template-templatesorders-php table.table.order-items {
+  margin-bottom: 0;
+}
+.page-template-templatesorders-php .general-details ul.order-status {
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 3px;
+  padding-bottom: 3px;
+}
+.page-template-templatesorders-php .general-details span {
+  font-weight: bold;
+}
+.page-template-templatesorders-php .alert-success.customer-note {
+  background-color: #dff0d8;
+  background: #dff0d8;
+  margin-bottom: 5px;
+}
+.page-template-templatesorders-php .alert-success.customer-note strong {
+  font-size: 12px;
+}
+.page-template-templatesorders-php .order_note_type {
+  padding-left: 0;
+}
+.page-template-templatesorders-php ul.order_notes {
+  font-size: 13px;
+}
+.page-template-templatesorders-php ul.order_notes p.meta {
+  font-size: 11px;
+}
+.page-template-templatesorders-php ul.order_notes .note_content {
+  position: relative;
+  background: #efefef;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+}
+.page-template-templatesorders-php ul.order_notes .note_content p {
+  margin: 0;
+  padding: 0;
+  word-wrap: break-word;
+}
+.page-template-templatesorders-php ul.order_notes .note_content:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -15px;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border-width: 15px 15px 0 0;
+  border-style: solid;
+  border-color: #efefef transparent;
+}
 /*--------------------------------------------------
 :: Sidebars
 -------------------------------------------------- */

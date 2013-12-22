@@ -687,7 +687,8 @@ function dokan_get_seller_orders( $seller_id ) {
     $sql = "SELECT oi.order_id FROM {$wpdb->prefix}woocommerce_order_items oi
             LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta oim ON oim.order_item_id = oi.order_item_id
             LEFT JOIN $wpdb->posts p ON oim.meta_value = p.ID
-            WHERE oim.meta_key = '_product_id'  AND p.post_author = %d";
+            WHERE oim.meta_key = '_product_id' AND p.post_author = %d
+            GROUP BY oi.order_id";
 
     return $wpdb->get_results( $wpdb->prepare( $sql, $seller_id ) );
 }
@@ -1214,3 +1215,36 @@ function dokan_get_product_status( $status ) {
             break;
     }
 }
+
+function dokan_get_order_status_class( $status ) {
+    switch ($status) {
+        case 'completed':
+            return 'success';
+            break;
+
+        case 'pending':
+            return 'danger';
+            break;
+
+        case 'on-hold':
+            return 'warning';
+            break;
+
+        case 'processing':
+            return 'info';
+            break;
+
+        case 'refunded':
+            return 'default';
+            break;
+
+        case 'cancelled':
+            return 'default';
+            break;
+
+        case 'failed':
+            return 'danger';
+            break;
+    }
+}
+

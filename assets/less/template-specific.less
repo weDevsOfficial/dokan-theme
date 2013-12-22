@@ -83,3 +83,83 @@
         visibility: visible;
     }
 }
+
+// order page
+.page-template-templatesorders-php {
+    td.thumb img {
+        padding: 2px;
+        margin: 0;
+        border: 1px solid #dfdfdf;
+        vertical-align: middle;
+        width: 46px;
+        height: 46px;
+    }
+
+    table.table.order-items {
+        margin-bottom: 0;
+    }
+
+    .general-details {
+        ul.order-status {
+            border-bottom: 1px solid @borderColor;
+            margin-bottom: 3px;
+            padding-bottom: 3px;
+        }
+
+        span {
+            font-weight: bold;
+        }
+    }
+
+    .alert-success.customer-note {
+        background-color: #dff0d8;
+        background: #dff0d8;
+        margin-bottom: 5px;
+
+        strong {
+            font-size: 12px;
+        }
+    }
+
+    .order_note_type {
+        padding-left: 0;
+    }
+
+    ul.order_notes {
+        font-size: 13px;
+
+        li {
+            // border-bottom: 1px solid @borderColor;
+        }
+
+        p.meta {
+            font-size: 11px;
+        }
+
+        .note_content {
+            position: relative;
+            background: #efefef;
+            padding: 3px 10px;
+            margin-bottom: 10px;
+
+            p {
+                margin: 0;
+                padding: 0;
+                word-wrap: break-word;
+            }
+        }
+
+        .note_content:after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: -15px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border-width: 15px 15px 0 0;
+            border-style: solid;
+            border-color: #efefef transparent
+        }
+    }
+}
