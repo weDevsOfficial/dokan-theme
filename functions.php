@@ -364,6 +364,8 @@ class WeDevs_Dokan {
         wp_enqueue_script( 'jquery-ui-datepicker' );
         wp_enqueue_script( 'underscore' );
 
+        wp_register_script( 'dokan-order', $template_directory . '/assets/js/orders.js', false, null, true );
+
         wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
         wp_enqueue_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
         wp_enqueue_script( 'dokan-reviews', get_stylesheet_directory_uri() . '/assets/js/reviews.js', array('jquery', 'underscore') );
@@ -372,7 +374,8 @@ class WeDevs_Dokan {
         wp_enqueue_script( 'dokan-scripts', $template_directory . '/assets/js/script.js', false, null, true );
         wp_localize_script( 'dokan-scripts', 'dokan', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' ),
-            'nonce' => wp_create_nonce( 'dokan_reviews' )
+            'nonce' => wp_create_nonce( 'dokan_reviews' ),
+            'ajax_loader' => $template_directory . '/assets/images/ajax-loader.gif'
         ) );
 
 
@@ -1248,3 +1251,19 @@ function dokan_get_order_status_class( $status ) {
     }
 }
 
+
+function dokan_change_order_status() {
+
+    check_ajax_referer( 'dokan_change_status' );
+
+    $order_id = intval( $_POST['order_id'] );
+    $order_status = $_POST['order_status'];
+
+    wp_set_object_terms( $order_id, $order_status, 'shop_order_status' );
+    $status_class = dokan_get_order_status_class( $order_status );
+
+    echo '<label class="label label-' . $status_class . '">' . $order_status . '</label>';
+    exit;
+}
+
+add_action( 'wp_ajax_dokan_change_status', 'dokan_change_order_status' );

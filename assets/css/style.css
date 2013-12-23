@@ -645,6 +645,15 @@ a:hover {
 .page-template-templatesorders-php .order_note_type {
   padding-left: 0;
 }
+.page-template-templatesorders-php #dokan-order-status-form {
+  margin: 10px 0;
+}
+.page-template-templatesorders-php #dokan-order-status-form select.form-control {
+  display: inline-block;
+  width: 40%;
+  margin-right: 10px;
+  font-size: 13px;
+}
 .page-template-templatesorders-php ul.order_notes {
   font-size: 13px;
 }
@@ -673,6 +682,16 @@ a:hover {
   border-width: 15px 15px 0 0;
   border-style: solid;
   border-color: #efefef transparent;
+}
+.page-template-templatesorders-php ul.order_notes li.customer-note .note_content {
+  background: #d7cad2;
+}
+.page-template-templatesorders-php ul.order_notes li.customer-note .note_content:after {
+  border-color: #d7cad2 transparent;
+}
+.page-template-templatesorders-php tfoot td.value {
+  border-left: 1px solid #dddddd;
+  text-align: right;
 }
 /*--------------------------------------------------
 :: Sidebars

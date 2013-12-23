@@ -125,6 +125,17 @@
         padding-left: 0;
     }
 
+    #dokan-order-status-form {
+        margin: 10px 0;
+
+        select.form-control {
+            display: inline-block;
+            width: 40%;
+            margin-right: 10px;
+            font-size: 13px;
+        }
+    }
+
     ul.order_notes {
         font-size: 13px;
 
@@ -161,5 +172,20 @@
             border-style: solid;
             border-color: #efefef transparent
         }
+
+        li.customer-note {
+            .note_content {
+                background: #d7cad2;
+
+                &:after {
+                    border-color: #d7cad2 transparent
+                }
+            }
+        }
+    }
+
+    tfoot td.value {
+        border-left: 1px solid @borderColor;
+        text-align: right;
     }
 }

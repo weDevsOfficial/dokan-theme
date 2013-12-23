@@ -3,7 +3,10 @@
  * Template Name: Dashboard - Orders
  */
 
+
+
 get_header();
+wp_enqueue_script( 'dokan-order' );
 ?>
 
 <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'order' ) ); ?>

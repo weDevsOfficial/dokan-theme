@@ -12,9 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		<?php endif; ?>
 	</td>
 
-	<td class="name" width="70%">
-
-		<?php if ( $_product && $_product->get_sku() ) echo esc_html( $_product->get_sku() ) . ' &ndash; '; ?>
+	<td class="name" width="65%">
 
 		<?php if ( $_product ) : ?>
 			<a target="_blank" href="<?php echo esc_url( get_permalink( $_product->id ) ); ?>">
@@ -23,6 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		<?php else : ?>
 			<?php echo esc_html( $item['name'] ); ?>
 		<?php endif; ?>
+
+		<small><?php if ( $_product && $_product->get_sku() ) echo '<br>' . esc_html( $_product->get_sku() ); ?></small>
 
 		<?php
 			if ( $_product && isset( $_product->variation_data ) )
@@ -34,24 +34,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 	<?php if ( get_option( 'woocommerce_calc_taxes' ) == 'yes' ) : ?>
 
-	<td class="tax_class" width="1%">
-		<select class="tax_class" name="order_item_tax_class[<?php echo absint( $item_id ); ?>]" title="<?php _e( 'Tax class', 'woocommerce' ); ?>">
-			<?php
-			$item_value = isset( $item['tax_class'] ) ? sanitize_title( $item['tax_class'] ) : '';
-
-			$tax_classes = array_filter( array_map( 'trim', explode( "\n", get_option('woocommerce_tax_classes' ) ) ) );
-
-			$classes_options = array();
-			$classes_options[''] = __( 'Standard', 'woocommerce' );
-
-			if ( $tax_classes )
-				foreach ( $tax_classes as $class )
-					$classes_options[ sanitize_title( $class ) ] = $class;
-
-			foreach ( $classes_options as $value => $name )
-				echo '<option value="' . esc_attr( $value ) . '" ' . selected( $value, $item_value, false ) . '>'. esc_html( $name ) . '</option>';
-			?>
-		</select>
+	<td class="tax_class" width="5%">
+		<?php
+		$item_value = isset( $item['tax_class'] ) ? sanitize_title( $item['tax_class'] ) : '--';
+		echo $item_value;
+		?>
 	</td>
 
 	<?php endif; ?>
@@ -67,9 +54,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	<?php if ( get_option( 'woocommerce_calc_taxes' ) == 'yes' ) : ?>
 
 	<td class="line_tax" width="1%">
-		<input type="number" step="any" min="0" name="line_tax[<?php echo absint( $item_id ); ?>]" placeholder="0.00" value="<?php if ( isset( $item['line_tax'] ) ) echo esc_attr( $item['line_tax'] ); ?>" class="line_tax" />
-
-		<span class="subtotal"><input type="number" step="any" min="0" name="line_subtotal_tax[<?php echo absint( $item_id ); ?>]" placeholder="0.00" value="<?php if ( isset( $item['line_subtotal_tax'] ) ) echo esc_attr( $item['line_subtotal_tax'] ); ?>" class="line_subtotal_tax" /></span>
+		<?php if ( isset( $item['line_subtotal_tax'] ) ) echo esc_attr( $item['line_subtotal_tax'] ); ?>
 	</td>
 
 	<?php endif; ?>
