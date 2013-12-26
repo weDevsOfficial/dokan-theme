@@ -2,7 +2,12 @@
 
 global $post, $product;
 
-// var_dump( $post );
+dokan_redirect_login();
+dokan_redirect_if_not_seller();
+
+if ( !dokan_is_product_author() ) {
+    return wp_redirect( get_permalink() );
+}
 
 $post_id = $post->ID;
 
@@ -102,15 +107,17 @@ get_header();
 
                                                     <div class="instruction-inside<?php echo $instruction_class; ?>">
                                                         <input type="hidden" name="feat_image_id" class="dokan-feat-image-id" value="<?php echo $feat_image_id; ?>">
-                                                        <a href="#" class="dokan-feat-image-btn"><?php _e( 'Upload a product cover image', 'dokan' ); ?></a>
+
+                                                        <i class="fa fa-cloud-upload"></i>
+                                                        <a href="#" class="dokan-feat-image-btn btn btn-sm"><?php _e( 'Upload a product cover image', 'dokan' ); ?></a>
                                                     </div>
 
                                                     <div class="image-wrap<?php echo $wrap_class; ?>">
                                                         <a class="close dokan-remove-feat-image">&times;</a>
                                                         <?php if ( $feat_image_id ) { ?>
-                                                            <?php echo get_the_post_thumbnail( $post->ID, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ) ); ?>
+                                                            <?php echo get_the_post_thumbnail( $post->ID, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ), array( 'height' => '', 'width' => '' ) ); ?>
                                                         <?php } else { ?>
-                                                            <img src="" alt="">
+                                                            <img height="" width="" src="" alt="">
                                                         <?php } ?>
                                                     </div>
                                                 </div>

@@ -3,6 +3,10 @@
  * Template Name: Dashboard - Products
  */
 
+dokan_redirect_login();
+dokan_redirect_if_not_seller();
+dokan_delete_product_handler();
+
 get_header();
 ?>
 
@@ -19,6 +23,7 @@ get_header();
                     <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-large btn-info"><i class="icon-cart"></i> Add new product</a>
                 </p>
 
+                <?php dokan_product_dashboard_errors(); ?>
 
                 <table class="table table-striped">
                     <thead>
@@ -43,22 +48,25 @@ get_header();
                             'paged' => $paged
                         );
 
-                        $query = new WP_Query( $args );
+                        $original_post = $post;
+                        $product_query = new WP_Query( $args );
 
-                        if ( $query->have_posts() ) {
-                            while ($query->have_posts()) {
-                                $query->the_post();
+                        if ( $product_query->have_posts() ) {
+                            while ($product_query->have_posts()) {
+                                $product_query->the_post();
 
                                 $product = get_product( $post->ID );
                                 ?>
                                 <tr>
-                                    <td><?php echo $product->get_image(); ?></td>
+                                    <td>
+                                        <a href="<?php echo dokan_edit_product_url( $post->ID ); ?>"><?php echo $product->get_image(); ?></a>
+                                    </td>
                                     <td>
                                         <p><a href="<?php echo dokan_edit_product_url( $post->ID ); ?>"><?php echo $product->get_title(); ?></a></p>
 
                                         <div class="row-actions">
                                             <span class="edit"><a href="<?php echo dokan_edit_product_url( $post->ID ); ?>"><?php _e( 'Edit', 'dokan' ); ?></a> | </span>
-                                            <span class="delete"><a onclick="return showNotice.warn();" href="post.php?action=delete&amp;post=195&amp;_wpnonce=a201236313"><?php _e( 'Delete Permanently', 'dokan' ); ?></a> | </span>
+                                            <span class="delete"><a onclick="return confirm('Are you sure?');" href="<?php echo wp_nonce_url( add_query_arg( array( 'action' => 'dokan-delete-product', 'product_id' => $post->ID ), get_permalink( $original_post->ID ) ), 'dokan-delete-product' ); ?>"><?php _e( 'Delete Permanently', 'dokan' ); ?></a> | </span>
                                             <span class="view"><a href="<?php echo get_permalink( $post->ID ); ?>" rel="permalink"><?php _e( 'View', 'dokan' ); ?></a></span>
                                         </div>
                                     </td>
@@ -167,16 +175,20 @@ get_header();
                 <?php
                 wp_reset_postdata();
 
-                if ( $query->max_num_pages > 1 ) {
-                    echo '<div class="pagination pagination-centered">';
-                    echo paginate_links( array(
+                if ( $product_query->max_num_pages > 1 ) {
+                    echo '<div class="pagination-wrap">';
+                    $page_links = paginate_links( array(
                         'current' => max( 1, get_query_var( 'paged' ) ),
-                        'total' => $query->max_num_pages,
+                        'total' => $product_query->max_num_pages,
                         'base' => str_replace( $post->ID, '%#%', esc_url( get_pagenum_link( $post->ID ) ) ),
-                        'type' => 'list',
+                        'type' => 'array',
                         'prev_text' => __( '&laquo;' ),
                         'next_text' => __( '&raquo;' )
                     ) );
+
+                    echo '<ul class="pagination"><li>';
+                    echo join("</li>\n\t<li>", $page_links);
+                    echo "</li>\n</ul>\n";
                     echo '</div>';
                 }
                 ?>

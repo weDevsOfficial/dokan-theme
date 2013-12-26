@@ -48,9 +48,6 @@ function dokan_autoload( $class ) {
 
 spl_autoload_register( 'dokan_autoload' );
 
-//mishu start
-
-//mishu end
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -72,9 +69,9 @@ class WeDevs_Dokan {
         add_action( 'admin_init', array($this, 'install_theme' ) );
 
         //for reviews ajax request
-        if ( defined('DOING_AJAX') && DOING_AJAX === true ) {
+        if ( defined('DOING_AJAX') && DOING_AJAX ) {
             $ajax = Dokan_Ajax::init();
-            $ajax->all_ajax_action();
+            $ajax->init_ajax();
         }
 
         //initalize user roles
@@ -85,7 +82,7 @@ class WeDevs_Dokan {
         $lib_dir = __DIR__ . '/lib/';
 
         require_once dirname( __FILE__ ) . '/lib/bootstrap-walker.php';
-        require_once dirname( __FILE__ ) . '/lib/woo-functions.php';
+        require_once dirname( __FILE__ ) . '/lib/theme-functions.php';
         require_once dirname( __FILE__ ) . '/lib/woo-template.php';
         require_once dirname( __FILE__ ) . '/lib/template-tags.php';
 
@@ -677,24 +674,7 @@ add_action( 'wp_ajax_dokan_save_attributes', function() {
  * @since Dokan 1.0
  */
 
-/**
- * Get all the orders from a specific seller
- *
- * @global object $wpdb
- * @param int $seller_id
- * @return array
- */
-function dokan_get_seller_orders( $seller_id ) {
-    global $wpdb;
 
-    $sql = "SELECT oi.order_id FROM {$wpdb->prefix}woocommerce_order_items oi
-            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta oim ON oim.order_item_id = oi.order_item_id
-            LEFT JOIN $wpdb->posts p ON oim.meta_value = p.ID
-            WHERE oim.meta_key = '_product_id' AND p.post_author = %d
-            GROUP BY oi.order_id";
-
-    return $wpdb->get_results( $wpdb->prepare( $sql, $seller_id ) );
-}
 
 /**
  * Helper function for input text field
@@ -729,8 +709,13 @@ function dokan_get_template( $template_name, $args = array() ) {
     }
 }
 
-function dokan_get_page_url( $page ) {
-    $page_id = dokan_get_option( $page, 'dokan_pages' );
+function dokan_get_page_url( $page, $context = 'dokan' ) {
+
+    if ( $context == 'woocommerce' ) {
+        $page_id = woocommerce_get_page_id( $page );
+    } else {
+        $page_id = dokan_get_option( $page, 'dokan_pages' );
+    }
 
     return get_permalink( $page_id );
 }

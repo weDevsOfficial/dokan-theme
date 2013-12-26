@@ -3,6 +3,9 @@
  * Template Name: Dashboard - Settings
  */
 
+dokan_redirect_login();
+dokan_redirect_if_not_seller();
+
 
 $dokan_template_settings = Dokan_Template_Settings::init();
 

@@ -615,6 +615,10 @@ a:hover {
 .page-template-templatesproducts-php tr:hover .row-actions {
   visibility: visible;
 }
+.page-template-templatesproducts-php table td img {
+  max-width: 48px;
+  max-height: 48px;
+}
 .page-template-templatesorders-php td.thumb img {
   padding: 2px;
   margin: 0;
@@ -692,6 +696,16 @@ a:hover {
 .page-template-templatesorders-php tfoot td.value {
   border-left: 1px solid #dddddd;
   text-align: right;
+}
+.page-template-templatesorders-php .order_download_permissions label {
+  font-weight: normal;
+}
+.page-template-templatesorders-php .order_download_permissions button.revoke_access {
+  padding: 3px 10px;
+  margin-top: -2px;
+}
+.page-template-templatesorders-php .order_download_permissions .toolbar {
+  margin-top: 15px;
 }
 /*--------------------------------------------------
 :: Sidebars
@@ -1051,6 +1065,21 @@ a:hover {
   overflow: hidden;
   position: relative;
 }
+.product-edit-container .dokan-feat-image-upload i.fa-cloud-upload {
+  display: block;
+  font-size: 80px;
+  color: #DFDFDF;
+}
+.product-edit-container .dokan-feat-image-upload a.dokan-feat-image-btn {
+  color: #8F8F8F;
+  text-shadow: 0 1px 1px #FFF;
+  background: #F0F0F0;
+}
+.product-edit-container .dokan-feat-image-upload a.dokan-feat-image-btn:hover {
+  color: #ECECEC;
+  text-shadow: 0 1px 1px #6F6F6F;
+  background: #B4B4B4;
+}
 .product-edit-container .dokan-feat-image-upload a.close {
   background: #000000;
   color: #FF0000;
@@ -1072,12 +1101,12 @@ a:hover {
 .product-edit-container .dokan-feat-image-upload img:hover a.close {
   display: block;
 }
-.product-edit-container .dokan-feat-image-upload .image-wrap :hover a.close {
+.product-edit-container .dokan-feat-image-upload .image-wrap:hover a.close {
   display: block;
 }
 .product-edit-container .instruction-inside {
   text-align: center;
-  padding-top: 110px;
+  padding-top: 55px;
   color: #aaa;
 }
 .product-edit-container .wp-editor-wrap {

@@ -3,6 +3,9 @@
  * Template Name: Dashboard
  */
 
+dokan_redirect_login();
+dokan_redirect_if_not_seller();
+
 get_header();
 ?>
 

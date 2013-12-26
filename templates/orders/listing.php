@@ -24,7 +24,7 @@ if ( $user_orders ) {
                 ?>
                 <tr>
                     <td>
-                        <?php echo '<a href="' . add_query_arg( array( 'order_id' => $the_order->id ), get_permalink() ) . '"><strong>' . sprintf( __( 'Order %s', 'woocommerce' ), esc_attr( $the_order->get_order_number() ) ) . '</strong></a>'; ?>
+                        <?php echo '<a href="' . wp_nonce_url( add_query_arg( array( 'order_id' => $the_order->id ), get_permalink() ), 'dokan_view_order' ) . '"><strong>' . sprintf( __( 'Order %s', 'woocommerce' ), esc_attr( $the_order->get_order_number() ) ) . '</strong></a>'; ?>
                     </td>
                     <td>
                         <?php echo esc_html( strip_tags( $the_order->get_formatted_order_total() ) ); ?>
@@ -73,7 +73,7 @@ if ( $user_orders ) {
                         echo '<abbr title="' . esc_attr( $t_time ) . '">' . esc_html( apply_filters( 'post_date_column_time', $h_time, $post ) ) . '</abbr>';
                         ?>
                     </td>
-                    <td>
+                    <td width="15%">
                         <?php
                         do_action( 'woocommerce_admin_order_actions_start', $the_order );
 
@@ -81,20 +81,20 @@ if ( $user_orders ) {
 
                         if ( in_array( $the_order->status, array('pending', 'on-hold') ) )
                             $actions['processing'] = array(
-                                'url' => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce-mark-order-processing&order_id=' . $the_order->id ), 'woocommerce-mark-order-processing' ),
+                                'url' => wp_nonce_url( admin_url( 'admin-ajax.php?action=dokan-mark-order-processing&order_id=' . $the_order->id ), 'dokan-mark-order-processing' ),
                                 'name' => __( 'Processing', 'woocommerce' ),
                                 'action' => "processing"
                             );
 
                         if ( in_array( $the_order->status, array('pending', 'on-hold', 'processing') ) )
                             $actions['complete'] = array(
-                                'url' => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce-mark-order-complete&order_id=' . $the_order->id ), 'woocommerce-mark-order-complete' ),
+                                'url' => wp_nonce_url( admin_url( 'admin-ajax.php?action=dokan-mark-order-complete&order_id=' . $the_order->id ), 'dokan-mark-order-complete' ),
                                 'name' => __( 'Complete', 'woocommerce' ),
                                 'action' => "complete"
                             );
 
                         $actions['view'] = array(
-                            'url' => admin_url( 'post.php?post=' . $the_order->id . '&action=edit' ),
+                            'url' => wp_nonce_url( add_query_arg( array( 'order_id' => $the_order->id ), get_permalink() ), 'dokan_view_order' ),
                             'name' => __( 'View', 'woocommerce' ),
                             'action' => "view"
                         );
@@ -103,7 +103,7 @@ if ( $user_orders ) {
 
                         foreach ($actions as $action) {
                             $image = ( isset( $action['image_url'] ) ) ? $action['image_url'] : $woocommerce->plugin_url() . '/assets/images/icons/' . $action['action'] . '.png';
-                            printf( '<a class="button tips" href="%s" data-tip="%s"><img src="%s" alt="%s" width="14" /></a>', esc_url( $action['url'] ), esc_attr( $action['name'] ), esc_attr( $image ), esc_attr( $action['name'] ) );
+                            printf( '<a class="btn btn-default btn-sm tips" href="%s" data-toggle="tooltip" data-placement="top" title="%s"><img src="%s" alt="%s" width="14" /></a> ', esc_url( $action['url'] ), esc_attr( $action['name'] ), esc_attr( $image ), esc_attr( $action['name'] ) );
                         }
 
                         do_action( 'woocommerce_admin_order_actions_end', $the_order );

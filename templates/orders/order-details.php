@@ -1,7 +1,13 @@
 <?php
-global $woocommerce;
+global $woocommerce, $current_user, $wpdb;
 
 $order_id = isset( $_GET['order_id'] ) ? intval( $_GET['order_id'] ) : 0;
+
+if ( !dokan_is_seller_has_order( $current_user->ID, $order_id ) ) {
+    echo '<div class="alert alert-danger">' . __( 'This is not yours, I swear!', 'dokan' ) . '</div>';
+    return;
+}
+
 $order = new WC_Order( $order_id );
 // var_dump($order);
 ?>
@@ -84,7 +90,7 @@ $order = new WC_Order( $order_id );
 
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><?php _e( 'Billing Address', 'dokan' ); ?></div>
+                    <div class="panel-heading"><strong><?php _e( 'Billing Address', 'dokan' ); ?></strong></div>
                     <div class="panel-body">
                         <?php echo $order->get_formatted_billing_address(); ?>
                     </div>
@@ -93,9 +99,20 @@ $order = new WC_Order( $order_id );
 
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><?php _e( 'Shipping Address', 'dokan' ); ?></div>
+                    <div class="panel-heading"><strong><?php _e( 'Shipping Address', 'dokan' ); ?></strong></div>
                     <div class="panel-body">
                         <?php echo $order->get_formatted_shipping_address(); ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong><?php _e( 'Downloadable Product Permission', 'dokan' ); ?></strong></div>
+                    <div class="panel-body">
+                        <?php include dirname( __FILE__ ) . '/downloadable.php'; ?>
                     </div>
                 </div>
             </div>
@@ -106,7 +123,7 @@ $order = new WC_Order( $order_id );
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><?php _e( 'General Details', 'dokan' ); ?></div>
+                    <div class="panel-heading"><strong><?php _e( 'General Details', 'dokan' ); ?></strong></div>
                     <div class="panel-body general-details">
                         <ul class="list-unstyled order-status">
                             <li>
@@ -178,7 +195,7 @@ $order = new WC_Order( $order_id );
 
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><?php _e( 'Order Notes', 'dokan' ); ?></div>
+                    <div class="panel-heading"><strong><?php _e( 'Order Notes', 'dokan' ); ?></strong></div>
                     <div class="panel-body" id="dokan-order-notes">
                         <?php
                         $args = array(

@@ -82,6 +82,11 @@
     tr:hover .row-actions {
         visibility: visible;
     }
+
+    table td img {
+        max-width: 48px;
+        max-height: 48px;
+    }
 }
 
 // order page
@@ -187,5 +192,21 @@
     tfoot td.value {
         border-left: 1px solid @borderColor;
         text-align: right;
+    }
+
+    .order_download_permissions {
+
+        label {
+            font-weight: normal;
+        }
+
+        button.revoke_access {
+            padding: 3px 10px;
+            margin-top: -2px;
+        }
+
+        .toolbar {
+            margin-top: 15px;
+        }
     }
 }

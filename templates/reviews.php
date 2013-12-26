@@ -3,6 +3,9 @@
  * Template Name: Dashboard - Reviews
  */
 
+dokan_redirect_login();
+dokan_redirect_if_not_seller();
+
 $dokan_template_reviews = Dokan_Template_reviews::init();
 $dokan_template_reviews->handle_status();
 

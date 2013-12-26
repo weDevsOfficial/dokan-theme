@@ -3,6 +3,9 @@
  * Template Name: Dashboard - Coupon
  */
 
+dokan_redirect_login();
+dokan_redirect_if_not_seller();
+
 
 $dokan_template_coupons = Dokan_Template_Coupons::init();
 
@@ -35,7 +38,7 @@ get_header();
                 <div class="entry-content">
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
-    
+
                 <p>
                    <a href="<?php echo add_query_arg( array( 'view' => 'add_coupons'), get_permalink() ); ?>" class="btn btn-large btn-info"><?php _e('Add New Coupon','dokan'); ?></a>
                 </p>

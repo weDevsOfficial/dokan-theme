@@ -3,7 +3,8 @@
  * Template Name: Dashboard - Orders
  */
 
-
+dokan_redirect_login();
+dokan_redirect_if_not_seller();
 
 get_header();
 wp_enqueue_script( 'dokan-order' );
