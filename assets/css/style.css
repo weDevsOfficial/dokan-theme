@@ -707,6 +707,36 @@ a:hover {
 .page-template-templatesorders-php .order_download_permissions .toolbar {
   margin-top: 15px;
 }
+.page-template-templatesreports-php .dokan-reports-wrap {
+  margin-top: 20px;
+}
+.page-template-templatesreports-php .postbox {
+  border: 1px solid #dddddd;
+  margin-bottom: 10px;
+  background: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.page-template-templatesreports-php .postbox h3 {
+  padding: 8px 10px;
+  margin: 0 0 5px 0;
+  border-bottom: 1px solid #dddddd;
+  font-size: 14px;
+}
+.page-template-templatesreports-php .postbox .inside {
+  padding: 3px 10px;
+}
+.page-template-templatesreports-php .report-filter {
+  margin-top: 15px;
+}
+.page-template-templatesreports-php .report-filter select {
+  border: 1px solid #dddddd;
+  padding: 2px 5px;
+}
+.page-template-templatesreports-php table.table {
+  margin-top: 15px;
+}
 /*--------------------------------------------------
 :: Sidebars
 -------------------------------------------------- */

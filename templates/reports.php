@@ -7,6 +7,8 @@ dokan_redirect_login();
 dokan_redirect_if_not_seller();
 
 get_header();
+
+wp_enqueue_script( 'jquery-flot' );
 ?>
 
 
@@ -26,6 +28,37 @@ get_header();
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
 
+                <div class="dokan-report-wrap">
+                    <?php
+                    global $woocommerce;
+
+                    require_once dirname( __DIR__ ) . '/includes/reports.php';
+
+                    $charts = dokan_get_reports_charts();
+
+                    $link = get_permalink();
+                    $current = isset( $_GET['chart'] ) ? $_GET['chart'] : 'overview';
+
+                    echo '<ul class="nav nav-tabs">';
+                    foreach ($charts['charts'] as $key => $value) {
+                        $class = ( $current == $key ) ? ' class="active"' : '';
+                        printf( '<li%s><a href="%s">%s</a></li>', $class, add_query_arg( array( 'chart' => $key ), $link ), $value['title'] );
+                    }
+                    echo '</ul>';
+                    ?>
+
+                    <?php if ( isset( $charts['charts'][$current] ) ) { ?>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home">
+                                <?php
+                                $func = $charts['charts'][$current]['function'];
+                                if ( $func && ( is_callable( $func ) ) ) {
+                                    call_user_func( $func );
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    <?php } ?>
             </article>
 
         <?php endwhile; // end of the loop. ?>

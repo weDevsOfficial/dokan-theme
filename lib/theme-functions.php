@@ -10,13 +10,27 @@
 function dokan_get_seller_orders( $seller_id ) {
     global $wpdb;
 
-    $sql = "SELECT oi.order_id FROM {$wpdb->prefix}woocommerce_order_items oi
+    $sql = "SELECT oi.order_id, p.post_date FROM {$wpdb->prefix}woocommerce_order_items oi
             LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta oim ON oim.order_item_id = oi.order_item_id
             LEFT JOIN $wpdb->posts p ON oim.meta_value = p.ID
-            WHERE oim.meta_key = '_product_id' AND p.post_author = %d
+            WHERE
+                oim.meta_key = '_product_id' AND
+                p.post_author = %d AND
+                p.post_status = 'publish'
             GROUP BY oi.order_id";
 
     return $wpdb->get_results( $wpdb->prepare( $sql, $seller_id ) );
+}
+
+function dokan_get_seller_order_ids( $seller_id ) {
+    $orders = dokan_get_seller_orders( $seller_id );
+    $order_ids = array();
+
+    if ( $orders ) {
+        $order_ids = wp_list_pluck( $orders, 'order_id' );
+    }
+
+    return $order_ids;
 }
 
 
