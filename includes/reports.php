@@ -834,10 +834,22 @@ function dokan_top_sellers() {
     $found_products = array_slice( $found_products, 0, 25, true );
     reset( $found_products );
     ?>
-    <form method="post" action="">
-        <p><label for="from"><?php _e( 'From:', 'woocommerce' ); ?></label> <input type="text" name="start_date" id="from" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $start_date) ); ?>" /> <label for="to"><?php _e( 'To:', 'woocommerce' ); ?></label> <input type="text" name="end_date" id="to" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $end_date) ); ?>" /> <input type="submit" class="button" value="<?php _e( 'Show', 'woocommerce' ); ?>" /></p>
+    <form method="post" action="" class="report-filter form-inline">
+        <div class="form-group">
+            <label for="from"><?php _e( 'From:', 'woocommerce' ); ?></label>
+            <input type="text" class="datepicker" name="start_date" id="from" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $start_date) ); ?>" />
+        </div>
+
+        <div class="form-group">
+            <label for="to"><?php _e( 'To:', 'woocommerce' ); ?></label>
+            <input type="text" class="datepicker" name="end_date" id="to" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $end_date) ); ?>" />
+        </div>
+
+        <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'woocommerce' ); ?>" />
     </form>
-    <table class="table table-bordered">
+
+
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th><?php _e( 'Product', 'woocommerce' ); ?></th>
@@ -859,18 +871,14 @@ function dokan_top_sellers() {
                         $orders_link = admin_url( 'edit.php?s&post_status=all&post_type=shop_order&action=-1&s=&shop_order_status=' . implode( ",", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) );
                     }
 
-                    $orders_link = apply_filters( 'woocommerce_reports_order_link', $orders_link, $product_id, $product_title );
+                    $orders_link = apply_filters( 'dokan_reports_order_link', $orders_link, $product_id, $product_title );
+                    $orders_link = ''; //FIXME : order link
 
-                    echo '<tr><th>' . $product_name . '</th><td width="1%"><span>' . esc_html( $sales ) . '</span></td><td class="bars"><a href="' . esc_url( $orders_link ) . '" style="width:' . esc_attr( $width ) . '%">&nbsp;</a></td></tr>';
+                    echo '<tr><th class="60%">' . $product_name . '</th><td width="1%"><span>' . esc_html( $sales ) . '</span></td><td width="30%"><div class="progress"><a class="progress-bar" href="' . esc_url( $orders_link ) . '" style="width:' . esc_attr( $width ) . '%">&nbsp;</a></div></td></tr>';
                 }
             ?>
         </tbody>
     </table>
-    <script type="text/javascript">
-        jQuery(function(){
-            <?php woocommerce_datepicker_js(); ?>
-        });
-    </script>
     <?php
 }
 
@@ -948,7 +956,6 @@ function dokan_top_earners() {
         </div>
 
         <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'woocommerce' ); ?>" />
-
     </form>
 
     <table class="table table-striped">

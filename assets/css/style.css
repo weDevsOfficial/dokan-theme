@@ -737,6 +737,9 @@ a:hover {
 .page-template-templatesreports-php table.table {
   margin-top: 15px;
 }
+.page-template-templatesreports-php table.table .progress {
+  margin-bottom: 0;
+}
 /*--------------------------------------------------
 :: Sidebars
 -------------------------------------------------- */
