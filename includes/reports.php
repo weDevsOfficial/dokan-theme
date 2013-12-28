@@ -1139,3 +1139,129 @@ function dokan_product_sales() {
         <?php
     }
 }
+
+/**
+ * Sales widget javascript
+ *
+ * @access public
+ * @return void
+ */
+function woocommerce_dashboard_sales_js() {
+
+    global $woocommerce, $wp_locale;
+
+    $screen = get_current_screen();
+
+    if (!$screen || $screen->id!=='dashboard') return;
+
+    global $current_month_offset, $the_month_num, $the_year;
+
+    // Get orders to display in widget
+    add_filter( 'posts_where', 'orders_this_month' );
+
+    $args = array(
+        'numberposts'     => -1,
+        'orderby'         => 'post_date',
+        'order'           => 'DESC',
+        'post_type'       => 'shop_order',
+        'post_status'     => 'publish' ,
+        'suppress_filters' => false,
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'shop_order_status',
+                'terms' => apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ),
+                'field' => 'slug',
+                'operator' => 'IN'
+            )
+        )
+    );
+    $orders = get_posts( $args );
+
+    $order_counts = array();
+    $order_amounts = array();
+
+    // Blank date ranges to begin
+    $month = $the_month_num;
+    $year = (int) $the_year;
+
+    $first_day = strtotime("{$year}-{$month}-01");
+    $last_day = strtotime('-1 second', strtotime('+1 month', $first_day));
+
+    if ((date('m') - $the_month_num)==0) :
+        $up_to = date('d', strtotime('NOW'));
+    else :
+        $up_to = date('d', $last_day);
+    endif;
+    $count = 0;
+
+    while ($count < $up_to) :
+
+        $time = strtotime(date('Ymd', strtotime('+ '.$count.' DAY', $first_day))).'000';
+
+        $order_counts[$time] = 0;
+        $order_amounts[$time] = 0;
+
+        $count++;
+    endwhile;
+
+    if ($orders) :
+        foreach ($orders as $order) :
+
+            $order_data = new WC_Order($order->ID);
+
+            if ($order_data->status=='cancelled' || $order_data->status=='refunded') continue;
+
+            $time = strtotime(date('Ymd', strtotime($order->post_date))).'000';
+
+            if (isset($order_counts[$time])) :
+                $order_counts[$time]++;
+            else :
+                $order_counts[$time] = 1;
+            endif;
+
+            if (isset($order_amounts[$time])) :
+                $order_amounts[$time] = $order_amounts[$time] + $order_data->order_total;
+            else :
+                $order_amounts[$time] = (float) $order_data->order_total;
+            endif;
+
+        endforeach;
+    endif;
+
+    remove_filter( 'posts_where', 'orders_this_month' );
+
+    /* Script variables */
+    $params = array(
+        'currency_symbol'   => get_woocommerce_currency_symbol(),
+        'number_of_sales'   => absint( array_sum( $order_counts ) ),
+        'sales_amount'      => woocommerce_price( array_sum( $order_amounts ) ),
+        'sold'              => __( 'Sold', 'woocommerce' ),
+        'earned'            => __( 'Earned', 'woocommerce' ),
+        'month_names'       => array_values( $wp_locale->month_abbrev ),
+    );
+
+    $order_counts_array = array();
+    foreach ($order_counts as $key => $count) :
+        $order_counts_array[] = array($key, $count);
+    endforeach;
+
+    $order_amounts_array = array();
+    foreach ($order_amounts as $key => $amount) :
+        $order_amounts_array[] = array($key, $amount);
+    endforeach;
+
+    $order_data = array( 'order_counts' => $order_counts_array, 'order_amounts' => $order_amounts_array );
+
+    $params['order_data'] = json_encode($order_data);
+
+    // Queue scripts
+    $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+
+    wp_register_script( 'woocommerce_dashboard_sales', $woocommerce->plugin_url() . '/assets/js/admin/dashboard_sales' . $suffix . '.js', array( 'jquery', 'flot', 'flot-resize' ), '1.0' );
+    wp_register_script( 'flot', $woocommerce->plugin_url() . '/assets/js/admin/jquery.flot'.$suffix.'.js', 'jquery', '1.0' );
+    wp_register_script( 'flot-resize', $woocommerce->plugin_url() . '/assets/js/admin/jquery.flot.resize'.$suffix.'.js', 'jquery', '1.0' );
+
+    wp_localize_script( 'woocommerce_dashboard_sales', 'params', $params );
+
+    wp_print_scripts('woocommerce_dashboard_sales');
+}

@@ -300,7 +300,7 @@ a:hover {
   border-radius: 0;
   margin-bottom: 0;
   padding-bottom: 0;
-  min-height: 40px;
+  min-height: 35px;
 }
 .navbar-default .navbar-nav > li > a {
   font-size: 14px;
@@ -739,6 +739,63 @@ a:hover {
 }
 .page-template-templatesreports-php table.table .progress {
   margin-bottom: 0;
+}
+.page-template-templatesdashboard-php .site-content .entry-content {
+  margin: 0;
+}
+.page-template-templatesdashboard-php .dashboard-widget {
+  background: #fff;
+  border: 1px solid #EBEBEB;
+  padding: 10px 15px;
+  position: relative;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  margin-bottom: 15px;
+}
+.page-template-templatesdashboard-php .dashboard-widget .widget-title {
+  font-weight: bold;
+  font-size: 15px;
+  border-bottom: 1px solid #EBEBEB;
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+}
+.page-template-templatesdashboard-php .dashboard-widget .widget-title i {
+  color: #ccc;
+  padding-right: 5px;
+}
+.page-template-templatesdashboard-php .dashboard-widget.big-counter {
+  padding: 15px 20px;
+  text-align: center;
+}
+.page-template-templatesdashboard-php .dashboard-widget.big-counter li {
+  width: 31%;
+}
+.page-template-templatesdashboard-php .dashboard-widget.big-counter .title {
+  font-size: 18px;
+  border-bottom: 1px solid #EBEBEB;
+  padding-bottom: 10px;
+  padding-top: 6px;
+  margin-bottom: 25px;
+}
+.page-template-templatesdashboard-php .dashboard-widget.big-counter .count {
+  font-size: 40px;
+}
+.page-template-templatesdashboard-php .dashboard-widget.products .pull-right a {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  margin-top: -6px;
+}
+.page-template-templatesdashboard-php .dashboard-widget.sells-graph {
+  padding-bottom: 7px;
+  width: 100%;
+  position: relative;
+}
+.page-template-templatesdashboard-php .dashboard-widget .list-count .count {
+  float: right;
+}
+.page-template-templatesdashboard-php article > .row {
+  margin-bottom: 15px;
 }
 /*--------------------------------------------------
 :: Sidebars

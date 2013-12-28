@@ -363,6 +363,7 @@ class WeDevs_Dokan {
 
         wp_register_script( 'dokan-order', $template_directory . '/assets/js/orders.js', false, null, true );
         wp_register_script( 'jquery-flot', $template_directory . '/assets/js/jquery.flot.js', false, null, true );
+        wp_register_script( 'jquery-chart', $template_directory . '/assets/js/Chart.min.js', false, null, true );
 
         wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
         wp_enqueue_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
