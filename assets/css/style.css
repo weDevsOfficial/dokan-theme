@@ -619,6 +619,21 @@ a:hover {
   max-width: 48px;
   max-height: 48px;
 }
+.page-template-templatesproducts-php ul.post-statuses-filter {
+  font-size: 12px;
+  color: #dddddd;
+}
+.page-template-templatesproducts-php ul.post-statuses-filter li {
+  line-height: 13px;
+  padding: 0 5px;
+  border-right: 1px solid #dddddd;
+}
+.page-template-templatesproducts-php ul.post-statuses-filter li:last-child {
+  border-right: none;
+}
+.page-template-templatesproducts-php ul.post-statuses-filter li.active a {
+  color: #999;
+}
 .page-template-templatesorders-php td.thumb img {
   padding: 2px;
   margin: 0;

@@ -312,3 +312,25 @@ function dokan_product_dashboard_errors() {
             break;
     }
 }
+
+function dokan_product_listing_status_filter() {
+    $permalink = get_permalink();
+    $status_class = isset( $_GET['post_status'] ) ? $_GET['post_status'] : 'all';
+
+    ?>
+    <ul class="list-inline col-md-9 post-statuses-filter">
+        <li<?php echo $status_class == 'all' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo $permalink; ?>"><?php _e( 'All', 'dokan' ); ?></a>
+        </li>
+        <li<?php echo $status_class == 'publish' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'post_status' => 'publish' ), $permalink ); ?>"><?php _e( 'Live', 'dokan' ); ?></a>
+        </li>
+        <li<?php echo $status_class == 'pending' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'post_status' => 'pending' ), $permalink ); ?>"><?php _e( 'Pending Review', 'dokan' ); ?></a>
+        </li>
+        <li<?php echo $status_class == 'draft' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'post_status' => 'draft' ), $permalink ); ?>"><?php _e( 'Draft', 'dokan' ); ?></a>
+        </li>
+    </ul> <!-- .post-statuses-filter -->
+    <?php
+}

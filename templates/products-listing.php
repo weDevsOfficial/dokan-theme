@@ -13,9 +13,13 @@ get_header();
 
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-                <p>
-                    <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-large btn-info"><i class="icon-cart"></i> Add new product</a>
-                </p>
+                <div class="product-listing-top row">
+                    <?php dokan_product_listing_status_filter(); ?>
+
+                    <span class="col-md-3 pull-right">
+                        <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-large btn-success"><i class="fa fa-cart"></i> Add new product</a>
+                    </span>
+                </div>
 
                 <?php dokan_product_dashboard_errors(); ?>
 
@@ -34,16 +38,21 @@ get_header();
                     <tbody>
                         <?php
                         $paged = (get_query_var( 'paged' )) ? get_query_var( 'paged' ) : 1;
+                        $post_statuses = array('publish', 'draft', 'pending');
                         $args = array(
                             'post_type' => 'product',
-                            'post_status' => array('publish', 'draft', 'pending'),
+                            'post_status' => $post_statuses,
                             'posts_per_page' => 10,
                             'author' => get_current_user_id(),
                             'paged' => $paged
                         );
 
+                        if ( isset( $_GET['post_status']) && in_array( $_GET['post_status'], $post_statuses ) ) {
+                            $args['post_status'] = $_GET['post_status'];
+                        }
+
                         $original_post = $post;
-                        $product_query = new WP_Query( $args );
+                        $product_query = new WP_Query( apply_filters( 'dokan_product_listing_query', $args ) );
 
                         if ( $product_query->have_posts() ) {
                             while ($product_query->have_posts()) {
