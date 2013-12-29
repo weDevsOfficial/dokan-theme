@@ -28,6 +28,7 @@ get_header();
                         <tr>
                             <th><?php _e( 'Image', 'dokan' ); ?></th>
                             <th><?php _e( 'Name', 'dokan' ); ?></th>
+                            <th><?php _e( 'Status', 'dokan' ); ?></th>
                             <th><?php _e( 'SKU', 'dokan' ); ?></th>
                             <th><?php _e( 'Stock', 'dokan' ); ?></th>
                             <th><?php _e( 'Price', 'dokan' ); ?></th>
@@ -72,6 +73,9 @@ get_header();
                                             <span class="delete"><a onclick="return confirm('Are you sure?');" href="<?php echo wp_nonce_url( add_query_arg( array( 'action' => 'dokan-delete-product', 'product_id' => $post->ID ), get_permalink( $original_post->ID ) ), 'dokan-delete-product' ); ?>"><?php _e( 'Delete Permanently', 'dokan' ); ?></a> | </span>
                                             <span class="view"><a href="<?php echo get_permalink( $post->ID ); ?>" rel="permalink"><?php _e( 'View', 'dokan' ); ?></a></span>
                                         </div>
+                                    </td>
+                                    <td>
+                                        <?php echo dokan_get_post_status( $post->post_status ); ?>
                                     </td>
                                     <td>
                                         <?php

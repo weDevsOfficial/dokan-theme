@@ -4,7 +4,7 @@
  *
  * @author Asaquzzaman
  */
-error_reporting(E_ALL);
+
 class Dokan_Template_reviews {
 
     private $limit = 15;
@@ -67,8 +67,6 @@ class Dokan_Template_reviews {
      */
     function reviews_view() {
 
-
-
         if ( is_user_logged_in() ) {
 
             // initialize
@@ -101,22 +99,11 @@ class Dokan_Template_reviews {
     function get_count( $post_type ) {
         global $wpdb, $current_user;
 
-        $count = $wpdb->get_results( "SELECT $wpdb->comments.comment_approved, COUNT( * ) AS num_comments
-            FROM $wpdb->comments, $wpdb->posts
-            WHERE $wpdb->posts.post_author='$current_user->ID' AND
-                $wpdb->posts.post_status='publish' AND
-                $wpdb->comments.comment_post_ID=$wpdb->posts.ID AND
-                $wpdb->posts.post_type='$post_type'
-            GROUP BY $wpdb->comments.comment_approved", ARRAY_A );
+        $counts = dokan_count_comments( $post_type, $current_user->ID );
 
-        foreach ($count as $number) {
-            if ( $number['comment_approved'] == '0' )
-                $this->pending = $number['num_comments'];
-            if ( $number['comment_approved'] == 'spam' )
-                $this->spam = $number['num_comments'];
-            if ( $number['comment_approved'] == 'trash' )
-                $this->trash = $number['num_comments'];
-        }
+        $this->pending = $counts->moderated;
+        $this->spam = $counts->spam;
+        $this->trash = $counts->trash;
     }
 
     /**
@@ -150,7 +137,7 @@ class Dokan_Template_reviews {
             <input type="submit" value="<?php _e( 'Submit', 'wpuf-comment' ); ?>" class="btn btn-primary" name="comt_stat_sub">
         </form>
 
-            
+
 
         <script type="text/template" id="wpuf-edit-comment-row">
             <tr class="wpuf-comment-edit-row">
@@ -380,7 +367,7 @@ class Dokan_Template_reviews {
             <td>
             <?php if ( get_option('woocommerce_enable_review_rating') == 'yes' ) : ?>
                 <?php $rating =  intval( get_comment_meta( $comment->comment_ID, 'rating', true ) ); ?>
-            
+
             <div class="dokan-rating">
                 <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="star-rating" title="<?php echo sprintf(__( 'Rated %d out of 5', 'woocommerce' ), $rating) ?>">
                     <span style="width:<?php echo ( intval( get_comment_meta( $comment->comment_ID, 'rating', true ) ) / 5 ) * 100; ?>%"><strong itemprop="ratingValue"><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'woocommerce' ); ?></span>
@@ -409,7 +396,7 @@ class Dokan_Template_reviews {
                 <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="spam" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="delete" class="wpuf-cmt-action"><?php _e( 'Delete Permanently', 'wpuf-comment' ); ?></a></li>
 
             <?php } else if ( $page_status == 'trash' ) { ?>
-                
+
                 <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="trash" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="1" class="wpuf-cmt-action"><?php _e( 'Restore', 'wpuf-comment' ); ?></a></li>
                 <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="trash" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="delete" class="wpuf-cmt-action"><?php _e( 'Delete Permanently', 'wpuf-comment' ); ?></a></li>
 
@@ -462,7 +449,7 @@ class Dokan_Template_reviews {
      * Process bulk action
      */
     function handle_status() {
-        
+
         if ( !isset( $_POST['comt_stat_sub'] ) ) {
             return;
         }

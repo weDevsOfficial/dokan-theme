@@ -20,15 +20,12 @@ wp_enqueue_script( 'dokan-order' );
         <?php while (have_posts()) : the_post(); ?>
 
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <header class="entry-header">
-                    <h1 class="entry-title">
-                        <?php the_title(); ?>
 
-                        <?php if ( isset( $_GET['order_id'] ) ) { ?>
-                            <a href="<?php the_permalink(); ?>" class="btn btn-default btn-sm"><?php _e( '&larr; Orders', 'dokan' ); ?></a>
-                        <?php } ?>
-                    </h1>
-                </header><!-- .entry-header -->
+                <?php if ( isset( $_GET['order_id'] ) ) { ?>
+                    <a href="<?php the_permalink(); ?>" class="btn btn-default btn-sm"><?php _e( '&larr; Orders', 'dokan' ); ?></a>
+                <?php } else {
+                    dokan_order_listing_status_filter();
+                } ?>
 
                 <div class="entry-content">
                     <?php the_content(); ?>

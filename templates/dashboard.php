@@ -10,6 +10,15 @@ get_header();
 
 wp_enqueue_script( 'jquery-chart' );
 wp_enqueue_script( 'jquery-flot' );
+
+$user_id = get_current_user_id();
+$orders_counts = dokan_count_orders( $user_id );
+$post_counts = dokan_count_posts( 'product', $user_id );
+$comment_counts = dokan_count_comments( 'product', $user_id );
+
+$products_url = dokan_get_page_url( 'products' );
+$orders_url = dokan_get_page_url( 'orders' );
+$reviews_url = dokan_get_page_url( 'reviews' );
 ?>
 
 <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'dashboard' ) ); ?>
@@ -47,19 +56,54 @@ wp_enqueue_script( 'jquery-flot' );
                         <div class="dashboard-widget orders">
                             <div class="widget-title"><i class="fa fa-shopping-cart"></i> Orders</div>
 
+                            <?php
+                            $order_data = array(
+                                array( 'value' => $orders_counts->completed, 'color' => '#73a724'),
+                                array( 'value' => $orders_counts->pending, 'color' => '#999'),
+                                array( 'value' => $orders_counts->processing, 'color' => '#21759b'),
+                                array( 'value' => $orders_counts->cancelled, 'color' => '#d54e21'),
+                                array( 'value' => $orders_counts->refunded, 'color' => '#e6db55'),
+                            );
+                            ?>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <ul class="list-unstyled list-count">
-                                        <li><span class="title">Total</span> <span class="count">30</span></li>
-                                        <li><span class="title">Completed</span> <span class="count">20</span></li>
-                                        <li><span class="title">Pending</span> <span class="count">13</span></li>
-                                        <li><span class="title">Processing</span> <span class="count">4</span></li>
-                                        <li><span class="title">Cancelled</span> <span class="count">2</span></li>
+                                        <li>
+                                            <a href="<?php echo $orders_url; ?>">
+                                                <span class="title"><?php _e( 'Total', 'dokan' ); ?></span> <span class="count"><?php echo $orders_counts->total; ?></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'completed' ), $orders_url ); ?>">
+                                                <span class="title"><?php _e( 'Completed', 'dokan' ); ?></span> <span class="count"><?php echo $orders_counts->completed; ?></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'pending' ), $orders_url ); ?>">
+                                                <span class="title"><?php _e( 'Pending', 'dokan' ); ?></span> <span class="count"><?php echo $orders_counts->pending; ?></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'processing' ), $orders_url ); ?>">
+                                                <span class="title"><?php _e( 'Processing', 'dokan' ); ?></span> <span class="count"><?php echo $orders_counts->processing; ?></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'cancelled' ), $orders_url ); ?>">
+                                                <span class="title"><?php _e( 'Cancelled', 'dokan' ); ?></span> <span class="count"><?php echo $orders_counts->cancelled; ?></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'refunded' ), $orders_url ); ?>">
+                                                <span class="title"><?php _e( 'Refunded', 'dokan' ); ?></span> <span class="count"><?php echo $orders_counts->refunded; ?></span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
 
                                 <div class="col-md-6" style="text-align: center;">
-                                    <canvas id="order-stats" width="130" height="130"></canvas>
+                                    <canvas id="order-stats" width="150" height="150"></canvas>
                                 </div>
                             </div>
                         </div> <!-- .orders -->
@@ -68,9 +112,26 @@ wp_enqueue_script( 'jquery-flot' );
                             <div class="widget-title"><i class="fa fa-comments"></i> Reviews</div>
 
                             <ul class="list-unstyled list-count">
-                                <li><span class="title">All</span> <span class="count">30</span></li>
-                                <li><span class="title">Pending</span> <span class="count">20</span></li>
-                                <li><span class="title">Spam</span> <span class="count">3</span></li>
+                                <li>
+                                    <a href="<?php echo $reviews_url; ?>">
+                                        <span class="title"><?php _e( 'All', 'dokan' ); ?></span> <span class="count"><?php echo $comment_counts->total; ?></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo add_query_arg( array( 'comment_status' => 'hold' ), $reviews_url ); ?>">
+                                        <span class="title"><?php _e( 'Pending', 'dokan' ); ?></span> <span class="count"><?php echo $comment_counts->moderated; ?></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo add_query_arg( array( 'comment_status' => 'spam' ), $reviews_url ); ?>">
+                                        <span class="title"><?php _e( 'Spam', 'dokan' ); ?></span> <span class="count"><?php echo $comment_counts->spam; ?></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo add_query_arg( array( 'comment_status' => 'trash' ), $reviews_url ); ?>">
+                                        <span class="title"><?php _e( 'Trash', 'dokan' ); ?></span> <span class="count"><?php echo $comment_counts->trash; ?></span>
+                                    </a>
+                                </li>
                             </ul>
                         </div> <!-- .reviews -->
 
@@ -78,15 +139,15 @@ wp_enqueue_script( 'jquery-flot' );
 
                     <div class="col-md-6">
                         <div class="dashboard-widget sells-graph">
-                            <div class="widget-title">Sales</div>
+                            <div class="widget-title"><i class="fa fa-credit-card"></i> <?php _e( 'Sales', 'dokan' ); ?></div>
 
-                            <div id="sell-stats" style="height: 295px;"></div>
+                            <div id="sell-stats" style="height: 325px;"></div>
                         </div> <!-- .sells-graph -->
 
 
                         <div class="dashboard-widget products">
                             <div class="widget-title">
-                                <i class="icon-briefcase"></i> Products
+                                <i class="icon-briefcase"></i> <?php _e( 'Products', 'dokan' ); ?>
 
                                 <span class="pull-right">
                                     <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-success btn-sm">+ Add new product</a>
@@ -94,9 +155,26 @@ wp_enqueue_script( 'jquery-flot' );
                             </div>
 
                             <ul class="list-unstyled list-count">
-                                <li><span class="title">Total</span> <span class="count">30</span></li>
-                                <li><span class="title">Live</span> <span class="count">20</span></li>
-                                <li><span class="title">Offline</span> <span class="count">3</span></li>
+                                <li>
+                                    <a href="<?php echo $products_url; ?>">
+                                        <span class="title"><?php _e( 'Total', 'dokan' ); ?></span> <span class="count"><?php echo $post_counts->total; ?></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo add_query_arg( array( 'post_status' => 'publish' ), $products_url ); ?>">
+                                        <span class="title"><?php _e( 'Live', 'dokan' ); ?></span> <span class="count"><?php echo $post_counts->publish; ?></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo add_query_arg( array( 'post_status' => 'draft' ), $products_url ); ?>">
+                                        <span class="title"><?php _e( 'Offline', 'dokan' ); ?></span> <span class="count"><?php echo $post_counts->draft; ?></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo add_query_arg( array( 'post_status' => 'pending' ), $products_url ); ?>">
+                                        <span class="title"><?php _e( 'Pending Review', 'dokan' ); ?></span> <span class="count"><?php echo $post_counts->pending; ?></span>
+                                    </a>
+                                </li>
                             </ul>
                         </div> <!-- .products -->
 
@@ -112,49 +190,7 @@ wp_enqueue_script( 'jquery-flot' );
 
 <script type="text/javascript">
     jQuery(function($) {
-        var order_stats = [
-            {
-                value: 30,
-                color:"#F7464A"
-            },
-            {
-                value : 50,
-                color : "#E2EAE9"
-            },
-            {
-                value : 100,
-                color : "#D4CCC5"
-            },
-            {
-                value : 40,
-                color : "#949FB1"
-            },
-            {
-                value : 120,
-                color : "#5cb85c"
-            }
-        ];
-
-        var sell_stats = {
-            labels : ["January","February","March","April","May","June","July"],
-            datasets : [
-                {
-                    fillColor : "rgba(220,220,220,0.5)",
-                    strokeColor : "rgba(220,220,220,1)",
-                    pointColor : "rgba(220,220,220,1)",
-                    pointStrokeColor : "#fff",
-                    data : [65,59,90,81,56,55,40]
-                },
-                {
-                    fillColor : "rgba(151,187,205,0.5)",
-                    strokeColor : "rgba(151,187,205,1)",
-                    pointColor : "rgba(151,187,205,1)",
-                    pointStrokeColor : "#fff",
-                    // data : [28,48,40,19,96,27,100]
-                    data : [[1385856000000,1],[1385942400000,0],[1386028800000,0],[1386115200000,0],[1386201600000,0],[1386288000000,0],[1386374400000,1],[1386460800000,0],[1386547200000,0],[1386633600000,0],[1386720000000,0],[1386806400000,1],[1386892800000,0],[1386979200000,0],[1387065600000,0],[1387152000000,0],[1387238400000,0],[1387324800000,0],[1387411200000,1],[1387497600000,0],[1387584000000,2],[1387670400000,0],[1387756800000,0],[1387843200000,1],[1387929600000,0],[1388016000000,0],[1388102400000,0],[1388188800000,0]]
-                }
-            ]
-        };
+        var order_stats = <?php echo json_encode( $order_data ); ?>;
 
         var params = {
             "currency_symbol":"$",

@@ -316,21 +316,122 @@ function dokan_product_dashboard_errors() {
 function dokan_product_listing_status_filter() {
     $permalink = get_permalink();
     $status_class = isset( $_GET['post_status'] ) ? $_GET['post_status'] : 'all';
-
+    $post_counts = dokan_count_posts( 'product', get_current_user_id() );
     ?>
     <ul class="list-inline col-md-9 post-statuses-filter">
         <li<?php echo $status_class == 'all' ? ' class="active"' : ''; ?>>
-            <a href="<?php echo $permalink; ?>"><?php _e( 'All', 'dokan' ); ?></a>
+            <a href="<?php echo $permalink; ?>"><?php printf( __( 'All (%d)', 'dokan' ), $post_counts->total ); ?></a>
         </li>
         <li<?php echo $status_class == 'publish' ? ' class="active"' : ''; ?>>
-            <a href="<?php echo add_query_arg( array( 'post_status' => 'publish' ), $permalink ); ?>"><?php _e( 'Live', 'dokan' ); ?></a>
+            <a href="<?php echo add_query_arg( array( 'post_status' => 'publish' ), $permalink ); ?>"><?php printf( __( 'Online (%d)', 'dokan' ), $post_counts->publish ); ?></a>
         </li>
         <li<?php echo $status_class == 'pending' ? ' class="active"' : ''; ?>>
-            <a href="<?php echo add_query_arg( array( 'post_status' => 'pending' ), $permalink ); ?>"><?php _e( 'Pending Review', 'dokan' ); ?></a>
+            <a href="<?php echo add_query_arg( array( 'post_status' => 'pending' ), $permalink ); ?>"><?php printf( __( 'Pending Review (%d)', 'dokan' ), $post_counts->pending ); ?></a>
         </li>
         <li<?php echo $status_class == 'draft' ? ' class="active"' : ''; ?>>
-            <a href="<?php echo add_query_arg( array( 'post_status' => 'draft' ), $permalink ); ?>"><?php _e( 'Draft', 'dokan' ); ?></a>
+            <a href="<?php echo add_query_arg( array( 'post_status' => 'draft' ), $permalink ); ?>"><?php printf( __( 'Draft (%d)', 'dokan' ), $post_counts->draft ); ?></a>
         </li>
     </ul> <!-- .post-statuses-filter -->
     <?php
+}
+
+function dokan_order_listing_status_filter() {
+    $orders_url = get_permalink();
+    $status_class = isset( $_GET['order_status'] ) ? $_GET['order_status'] : 'all';
+    $orders_counts = dokan_count_orders( get_current_user_id() );
+    ?>
+
+    <ul class="list-inline order-statuses-filter">
+        <li<?php echo $status_class == 'all' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo $orders_url; ?>">
+                <?php printf( __( 'All (%d)', 'dokan' ), $orders_counts->total ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'completed' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'completed' ), $orders_url ); ?>">
+                <?php printf( __( 'Completed (%d)', 'dokan' ), $orders_counts->completed ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'pending' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'pending' ), $orders_url ); ?>">
+                <?php printf( __( 'Pending (%d)', 'dokan' ), $orders_counts->pending ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'processing' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'processing' ), $orders_url ); ?>">
+                <?php printf( __( 'Processing (%d)', 'dokan' ), $orders_counts->processing ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'canceled' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'cancelled' ), $orders_url ); ?>">
+                <?php printf( __( 'Cancelled (%d)', 'dokan' ), $orders_counts->cancelled ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'refunded' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'refunded' ), $orders_url ); ?>">
+                <?php printf( __( 'Refunded (%d)', 'dokan' ), $orders_counts->refunded ); ?></span>
+            </a>
+        </li>
+    </ul>
+    <?php
+}
+
+function dokan_get_dashboard_nav() {
+    $urls = array(
+        'dashboard' => array(
+            'title' => __( 'Dashboard', 'dokan'),
+            'icon' => '<i class="icon-dashboard"></i>',
+            'url' => dokan_get_page_url( 'dashboard' )
+        ),
+        'product' => array(
+            'title' => __( 'Products', 'dokan'),
+            'icon' => '<i class="icon-briefcase"></i>',
+            'url' => dokan_get_page_url( 'products' )
+        ),
+        'order' => array(
+            'title' => __( 'Orders', 'dokan'),
+            'icon' => '<i class="icon-basket"></i>',
+            'url' => dokan_get_page_url( 'orders' )
+        ),
+        'coupon' => array(
+            'title' => __( 'Coupons', 'dokan'),
+            'icon' => '<i class="icon-gift"></i>',
+            'url' => dokan_get_page_url( 'coupons' )
+        ),
+        'report' => array(
+            'title' => __( 'Reports', 'dokan'),
+            'icon' => '<i class="icon-stats"></i>',
+            'url' => dokan_get_page_url( 'reports' )
+        ),
+        'reviews' => array(
+            'title' => __( 'Reviews', 'dokan'),
+            'icon' => '<i class="icon-bubbles"></i>',
+            'url' => dokan_get_page_url( 'reviews' )
+        ),
+        'withdraw' => array(
+            'title' => __( 'Withdraw', 'dokan'),
+            'icon' => '<i class="icon-upload"></i>',
+            'url' => dokan_get_page_url( 'withdraw' )
+        ),
+        'settings' => array(
+            'title' => __( 'Settings', 'dokan'),
+            'icon' => '<i class="icon-cog"></i>',
+            'url' => dokan_get_page_url( 'settings' )
+        ),
+    );
+
+    return apply_filters( 'dokan_get_dashboard_nav', $urls );
+}
+
+function dokan_dashboard_nav( $active_menu ) {
+    $urls = dokan_get_dashboard_nav();
+    $menu = '<ul class="dokan-dashboard-menu">';
+
+    foreach ($urls as $key => $item) {
+        $class = ( $active_menu == $key ) ? ' class="active"' : '';
+        $menu .= sprintf( '<li%s><a href="%s">%s %s</a></li>', $class, $item['url'], $item['icon'], $item['title'] );
+    }
+    $menu .= '</ul>';
+
+    return $menu;
 }

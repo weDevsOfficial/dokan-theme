@@ -634,6 +634,16 @@ a:hover {
 .page-template-templatesproducts-php ul.post-statuses-filter li.active a {
   color: #999;
 }
+.page-template-templatesproducts-php del .amount {
+  color: #dd5a43;
+}
+.page-template-templatesproducts-php ins {
+  text-decoration: none;
+}
+.page-template-templatesproducts-php ins .amount {
+  color: #69aa46;
+  font-weight: bold;
+}
 .page-template-templatesorders-php td.thumb img {
   padding: 2px;
   margin: 0;
@@ -672,6 +682,21 @@ a:hover {
   width: 40%;
   margin-right: 10px;
   font-size: 13px;
+}
+.page-template-templatesorders-php ul.order-statuses-filter {
+  font-size: 12px;
+  color: #dddddd;
+}
+.page-template-templatesorders-php ul.order-statuses-filter li {
+  line-height: 13px;
+  padding: 0 5px;
+  border-right: 1px solid #dddddd;
+}
+.page-template-templatesorders-php ul.order-statuses-filter li:last-child {
+  border-right: none;
+}
+.page-template-templatesorders-php ul.order-statuses-filter li.active a {
+  color: #999;
 }
 .page-template-templatesorders-php ul.order_notes {
   font-size: 13px;
@@ -766,6 +791,9 @@ a:hover {
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
   margin-bottom: 15px;
+}
+.page-template-templatesdashboard-php .dashboard-widget a {
+  font-size: 13px;
 }
 .page-template-templatesdashboard-php .dashboard-widget .widget-title {
   font-weight: bold;
