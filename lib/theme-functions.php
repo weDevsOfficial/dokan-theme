@@ -10,16 +10,25 @@
 function dokan_get_seller_orders( $seller_id ) {
     global $wpdb;
 
-    $sql = "SELECT oi.order_id, p.post_date FROM {$wpdb->prefix}woocommerce_order_items oi
-            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta oim ON oim.order_item_id = oi.order_item_id
-            LEFT JOIN $wpdb->posts p ON oim.meta_value = p.ID
-            WHERE
-                oim.meta_key = '_product_id' AND
-                p.post_author = %d AND
-                p.post_status = 'publish'
-            GROUP BY oi.order_id";
+    $cache_key = 'dokan-seller-orders-' . $seller_id;
 
-    return $wpdb->get_results( $wpdb->prepare( $sql, $seller_id ) );
+    $orders = wp_cache_get( $cache_key, 'dokan' );
+
+    if ( $orders === false ) {
+        $sql = "SELECT oi.order_id, p.post_date FROM {$wpdb->prefix}woocommerce_order_items oi
+                LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta oim ON oim.order_item_id = oi.order_item_id
+                LEFT JOIN $wpdb->posts p ON oim.meta_value = p.ID
+                WHERE
+                    oim.meta_key = '_product_id' AND
+                    p.post_author = %d AND
+                    p.post_status = 'publish'
+                GROUP BY oi.order_id";
+
+        $orders = $wpdb->get_results( $wpdb->prepare( $sql, $seller_id ) );
+        wp_cache_set( $cache_key, $orders, 'dokan' );
+    }
+
+    return $orders;
 }
 
 function dokan_get_seller_order_ids( $seller_id ) {
@@ -122,7 +131,7 @@ function dokan_count_posts( $post_type, $user_id ) {
     global $wpdb;
 
     $cache_key = 'dokan-count-' . $post_type . '-' . $user_id;
-    $counts = wp_cache_get( $cache_key, 'counts' );
+    $counts = wp_cache_get( $cache_key, 'dokan' );
 
     if ( false === $counts ) {
         $query = "SELECT post_status, COUNT( * ) AS num_posts FROM {$wpdb->posts} WHERE post_type = %s AND post_author = %d GROUP BY post_status";
@@ -137,7 +146,7 @@ function dokan_count_posts( $post_type, $user_id ) {
 
         $counts['total'] = $total;
         $counts = (object) $counts;
-        wp_cache_set( $cache_key, $counts, 'counts' );
+        wp_cache_set( $cache_key, $counts, 'dokan' );
     }
 
     return $counts;
@@ -147,7 +156,7 @@ function dokan_count_comments( $post_type, $user_id ) {
     global $wpdb, $current_user;
 
     $cache_key = 'dokan-count-comments-' . $post_type . '-' . $user_id;
-    $counts = wp_cache_get( $cache_key, 'counts' );
+    $counts = wp_cache_get( $cache_key, 'dokan' );
 
     if ( $counts === false ) {
         $query = "SELECT c.comment_approved, COUNT( * ) AS num_comments
@@ -172,7 +181,7 @@ function dokan_count_comments( $post_type, $user_id ) {
         $counts['total'] = $total;
 
         $counts = (object) $counts;
-        wp_cache_set( $cache_key, $counts, 'counts' );
+        wp_cache_set( $cache_key, $counts, 'dokan' );
     }
 
     return $counts;
@@ -182,7 +191,7 @@ function dokan_count_orders( $user_id ) {
     global $wpdb;
 
     $cache_key = 'dokan-count-orders-' . $user_id;
-    $counts = wp_cache_get( $cache_key, 'counts' );
+    $counts = wp_cache_get( $cache_key, 'dokan' );
 
     if ( $counts === false ) {
         $counts = array('pending' => 0, 'completed' => 0, 'on-hold' => 0, 'processing' => 0, 'refunded' => 0, 'cancelled' => 0, 'total' => 0);
@@ -212,7 +221,7 @@ function dokan_count_orders( $user_id ) {
         }
 
         $counts = (object) $counts;
-        wp_cache_set( $cache_key, $counts, 'counts' );
+        wp_cache_set( $cache_key, $counts, 'dokan' );
     }
 
     return $counts;

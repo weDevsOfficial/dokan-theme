@@ -39,15 +39,15 @@ $reviews_url = dokan_get_page_url( 'reviews' );
                         <div class="dashboard-widget big-counter">
                             <ul class="list-inline">
                                 <li>
-                                    <div class="title">Pageview</div>
+                                    <div class="title"><?php _e( 'Pageview', 'dokan' ); ?></div>
                                     <div class="count">1000</div>
                                 </li>
                                 <li>
-                                    <div class="title">Sales</div>
-                                    <div class="count">200</div>
+                                    <div class="title"><?php _e( 'Sales', 'dokan' ); ?></div>
+                                    <div class="count"><?php echo $orders_counts->completed; ?></div>
                                 </li>
                                 <li>
-                                    <div class="title">Earned</div>
+                                    <div class="title"><?php _e( 'Earned', 'dokan' ); ?></div>
                                     <div class="count">$500</div>
                                 </li>
                             </ul>
