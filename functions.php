@@ -479,7 +479,11 @@ function dokan_product_seller_tab( $val ) {
 }
 
 function dokan_edit_product_url( $product_id ) {
-    return trailingslashit( get_permalink( $product_id ) ). 'edit/';
+    if ( get_post_field( 'post_status', $product_id ) == 'publish' ) {
+        return trailingslashit( get_permalink( $product_id ) ). 'edit/';
+    }
+
+    return add_query_arg( array( 'product_id' => $product_id, 'action' => 'edit' ), dokan_get_page_url('products') );
 }
 
 /**
