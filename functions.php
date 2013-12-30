@@ -1,18 +1,11 @@
 <?php
-//mishu
-error_reporting(E_ALL);
-
-function debug($val) {
-    echo '<pre>'; print_r($val); echo '</pre>';
-}
-
-//close mishu
 /**
  * Dokan functions and definitions
  *
  * @package Dokan
  * @since Dokan 1.0
  */
+
 /**
  * Set the content width based on the theme's design and stylesheet.
  *
@@ -60,62 +53,55 @@ class WeDevs_Dokan {
         //includes file
         $this->includes();
 
-        //bind actions
-        add_action( 'after_setup_theme', array($this, 'setup') );
-        add_action( 'widgets_init', array($this, 'widgets_init') );
-        add_action( 'wp_enqueue_scripts', array($this, 'scripts') );
-        add_filter( 'posts_where', array($this, 'hide_others_uploads') );
+        // init actions and filter
+        $this->init_filters();
+        $this->init_actions();
 
-        add_action( 'admin_init', array($this, 'install_theme' ) );
-
-        //for reviews ajax request
-        if ( defined('DOING_AJAX') && DOING_AJAX ) {
-            $ajax = Dokan_Ajax::init();
-            $ajax->init_ajax();
-        }
+        // initialize classes
+        $this->init_classes();
 
         //initalize user roles
         $this->user_roles();
+
+        //for reviews ajax request
+        $this->init_ajax();
+    }
+
+    function init_filters() {
+        add_filter( 'posts_where', array($this, 'hide_others_uploads') );
+    }
+
+    function init_actions() {
+        add_action( 'after_setup_theme', array($this, 'setup') );
+        add_action( 'widgets_init', array($this, 'widgets_init') );
+        add_action( 'wp_enqueue_scripts', array($this, 'scripts') );
+        add_action( 'admin_init', array($this, 'install_theme' ) );
+    }
+
+    function init_classes() {
+        new Dokan_Pageviews();
+    }
+
+    function init_ajax() {
+        $doing_ajax = defined('DOING_AJAX') && DOING_AJAX;
+
+        if ( $doing_ajax ) {
+            Dokan_Ajax::init()->init_ajax();
+            new Dokan_Pageviews();
+        }
     }
 
     function includes() {
         $lib_dir = __DIR__ . '/lib/';
 
-        require_once dirname( __FILE__ ) . '/lib/bootstrap-walker.php';
-        require_once dirname( __FILE__ ) . '/lib/theme-functions.php';
-        require_once dirname( __FILE__ ) . '/lib/woo-template.php';
-        require_once dirname( __FILE__ ) . '/lib/template-tags.php';
+        require_once $lib_dir . 'theme-functions.php';
 
         if ( is_admin() ) {
-            require_once dirname( __FILE__ ) . '/lib/admin.php';
-        }
-
-
-        $files = array(
-            'woo-template.php', //Custom template fixing functions for WooCommerce
-            'template-tags.php', //Custom template tags for this theme.
-            'extras.php', // Custom functions that act independently of the theme templates
-            'functions.php', //Helper functions
-            //'featured-image.php', //Featured Image uploader functions
-
-            /** roots files ***/
-            'roots/utils.php',           // Utility functions
-            'roots/wrapper.php',         // Theme wrapper class
-            'roots/sidebar.php',         // Sidebar class
-            'roots/config.php',          // Configuration
-            'roots/titles.php',          // Page titles
-            'roots/cleanup.php',         // Cleanup
-            'roots/nav.php',             // Custom nav modifications
-            'roots/gallery.php',         // Custom [gallery] modifications
-            'roots/comments.php',        // Custom comments modifications
-            'roots/rewrites.php',        // URL rewriting for assets
-            'roots/relative-urls.php',   // Root relative URLs
-            'roots/widgets.php',         // Sidebars and widgets
-            'roots/custom.php',          // Custom functions
-        );
-
-        foreach ($files as $file) {
-            //require_once $lib_dir . $file;
+            require_once $lib_dir . 'admin.php';
+        } else {
+            require_once $lib_dir . 'bootstrap-walker.php';
+            require_once $lib_dir . 'woo-template.php';
+            require_once $lib_dir . 'template-tags.php';
         }
     }
 

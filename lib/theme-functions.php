@@ -226,3 +226,54 @@ function dokan_count_orders( $user_id ) {
 
     return $counts;
 }
+
+function dokan_author_pageviews( $seller_id ) {
+    global $wpdb;
+
+    $cache_key = 'dokan-pageview-' . $seller_id;
+    $pageview = wp_cache_get( $cache_key, 'dokan' );
+
+    if ( $pageview === false ) {
+        $sql = "SELECT SUM(meta_value) as pageview
+            FROM {$wpdb->postmeta} AS meta
+            LEFT JOIN {$wpdb->posts} AS p ON p.ID = meta.post_id
+            WHERE meta.meta_key = 'pageview' AND p.post_author = %d AND p.post_status IN ('publish', 'pending', 'draft')";
+
+        $count = $wpdb->get_row( $wpdb->prepare( $sql, $seller_id ) );
+        $pageview = $count->pageview;
+
+        wp_cache_set( $cache_key, $pageview, 'dokan' );
+    }
+
+    return $pageview;
+}
+
+
+function dokan_author_total_earning( $seller_id ) {
+    global $wpdb;
+
+    $cache_key = 'dokan-earning-' . $seller_id;
+    $earnings = wp_cache_get( $cache_key, 'dokan' );
+
+    if ( $earnings === false ) {
+        $order_ids = dokan_get_seller_order_ids( $seller_id );
+        $order_ids = count( $order_ids ) ? implode( ', ', $order_ids ) : 0;
+
+        $sql = "SELECT SUM(oim.meta_value) as earnings
+                FROM {$wpdb->prefix}woocommerce_order_items AS oi
+                LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS oim ON oim.order_item_id = oi.order_item_id
+                LEFT JOIN {$wpdb->term_relationships} rel ON oi.order_id = rel.object_id
+                LEFT JOIN {$wpdb->term_taxonomy} tax ON rel.term_taxonomy_id = tax.term_taxonomy_id
+                LEFT JOIN {$wpdb->terms} terms ON tax.term_id = terms.term_id
+                WHERE oi.order_id IN ($order_ids) AND oim.meta_key = '_line_total' AND terms.slug = 'completed'
+                GROUP BY oi.order_id";
+
+        $count = $wpdb->get_row( $wpdb->prepare( $sql, $seller_id ) );
+        $earnings = $count->earnings;
+
+        wp_cache_set( $cache_key, $earnings, 'dokan' );
+    }
+
+    return $earnings;
+}
+
