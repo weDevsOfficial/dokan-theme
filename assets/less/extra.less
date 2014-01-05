@@ -70,3 +70,23 @@
         color: #468847;
     }
 }
+
+/* WooCommerce override
+-----------------------------------*/
+
+.woocommerce,
+.woocommerce-page {
+    ul#shipping_method {
+        text-align: left;
+
+        li {
+            text-indent: 0 !important;
+        }
+    }
+
+    .woocommerce-message:before,
+    .woocommerce-error:before,
+    .woocommerce-info:before {
+        height: 2.5em;
+    }
+}

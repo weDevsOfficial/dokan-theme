@@ -22,7 +22,7 @@ get_header();
 
         <h2 class="bordered">
             <span>Latest Products</span>
-            <small> - <a href="<?php echo sbw_woo_shop_url(); ?>" class="label label-info">View All &rarr;</a></small>
+            <small> - <a href="<?php //echo sbw_woo_shop_url(); ?>" class="label label-info">View All &rarr;</a></small>
             <div class="border"></div>
         </h2>
 

@@ -46,85 +46,80 @@ function dokan_get_reports_charts() {
     return apply_filters( 'dokan_reports_charts', $charts );
 }
 
-/**
- * Output JavaScript for highlighting weekends on charts.
- *
- * @access public
- * @return void
- */
-function woocommerce_weekend_area_js() {
-    ?>
-    function weekendAreas(axes) {
-        var markings = [];
-        var d = new Date(axes.xaxis.min);
-        // go to the first Saturday
-        d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7))
-        d.setUTCSeconds(0);
-        d.setUTCMinutes(0);
-        d.setUTCHours(0);
-        var i = d.getTime();
-        do {
-            markings.push({ xaxis: { from: i, to: i + 2 * 24 * 60 * 60 * 1000 } });
-            i += 7 * 24 * 60 * 60 * 1000;
-        } while (i < axes.xaxis.max);
+function dokan_sales_overview_chart_data() {
+    global $start_date, $end_date, $woocommerce, $wpdb, $wp_locale, $current_user;
 
-        return markings;
+    $start_date = strtotime( date('Ymd', strtotime( date('Ym', current_time('timestamp') ) . '01' ) ) );
+    $end_date = strtotime( date('Ymd', current_time( 'timestamp' ) ) );
+
+    // Blank date ranges to begin
+    $order_counts = $order_amounts = array();
+
+    $count = 0;
+
+    $days = ( $end_date - $start_date ) / ( 60 * 60 * 24 );
+
+    if ( $days == 0 )
+        $days = 1;
+
+    while ( $count < $days ) {
+        $time = strtotime( date( 'Ymd', strtotime( '+ ' . $count . ' DAY', $start_date ) ) ) . '000';
+
+        $order_counts[ $time ] = $order_amounts[ $time ] = 0;
+
+        $count++;
     }
-    <?php
-}
 
-/**
- * Output JavaScript for chart tooltips.
- *
- * @access public
- * @return void
- */
-function woocommerce_tooltip_js() {
-    ?>
-    function showTooltip(x, y, contents) {
-        jQuery('<div id="tooltip">' + contents + '</div>').css( {
-            position: 'absolute',
-            display: 'none',
-            top: y + 5,
-            left: x + 5,
-            padding: '5px 10px',
-            border: '3px solid #3da5d5',
-            background: '#288ab7',
-            color: '#ffffff'
-        }).appendTo("body").fadeIn(200);
+    $user_orders = dokan_get_seller_order_ids( $current_user->ID );
+    $user_orders_in = count( $user_orders ) ? implode( ', ', $user_orders ) : 0;
+
+    // Get order ids and dates in range
+    $orders = apply_filters('dokan_reports_sales_overview_orders', $wpdb->get_results( "
+        SELECT posts.ID, posts.post_date FROM {$wpdb->posts} AS posts
+
+        LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID = rel.object_ID
+        LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
+        LEFT JOIN {$wpdb->terms} AS term USING( term_id )
+
+        WHERE   posts.post_type     = 'shop_order'
+        AND     posts.post_status   = 'publish'
+        AND     tax.taxonomy        = 'shop_order_status'
+        AND     term.slug           IN ('" . implode( "','", apply_filters( 'dokan_reports_order_statuses', array( 'completed', 'processing' ) ) ) . "')
+        AND     post_date > '" . date('Y-m-d', $start_date ) . "'
+        AND     post_date < '" . date('Y-m-d', strtotime('+1 day', $end_date ) ) . "'
+        AND     posts.ID IN( {$user_orders_in} )
+        ORDER BY post_date ASC
+    " ) );
+
+    if ( $orders ) {
+        foreach ( $orders as $order ) {
+
+            $order_total = get_post_meta( $order->ID, '_order_total', true );
+            $time = strtotime( date( 'Ymd', strtotime( $order->post_date ) ) ) . '000';
+
+            if ( isset( $order_counts[ $time ] ) )
+                $order_counts[ $time ]++;
+            else
+                $order_counts[ $time ] = 1;
+
+            if ( isset( $order_amounts[ $time ] ) )
+                $order_amounts[ $time ] = $order_amounts[ $time ] + $order_total;
+            else
+                $order_amounts[ $time ] = floatval( $order_total );
+        }
     }
-    var previousPoint = null;
-    jQuery("#placeholder").bind("plothover", function (event, pos, item) {
-        if (item) {
-            if (previousPoint != item.dataIndex) {
-                previousPoint = item.dataIndex;
 
-                jQuery("#tooltip").remove();
+    $order_counts_array = $order_amounts_array = array();
 
-                if (item.series.label=="<?php echo esc_js( __( 'Sales amount', 'woocommerce' ) ) ?>") {
+    foreach ( $order_counts as $key => $count )
+        $order_counts_array[] = array( esc_js( $key ), esc_js( $count ) );
 
-                    var y = item.datapoint[1].toFixed(2);
-                    showTooltip(item.pageX, item.pageY, item.series.label + " - " + "<?php echo get_woocommerce_currency_symbol(); ?>" + y);
+    foreach ( $order_amounts as $key => $amount )
+        $order_amounts_array[] = array( esc_js( $key ), esc_js( $amount ) );
 
-                } else if (item.series.label=="<?php echo esc_js( __( 'Number of sales', 'woocommerce' ) ) ?>") {
+    $order_data = array( 'order_counts' => $order_counts_array, 'order_amounts' => $order_amounts_array );
 
-                    var y = item.datapoint[1];
-                    showTooltip(item.pageX, item.pageY, item.series.label + " - " + y);
-
-                } else {
-
-                    var y = item.datapoint[1];
-                    showTooltip(item.pageX, item.pageY, y);
-
-                }
-            }
-        }
-        else {
-            jQuery("#tooltip").remove();
-            previousPoint = null;
-        }
-    });
-    <?php
+    return json_encode( $order_data );
 }
 
 function dokan_sales_overview() {
@@ -132,7 +127,7 @@ function dokan_sales_overview() {
 
     $total_sales = $total_orders = $order_items = $discount_total = $shipping_total = 0;
     $user_orders = dokan_get_seller_order_ids( $current_user->ID );
-    $user_orders_in = implode( ',', $user_orders );
+    $user_orders_in = count( $user_orders ) ? implode( ', ', $user_orders ) : 0;
 
     $order_totals = apply_filters( 'woocommerce_reports_sales_overview_order_totals', $wpdb->get_row( "
         SELECT SUM(meta.meta_value) AS total_sales, COUNT(posts.ID) AS total_orders FROM {$wpdb->posts} AS posts
@@ -252,74 +247,7 @@ function dokan_sales_overview() {
     </div>
     <?php
 
-    $start_date = strtotime( date('Ymd', strtotime( date('Ym', current_time('timestamp') ) . '01' ) ) );
-    $end_date = strtotime( date('Ymd', current_time( 'timestamp' ) ) );
-
-    // Blank date ranges to begin
-    $order_counts = $order_amounts = array();
-
-    $count = 0;
-
-    $days = ( $end_date - $start_date ) / ( 60 * 60 * 24 );
-
-    if ( $days == 0 )
-        $days = 1;
-
-    while ( $count < $days ) {
-        $time = strtotime( date( 'Ymd', strtotime( '+ ' . $count . ' DAY', $start_date ) ) ) . '000';
-
-        $order_counts[ $time ] = $order_amounts[ $time ] = 0;
-
-        $count++;
-    }
-
-    // Get order ids and dates in range
-    $orders = apply_filters('dokan_reports_sales_overview_orders', $wpdb->get_results( "
-        SELECT posts.ID, posts.post_date FROM {$wpdb->posts} AS posts
-
-        LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID = rel.object_ID
-        LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
-        LEFT JOIN {$wpdb->terms} AS term USING( term_id )
-
-        WHERE   posts.post_type     = 'shop_order'
-        AND     posts.post_status   = 'publish'
-        AND     tax.taxonomy        = 'shop_order_status'
-        AND     term.slug           IN ('" . implode( "','", apply_filters( 'dokan_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
-        AND     post_date > '" . date('Y-m-d', $start_date ) . "'
-        AND     post_date < '" . date('Y-m-d', strtotime('+1 day', $end_date ) ) . "'
-        AND     posts.ID IN( {$user_orders_in} )
-        ORDER BY post_date ASC
-    " ) );
-
-    if ( $orders ) {
-        foreach ( $orders as $order ) {
-
-            $order_total = get_post_meta( $order->ID, '_order_total', true );
-            $time = strtotime( date( 'Ymd', strtotime( $order->post_date ) ) ) . '000';
-
-            if ( isset( $order_counts[ $time ] ) )
-                $order_counts[ $time ]++;
-            else
-                $order_counts[ $time ] = 1;
-
-            if ( isset( $order_amounts[ $time ] ) )
-                $order_amounts[ $time ] = $order_amounts[ $time ] + $order_total;
-            else
-                $order_amounts[ $time ] = floatval( $order_total );
-        }
-    }
-
-    $order_counts_array = $order_amounts_array = array();
-
-    foreach ( $order_counts as $key => $count )
-        $order_counts_array[] = array( esc_js( $key ), esc_js( $count ) );
-
-    foreach ( $order_amounts as $key => $amount )
-        $order_amounts_array[] = array( esc_js( $key ), esc_js( $amount ) );
-
-    $order_data = array( 'order_counts' => $order_counts_array, 'order_amounts' => $order_amounts_array );
-
-    $chart_data = json_encode( $order_data );
+    $chart_data = dokan_sales_overview_chart_data();
     ?>
     <script type="text/javascript">
         jQuery(function(){
@@ -386,7 +314,7 @@ function dokan_daily_sales() {
     $start_date = isset( $_POST['start_date'] ) ? $_POST['start_date'] : '';
     $end_date   = isset( $_POST['end_date'] ) ? $_POST['end_date'] : '';
     $user_orders = dokan_get_seller_order_ids( $current_user->ID );
-    $user_orders_in = implode( ',', $user_orders );
+    $user_orders_in = count( $user_orders ) ? implode( ', ', $user_orders ) : 0;
 
     if ( ! $start_date)
         $start_date = date( 'Ymd', strtotime( date('Ym', current_time( 'timestamp' ) ) . '01' ) );
@@ -610,7 +538,7 @@ function dokan_monthly_sales() {
     $total_sales = $total_orders = $order_items = 0;
     $order_counts = $order_amounts = array();
     $user_orders = dokan_get_seller_order_ids( $current_user->ID );
-    $user_orders_in = implode( ',', $user_orders );
+    $user_orders_in = count( $user_orders ) ? implode( ', ', $user_orders ) : 0;
 
     for ( $count = 0; $count < 12; $count++ ) {
         $time = strtotime( date('Ym', strtotime( '+ ' . $count . ' MONTH', $start_date ) ) . '01' ) . '000';
@@ -795,7 +723,7 @@ function dokan_top_sellers() {
     $end_date = strtotime( $end_date );
 
     $user_orders = dokan_get_seller_order_ids( $current_user->ID );
-    $user_orders_in = implode( ',', $user_orders );
+    $user_orders_in = count( $user_orders ) ? implode( ', ', $user_orders ) : 0;
 
     // Get order ids and dates in range
     $order_items = apply_filters( 'woocommerce_reports_top_sellers_order_items', $wpdb->get_results( "
@@ -905,7 +833,7 @@ function dokan_top_earners() {
     $end_date = strtotime( $end_date );
 
     $user_orders = dokan_get_seller_order_ids( $current_user->ID );
-    $user_orders_in = implode( ',', $user_orders );
+    $user_orders_in = count( $user_orders ) ? implode( ', ', $user_orders ) : 0;
 
     // Get order ids and dates in range
     $order_items = apply_filters( 'woocommerce_reports_top_earners_order_items', $wpdb->get_results( "

@@ -821,7 +821,7 @@ a:hover {
   margin-bottom: 25px;
 }
 .page-template-templatesdashboard-php .dashboard-widget.big-counter .count {
-  font-size: 40px;
+  font-size: 32px;
 }
 .page-template-templatesdashboard-php .dashboard-widget.products .pull-right a {
   -webkit-border-radius: 0;
@@ -1507,6 +1507,24 @@ a:hover {
 }
 .alert-danger strong {
   color: #468847;
+}
+/* WooCommerce override
+-----------------------------------*/
+.woocommerce ul#shipping_method,
+.woocommerce-page ul#shipping_method {
+  text-align: left;
+}
+.woocommerce ul#shipping_method li,
+.woocommerce-page ul#shipping_method li {
+  text-indent: 0 !important;
+}
+.woocommerce .woocommerce-message:before,
+.woocommerce-page .woocommerce-message:before,
+.woocommerce .woocommerce-error:before,
+.woocommerce-page .woocommerce-error:before,
+.woocommerce .woocommerce-info:before,
+.woocommerce-page .woocommerce-info:before {
+  height: 2.5em;
 }
 .dokan-hide {
   display: none;

@@ -265,8 +265,7 @@ function dokan_author_total_earning( $seller_id ) {
                 LEFT JOIN {$wpdb->term_relationships} rel ON oi.order_id = rel.object_id
                 LEFT JOIN {$wpdb->term_taxonomy} tax ON rel.term_taxonomy_id = tax.term_taxonomy_id
                 LEFT JOIN {$wpdb->terms} terms ON tax.term_id = terms.term_id
-                WHERE oi.order_id IN ($order_ids) AND oim.meta_key = '_line_total' AND terms.slug = 'completed'
-                GROUP BY oi.order_id";
+                WHERE oi.order_id IN ($order_ids) AND oim.meta_key = '_line_total' AND terms.slug IN ('completed', 'processing')";
 
         $count = $wpdb->get_row( $wpdb->prepare( $sql, $seller_id ) );
         $earnings = $count->earnings;
@@ -277,3 +276,140 @@ function dokan_author_total_earning( $seller_id ) {
     return $earnings;
 }
 
+function dokan_generate_sync_table() {
+    global $wpdb;
+
+    $sql = "SELECT oi.order_id, p.ID as product_id, p.post_title, p.post_author as seller_id,
+                oim2.meta_value as order_total, terms.name as order_status
+            FROM {$wpdb->prefix}woocommerce_order_items oi
+            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta oim ON oim.order_item_id = oi.order_item_id
+            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta oim2 ON oim2.order_item_id = oi.order_item_id
+            LEFT JOIN $wpdb->posts p ON oim.meta_value = p.ID
+            LEFT JOIN {$wpdb->term_relationships} rel ON oi.order_id = rel.object_id
+            LEFT JOIN {$wpdb->term_taxonomy} tax ON rel.term_taxonomy_id = tax.term_taxonomy_id
+            LEFT JOIN {$wpdb->terms} terms ON tax.term_id = terms.term_id
+            WHERE
+                oim.meta_key = '_product_id' AND
+                oim2.meta_key = '_line_total'
+            GROUP BY oi.order_id";
+
+    $orders = $wpdb->get_results( $sql );
+    $table_name = $wpdb->prefix . 'dokan_orders';
+    $percentage = dokan_get_seller_percentage();
+
+    $wpdb->query( 'TRUNCATE TABLE ' . $table_name );
+
+    if ( $orders ) {
+        foreach ($orders as $order) {
+            $wpdb->insert(
+                $table_name,
+                array(
+                    'order_id' => $order->order_id,
+                    'seller_id' => $order->seller_id,
+                    'order_total' => $order->order_total,
+                    'net_amount' => ($order->order_total * $percentage)/100,
+                    'order_status' => $order->order_status,
+                ),
+                array(
+                    '%d',
+                    '%d',
+                    '%f',
+                    '%f',
+                    '%s',
+                )
+            );
+        } // foreach
+    } // if
+}
+
+function dokan_create_sync_table() {
+    global $wpdb;
+
+    $sql = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}dokan_orders` (
+      `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+      `order_id` bigint(20) DEFAULT NULL,
+      `seller_id` bigint(20) DEFAULT NULL,
+      `order_total` float(11,2) DEFAULT NULL,
+      `net_amount` float(11,2) DEFAULT NULL,
+      `order_status` varchar(30) DEFAULT NULL,
+      `status` tinyint(1) DEFAULT '1',
+      PRIMARY KEY (`id`),
+      KEY `order_id` (`order_id`),
+      KEY `seller_id` (`seller_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
+    $wpdb->query( $sql );
+}
+
+function dokan_on_order_status_change( $order_id, $old_status, $new_status ) {
+    global $wpdb;
+
+    // insert on dokan sync table
+    $wpdb->update( $wpdb->prefix . 'dokan_orders',
+        array( 'order_status' => $new_status ),
+        array( 'order_id' => $order_id ),
+        array( '%s' ),
+        array( '%d' )
+    );
+
+    // if any child orders found, change the orders as well
+    $sub_orders = get_children( array( 'post_parent' => $order_id, 'post_type' => 'shop_order' ) );
+    if ( $sub_orders ) {
+        foreach ($sub_orders as $order_post) {
+            $order = new WC_Order( $order_post );
+            $order->update_status( $new_status );
+        }
+    }
+}
+
+add_action( 'woocommerce_order_status_changed', 'dokan_on_order_status_change', 10, 3 );
+
+function dokan_insert_order( $order_id ) {
+    global $wpdb;
+
+    $order = new WC_Order( $order_id );
+    $percentage = dokan_get_seller_percentage();
+    $order_total = $order->get_total();
+
+    $wpdb->insert( $wpdb->prefix . 'dokan_orders',
+        array(
+            'order_id' => $order_id,
+            'seller_id' => dokan_get_seller_id_by_order( $order_id ),
+            'order_total' => $order_total,
+            'net_amount' => ($order_total * $percentage)/100,
+            'order_status' => $order->status,
+        ),
+        array(
+            '%d',
+            '%d',
+            '%f',
+            '%f',
+            '%s',
+        )
+    );
+}
+
+add_action( 'woocommerce_checkout_update_order_meta', 'dokan_insert_order' );
+add_action( 'dokan_checkout_update_order_meta', 'dokan_insert_order' );
+
+function dokan_get_seller_percentage() {
+    return 90;
+}
+
+function dokan_get_seller_id_by_order( $order_id ) {
+    global $wpdb;
+
+    $sql = "SELECT p.post_author AS seller_id
+            FROM wp_woocommerce_order_items oi
+            LEFT JOIN wp_woocommerce_order_itemmeta oim ON oim.order_item_id = oi.order_item_id
+            LEFT JOIN wp_posts p ON oim.meta_value = p.ID
+            WHERE oim.meta_key = '_product_id' AND oi.order_id = %d GROUP BY p.post_author";
+
+    $sellers = $wpdb->get_results( $wpdb->prepare( $sql, $order_id ) );
+
+    if ( count( $sellers ) == 1 ) {
+        return (int) reset( $sellers )->seller_id;
+    }
+
+    return 0;
+}

@@ -33,6 +33,7 @@ get_header();
                             <th><?php _e( 'Stock', 'dokan' ); ?></th>
                             <th><?php _e( 'Price', 'dokan' ); ?></th>
                             <th><?php _e( 'Type', 'dokan' ); ?></th>
+                            <th><?php _e( 'Views', 'dokan' ); ?></th>
                             <th><?php _e( 'Date', 'dokan' ); ?></th>
                         </tr>
                     </thead>
@@ -130,6 +131,9 @@ get_header();
                                             echo '<span class="product-type tips ' . $product->product_type . '">' . ucwords( $product->product_type ) . '</span>';
                                         }
                                         ?>
+                                    </td>
+                                    <td>
+                                        <?php echo (int) get_post_meta( $post->ID, 'pageview', true ); ?>
                                     </td>
                                     <td>
                                         <?php

@@ -32,6 +32,8 @@ class Dokan_Ajax {
         add_action( 'wp_ajax_dokan-mark-order-processing', array( $this, 'process_order' ) );
         add_action( 'wp_ajax_dokan_grant_access_to_download', array( $this, 'grant_access_to_download' ) );
 
+        add_action( 'wp_ajax_dokan_change_status', array( $this, 'change_order_status' ) );
+
     }
 
     function complete_order() {
@@ -188,6 +190,21 @@ class Dokan_Ajax {
         }
 
         die();
+    }
+
+    function change_order_status() {
+
+        check_ajax_referer( 'dokan_change_status' );
+
+        $order_id = intval( $_POST['order_id'] );
+        $order_status = $_POST['order_status'];
+
+        $order = new WC_Order( $order_id );
+        $order->update_status( $order_status );
+
+        $status_class = dokan_get_order_status_class( $order_status );
+        echo '<label class="label label-' . $status_class . '">' . $order_status . '</label>';
+        exit;
     }
 
 }

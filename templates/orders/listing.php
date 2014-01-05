@@ -8,13 +8,12 @@ if ( $user_orders ) {
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Order</th>
-                <th>Order Total</th>
-                <th>Status</th>
-                <th>Customer</th>
-
-                <th>Date</th>
-                <th>Action</th>
+                <th><?php _e( 'Order', 'dokan' ); ?></th>
+                <th><?php _e( 'Order Total', 'dokan' ); ?></th>
+                <th><?php _e( 'Status', 'dokan' ); ?></th>
+                <th><?php _e( 'Customer', 'dokan' ); ?></th>
+                <th><?php _e( 'Date', 'dokan' ); ?></th>
+                <th><?php _e( 'Action', 'dokan' ); ?></th>
             </tr>
         </thead>
         <tbody>

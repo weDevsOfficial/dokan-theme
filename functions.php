@@ -152,6 +152,7 @@ class WeDevs_Dokan {
         ) );
 
         add_theme_support( 'woocommerce' );
+        add_post_type_support( 'product', 'author' );
 
         /**
          * Add support for the Aside Post Formats
@@ -1230,18 +1231,295 @@ function dokan_get_order_status_class( $status ) {
 }
 
 
-function dokan_change_order_status() {
+// add_action( 'woocommerce_checkout_process', function() {
+//     global $wpdb, $woocommerce, $current_user;
 
-    check_ajax_referer( 'dokan_change_status' );
+//     var_dump( $woocommerce->cart );
+//     foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
+//         // var_dump( $values );
+//     }
+//     die();
+// });
 
-    $order_id = intval( $_POST['order_id'] );
-    $order_status = $_POST['order_status'];
+add_filter( 'woocommerce_get_item_data', function($item_data, $cart_item) {
+    $seller_info = get_userdata( $cart_item['data']->post->post_author );
+    $item_data[] = array(
+        'name' => __( 'Seller', 'dokan' ),
+        'value' => $seller_info->display_name
+    );
 
-    wp_set_object_terms( $order_id, $order_status, 'shop_order_status' );
-    $status_class = dokan_get_order_status_class( $order_status );
+    return $item_data;
 
-    echo '<label class="label label-' . $status_class . '">' . $order_status . '</label>';
-    exit;
+}, 10, 2 );
+
+
+function dokan_create_sub_order( $parent_order_id ) {
+    global $woocommerce;
+
+    $parent_order = new WC_Order( $parent_order_id );
+    $order_items = $parent_order->get_items();
+
+    $sellers = array();
+    foreach ($order_items as $item) {
+        $seller_id = get_post_field( 'post_author', $item['product_id'] );
+        $sellers[$seller_id][] = $item;
+    }
+
+    // return if we've only ONE seller
+    if ( count( $sellers ) == 1 ) {
+        return;
+    }
+
+    // var_dump( $parent_order );
+
+    // seems like we've got multiple sellers
+    foreach ($sellers as $seller_id => $seller_products ) {
+        dokan_create_seller_order( $parent_order, $seller_products );
+    }
+
+    // echo "voila";
+
+    // die();
 }
 
-add_action( 'wp_ajax_dokan_change_status', 'dokan_change_order_status' );
+add_action( 'woocommerce_checkout_update_order_meta', 'dokan_create_sub_order' );
+
+function dokan_create_seller_order( $parent_order, $seller_products ) {
+    $order_data = apply_filters( 'woocommerce_new_order_data', array(
+        'post_type'     => 'shop_order',
+        'post_title'    => sprintf( __( 'Order &ndash; %s', 'woocommerce' ), strftime( _x( '%b %d, %Y @ %I:%M %p', 'Order date parsed by strftime', 'woocommerce' ) ) ),
+        'post_status'   => 'publish',
+        'ping_status'   => 'closed',
+        'post_excerpt'  => isset( $posted['order_comments'] ) ? $posted['order_comments'] : '',
+        'post_author'   => 1,
+        'post_parent'   => $parent_order->id,
+        'post_password' => uniqid( 'order_' )   // Protects the post just in case
+    ) );
+
+    $order_id = wp_insert_post( $order_data );
+
+    if ( $order_id && !is_wp_error( $order_id ) ) {
+
+        $order_total = $order_tax = 0;
+
+        // now insert line items
+        foreach ($seller_products as $item) {
+            $order_total += (float) $item['line_total'];
+            $order_tax += (float) $item['line_tax'];
+
+            $item_id = woocommerce_add_order_item( $order_id, array(
+                'order_item_name' => $item['name'],
+                'order_item_type' => 'line_item'
+            ) );
+
+            if ( $item_id ) {
+                woocommerce_add_order_item_meta( $item_id, '_qty', $item['qty'] );
+                woocommerce_add_order_item_meta( $item_id, '_tax_class', $item['tax_class'] );
+                woocommerce_add_order_item_meta( $item_id, '_product_id', $item['product_id'] );
+                woocommerce_add_order_item_meta( $item_id, '_variation_id', $item['variation_id'] );
+                woocommerce_add_order_item_meta( $item_id, '_line_subtotal', $item['line_subtotal'] );
+                woocommerce_add_order_item_meta( $item_id, '_line_total', $item['line_total'] );
+                woocommerce_add_order_item_meta( $item_id, '_line_tax', $item['line_tax'] );
+                woocommerce_add_order_item_meta( $item_id, '_line_subtotal_tax', $item['line_subtotal_tax'] );
+            }
+        } // foreach
+
+        $bill_ship = array(
+            '_billing_country', '_billing_first_name', '_billing_last_name', '_billing_company',
+            '_billing_address_1', '_billing_address_2', '_billing_city', '_billing_state', '_billing_postcode',
+            '_billing_email', '_billing_phone', '_shipping_country', '_shipping_first_name', '_shipping_last_name',
+            '_shipping_company', '_shipping_address_1', '_shipping_address_2', '_shipping_city',
+            '_shipping_state', '_shipping_postcode'
+        );
+
+        // save billing and shipping address
+        foreach ($bill_ship as $val) {
+            $order_key = ltrim( $val, '_' );
+            update_post_meta( $order_id, $val, $parent_order->$order_key );
+        }
+
+        // do shipping
+        $shipping_cost = dokan_create_sub_order_shipping( $parent_order, $order_id, $seller_products );
+
+        // set order meta
+        update_post_meta( $order_id, '_payment_method',         $parent_order->payment_method );
+        update_post_meta( $order_id, '_payment_method_title',   $parent_order->payment_method_title );
+
+        update_post_meta( $order_id, '_order_shipping',         $shipping_cost );
+        update_post_meta( $order_id, '_order_discount',         '0' );
+        update_post_meta( $order_id, '_cart_discount',          '0' );
+        update_post_meta( $order_id, '_order_tax',              woocommerce_format_total( $order_tax ) );
+        update_post_meta( $order_id, '_order_shipping_tax',     '0' );
+        update_post_meta( $order_id, '_order_total',            woocommerce_format_total( $order_total + $shipping_cost ) );
+        update_post_meta( $order_id, '_order_key',              apply_filters('woocommerce_generate_order_key', uniqid('order_') ) );
+        update_post_meta( $order_id, '_customer_user',          $parent_order->customer_user );
+        update_post_meta( $order_id, '_order_currency',         $parent_order->order_custom_fields['_order_currency'] );
+        update_post_meta( $order_id, '_prices_include_tax',     $parent_order->prices_include_tax );
+        update_post_meta( $order_id, '_customer_ip_address',    $parent_order->order_custom_fields['_customer_ip_address'] );
+        update_post_meta( $order_id, '_customer_user_agent',    $parent_order->order_custom_fields['_customer_user_agent'] );
+
+        do_action( 'dokan_checkout_update_order_meta', $order_id );
+
+        // Order status
+        wp_set_object_terms( $order_id, 'pending', 'shop_order_status' );
+    } // if order
+}
+
+function dokan_create_sub_order_shipping( $parent_order, $order_id, $seller_products ) {
+    // take only the first shipping method
+    $shipping_methods = $parent_order->get_shipping_methods();
+    $shipping_method = is_array( $shipping_methods ) ? reset( $shipping_methods ) : array();
+
+    // bail out if no shipping methods found
+    if ( !$shipping_method ) {
+        return;
+    }
+
+    $shipping_products = array();
+    $packages = array();
+
+    // emulate shopping cart for calculating the shipping method
+    foreach ($seller_products as $product_item) {
+        $product = get_product( $product_item['product_id'] );
+
+        if ( $product->needs_shipping() ) {
+            $shipping_products[] = array(
+                'product_id' => $product_item['product_id'],
+                'variation_id' => $product_item['variation_id'],
+                'variation' => '',
+                'quantity' => $product_item['qty'],
+                'data' => $product,
+                'line_total' => $product_item['line_total'],
+                'line_tax' => $product_item['line_tax'],
+                'line_subtotal' => $product_item['line_subtotal'],
+                'line_subtotal_tax' => $product_item['line_subtotal_tax'],
+            );
+        }
+    }
+
+    if ( $shipping_products ) {
+        $package = array(
+            'contents' => $shipping_products,
+            'contents_cost' => array_sum( wp_list_pluck( $shipping_products, 'line_total' ) ),
+            'applied_coupons' => array(),
+            'destination' => array(
+                'country' => $parent_order->shipping_country,
+                'state' => $parent_order->shipping_state,
+                'postcode' => $parent_order->shipping_postcode,
+                'city' => $parent_order->shipping_city,
+                'address' => $parent_order->shipping_address_1,
+                'address_2' => $parent_order->shipping_address_2,
+            )
+        );
+
+        $wc_shipping = WC_Shipping::instance();
+        $pack = $wc_shipping->calculate_shipping_for_package( $package );
+
+        if ( array_key_exists( $shipping_method['method_id'], $pack['rates'] ) ) {
+            $method = $pack['rates'][$shipping_method['method_id']];
+            $cost = wc_format_decimal( $method->cost );
+
+            $item_id = wc_add_order_item( $order_id, array(
+                'order_item_name'       => $method->label,
+                'order_item_type'       => 'shipping'
+            ) );
+
+            if ( $item_id ) {
+                wc_add_order_item_meta( $item_id, 'method_id', $method->id );
+                wc_add_order_item_meta( $item_id, 'cost', $cost );
+            }
+
+            // echo "order: $order_id, Shipping cost: $cost, item_id = $item_id";
+            return $cost;
+        };
+    }
+
+    return 0;
+}
+
+add_action( 'woocommerce_order_details_after_order_table', function( $parent_order ) {
+
+    $sub_orders = get_children( array( 'post_parent' => $parent_order->id, 'post_type' => 'shop_order' ) );
+
+    if ( !$sub_orders ) {
+        return;
+    }
+    ?>
+    <header>
+        <h2><?php _e( 'Sub Orders', 'dokan' ); ?></h2>
+    </header>
+
+    <div class="alert alert-info">
+        <label class="label label-success">Note:</label>
+        This order has products from multiple vendors/sellers. So we divided this order into multiple seller orders.
+        Each order will be handled by their respective seller independently.
+    </div>
+
+
+    <table class="shop_table my_account_orders">
+
+        <thead>
+            <tr>
+                <th class="order-number"><span class="nobr"><?php _e( 'Order', 'woocommerce' ); ?></span></th>
+                <th class="order-date"><span class="nobr"><?php _e( 'Date', 'woocommerce' ); ?></span></th>
+                <th class="order-status"><span class="nobr"><?php _e( 'Status', 'woocommerce' ); ?></span></th>
+                <th class="order-total"><span class="nobr"><?php _e( 'Total', 'woocommerce' ); ?></span></th>
+                <th class="order-actions">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($sub_orders as $order_post) {
+            $order = new WC_Order( $order_post->ID );
+            $status = get_term_by( 'slug', $order->status, 'shop_order_status' );
+            $item_count = $order->get_item_count();
+            ?>
+                <tr class="order">
+                    <td class="order-number">
+                        <a href="<?php echo esc_url( add_query_arg('order', $order->id, get_permalink( woocommerce_get_page_id( 'view_order' ) ) ) ); ?>">
+                            <?php echo $order->get_order_number(); ?>
+                        </a>
+                    </td>
+                    <td class="order-date">
+                        <time datetime="<?php echo date('Y-m-d', strtotime( $order->order_date ) ); ?>" title="<?php echo esc_attr( strtotime( $order->order_date ) ); ?>"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $order->order_date ) ); ?></time>
+                    </td>
+                    <td class="order-status" style="text-align:left; white-space:nowrap;">
+                        <?php echo ucfirst( __( $status->name, 'woocommerce' ) ); ?>
+                    </td>
+                    <td class="order-total">
+                        <?php echo sprintf( _n( '%s for %s item', '%s for %s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ); ?>
+                    </td>
+                    <td class="order-actions">
+                        <?php
+                            $actions = array();
+
+                            if ( in_array( $order->status, apply_filters( 'woocommerce_valid_order_statuses_for_payment', array( 'pending', 'failed' ), $order ) ) )
+                                $actions['pay'] = array(
+                                    'url'  => $order->get_checkout_payment_url(),
+                                    'name' => __( 'Pay', 'woocommerce' )
+                                );
+
+                            if ( in_array( $order->status, apply_filters( 'woocommerce_valid_order_statuses_for_cancel', array( 'pending', 'failed' ), $order ) ) )
+                                $actions['cancel'] = array(
+                                    'url'  => $order->get_cancel_order_url(),
+                                    'name' => __( 'Cancel', 'woocommerce' )
+                                );
+
+                            $actions['view'] = array(
+                                'url'  => add_query_arg( 'order', $order->id, get_permalink( woocommerce_get_page_id( 'view_order' ) ) ),
+                                'name' => __( 'View', 'woocommerce' )
+                            );
+
+                            $actions = apply_filters( 'woocommerce_my_account_my_orders_actions', $actions, $order );
+
+                            foreach( $actions as $key => $action ) {
+                                echo '<a href="' . esc_url( $action['url'] ) . '" class="button ' . sanitize_html_class( $key ) . '">' . esc_html( $action['name'] ) . '</a>';
+                            }
+                        ?>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <?php
+});
