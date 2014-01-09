@@ -79,7 +79,11 @@ class WeDevs_Dokan {
     }
 
     function init_classes() {
-        new Dokan_Pageviews();
+        if ( !is_admin() ) {
+            new Dokan_Pageviews();
+        }
+
+        new Dokan_Rewrites();
     }
 
     function init_ajax() {
@@ -1301,11 +1305,13 @@ function dokan_create_seller_order( $parent_order, $seller_products ) {
     if ( $order_id && !is_wp_error( $order_id ) ) {
 
         $order_total = $order_tax = 0;
+        $product_ids = array();
 
         // now insert line items
         foreach ($seller_products as $item) {
             $order_total += (float) $item['line_total'];
             $order_tax += (float) $item['line_tax'];
+            $product_ids[] = $item['product_id'];
 
             $item_id = woocommerce_add_order_item( $order_id, array(
                 'order_item_name' => $item['name'],
@@ -1341,6 +1347,9 @@ function dokan_create_seller_order( $parent_order, $seller_products ) {
         // do shipping
         $shipping_cost = dokan_create_sub_order_shipping( $parent_order, $order_id, $seller_products );
 
+        // add coupons if any
+        dokan_create_sub_order_coupon( $parent_order, $order_id, $product_ids );
+
         // set order meta
         update_post_meta( $order_id, '_payment_method',         $parent_order->payment_method );
         update_post_meta( $order_id, '_payment_method_title',   $parent_order->payment_method_title );
@@ -1363,6 +1372,32 @@ function dokan_create_seller_order( $parent_order, $seller_products ) {
         // Order status
         wp_set_object_terms( $order_id, 'pending', 'shop_order_status' );
     } // if order
+}
+
+
+function dokan_create_sub_order_coupon( $parent_order, $order_id, $product_ids ) {
+    $used_coupons = $parent_order->get_used_coupons();
+
+    if ( ! count( $used_coupons ) ) {
+        return;
+    }
+
+    // seems like we've got some coupons
+    $code = reset( $used_coupons ); // get the first one as we assume only 1 coupon can be applied at once
+    $coupon = new WC_Coupon( $code );
+
+    if ( $coupon && !is_wp_error( $coupon ) && array_intersect( $product_ids, $coupon->product_ids ) ) {
+        // we found some match
+        $item_id = wc_add_order_item( $order_id, array(
+            'order_item_name' => $code,
+            'order_item_type' => 'coupon'
+        ) );
+
+        // Add line item meta
+        if ( $item_id ) {
+            wc_add_order_item_meta( $item_id, 'discount_amount', 0 );
+        }
+    }
 }
 
 function dokan_create_sub_order_shipping( $parent_order, $order_id, $seller_products ) {
@@ -1429,7 +1464,6 @@ function dokan_create_sub_order_shipping( $parent_order, $order_id, $seller_prod
                 wc_add_order_item_meta( $item_id, 'cost', $cost );
             }
 
-            // echo "order: $order_id, Shipping cost: $cost, item_id = $item_id";
             return $cost;
         };
     }
@@ -1521,5 +1555,49 @@ add_action( 'woocommerce_order_details_after_order_table', function( $parent_ord
             <?php } ?>
         </tbody>
     </table>
+    <?php
+});
+
+add_action( 'wp_trash_post', function( $post_id ) {
+    $post = get_post( $post_id );
+
+    if ( $post->post_type == 'shop_order' ) {
+        dokan_sync_update_order_status( $post_id, 0 );
+    }
+});
+
+add_action( 'wp_untrash_post', function( $post_id ) {
+    $post = get_post( $post_id );
+    // var_dump($post);die();
+    if ( $post->post_type == 'shop_order' ) {
+        dokan_sync_update_order_status( $post_id, 1 );
+    }
+});
+
+add_action( 'pre_get_posts', function( $query ) {
+    global $wp_query;
+
+    $author = get_query_var( 'store' );
+
+    if ( $query->is_main_query() && !empty( $author ) ) {
+        $query->set( 'post_type', 'product' );
+        $query->set( 'author_name', $author );
+    }
+});
+
+remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
+remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+
+add_action( 'woocommerce_after_shop_loop_item', function() {
+    global $product;
+    ?>
+    <span class="item-bar">
+        <span class="item-price">$ 1,000</span>
+        <span class="item-button">
+            <?php woocommerce_template_loop_add_to_cart(); ?>
+            <a href="#" class="btn fav"><i class="fa fa-heart"></i></a>
+        </span>
+    </span>
     <?php
 });

@@ -364,7 +364,7 @@ function dokan_on_order_status_change( $order_id, $old_status, $new_status ) {
 
 add_action( 'woocommerce_order_status_changed', 'dokan_on_order_status_change', 10, 3 );
 
-function dokan_insert_order( $order_id ) {
+function dokan_sync_insert_order( $order_id ) {
     global $wpdb;
 
     $order = new WC_Order( $order_id );
@@ -389,8 +389,18 @@ function dokan_insert_order( $order_id ) {
     );
 }
 
-add_action( 'woocommerce_checkout_update_order_meta', 'dokan_insert_order' );
-add_action( 'dokan_checkout_update_order_meta', 'dokan_insert_order' );
+add_action( 'woocommerce_checkout_update_order_meta', 'dokan_sync_insert_order' );
+add_action( 'dokan_checkout_update_order_meta', 'dokan_sync_insert_order' );
+
+function dokan_sync_update_order_status( $order_id, $status = 1 ) {
+    global $wpdb;
+
+    $wpdb->update( $wpdb->prefix . 'dokan_orders',
+        array( 'status' => $status ),
+        array( 'order_id' => $order_id ),
+        array( '%d' )
+    );
+}
 
 function dokan_get_seller_percentage() {
     return 90;
