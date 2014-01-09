@@ -940,6 +940,92 @@ a:hover {
 .widget.store-contact ul li {
   border-bottom: none;
 }
+.widget.dokan-category-menu h3.widget-title {
+  margin: 0;
+  padding: 10px 10px 10px 20px;
+  background: #eee;
+  border: 1px solid #eee;
+}
+.widget.dokan-category-menu #cat-drop-stack {
+  border: 1px solid #eee;
+  border-top: none;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  position: relative;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul {
+  margin-bottom: 0px;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li {
+  list-style: none;
+  padding: 0;
+  position: relative;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li .caret {
+  border-bottom: 4px solid transparent;
+  border-top: 4px solid transparent;
+  border-left: 4px solid #000000;
+  display: inline-block;
+  height: 0;
+  opacity: 0.3;
+  vertical-align: middle;
+  width: 0;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category {
+  display: none;
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #E3E3E3;
+  box-shadow: 5px 0px 10px rgba(108, 108, 108, 0.3);
+  min-height: 250px;
+  padding: 20px;
+  position: absolute;
+  left: 250px;
+  top: -50px;
+  white-space: nowrap;
+  z-index: 99;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  zoom: 1;
+  vertical-align: top;
+  padding-right: 20px;
+  width: 200px;
+  font-size: 12px;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block h3 {
+  font-weight: bold;
+  font-size: 14px;
+  border-bottom: 1px solid #ccc;
+  padding: 0 0 7px 0;
+  margin: 0 0 7px 0;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block h3 a {
+  text-decoration: none;
+  color: #555;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block ul a {
+  color: #777;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category li {
+  font-weight: normal;
+  padding: 0;
+  border-bottom: none;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li:hover .sub-category {
+  display: block;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li > a {
+  padding: 7px 0px 8px 20px;
+  color: #5C5B52;
+  display: block;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li > a:hover {
+  background: #f04023;
+  color: #fff;
+}
 /*--------------------------------------------------
 :: Comments
 -------------------------------------------------- */
@@ -1529,33 +1615,8 @@ a:hover {
 .site-footer .footer-getway ul li img {
   margin-left: 15px;
 }
-.home-content-area {
-  margin-top: -20px;
-}
 #home-page-section-1 {
   margin-bottom: 25px;
-}
-#cat-drop-stack {
-  border: 1px solid #eee;
-  border-top: none;
-  padding: 10px 0px 0px;
-}
-#cat-drop-stack ul {
-  margin-bottom: 0px;
-}
-#cat-drop-stack ul li {
-  list-style: none;
-  font-weight: bold;
-  padding: 0;
-}
-#cat-drop-stack ul li a {
-  padding: 7px 0px 8px 20px;
-  color: #5C5B52;
-  display: block;
-}
-#cat-drop-stack ul li a:hover {
-  background: #f04023;
-  color: #fff;
 }
 #main-slider {
   height: 360px;

@@ -81,4 +81,111 @@
         }
     }
 
+    &.dokan-category-menu {
+        h3.widget-title {
+            margin: 0;
+            padding: 10px 10px 10px 20px;
+            background: #eee;
+            border: 1px solid #eee;
+        }
+
+        #cat-drop-stack {
+            border: 1px solid #eee;
+            border-top: none;
+            padding: 0;
+            margin: 0;
+            background: #fff;
+            position: relative;
+
+            > ul {
+                margin-bottom: 0px;
+
+                > li {
+                    list-style: none;
+                    // font-weight: bold;
+                    padding: 0;
+                    position: relative;
+
+                    .caret {
+                        border-bottom: 4px solid transparent;
+                        border-top: 4px solid transparent;
+                        border-left: 4px solid #000000;
+                        display: inline-block;
+                        height: 0;
+                        opacity: 0.3;
+                        vertical-align: middle;
+                        width: 0;
+                        // float: right;
+                    }
+
+                    .sub-category {
+                        display: none;
+                        background: none repeat scroll 0 0 #FFFFFF;
+                        border: 1px solid #E3E3E3;
+                        box-shadow: 5px 0px 10px rgba(108, 108, 108, 0.3);
+                        min-height: 250px;
+                        padding: 20px;
+                        position: absolute;
+                        left: 250px;
+                        top: -50px;
+                        white-space: nowrap;
+                        z-index: 99;
+
+                        .sub-block {
+                            position: relative;
+                            z-index: 1;
+                            display: inline-block;
+                            zoom: 1;
+                            vertical-align: top;
+                            padding-right: 20px;
+                            width: 200px;
+                            font-size: 12px;
+
+                            h3 {
+                                font-weight: bold;
+                                font-size: 14px;
+                                border-bottom: 1px solid #ccc;
+                                padding: 0 0 7px 0;
+                                margin: 0 0 7px 0;
+
+                                a {
+                                    text-decoration: none;
+                                    color: #555;
+                                }
+                            }
+
+                            ul {
+                                a {
+                                    color: #777;
+                                }
+                            }
+                        }
+
+                        li {
+                            font-weight: normal;
+                            padding: 0;
+                            border-bottom: none;
+                        }
+                    }
+
+                    &:hover {
+                        .sub-category {
+                            display: block;
+                        }
+                    }
+
+                    > a {
+                        padding: 7px 0px 8px 20px;
+                        color: #5C5B52;
+                        display: block;
+
+                        &:hover {
+                            background: #f04023;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
