@@ -435,3 +435,16 @@ function dokan_dashboard_nav( $active_menu ) {
 
     return $menu;
 }
+
+function dokan_category_widget() {
+     the_widget( 'Dokan_Category_Widget', array(
+        'title' => __( 'Product Categories', 'dokan' )
+        ),
+        array(
+            'before_widget' => '<aside class="widget dokan-category-menu">',
+            'after_widget' => '</aside>',
+            'before_title' => '<h3 class="widget-title">',
+            'after_title' => '</h3>',
+        )
+    );
+}

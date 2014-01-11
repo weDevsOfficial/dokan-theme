@@ -98,12 +98,13 @@ class Dokan_Template_Settings{
                 'paypal_email'  => filter_var( $_POST['setting_paypal_email'], FILTER_VALIDATE_EMAIL ),
             ),
 
-            'phone'         => $_POST['setting_phone'],
-            'address'       => $_POST['setting_address'],
-            'location'      => $_POST['location'],
-            'find_address'   => $_POST['find_address'],
-            'dokan_category'  => $_POST['setting_category'],
-            'banner'        => $_POST['dokan_banner'],
+            'phone' => $_POST['setting_phone'],
+            'show_email' => $_POST['setting_show_email'],
+            'address' => $_POST['setting_address'],
+            'location' => $_POST['location'],
+            'find_address' => $_POST['find_address'],
+            'dokan_category' => $_POST['setting_category'],
+            'banner' => $_POST['dokan_banner'],
         );
 
         update_user_meta( get_current_user_id(), 'dokan_profile_settings', $dokan_settings );
@@ -114,7 +115,7 @@ class Dokan_Template_Settings{
 
 
 
-    function setting_field( $validate='' ) {
+    function setting_field( $validate = '' ) {
         global $current_user;
 
         if( isset($_GET['message'])) {
@@ -144,6 +145,7 @@ class Dokan_Template_Settings{
         $swift_code = isset( $profile_info['payment']['swift_code'] ) ? esc_attr( $profile_info['payment']['swift_code'] ) : '';
 
         $phone = isset( $profile_info['phone'] ) ? esc_attr( $profile_info['phone'] ) : '';
+        $show_email = isset( $profile_info['show_email'] ) ? esc_attr( $profile_info['show_email'] ) : 'no';
         $address = isset( $profile_info['address'] ) ? esc_textarea( $profile_info['address'] ) : '';
         $map_location = isset( $profile_info['location'] ) ? esc_attr( $profile_info['location'] ) : '';
         $map_address = isset( $profile_info['find_address'] ) ? esc_attr( $profile_info['find_address'] ) : '';
@@ -318,6 +320,18 @@ class Dokan_Template_Settings{
                     <label class="col-md-3 control-label" for="setting_phone"><?php _e( 'Phone No', 'dokan' ); ?></label>
                     <div class="col-md-5">
                         <input id="setting_phone" value="<?php echo $phone; ?>" name="setting_phone" placeholder="+123456.." class="form-control input-md" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="setting_phone"><?php _e( 'Email', 'dokan' ); ?></label>
+                    <div class="col-md-5">
+                        <div class="checkbox">
+                            <label>
+                                <input type="hidden" name="setting_show_email" value="no">
+                                <input type="checkbox" name="setting_show_email" value="yes"<?php checked( $show_email, 'yes' ); ?>> <?php _e( 'Show email address in store', 'dokan' ); ?>
+                            </label>
+                        </div>
                     </div>
                 </div>
 

@@ -5,7 +5,7 @@ class Dokan_Category_Walker extends Walker {
     var $tree_type = 'category';
     var $db_fields = array('parent' => 'parent', 'id' => 'term_id'); //TODO: decouple this
 
-    function start_lvl( &$output, $depth, $args ) {
+    function start_lvl( &$output, $depth = 0, $args = array() ) {
         $indent = str_repeat( "\t", $depth );
 
         if ( $depth == 0 ) {
@@ -15,7 +15,7 @@ class Dokan_Category_Walker extends Walker {
         }
     }
 
-    function end_lvl( &$output, $depth, $args ) {
+    function end_lvl( &$output, $depth = 0, $args = array() ) {
         $indent = str_repeat( "\t", $depth );
 
         if ( $depth == 0 ) {
@@ -25,7 +25,7 @@ class Dokan_Category_Walker extends Walker {
         }
     }
 
-    function start_el( &$output, $category, $depth, $args ) {
+    function start_el( &$output, $category, $depth = 0, $args = array(), $id = 0 ) {
         extract( $args );
         $indent = str_repeat( "\t", $depth );
 
@@ -37,7 +37,7 @@ class Dokan_Category_Walker extends Walker {
         }
     }
 
-    function end_el( &$output, $category, $depth, $args ) {
+    function end_el( &$output, $category, $depth = 0, $args = array() ) {
         $indent = str_repeat( "\t", $depth );
 
         if ( $depth == 1 ) {

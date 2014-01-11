@@ -1596,11 +1596,24 @@ add_action( 'woocommerce_after_shop_loop_item', function() {
     global $product;
     ?>
     <span class="item-bar">
-        <span class="item-price">$ 1,000</span>
+
+        <?php woocommerce_template_loop_price(); ?>
+
         <span class="item-button">
             <?php woocommerce_template_loop_add_to_cart(); ?>
             <a href="#" class="btn fav"><i class="fa fa-heart"></i></a>
         </span>
     </span>
     <?php
+});
+
+add_filter( 'woocommerce_breadcrumb_defaults', function( $args ) {
+    return array(
+        'delimiter'   => '',
+        'wrap_before' => '<nav class="breadcrumb" ' . ( is_single() ? 'itemprop="breadcrumb"' : '' ) . '>',
+        'wrap_after'  => '</nav>',
+        'before'      => '<li>',
+        'after'       => '</li>',
+        'home'        => _x( '<i class="fa fa-home"></i> Home', 'breadcrumb', 'dokan' ),
+    );
 });

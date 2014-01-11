@@ -15,15 +15,12 @@
 		do_action('woocommerce_before_main_content');
 	?>
 
+		<div class="archive-title clearfix">
 		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
 
 			<h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
 
 		<?php endif; ?>
-
-		<?php do_action( 'woocommerce_archive_description' ); ?>
-
-		<?php if ( have_posts() ) : ?>
 
 			<?php
 				/**
@@ -34,6 +31,12 @@
 				 */
 				do_action( 'woocommerce_before_shop_loop' );
 			?>
+
+		</div>
+
+		<?php do_action( 'woocommerce_archive_description' ); ?>
+
+		<?php if ( have_posts() ) : ?>
 
 			<?php woocommerce_product_loop_start(); ?>
 

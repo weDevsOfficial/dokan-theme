@@ -19,21 +19,9 @@ get_header();
 
         <div id="home-page-section-1" class="row">
             <div class="col-md-3">
-                <div id="cat-drop-stack">
-                    <ul>
-                        <li><a href="#">Electronics</a></li>
-                        <li><a href="#">Apparel & Accessories</a></li>
-                        <li><a href="#">Home & Garden</a></li>
-                        <li><a href="#">Bags & Shoes</a></li>
-                        <li><a href="#">Jewelry & Watches</a></li>
-                        <li><a href="#">Automotive</a></li>
-                        <li><a href="#">Beauty & Health</a></li>
-                        <li><a href="#">Toys, Kids & Baby</a></li>
-                        <li><a href="#">Sports & Entertainment</a></li>
-                        <li><a href="#">All Categories</a></li>
-                    </ul>
-                </div>
+                <?php dokan_category_widget(); ?>
             </div>
+
             <div class="col-md-6">
                 <div id="main-slider">
                     Example

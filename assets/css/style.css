@@ -46,6 +46,14 @@ body {
   color: #444;
   background: #fafafa;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+select {
+  font-family: 'Open Sans', sans-serif;
+}
 a:hover {
   text-decoration: none;
 }
@@ -849,11 +857,15 @@ a:hover {
   margin-bottom: 30px;
   position: relative;
   background-color: #e67636;
+  background-size: 100% auto;
 }
 .store-page-wrap .profile-frame .profile-info-box {
   height: 100%;
   background: rgba(0, 0, 0, 0.65);
   color: #fff;
+}
+.store-page-wrap .profile-frame .profile-info-box a {
+  color: #ccc;
 }
 .store-page-wrap .profile-frame .profile-info-box .profile-img {
   height: 120px;
@@ -870,11 +882,23 @@ a:hover {
 .store-page-wrap .profile-frame .profile-info-box .profile-info li {
   padding-bottom: 5px;
 }
+.store-page-wrap .profile-frame .profile-info-box .profile-info li.store-name {
+  font-weight: bold;
+  padding-bottom: 10px;
+  font-size: 15px;
+}
 .store-page-wrap .profile-frame .profile-info-box .profile-info i {
   font-weight: bold;
   float: left;
   margin-left: -25px;
   margin-top: 4px;
+}
+.store-page-wrap .profile-frame .profile-info-box .profile-info .store-social i {
+  color: #fff;
+  font-size: 20px;
+  float: none;
+  font-weight: normal;
+  margin: 0;
 }
 /*--------------------------------------------------
 :: Sidebars
@@ -936,6 +960,21 @@ a:hover {
 .widget .avatar img {
   border: 1px solid #ccc;
   background: #fff;
+}
+.widget.store-contact .form-group {
+  margin-bottom: 0;
+}
+.widget.store-contact .form-group label.error {
+  display: inline;
+  color: #b94a48;
+  font-weight: normal;
+}
+.widget.store-contact .form-group input.valid,
+.widget.store-contact .form-group textarea.valid {
+  border-color: #65CA67;
+}
+.widget.store-contact .form-group input[type=text] {
+  padding: 6px 12px;
 }
 .widget.store-contact ul li {
   border-bottom: none;
@@ -1823,21 +1862,6 @@ a:hover {
   background: #363636;
   left: 117px;
 }
-.title {
-  display: block;
-  width: 200px;
-  margin-left: -10px;
-  padding: 10px 5px;
-  position: absolute;
-  bottom: 78%;
-  font-size: 12px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 18px;
-  background: #000;
-  opacity: .8;
-  color: #fff;
-}
 .cat {
   background: #f04023;
   color: #fff;
@@ -2067,8 +2091,57 @@ a:hover {
 .alert-danger strong {
   color: #468847;
 }
+.breadcrumb {
+  margin: 0;
+  background: transparent;
+  padding: 0;
+  color: #999999;
+}
+.breadcrumb > li + li:before {
+  content: "\f105";
+  font-family: FontAwesome;
+}
+.pagination > .active > a,
+.pagination > .active > a:hover {
+  background-color: #f05025;
+  border-color: #f05025;
+}
 /* WooCommerce override
 -----------------------------------*/
+.woocommerce .woocommerce-breadcrumb,
+.woocommerce-page .woocommerce-breadcrumb {
+  margin: 0;
+  padding: 0;
+}
+.woocommerce .archive-title,
+.woocommerce-page .archive-title {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #dddddd;
+}
+.woocommerce .archive-title h1.page-title,
+.woocommerce-page .archive-title h1.page-title {
+  margin: 0;
+  float: left;
+  width: 49%;
+  line-height: 42px;
+}
+.woocommerce .archive-title .woocommerce-ordering,
+.woocommerce-page .archive-title .woocommerce-ordering,
+.woocommerce .archive-title .woocommerce-result-count,
+.woocommerce-page .archive-title .woocommerce-result-count {
+  width: 23.8%;
+  line-height: 42px;
+}
+.woocommerce .archive-title .woocommerce-ordering select,
+.woocommerce-page .archive-title .woocommerce-ordering select,
+.woocommerce .archive-title .woocommerce-result-count select,
+.woocommerce-page .archive-title .woocommerce-result-count select {
+  border: 1px solid #dddddd;
+  margin: 0;
+  padding: 6px 40px 8px 10px;
+  width: 100%;
+  vertical-align: middle;
+}
 .woocommerce ul#shipping_method,
 .woocommerce-page ul#shipping_method {
   text-align: left;
@@ -2102,13 +2175,11 @@ a:hover {
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
 }
-.woocommerce ul.products li.product .item-price,
-.woocommerce-page ul.products li.product .item-price {
-  text-align: center;
-  padding: 0px 5px;
-  font-weight: bold;
-  color: #8f8f8f;
-  margin-left: 10px;
+.woocommerce ul.products li.product .item-bar .price,
+.woocommerce-page ul.products li.product .item-bar .price {
+  padding: 0px 0 0 10px;
+  display: inline-block;
+  margin: 0;
 }
 .woocommerce ul.products li.product .item-button,
 .woocommerce-page ul.products li.product .item-button {
@@ -2129,6 +2200,8 @@ a:hover {
   right: 0;
   background: #269C10;
   color: #fff;
+  padding: 1px 10px;
+  font-size: 12px;
 }
 .woocommerce ul.products li.product .item-button a span,
 .woocommerce-page ul.products li.product .item-button a span {

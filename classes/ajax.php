@@ -34,6 +34,7 @@ class Dokan_Ajax {
 
         add_action( 'wp_ajax_dokan_change_status', array( $this, 'change_order_status' ) );
 
+        add_action( 'wp_ajax_dokan_contact_seller', array( $this, 'contact_seller' ) );
     }
 
     function complete_order() {
@@ -207,4 +208,42 @@ class Dokan_Ajax {
         exit;
     }
 
+    function contact_seller() {
+        $posted = $_POST;
+
+        check_ajax_referer( 'dokan_contact_seller' );
+        // print_r($posted);
+
+        $seller = get_user_by( 'id', (int) $posted['seller_id'] );
+
+        if ( !$seller ) {
+            $message = sprintf( '<div class="alert alert-success">%s</div>', __( 'Something went wrong!', 'dokan' ) );
+            wp_send_json_error( $message );
+        }
+
+        $contact_name = trim( strip_tags( $posted['name'] ) );
+        $blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+        $reply_to = "Reply-To: {$contact_name}<{$posted['email']}>";
+        $content_type = 'Content-Type: text/plain';
+        $charset = 'Charset: UTF-8';
+        $from = 'no-reply@' . preg_replace( '#^www\.#', '', strtolower( $_SERVER['SERVER_NAME'] ) );
+        $from = "From: $blogname <$from>";
+        $headers = array( $reply_to, $content_type, $charset, $from );
+
+        $subject = sprintf( __( '"%s" sent you a message from your "%s" store', 'dokan' ), $contact_name, $blogname );
+
+        $message = sprintf( "From: %s (%s)\n", $contact_name, $posted['email'] );
+        $message .= sprintf( "IP: %s\n", dokan_get_client_ip() );
+        $message .= sprintf( "User Agent: %s\n\n", substr( $_SERVER['HTTP_USER_AGENT'], 0, 254 ) );
+        $message .= "---------------------------------------------\n\n";
+        $message .= $posted['message'] . "\n\n";
+        $message .= "---------------------------------------------\n\n";
+        $message .= sprintf( __( '- Sent from "%s" (%s)', 'dokan' ), $blogname, site_url() );
+
+        // wp_mail( $seller->user_email, $subject, $message, $headers );
+
+        $success = sprintf( '<div class="alert alert-success">%s</div>', __( 'Email sent successfully!', 'dokan' ) );
+        wp_send_json_success( $success );
+        exit;
+    }
 }

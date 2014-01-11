@@ -76,6 +76,24 @@
     }
 
     &.store-contact {
+        .form-group {
+            margin-bottom: 0;
+
+            label.error {
+                display: inline;
+                color: #b94a48;
+                font-weight: normal;
+            }
+
+            input.valid, textarea.valid {
+                border-color: #65CA67;
+            }
+
+            input[type=text] {
+                padding: 6px 12px;
+            }
+        }
+
         ul li {
             border-bottom: none;
         }

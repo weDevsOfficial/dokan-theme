@@ -398,11 +398,16 @@
         margin-bottom: 30px;
         position: relative;
         background-color: #e67636;
+        background-size: 100% auto;
 
         .profile-info-box {
             height: 100%;
             background: rgba(0, 0, 0, 0.65);
             color: #fff;
+
+            a {
+                color: #ccc;
+            }
 
             .profile-img {
                 height: 120px;
@@ -420,6 +425,12 @@
 
                 li {
                     padding-bottom: 5px;
+
+                    &.store-name {
+                        font-weight: bold;
+                        padding-bottom: 10px;
+                        font-size: 15px;
+                    }
                 }
 
                 i {
@@ -428,6 +439,16 @@
                     float: left;
                     margin-left: -25px;
                     margin-top: 4px;
+                }
+
+                .store-social {
+                    i {
+                        color: #fff;
+                        font-size: 20px;
+                        float: none;
+                        font-weight: normal;
+                        margin: 0;
+                    }
                 }
             }
         }
