@@ -113,6 +113,10 @@
 
                 if ( $gallery ) {
                     foreach ($gallery as $image_id) {
+                        if ( empty( $image_id ) ) {
+                            continue;
+                        }
+
                         $attachment_image = wp_get_attachment_image_src( $image_id, 'thumbnail' );
                         ?>
                         <li class="image" data-attachment_id="<?php echo $image_id; ?>">

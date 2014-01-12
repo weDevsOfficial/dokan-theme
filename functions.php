@@ -358,7 +358,7 @@ class WeDevs_Dokan {
         wp_register_script( 'jquery-flot', $template_directory . '/assets/js/jquery.flot.js', false, null, true );
         wp_register_script( 'jquery-chart', $template_directory . '/assets/js/Chart.min.js', false, null, true );
 
-        wp_enqueue_script( 'menu-aim', $template_directory . '/assets/js/jquery.menu-aim.js', false, null, true );
+        // wp_enqueue_script( 'menu-aim', $template_directory . '/assets/js/jquery.menu-aim.js', false, null, true );
         wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
         wp_enqueue_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
         wp_enqueue_script( 'dokan-reviews', get_stylesheet_directory_uri() . '/assets/js/reviews.js', array('jquery', 'underscore') );
@@ -553,7 +553,6 @@ function devplus_wpquery_where( $where ){
 add_filter( 'posts_where', 'devplus_wpquery_where' );
 
 add_action( 'wp_ajax_dokan_save_attributes', function() {
-    global $woocommerce;
 
     // check_ajax_referer( 'save-attributes', 'security' );
 
@@ -571,7 +570,7 @@ add_action( 'wp_ajax_dokan_save_attributes', function() {
     if ( isset( $data['attribute_names'] ) ) {
 
         $attribute_names  = array_map( 'stripslashes', $data['attribute_names'] );
-        $attribute_values = $data['attribute_values'];
+        $attribute_values = isset( $data['attribute_values'] ) ? $data['attribute_values'] : array();
 
         if ( isset( $data['attribute_visibility'] ) )
             $attribute_visibility = $data['attribute_visibility'];
@@ -602,28 +601,24 @@ add_action( 'wp_ajax_dokan_save_attributes', function() {
 
                     // Text based attributes - Posted values are term names - don't change to slugs
                     } else {
-                        $values = array_map( 'stripslashes', array_map( 'strip_tags', explode( '|', $attribute_values[ $i ] ) ) );
+                        $values = array_map( 'stripslashes', array_map( 'strip_tags', explode( WC_DELIMITER, $attribute_values[ $i ] ) ) );
                     }
 
                     // Remove empty items in the array
-                    $values = array_filter( $values );
+                    $values = array_filter( $values, 'strlen' );
 
                 } else {
                     $values = array();
                 }
 
                 // Update post terms
-                if ( taxonomy_exists( $attribute_names[ $i ] ) ) {
+                if ( taxonomy_exists( $attribute_names[ $i ] ) )
                     wp_set_object_terms( $post_id, $values, $attribute_names[ $i ] );
-                    print_r($values);
-                    // var_dump($values);
-                    echo "wp_set_object_terms( $post_id, $values, {$attribute_names[$i]} )";
-                }
 
                 if ( $values ) {
                     // Add attribute to array, but don't set values
                     $attributes[ sanitize_title( $attribute_names[ $i ] ) ] = array(
-                        'name'          => woocommerce_clean( $attribute_names[ $i ] ),
+                        'name'          => wc_clean( $attribute_names[ $i ] ),
                         'value'         => '',
                         'position'      => $attribute_position[ $i ],
                         'is_visible'    => $is_visible,
@@ -635,14 +630,11 @@ add_action( 'wp_ajax_dokan_save_attributes', function() {
             } elseif ( isset( $attribute_values[ $i ] ) ) {
 
                 // Text based, separate by pipe
-                $values = implode( ' | ', array_map( 'woocommerce_clean', array_map( 'stripslashes', $attribute_values[ $i ] ) ) );
-                // $values = array_map( 'sanitize_title', $attribute_values[ $i ] );
-
-                // print_r( $values );
+                $values = implode( ' ' . WC_DELIMITER . ' ', array_map( 'wc_clean', array_map( 'stripslashes', $attribute_values[ $i ] ) ) );
 
                 // Custom attribute - Add attribute to array and set the values
                 $attributes[ sanitize_title( $attribute_names[ $i ] ) ] = array(
-                    'name'          => woocommerce_clean( $attribute_names[ $i ] ),
+                    'name'          => wc_clean( $attribute_names[ $i ] ),
                     'value'         => $values,
                     'position'      => $attribute_position[ $i ],
                     'is_visible'    => $is_visible,
@@ -661,7 +653,9 @@ add_action( 'wp_ajax_dokan_save_attributes', function() {
         }
     }
     uasort( $attributes, 'attributes_cmp' );
-    // print_r( $attributes );
+
+    print_r($attributes);
+    print_r($post_id);
 
     update_post_meta( $post_id, '_product_attributes', $attributes );
 

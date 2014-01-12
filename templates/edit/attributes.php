@@ -142,5 +142,5 @@
 
 <p class="toolbar">
     <button class="btn btn-success add-variant-category">+ Add a category</button>
-    <button type="button" class="btn btn-default save_attributes"><?php _e( 'Save attributes', 'woocommerce' ); ?></button>
+    <button type="button" class="btn btn-default save_attributes" data-id="<?php echo $thepostid; ?>"><?php _e( 'Save attributes', 'woocommerce' ); ?></button>
 </p>

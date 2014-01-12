@@ -8,7 +8,9 @@
 get_header();
 ?>
 
-<div id="primary" class="content-area col-md-8">
+<?php get_sidebar( 'product-single' ); ?>
+
+<div id="primary" class="content-area col-md-9">
     <div id="content" class="site-content" role="main">
 
 	<?php
@@ -39,5 +41,4 @@ get_header();
     </div><!-- #content .site-content -->
 </div><!-- #primary .content-area -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

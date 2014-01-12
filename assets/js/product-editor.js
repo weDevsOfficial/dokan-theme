@@ -156,7 +156,7 @@
             save: function() {
 
                 var data = {
-                    post_id: 36,
+                    post_id: $(this).data('id'),
                     data:  $('.woocommerce_attributes').find('input, select, textarea').serialize(),
                     action:  'dokan_save_attributes'
                 };
@@ -166,6 +166,7 @@
                 // $('#variants-holder').block({ message: 'saving...' });
                 $('#variants-holder').block({ message: null, overlayCSS: { background: '#fff', opacity: 0.6 } });
                 $.post(ajaxurl, data, function(resp) {
+                    console.log(resp);
 
                     $('#variable_product_options').block({ message: null, overlayCSS: { background: '#fff', opacity: 0.6 } });
                     $('#variable_product_options').load( this_page + ' #variable_product_options_inner', function() {

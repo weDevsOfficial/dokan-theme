@@ -356,6 +356,12 @@
                 td.upload_image img {
                     width: 73px;
                 }
+
+                td.options {
+                    label {
+                        display: block;
+                    }
+                }
             }
 
             td.data {
@@ -383,6 +389,10 @@
 
             label, select, input {
                 font-size: 12px;
+            }
+
+            input[type=text], input[type=number], select {
+                border: 1px solid @borderColor;
             }
 
             select {
