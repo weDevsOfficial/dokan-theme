@@ -151,7 +151,7 @@ $reviews_url = dokan_get_page_url( 'reviews' );
                         <div class="dashboard-widget sells-graph">
                             <div class="widget-title"><i class="fa fa-credit-card"></i> <?php _e( 'Sales', 'dokan' ); ?></div>
 
-                            <div id="placeholder" style="height: 324px;"></div>
+                            <div id="placeholder" style="height: 342px;"></div>
                             <?php require_once dirname( __DIR__ ) . '/includes/reports.php'; ?>
                         </div> <!-- .sells-graph -->
 

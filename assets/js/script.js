@@ -12,6 +12,8 @@ jQuery(function($) {
         dateFormat: 'yy-mm-dd'
     });
 
+    $('.tips').tooltip();
+
     // set dashboard menu height
     // $('.dokan-dash-sidebar ul.dokan-dashboard-menu').css({
     //     'height': $('#main').height()

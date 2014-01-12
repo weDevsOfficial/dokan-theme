@@ -1421,8 +1421,18 @@ a:hover {
   background: #eee;
   padding: 5px 10px;
 }
-.product-edit-container .dokan-edit-sidebar .dokan-side-body {
+.product-edit-container .dokan-edit-sidebar .downloadable_files td {
+  border-top: none;
+  border-bottom: 1px solid #dddddd;
+}
+.product-edit-container .dokan-edit-sidebar .downloadable_files td input {
+  width: 100%;
+}
+.product-edit-container .dokan-edit-sidebar .downloadable_files .dokan-side-body {
   padding: 10px;
+}
+.product-edit-container .dokan-edit-sidebar .downloadable_files .dokan-side-body .input-group-addon {
+  width: 20px;
 }
 .product-edit-container ul.label-on-left label {
   min-width: 200px;
@@ -1485,12 +1495,13 @@ a:hover {
 }
 .product-edit-container #product-variations .wc-metabox h3 {
   background: #e5e5e5;
-  padding: 5px 10px;
+  padding: 10px;
   font-size: 14px;
 }
 .product-edit-container #product-variations .wc-metabox h3 button {
   float: right;
   font-size: 12px;
+  margin-top: -5px;
 }
 .product-edit-container #product-variations .wc-metabox table {
   margin: 10px;
@@ -1500,10 +1511,17 @@ a:hover {
   width: 50%;
 }
 .product-edit-container #product-variations .wc-metabox table td.upload_image img {
-  width: 73px;
+  width: 110px;
+  max-width: 110px;
+  max-height: 110px;
 }
 .product-edit-container #product-variations .wc-metabox table td.options label {
   display: block;
+}
+.product-edit-container #product-variations .wc-metabox table td.sku,
+.product-edit-container #product-variations .wc-metabox table td.upload_image,
+.product-edit-container #product-variations .wc-metabox table td.options {
+  width: 15%;
 }
 .product-edit-container #product-variations .wc-metabox td.data {
   padding: 0 0 0 10px;
@@ -1514,11 +1532,21 @@ a:hover {
   margin: 0;
   width: 100%;
 }
+.product-edit-container #product-variations .wc-metabox table.data_table td {
+  padding: 0 6px 6px 0;
+  width: 50%;
+}
+.product-edit-container #product-variations .wc-metabox table.data_table td input {
+  width: 100%;
+  padding: 5px 10px;
+}
+.product-edit-container #product-variations .wc-metabox table.data_table td input.upload_file_button {
+  width: auto;
+  margin-top: 5px;
+}
 .product-edit-container #product-variations .wc-metabox table.data_table td.dimensions_field input {
   width: 25%;
-}
-.product-edit-container #product-variations .wc-metabox table.data_table td {
-  padding: 0 6px;
+  padding: 3px;
 }
 .product-edit-container #product-variations .wc-metabox table.data_table label {
   display: block;
@@ -1536,6 +1564,12 @@ a:hover {
 .product-edit-container #product-variations .wc-metabox select {
   width: auto;
   display: inline-block;
+}
+.product-edit-container #product-variations p.toolbar {
+  padding-top: 10px;
+}
+.product-edit-container #product-variations p.toolbar select {
+  border: 1px solid #dddddd;
 }
 .product-edit-container #dokan-product-images ul.product_images {
   margin: 0 0 10px 0;

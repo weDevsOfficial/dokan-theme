@@ -423,3 +423,271 @@ function dokan_get_seller_id_by_order( $order_id ) {
 
     return 0;
 }
+
+// Function to get the client ip address
+function dokan_get_client_ip() {
+    $ipaddress = '';
+
+    if ( getenv( 'HTTP_CLIENT_IP' ) )
+        $ipaddress = getenv( 'HTTP_CLIENT_IP' );
+    else if ( getenv( 'HTTP_X_FORWARDED_FOR' ) )
+        $ipaddress = getenv( 'HTTP_X_FORWARDED_FOR' & quot );
+    else if ( getenv( 'HTTP_X_FORWARDED' ) )
+        $ipaddress = getenv( 'HTTP_X_FORWARDED' );
+    else if ( getenv( 'HTTP_FORWARDED_FOR' ) )
+        $ipaddress = getenv( 'HTTP_FORWARDED_FOR' );
+    else if ( getenv( 'HTTP_X_CLUSTER_CLIENT_IP' ) )
+        $ipaddress = getenv( 'HTTP_FORWARDED_FOR' );
+    else if ( getenv( 'HTTP_FORWARDED' ) )
+        $ipaddress = getenv( 'HTTP_FORWARDED' );
+    else if ( getenv( 'REMOTE_ADDR' ) )
+        $ipaddress = getenv( 'REMOTE_ADDR' );
+    else
+        $ipaddress = 'UNKNOWN';
+
+    return $ipaddress;
+}
+
+function dokan_format_time( $datetime ) {
+    $timestamp = strtotime( $datetime );
+
+    $date_format = get_option( 'date_format' );
+    $time_format = get_option( 'time_format' );
+
+    return date_i18n( $date_format . ' ' . $time_format, $timestamp );
+}
+
+function dokan_post_input_box( $post_id, $meta_key, $attr = array(), $type = 'text'  ) {
+    $placeholder = isset( $attr['placeholder'] ) ? esc_attr( $attr['placeholder'] ) : '';
+    $class = isset( $attr['class'] ) ? esc_attr( $attr['class'] ) : 'form-control';
+    $name = isset( $attr['name'] ) ? esc_attr( $attr['name'] ) : $meta_key;
+    $value = isset( $attr['value'] ) ? $attr['value'] : get_post_meta( $post_id, $meta_key, true );
+    $size = isset( $attr['size'] ) ? $attr['size'] : 30;
+
+    switch ($type) {
+        case 'text':
+            ?>
+            <input type="text" name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="<?php echo esc_attr( $value ); ?>" class="<?php echo $class; ?>" placeholder="<?php echo $placeholder; ?>">
+            <?php
+            break;
+
+        case 'textarea':
+            $rows = isset( $attr['rows'] ) ? absint( $attr['rows'] ) : 4;
+            ?>
+            <textarea name="<?php echo $name; ?>" id="<?php echo $name; ?>" rows="<?php echo $rows; ?>" class="<?php echo $class; ?>" placeholder="<?php echo $placeholder; ?>"><?php echo esc_textarea( $value ); ?></textarea>
+            <?php
+            break;
+
+        case 'checkbox':
+            $label = isset( $attr['label'] ) ? $attr['label'] : '';
+            ?>
+
+            <label class="checkbox-inline" for="<?php echo $name; ?>">
+                <input name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" type="checkbox"<?php checked( $value, 'yes' ); ?>>
+                <?php echo $label; ?>
+            </label>
+
+            <?php
+            break;
+
+        case 'select':
+            $options = is_array( $attr['options'] ) ? $attr['options'] : array();
+            ?>
+            <select name="<?php echo $name; ?>" id="<?php echo $name; ?>" class="<?php echo $class; ?>">
+                <?php foreach ($options as $key => $label) { ?>
+                    <option value="<?php echo esc_attr( $key ); ?>"<?php selected( $value, $key ); ?>><?php echo $label; ?></option>
+                <?php } ?>
+            </select>
+
+            <?php
+            break;
+
+        case 'number':
+            $min = isset( $attr['min'] ) ? $attr['min'] : 0;
+            $step = isset( $attr['step'] ) ? $attr['step'] : 'any';
+            ?>
+            <input type="number" name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="<?php echo esc_attr( $value ); ?>" class="<?php echo $class; ?>" placeholder="<?php echo $placeholder; ?>" min="<?php echo esc_attr( $min ); ?>" step="<?php echo esc_attr( $step ); ?>" size="<?php echo esc_attr( $size ); ?>">
+            <?php
+            break;
+    }
+}
+
+function dokan_get_post_status( $status ) {
+    switch ($status) {
+        case 'publish':
+            return __( 'Online', 'dokan' );
+            break;
+
+        case 'draft':
+            return __( 'Draft', 'dokan' );
+            break;
+
+        case 'pending':
+            return __( 'Pending Review', 'dokan' );
+            break;
+
+        case 'future':
+            return __( 'Scheduled', 'dokan' );
+            break;
+
+        default:
+            return '';
+            break;
+    }
+}
+
+function dokan_get_product_status( $status ) {
+    switch ($status) {
+        case 'simple':
+            return __( 'Simple Product', 'dokan' );
+            break;
+
+        case 'variable':
+            return __( 'Variable Product', 'dokan' );
+            break;
+
+        case 'grouped':
+            return __( 'Grouped Product', 'dokan' );
+            break;
+
+        case 'external':
+            return __( 'Scheduled', 'dokan' );
+            break;
+
+        default:
+            return '';
+            break;
+    }
+}
+
+function dokan_get_order_status_class( $status ) {
+    switch ($status) {
+        case 'completed':
+            return 'success';
+            break;
+
+        case 'pending':
+            return 'danger';
+            break;
+
+        case 'on-hold':
+            return 'warning';
+            break;
+
+        case 'processing':
+            return 'info';
+            break;
+
+        case 'refunded':
+            return 'default';
+            break;
+
+        case 'cancelled':
+            return 'default';
+            break;
+
+        case 'failed':
+            return 'danger';
+            break;
+    }
+}
+
+/**
+ * Helper function for input text field
+ *
+ * @param string $key
+ * @return string
+ */
+function dokan_posted_input( $key ) {
+    $value = isset( $_POST[$key] ) ? trim( $_POST[$key] ) : '';
+
+    return esc_attr( $value );
+}
+
+/**
+ * Helper function for input textarea
+ *
+ * @param string $key
+ * @return string
+ */
+function dokan_posted_textarea( $key ) {
+    $value = isset( $_POST[$key] ) ? trim( $_POST[$key] ) : '';
+
+    return esc_textarea( $value );
+}
+
+function dokan_get_template( $template_name, $args = array() ) {
+
+    if ( file_exists( $template_name ) ) {
+        extract( $args );
+
+        include_once $template_name;
+    }
+}
+
+function dokan_get_page_url( $page, $context = 'dokan' ) {
+
+    if ( $context == 'woocommerce' ) {
+        $page_id = woocommerce_get_page_id( $page );
+    } else {
+        $page_id = dokan_get_option( $page, 'dokan_pages' );
+    }
+
+    return get_permalink( $page_id );
+}
+
+function dokan_edit_product_url( $product_id ) {
+    if ( get_post_field( 'post_status', $product_id ) == 'publish' ) {
+        return trailingslashit( get_permalink( $product_id ) ). 'edit/';
+    }
+
+    return add_query_arg( array( 'product_id' => $product_id, 'action' => 'edit' ), dokan_get_page_url('products') );
+}
+
+/**
+ * Ads additional columns to admin user table
+ *
+ * @param array $columns
+ * @return array
+ */
+function my_custom_admin_product_columns( $columns ) {
+    $columns['author'] = __( 'Author' );
+
+    return $columns;
+}
+
+add_filter( 'manage_edit-product_columns', 'my_custom_admin_product_columns' );
+
+
+/**
+ * Get the value of a settings field
+ *
+ * @param string $option settings field name
+ * @param string $section the section name this field belongs to
+ * @param string $default default text if it's not found
+ * @return mixed
+ */
+function dokan_get_option( $option, $section, $default = '' ) {
+
+    $options = get_option( $section );
+
+    if ( isset( $options[$option] ) ) {
+        return $options[$option];
+    }
+
+    return $default;
+}
+
+function dokan_product_editor_scripts() {
+    $template_directory = get_template_directory_uri();
+
+    wp_enqueue_script( 'jquery' );
+    wp_enqueue_script( 'jquery-ui' );
+    wp_enqueue_script( 'jquery-ui-autocomplete' );
+    wp_enqueue_script( 'jquery-ui-datepicker' );
+    wp_enqueue_script( 'underscore' );
+
+    wp_enqueue_script( 'post' );
+    wp_enqueue_media();
+    wp_enqueue_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
+}

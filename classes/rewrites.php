@@ -9,7 +9,8 @@ class Dokan_Rewrites {
 
     function __construct() {
         add_action( 'init', array($this, 'register_rule') );
-        add_filter( 'template_include', array($this, 'include_template') );
+        add_filter( 'template_include', array($this, 'store_template') );
+        add_filter( 'template_include', array($this, 'product_edit_template'), 11 );
         add_filter( 'query_vars', array($this, 'register_query_var') );
     }
 
@@ -19,6 +20,14 @@ class Dokan_Rewrites {
      * @return void
      */
     function register_rule() {
+        $permalinks = get_option( 'woocommerce_permalinks', array() );
+        $base = substr( $permalinks['product_base'], 1 );
+
+        if ( !empty( $base ) ) {
+            dokan_product_editor_scripts();
+            add_rewrite_rule( $base . '/([^/]+)(/[0-9]+)?/edit/?$', 'index.php?product=$matches[1]&page=$matches[2]&edit=true', 'top' );
+        }
+
         add_rewrite_rule( 'store/([^/]+)/?$', 'index.php?store=$matches[1]', 'top' );
         add_rewrite_rule( 'store/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&&paged=$matches[2]', 'top' );
     }
@@ -31,6 +40,7 @@ class Dokan_Rewrites {
      */
     function register_query_var( $vars ) {
         $vars[] = 'store';
+        $vars[] = 'edit';
 
         return $vars;
     }
@@ -41,7 +51,7 @@ class Dokan_Rewrites {
      * @param type $template
      * @return string
      */
-    function include_template( $template ) {
+    function store_template( $template ) {
 
         $store_name = get_query_var( 'store' );
 
@@ -64,6 +74,14 @@ class Dokan_Rewrites {
             );
 
             return get_query_template( 'store', $templates );
+        }
+
+        return $template;
+    }
+
+    function product_edit_template( $template ) {
+        if ( get_query_var( 'edit' ) && is_singular( 'product' ) ) {
+            return get_template_directory() . '/templates/product-edit.php';
         }
 
         return $template;

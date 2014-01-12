@@ -40,12 +40,23 @@
             $('.product-edit-container').on('click', 'a.dokan-remove-feat-image', this.featuredImage.removeImage);
 
             // download links
-            $('.product-edit-container').on('click', 'a.downloadable_upload_btn', this.fileDownloadable);
+            $('.product-edit-container').on('click', 'a.upload_file_button', this.fileDownloadable);
 
             // post status change
             $('.dokan-toggle-sidebar').on('click', 'a.dokan-toggle-edit', this.sidebarToggle.showStatus);
             $('.dokan-toggle-sidebar').on('click', 'a.dokan-toggle-save', this.sidebarToggle.saveStatus);
             $('.dokan-toggle-sidebar').on('click', 'a.dokan-toggle-cacnel', this.sidebarToggle.cancel);
+
+            // File inputs
+            $('.downloadable_files').on('click', 'a.insert-file-row', function(){
+                $(this).closest('table').find('tbody').append( $(this).data( 'row' ) );
+                return false;
+            });
+
+            $('.downloadable_files').on('click', 'a.delete', function(){
+                $(this).closest('tr').remove();
+                return false;
+            });
         },
 
         /**
@@ -360,16 +371,12 @@
 
                 downloadable_frame.on('select', function() {
                     var selection = downloadable_frame.state().get('selection');
-                    var textarea = $('textarea#_file_paths');
-                    var prev_value = textarea.val();
 
                     selection.map( function( attachment ) {
                         attachment = attachment.toJSON();
 
-                        prev_value = prev_value ? prev_value + "\n" + attachment.url : attachment.url;
+                        self.closest('tr').find('input.wc_file_url').val(attachment.url);
                     });
-
-                    textarea.val( prev_value );
                 });
 
                 downloadable_frame.open();
