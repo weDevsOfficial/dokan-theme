@@ -630,6 +630,53 @@ a:hover {
   max-width: 48px;
   max-height: 48px;
 }
+.page-template-templatesproducts-php table.product-listing-table span.product-type:before {
+  font-family: FontAwesome;
+  content: "\f133";
+  display: block;
+  text-align: center;
+}
+.page-template-templatesproducts-php table.product-listing-table span.product-type.downloadable:before {
+  font-family: FontAwesome;
+  content: "\f019";
+  display: block;
+  text-align: center;
+}
+.page-template-templatesproducts-php table.product-listing-table span.product-type.variable:before {
+  font-family: FontAwesome;
+  content: "\f02d";
+  display: block;
+  text-align: center;
+}
+.page-template-templatesproducts-php table.product-listing-table span.product-type.simple:before {
+  font-family: FontAwesome;
+  content: "\f0c9";
+  display: block;
+  text-align: center;
+}
+.page-template-templatesproducts-php table.product-listing-table span.product-type.virtual:before {
+  font-family: FontAwesome;
+  content: "\f0c2";
+  display: block;
+  text-align: center;
+}
+.page-template-templatesproducts-php table.product-listing-table mark.instock {
+  color: #7AD03A;
+  background: transparent;
+  font-weight: bold;
+}
+.page-template-templatesproducts-php table.product-listing-table td.post-status label.draft {
+  background: #ccc;
+}
+.page-template-templatesproducts-php table.product-listing-table td.post-status label.publish {
+  background: #65C265;
+}
+.page-template-templatesproducts-php table.product-listing-table td.post-status label.pending {
+  background: #f05025;
+}
+.page-template-templatesproducts-php table.product-listing-table td.post-date {
+  font-size: 13px;
+}
 .page-template-templatesproducts-php ul.post-statuses-filter {
   font-size: 12px;
   color: #dddddd;

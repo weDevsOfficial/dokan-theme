@@ -18,7 +18,7 @@ if ( isset( $_POST['update_product']) ) {
         'post_title' => sanitize_text_field( $_POST['post_title'] ),
         'post_content' => $_POST['post_content'],
         'post_excerpt' => $_POST['post_excerpt'],
-        'post_status' => $_POST['post_status'],
+        'post_status' => isset( $_POST['post_status'] ) ? $_POST['post_status'] : 'pending',
         'comment_status' => isset( $_POST['_enable_reviews'] ) ? 'open' : 'closed'
     );
 

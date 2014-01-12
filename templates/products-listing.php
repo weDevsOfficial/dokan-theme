@@ -23,7 +23,7 @@ get_header();
 
                 <?php dokan_product_dashboard_errors(); ?>
 
-                <table class="table table-striped">
+                <table class="table table-striped product-listing-table">
                     <thead>
                         <tr>
                             <th><?php _e( 'Image', 'dokan' ); ?></th>
@@ -46,6 +46,8 @@ get_header();
                             'post_status' => $post_statuses,
                             'posts_per_page' => 10,
                             'author' => get_current_user_id(),
+                            'orderby' => 'post_date',
+                            'order' => 'DESC',
                             'paged' => $paged
                         );
 
@@ -60,9 +62,10 @@ get_header();
                             while ($product_query->have_posts()) {
                                 $product_query->the_post();
 
+                                $tr_class = ($post->post_status == 'pending' ) ? ' class="danger"' : '';
                                 $product = get_product( $post->ID );
                                 ?>
-                                <tr>
+                                <tr<?php echo $tr_class; ?>>
                                     <td>
                                         <a href="<?php echo dokan_edit_product_url( $post->ID ); ?>"><?php echo $product->get_image(); ?></a>
                                     </td>
@@ -75,8 +78,8 @@ get_header();
                                             <span class="view"><a href="<?php echo get_permalink( $post->ID ); ?>" rel="permalink"><?php _e( 'View', 'dokan' ); ?></a></span>
                                         </div>
                                     </td>
-                                    <td>
-                                        <?php echo dokan_get_post_status( $post->post_status ); ?>
+                                    <td class="post-status">
+                                        <label class="label <?php echo $post->post_status; ?>"><?php echo dokan_get_post_status( $post->post_status ); ?></label>
                                     </td>
                                     <td>
                                         <?php
@@ -111,31 +114,32 @@ get_header();
                                     </td>
                                     <td>
                                         <?php
-                                        if ( $product->product_type == 'grouped' ) {
-                                            echo '<span class="product-type tips ' . $product->product_type . '">' . __( 'Grouped', 'woocommerce' ) . '</span>';
-                                        } elseif ( $product->product_type == 'external' ) {
-                                            echo '<span class="product-type tips ' . $product->product_type . '">' . __( 'External/Affiliate', 'woocommerce' ) . '</span>';
-                                        } elseif ( $product->product_type == 'simple' ) {
+                                            if( $product->product_type == 'grouped' ):
+                                                echo '<span class="product-type tips grouped" title="' . __( 'Grouped', 'woocommerce' ) . '"></span>';
+                                            elseif ( $product->product_type == 'external' ):
+                                                echo '<span class="product-type tips external" title="' . __( 'External/Affiliate', 'woocommerce' ) . '"></span>';
+                                            elseif ( $product->product_type == 'simple' ):
 
-                                            if ( $product->is_virtual() ) {
-                                                echo '<span class="product-type tips virtual">' . __( 'Virtual', 'woocommerce' ) . '</span>';
-                                            } elseif ( $product->is_downloadable() ) {
-                                                echo '<span class="product-type tips downloadable">' . __( 'Downloadable', 'woocommerce' ) . '</span>';
-                                            } else {
-                                                echo '<span class="product-type tips ' . $product->product_type . '">' . __( 'Simple', 'woocommerce' ) . '</span>';
-                                            }
-                                        } elseif ( $product->product_type == 'variable' ) {
-                                            echo '<span class="product-type tips ' . $product->product_type . '">' . __( 'Variable', 'woocommerce' ) . '</span>';
-                                        } else {
-                                            // Assuming that we have other types in future
-                                            echo '<span class="product-type tips ' . $product->product_type . '">' . ucwords( $product->product_type ) . '</span>';
-                                        }
+                                                if ( $product->is_virtual() ) {
+                                                    echo '<span class="product-type tips virtual" title="' . __( 'Virtual', 'woocommerce' ) . '"></span>';
+                                                } elseif ( $product->is_downloadable() ) {
+                                                    echo '<span class="product-type tips downloadable" title="' . __( 'Downloadable', 'woocommerce' ) . '"></span>';
+                                                } else {
+                                                    echo '<span class="product-type tips simple" title="' . __( 'Simple', 'woocommerce' ) . '"></span>';
+                                                }
+
+                                            elseif ( $product->product_type == 'variable' ):
+                                                echo '<span class="product-type tips variable" title="' . __( 'Variable', 'woocommerce' ) . '"></span>';
+                                            else:
+                                                // Assuming that we have other types in future
+                                                echo '<span class="product-type tips ' . $product->product_type . '" title="' . ucfirst( $the_product->product_type ) . '"></span>';
+                                            endif;
                                         ?>
                                     </td>
                                     <td>
                                         <?php echo (int) get_post_meta( $post->ID, 'pageview', true ); ?>
                                     </td>
-                                    <td>
+                                    <td class="post-date">
                                         <?php
                                         if ( '0000-00-00 00:00:00' == $post->post_date ) {
                                             $t_time = $h_time = __( 'Unpublished' );
