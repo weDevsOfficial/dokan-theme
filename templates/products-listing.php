@@ -13,11 +13,11 @@ get_header();
 
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-                <div class="product-listing-top row">
+                <div class="product-listing-top clearfix">
                     <?php dokan_product_listing_status_filter(); ?>
 
-                    <span class="col-md-3 pull-right">
-                        <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-large btn-success"><i class="fa fa-cart"></i> Add new product</a>
+                    <span class="col-md-3">
+                        <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-large btn-success pull-right"><i class="fa fa-briefcase">&nbsp;</i> <?php _e( 'Add new product', 'dokan' ); ?></a>
                     </span>
                 </div>
 

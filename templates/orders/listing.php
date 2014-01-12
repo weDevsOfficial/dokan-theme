@@ -82,27 +82,30 @@ if ( $user_orders ) {
                             $actions['processing'] = array(
                                 'url' => wp_nonce_url( admin_url( 'admin-ajax.php?action=dokan-mark-order-processing&order_id=' . $the_order->id ), 'dokan-mark-order-processing' ),
                                 'name' => __( 'Processing', 'woocommerce' ),
-                                'action' => "processing"
+                                'action' => "processing",
+                                'icon' => '<i class="fa fa-clock-o">&nbsp;</i>'
                             );
 
                         if ( in_array( $the_order->status, array('pending', 'on-hold', 'processing') ) )
                             $actions['complete'] = array(
                                 'url' => wp_nonce_url( admin_url( 'admin-ajax.php?action=dokan-mark-order-complete&order_id=' . $the_order->id ), 'dokan-mark-order-complete' ),
                                 'name' => __( 'Complete', 'woocommerce' ),
-                                'action' => "complete"
+                                'action' => "complete",
+                                'icon' => '<i class="fa fa-check">&nbsp;</i>'
                             );
 
                         $actions['view'] = array(
                             'url' => wp_nonce_url( add_query_arg( array( 'order_id' => $the_order->id ), get_permalink() ), 'dokan_view_order' ),
                             'name' => __( 'View', 'woocommerce' ),
-                            'action' => "view"
+                            'action' => "view",
+                            'icon' => '<i class="fa fa-eye">&nbsp;</i>'
                         );
 
                         $actions = apply_filters( 'woocommerce_admin_order_actions', $actions, $the_order );
 
                         foreach ($actions as $action) {
-                            $image = ( isset( $action['image_url'] ) ) ? $action['image_url'] : $woocommerce->plugin_url() . '/assets/images/icons/' . $action['action'] . '.png';
-                            printf( '<a class="btn btn-default btn-sm tips" href="%s" data-toggle="tooltip" data-placement="top" title="%s"><img src="%s" alt="%s" width="14" /></a> ', esc_url( $action['url'] ), esc_attr( $action['name'] ), esc_attr( $image ), esc_attr( $action['name'] ) );
+                            $icon = ( isset( $action['icon'] ) ) ? $action['icon'] : '';
+                            printf( '<a class="btn btn-default btn-sm tips" href="%s" data-toggle="tooltip" data-placement="top" title="%s">%s</a> ', esc_url( $action['url'] ), esc_attr( $action['name'] ), $icon );
                         }
 
                         do_action( 'woocommerce_admin_order_actions_end', $the_order );
