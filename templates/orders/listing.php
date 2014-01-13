@@ -1,7 +1,13 @@
 <?php
 global $woocommerce;
 
-$user_orders = dokan_get_seller_orders( get_current_user_id() );
+$seller_id = get_current_user_id();
+$order_status = isset( $_GET['order_status'] ) ? sanitize_key( $_GET['order_status'] ) : 'all';
+$paged = max( 1, get_query_var( 'paged' ) );
+$limit = 10;
+$offset = ( $paged - 1 ) * $limit;
+
+$user_orders = dokan_get_seller_orders( $seller_id, $order_status, $limit, $offset );
 
 if ( $user_orders ) {
     ?>
@@ -120,22 +126,29 @@ if ( $user_orders ) {
     </table>
 
     <?php
-    // if ( $query->max_num_pages > 1 ) {
-    //     echo '<div class="pagination pagination-centered">';
-    //     echo paginate_links( array(
-    //         'current' => max( 1, get_query_var( 'paged' ) ),
-    //         'total' => $query->max_num_pages,
-    //         'base' => str_replace( $post->ID, '%#%', esc_url( get_pagenum_link( $post->ID ) ) ),
-    //         'type' => 'list',
-    //         'prev_text' => __( '&laquo;' ),
-    //         'next_text' => __( '&raquo;' )
-    //     ) );
-    //     echo '</div>';
-    // }
+    $order_count = dokan_get_seller_orders_number( $seller_id, $order_status );
+    $num_of_pages = ceil( $order_count / $limit );
+
+    if ( $num_of_pages > 1 ) {
+        echo '<div class="pagination-container">';
+        $page_links = paginate_links( array(
+            'current' => $paged,
+            'total' => $order_count,
+            'base' => str_replace( $post->ID, '%#%', esc_url( get_pagenum_link( $post->ID ) ) ),
+            'type' => 'array',
+        ) );
+
+        echo "<ul class='pagination'>\n\t<li>";
+        echo join("</li>\n\t<li>", $page_links);
+        echo "</li>\n</ul>\n";
+        echo '</div>';
+    }
     ?>
 
 <?php } else { ?>
 
-    <?php _e( 'No orders found', 'dokan' ); ?>
+    <div class="alert alert-danger">
+        <?php _e( 'No orders found', 'dokan' ); ?>
+    </div>
 
 <?php } ?>
