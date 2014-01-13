@@ -1,66 +1,6 @@
 <?php
 
-/**
- * Get all the orders from a specific seller
- *
- * @global object $wpdb
- * @param int $seller_id
- * @return array
- */
-function dokan_get_seller_orders( $seller_id ) {
-    global $wpdb;
-
-    $cache_key = 'dokan-seller-orders-' . $seller_id;
-
-    $orders = wp_cache_get( $cache_key, 'dokan' );
-
-    if ( $orders === false ) {
-        $sql = "SELECT oi.order_id, p.post_date FROM {$wpdb->prefix}woocommerce_order_items oi
-                LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta oim ON oim.order_item_id = oi.order_item_id
-                LEFT JOIN $wpdb->posts p ON oim.meta_value = p.ID
-                WHERE
-                    oim.meta_key = '_product_id' AND
-                    p.post_author = %d AND
-                    p.post_status = 'publish'
-                GROUP BY oi.order_id";
-
-        $orders = $wpdb->get_results( $wpdb->prepare( $sql, $seller_id ) );
-        wp_cache_set( $cache_key, $orders, 'dokan' );
-    }
-
-    return $orders;
-}
-
-function dokan_get_seller_order_ids( $seller_id ) {
-    $orders = dokan_get_seller_orders( $seller_id );
-    $order_ids = array();
-
-    if ( $orders ) {
-        $order_ids = wp_list_pluck( $orders, 'order_id' );
-    }
-
-    return $order_ids;
-}
-
-
-/**
- * Get all the orders from a specific seller
- *
- * @global object $wpdb
- * @param int $seller_id
- * @return array
- */
-function dokan_is_seller_has_order( $seller_id, $order_id ) {
-    global $wpdb;
-
-    $sql = "SELECT oi.order_id FROM {$wpdb->prefix}woocommerce_order_items oi
-            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta oim ON oim.order_item_id = oi.order_item_id
-            LEFT JOIN $wpdb->posts p ON oim.meta_value = p.ID
-            WHERE oim.meta_key = '_product_id' AND p.post_author = %d AND oi.order_id = %d
-            GROUP BY oi.order_id";
-
-    return $wpdb->get_row( $wpdb->prepare( $sql, $seller_id, $order_id ) );
-}
+require_once __DIR__ . '/order-functions.php';
 
 function dokan_is_user_seller( $user_id ) {
     if ( !user_can( $user_id, 'edit_shop_orders' ) ) {
@@ -187,46 +127,6 @@ function dokan_count_comments( $post_type, $user_id ) {
     return $counts;
 }
 
-function dokan_count_orders( $user_id ) {
-    global $wpdb;
-
-    $cache_key = 'dokan-count-orders-' . $user_id;
-    $counts = wp_cache_get( $cache_key, 'dokan' );
-
-    if ( $counts === false ) {
-        $counts = array('pending' => 0, 'completed' => 0, 'on-hold' => 0, 'processing' => 0, 'refunded' => 0, 'cancelled' => 0, 'total' => 0);
-        $order_ids = dokan_get_seller_order_ids( $user_id );
-        $order_ids = count( $order_ids ) ? implode( ', ', $order_ids ) : 0;
-
-        $sql = "SELECT terms.slug
-                FROM {$wpdb->posts} p
-                LEFT JOIN {$wpdb->term_relationships} rel ON p.ID = rel.object_id
-                LEFT JOIN {$wpdb->term_taxonomy} tax ON rel.term_taxonomy_id = tax.term_taxonomy_id
-                LEFT JOIN {$wpdb->terms} terms ON tax.term_id = terms.term_id
-                WHERE p.post_type = 'shop_order' AND
-                    tax.taxonomy = 'shop_order_status' AND
-                    p.ID IN($order_ids)";
-
-        $results = $wpdb->get_results( $sql );
-
-        if ($results) {
-            $total = 0;
-
-            foreach ($results as $term_slug) {
-                if ( isset( $counts[$term_slug->slug] ) ) {
-                    $counts[$term_slug->slug] += 1;
-                    $counts['total'] += 1;
-                }
-            }
-        }
-
-        $counts = (object) $counts;
-        wp_cache_set( $cache_key, $counts, 'dokan' );
-    }
-
-    return $counts;
-}
-
 function dokan_author_pageviews( $seller_id ) {
     global $wpdb;
 
@@ -332,7 +232,6 @@ function dokan_create_sync_table() {
       `order_total` float(11,2) DEFAULT NULL,
       `net_amount` float(11,2) DEFAULT NULL,
       `order_status` varchar(30) DEFAULT NULL,
-      `status` tinyint(1) DEFAULT '1',
       PRIMARY KEY (`id`),
       KEY `order_id` (`order_id`),
       KEY `seller_id` (`seller_id`)
@@ -341,87 +240,8 @@ function dokan_create_sync_table() {
     $wpdb->query( $sql );
 }
 
-function dokan_on_order_status_change( $order_id, $old_status, $new_status ) {
-    global $wpdb;
-
-    // insert on dokan sync table
-    $wpdb->update( $wpdb->prefix . 'dokan_orders',
-        array( 'order_status' => $new_status ),
-        array( 'order_id' => $order_id ),
-        array( '%s' ),
-        array( '%d' )
-    );
-
-    // if any child orders found, change the orders as well
-    $sub_orders = get_children( array( 'post_parent' => $order_id, 'post_type' => 'shop_order' ) );
-    if ( $sub_orders ) {
-        foreach ($sub_orders as $order_post) {
-            $order = new WC_Order( $order_post );
-            $order->update_status( $new_status );
-        }
-    }
-}
-
-add_action( 'woocommerce_order_status_changed', 'dokan_on_order_status_change', 10, 3 );
-
-function dokan_sync_insert_order( $order_id ) {
-    global $wpdb;
-
-    $order = new WC_Order( $order_id );
-    $percentage = dokan_get_seller_percentage();
-    $order_total = $order->get_total();
-
-    $wpdb->insert( $wpdb->prefix . 'dokan_orders',
-        array(
-            'order_id' => $order_id,
-            'seller_id' => dokan_get_seller_id_by_order( $order_id ),
-            'order_total' => $order_total,
-            'net_amount' => ($order_total * $percentage)/100,
-            'order_status' => $order->status,
-        ),
-        array(
-            '%d',
-            '%d',
-            '%f',
-            '%f',
-            '%s',
-        )
-    );
-}
-
-add_action( 'woocommerce_checkout_update_order_meta', 'dokan_sync_insert_order' );
-add_action( 'dokan_checkout_update_order_meta', 'dokan_sync_insert_order' );
-
-function dokan_sync_update_order_status( $order_id, $status = 1 ) {
-    global $wpdb;
-
-    $wpdb->update( $wpdb->prefix . 'dokan_orders',
-        array( 'status' => $status ),
-        array( 'order_id' => $order_id ),
-        array( '%d' )
-    );
-}
-
 function dokan_get_seller_percentage() {
     return 90;
-}
-
-function dokan_get_seller_id_by_order( $order_id ) {
-    global $wpdb;
-
-    $sql = "SELECT p.post_author AS seller_id
-            FROM wp_woocommerce_order_items oi
-            LEFT JOIN wp_woocommerce_order_itemmeta oim ON oim.order_item_id = oi.order_item_id
-            LEFT JOIN wp_posts p ON oim.meta_value = p.ID
-            WHERE oim.meta_key = '_product_id' AND oi.order_id = %d GROUP BY p.post_author";
-
-    $sellers = $wpdb->get_results( $wpdb->prepare( $sql, $order_id ) );
-
-    if ( count( $sellers ) == 1 ) {
-        return (int) reset( $sellers )->seller_id;
-    }
-
-    return 0;
 }
 
 // Function to get the client ip address
@@ -556,38 +376,6 @@ function dokan_get_product_status( $status ) {
 
         default:
             return '';
-            break;
-    }
-}
-
-function dokan_get_order_status_class( $status ) {
-    switch ($status) {
-        case 'completed':
-            return 'success';
-            break;
-
-        case 'pending':
-            return 'danger';
-            break;
-
-        case 'on-hold':
-            return 'warning';
-            break;
-
-        case 'processing':
-            return 'info';
-            break;
-
-        case 'refunded':
-            return 'default';
-            break;
-
-        case 'cancelled':
-            return 'default';
-            break;
-
-        case 'failed':
-            return 'danger';
             break;
     }
 }

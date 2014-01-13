@@ -1198,36 +1198,3 @@ function dokan_create_sub_order_shipping( $parent_order, $order_id, $seller_prod
 
     return 0;
 }
-
-function dokan_on_order_trash( $post_id ) {
-    $post = get_post( $post_id );
-
-    if ( $post->post_type == 'shop_order' ) {
-        dokan_sync_update_order_status( $post_id, 0 );
-    }
-}
-
-add_action( 'wp_trash_post', 'dokan_on_order_trash' );
-
-function dokan_on_order_untrash( $post_id ) {
-    $post = get_post( $post_id );
-
-    if ( $post->post_type == 'shop_order' ) {
-        dokan_sync_update_order_status( $post_id, 1 );
-    }
-}
-
-add_action( 'wp_untrash_post', 'dokan_on_order_untrash' );
-
-function dokan_store_query_filter( $query ) {
-    global $wp_query;
-
-    $author = get_query_var( 'store' );
-
-    if ( $query->is_main_query() && !empty( $author ) ) {
-        $query->set( 'post_type', 'product' );
-        $query->set( 'author_name', $author );
-    }
-}
-
-add_action( 'pre_get_posts', 'dokan_store_query_filter' );
