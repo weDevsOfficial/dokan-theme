@@ -12,6 +12,7 @@ class Dokan_Rewrites {
         add_filter( 'template_include', array($this, 'store_template') );
         add_filter( 'template_include', array($this, 'product_edit_template'), 11 );
         add_filter( 'query_vars', array($this, 'register_query_var') );
+        add_filter( 'pre_get_posts', array($this, 'store_query_filter') );
     }
 
     /**
@@ -85,6 +86,17 @@ class Dokan_Rewrites {
         }
 
         return $template;
+    }
+
+    function store_query_filter( $query ) {
+        global $wp_query;
+
+        $author = get_query_var( 'store' );
+
+        if ( !is_admin() && $query->is_main_query() && !empty( $author ) ) {
+            $query->set( 'post_type', 'product' );
+            $query->set( 'author_name', $author );
+        }
     }
 
 }
