@@ -3,6 +3,9 @@
  * Template Name: Dashboard - Coupon
  */
 
+dokan_redirect_login();
+dokan_redirect_if_not_seller();
+
 
 $dokan_template_coupons = Dokan_Template_Coupons::init();
 
@@ -13,8 +16,7 @@ if ( !is_wp_error( $validated ) ) {
 }
 
 $dokan_template_coupons->coupun_delete();
-
-
+$is_edit_page = isset( $_GET['view'] ) && $_GET['view'] == 'add_coupons';
 
 get_header();
 ?>
@@ -29,16 +31,28 @@ get_header();
 
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                 <header class="entry-header">
-                    <h1 class="entry-title"><?php the_title(); ?></h1>
+                    <div class="row">
+                        <span class="col-md-9">
+                            <h1 class="entry-title">
+                            <?php the_title(); ?>
+
+                            <?php if ( $is_edit_page ) {
+                                printf( '<small> - %s</small>', __( 'Edit Coupon', 'dokan' ) );
+                            } ?>
+                            </h1>
+                        </span>
+
+                        <?php if ( !$is_edit_page ) { ?>
+                            <span class="col-md-3">
+                                <a href="<?php echo add_query_arg( array( 'view' => 'add_coupons'), get_permalink() ); ?>" class="btn btn-large btn-success pull-right"><i class="fa fa-gift">&nbsp;</i> <?php _e( 'Add new Coupon', 'dokan' ); ?></a>
+                            </span>
+                        <?php } ?>
+                    </div>
                 </header><!-- .entry-header -->
 
                 <div class="entry-content">
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
-    
-                <p>
-                   <a href="<?php echo add_query_arg( array( 'view' => 'add_coupons'), get_permalink() ); ?>" class="btn btn-large btn-info"><?php _e('Add New Coupon','dokan'); ?></a>
-                </p>
 
                 <?php $dokan_template_coupons->user_coupons(); ?>
 

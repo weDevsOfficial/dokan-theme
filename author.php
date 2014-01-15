@@ -14,12 +14,15 @@ get_header(); ?>
       <div class="span12">
 
 
+            <?php global $wp_query; var_dump($wp_query); ?>
           <?php
           global $author;
 
           if(have_posts()) the_post();
           if(get_the_author_meta('description')):
           ?>
+
+
 
           <h2><?php echo get_the_author_meta('meta_key'); ?></h2>
           <hr>

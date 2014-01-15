@@ -2,9 +2,15 @@
 
 global $post, $product;
 
-// var_dump( $post );
+dokan_redirect_login();
+dokan_redirect_if_not_seller();
 
 $post_id = $post->ID;
+
+if ( isset( $_GET['product_id'] ) ) {
+    $post_id = intval( $_GET['product_id'] );
+    $post = get_post( $post_id );
+}
 
 if ( isset( $_POST['update_product']) ) {
     $product_info = array(
@@ -12,6 +18,7 @@ if ( isset( $_POST['update_product']) ) {
         'post_title' => sanitize_text_field( $_POST['post_title'] ),
         'post_content' => $_POST['post_content'],
         'post_excerpt' => $_POST['post_excerpt'],
+        'post_status' => isset( $_POST['post_status'] ) ? $_POST['post_status'] : 'pending',
         'comment_status' => isset( $_POST['_enable_reviews'] ) ? 'open' : 'closed'
     );
 
@@ -22,8 +29,8 @@ if ( isset( $_POST['update_product']) ) {
     wp_redirect( add_query_arg( array( 'message' => 'success' ), $edit_url ) );
 }
 
-$_regular_price = get_post_meta( $post->ID, '_regular_price', true );
-$_sale_price = get_post_meta( $post->ID, '_sale_price', true );
+$_regular_price = get_post_meta( $post_id, '_regular_price', true );
+$_sale_price = get_post_meta( $post_id, '_sale_price', true );
 $is_discount = !empty( $_sale_price ) ? true : false;
 $_sale_price_dates_from = get_post_meta( $post_id, '_sale_price_dates_from', true );
 $_sale_price_dates_to = get_post_meta( $post_id, '_sale_price_dates_to', true );
@@ -64,7 +71,7 @@ get_header();
                         <?php if ( isset( $_GET['message'] ) && $_GET['message'] == 'success') { ?>
                             <div class="alert alert-success">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                <strong>Success!</strong> The product has been updated successfully.
+                                <strong>Success!</strong> The product has been updated successfully. <a href="<?php echo get_permalink( $post_id ); ?>" target="_blank"><?php _e( 'View Product &rarr;', 'dokan' ); ?></a>
                             </div>
                         <?php } ?>
 
@@ -93,24 +100,26 @@ get_header();
                                                     $wrap_class = ' dokan-hide';
                                                     $instruction_class = '';
                                                     $feat_image_id = 0;
-                                                    if ( has_post_thumbnail( $post->ID ) ) {
+                                                    if ( has_post_thumbnail( $post_id ) ) {
                                                         $wrap_class = '';
                                                         $instruction_class = ' dokan-hide';
-                                                        $feat_image_id = get_post_thumbnail_id( $post->ID );
+                                                        $feat_image_id = get_post_thumbnail_id( $post_id );
                                                     }
                                                     ?>
 
                                                     <div class="instruction-inside<?php echo $instruction_class; ?>">
                                                         <input type="hidden" name="feat_image_id" class="dokan-feat-image-id" value="<?php echo $feat_image_id; ?>">
-                                                        <a href="#" class="dokan-feat-image-btn"><?php _e( 'Upload a product cover image', 'dokan' ); ?></a>
+
+                                                        <i class="fa fa-cloud-upload"></i>
+                                                        <a href="#" class="dokan-feat-image-btn btn btn-sm"><?php _e( 'Upload a product cover image', 'dokan' ); ?></a>
                                                     </div>
 
                                                     <div class="image-wrap<?php echo $wrap_class; ?>">
                                                         <a class="close dokan-remove-feat-image">&times;</a>
                                                         <?php if ( $feat_image_id ) { ?>
-                                                            <?php echo get_the_post_thumbnail( $post->ID, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ) ); ?>
+                                                            <?php echo get_the_post_thumbnail( $post_id, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ), array( 'height' => '', 'width' => '' ) ); ?>
                                                         <?php } else { ?>
-                                                            <img src="" alt="">
+                                                            <img height="" width="" src="" alt="">
                                                         <?php } ?>
                                                     </div>
                                                 </div>
@@ -119,15 +128,15 @@ get_header();
                                             <div class="col-md-7">
 
                                                 <div class="form-group">
-                                                    <input type="hidden" name="dokan_product_id" value="<?php echo $post->ID; ?>">
-                                                    <?php dokan_post_input_box( $post->ID, 'post_title', array( 'placeholder' => 'Product name..', 'value' => $post->post_title ) ); ?>
+                                                    <input type="hidden" name="dokan_product_id" value="<?php echo $post_id; ?>">
+                                                    <?php dokan_post_input_box( $post_id, 'post_title', array( 'placeholder' => 'Product name..', 'value' => $post->post_title ) ); ?>
                                                 </div>
 
                                                 <div class="row show_if_simple">
                                                     <div class="form-group col-md-6">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                                                            <?php dokan_post_input_box( $post->ID, '_regular_price', array( 'placeholder' => '9.99' ) ); ?>
+                                                            <?php dokan_post_input_box( $post_id, '_regular_price', array( 'placeholder' => '9.99' ) ); ?>
                                                         </div>
                                                     </div>
 
@@ -144,7 +153,7 @@ get_header();
                                                         <div class="row form-group">
                                                             <div class="input-group col-md-6">
                                                                 <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                                                                <?php dokan_post_input_box( $post->ID, '_sale_price', array( 'placeholder' => __( 'Special Price', 'dokan' ) ) ); ?>
+                                                                <?php dokan_post_input_box( $post_id, '_sale_price', array( 'placeholder' => __( 'Special Price', 'dokan' ) ) ); ?>
                                                             </div>
 
                                                             <div class="col-md-6">
@@ -176,12 +185,12 @@ get_header();
 
 
                                                 <div class="form-group">
-                                                    <?php dokan_post_input_box( $post->ID, 'post_excerpt', array( 'placeholder' => 'Short description about the product...', 'value' => $post->post_excerpt ), 'textarea' ); ?>
+                                                    <?php dokan_post_input_box( $post_id, 'post_excerpt', array( 'placeholder' => 'Short description about the product...', 'value' => $post->post_excerpt ), 'textarea' ); ?>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <?php
-                                                    $term = wp_get_post_terms( $post->ID, 'product_cat', array( 'fields' => 'ids') );
+                                                    $term = wp_get_post_terms( $post_id, 'product_cat', array( 'fields' => 'ids') );
                                                     if ( $term ) {
                                                         $product_cat = reset( $term );
                                                     }

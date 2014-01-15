@@ -53,8 +53,8 @@
 
             <div class="dokan-toggle-select-container dokan-hide">
                 <select name="_product_type" id="_product_type" class="dokan-toggle-select">
-                    <option value="simple" <?php selected( $product_type, 'simple' ); ?>><?php _e( 'Simple Product', 'woocommerce' ); ?></option>
-                    <option value="variable" <?php selected( $product_type, 'variable' ); ?>><?php _e( 'Variable Product', 'woocommerce' ); ?></option>
+                    <option value="simple" <?php selected( $product_type, 'simple' ); ?>><?php _e( 'Simple Product', 'dokan' ); ?></option>
+                    <option value="variable" <?php selected( $product_type, 'variable' ); ?>><?php _e( 'Variable Product', 'dokan' ); ?></option>
                 </select>
 
                 <a class="dokan-toggle-save btn btn-default btn-sm" href="#"><?php _e( 'OK', 'dokan' ); ?></a>
@@ -64,7 +64,7 @@
     </div> <!-- .product-type -->
 </div>
 
-<aside class="downloadable">
+<aside class="downloadable downloadable_files">
     <div class="dokan-side-head">
         <label class="checkbox-inline">
             <input type="checkbox" id="_downloadable" name="_downloadable" value="yes"<?php checked( $_downloadable, 'yes' ); ?>>
@@ -75,13 +75,36 @@
     <div class="dokan-side-body<?php echo ($_downloadable == 'yes' ) ? '' : ' dokan-hide'; ?>">
         <ul class="list-unstyled ">
             <li class="form-group">
-                <p><a href="#" class="downloadable_upload_btn btn btn-default btn-sm"><i class="fa fa-upload"></i> Upload File</a></p>
 
-                <?php
-                $file_paths = get_post_meta( $post->ID, '_file_paths', true );
-                $file_paths = is_array( $file_paths ) ? implode( "\r\n", $file_paths ) : '';
-                ?>
-                <textarea name="_file_paths" id="_file_paths" rows="4" class="form-control" placeholder="<?php _e( 'File urls, one per line.', 'dokan' ); ?>"><?php echo esc_textarea( $file_paths ); ?></textarea>
+                <table class="table table-condensed">
+                    <tfoot>
+                        <tr>
+                            <th>
+                                <a href="#" class="insert-file-row btn btn-sm btn-success" data-row="<?php
+                                    $file = array(
+                                        'file' => '',
+                                        'name' => ''
+                                    );
+                                    ob_start();
+                                    include dirname( dirname( __DIR__ ) ) . '/lib/woo-views/html-product-download.php';
+                                    echo esc_attr( ob_get_clean() );
+                                ?>"><?php _e( 'Add File', 'dokan' ); ?></a>
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <?php
+                        $downloadable_files = get_post_meta( $post->ID, '_downloadable_files', true );
+
+                        if ( $downloadable_files ) {
+                            foreach ( $downloadable_files as $key => $file ) {
+                                include dirname( dirname( __DIR__ ) ) . '/lib/woo-views/html-product-download.php';
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+
             </li>
             <li class="form-group">
                 <div class="input-group">
@@ -113,6 +136,10 @@
 
                 if ( $gallery ) {
                     foreach ($gallery as $image_id) {
+                        if ( empty( $image_id ) ) {
+                            continue;
+                        }
+
                         $attachment_image = wp_get_attachment_image_src( $image_id, 'thumbnail' );
                         ?>
                         <li class="image" data-attachment_id="<?php echo $image_id; ?>">

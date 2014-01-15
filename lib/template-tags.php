@@ -210,3 +210,246 @@ function wedevs_page_navi( $before = '', $after = '', $wp_query ) {
     }
     echo '</ul></div>' . $after . "";
 }
+
+function dokan_checkout_header_btn() {
+    global $woocommerce;
+
+    $items = $woocommerce->cart->get_cart();
+    ?>
+    <span class="cart-link">
+        <a href="<?php echo $woocommerce->cart->get_cart_url(); ?>"
+           title="<?php _e( 'View your shopping cart', 'woothemes' ); ?>">
+            <i class="icon-shopping-cart"></i>
+            <span><?php printf( __( 'Cart (%d) %s', 'wedevs' ), $woocommerce->cart->get_cart_contents_count(), $woocommerce->cart->get_cart_total() ); ?></span>
+        </a>
+
+        <div class="cart-items">
+            <span class="border"></span>
+
+            <?php if ( $items ) { ?>
+
+            <ul class="mini-product-list">
+                <?php
+                foreach ( $items as $hash => $item ) {
+                    $product = $item['data'];
+                    ?>
+
+                    <li class="item clearfix">
+
+                        <?php
+                        $thumbnail = apply_filters( 'woocommerce_in_cart_product_thumbnail', $product->get_image(), $item, $hash );
+                        printf( '<a href="%s">%s</a>', esc_url( get_permalink( apply_filters( 'woocommerce_in_cart_product_id', $item['product_id'] ) ) ), $thumbnail );
+                        ?>
+
+                        <div class="product-details">
+                            <?php echo apply_filters( 'woocommerce_cart_item_remove_link', sprintf( '<a href="%s" class="remove" title="%s">&times;</a>', esc_url( $woocommerce->cart->get_remove_url( $hash ) ), __( 'Remove this item', 'woocommerce' ) ), $hash ); ?>
+
+                            <p class="product-name">
+                                <?php
+                                if ( $product->exists() && $item['quantity'] > 0 ) {
+
+                                    if ( !$product->is_visible() || ($product instanceof WC_Product_Variation && !$product->parent_is_visible()) ) {
+                                        echo apply_filters( 'woocommerce_in_cart_product_title', $product->get_title(), $item, $hash );
+                                    } else {
+                                        printf( '<a href="%s">%s</a>', esc_url( get_permalink( apply_filters( 'woocommerce_in_cart_product_id', $item['product_id'] ) ) ), apply_filters( 'woocommerce_in_cart_product_title', $product->get_title(), $item, $hash ) );
+                                    }
+
+                                }
+                                ?>
+                            </p>
+
+                            <?php echo $item['quantity'] ?> x
+
+                            <span class="price">
+                                <?php
+                                $product_price = get_option( 'woocommerce_display_cart_prices_excluding_tax' ) == 'yes' || $woocommerce->customer->is_vat_exempt() ? $product->get_price_excluding_tax() : $product->get_price();
+
+                                echo apply_filters( 'woocommerce_cart_item_price_html', woocommerce_price( $product_price ), $item, $hash );
+                                ?>
+                            </span>
+
+                        </div>
+                        <!-- .product-details -->
+                    </li>
+                    <?php } ?>
+            </ul>
+
+            <div class="buttons clearfix">
+                <a class="btn btn-info"
+                   href="<?php echo $woocommerce->cart->get_cart_url(); ?>"><?php _e( 'View Cart', 'dokan' ); ?></a>
+                <a class="btn btn-warning"
+                   href="<?php echo $woocommerce->cart->get_checkout_url(); ?>"><?php _e( 'Checkout', 'dokan' ); ?></a>
+            </div>
+            <?php } else { ?>
+            <div class="alert alert-error">
+                <a class="close" data-dismiss="alert">&times;</a>
+                <?php _e( 'No items found in cart', 'dokan' ); ?>
+            </div>
+            <?php } ?>
+        </div>
+    </span>
+<?php
+}
+
+function dokan_product_dashboard_errors() {
+    $type = isset( $_GET['message'] ) ? $_GET['message'] : '';
+
+    switch ($type) {
+        case 'product_deleted':
+            ?>
+            <div class="alert alert-success">
+                <?php echo __( 'Product has been deleted successfully!', 'dokan' ); ?>
+            </div>
+            <?php
+            break;
+
+        case 'error':
+            ?>
+            <div class="alert alert-danger">
+                <?php echo __( 'Something went wrong!', 'dokan' ); ?>
+            </div>
+            <?php
+            break;
+    }
+}
+
+function dokan_product_listing_status_filter() {
+    $permalink = get_permalink();
+    $status_class = isset( $_GET['post_status'] ) ? $_GET['post_status'] : 'all';
+    $post_counts = dokan_count_posts( 'product', get_current_user_id() );
+    ?>
+    <ul class="list-inline col-md-9 post-statuses-filter">
+        <li<?php echo $status_class == 'all' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo $permalink; ?>"><?php printf( __( 'All (%d)', 'dokan' ), $post_counts->total ); ?></a>
+        </li>
+        <li<?php echo $status_class == 'publish' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'post_status' => 'publish' ), $permalink ); ?>"><?php printf( __( 'Online (%d)', 'dokan' ), $post_counts->publish ); ?></a>
+        </li>
+        <li<?php echo $status_class == 'pending' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'post_status' => 'pending' ), $permalink ); ?>"><?php printf( __( 'Pending Review (%d)', 'dokan' ), $post_counts->pending ); ?></a>
+        </li>
+        <li<?php echo $status_class == 'draft' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'post_status' => 'draft' ), $permalink ); ?>"><?php printf( __( 'Draft (%d)', 'dokan' ), $post_counts->draft ); ?></a>
+        </li>
+    </ul> <!-- .post-statuses-filter -->
+    <?php
+}
+
+function dokan_order_listing_status_filter() {
+    $orders_url = get_permalink();
+    $status_class = isset( $_GET['order_status'] ) ? $_GET['order_status'] : 'all';
+    $orders_counts = dokan_count_orders( get_current_user_id() );
+    ?>
+
+    <ul class="list-inline order-statuses-filter">
+        <li<?php echo $status_class == 'all' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo $orders_url; ?>">
+                <?php printf( __( 'All (%d)', 'dokan' ), $orders_counts->total ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'completed' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'completed' ), $orders_url ); ?>">
+                <?php printf( __( 'Completed (%d)', 'dokan' ), $orders_counts->completed ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'processing' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'processing' ), $orders_url ); ?>">
+                <?php printf( __( 'Processing (%d)', 'dokan' ), $orders_counts->processing ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'on-hold' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'on-hold' ), $orders_url ); ?>">
+                <?php printf( __( 'On-hold (%d)', 'dokan' ), $orders_counts->{'on-hold'} ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'pending' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'pending' ), $orders_url ); ?>">
+                <?php printf( __( 'Pending (%d)', 'dokan' ), $orders_counts->pending ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'canceled' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'cancelled' ), $orders_url ); ?>">
+                <?php printf( __( 'Cancelled (%d)', 'dokan' ), $orders_counts->cancelled ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'refunded' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'refunded' ), $orders_url ); ?>">
+                <?php printf( __( 'Refunded (%d)', 'dokan' ), $orders_counts->refunded ); ?></span>
+            </a>
+        </li>
+    </ul>
+    <?php
+}
+
+function dokan_get_dashboard_nav() {
+    $urls = array(
+        'dashboard' => array(
+            'title' => __( 'Dashboard', 'dokan'),
+            'icon' => '<i class="icon-dashboard"></i>',
+            'url' => dokan_get_page_url( 'dashboard' )
+        ),
+        'product' => array(
+            'title' => __( 'Products', 'dokan'),
+            'icon' => '<i class="icon-briefcase"></i>',
+            'url' => dokan_get_page_url( 'products' )
+        ),
+        'order' => array(
+            'title' => __( 'Orders', 'dokan'),
+            'icon' => '<i class="icon-basket"></i>',
+            'url' => dokan_get_page_url( 'orders' )
+        ),
+        'coupon' => array(
+            'title' => __( 'Coupons', 'dokan'),
+            'icon' => '<i class="icon-gift"></i>',
+            'url' => dokan_get_page_url( 'coupons' )
+        ),
+        'report' => array(
+            'title' => __( 'Reports', 'dokan'),
+            'icon' => '<i class="icon-stats"></i>',
+            'url' => dokan_get_page_url( 'reports' )
+        ),
+        'reviews' => array(
+            'title' => __( 'Reviews', 'dokan'),
+            'icon' => '<i class="icon-bubbles"></i>',
+            'url' => dokan_get_page_url( 'reviews' )
+        ),
+        'withdraw' => array(
+            'title' => __( 'Withdraw', 'dokan'),
+            'icon' => '<i class="icon-upload"></i>',
+            'url' => dokan_get_page_url( 'withdraw' )
+        ),
+        'settings' => array(
+            'title' => __( 'Settings', 'dokan'),
+            'icon' => '<i class="icon-cog"></i>',
+            'url' => dokan_get_page_url( 'settings' )
+        ),
+    );
+
+    return apply_filters( 'dokan_get_dashboard_nav', $urls );
+}
+
+function dokan_dashboard_nav( $active_menu ) {
+    $urls = dokan_get_dashboard_nav();
+    $menu = '<ul class="dokan-dashboard-menu">';
+
+    foreach ($urls as $key => $item) {
+        $class = ( $active_menu == $key ) ? ' class="active"' : '';
+        $menu .= sprintf( '<li%s><a href="%s">%s %s</a></li>', $class, $item['url'], $item['icon'], $item['title'] );
+    }
+    $menu .= '</ul>';
+
+    return $menu;
+}
+
+function dokan_category_widget() {
+     the_widget( 'Dokan_Category_Widget', array(
+        'title' => __( 'Product Categories', 'dokan' )
+        ),
+        array(
+            'before_widget' => '<aside class="widget dokan-category-menu">',
+            'after_widget' => '</aside>',
+            'before_title' => '<h3 class="widget-title">',
+            'after_title' => '</h3>',
+        )
+    );
+}

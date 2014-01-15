@@ -1,18 +1,11 @@
 <?php
-//mishu
-error_reporting(0);
-
-function debug($val) {
-    echo '<pre>'; print_r($val); echo '</pre>';
-}
-
-//close mishu
 /**
  * Dokan functions and definitions
  *
  * @package Dokan
  * @since Dokan 1.0
  */
+
 /**
  * Set the content width based on the theme's design and stylesheet.
  *
@@ -48,9 +41,6 @@ function dokan_autoload( $class ) {
 
 spl_autoload_register( 'dokan_autoload' );
 
-//mishu start
-
-//mishu end
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -63,62 +53,62 @@ class WeDevs_Dokan {
         //includes file
         $this->includes();
 
-        //bind actions
-        add_action( 'after_setup_theme', array($this, 'setup') );
-        add_action( 'widgets_init', array($this, 'widgets_init') );
-        add_action( 'wp_enqueue_scripts', array($this, 'scripts') );
-        add_filter( 'posts_where', array($this, 'hide_others_uploads') );
+        // init actions and filter
+        $this->init_filters();
+        $this->init_actions();
 
-        add_action( 'admin_init', array($this, 'install_theme' ) );
-
-        //for reviews ajax request
-        if ( defined('DOING_AJAX') && DOING_AJAX === true ) {
-            $ajax = Dokan_Ajax::init();
-            $ajax->all_ajax_action();
-        }
+        // initialize classes
+        $this->init_classes();
 
         //initalize user roles
         $this->user_roles();
+
+        //for reviews ajax request
+        $this->init_ajax();
+    }
+
+    function init_filters() {
+        add_filter( 'posts_where', array($this, 'hide_others_uploads') );
+    }
+
+    function init_actions() {
+        add_action( 'after_setup_theme', array($this, 'setup') );
+        add_action( 'widgets_init', array($this, 'widgets_init') );
+        add_action( 'wp_enqueue_scripts', array($this, 'scripts') );
+        add_action( 'admin_init', array($this, 'install_theme' ) );
+    }
+
+    function init_classes() {
+        if ( !is_admin() ) {
+            new Dokan_Pageviews();
+        }
+
+        new Dokan_Rewrites();
+    }
+
+    function init_ajax() {
+        $doing_ajax = defined('DOING_AJAX') && DOING_AJAX;
+
+        if ( $doing_ajax ) {
+            Dokan_Ajax::init()->init_ajax();
+            new Dokan_Pageviews();
+        }
     }
 
     function includes() {
         $lib_dir = __DIR__ . '/lib/';
+        $inc_dir = __DIR__ . '/includes/';
 
-        require_once dirname( __FILE__ ) . '/lib/bootstrap-walker.php';
-        require_once dirname( __FILE__ ) . '/lib/woo-functions.php';
-        require_once dirname( __FILE__ ) . '/lib/woo-template.php';
-        require_once dirname( __FILE__ ) . '/lib/template-tags.php';
+        require_once $lib_dir . 'theme-functions.php';
+        require_once $inc_dir . 'widgets/menu-category.php';
 
         if ( is_admin() ) {
-            require_once dirname( __FILE__ ) . '/lib/admin.php';
-        }
-
-
-        $files = array(
-            'woo-template.php', //Custom template fixing functions for WooCommerce
-            'template-tags.php', //Custom template tags for this theme.
-            'extras.php', // Custom functions that act independently of the theme templates
-            'functions.php', //Helper functions
-            //'featured-image.php', //Featured Image uploader functions
-
-            /** roots files ***/
-            'roots/utils.php',           // Utility functions
-            'roots/wrapper.php',         // Theme wrapper class
-            'roots/sidebar.php',         // Sidebar class
-            'roots/config.php',          // Configuration
-            'roots/titles.php',          // Page titles
-            'roots/cleanup.php',         // Cleanup
-            'roots/nav.php',             // Custom nav modifications
-            'roots/gallery.php',         // Custom [gallery] modifications
-            'roots/comments.php',        // Custom comments modifications
-            'roots/rewrites.php',        // URL rewriting for assets
-            'roots/relative-urls.php',   // Root relative URLs
-            'roots/widgets.php',         // Sidebars and widgets
-            'roots/custom.php',          // Custom functions
-        );
-
-        foreach ($files as $file) {
-            //require_once $lib_dir . $file;
+            require_once $lib_dir . 'admin.php';
+        } else {
+            require_once $lib_dir . 'bootstrap-walker.php';
+            require_once $lib_dir . 'wc-functions.php';
+            require_once $lib_dir . 'wc-template.php';
+            require_once $lib_dir . 'template-tags.php';
         }
     }
 
@@ -169,6 +159,7 @@ class WeDevs_Dokan {
         ) );
 
         add_theme_support( 'woocommerce' );
+        add_post_type_support( 'product', 'author' );
 
         /**
          * Add support for the Aside Post Formats
@@ -309,8 +300,8 @@ class WeDevs_Dokan {
         register_sidebar( array(
             'name' => __( 'Sidebar', 'dokan' ),
             'id' => 'sidebar-1',
-            'before_widget' => '<aside id="%1$s" class="widget %2$s"><div class="widget-inner">',
-            'after_widget' => '</div></aside>',
+            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+            'after_widget' => '</aside>',
             'before_title' => '<h3 class="widget-title">',
             'after_title' => '</h3>',
         ) );
@@ -333,9 +324,6 @@ class WeDevs_Dokan {
     function scripts() {
         $template_directory = get_template_directory_uri();
 
-        wp_enqueue_script( 'post' );
-        wp_enqueue_media();
-
         wp_enqueue_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.css', false, null );
         wp_enqueue_style( 'icomoon', $template_directory . '/assets/css/icomoon.css', false, null );
         wp_enqueue_style( 'fontawesome', $template_directory . '/assets/css/font-awesome.css', false, null );
@@ -354,32 +342,30 @@ class WeDevs_Dokan {
             wp_enqueue_script( 'keyboard-image-navigation', $template_directory . '/assets/js/keyboard-image-navigation.js', array('jquery'), '20120202' );
         }
 
-        // wp_register_script( 'modernizr', $template_directory . '/assets/js/vendor/modernizr-2.6.2.min.js', false, null, false );
-        // wp_register_script( 'roots_plugins', $template_directory . '/assets/js/plugins.js', false, null, true );
-        // wp_register_script( 'tip-tip', $template_directory . '/assets/js/jquery.tipTip.js', false, null, true );
-
         wp_enqueue_script( 'jquery' );
         wp_enqueue_script( 'jquery-ui' );
-        wp_enqueue_script( 'jquery-ui-autocomplete' );
         wp_enqueue_script( 'jquery-ui-datepicker' );
-        wp_enqueue_script( 'underscore' );
 
+        wp_register_script( 'dokan-order', $template_directory . '/assets/js/orders.js', false, null, true );
+
+        wp_register_script( 'jquery-flot', $template_directory . '/assets/js/jquery.flot.js', false, null, true );
+        wp_register_script( 'jquery-chart', $template_directory . '/assets/js/Chart.min.js', false, null, true );
+
+        // wp_enqueue_script( 'menu-aim', $template_directory . '/assets/js/jquery.menu-aim.js', false, null, true );
         wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
-        wp_enqueue_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
-        wp_enqueue_script( 'dokan-reviews', get_stylesheet_directory_uri() . '/assets/js/reviews.js', array('jquery', 'underscore') );
+
+        wp_enqueue_script( 'dokan-reviews', $template_directory . '/assets/js/reviews.js', array('jquery', 'underscore') );
+    
+        wp_enqueue_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
+        wp_enqueue_script( 'chosen-ajax', $template_directory . '/assets/js/ajax-chosen.jquery.min.js', array('jquery'), null, true );
+        wp_enqueue_script( 'form-validate', $template_directory . '/assets/js/form-validate.js', array('jquery'), null, true  );
         wp_enqueue_script( 'dokan-scripts', $template_directory . '/assets/js/script.js', false, null, true );
         wp_localize_script( 'dokan-scripts', 'dokan', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' ),
-            'nonce' => wp_create_nonce( 'dokan_reviews' )
+            'nonce' => wp_create_nonce( 'dokan_reviews' ),
+            'ajax_loader' => $template_directory . '/assets/images/ajax-loader.gif'
         ) );
-
-        wp_enqueue_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
-        wp_enqueue_script( 'form-validate', get_stylesheet_directory_uri() . '/assets/js/form-validate.js', array('jquery'), null, true  );
-
-
     }
-
-
 
     /**
      * Init dokan user roles
@@ -436,782 +422,3 @@ class WeDevs_Dokan {
 
 $dokan = new WeDevs_Dokan();
 
-add_action( 'admin_init', function() {
-    global $pagenow;
-
-    $post_type = isset( $_GET['post_type'] ) ? $_GET['post_type'] : 'post';
-    // var_dump( $pagenow, $post_type );
-});
-
-add_action( 'woocommerce_single_product_summary', function() {
-    global $product;
-
-    $author = get_user_by( 'id', $product->post->post_author );
-    ?>
-
-    Seller: <?php printf( '<a href="%s">%s</a>', get_author_posts_url( $author->ID ), $author->display_name ); ?>
-
-    <?php
-}, 99);
-
-add_filter( 'woocommerce_product_tabs', function( $tabs) {
-
-    $tabs['seller'] = array(
-        'title' => __( 'Seller Info', 'dokan' ),
-        'priority' => 90,
-        'callback' => 'dokan_product_seller_tab'
-    );
-
-    return $tabs;
-}, 10);
-
-function dokan_product_seller_tab( $val ) {
-    global $product;
-
-    $author = get_user_by( 'id', $product->post->post_author );
-    ?>
-
-    Seller: <?php printf( '<a href="%s">%s</a>', get_author_posts_url( $author->ID ), $author->display_name ); ?>
-
-    <?php
-}
-
-function dokan_edit_product_url( $product_id ) {
-    return trailingslashit( get_permalink( $product_id ) ). 'edit/';
-}
-
-/**
- * Register URL endpoints for photo and videos
- *
- * @return void
- */
-function dokan_movie_rewrite_rule() {
-    $permalinks = get_option( 'woocommerce_permalinks', array() );
-    add_rewrite_rule( 'shop/([^/]+)(/[0-9]+)?/edit/?$', 'index.php?product=$matches[1]&page=$matches[2]&edit=true', 'top' );
-}
-
-add_action( 'init', 'dokan_movie_rewrite_rule' );
-
-function dokan_register_query_var( $vars ) {
-    $vars[] = 'edit';
-
-    return $vars;
-}
-
-add_filter( 'query_vars', 'dokan_register_query_var' );
-
-/**
- * Set photo and video templates on template_redirect
- *
- * @return void
- */
-function dokan_url_rewrite_templates( $template ) {
-
-    if ( get_query_var( 'edit' ) && is_singular( 'product' ) ) {
-        return get_template_directory() . '/templates/product-edit.php';
-    }
-
-    return $template;
-}
-
-add_action( 'template_include', 'dokan_url_rewrite_templates', 11 );
-
-// add_filter( 'wp_mail', function( $mail ) {
-
-//     echo( $mail['message'] );
-//     die();
-//     return $mail;
-// });
-
-/**
- * Ads additional columns to admin user table
- *
- * @param array $columns
- * @return array
- */
-function my_custom_admin_product_columns( $columns ) {
-    $columns['author'] = __( 'Author' );
-
-    return $columns;
-}
-
-add_filter( 'manage_edit-product_columns', 'my_custom_admin_product_columns' );
-
-function devplus_wpquery_where( $where ){
-    global $current_user;
-
-    if( is_user_logged_in() ){
-         // logged in user, but ware we viewing the library?
-         if( isset( $_POST['action'] ) && ( $_POST['action'] == 'query-attachments' ) ){
-            $where .= ' AND post_author=' . $current_user->data->ID;
-        }
-    }
-
-    return $where;
-}
-
-add_filter( 'posts_where', 'devplus_wpquery_where' );
-
-add_action( 'wp_ajax_dokan_save_attributes', function() {
-    global $woocommerce;
-
-    // check_ajax_referer( 'save-attributes', 'security' );
-
-    // Get post data
-    parse_str( $_POST['data'], $data );
-    $post_id = absint( $_POST['post_id'] );
-
-    // print_r($data);
-
-    // exit;
-
-    // Save Attributes
-    $attributes = array();
-
-    if ( isset( $data['attribute_names'] ) ) {
-
-        $attribute_names  = array_map( 'stripslashes', $data['attribute_names'] );
-        $attribute_values = $data['attribute_values'];
-
-        if ( isset( $data['attribute_visibility'] ) )
-            $attribute_visibility = $data['attribute_visibility'];
-
-        if ( isset( $data['attribute_variation'] ) )
-            $attribute_variation = $data['attribute_variation'];
-
-        $attribute_is_taxonomy = $data['attribute_is_taxonomy'];
-        $attribute_position = $data['attribute_position'];
-
-        $attribute_names_count = sizeof( $attribute_names );
-
-        for ( $i=0; $i < $attribute_names_count; $i++ ) {
-            if ( ! $attribute_names[ $i ] )
-                continue;
-
-            $is_visible     = isset( $attribute_visibility[ $i ] ) ? 1 : 0;
-            $is_variation   = isset( $attribute_variation[ $i ] ) ? 1 : 0;
-            $is_taxonomy    = $attribute_is_taxonomy[ $i ] ? 1 : 0;
-
-            if ( $is_taxonomy ) {
-
-                if ( isset( $attribute_values[ $i ] ) ) {
-
-                    // Select based attributes - Format values (posted values are slugs)
-                    if ( is_array( $attribute_values[ $i ] ) ) {
-                        $values = array_map( 'sanitize_title', $attribute_values[ $i ] );
-
-                    // Text based attributes - Posted values are term names - don't change to slugs
-                    } else {
-                        $values = array_map( 'stripslashes', array_map( 'strip_tags', explode( '|', $attribute_values[ $i ] ) ) );
-                    }
-
-                    // Remove empty items in the array
-                    $values = array_filter( $values );
-
-                } else {
-                    $values = array();
-                }
-
-                // Update post terms
-                if ( taxonomy_exists( $attribute_names[ $i ] ) ) {
-                    wp_set_object_terms( $post_id, $values, $attribute_names[ $i ] );
-                    print_r($values);
-                    // var_dump($values);
-                    echo "wp_set_object_terms( $post_id, $values, {$attribute_names[$i]} )";
-                }
-
-                if ( $values ) {
-                    // Add attribute to array, but don't set values
-                    $attributes[ sanitize_title( $attribute_names[ $i ] ) ] = array(
-                        'name'          => woocommerce_clean( $attribute_names[ $i ] ),
-                        'value'         => '',
-                        'position'      => $attribute_position[ $i ],
-                        'is_visible'    => $is_visible,
-                        'is_variation'  => $is_variation,
-                        'is_taxonomy'   => $is_taxonomy
-                    );
-                }
-
-            } elseif ( isset( $attribute_values[ $i ] ) ) {
-
-                // Text based, separate by pipe
-                $values = implode( ' | ', array_map( 'woocommerce_clean', array_map( 'stripslashes', $attribute_values[ $i ] ) ) );
-                // $values = array_map( 'sanitize_title', $attribute_values[ $i ] );
-
-                // print_r( $values );
-
-                // Custom attribute - Add attribute to array and set the values
-                $attributes[ sanitize_title( $attribute_names[ $i ] ) ] = array(
-                    'name'          => woocommerce_clean( $attribute_names[ $i ] ),
-                    'value'         => $values,
-                    'position'      => $attribute_position[ $i ],
-                    'is_visible'    => $is_visible,
-                    'is_variation'  => $is_variation,
-                    'is_taxonomy'   => $is_taxonomy
-                );
-            }
-
-         }
-    }
-
-    if ( ! function_exists( 'attributes_cmp' ) ) {
-        function attributes_cmp( $a, $b ) {
-            if ( $a['position'] == $b['position'] ) return 0;
-            return ( $a['position'] < $b['position'] ) ? -1 : 1;
-        }
-    }
-    uasort( $attributes, 'attributes_cmp' );
-    // print_r( $attributes );
-
-    update_post_meta( $post_id, '_product_attributes', $attributes );
-
-    die();
-});
-
-
-/**
- * Some helper functions
- *
- * @since Dokan 1.0
- */
-
-/**
- * Get all the orders from a specific seller
- *
- * @global object $wpdb
- * @param int $seller_id
- * @return array
- */
-function dokan_get_seller_orders( $seller_id ) {
-    global $wpdb;
-
-    $sql = "SELECT oi.order_id FROM {$wpdb->prefix}woocommerce_order_items oi
-            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta oim ON oim.order_item_id = oi.order_item_id
-            LEFT JOIN $wpdb->posts p ON oim.meta_value = p.ID
-            WHERE oim.meta_key = '_product_id'  AND p.post_author = %d";
-
-    return $wpdb->get_results( $wpdb->prepare( $sql, $seller_id ) );
-}
-
-/**
- * Helper function for input text field
- *
- * @param string $key
- * @return string
- */
-function dokan_posted_input( $key ) {
-    $value = isset( $_POST[$key] ) ? trim( $_POST[$key] ) : '';
-
-    return esc_attr( $value );
-}
-
-/**
- * Helper function for input textarea
- *
- * @param string $key
- * @return string
- */
-function dokan_posted_textarea( $key ) {
-    $value = isset( $_POST[$key] ) ? trim( $_POST[$key] ) : '';
-
-    return esc_textarea( $value );
-}
-
-function dokan_get_template( $template_name, $args = array() ) {
-
-    if ( file_exists( $template_name ) ) {
-        extract( $args );
-
-        include_once $template_name;
-    }
-}
-
-function dokan_get_page_url( $page ) {
-    $page_id = dokan_get_option( $page, 'dokan_pages' );
-
-    return get_permalink( $page_id );
-}
-
-/**
- * Get the value of a settings field
- *
- * @param string $option settings field name
- * @param string $section the section name this field belongs to
- * @param string $default default text if it's not found
- * @return mixed
- */
-function dokan_get_option( $option, $section, $default = '' ) {
-
-    $options = get_option( $section );
-
-    if ( isset( $options[$option] ) ) {
-        return $options[$option];
-    }
-
-    return $default;
-}
-
-// Function to get the client ip address
-function dokan_get_client_ip() {
-    $ipaddress = '';
-
-    if ( getenv( 'HTTP_CLIENT_IP' ) )
-        $ipaddress = getenv( 'HTTP_CLIENT_IP' );
-    else if ( getenv( 'HTTP_X_FORWARDED_FOR' ) )
-        $ipaddress = getenv( 'HTTP_X_FORWARDED_FOR' & quot );
-    else if ( getenv( 'HTTP_X_FORWARDED' ) )
-        $ipaddress = getenv( 'HTTP_X_FORWARDED' );
-    else if ( getenv( 'HTTP_FORWARDED_FOR' ) )
-        $ipaddress = getenv( 'HTTP_FORWARDED_FOR' );
-    else if ( getenv( 'HTTP_X_CLUSTER_CLIENT_IP' ) )
-        $ipaddress = getenv( 'HTTP_FORWARDED_FOR' );
-    else if ( getenv( 'HTTP_FORWARDED' ) )
-        $ipaddress = getenv( 'HTTP_FORWARDED' );
-    else if ( getenv( 'REMOTE_ADDR' ) )
-        $ipaddress = getenv( 'REMOTE_ADDR' );
-    else
-        $ipaddress = 'UNKNOWN';
-
-    return $ipaddress;
-}
-
-function dokan_format_time( $datetime ) {
-    $timestamp = strtotime( $datetime );
-
-    $date_format = get_option( 'date_format' );
-    $time_format = get_option( 'time_format' );
-
-    return date_i18n( $date_format . ' ' . $time_format, $timestamp );
-}
-
-
-/**
- * Save the product data meta box.
- *
- * @access public
- * @param mixed $post_id
- * @return void
- */
-function dokan_process_product_meta( $post_id ) {
-    global $wpdb, $woocommerce, $woocommerce_errors;
-
-    // Add any default post meta
-    add_post_meta( $post_id, 'total_sales', '0', true );
-
-    // Get types
-    $product_type       = empty( $_POST['_product_type'] ) ? 'simple' : sanitize_title( stripslashes( $_POST['_product_type'] ) );
-    $is_downloadable    = isset( $_POST['_downloadable'] ) ? 'yes' : 'no';
-    $is_virtual         = isset( $_POST['_virtual'] ) ? 'yes' : 'no';
-
-    // Product type + Downloadable/Virtual
-    wp_set_object_terms( $post_id, $product_type, 'product_type' );
-    update_post_meta( $post_id, '_downloadable', $is_downloadable );
-    update_post_meta( $post_id, '_virtual', $is_virtual );
-
-    // Gallery Images
-    $attachment_ids = array_filter( explode( ',', woocommerce_clean( $_POST['product_image_gallery'] ) ) );
-    update_post_meta( $post_id, '_product_image_gallery', implode( ',', $attachment_ids ) );
-
-    // Update post meta
-    update_post_meta( $post_id, '_regular_price', stripslashes( $_POST['_regular_price'] ) );
-    update_post_meta( $post_id, '_sale_price', stripslashes( $_POST['_sale_price'] ) );
-
-    if ( isset( $_POST['_tax_status'] ) )
-        update_post_meta( $post_id, '_tax_status', stripslashes( $_POST['_tax_status'] ) );
-
-    if ( isset( $_POST['_tax_class'] ) )
-        update_post_meta( $post_id, '_tax_class', stripslashes( $_POST['_tax_class'] ) );
-
-    update_post_meta( $post_id, '_visibility', stripslashes( $_POST['_visibility'] ) );
-    update_post_meta( $post_id, '_purchase_note', stripslashes( $_POST['_purchase_note'] ) );
-    update_post_meta( $post_id, '_featured', isset( $_POST['_featured'] ) ? 'yes' : 'no' );
-
-    // Dimensions
-    if ( $is_virtual == 'no' ) {
-        update_post_meta( $post_id, '_weight', stripslashes( $_POST['_weight'] ) );
-        update_post_meta( $post_id, '_length', stripslashes( $_POST['_length'] ) );
-        update_post_meta( $post_id, '_width', stripslashes( $_POST['_width'] ) );
-        update_post_meta( $post_id, '_height', stripslashes( $_POST['_height'] ) );
-    } else {
-        update_post_meta( $post_id, '_weight', '' );
-        update_post_meta( $post_id, '_length', '' );
-        update_post_meta( $post_id, '_width', '' );
-        update_post_meta( $post_id, '_height', '' );
-    }
-
-    // Save shipping class
-    $product_shipping_class = $_POST['product_shipping_class'] > 0 && $product_type != 'external' ? absint( $_POST['product_shipping_class'] ) : '';
-    wp_set_object_terms( $post_id, $product_shipping_class, 'product_shipping_class');
-
-    // Unique SKU
-    $sku                = get_post_meta($post_id, '_sku', true);
-    $new_sku            = woocommerce_clean( stripslashes( $_POST['_sku'] ) );
-    if ( $new_sku == '' ) {
-        update_post_meta( $post_id, '_sku', '' );
-    } elseif ( $new_sku !== $sku ) {
-        if ( ! empty( $new_sku ) ) {
-            if (
-                $wpdb->get_var( $wpdb->prepare("
-                    SELECT $wpdb->posts.ID
-                    FROM $wpdb->posts
-                    LEFT JOIN $wpdb->postmeta ON ($wpdb->posts.ID = $wpdb->postmeta.post_id)
-                    WHERE $wpdb->posts.post_type = 'product'
-                    AND $wpdb->posts.post_status = 'publish'
-                    AND $wpdb->postmeta.meta_key = '_sku' AND $wpdb->postmeta.meta_value = '%s'
-                 ", $new_sku ) )
-                ) {
-                $woocommerce_errors[] = __( 'Product SKU must be unique.', 'woocommerce' );
-            } else {
-                update_post_meta( $post_id, '_sku', $new_sku );
-            }
-        } else {
-            update_post_meta( $post_id, '_sku', '' );
-        }
-    }
-
-    // Save Attributes
-    $attributes = array();
-
-    if ( isset( $_POST['attribute_names'] ) ) {
-        $attribute_names = $_POST['attribute_names'];
-        $attribute_values = $_POST['attribute_values'];
-
-        if ( isset( $_POST['attribute_visibility'] ) )
-            $attribute_visibility = $_POST['attribute_visibility'];
-
-        if ( isset( $_POST['attribute_variation'] ) )
-            $attribute_variation = $_POST['attribute_variation'];
-
-        $attribute_is_taxonomy = $_POST['attribute_is_taxonomy'];
-        $attribute_position = $_POST['attribute_position'];
-
-        $attribute_names_count = sizeof( $attribute_names );
-
-        for ( $i=0; $i < $attribute_names_count; $i++ ) {
-            if ( ! $attribute_names[ $i ] )
-                continue;
-
-            $is_visible     = isset( $attribute_visibility[ $i ] ) ? 1 : 0;
-            $is_variation   = isset( $attribute_variation[ $i ] ) ? 1 : 0;
-            $is_taxonomy    = $attribute_is_taxonomy[ $i ] ? 1 : 0;
-
-            if ( $is_taxonomy ) {
-
-                if ( isset( $attribute_values[ $i ] ) ) {
-
-                    // Select based attributes - Format values (posted values are slugs)
-                    if ( is_array( $attribute_values[ $i ] ) ) {
-                        $values = array_map( 'sanitize_title', $attribute_values[ $i ] );
-
-                    // Text based attributes - Posted values are term names - don't change to slugs
-                    } else {
-                        $values = array_map( 'stripslashes', array_map( 'strip_tags', explode( '|', $attribute_values[ $i ] ) ) );
-                    }
-
-                    // Remove empty items in the array
-                    $values = array_filter( $values, 'strlen' );
-
-                } else {
-                    $values = array();
-                }
-
-                // Update post terms
-                if ( taxonomy_exists( $attribute_names[ $i ] ) )
-                    wp_set_object_terms( $post_id, $values, $attribute_names[ $i ] );
-
-                if ( $values ) {
-                    // Add attribute to array, but don't set values
-                    $attributes[ sanitize_title( $attribute_names[ $i ] ) ] = array(
-                        'name'          => woocommerce_clean( $attribute_names[ $i ] ),
-                        'value'         => '',
-                        'position'      => $attribute_position[ $i ],
-                        'is_visible'    => $is_visible,
-                        'is_variation'  => $is_variation,
-                        'is_taxonomy'   => $is_taxonomy
-                    );
-                }
-
-            } elseif ( isset( $attribute_values[ $i ] ) ) {
-
-                // Text based, separate by pipe
-                $values = implode( ' | ', array_map( 'woocommerce_clean', $attribute_values[$i] ) );
-
-                // Custom attribute - Add attribute to array and set the values
-                $attributes[ sanitize_title( $attribute_names[ $i ] ) ] = array(
-                    'name'          => woocommerce_clean( $attribute_names[ $i ] ),
-                    'value'         => $values,
-                    'position'      => $attribute_position[ $i ],
-                    'is_visible'    => $is_visible,
-                    'is_variation'  => $is_variation,
-                    'is_taxonomy'   => $is_taxonomy
-                );
-            }
-
-         }
-    }
-
-    if ( ! function_exists( 'attributes_cmp' ) ) {
-        function attributes_cmp( $a, $b ) {
-            if ( $a['position'] == $b['position'] ) return 0;
-            return ( $a['position'] < $b['position'] ) ? -1 : 1;
-        }
-    }
-    uasort( $attributes, 'attributes_cmp' );
-
-    update_post_meta( $post_id, '_product_attributes', $attributes );
-
-    // Sales and prices
-    if ( in_array( $product_type, array( 'variable' ) ) ) {
-
-        // Variable products have no prices
-        update_post_meta( $post_id, '_regular_price', '' );
-        update_post_meta( $post_id, '_sale_price', '' );
-        update_post_meta( $post_id, '_sale_price_dates_from', '' );
-        update_post_meta( $post_id, '_sale_price_dates_to', '' );
-        update_post_meta( $post_id, '_price', '' );
-
-    } else {
-
-        $date_from = isset( $_POST['_sale_price_dates_from'] ) ? $_POST['_sale_price_dates_from'] : '';
-        $date_to = isset( $_POST['_sale_price_dates_to'] ) ? $_POST['_sale_price_dates_to'] : '';
-
-        // Dates
-        if ( $date_from )
-            update_post_meta( $post_id, '_sale_price_dates_from', strtotime( $date_from ) );
-        else
-            update_post_meta( $post_id, '_sale_price_dates_from', '' );
-
-        if ( $date_to )
-            update_post_meta( $post_id, '_sale_price_dates_to', strtotime( $date_to ) );
-        else
-            update_post_meta( $post_id, '_sale_price_dates_to', '' );
-
-        if ( $date_to && ! $date_from )
-            update_post_meta( $post_id, '_sale_price_dates_from', strtotime( 'NOW', current_time( 'timestamp' ) ) );
-
-        // Update price if on sale
-        if ( $_POST['_sale_price'] != '' && $date_to == '' && $date_from == '' )
-            update_post_meta( $post_id, '_price', stripslashes( $_POST['_sale_price'] ) );
-        else
-            update_post_meta( $post_id, '_price', stripslashes( $_POST['_regular_price'] ) );
-
-        if ( $_POST['_sale_price'] != '' && $date_from && strtotime( $date_from ) < strtotime( 'NOW', current_time( 'timestamp' ) ) )
-            update_post_meta( $post_id, '_price', stripslashes($_POST['_sale_price']) );
-
-        if ( $date_to && strtotime( $date_to ) < strtotime( 'NOW', current_time( 'timestamp' ) ) ) {
-            update_post_meta( $post_id, '_price', stripslashes($_POST['_regular_price']) );
-            update_post_meta( $post_id, '_sale_price_dates_from', '');
-            update_post_meta( $post_id, '_sale_price_dates_to', '');
-        }
-    }
-
-    // Sold Individuall
-    if ( ! empty( $_POST['_sold_individually'] ) ) {
-        update_post_meta( $post_id, '_sold_individually', 'yes' );
-    } else {
-        update_post_meta( $post_id, '_sold_individually', '' );
-    }
-
-    // Stock Data
-    if ( get_option('woocommerce_manage_stock') == 'yes' ) {
-
-        if ( ! empty( $_POST['_manage_stock'] ) ) {
-
-            // Manage stock
-            update_post_meta( $post_id, '_stock', (int) $_POST['_stock'] );
-            update_post_meta( $post_id, '_stock_status', stripslashes( $_POST['_stock_status'] ) );
-            update_post_meta( $post_id, '_backorders', stripslashes( $_POST['_backorders'] ) );
-            update_post_meta( $post_id, '_manage_stock', 'yes' );
-
-            // Check stock level
-            if ( $product_type !== 'variable' && $_POST['_backorders'] == 'no' && (int) $_POST['_stock'] < 1 )
-                update_post_meta( $post_id, '_stock_status', 'outofstock' );
-
-        } else {
-
-            // Don't manage stock
-            update_post_meta( $post_id, '_stock', '' );
-            update_post_meta( $post_id, '_stock_status', stripslashes( $_POST['_stock_status'] ) );
-            update_post_meta( $post_id, '_backorders', stripslashes( $_POST['_backorders'] ) );
-            update_post_meta( $post_id, '_manage_stock', 'no' );
-
-        }
-
-    } else {
-
-        update_post_meta( $post_id, '_stock_status', stripslashes( $_POST['_stock_status'] ) );
-
-    }
-
-    // Upsells
-    if ( isset( $_POST['upsell_ids'] ) ) {
-        $upsells = array();
-        $ids = $_POST['upsell_ids'];
-        foreach ( $ids as $id )
-            if ( $id && $id > 0 )
-                $upsells[] = $id;
-
-        update_post_meta( $post_id, '_upsell_ids', $upsells );
-    } else {
-        delete_post_meta( $post_id, '_upsell_ids' );
-    }
-
-    // Cross sells
-    if ( isset( $_POST['crosssell_ids'] ) ) {
-        $crosssells = array();
-        $ids = $_POST['crosssell_ids'];
-        foreach ( $ids as $id )
-            if ( $id && $id > 0 )
-                $crosssells[] = $id;
-
-        update_post_meta( $post_id, '_crosssell_ids', $crosssells );
-    } else {
-        delete_post_meta( $post_id, '_crosssell_ids' );
-    }
-
-    // Downloadable options
-    if ( $is_downloadable == 'yes' ) {
-
-        $_download_limit = absint( $_POST['_download_limit'] );
-        if ( ! $_download_limit )
-            $_download_limit = ''; // 0 or blank = unlimited
-
-        $_download_expiry = absint( $_POST['_download_expiry'] );
-        if ( ! $_download_expiry )
-            $_download_expiry = ''; // 0 or blank = unlimited
-
-        // file paths will be stored in an array keyed off md5(file path)
-        if ( isset( $_POST['_file_paths'] ) ) {
-            $_file_paths = array();
-            $file_paths = str_replace( "\r\n", "\n", esc_attr( $_POST['_file_paths'] ) );
-            $file_paths = trim( preg_replace( "/\n+/", "\n", $file_paths ) );
-            if ( $file_paths ) {
-                $file_paths = explode( "\n", $file_paths );
-
-                foreach ( $file_paths as $file_path ) {
-                    $file_path = trim( $file_path );
-                    $_file_paths[ md5( $file_path ) ] = $file_path;
-                }
-            }
-
-            // grant permission to any newly added files on any existing orders for this product
-            do_action( 'woocommerce_process_product_file_download_paths', $post_id, 0, $_file_paths );
-
-            update_post_meta( $post_id, '_file_paths', $_file_paths );
-        }
-
-        if ( isset( $_POST['_download_limit'] ) )
-            update_post_meta( $post_id, '_download_limit', esc_attr( $_download_limit ) );
-        if ( isset( $_POST['_download_expiry'] ) )
-            update_post_meta( $post_id, '_download_expiry', esc_attr( $_download_expiry ) );
-    }
-
-    // Do action for product type
-    do_action( 'woocommerce_process_product_meta_' . $product_type, $post_id );
-
-    // Clear cache/transients
-    $woocommerce->clear_product_transients( $post_id );
-}
-
-function dokan_post_input_box( $post_id, $meta_key, $attr = array(), $type = 'text'  ) {
-    $placeholder = isset( $attr['placeholder'] ) ? esc_attr( $attr['placeholder'] ) : '';
-    $class = isset( $attr['class'] ) ? esc_attr( $attr['class'] ) : 'form-control';
-    $name = isset( $attr['name'] ) ? esc_attr( $attr['name'] ) : $meta_key;
-    $value = isset( $attr['value'] ) ? $attr['value'] : get_post_meta( $post_id, $meta_key, true );
-    $size = isset( $attr['size'] ) ? $attr['size'] : 30;
-
-    switch ($type) {
-        case 'text':
-            ?>
-            <input type="text" name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="<?php echo esc_attr( $value ); ?>" class="<?php echo $class; ?>" placeholder="<?php echo $placeholder; ?>">
-            <?php
-            break;
-
-        case 'textarea':
-            $rows = isset( $attr['rows'] ) ? absint( $attr['rows'] ) : 4;
-            ?>
-            <textarea name="<?php echo $name; ?>" id="<?php echo $name; ?>" rows="<?php echo $rows; ?>" class="<?php echo $class; ?>" placeholder="<?php echo $placeholder; ?>"><?php echo esc_textarea( $value ); ?></textarea>
-            <?php
-            break;
-
-        case 'checkbox':
-            $label = isset( $attr['label'] ) ? $attr['label'] : '';
-            ?>
-
-            <label class="checkbox-inline" for="<?php echo $name; ?>">
-                <input name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" type="checkbox"<?php checked( $value, 'yes' ); ?>>
-                <?php echo $label; ?>
-            </label>
-
-            <?php
-            break;
-
-        case 'select':
-            $options = is_array( $attr['options'] ) ? $attr['options'] : array();
-            ?>
-            <select name="<?php echo $name; ?>" id="<?php echo $name; ?>" class="<?php echo $class; ?>">
-                <?php foreach ($options as $key => $label) { ?>
-                    <option value="<?php echo esc_attr( $key ); ?>"<?php selected( $value, $key ); ?>><?php echo $label; ?></option>
-                <?php } ?>
-            </select>
-
-            <?php
-            break;
-
-        case 'number':
-            $min = isset( $attr['min'] ) ? $attr['min'] : 0;
-            $step = isset( $attr['step'] ) ? $attr['step'] : 'any';
-            ?>
-            <input type="number" name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="<?php echo esc_attr( $value ); ?>" class="<?php echo $class; ?>" placeholder="<?php echo $placeholder; ?>" min="<?php echo esc_attr( $min ); ?>" step="<?php echo esc_attr( $step ); ?>" size="<?php echo esc_attr( $size ); ?>">
-            <?php
-            break;
-    }
-}
-
-function dokan_get_post_status( $status ) {
-    switch ($status) {
-        case 'publish':
-            return __( 'Online', 'dokan' );
-            break;
-
-        case 'draft':
-            return __( 'Draft', 'dokan' );
-            break;
-
-        case 'pending':
-            return __( 'Pending Review', 'dokan' );
-            break;
-
-        case 'future':
-            return __( 'Scheduled', 'dokan' );
-            break;
-
-        default:
-            return '';
-            break;
-    }
-}
-
-function dokan_get_product_status( $status ) {
-    switch ($status) {
-        case 'simple':
-            return __( 'Simple Product', 'dokan' );
-            break;
-
-        case 'variable':
-            return __( 'Variable Product', 'dokan' );
-            break;
-
-        case 'grouped':
-            return __( 'Grouped Product', 'dokan' );
-            break;
-
-        case 'external':
-            return __( 'Scheduled', 'dokan' );
-            break;
-
-        default:
-            return '';
-            break;
-    }
-}

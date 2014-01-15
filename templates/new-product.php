@@ -3,11 +3,8 @@
  * Template Name: New Product
  */
 
-// dokan_write_panel_scripts();
-
-// require_once WP_PLUGIN_DIR . '/woocommerce/admin/post-types/writepanels/writepanels-init.php';
-
-global $dokan_feat_image;
+dokan_redirect_login();
+dokan_redirect_if_not_seller();
 
 $errors = array();
 $product_cat = -1;
@@ -67,11 +64,10 @@ if ( isset( $_POST['add_product'] ) ) {
 get_header();
 ?>
 
-<div class="row">
-
     <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
 
-    <div class="col-md-9 product-edit-container">
+<div id="primary" class="content-area col-md-9">
+    <div id="content" class="site-content" role="main">
 
         <?php if ( $errors ) { ?>
             <div class="alert alert-danger">
@@ -87,16 +83,18 @@ get_header();
 
         <form class="form" method="post">
 
-            <div class="row">
+            <div class="row product-edit-container">
                 <div class="col-md-4">
                     <div class="dokan-feat-image-upload">
                         <div class="instruction-inside">
                             <input type="hidden" name="feat_image_id" class="dokan-feat-image-id" value="0">
-                            <a href="#" class="dokan-feat-image-btn">Upload a product cover image</a>
+                            <i class="fa fa-cloud-upload"></i>
+                            <a href="#" class="dokan-feat-image-btn btn btn-sm"><?php _e( 'Upload a product cover image', 'dokan' ); ?></a>
                         </div>
+
                         <div class="image-wrap dokan-hide">
                             <a class="close dokan-remove-feat-image">&times;</a>
-                            <img src="" alt="">
+                                <img src="" alt="">
                         </div>
                     </div>
                 </div>
@@ -146,6 +144,7 @@ get_header();
             </div>
 
         </form>
-    </div>
-</div>
+    </div><!-- #content .site-content -->
+</div><!-- #primary .content-area -->
+
 <?php get_footer(); ?>

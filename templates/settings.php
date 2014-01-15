@@ -3,6 +3,9 @@
  * Template Name: Dashboard - Settings
  */
 
+dokan_redirect_login();
+dokan_redirect_if_not_seller();
+
 
 $dokan_template_settings = Dokan_Template_Settings::init();
 
@@ -12,8 +15,10 @@ if( $validate !== false && !is_wp_error( $validate ) ) {
    $dokan_template_settings->insert_settings_info();
 }
 
-$scheme = is_ssl() ? 'https' : 'http';        
+$scheme = is_ssl() ? 'https' : 'http';
 wp_enqueue_script( 'google-maps', $scheme . '://maps.google.com/maps/api/js?sensor=true' );
+wp_enqueue_script( 'jquery-ui' );
+wp_enqueue_script( 'jquery-ui-autocomplete' );
 
 get_header();
 ?>
@@ -33,7 +38,8 @@ get_header();
                 <div class="entry-content">
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
-                <?php if( is_wp_error($validate) ) {
+
+                <?php if ( is_wp_error( $validate ) ) {
                     $messages = $validate->get_error_messages();
 
                     foreach( $messages as $message ) {
@@ -46,6 +52,7 @@ get_header();
                         <?php
                     }
                 } ?>
+
                 <?php $dokan_template_settings->setting_field($validate); ?>
             </article>
 

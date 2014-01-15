@@ -170,6 +170,24 @@
         overflow: hidden;
         position: relative;
 
+        i.fa-cloud-upload {
+            display: block;
+            font-size: 80px;
+            color: #DFDFDF;
+        }
+
+        a.dokan-feat-image-btn {
+            color: #8F8F8F;
+            text-shadow: 0 1px 1px #FFF;
+            background: #F0F0F0;
+
+            &:hover {
+                color: #ECECEC;
+                text-shadow: 0 1px 1px #6F6F6F;
+                background: #B4B4B4;
+            }
+        }
+
         a.close {
             background: #000000;
             color: #FF0000;
@@ -196,14 +214,14 @@
             }
         }
 
-        .image-wrap :hover a.close {
+        .image-wrap:hover a.close {
             display: block;
         }
     }
 
     .instruction-inside {
         text-align: center;
-        padding-top: 110px;
+        padding-top: 55px;
         color: #aaa;
     }
 
@@ -225,9 +243,23 @@
             padding: 5px 10px;
         }
 
-        .dokan-side-body {
-            padding: 10px;
-            // display: none;
+        .downloadable_files {
+            td {
+                border-top: none;
+                border-bottom: 1px solid @borderColor;
+
+                input {
+                    width: 100%;
+                }
+            }
+
+            .dokan-side-body {
+                padding: 10px;
+
+                .input-group-addon {
+                    width: 20px;
+                }
+            }
         }
     }
 
@@ -318,12 +350,13 @@
 
             h3 {
                 background: #e5e5e5;
-                padding: 5px 10px;
+                padding: 10px;
                 font-size: 14px;
 
                 button {
                     float: right;
                     font-size: 12px;
+                    margin-top: -5px;
                 }
             }
 
@@ -336,7 +369,19 @@
                 }
 
                 td.upload_image img {
-                    width: 73px;
+                    width: 110px;
+                    max-width: 110px;
+                    max-height: 110px;
+                }
+
+                td.options {
+                    label {
+                        display: block;
+                    }
+                }
+
+                td.sku, td.upload_image, td.options {
+                    width: 15%;
                 }
             }
 
@@ -350,12 +395,24 @@
                 margin: 0;
                 width: 100%;
 
-                td.dimensions_field input {
-                    width: 25%;
+                td {
+                    padding: 0 6px 6px 0;
+                    width: 50%;
+
+                    input {
+                        width: 100%;
+                        padding: 5px 10px;
+                    }
+
+                    input.upload_file_button {
+                        width: auto;
+                        margin-top: 5px;
+                    }
                 }
 
-                td {
-                    padding: 0 6px;
+                td.dimensions_field input {
+                    width: 25%;
+                    padding: 3px;
                 }
 
                 label {
@@ -367,9 +424,21 @@
                 font-size: 12px;
             }
 
+            input[type=text], input[type=number], select {
+                border: 1px solid @borderColor;
+            }
+
             select {
                 width: auto;
                 display: inline-block;
+            }
+        }
+
+        p.toolbar {
+            padding-top: 10px;
+
+            select {
+                border: 1px solid @borderColor;
             }
         }
     } // product variations

@@ -7,7 +7,7 @@
     global $woocommerce;
 
     // Array of defined attribute taxonomies
-    $attribute_taxonomies = $woocommerce->get_attribute_taxonomies();
+    $attribute_taxonomies = wc_get_attribute_taxonomies();
 
     // Product attributes - taxonomies and custom, ordered, with visibility and variation attributes set
     $attributes = maybe_unserialize( get_post_meta( $thepostid, '_product_attributes', true ) );
@@ -142,5 +142,5 @@
 
 <p class="toolbar">
     <button class="btn btn-success add-variant-category">+ Add a category</button>
-    <button type="button" class="btn btn-default save_attributes"><?php _e( 'Save attributes', 'woocommerce' ); ?></button>
+    <button type="button" class="btn btn-default save_attributes" data-id="<?php echo $thepostid; ?>"><?php _e( 'Save attributes', 'woocommerce' ); ?></button>
 </p>

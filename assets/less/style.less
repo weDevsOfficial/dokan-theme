@@ -23,12 +23,17 @@ body {
     background: @bodyColor;
 }
 
+h1, h2, h3, h4, h5, select {
+    font-family: 'Open Sans', sans-serif;
+}
+
 a:hover { text-decoration: none; }
 
 @import "wordpress.less";
 @import "header.less";
 @import "menu.less";
 @import "contents.less";
+@import "template-specific.less";
 @import "widgets.less";
 @import "comments.less";
 @import "product-edit.less";

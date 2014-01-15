@@ -3,6 +3,9 @@
  * Template Name: Dashboard - Withdraw
  */
 
+dokan_redirect_login();
+dokan_redirect_if_not_seller();
+
 $dokan_withdraw = Dokan_Template_Withdraw::init();
 
 $validate = $dokan_withdraw->validate();

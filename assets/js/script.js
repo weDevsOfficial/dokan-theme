@@ -12,25 +12,42 @@ jQuery(function($) {
         dateFormat: 'yy-mm-dd'
     });
 
+    $('.tips').tooltip();
+
     // set dashboard menu height
-    // $('.dokan-dash-sidebar ul.dokan-dashboard-menu').css({
-    //     'height': $('#main').height()
-    // });
+    var dashboardMenu = $('ul.dokan-dashboard-menu'),
+        contentArea = $('#content article');
+
+    if ( contentArea.height() > dashboardMenu.height() ) {
+        dashboardMenu.css({ height: contentArea.height() });
+    }
 
 });
 
 //dokan settings
 
 (function($) {
-    
-    var settings = {
+
+    $.validator.setDefaults({ ignore: ":hidden" });
+
+    var validatorError = function(error, element) {
+        var form_group = $(element).closest('.form-group');
+        form_group.addClass('has-error').append(error);
+    };
+
+    var validatorSuccess = function(label, element) {
+        $(element).closest('.form-group').removeClass('has-error');
+    };
+
+    var Dokan_Settings = {
         init: function() {
-            self = this;
+            var self = this;
 
             //image upload
             $('a.dokan-banner-drag').on('click', this.imageUpload);
-            
-            self.jqueryValidate(self);
+            $('a.dokan-remove-banner-image').on('click', this.removeBanner);
+
+            this.validateForm(self);
 
             return false;
         },
@@ -38,7 +55,7 @@ jQuery(function($) {
 
         imageUpload: function() {
             var file_frame,
-                click = $(this);     
+                self = $(this);
 
             // If the media frame already exists, reopen it.
             if ( file_frame ) {
@@ -50,21 +67,21 @@ jQuery(function($) {
             file_frame = wp.media.frames.file_frame = wp.media({
                 title: jQuery( this ).data( 'uploader_title' ),
                 button: {
-                    text: jQuery( this ).data( 'uploader_button_text' ),
+                    text: jQuery( this ).data( 'uploader_button_text' )
                 },
-                multiple: false // Set to true to allow multiple files to be selected
+                multiple: false
             });
 
             // When an image is selected, run a callback.
             file_frame.on( 'select', function() {
-                // We set multiple to false so only get one image from the uploader
-                attachment = file_frame.state().get('selection').first().toJSON();
+                var attachment = file_frame.state().get('selection').first().toJSON();
 
-                // Do something with attachment.id and/or attachment.url here
-                console.log(attachment);
-                click.closest('div').find('input.dokan-file-field').val(attachment.id);
-                click.closest('div').find('img.dokan-banner-img').attr('src', attachment.url);
-                $('.dokan-banner-drag').hide();
+                var wrap = self.closest('.dokan-banner');
+                wrap.find('input.dokan-file-field').val(attachment.id);
+                wrap.find('img.dokan-banner-img').attr('src', attachment.url);
+                $('.image-wrap', wrap).removeClass('dokan-hide');
+
+                $('.button-area').addClass('dokan-hide');
             });
 
             // Finally, open the modal
@@ -72,88 +89,65 @@ jQuery(function($) {
 
         },
 
-        serverValidate: function() {
-   
+        submitSettings: function() {
+
             var self = $( "form#settings-form" ),
                 form_data = self.serialize() + '&action=dokan_settings';
 
-            
+
             self.find('.ajax_prev').append('<span class="dokan-loading"> </span>');
-          
             $.post(dokan.ajaxurl, form_data, function(resp) {
 
                self.find('span.dokan-loading').remove();
                 $('html,body').animate({scrollTop:100});
 
-                if(resp.success) {
-                    console.log(resp.data['success_save']);
-                    var alert = $('.alert-success');
-                        prev_alert = $('.alert-danger');
+                if ( resp.success ) {
 
-                    prev_alert.hide().children('strong').children('p').remove();
-                    alert.children('strong').children('p').remove();
-                    alert.show().children('strong').append('<p>'+resp.data['success_save']+'</p>');
+                    $('.dokan-ajax-response').html( $('<div/>', {
+                        class: 'alert alert-success',
+                        html: '<p>' + resp.data + '</p>'
+                    }) );
 
+                } else {
+
+                    $('.dokan-ajax-response').html( $('<div/>', {
+                        'class': 'alert alert-danger',
+                        'html': '<p>' + resp.data + '</p>'
+                    }) );
                 }
-
-                if(resp.success === false) {
-                    var alert = $('.alert-danger');
-                    
-                    $('.alert-success').hide().children('strong').children('p').remove();
-                    alert.children('strong').children('p').remove();
-
-                    if(resp.data['noce_verify'] ) {
-                        
-                        alert.show().children('strong').append('<p>'+resp.data['noce_verify']+'</p>');
-                    }
-
-                    if( resp.data['error_message'] ) {
-
-                        var error_all= '';
-
-                        $.each(resp.data['error_message'], function( key, message) {
-                            error_all += '<p>'+message[0]+'</p>';
-                        } );
-
-                        alert.show().children('strong').append(error_all);
-                    }
-                }
-            }); 
+            });
         },
 
-        jqueryValidate: function(self) {
-
-
+        validateForm: function(self) {
 
             $("form#settings-form").validate({
                 //errorLabelContainer: '#errors'
                 submitHandler: function(form) {
-                    self.serverValidate();
+                    self.submitSettings();
                 },
                 errorElement: 'span',
                 errorClass: 'error',
-                errorPlacement: function(error, element) {
-        
-                    var form_group = $(element).closest('.form-group');
-                    form_group.addClass('has-error').append(error);
-                },
+                errorPlacement: validatorError,
+                success: validatorSuccess
+            });
 
-                success: function(label, element) {
-                    $(element).closest('.form-group').removeClass('has-error');
-                }
-            }); 
+        },
 
+        removeBanner: function(e) {
+            e.preventDefault();
+
+            var self = $(this);
+            var wrap = self.closest('.image-wrap');
+            var instruction = wrap.siblings('.button-area');
+
+            wrap.find('input.dokan-file-field').val('0');
+            wrap.addClass('dokan-hide');
+            instruction.removeClass('dokan-hide');
         }
-    }
+    };
 
-    settings.init();
+    var Dokan_Withdraw = {
 
-})(jQuery);
-
-//withdraw
-(function($) {
-    var withdraw = {
-        
         init: function() {
             var self = this;
 
@@ -163,54 +157,66 @@ jQuery(function($) {
         withdrawValidate: function(self) {
             $('form.withdraw').validate({
                 //errorLabelContainer: '#errors'
-                
+
                 errorElement: 'span',
                 errorClass: 'error',
-                errorPlacement: function(error, element) {
-        
-                    var form_group = $(element).closest('.form-group');
-                    form_group.addClass('has-error').append(error);
-                },
-
-                success: function(label, element) {
-                    $(element).closest('.form-group').removeClass('has-error');
-                }
+                errorPlacement: validatorError,
+                success: validatorSuccess
             })
         }
+    };
 
-        
-    }
-
-    withdraw.init();
-})(jQuery);
-
-//coupons
-(function($){
-    var coupons = {
+    var Dokan_Coupons = {
         init: function() {
             var self = this;
-            this.couponsValidation(self); 
+            this.couponsValidation(self);
         },
 
         couponsValidation: function(self) {
             $("form.coupons").validate({
-                //errorLabelContainer: '#errors'
                 errorElement: 'span',
                 errorClass: 'error',
-                errorPlacement: function(error, element) {
-        
-                    var form_group = $(element).closest('.form-group');
-                    form_group.addClass('has-error').append(error);
-                },
-
-                success: function(label, element) {
-                    $(element).closest('.form-group').removeClass('has-error');
-                }
-            }); 
+                errorPlacement: validatorError,
+                success: validatorSuccess
+            });
         }
+    };
 
+    var Dokan_Seller = {
+        init: function() {
+            this.validate(this);
+        },
 
-    }
+        validate: function(self) {
+            // e.preventDefault();
 
-    coupons.init();
-})(jQuery)
+            $('form#dokan-form-contact-seller').validate({
+                errorPlacement: validatorError,
+                success: validatorSuccess,
+                submitHandler: function(form) {
+
+                    $(form).block({ message: null, overlayCSS: { background: '#fff url(' + dokan.ajax_loader + ') no-repeat center', opacity: 0.6 } });
+
+                    var form_data = $(form).serialize();
+                    $.post(dokan.ajaxurl, form_data, function(resp) {
+                        $(form).unblock();
+
+                        if ( typeof resp.data !== 'undefined' ) {
+                            $(form).find('.ajax-response').html(resp.data);
+                        }
+
+                        $(form).find('input[type=text], input[type=email], textarea').val('');
+                    });
+                }
+            });
+        }
+    };
+
+    $(function() {
+        Dokan_Settings.init();
+        Dokan_Withdraw.init();
+        Dokan_Coupons.init();
+        Dokan_Seller.init();
+    });
+
+})(jQuery);

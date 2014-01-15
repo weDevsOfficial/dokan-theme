@@ -6,7 +6,7 @@
  * @package _bootstraps - 2013 1.0
  */
 ?>
-<div id="secondary" class="col-md-4" role="complementary">
+<div id="secondary" class="col-md-3" role="complementary">
     <div class="widget-area">
 
         <?php do_action( 'before_sidebar' ); ?>

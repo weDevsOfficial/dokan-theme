@@ -81,28 +81,28 @@
 
                             <?php if ( is_user_logged_in() ) { ?>
                                 <li><i class="icon-off"></i> <?php wp_loginout( home_url() ); ?></li>
-                                <li><a href="<?php echo sbw_woo_account_url(); ?>"><i class="icon-user"></i> Account</a></li>
+                                <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><i class="icon-user"></i> Account</a></li>
                             <?php } else { ?>
                                 <li><i class="icon-off"></i> <?php wp_loginout( home_url() ); ?></li>
                             <?php } ?>
 
-                            <li class="nav-cart-link"><?php sbw_cart_header(); ?></li>
+                            <li class="nav-cart-link"><?php dokan_checkout_header_btn(); ?></li>
                             <script type="text/javascript">
-                                jQuery(function($) {
-                                    $('a#nav-cart-pop').popover({
-                                        html: true,
-                                        placement: 'bottom',
-                                        trigger: 'manual',
-                                        content: $('.nav-cart-link .cart-items').html()
-                                    }).click(function(evt) {
-                                        evt.stopPropagation();
-                                        $(this).popover('show');
-                                    });;
+                                // jQuery(function($) {
+                                //     $('a#nav-cart-pop').popover({
+                                //         html: true,
+                                //         placement: 'bottom',
+                                //         trigger: 'manual',
+                                //         content: $('.nav-cart-link .cart-items').html()
+                                //     }).click(function(evt) {
+                                //         evt.stopPropagation();
+                                //         $(this).popover('show');
+                                //     });;
 
-                                    $('html').click(function() {
-                                        $('a#nav-cart-pop').popover('hide');
-                                    });
-                                });
+                                //     $('html').click(function() {
+                                //         $('a#nav-cart-pop').popover('hide');
+                                //     });
+                                // });
                                 </script>
                         </ul>
                     </div>

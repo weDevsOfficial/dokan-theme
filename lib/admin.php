@@ -19,7 +19,7 @@ class Dokan_Admin_Settings {
     }
 
     function admin_init() {
-
+        Dokan_Template_Withdraw::init()->withdraw_csv();
         //set the settings
         $this->settings_api->set_sections( $this->get_settings_sections() );
         $this->settings_api->set_fields( $this->get_settings_fields() );
@@ -33,7 +33,8 @@ class Dokan_Admin_Settings {
         $capability = apply_filters( 'doakn_menu_capability', 'activate_plugins' );
 
         add_menu_page( __( 'Doakn', 'dokan' ), __( 'Doakn', 'dokan' ), $capability, 'dokan', array($this, 'settings_page'), null, $menu_position );
-        add_submenu_page( 'dokan', __( 'Withdraw', 'dokan' ), __( 'Withdraw', 'dokan' ), $capability, 'dokan-withdraw', array($this, 'withdraw_page') );
+        $withdraw = add_submenu_page( 'dokan', __( 'Withdraw', 'dokan' ), __( 'Withdraw', 'dokan' ), $capability, 'dokan-withdraw', array($this, 'withdraw_page') );
+
     }
 
     function get_settings_sections() {
@@ -137,6 +138,7 @@ class Dokan_Admin_Settings {
     function withdraw_page() {
         $dokan_admin_withdraw = Dokan_Template_Withdraw::init();
         $dokan_admin_withdraw->admin_withdraw_list();
+
     }
 
 }
