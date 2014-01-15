@@ -3,6 +3,7 @@ jQuery(function( $ ) {
 
     wp.customize( 'theme_logo', function( value ) {
         value.bind( function( to ) {
+            console.log(to);
             $( '.site-header h1.site-title a' ).css( 'background', "url("+to+") no-repeat scroll 0 0 rgba(0, 0, 0, 0)");
         } );
     });
@@ -74,5 +75,5 @@ jQuery(function( $ ) {
             $( '.site-footer' ).css( 'background-color', to );
         } );
     });
-    
+
 });

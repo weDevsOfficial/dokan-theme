@@ -17,16 +17,15 @@ get_header();
 <div id="primary" class="home-content-area col-md-12">
     <div id="content" class="site-content" role="main">
 
-        <div id="home-page-section-1" class="row">
+        <div class="row">
             <div class="col-md-3">
                 <?php dokan_category_widget(); ?>
             </div>
 
             <div class="col-md-6">
-                <div id="main-slider">
                     Example
-                </div>
             </div>
+
             <div class="col-md-3">
                 <div id="feature-board">
                     <h2>Why <strong>dokan</strong></h2>
@@ -50,446 +49,70 @@ get_header();
         </div> <!-- #home-page-section-1 -->
 
         <div id="home-page-section-2" class="row">
+
             <div id="home-page-container" class="col-md-9">
-                <div id="l-f-s-tab">
-                    <!-- Nav tabs -->
-                    <ul id="myTab" class="nav nav-tabs">
-                        <li><a href="#d-latest" data-toggle="tab">Latest</a></li>
-                        <li><a href="#d-featured" data-toggle="tab">Featured</a></li>
-                        <li><a href="#d-special" data-toggle="tab">Special</a></li>
+
+                <div class="featured-tab-area clearfix">
+                    <ul id="dokan-feat-tab" class="nav nav-tabs">
+                        <li class="active"><a href="#latest-products" data-toggle="tab"><?php _e( 'Latest', 'dokan' ); ?></a></li>
+                        <li><a href="#featured-products" data-toggle="tab"><?php _e( 'Featured', 'dokan' ); ?></a></li>
+                        <li><a href="#special-products" data-toggle="tab"><?php _e( 'Special', 'dokan' ); ?></a></li>
                     </ul>
 
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="d-latest">
-                            <div id="d-latest-slider" class="flexslider">
-                                <ul class="slides items list-inline">
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status out">Soldout</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-clipboard"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <!-- items mirrored twice, total of 12 -->
-                                </ul>
-                            </div>
+                    <div class="tab-content woocommerce">
+                        <div class="tab-pane fade in active" id="latest-products">
+                            <ul class="products list-inline">
+                                <?php
+                                $latest_query = new WP_Query( array(
+                                    'posts_per_page' => 8,
+                                    'post_type' => 'product'
+                                ) );
+                                ?>
+                                <?php while ( $latest_query->have_posts() ) : $latest_query->the_post(); ?>
+
+                                    <?php woocommerce_get_template_part( 'content', 'product' ); ?>
+
+                                <?php endwhile; ?>
+                            </ul>
                         </div>
-                        <div class="tab-pane fade" id="d-featured">
-                            <div id="d-featured-slider" class="flexslider">
-                                <ul class="slides items list-inline">
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status out">Soldout</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-clipboard"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                </ul>
-                            </div>
+
+                        <div class="tab-pane fade" id="featured-products">
+                            <ul class="products list-inline">
+                                <?php
+                                $latest_query = new WP_Query( array(
+                                    'posts_per_page' => 8,
+                                    'post_type' => 'product'
+                                ) );
+                                ?>
+                                <?php while ( $latest_query->have_posts() ) : $latest_query->the_post(); ?>
+
+                                    <?php woocommerce_get_template_part( 'content', 'product' ); ?>
+
+                                <?php endwhile; ?>
+                            </ul>
                         </div>
-                        <div class="tab-pane fade" id="d-special">
-                            <div id="d-special-slider" class="flexslider">
-                                <ul class="slides items">
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status out">Soldout</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-clipboard"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <li>
-                                        <figure>
-                                            <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                            <figcaption>
-                                                <span class="status on">On Sale</span>
-                                                <h3 class="title">Product Item Number : #001</h3>
-                                                <span class="item-bar">
-                                                    <span class="item-price">$ 1,000</span>
-                                                    <span class="item-button">
-                                                        <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                                    </span>
-                                                </span>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                    <!-- items mirrored twice, total of 12 -->
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                        <div class="tab-pane fade" id="special-products">
+                            <ul class="products list-inline">
+                                <?php
+                                $latest_query = new WP_Query( array(
+                                    'posts_per_page' => 8,
+                                    'post_type' => 'product'
+                                ) );
+                                ?>
+                                <?php while ( $latest_query->have_posts() ) : $latest_query->the_post(); ?>
+
+                                    <?php woocommerce_get_template_part( 'content', 'product' ); ?>
+
+                                <?php endwhile; ?>
+                            </ul>
+                        </div> <!-- .tab-pane -->
+                    </div> <!-- .tab-content -->
+                </div> <!-- .featured-tab-area -->
+
                 <div id="brand-showcase">
                     <h2>Brand Showcase</h2>
+
                     <div class="brand-tabs ">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs">
@@ -641,151 +264,28 @@ get_header();
                     </div>
                 </div>
 
-                <div id="best-sellers">
+                <div class="best-sellers-area">
                     <h2>Best Sellers</h2>
-                    <hr>
-                    <div class="best-sellers-sliders">
-                        <ul class="slides items list-inline">
-                            <li>
-                                <figure>
-                                    <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                    <figcaption>
-                                        <span class="status on">On Sale</span>
-                                        <h3 class="title">Product Item Number : #001</h3>
-                                        <span class="item-bar">
-                                            <span class="item-price">$ 1,000</span>
-                                            <span class="item-button">
-                                                <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                            </span>
-                                        </span>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <figure>
-                                    <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                    <figcaption>
-                                        <span class="status on">On Sale</span>
-                                        <h3 class="title">Product Item Number : #001</h3>
-                                        <span class="item-bar">
-                                            <span class="item-price">$ 1,000</span>
-                                            <span class="item-button">
-                                                <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                            </span>
-                                        </span>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <figure>
-                                    <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                    <figcaption>
-                                        <span class="status on">On Sale</span>
-                                        <h3 class="title">Product Item Number : #001</h3>
-                                        <span class="item-bar">
-                                            <span class="item-price">$ 1,000</span>
-                                            <span class="item-button">
-                                                <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                            </span>
-                                        </span>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <figure>
-                                    <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                    <figcaption>
-                                        <span class="status on">On Sale</span>
-                                        <h3 class="title">Product Item Number : #001</h3>
-                                        <span class="item-bar">
-                                            <span class="item-price">$ 1,000</span>
-                                            <span class="item-button">
-                                                <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                            </span>
-                                        </span>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <figure>
-                                    <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                    <figcaption>
-                                        <span class="status on">On Sale</span>
-                                        <h3 class="title">Product Item Number : #001</h3>
-                                        <span class="item-bar">
-                                            <span class="item-price">$ 1,000</span>
-                                            <span class="item-button">
-                                                <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                            </span>
-                                        </span>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <figure>
-                                    <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                    <figcaption>
-                                        <span class="status on">On Sale</span>
-                                        <h3 class="title">Product Item Number : #001</h3>
-                                        <span class="item-bar">
-                                            <span class="item-price">$ 1,000</span>
-                                            <span class="item-button">
-                                                <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                            </span>
-                                        </span>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <figure>
-                                    <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                    <figcaption>
-                                        <span class="status on">On Sale</span>
-                                        <h3 class="title">Product Item Number : #001</h3>
-                                        <span class="item-bar">
-                                            <span class="item-price">$ 1,000</span>
-                                            <span class="item-button">
-                                                <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                            </span>
-                                        </span>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <figure>
-                                    <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                    <figcaption>
-                                        <span class="status on">On Sale</span>
-                                        <h3 class="title">Product Item Number : #001</h3>
-                                        <span class="item-bar">
-                                            <span class="item-price">$ 1,000</span>
-                                            <span class="item-button">
-                                                <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                            </span>
-                                        </span>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li>
-                                <figure>
-                                    <img src="<?php echo $url; ?>/sports.jpg" alt="Sports">
-                                    <figcaption>
-                                        <span class="status on">On Sale</span>
-                                        <h3 class="title">Product Item Number : #001</h3>
-                                        <span class="item-bar">
-                                            <span class="item-price">$ 1,000</span>
-                                            <span class="item-button">
-                                                <a href="#" class="btn cat"><span class="icon-cart"></span></a><a href="#" class="btn fav"><span class="icon-heart"></span></a>
-                                            </span>
-                                        </span>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <!-- items mirrored twice, total of 12 -->
+
+                    <div class="best-sellers-sliders woocommerce clearfix">
+                        <ul class="products">
+                            <?php
+                            $latest_query = new WP_Query( array(
+                                'posts_per_page' => 8,
+                                'post_type' => 'product'
+                            ) );
+                            ?>
+
+                            <?php while ( $latest_query->have_posts() ) : $latest_query->the_post(); ?>
+
+                                <?php woocommerce_get_template_part( 'content', 'product' ); ?>
+
+                            <?php endwhile; // end of the loop. ?>
                         </ul>
                     </div>
-                </div>
-            </div>
+                </div> <!-- .best-sellers-area -->
+            </div> <!-- #home-page-container -->
+
             <div id="home-page-aside" class="col-md-3 row">
                 <div id="super-deals">
                     <h3 class="deal-title">Super Deals</h3>

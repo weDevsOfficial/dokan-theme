@@ -563,6 +563,307 @@ a:hover {
 #content nav .meta-nav {
   font-weight: normal;
 }
+.home .featured-tab-area .nav-tabs a {
+  font-weight: bolder;
+  color: #676767;
+}
+.home .featured-tab-area .nav-tabs > li.active > a,
+.home .featured-tab-area .nav-tabs > li.active > a:hover,
+.home .featured-tab-area .nav-tabs > li.active > a:focus {
+  box-shadow: inset 0px 5px 0px #f04023;
+}
+.home .featured-tab-area .tab-content {
+  padding-top: 20px;
+}
+.home #brand-showcase h2 {
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #676767;
+}
+.home #brand-showcase .brand-tabs {
+  border: 1px solid #d3d3d3;
+  box-shadow: inset 0px 3px 0px #f04023;
+  border-radius: 3px 3px 0 0;
+  background: #ebebeb;
+  position: relative;
+}
+.home #brand-showcase .nav-tabs li {
+  box-shadow: inset 0px 3px 0px #f04023;
+  text-align: center;
+}
+.home #brand-showcase .nav-tabs li a {
+  font-weight: bolder;
+  color: #676767;
+}
+.home #brand-showcase .nav-tabs li a:hover {
+  background: #fff;
+  border-top: none;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+  margin-top: 3px;
+  padding-top: 7px;
+}
+.home #brand-showcase .nav-tabs > li.active > a,
+.home #brand-showcase .nav-tabs > li.active > a:hover,
+.home #brand-showcase .nav-tabs > li.active > a:focus {
+  background: #fff;
+  border-top: none;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+  margin-top: 3px;
+  padding-top: 7px;
+}
+.home #brand-showcase .nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.428571429;
+  border: 1px solid transparent;
+  border-radius: 0px 0px 0 0;
+}
+.home #brand-showcase .tab-content {
+  background: #fff;
+  padding: 5px 10px 15px;
+}
+.home #brand-showcase .show-brand-name {
+  font-size: 32px;
+  color: #585858;
+  font-weight: bolder;
+}
+.home #brand-showcase .show-brand-dsc {
+  line-height: 18px;
+  font-size: 12px;
+  color: #505050;
+}
+.home #brand-showcase .show-call {
+  color: #585858;
+  font-weight: bold;
+  font-size: 14px;
+}
+.home #brand-showcase #show-items ul {
+  list-style: none;
+}
+.home #brand-showcase #show-items ul li {
+  margin-top: 18px;
+}
+.home #brand-showcase #show-items .show-thumb {
+  width: 85px;
+  height: 90px;
+  float: left;
+  margin-right: 5px;
+}
+.home #brand-showcase #show-items .show-title {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: bold;
+  color: #585858;
+}
+.home #brand-showcase #show-items .show-price {
+  font-size: 16px;
+  font-weight: bolder;
+  color: #f04023;
+  margin-top: 20px;
+}
+.home #brand-showcase #show-items .show-price span {
+  color: #828080;
+  font-size: 12px;
+  font-weight: normal;
+}
+.home #best-sellers {
+  margin-top: 25px;
+}
+.home #best-sellers h2 {
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #676767;
+  margin-bottom: -10px;
+}
+.home #best-sellers hr {
+  border: 1px solid #cccccc;
+  border-top: none;
+  margin-bottom: 5px;
+}
+.home #best-sellers .best-sellers-sliders {
+  margin-left: 2px;
+  position: relative;
+}
+.home .items {
+  margin: 0 auto;
+  list-style: none;
+  text-align: center;
+}
+.home .items figure {
+  display: inline-block;
+  width: 202px;
+  height: 202px;
+  margin: 0;
+  margin-top: 10px;
+  text-align: left;
+  position: relative;
+  border: 1px solid #d3d3d3;
+}
+.home .items figure img {
+  max-width: 100%;
+  display: block;
+  position: relative;
+}
+.home .items figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+}
+.home .status {
+  color: #fff;
+  font-weight: bold;
+  margin: 20px 0 0 0;
+  padding: 7px 10px;
+  bottom: 155px;
+  position: relative;
+  font-size: 14px;
+}
+.home .on {
+  background: #f04023;
+  left: 119px;
+}
+.home .out {
+  background: #363636;
+  left: 117px;
+}
+.home .cat {
+  background: #f04023;
+  color: #fff;
+}
+.home .fav {
+  background: #fff;
+  color: #f04023;
+}
+.home .flex-direction-nav a:before {
+  font-family: 'dokan-html-icons';
+  font-size: 20px;
+  display: inline-block;
+  content: '\e609';
+}
+.home .flex-direction-nav a.flex-next:before {
+  content: '\e608';
+}
+.home .flex-direction-nav a {
+  display: block;
+  width: 30px;
+  height: 24px;
+  margin: 0px 0 0;
+  position: absolute;
+  top: -15%;
+  z-index: 10;
+  overflow: hidden;
+  cursor: pointer;
+  color: #7b7b7b;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  transition: all .3s ease;
+}
+.home #home-page-aside {
+  padding-left: 50px;
+  padding-right: 0px;
+}
+.home .deal-title {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  background: #f04023;
+  color: #fff;
+  padding: 10px 20px;
+}
+.home .deal-items {
+  margin: 0 auto;
+  list-style: none;
+  text-align: center;
+  padding-left: 5px;
+}
+.home .deal-items li {
+  display: inline-block;
+  margin: 0;
+  margin-right: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+  position: relative;
+  border: 1px solid #d3d3d3;
+}
+.home .deal-items figure {
+  width: 210px;
+  height: 230px;
+  margin: 0;
+  position: relative;
+}
+.home .deal-items figure img {
+  max-width: 100%;
+  display: block;
+  position: relative;
+}
+.home .deal-items figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+}
+.home .deal-items .deal-status {
+  width: 80px;
+  background: #f04023;
+  color: #fff;
+  font-weight: bold;
+  margin: 20px 0 0 0;
+  padding: 7px 10px;
+  left: 120px;
+  bottom: 175px;
+  position: relative;
+  font-size: 14px;
+  float: right;
+  text-align: center;
+}
+.home .deal-items .deal-time-bar {
+  background: white;
+  display: block;
+  width: 210px;
+  margin-left: -10px;
+  padding: 8px;
+  bottom: 0px;
+  position: absolute;
+}
+.home .deal-items .deal-time-bar li {
+  border: none;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  margin-left: 6px;
+}
+.home .deal-items .deal-time-bar li .d-time-title {
+  position: absolute;
+  color: #666463;
+  padding: 3px 10px;
+  bottom: 13px;
+  left: -5px;
+  font-weight: bold;
+  font-size: 12px;
+}
+.home .deal-items .deal-time-bar li .d-time {
+  position: relative;
+  padding: 7px;
+  top: 16px;
+  left: 5px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  border: 1px solid #d3d3d3;
+  color: #f04023;
+}
+.home .deal-items .deal-time-bar li .d-h {
+  left: 7px;
+}
+.home .deal-items .deal-time-bar li .d-m {
+  left: 15px;
+}
 .page-template-templatessettings-php .dokan-banner {
   border: 4px dashed #D8D8D8;
   height: 270px;
@@ -1913,307 +2214,6 @@ a:hover {
 }
 #home-page-section-2 {
   margin-bottom: 25px;
-}
-#l-f-s-tab {
-  margin-bottom: -35px;
-}
-#l-f-s-tab .nav-tabs a {
-  font-weight: bolder;
-  color: #676767;
-}
-#l-f-s-tab .nav-tabs > li.active > a,
-#l-f-s-tab .nav-tabs > li.active > a:hover,
-#l-f-s-tab .nav-tabs > li.active > a:focus {
-  box-shadow: inset 0px 5px 0px #f04023;
-}
-#brand-showcase h2 {
-  font-weight: bold;
-  font-size: 16px;
-  text-transform: uppercase;
-  color: #676767;
-}
-#brand-showcase .brand-tabs {
-  border: 1px solid #d3d3d3;
-  box-shadow: inset 0px 3px 0px #f04023;
-  border-radius: 3px 3px 0 0;
-  background: #ebebeb;
-  position: relative;
-}
-#brand-showcase .nav-tabs li {
-  box-shadow: inset 0px 3px 0px #f04023;
-  text-align: center;
-}
-#brand-showcase .nav-tabs li a {
-  font-weight: bolder;
-  color: #676767;
-}
-#brand-showcase .nav-tabs li a:hover {
-  background: #fff;
-  border-top: none;
-  border: 1px solid #ddd;
-  border-bottom-color: transparent;
-  margin-top: 3px;
-  padding-top: 7px;
-}
-#brand-showcase .nav-tabs > li.active > a,
-#brand-showcase .nav-tabs > li.active > a:hover,
-#brand-showcase .nav-tabs > li.active > a:focus {
-  background: #fff;
-  border-top: none;
-  border: 1px solid #ddd;
-  border-bottom-color: transparent;
-  margin-top: 3px;
-  padding-top: 7px;
-}
-#brand-showcase .nav-tabs > li > a {
-  margin-right: 2px;
-  line-height: 1.428571429;
-  border: 1px solid transparent;
-  border-radius: 0px 0px 0 0;
-}
-#brand-showcase .tab-content {
-  background: #fff;
-  padding: 5px 10px 15px;
-}
-#brand-showcase .show-brand-name {
-  font-size: 32px;
-  color: #585858;
-  font-weight: bolder;
-}
-#brand-showcase .show-brand-dsc {
-  line-height: 18px;
-  font-size: 12px;
-  color: #505050;
-}
-#brand-showcase .show-call {
-  color: #585858;
-  font-weight: bold;
-  font-size: 14px;
-}
-#brand-showcase #show-items ul {
-  list-style: none;
-}
-#brand-showcase #show-items ul li {
-  margin-top: 18px;
-}
-#brand-showcase #show-items .show-thumb {
-  width: 85px;
-  height: 90px;
-  float: left;
-  margin-right: 5px;
-}
-#brand-showcase #show-items .show-title {
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: bold;
-  color: #585858;
-}
-#brand-showcase #show-items .show-price {
-  font-size: 16px;
-  font-weight: bolder;
-  color: #f04023;
-  margin-top: 20px;
-}
-#brand-showcase #show-items .show-price span {
-  color: #828080;
-  font-size: 12px;
-  font-weight: normal;
-}
-#best-sellers {
-  margin-top: 25px;
-}
-#best-sellers h2 {
-  font-weight: bold;
-  font-size: 14px;
-  text-transform: uppercase;
-  color: #676767;
-  margin-bottom: -10px;
-}
-#best-sellers hr {
-  border: 1px solid #cccccc;
-  border-top: none;
-  margin-bottom: 5px;
-}
-#best-sellers .best-sellers-sliders {
-  margin-left: 2px;
-  position: relative;
-}
-.items {
-  margin: 0 auto;
-  list-style: none;
-  text-align: center;
-}
-.items figure {
-  display: inline-block;
-  width: 202px;
-  height: 202px;
-  margin: 0;
-  margin-top: 10px;
-  text-align: left;
-  position: relative;
-  border: 1px solid #d3d3d3;
-}
-.items figure img {
-  max-width: 100%;
-  display: block;
-  position: relative;
-}
-.items figcaption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 10px;
-}
-.status {
-  color: #fff;
-  font-weight: bold;
-  margin: 20px 0 0 0;
-  padding: 7px 10px;
-  bottom: 155px;
-  position: relative;
-  font-size: 14px;
-}
-.on {
-  background: #f04023;
-  left: 119px;
-}
-.out {
-  background: #363636;
-  left: 117px;
-}
-.cat {
-  background: #f04023;
-  color: #fff;
-}
-.fav {
-  background: #fff;
-  color: #f04023;
-}
-.flex-direction-nav a:before {
-  font-family: 'dokan-html-icons';
-  font-size: 20px;
-  display: inline-block;
-  content: '\e609';
-}
-.flex-direction-nav a.flex-next:before {
-  content: '\e608';
-}
-.flex-direction-nav a {
-  display: block;
-  width: 30px;
-  height: 24px;
-  margin: 0px 0 0;
-  position: absolute;
-  top: -15%;
-  z-index: 10;
-  overflow: hidden;
-  cursor: pointer;
-  color: #7b7b7b;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  transition: all .3s ease;
-}
-#home-page-aside {
-  padding-left: 50px;
-  padding-right: 0px;
-}
-.deal-title {
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  width: 100%;
-  background: #f04023;
-  color: #fff;
-  padding: 10px 20px;
-}
-.deal-items {
-  margin: 0 auto;
-  list-style: none;
-  text-align: center;
-  padding-left: 5px;
-}
-.deal-items li {
-  display: inline-block;
-  margin: 0;
-  margin-right: 0px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-align: left;
-  position: relative;
-  border: 1px solid #d3d3d3;
-}
-.deal-items figure {
-  width: 210px;
-  height: 230px;
-  margin: 0;
-  position: relative;
-}
-.deal-items figure img {
-  max-width: 100%;
-  display: block;
-  position: relative;
-}
-.deal-items figcaption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 10px;
-}
-.deal-items .deal-status {
-  width: 80px;
-  background: #f04023;
-  color: #fff;
-  font-weight: bold;
-  margin: 20px 0 0 0;
-  padding: 7px 10px;
-  left: 120px;
-  bottom: 175px;
-  position: relative;
-  font-size: 14px;
-  float: right;
-  text-align: center;
-}
-.deal-items .deal-time-bar {
-  background: white;
-  display: block;
-  width: 210px;
-  margin-left: -10px;
-  padding: 8px;
-  bottom: 0px;
-  position: absolute;
-}
-.deal-items .deal-time-bar li {
-  border: none;
-  margin-bottom: 20px;
-  margin-right: 20px;
-  margin-left: 6px;
-}
-.deal-items .deal-time-bar li .d-time-title {
-  position: absolute;
-  color: #666463;
-  padding: 3px 10px;
-  bottom: 13px;
-  left: -5px;
-  font-weight: bold;
-  font-size: 12px;
-}
-.deal-items .deal-time-bar li .d-time {
-  position: relative;
-  padding: 7px;
-  top: 16px;
-  left: 5px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 14px;
-  border: 1px solid #d3d3d3;
-  color: #f04023;
-}
-.deal-items .deal-time-bar li .d-h {
-  left: 7px;
-}
-.deal-items .deal-time-bar li .d-m {
-  left: 15px;
 }
 .profile-content-area {
   margin-top: -20px;
