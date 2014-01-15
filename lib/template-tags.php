@@ -183,11 +183,11 @@ function wedevs_page_navi( $before = '', $after = '', $wp_query ) {
 
     echo $before . '<div class="pagination-container"><ul class="pagination">' . "";
     if ( $paged > 1 ) {
-        $first_page_text = "«";
+        $first_page_text = "&larr;";
         echo '<li class="prev"><a href="' . get_pagenum_link() . '" title="First">' . $first_page_text . '</a></li>';
     }
 
-    $prevposts = get_previous_posts_link( '← Previous' );
+    $prevposts = get_previous_posts_link( '&larr; Previous' );
     if ( $prevposts ) {
         echo '<li>' . $prevposts . '</li>';
     } else {
