@@ -352,14 +352,19 @@ function dokan_order_listing_status_filter() {
                 <?php printf( __( 'Completed (%d)', 'dokan' ), $orders_counts->completed ); ?></span>
             </a>
         </li>
-        <li<?php echo $status_class == 'pending' ? ' class="active"' : ''; ?>>
-            <a href="<?php echo add_query_arg( array( 'order_status' => 'pending' ), $orders_url ); ?>">
-                <?php printf( __( 'Pending (%d)', 'dokan' ), $orders_counts->pending ); ?></span>
-            </a>
-        </li>
         <li<?php echo $status_class == 'processing' ? ' class="active"' : ''; ?>>
             <a href="<?php echo add_query_arg( array( 'order_status' => 'processing' ), $orders_url ); ?>">
                 <?php printf( __( 'Processing (%d)', 'dokan' ), $orders_counts->processing ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'on-hold' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'on-hold' ), $orders_url ); ?>">
+                <?php printf( __( 'On-hold (%d)', 'dokan' ), $orders_counts->{'on-hold'} ); ?></span>
+            </a>
+        </li>
+        <li<?php echo $status_class == 'pending' ? ' class="active"' : ''; ?>>
+            <a href="<?php echo add_query_arg( array( 'order_status' => 'pending' ), $orders_url ); ?>">
+                <?php printf( __( 'Pending (%d)', 'dokan' ), $orders_counts->pending ); ?></span>
             </a>
         </li>
         <li<?php echo $status_class == 'canceled' ? ' class="active"' : ''; ?>>

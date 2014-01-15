@@ -11,32 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		<input type="hidden" class="order_item_id" name="order_item_id[]" value="<?php echo esc_attr( $item_id ); ?>" />
 	</td>
 
-	<?php if ( get_option( 'woocommerce_calc_taxes' ) == 'yes' ) : ?>
-
-	<td class="tax_class" width="1%">
-		<select class="tax_class" name="order_item_tax_class[<?php echo absint( $item_id ); ?>]" title="<?php _e( 'Tax class', 'woocommerce' ); ?>">
-			<?php $tax_class = isset( $item['tax_class'] ) ? sanitize_title( $item['tax_class'] ) : ''; ?>
-			<option value="0" <?php selected( 0, $tax_class ) ?>><?php _e( 'N/A', 'woocommerce' ); ?></option>
-			<optgroup label="<?php _e( 'Taxable', 'woocommerce' ); ?>">
-				<?php
-				$tax_classes = array_filter( array_map( 'trim', explode( "\n", get_option('woocommerce_tax_classes' ) ) ) );
-
-				$classes_options = array();
-				$classes_options[''] = __( 'Standard', 'woocommerce' );
-
-				if ( $tax_classes )
-					foreach ( $tax_classes as $class )
-						$classes_options[ sanitize_title( $class ) ] = $class;
-
-				foreach ( $classes_options as $value => $name )
-					echo '<option value="' . esc_attr( $value ) . '" ' . selected( $value, $tax_class, false ) . '>'. esc_html( $name ) . '</option>';
-				?>
-			</optgroup>
-		</select>
-	</td>
-
-	<?php endif; ?>
-
 	<td class="quantity" width="1%">1</td>
 
 	<td class="line_cost" width="1%">

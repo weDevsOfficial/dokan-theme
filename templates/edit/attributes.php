@@ -7,7 +7,7 @@
     global $woocommerce;
 
     // Array of defined attribute taxonomies
-    $attribute_taxonomies = $woocommerce->get_attribute_taxonomies();
+    $attribute_taxonomies = wc_get_attribute_taxonomies();
 
     // Product attributes - taxonomies and custom, ordered, with visibility and variation attributes set
     $attributes = maybe_unserialize( get_post_meta( $thepostid, '_product_attributes', true ) );

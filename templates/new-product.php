@@ -66,7 +66,8 @@ get_header();
 
     <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
 
-    <div class="col-md-9 product-edit-container">
+<div id="primary" class="content-area col-md-9">
+    <div id="content" class="site-content" role="main">
 
         <?php if ( $errors ) { ?>
             <div class="alert alert-danger">
@@ -143,6 +144,7 @@ get_header();
             </div>
 
         </form>
-    </div>
+    </div><!-- #content .site-content -->
+</div><!-- #primary .content-area -->
 
 <?php get_footer(); ?>

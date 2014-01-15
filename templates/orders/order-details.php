@@ -27,17 +27,9 @@ $order = new WC_Order( $order_id );
 
                                     <?php do_action( 'woocommerce_admin_order_item_headers' ); ?>
 
-                                    <?php if ( get_option( 'woocommerce_calc_taxes' ) == 'yes' ) : ?>
-                                        <th class="tax_class" width="15%"><?php _e( 'Tax Class', 'woocommerce' ); ?></th>
-                                    <?php endif; ?>
-
                                     <th class="quantity"><?php _e( 'Qty', 'woocommerce' ); ?></th>
 
                                     <th class="line_cost"><?php _e( 'Totals', 'woocommerce' ); ?></th>
-
-                                    <?php if ( get_option( 'woocommerce_calc_taxes' ) == 'yes' ) : ?>
-                                        <th class="line_tax"><?php _e( 'Tax', 'woocommerce' ); ?></th>
-                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody id="order_items_list">
@@ -68,12 +60,11 @@ $order = new WC_Order( $order_id );
 
                             <tfoot>
                                 <?php
-                                    $colspan = ( get_option( 'woocommerce_calc_taxes' ) == 'yes' ) ? 4 : 2;
                                     if ( $totals = $order->get_order_item_totals() ) {
                                         foreach ( $totals as $total ) {
                                             ?>
                                             <tr>
-                                                <th colspan="<?php echo $colspan; ?>"><?php echo $total['label']; ?></th>
+                                                <th colspan="2"><?php echo $total['label']; ?></th>
                                                 <td colspan="2" class="value"><?php echo $total['value']; ?></td>
                                             </tr>
                                             <?php
@@ -181,14 +172,18 @@ $order = new WC_Order( $order_id );
                             </li>
                         </ul>
 
-                        <?php if ( get_option( 'woocommerce_enable_order_comments' ) != 'no' ) : ?>
+                        <?php
+                        if ( get_option( 'woocommerce_enable_order_comments' ) != 'no' ) {
+                            $customer_note = get_post_field( 'post_excerpt', $order->id );
 
-                            <div class="alert alert-success customer-note">
-                                <strong><?php _e( 'Customer Note:', 'dokan' ) ?></strong><br>
-                                <?php echo wp_kses_post( get_post_field( 'post_excerpt', $order->id ) ); ?>
-                            </div>
-
-                        <?php endif; ?>
+                            if ( !empty( $customer_note ) ) {
+                                ?>
+                                <div class="alert alert-success customer-note">
+                                    <strong><?php _e( 'Customer Note:', 'dokan' ) ?></strong><br>
+                                    <?php echo wp_kses_post( $customer_note ); ?>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

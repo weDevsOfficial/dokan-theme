@@ -343,6 +343,8 @@ class WeDevs_Dokan {
         }
 
         wp_enqueue_script( 'jquery' );
+        wp_enqueue_script( 'jquery-ui' );
+        wp_enqueue_script( 'jquery-ui-datepicker' );
 
         wp_register_script( 'dokan-order', $template_directory . '/assets/js/orders.js', false, null, true );
         wp_register_script( 'jquery-flot', $template_directory . '/assets/js/jquery.flot.js', false, null, true );

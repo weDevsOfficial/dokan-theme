@@ -88,21 +88,21 @@
 
                             <li class="nav-cart-link"><?php dokan_checkout_header_btn(); ?></li>
                             <script type="text/javascript">
-                                jQuery(function($) {
-                                    $('a#nav-cart-pop').popover({
-                                        html: true,
-                                        placement: 'bottom',
-                                        trigger: 'manual',
-                                        content: $('.nav-cart-link .cart-items').html()
-                                    }).click(function(evt) {
-                                        evt.stopPropagation();
-                                        $(this).popover('show');
-                                    });;
+                                // jQuery(function($) {
+                                //     $('a#nav-cart-pop').popover({
+                                //         html: true,
+                                //         placement: 'bottom',
+                                //         trigger: 'manual',
+                                //         content: $('.nav-cart-link .cart-items').html()
+                                //     }).click(function(evt) {
+                                //         evt.stopPropagation();
+                                //         $(this).popover('show');
+                                //     });;
 
-                                    $('html').click(function() {
-                                        $('a#nav-cart-pop').popover('hide');
-                                    });
-                                });
+                                //     $('html').click(function() {
+                                //         $('a#nav-cart-pop').popover('hide');
+                                //     });
+                                // });
                                 </script>
                         </ul>
                     </div>

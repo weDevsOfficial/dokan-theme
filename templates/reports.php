@@ -12,7 +12,7 @@ wp_enqueue_script( 'jquery-flot' );
 ?>
 
 
-<?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'reports' ) ); ?>
+<?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'report' ) ); ?>
 
 <div id="primary" class="content-area col-md-10">
     <div id="content" class="site-content" role="main">

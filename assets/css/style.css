@@ -954,6 +954,127 @@ a:hover {
   font-weight: normal;
   margin: 0;
 }
+.page-template-templatescoupons-php .site-content .entry-header {
+  border-bottom: 1px solid #dddddd;
+}
+.page-template-templatescoupons-php .site-content .entry-header .entry-title {
+  border-bottom: none;
+}
+.page-template-templatescoupons-php .code:before,
+.page-template-templatescoupons-php .code a:before,
+.page-template-templatescoupons-php .code span:before,
+.page-template-templatescoupons-php .code:after,
+.page-template-templatescoupons-php .code a:after,
+.page-template-templatescoupons-php .code span:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 8px;
+  height: 4px;
+  background: #f7f7f7;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0 2px 0 0 rgba(255, 255, 255, 0.3), inset 0 2px 0 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 2px 0 0 rgba(255, 255, 255, 0.3), inset 0 2px 0 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 0 0 rgba(255, 255, 255, 0.3), inset 0 2px 0 0 rgba(0, 0, 0, 0.1);
+}
+.page-template-templatescoupons-php .code {
+  overflow: hidden;
+  vertical-align: middle;
+  margin: 0 8px 0 0;
+  background: #ececec;
+  color: #21759A;
+  text-shadow: 0 1px 0 #ddd;
+  padding: 2px;
+  position: relative;
+  float: left;
+  line-height: 1em;
+  -moz-box-shadow: 0 2px 0 0 #dddddd;
+  -webkit-box-shadow: 0 2px 0 0 #dddddd;
+  box-shadow: 0 2px 0 0 #dddddd;
+  font-weight: bold;
+}
+.page-template-templatescoupons-php .code:before {
+  bottom: 5px;
+  left: 0;
+  margin: 0 0 0 -4px;
+}
+.page-template-templatescoupons-php .code:after {
+  top: 5px;
+  left: 0;
+  margin: 0 0 0 -4px;
+}
+.page-template-templatescoupons-php .code a,
+.page-template-templatescoupons-php .code span {
+  float: left;
+  padding: 0 4px;
+  color: #21759A;
+}
+.page-template-templatescoupons-php .code a:before,
+.page-template-templatescoupons-php .code span:before {
+  bottom: 5px;
+  right: 0;
+  margin: 0 -4px 0 0;
+}
+.page-template-templatescoupons-php .code a:after,
+.page-template-templatescoupons-php .code span:after {
+  content: "";
+  top: 5px;
+  right: 0;
+  margin: 0 -4px 0 0;
+}
+.page-template-templatescoupons-php .code a span,
+.page-template-templatescoupons-php .code span span {
+  border: 1px dashed #ccc;
+  padding: .5em 6px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+}
+.page-template-templatescoupons-php .code a span:before,
+.page-template-templatescoupons-php .code span span:before {
+  top: 50%;
+  left: 0;
+  margin: -2px 0 0 -4px;
+}
+.page-template-templatescoupons-php .code a span:after,
+.page-template-templatescoupons-php .code span span:after {
+  top: 50%;
+  right: 0;
+  margin: -2px -4px 0 0;
+}
+.page-template-templatescoupons-php .code:hover {
+  background: #975e83;
+  color: #fff;
+  text-shadow: 0 1px 0 #5a324b;
+}
+.page-template-templatescoupons-php .code:hover a,
+.page-template-templatescoupons-php .code:hover span {
+  color: #fff;
+}
+.page-template-templatescoupons-php .code:hover a span,
+.page-template-templatescoupons-php .code:hover span span {
+  border: 1px dashed #bb82a7;
+}
+.page-template-templatescoupons-php .row-actions {
+  visibility: hidden;
+  font-size: 12px;
+  color: #ccc;
+  clear: both;
+  padding-top: 8px;
+}
+.page-template-templatescoupons-php .row-actions .delete a {
+  color: #A05;
+}
+.page-template-templatescoupons-php .row-actions .delete a:hover {
+  color: red;
+}
+.page-template-templatescoupons-php tr:hover .row-actions {
+  visibility: visible;
+}
 /*--------------------------------------------------
 :: Sidebars
 -------------------------------------------------- */

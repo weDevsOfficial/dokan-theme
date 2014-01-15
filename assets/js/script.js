@@ -15,9 +15,12 @@ jQuery(function($) {
     $('.tips').tooltip();
 
     // set dashboard menu height
-    // $('.dokan-dash-sidebar ul.dokan-dashboard-menu').css({
-    //     'height': $('#main').height()
-    // });
+    var dashboardMenu = $('ul.dokan-dashboard-menu'),
+        contentArea = $('#content article');
+
+    if ( contentArea.height() > dashboardMenu.height() ) {
+        dashboardMenu.css({ height: contentArea.height() });
+    }
 
 });
 

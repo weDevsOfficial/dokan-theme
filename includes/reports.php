@@ -126,24 +126,23 @@ function dokan_sales_overview() {
     global $start_date, $end_date, $woocommerce, $wpdb, $wp_locale, $current_user;
 
     $total_sales = $total_orders = $order_items = $discount_total = $shipping_total = 0;
-    $user_orders = dokan_get_seller_order_ids( $current_user->ID );
-    $user_orders_in = count( $user_orders ) ? implode( ', ', $user_orders ) : 0;
+    $order_status = implode( "','", apply_filters( 'dokan_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) );
 
-    $order_totals = apply_filters( 'woocommerce_reports_sales_overview_order_totals', $wpdb->get_row( "
-        SELECT SUM(meta.meta_value) AS total_sales, COUNT(posts.ID) AS total_orders FROM {$wpdb->posts} AS posts
+    $sql = "SELECT SUM(meta__order_total.meta_value) AS total_sales,
+               SUM(meta__order_shipping.meta_value) AS total_shipping,
+               COUNT(posts.ID) AS total_orders
+            FROM {$wpdb->posts} AS posts
+            LEFT JOIN {$wpdb->prefix}dokan_orders AS do ON posts.ID = do.order_id
+            LEFT JOIN {$wpdb->postmeta} AS meta__order_total ON posts.ID = meta__order_total.post_id
+            LEFT JOIN {$wpdb->postmeta} AS meta__order_shipping ON posts.ID = meta__order_shipping.post_id
+            WHERE posts.post_type = 'shop_order'
+                AND posts.post_status = 'publish'
+                AND do.order_status IN ('$order_status')
+                AND do.seller_id = {$current_user->ID}
+                AND meta__order_total.meta_key = '_order_total'
+                AND meta__order_shipping.meta_key = '_order_shipping'";
 
-        LEFT JOIN {$wpdb->postmeta} AS meta ON posts.ID = meta.post_id
-        LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID=rel.object_ID
-        LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
-        LEFT JOIN {$wpdb->terms} AS term USING( term_id )
-
-        WHERE   meta.meta_key       = '_order_total'
-        AND     posts.post_type     = 'shop_order'
-        AND     posts.post_status   = 'publish'
-        AND     tax.taxonomy        = 'shop_order_status'
-        AND     posts.ID            IN( {$user_orders_in} )
-        AND     term.slug           IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
-    " ) );
+    $order_totals = apply_filters( 'dokan_reports_sales_overview_order_totals', $wpdb->get_row( $sql ) );
 
     $total_sales    = $order_totals->total_sales;
     $total_orders   = absint( $order_totals->total_orders );
@@ -160,8 +159,8 @@ function dokan_sales_overview() {
         AND     posts.post_type     = 'shop_order'
         AND     posts.post_status   = 'publish'
         AND     tax.taxonomy        = 'shop_order_status'
-        AND     posts.ID            IN( {$user_orders_in} )
-        AND     term.slug           IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
+
+        AND     term.slug           IN ('$order_status')
     " ) );
 
     $shipping_total = apply_filters( 'woocommerce_reports_sales_overview_shipping_total', $wpdb->get_var( "
@@ -176,25 +175,25 @@ function dokan_sales_overview() {
         AND     posts.post_type     = 'shop_order'
         AND     posts.post_status   = 'publish'
         AND     tax.taxonomy        = 'shop_order_status'
-        AND     posts.ID            IN( {$user_orders_in} )
+
         AND     term.slug           IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
     " ) );
 
-    $order_items = apply_filters( 'woocommerce_reports_sales_overview_order_items', absint( $wpdb->get_var( "
-        SELECT SUM( order_item_meta.meta_value )
-        FROM {$wpdb->prefix}woocommerce_order_items as order_items
-        LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
-        LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
-        LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID = rel.object_ID
-        LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
-        LEFT JOIN {$wpdb->terms} AS term USING( term_id )
-        WHERE   term.slug IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
-        AND     posts.post_status   = 'publish'
-        AND     tax.taxonomy        = 'shop_order_status'
-        AND     order_items.order_item_type = 'line_item'
-        AND     order_item_meta.meta_key = '_qty'
-        AND     posts.ID IN( {$user_orders_in} )
-    " ) ) );
+
+    $order_items_sql = "
+        SELECT SUM(order_item_meta__qty.meta_value) AS order_item_qty
+        FROM {$wpdb->posts} AS posts
+        LEFT JOIN {$wpdb->prefix}dokan_orders AS do ON posts.ID = do.order_id
+        LEFT JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_items.order_id
+        LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS order_item_meta__qty ON order_items.order_item_id = order_item_meta__qty.order_item_id
+        WHERE posts.post_type = 'shop_order'
+          AND posts.post_status = 'publish'
+          AND do.order_status IN ('$order_status')
+          AND do.seller_id = {$current_user->ID}
+          AND order_items.order_item_type = 'line_item'
+          AND order_item_meta__qty.meta_key = '_qty'";
+
+    $order_items = apply_filters( 'woocommerce_reports_sales_overview_order_items', absint( $wpdb->get_var( $order_items_sql ) ) );
     ?>
     <div id="poststuff" class="dokan-reports-wrap row">
         <div class="dokan-reports-sidebar col-md-3">
@@ -239,7 +238,7 @@ function dokan_sales_overview() {
             <div class="postbox">
                 <h3><span><?php _e( 'This month\'s sales', 'woocommerce' ); ?></span></h3>
                 <div class="inside chart">
-                    <div id="placeholder" style="width:100%; overflow:hidden; height:568px; position:relative;"></div>
+                    <div id="placeholder" style="width:100%; overflow:hidden; height:440px; position:relative;"></div>
                     <div id="cart_legend"></div>
                 </div>
             </div>
@@ -293,9 +292,6 @@ function dokan_sales_overview() {
             });
 
             placeholder.resize();
-
-            <?php woocommerce_weekend_area_js(); ?>
-            <?php woocommerce_tooltip_js(); ?>
         });
     </script>
     <?php
@@ -509,7 +505,7 @@ function dokan_daily_sales() {
 
             placeholder.resize();
 
-            <?php woocommerce_weekend_area_js(); ?>
+            <?php //woocommerce_weekend_area_js(); ?>
             <?php woocommerce_tooltip_js(); ?>
             <?php //woocommerce_datepicker_js(); ?>
         });

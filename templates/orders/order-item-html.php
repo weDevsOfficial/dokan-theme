@@ -32,17 +32,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 	<?php do_action( 'woocommerce_admin_order_item_values', $_product, $item, absint( $item_id ) ); ?>
 
-	<?php if ( get_option( 'woocommerce_calc_taxes' ) == 'yes' ) : ?>
-
-	<td class="tax_class" width="5%">
-		<?php
-		$item_value = isset( $item['tax_class'] ) ? sanitize_title( $item['tax_class'] ) : '--';
-		echo $item_value;
-		?>
-	</td>
-
-	<?php endif; ?>
-
 	<td class="line-quantity" width="1%">
 		<?php echo esc_attr( $item['qty'] ); ?>
 	</td>
@@ -50,13 +39,5 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	<td class="line_cost" width="1%">
 		<?php if ( isset( $item['line_subtotal'] ) ) echo woocommerce_price( $item['line_subtotal'] ); ?>
 	</td>
-
-	<?php if ( get_option( 'woocommerce_calc_taxes' ) == 'yes' ) : ?>
-
-	<td class="line_tax" width="1%">
-		<?php if ( isset( $item['line_subtotal_tax'] ) ) echo esc_attr( $item['line_subtotal_tax'] ); ?>
-	</td>
-
-	<?php endif; ?>
 
 </tr>

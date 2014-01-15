@@ -48,7 +48,7 @@ $reviews_url = dokan_get_page_url( 'reviews' );
                                 </li>
                                 <li>
                                     <div class="title"><?php _e( 'Sales', 'dokan' ); ?></div>
-                                    <div class="count"><?php echo ($orders_counts->completed + $orders_counts->processing); ?></div>
+                                    <div class="count"><?php echo ($orders_counts->completed + $orders_counts->processing + $orders_counts->{'on-hold'}); ?></div>
                                 </li>
                                 <li>
                                     <div class="title"><?php _e( 'Earned', 'dokan' ); ?></div>
@@ -113,7 +113,7 @@ $reviews_url = dokan_get_page_url( 'reviews' );
                                 </div>
 
                                 <div class="col-md-6" style="text-align: center;">
-                                    <canvas id="order-stats" width="150" height="150"></canvas>
+                                    <canvas id="order-stats" width="175" height="175"></canvas>
                                 </div>
                             </div>
                         </div> <!-- .orders -->
@@ -151,7 +151,7 @@ $reviews_url = dokan_get_page_url( 'reviews' );
                         <div class="dashboard-widget sells-graph">
                             <div class="widget-title"><i class="fa fa-credit-card"></i> <?php _e( 'Sales', 'dokan' ); ?></div>
 
-                            <div id="placeholder" style="height: 342px;"></div>
+                            <div id="placeholder" style="height: 350px;"></div>
                             <?php require_once dirname( __DIR__ ) . '/includes/reports.php'; ?>
                         </div> <!-- .sells-graph -->
 
@@ -247,9 +247,6 @@ $reviews_url = dokan_get_page_url( 'reviews' );
         });
 
         placeholder.resize();
-
-        <?php woocommerce_weekend_area_js(); ?>
-        <?php woocommerce_tooltip_js(); ?>
     })
 </script>
 

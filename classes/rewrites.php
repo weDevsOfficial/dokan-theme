@@ -25,7 +25,6 @@ class Dokan_Rewrites {
         $base = substr( $permalinks['product_base'], 1 );
 
         if ( !empty( $base ) ) {
-            dokan_product_editor_scripts();
             add_rewrite_rule( $base . '/([^/]+)(/[0-9]+)?/edit/?$', 'index.php?product=$matches[1]&page=$matches[2]&edit=true', 'top' );
         }
 
@@ -82,6 +81,9 @@ class Dokan_Rewrites {
 
     function product_edit_template( $template ) {
         if ( get_query_var( 'edit' ) && is_singular( 'product' ) ) {
+
+            dokan_product_editor_scripts();
+
             return get_template_directory() . '/templates/product-edit.php';
         }
 
