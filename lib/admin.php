@@ -32,7 +32,7 @@ class Dokan_Admin_Settings {
         $menu_position = apply_filters( 'doakn_menu_position', 17 );
         $capability = apply_filters( 'doakn_menu_capability', 'activate_plugins' );
 
-        add_menu_page( __( 'Dokan', 'dokan' ), __( 'Dokan', 'dokan' ), $capability, 'dokan', array($this, 'settings_page'), null, $menu_position );
+        add_menu_page( __( 'Dokan', 'dokan' ), __( 'Dokan', 'dokan' ), $capability, 'dokan', array($this, 'settings_page'), 'dashicons-vault', $menu_position );
         add_submenu_page( 'dokan', __( 'Settings', 'dokan' ), __( 'Settings', 'dokan' ), $capability, 'dokan', array($this, 'settings_page') );
         add_submenu_page( 'dokan', __( 'Withdraw', 'dokan' ), __( 'Withdraw', 'dokan' ), $capability, 'dokan-withdraw', array($this, 'withdraw_page') );
     }
