@@ -241,7 +241,7 @@ function dokan_create_sync_table() {
 }
 
 function dokan_get_seller_percentage() {
-    return 90;
+    return dokan_get_option( 'seller_percentage', 'dokan_general', '90' );
 }
 
 // Function to get the client ip address

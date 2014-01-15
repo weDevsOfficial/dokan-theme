@@ -32,18 +32,23 @@ class Dokan_Admin_Settings {
         $menu_position = apply_filters( 'doakn_menu_position', 17 );
         $capability = apply_filters( 'doakn_menu_capability', 'activate_plugins' );
 
-        add_menu_page( __( 'Doakn', 'dokan' ), __( 'Doakn', 'dokan' ), $capability, 'dokan', array($this, 'settings_page'), null, $menu_position );
+        add_menu_page( __( 'Dokan', 'dokan' ), __( 'Dokan', 'dokan' ), $capability, 'dokan', array($this, 'settings_page'), null, $menu_position );
+        add_submenu_page( 'dokan', __( 'Settings', 'dokan' ), __( 'Settings', 'dokan' ), $capability, 'dokan', array($this, 'settings_page') );
         add_submenu_page( 'dokan', __( 'Withdraw', 'dokan' ), __( 'Withdraw', 'dokan' ), $capability, 'dokan-withdraw', array($this, 'withdraw_page') );
     }
 
     function get_settings_sections() {
         $sections = array(
             array(
+                'id' => 'dokan_general',
+                'title' => __( 'General Settings', 'dokan' )
+            ),
+            array(
                 'id' => 'dokan_pages',
                 'title' => __( 'Page Settings', 'dokan' )
             )
         );
-        return $sections;
+        return apply_filters( 'dokan_settings_sections', $sections );
     }
 
     /**
@@ -62,6 +67,15 @@ class Dokan_Admin_Settings {
         }
 
         $settings_fields = array(
+            'dokan_general' => array(
+                array(
+                    'name' => 'seller_percentage',
+                    'label' => __( 'Seller Percentage', 'dokan' ),
+                    'desc' => __( 'How much amount (%) a seller will get from each order', 'dokan' ),
+                    'default' => '90',
+                    'type' => 'text',
+                ),
+            ),
             'dokan_pages' => array(
                 array(
                     'name' => 'dashboard',
@@ -121,7 +135,7 @@ class Dokan_Admin_Settings {
             )
         );
 
-        return $settings_fields;
+        return apply_filters( 'dokan_settings_fields', $settings_fields );
     }
 
     function settings_page() {
