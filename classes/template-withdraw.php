@@ -30,6 +30,10 @@ class Dokan_Template_Withdraw {
         }
         global $wpdb;
        
+        if( $_POST['id'] === null ) {
+            return;
+        }
+
         //if id empty then empty value return
         if( ! is_array( $_POST['id'] ) && ! count( $_POST['id'] ) ) {
             return;
@@ -241,7 +245,9 @@ class Dokan_Template_Withdraw {
     function forntend_admin_withdraw_list() {
         $user_id = get_current_user_id();
         $result = $this->get_withdraw_requests($user_id, $status = 0);
-       // var_dump($result);
+        if( ! count( $result ) ) {
+            return;
+        }
         ?>
         <form method="post" action="">
             <table class="widefat" style="margin-top: 20px;">
@@ -302,7 +308,9 @@ class Dokan_Template_Withdraw {
     function admin_withdraw_list() {
         $user_id = get_current_user_id();
         $result = $this->get_withdraw_requests($user_id, $status = 0);
-       // var_dump($result);
+        if( ! count( $result ) ) {
+            return;
+        }
         ?>
         <form method="post" action="">
             <table class="widefat" style="margin-top: 20px;">
