@@ -142,34 +142,34 @@ get_header();
                                     <td class="post-date">
                                         <?php
                                         if ( '0000-00-00 00:00:00' == $post->post_date ) {
-                                            $t_time = $h_time = __( 'Unpublished' );
+                                            $t_time = $h_time = __( 'Unpublished', 'dokan' );
                                             $time_diff = 0;
                                         } else {
-                                            $t_time = get_the_time( __( 'Y/m/d g:i:s A' ) );
+                                            $t_time = get_the_time( __( 'Y/m/d g:i:s A', 'dokan' ) );
                                             $m_time = $post->post_date;
                                             $time = get_post_time( 'G', true, $post );
 
                                             $time_diff = time() - $time;
 
                                             if ( $time_diff > 0 && $time_diff < 24 * 60 * 60 ) {
-                                                $h_time = sprintf( __( '%s ago' ), human_time_diff( $time ) );
+                                                $h_time = sprintf( __( '%s ago', 'dokan' ), human_time_diff( $time ) );
                                             } else {
-                                                $h_time = mysql2date( __( 'Y/m/d' ), $m_time );
+                                                $h_time = mysql2date( __( 'Y/m/d', 'dokan' ), $m_time );
                                             }
                                         }
 
                                         echo '<abbr title="' . $t_time . '">' . apply_filters( 'post_date_column_time', $h_time, $post, 'date', 'all' ) . '</abbr>';
                                         echo '<br />';
                                         if ( 'publish' == $post->post_status ) {
-                                            _e( 'Published' );
+                                            _e( 'Published', 'dokan' );
                                         } elseif ( 'future' == $post->post_status ) {
                                             if ( $time_diff > 0 ) {
-                                                echo '<strong class="attention">' . __( 'Missed schedule' ) . '</strong>';
+                                                echo '<strong class="attention">' . __( 'Missed schedule', 'dokan' ) . '</strong>';
                                             } else {
-                                                _e( 'Scheduled' );
+                                                _e( 'Scheduled', 'dokan' );
                                             }
                                         } else {
-                                            _e( 'Last Modified' );
+                                            _e( 'Last Modified', 'dokan' );
                                         }
                                         ?>
                                     </td>
@@ -197,8 +197,8 @@ get_header();
                         'total' => $product_query->max_num_pages,
                         'base' => str_replace( $post->ID, '%#%', esc_url( get_pagenum_link( $post->ID ) ) ),
                         'type' => 'array',
-                        'prev_text' => __( '&laquo;' ),
-                        'next_text' => __( '&raquo;' )
+                        'prev_text' => __( '&laquo; Previous', 'dokan' ),
+                        'next_text' => __( 'Next &raquo;', 'dokan' )
                     ) );
 
                     echo '<ul class="pagination"><li>';

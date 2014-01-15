@@ -241,7 +241,7 @@ function dokan_create_sync_table() {
 }
 
 function dokan_get_seller_percentage() {
-    return 90;
+    return dokan_get_option( 'seller_percentage', 'dokan_general', '90' );
 }
 
 // Function to get the client ip address
@@ -439,7 +439,7 @@ function dokan_edit_product_url( $product_id ) {
  * @return array
  */
 function my_custom_admin_product_columns( $columns ) {
-    $columns['author'] = __( 'Author' );
+    $columns['author'] = __( 'Author', 'dokan' );
 
     return $columns;
 }

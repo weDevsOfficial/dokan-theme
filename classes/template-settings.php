@@ -365,10 +365,12 @@ class Dokan_Template_Settings{
                     <div class="col-md-5">
                         <ul class="dokan-categories">
                             <?php $dokan_categories = $this->get_dokan_categories(); ?>
-                            <?php foreach ($dokan_categories as $key => $val) { ?>
+                            <?php foreach ($dokan_categories as $key => $val) { 
+                                ?>
+
                                 <li>
                                     <label>
-                                        <input type="checkbox" required="required" name="setting_category[]" <?php checked( in_array( $key, $dokan_category ), true ); ?> value="<?php echo esc_attr( $key ); ?>">
+                                        <input type="checkbox" required="required" name="setting_category[]" <?php checked( array_key_exists( $key, $dokan_categories ), true ); ?> value="<?php echo esc_attr( $key ); ?>">
                                         <?php echo $val; ?>
                                     </label>
                                 </li>

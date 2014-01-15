@@ -23,6 +23,54 @@ class Dokan_Template_Withdraw {
         return $instance;
     }
 
+    function withdraw_csv() {
+        if( ! isset( $_POST['dokan-withdraw-csv'] ) ) {
+            
+            return;
+        }
+        global $wpdb;
+       
+        if( ! isset( $_POST['id'] )  ) {
+            return;
+        }
+
+        //if id empty then empty value return
+        if( ! is_array( $_POST['id'] ) && ! count( $_POST['id'] ) ) {
+            return;
+        }
+
+        $id = implode( "','", $_POST['id'] );
+  
+        $result = $wpdb->get_results( 
+            "SELECT * FROM {$wpdb->dokan_withdraw}
+            WHERE id in('$id') AND status=0"
+        );
+
+        if( ! $result ) {
+            return;
+        }
+
+        foreach( $result as $key => $obj ) {
+          
+            $data[] = array(
+                'email' => get_user_by( 'id', $obj->user_id )->user_email,
+                'amount' => $obj->amount,
+                'currency' => get_option('woocommerce_currency') ,
+            ); 
+         
+        }
+        
+        header('Content-type: html/csv');
+        header('Content-Disposition: attachment; filename="withdraw-'.date('d-m-y').'.csv"');
+        
+        foreach ($data as $fields) {
+            echo $fields['email']. ',';
+            echo $fields['amount']. ',';
+            echo $fields['currency'] . "\n";
+        }
+        die();
+    }
+
 
 
     function cancel_pending() {
@@ -140,25 +188,27 @@ class Dokan_Template_Withdraw {
         $withdraw_db_version = '1.0';
         $installed_ver = get_option( "withdraw_db_version" );
 
-        if ( $installed_ver != $withdraw_db_version ) {
-
-            $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->dokan_withdraw} (
-                   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-                   `user_id` bigint(20) unsigned NOT NULL,
-                   `amount` float(11) NOT NULL,
-                   `date` timestamp NOT NULL,
-                   `status` int(1) NOT NULL,
-                   `method` varchar(30) NOT NULL,
-                   `note` text NOT NULL,
-                   `ip` varchar(15) NOT NULL,
-                  PRIMARY KEY (id)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-
-            require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-            dbDelta( $sql );
-
-            add_option( "withdraw_db_version", $withdraw_db_version );
+        if ( version_compare( $withdraw_db_version, $installed_ver, '<=' ) ) {
+            return;
         }
+
+        $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->dokan_withdraw} (
+               `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+               `user_id` bigint(20) unsigned NOT NULL,
+               `amount` float(11) NOT NULL,
+               `date` timestamp NOT NULL,
+               `status` int(1) NOT NULL,
+               `method` varchar(30) NOT NULL,
+               `note` text NOT NULL,
+               `ip` varchar(15) NOT NULL,
+              PRIMARY KEY (id)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        dbDelta( $sql );
+
+        add_option( "withdraw_db_version", $withdraw_db_version );
+        
     }
 
     function has_pending_request( $user_id ) {
@@ -192,12 +242,13 @@ class Dokan_Template_Withdraw {
         return $result;
     }
 
-    
-
-    function admin_withdraw_list() {
-        
-        $result = $this->get_withdraw_requests();
-       // var_dump($result);
+    function forntend_admin_withdraw_list() {
+        $user_id = get_current_user_id();
+        $result = $this->get_withdraw_requests($user_id, $status = 0);
+        if( ! count( $result ) ) {
+            echo '<h3 style="padding: 10px;">No pending withdraw request found</h3>';
+            return;
+        }
         ?>
         <form method="post" action="">
             <table class="widefat" style="margin-top: 20px;">
@@ -248,9 +299,80 @@ class Dokan_Template_Withdraw {
         echo '</table>';
         ?>
 
+        </form>
 
+        <?php
+        $this->add_note_script();
+    }
+    
 
+    function admin_withdraw_list() {
+        $user_id = get_current_user_id();
+        $result = $this->get_withdraw_requests($user_id, $status = 0);
+        if( ! count( $result ) ) {
+            echo '<h3 style="padding: 10px;">No pending withdraw request found</h3>';
+            return;
+        }
+        ?>
+        <form method="post" action="">
+            <table class="widefat" style="margin-top: 20px;">
+                <thead>
+                <tr>
+                    <th class="check-column"><input type="checkbox" id="cb-select-all-1" class="dokan-withdraw-allcheck"></th>
+                    <th><?php _e( 'User Name', 'dokan' ); ?></th>
+                    <th><?php _e( 'User Email', 'dokan' ); ?></th>
+                    <th><?php _e( 'Amount', 'dokan' ); ?></th>
+                    <th><?php _e( 'Date', 'dokan' ); ?></th>
+                    <th><?php _e( 'Status', 'dokan' ); ?></th>
+                    <th><?php _e( 'Method', 'dokan' ); ?></th>
+                    <th><?php _e( 'Note', 'dokan' ); ?></th>
+                    <th><?php _e( 'IP', 'dokan' ); ?></th>
+                </tr>
+                </thead>
 
+        <?php
+        foreach( $result as $key=>$result_array ) {
+            $user_data = get_userdata($result_array->user_id);
+            ?>
+
+            <tr>
+                <th class="check-column"><input type="checkbox" name="id[]" value="<?php echo $result_array->id;?>"></th>
+                <th><?php echo $user_data->user_login; ?></th>
+                <th><?php echo $user_data->user_email; ?></th>
+                <th><?php echo $result_array->amount; ?></th>
+                <th><?php echo $result_array->date; ?></th>
+                <th>
+                    <?php 
+                        echo $this->request_status( $result_array->status );
+                    ?>
+                </th>
+                <th><?php echo $result_array->method; ?></th>
+                <th >
+                    <div class="dokan-add-note" style="width: 130px;">
+                        <p class="ajax_note"><?php echo $result_array->note; ?></p>
+                        <input type="text" class="dokan-note-text" style="display: none;" name="note">
+                        <a class="dokan-note-submit btn btn-info" style="display: none;" data-admin_url="<?php echo admin_url( 'admin-ajax.php' ); ?>" data-row_id=<?php echo $result_array->id; ?> data-user_id=<?php echo $result_array->user_id; ?> href="#" ><?php _e('Note', 'dokan' ); ?></a>
+                        <a href="#" style="display: none; margin-left: 72px;" class="dokan-note-cancle button"><?php _e('X', 'dokan' ); ?></a>
+                        <a href="#" class="dokan-note-field"><?php _e('Add note', 'dokan' ); ?></a>
+                    </div>
+                    
+                </th>
+                <th><?php echo $result_array->ip; ?></th>
+            </tr>
+            <?php
+
+        }
+        echo '</table>';
+        ?>
+        <input type="submit" name="dokan-withdraw-csv" class="button" value="Download">
+        </form>
+        <?php
+
+        $this->add_note_script();
+    }
+
+    function add_note_script() {
+        ?>
         <script type="text/javascript">
 
         jQuery(function($) {

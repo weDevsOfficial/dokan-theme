@@ -1812,7 +1812,6 @@ a:hover {
 -------------------------------------------------- */
 .site-footer {
   margin-top: 30px;
-  background: #393939;
   color: #e8e8e8;
 }
 .site-footer .footer-widget-area {
@@ -1861,15 +1860,18 @@ a:hover {
   line-height: 18px;
   margin-bottom: 10px;
 }
+.site-footer .footer-widget-area {
+  background: #393939;
+}
+.site-footer .copy-container {
+  background: #242424;
+}
 .site-footer .footer-copy {
-  border-top: 1px solid #313131;
-  padding: 15px 0;
+  padding: 15px 0 40px 0;
+  font-size: 13px;
 }
-.site-footer .footer-getway ul li {
-  list-style: none;
-}
-.site-footer .footer-getway ul li img {
-  margin-left: 15px;
+.site-footer .footer-copy a {
+  color: #AFAFAF;
 }
 #home-page-section-1 {
   margin-bottom: 25px;

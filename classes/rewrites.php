@@ -22,7 +22,9 @@ class Dokan_Rewrites {
      */
     function register_rule() {
         $permalinks = get_option( 'woocommerce_permalinks', array() );
-        $base = substr( $permalinks['product_base'], 1 );
+        if( isset( $permalinks['product_base'] ) ) {
+            $base = substr( $permalinks['product_base'], 1 );
+        }
 
         if ( !empty( $base ) ) {
             add_rewrite_rule( $base . '/([^/]+)(/[0-9]+)?/edit/?$', 'index.php?product=$matches[1]&page=$matches[2]&edit=true', 'top' );

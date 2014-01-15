@@ -48,16 +48,16 @@ class Dokan_Template_Coupons{
 
         $errors = new WP_Error();
 
-        if( empty($_POST['title']) ) {
-            $errors->add('title', __("Required title"));
+        if ( empty($_POST['title']) ) {
+            $errors->add('title', __( 'Please enter the coupon title', 'dokan'));
         }
 
-        if( empty( $_POST['amount'] ) ) {
-            $errors->add('amount', __("Required amount"));
+        if ( empty( $_POST['amount'] ) ) {
+            $errors->add('amount', __( 'Please enter the amount', 'dokan' ) );
         }
 
         if( !isset( $_POST['product_drop_down'] ) || !count( $_POST['product_drop_down'] ) ) {
-            $errors->add('products', __("Required product"));
+            $errors->add('products', __( 'Please specify any products', 'dokan' ) );
         }
 
         if ( $errors->get_error_codes() ) {
