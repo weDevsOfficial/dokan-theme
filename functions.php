@@ -11,6 +11,7 @@
  *
  * @since Dokan 1.0
  */
+
 if ( !isset( $content_width ) )
     $content_width = 640; /* pixels */
 
@@ -102,6 +103,7 @@ class WeDevs_Dokan {
         require_once $lib_dir . 'theme-functions.php';
         require_once $inc_dir . 'widgets/menu-category.php';
 
+        require_once $lib_dir . 'customizer.php';
         if ( is_admin() ) {
             require_once $lib_dir . 'admin.php';
         } else {
@@ -160,6 +162,23 @@ class WeDevs_Dokan {
 
         add_theme_support( 'woocommerce' );
         add_post_type_support( 'product', 'author' );
+    
+        // This theme supports a variety of post formats.
+        add_theme_support( 'post-formats', array( 'aside', 'image', 'link', 'quote', 'status' ) );
+
+        /*
+         * This theme supports custom background color and image,
+         * and here we also set up the default background color.
+         */
+        add_theme_support( 'custom-background', array(
+            'default-color' => 'fcfcfc',
+        ) );
+
+        add_theme_support( 'html5', array(
+            'search-form',
+            'comment-form',
+            'comment-list',
+         ) );
 
         /**
          * Add support for the Aside Post Formats
