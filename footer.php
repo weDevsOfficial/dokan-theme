@@ -13,103 +13,61 @@
 </div><!-- #main .site-main -->
 
 <footer id="colophon" class="site-footer" role="contentinfo">
-    <div class="container">
+    <div class="footer-widget-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <?php dynamic_sidebar( 'footer-1' ); ?>
+                </div>
 
-        <div class="row footer-widget-area">
-            <div class="col-md-3">
-                <aside class="widget">
-                    <h3 class="widget-title">Company</h3>
+                <div class="col-md-3">
+                    <?php dynamic_sidebar( 'footer-2' ); ?>
+                </div>
 
-                    <ul class="list-unstyled">
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Grunteed Period</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </aside>
-            </div>
+                <div class="col-md-3">
+                    <?php dynamic_sidebar( 'footer-3' ); ?>
+                </div>
 
-            <div class="col-md-3">
-                <aside class="widget">
-                    <h3 class="widget-title">Company</h3>
-
-                    <ul class="list-unstyled">
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Grunteed Period</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </aside>
-            </div>
-
-            <div class="col-md-3">
-                <aside class="widget">
-                    <h3 class="widget-title">Company</h3>
-
-                    <ul class="list-unstyled">
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Grunteed Period</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </aside>
-            </div>
-
-            <div class="col-md-3">
-                <aside class="widget footer-subscribe">
-                    <h3 class="widget-title">Newsletter Subscription</h3>
-
-                    <form action="post">
-                        <ul class="subscribe-from">
-                            <li>
-                                <input type="email" name="email" value="" placeholder="Please enter your Email" class="form-control">
-                            </li>
-                            <li>
-                                <input type="submit" value="Subscribe" class="btn">
-                            </li>
-                        </ul>
-                    </form>
-
-                    <?php $url = get_template_directory_uri() . '/assets/images/footer'; ?>
-                    <ul class="list-inline footer-social">
-                        <li><a href="#" target="_blank"><img src="<?php echo $url; ?>/f-facebook.png" alt="Facebook"></a></li>
-                        <li><a href="#" target="_blank"><img src="<?php echo $url; ?>/f-gplus.png" alt="G+"></a></li>
-                        <li><a href="#" target="_blank"><img src="<?php echo $url; ?>/f-twitter.png" alt="Twitter"></a></li>
-                    </ul>
-                </aside>
-            </div>
+                <div class="col-md-3">
+                    <?php dynamic_sidebar( 'footer-4' ); ?>
+                </div>
+            </div> <!-- .footer-widget-area -->
         </div>
+    </div>
 
+    <div class="copy-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer-copy">
+                        <div class="col-md-6 site-info">
+                            <?php
+                            $footer_text = dokan_get_option( 'footer_text', 'dokan_general' );
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="footer-copy">
-                    <div class="col-md-6 site-info">
+                            if ( empty( $footer_text ) ) {
+                                printf( __( '&copy; %d, %s. All rights are reserved.', 'dokan' ), date( 'Y' ), get_bloginfo( 'name' ) );
+                                printf( __( 'Powered <a href="%s" target="_blank">Dokan</a> - by <a href="%s" target="_blank">weDevs</a>', 'dokan' ), esc_url( 'http://wedevs.com/themes/dokan' ), esc_url( 'http://wedevs.com' ) );
+                            } else {
+                                echo $footer_text;
+                            }
+                            ?>
+                        </div><!-- .site-info -->
 
-                        &copy; 2008-2013 <a href="http://tareq.wedevs.com">Tareq Hasan</a>. All rights are reserved.
-                        Powered by <a href="http://wordpress.org/" target="_blank" title="A Semantic Personal Publishing Platform" rel="generator">WordPress</a>.
-                    </div><!-- .site-info -->
-
-                    <div class="col-md-6 pull-right footer-getway">
-                        <ul>
-                            <li>
-                                <img src="<?php echo $url; ?>/visa.png" alt="VISA">
-                                <img src="<?php echo $url; ?>/master-card.png" alt="MASTER CARD">
-                                <img src="<?php echo $url; ?>/web-money.png" alt="WEB Money">
-                                <img src="<?php echo $url; ?>/2co.png" alt="2CO">
-                                <img src="<?php echo $url; ?>/paypal.png" alt="Paypal">
-                                <img src="<?php echo $url; ?>/google-checkout.png" alt="Google">
-                                <img src="<?php echo $url; ?>/switch.png" alt="Switch">
-                                <img src="<?php echo $url; ?>/dinners.png" alt="Dinners">
-                                <img src="<?php echo $url; ?>/moneybookers.png" alt="Money Bookers">
-                                <img src="<?php echo $url; ?>/stripe.png" alt="Stripe">
-                            </li>
-                        </ul>
+                        <div class="col-md-6 footer-gateway">
+                            <?php
+                                wp_nav_menu( array(
+                                    'theme_location' => 'footer',
+                                    'depth' => 1,
+                                    'container_class' => 'footer-menu-container clearfix',
+                                    'menu_class' => 'menu list-inline pull-right',
+                                ) );
+                            ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div><!-- .row -->
-    </div><!-- .container -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div> <!-- .copy-container -->
 </footer><!-- #colophon .site-footer -->
 </div><!-- #page .hfeed .site -->
 

@@ -156,6 +156,7 @@ class WeDevs_Dokan {
             'primary' => __( 'Primary Menu', 'dokan' ),
             'top-left' => __( 'Top Left', 'dokan' ),
             'product-cat' => __( 'Product Category', 'dokan' ),
+            'footer' => __( 'Footer Menu', 'dokan' ),
         ) );
 
         add_theme_support( 'woocommerce' );
@@ -297,23 +298,26 @@ class WeDevs_Dokan {
      * @since Dokan 1.0
      */
     function widgets_init() {
-        register_sidebar( array(
-            'name' => __( 'Sidebar', 'dokan' ),
-            'id' => 'sidebar-1',
-            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-            'after_widget' => '</aside>',
-            'before_title' => '<h3 class="widget-title">',
-            'after_title' => '</h3>',
-        ) );
 
-        register_sidebar( array(
-            'name' => __( 'Home Sidebar', 'dokan' ),
-            'id' => 'sidebar-home',
-            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-            'after_widget' => '</aside>',
-            'before_title' => '<h3 class="widget-title">',
-            'after_title' => '</h3>',
-        ) );
+        $sidebars = array(
+            array( 'name' => __( 'General Sidebar', 'dokan' ), 'id' => 'sidebar-1' ),
+            array( 'name' => __( 'Home Sidebar', 'dokan' ), 'id' => 'sidebar-home' ),
+            array( 'name' => __( 'Footer Sidebar - 1', 'dokan' ), 'id' => 'footer-1' ),
+            array( 'name' => __( 'Footer Sidebar - 2', 'dokan' ), 'id' => 'footer-2' ),
+            array( 'name' => __( 'Footer Sidebar - 3', 'dokan' ), 'id' => 'footer-3' ),
+            array( 'name' => __( 'Footer Sidebar - 4', 'dokan' ), 'id' => 'footer-4' ),
+        );
+
+        foreach ($sidebars as $sidebar) {
+            register_sidebar( array(
+                'name' => $sidebar['name'],
+                'id' => $sidebar['id'],
+                'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+                'after_widget' => '</aside>',
+                'before_title' => '<h3 class="widget-title">',
+                'after_title' => '</h3>',
+            ) );
+        }
     }
 
     /**

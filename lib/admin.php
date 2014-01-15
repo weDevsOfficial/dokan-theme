@@ -75,6 +75,13 @@ class Dokan_Admin_Settings {
                     'default' => '90',
                     'type' => 'text',
                 ),
+                array(
+                    'name' => 'footer_text',
+                    'label' => __( 'Site footer text', 'dokan' ),
+                    'desc' => '',
+                    'default' => sprintf( __( '&copy; %d. All rights are reserved', 'dokan' ), date('Y') ),
+                    'type' => 'text',
+                ),
             ),
             'dokan_pages' => array(
                 array(

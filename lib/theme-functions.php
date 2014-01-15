@@ -439,7 +439,7 @@ function dokan_edit_product_url( $product_id ) {
  * @return array
  */
 function my_custom_admin_product_columns( $columns ) {
-    $columns['author'] = __( 'Author' );
+    $columns['author'] = __( 'Author', 'dokan' );
 
     return $columns;
 }
