@@ -30,7 +30,7 @@ class Dokan_Template_Withdraw {
         }
         global $wpdb;
        
-        if( $_POST['id'] === null ) {
+        if( ! isset( $_POST['id'] )  ) {
             return;
         }
 
@@ -246,6 +246,7 @@ class Dokan_Template_Withdraw {
         $user_id = get_current_user_id();
         $result = $this->get_withdraw_requests($user_id, $status = 0);
         if( ! count( $result ) ) {
+            echo '<h3 style="padding: 10px;">No pending withdraw request found</h3>';
             return;
         }
         ?>
@@ -309,6 +310,7 @@ class Dokan_Template_Withdraw {
         $user_id = get_current_user_id();
         $result = $this->get_withdraw_requests($user_id, $status = 0);
         if( ! count( $result ) ) {
+            echo '<h3 style="padding: 10px;">No pending withdraw request found</h3>';
             return;
         }
         ?>
