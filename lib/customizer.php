@@ -211,7 +211,7 @@ class Dokan_Customizer {
             .site-footer .widget ul li a:hover{ color: <?php echo get_theme_mod( 'dokan_footer_link_hover' ); ?>; }
             .site-footer { color: <?php echo get_theme_mod( 'dokan_footer_text' ); ?>; }
             .site-footer .footer-widget-area { background: <?php echo get_theme_mod( 'dokan_footer_bg' ); ?> ; }
-            .site-footer .copy-container { background: <?php echo get_theme_mod( 'footer_bottom_bar_bg_color' ); ?> ; }
+            .site-footer .copy-container { background: <?php echo get_theme_mod( 'dokan_footer_bottom_bar_bg_color' ); ?> ; }
         </style>
         <?php
     }
