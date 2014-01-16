@@ -200,8 +200,8 @@ class Dokan_Customizer {
                 .site-header h1.site-title a { background: url("<?php echo esc_url( $logo ); ?>") no-repeat scroll 0 0 rgba(0, 0, 0, 0);}
             <?php endif; ?>
 
-            a { color: <?php echo get_theme_mod( 'dokan_link_color' ); ?>; }
-            a:hover { color: <?php echo get_theme_mod( 'dokan_link_hover_color' ); ?>; }
+            a,.site-footer .footer-copy a { color: <?php echo get_theme_mod( 'dokan_link_color' ); ?>; }
+            a:hover,.site-footer .footer-copy a:hover { color: <?php echo get_theme_mod( 'dokan_link_hover_color' ); ?>; }
             .site-header { background-color: <?php echo get_theme_mod( 'dokan_header_bg' ); ?> ; }
             .navbar-default{ background-color: <?php echo get_theme_mod( 'dokan_nav_bg' ); ?>; }
             .navbar-default .navbar-nav > li > a{ color: <?php echo get_theme_mod( 'dokan_nav_color' ); ?>; }

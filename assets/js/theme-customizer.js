@@ -34,14 +34,14 @@ jQuery(function( $ ) {
 
     wp.customize( 'link_color', function( value ) {
         value.bind( function( to ) {
-            $( 'a' ).css( 'color', to );
+            $( 'a,.site-footer .footer-copy a' ).css( 'color', to );
         } );
     });
 
 
     wp.customize( 'link_hover_color', function( value ) {
         value.bind( function( to ) {
-            $( 'a:hover' ).css( 'color', to );
+            $( 'a:hover,.site-footer .footer-copy a:hover' ).css( 'color', to );
         } );
     });
 
