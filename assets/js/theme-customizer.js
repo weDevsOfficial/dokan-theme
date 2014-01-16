@@ -9,14 +9,14 @@ jQuery(function( $ ) {
 
     wp.customize( 'dokan_link_color', function( value ) {
         value.bind( function( to ) {
-            $( 'a,.site-footer .footer-copy a' ).css( 'color', to );
+            $( '.site-header .cart-area-top a, .site-footer .footer-copy a, a' ).css( 'color', to );
         } );
     });
 
 
     wp.customize( 'dokan_link_hover_color', function( value ) {
         value.bind( function( to ) {
-            $( 'a:hover,.site-footer .footer-copy a:hover' ).css( 'color', to );
+            $( '.site-header .cart-area-top a:hover, .site-footer .footer-copy a:hover, a:hover' ).css( 'color', to );
         } );
     });
 
@@ -41,6 +41,24 @@ jQuery(function( $ ) {
     wp.customize( 'dokan_nav_hover', function( value ) {
         value.bind( function( to ) {
             $( '.navbar-default .navbar-nav > li > a:hover' ).css( 'color', to );
+        } );
+    });
+
+    wp.customize( 'sidebar_widget_header', function( value ) {
+        value.bind( function( to ) {
+            $( '.widget-title' ).css( 'color', to );
+        } );
+    });
+
+    wp.customize( 'dokan_sidebar_widget_link', function( value ) {
+        value.bind( function( to ) {
+            $( '.widget ul li a' ).css( 'color', to );
+        } );
+    });
+
+    wp.customize( 'dokan_sidebar_link_hover', function( value ) {
+        value.bind( function( to ) {
+            $( '.widget ul li a:hover' ).css( 'color', to );
         } );
     });
 
