@@ -124,6 +124,19 @@ class Dokan_Customizer {
             'priority' => 50
         ) ) );
 
+        // Footer bottom bar Background color
+        $wp_customize->add_setting( 'footer_bottom_bar_bg_color', array(
+            'default' => '#242424',
+            'transport' => 'postMessage',
+        ) );
+
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_bottom_bar_bg_color', array(
+            'label' => __( 'Copy Container Background color', 'dokan' ),
+            'section' => 'colors',
+            'settings' => 'footer_bottom_bar_bg_color',
+            'priority' => 50
+        ) ) );
+
         // footer text color
         $wp_customize->add_setting( 'dokan_footer_text', array(
             'default' => '#E8E8E8',
@@ -197,7 +210,8 @@ class Dokan_Customizer {
             .site-footer .widget ul li a{ color: <?php echo get_theme_mod( 'dokan_footer_widget_link' ); ?>; }
             .site-footer .widget ul li a:hover{ color: <?php echo get_theme_mod( 'dokan_footer_link_hover' ); ?>; }
             .site-footer { color: <?php echo get_theme_mod( 'dokan_footer_text' ); ?>; }
-            .site-footer { background-color: <?php echo get_theme_mod( 'dokan_footer_bg' ); ?> ; }
+            .site-footer .footer-widget-area { background: <?php echo get_theme_mod( 'dokan_footer_bg' ); ?> ; }
+            .site-footer .copy-container { background: <?php echo get_theme_mod( 'footer_bottom_bar_bg_color' ); ?> ; }
         </style>
         <?php
     }

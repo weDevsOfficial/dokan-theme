@@ -72,7 +72,13 @@ jQuery(function( $ ) {
 
     wp.customize( 'footer_bg_color', function( value ) {
         value.bind( function( to ) {
-            $( '.site-footer' ).css( 'background-color', to );
+            $( '.site-footer .footer-widget-area' ).css( 'background', to );
+        } );
+    });
+
+    wp.customize( 'footer_bottom_bar_bg_color', function( value ) {
+        value.bind( function( to ) {
+            $( '.site-footer .copy-container' ).css( 'background', to );
         } );
     });
 
