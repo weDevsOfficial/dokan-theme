@@ -269,7 +269,7 @@ class Dokan_Ajax {
             $variation = get_post( $variation_id ); // Get the variation object
 
             // include( 'admin/post-types/meta-boxes/views/html-variation-admin.php' );
-            include dirname( __DIR__ ) . '/lib/woo-views/variation-admin-html.php';
+            include DOKAN_INC_DIR . '/woo-views/variation-admin-html.php';
         }
 
         die();

@@ -2,8 +2,8 @@
 /**
  * The template used for displaying page content in page.php
  *
- * @package _bootstraps
- * @package _bootstraps - 2013 1.0
+ * @package dokan
+ * @package dokan - 2013 1.0
  */
 ?>
 

@@ -20,6 +20,8 @@ if ( !defined( '__DIR__' ) ) {
     define( '__DIR__', dirname( __FILE__ ) );
 }
 
+define( 'DOKAN_INC_DIR', __DIR__ . '/includes' );
+define( 'DOKAN_LIB_DIR', __DIR__ . '/lib' );
 
 /**
  * Autoload class files on demand
@@ -61,9 +63,6 @@ class WeDevs_Dokan {
         // initialize classes
         $this->init_classes();
 
-        //initalize user roles
-        $this->user_roles();
-
         //for reviews ajax request
         $this->init_ajax();
     }
@@ -76,6 +75,7 @@ class WeDevs_Dokan {
         add_action( 'after_setup_theme', array($this, 'setup') );
         add_action( 'widgets_init', array($this, 'widgets_init') );
         add_action( 'wp_enqueue_scripts', array($this, 'scripts') );
+        add_action( 'login_enqueue_scripts', array($this, 'login_scripts') );
         add_action( 'admin_init', array($this, 'install_theme' ) );
     }
 
@@ -100,17 +100,16 @@ class WeDevs_Dokan {
         $lib_dir = __DIR__ . '/lib/';
         $inc_dir = __DIR__ . '/includes/';
 
-        require_once $lib_dir . 'theme-functions.php';
+        require_once $inc_dir . 'theme-functions.php';
         require_once $inc_dir . 'widgets/menu-category.php';
 
-        require_once $lib_dir . 'customizer.php';
         if ( is_admin() ) {
-            require_once $lib_dir . 'admin.php';
+            require_once $inc_dir . 'admin.php';
         } else {
             require_once $lib_dir . 'bootstrap-walker.php';
-            require_once $lib_dir . 'wc-functions.php';
-            require_once $lib_dir . 'wc-template.php';
-            require_once $lib_dir . 'template-tags.php';
+            require_once $inc_dir . 'wc-functions.php';
+            require_once $inc_dir . 'wc-template.php';
+            require_once $inc_dir . 'template-tags.php';
         }
     }
 
@@ -189,7 +188,8 @@ class WeDevs_Dokan {
         global $pagenow;
 
         if ( is_admin() && isset($_GET['activated'] ) && $pagenow == 'themes.php' ) {
-            // (new Dokan_Installer())->do_install();
+            $installer = new Dokan_Installer();
+            $installer->do_install();
         }
     }
 
@@ -272,30 +272,8 @@ class WeDevs_Dokan {
         ) );
     }
 
-    /**
-     * Init dokan user roles
-     *
-     * @since Dokan 1.0
-     * @global WP_Roles $wp_roles
-     */
-    function user_roles() {
-        global $wp_roles;
-
-        if ( class_exists( 'WP_Roles' ) && !isset( $wp_roles ) ) {
-            $wp_roles = new WP_Roles();
-        }
-
-        add_role( 'seller', __( 'Seller', 'dokan' ), array(
-            'read' => true,
-            'publish_posts' => true,
-            'edit_posts' => true,
-            'delete_published_posts' => true,
-            'edit_published_posts' => true,
-            'delete_posts' => true,
-            'unfiltered_html' => true,
-            'upload_files' => true,
-            'dokandar' => true
-        ) );
+    function login_scripts() {
+        wp_enqueue_script( 'jquery' );
     }
 
     /**

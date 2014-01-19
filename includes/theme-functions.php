@@ -222,24 +222,6 @@ function dokan_generate_sync_table() {
     } // if
 }
 
-function dokan_create_sync_table() {
-    global $wpdb;
-
-    $sql = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}dokan_orders` (
-      `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-      `order_id` bigint(20) DEFAULT NULL,
-      `seller_id` bigint(20) DEFAULT NULL,
-      `order_total` float(11,2) DEFAULT NULL,
-      `net_amount` float(11,2) DEFAULT NULL,
-      `order_status` varchar(30) DEFAULT NULL,
-      PRIMARY KEY (`id`),
-      KEY `order_id` (`order_id`),
-      KEY `seller_id` (`seller_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-
-    $wpdb->query( $sql );
-}
-
 function dokan_get_seller_percentage() {
     return dokan_get_option( 'seller_percentage', 'dokan_general', '90' );
 }

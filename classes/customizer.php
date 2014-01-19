@@ -18,7 +18,7 @@ class Dokan_Customizer {
         $wp_customize->add_section( 'dokan_log_section', array(
             'title' => __( 'Theme Logo', 'dokan' ),
             'priority' => 9,
-            'description' => __( 'Upload your logo to replace the default Logo (dimension : 180 X 50)' ),
+            'description' => __( 'Upload your logo to replace the default Logo (dimension : 180 X 50)', 'dokan' ),
         ) );
 
         $wp_customize->add_setting( 'dokan_logo', array(
