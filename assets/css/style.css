@@ -736,30 +736,30 @@ a:hover {
   background: #fff;
   color: #f04023;
 }
-.home .flex-direction-nav a:before {
-  font-family: 'dokan-html-icons';
-  font-size: 20px;
-  display: inline-block;
-  content: '\e609';
+.home .flexslider {
+  padding: 15px;
+  margin: 0 0 30px 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: 1px solid #f7f7f7;
+  box-shadow: none;
 }
-.home .flex-direction-nav a.flex-next:before {
-  content: '\e608';
+.home .flexslider h2 {
+  margin: 0 0 20px 0;
 }
-.home .flex-direction-nav a {
-  display: block;
-  width: 30px;
-  height: 24px;
-  margin: 0px 0 0;
-  position: absolute;
-  top: -15%;
-  z-index: 10;
-  overflow: hidden;
-  cursor: pointer;
-  color: #7b7b7b;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
-  -webkit-transition: all .3s ease;
-  -moz-transition: all .3s ease;
-  transition: all .3s ease;
+.home .flexslider img {
+  max-width: 100%;
+}
+.home .flexslider .flex-direction-nav a:before {
+  margin-top: 10px;
+  color: #999;
+}
+.home .flexslider .flex-direction-nav a:hover:before {
+  color: #333;
+}
+.home .flexslider .flex-control-nav {
+  bottom: 0;
 }
 .home #home-page-aside {
   padding-left: 50px;
@@ -2292,6 +2292,16 @@ a:hover {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
+.navbar-brand {
+  font-size: 14px;
+  padding: 7px;
+}
+@media (max-width: 768px) {
+  .navbar-brand {
+    padding: 15px 15px;
+    font-size: 18px;
+  }
+}
 .breadcrumb {
   margin: 0;
   background: transparent;
@@ -2534,16 +2544,23 @@ a:hover {
   border: none;
   padding: 0;
 }
+.woocommerce .site-content .entry-header .entry-title,
+.woocommerce-page .site-content .entry-header .entry-title {
+  margin-bottom: 0;
+  padding-bottom: 20px;
+}
 .woocommerce .login-form,
 .woocommerce-page .login-form {
+  padding-top: 20px;
   border-right: 1px solid #dddddd;
 }
 .woocommerce .login-form form,
 .woocommerce-page .login-form form {
-  width: 70%;
+  width: 50%;
 }
 .woocommerce .reg-form,
 .woocommerce-page .reg-form {
+  padding-top: 20px;
   padding-left: 12%;
 }
 .woocommerce .reg-form form,

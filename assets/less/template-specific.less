@@ -203,31 +203,59 @@
         color: #f04023;
     }
 
-    .flex-direction-nav {
-        a:before {
-            font-family: 'dokan-html-icons';
-            font-size: 20px;
-            display: inline-block;
-            content: '\e609';
+    .flexslider {
+        padding: 15px;
+        margin: 0 0 30px 0;
+        .border-radius(0);
+        border: 1px solid lighten(@borderColor, 10%);
+        box-shadow: none;
+
+        h2 {
+            margin: 0 0 20px 0;
         }
-        a.flex-next:before {
-            content: '\e608';
+
+        img {
+            max-width: 100%;
         }
-        a {
-            display: block;
-            width: 30px;
-            height: 24px;
-            margin: 0px 0 0;
-            position: absolute;
-            top: -15%;
-            z-index: 10;
-            overflow: hidden;
-            cursor: pointer;
-            color: #7b7b7b;
-            text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
-            -webkit-transition: all .3s ease;
-            -moz-transition: all .3s ease;
-            transition: all .3s ease;
+
+        .flex-direction-nav {
+
+            a:before {
+                margin-top: 10px;
+                color: #999;
+            }
+
+            a {
+                // opacity: 1;
+                // text-decoration: none;
+                // height: 40px;
+
+                &:hover:before {
+                    color: #333;
+                }
+            }
+
+            a.flex-prev {
+                // left: 0;
+
+                // &:before {
+                //     opacity: 1;
+                //     content: '\f137';
+                // }
+            }
+
+            a.flex-next {
+                // right: 0;
+
+                // &:before {
+                //     opacity: 1;
+                //     content: '\f138';
+                // }
+            }
+        }
+
+        .flex-control-nav {
+            bottom: 0;
         }
     }
 

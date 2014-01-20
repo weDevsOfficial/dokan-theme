@@ -67,6 +67,18 @@
 //     }
 // }
 
+.navbar-brand {
+    font-size: 14px;
+    padding: 7px;
+}
+
+@media (max-width: 768px) {
+    .navbar-brand {
+        padding: 15px 15px;
+        font-size: 18px;
+    }
+}
+
 .breadcrumb {
     margin: 0;
     background: transparent;
@@ -318,15 +330,22 @@
         padding: 0;
     }
 
+    .site-content .entry-header .entry-title {
+        margin-bottom: 0;
+        padding-bottom: 20px;
+    }
+
     .login-form {
+        padding-top: 20px;
         border-right: 1px solid @borderColor;
 
         form {
-            width: 70%;
+            width: 50%;
         }
     }
 
     .reg-form {
+        padding-top: 20px;
         padding-left: 12%;
 
         form {

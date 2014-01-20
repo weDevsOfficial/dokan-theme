@@ -20,6 +20,8 @@ class Dokan_Installer {
         $this->create_tables();
         dokan_generate_sync_table();
 
+        flush_rewrite_rules();
+
         update_option( 'dokan_theme_version', $this->theme_version );
     }
 

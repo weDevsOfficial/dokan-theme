@@ -46,25 +46,25 @@
     <div id="page" class="hfeed site">
         <?php do_action( 'before' ); ?>
 
-        <nav class="navbar navbar-inverse navbar-top-area" role="navigation">
+        <nav class="navbar navbar-inverse navbar-top-area">
             <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <?php
-                        wp_nav_menu( array(
-                            'menu'              => 'primary',
-                            'theme_location'    => 'top-left',
-                            // 'depth'             => 3,
-                            'container'         => 'div',
-                            'container_class'   => 'collapse navbar-collapse navbar-ex1-collapse',
-                            'menu_class'        => 'nav navbar-nav',
-                            'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
-                            'walker'            => new wp_bootstrap_navwalker())
-                        );
-                    ?>
-                </div>
-            </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <?php
+                            wp_nav_menu( array(
+                                'menu'              => 'primary',
+                                'theme_location'    => 'top-left',
+                                'depth'             => 0,
+                                'container'         => 'div',
+                                'container_class'   => 'collapse navbar-collapse navbar-ex1-collapse',
+                                'menu_class'        => 'nav navbar-nav',
+                                'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
+                                'walker'            => new wp_bootstrap_navwalker())
+                            );
+                        ?>
+                    </div>
+                </div> <!-- .row -->
+            </div> <!-- .container -->
         </nav>
 
         <header id="masthead" class="site-header" role="banner">
@@ -119,19 +119,18 @@
                                     <nav class="navbar navbar-default" role="navigation">
                                         <div class="navbar-header">
                                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="sr-only"><?php _e( 'Toggle navigation', 'dokan' ); ?></span>
                                                 <span class="icon-bar"></span>
                                                 <span class="icon-bar"></span>
                                                 <span class="icon-bar"></span>
                                             </button>
-                                            <a class="navbar-brand" href="<?php home_url(); ?>"><i class="icon-home"></i></a>
+                                            <a class="navbar-brand" href="<?php echo home_url(); ?>"><i class="fa fa-home"></i> <?php _e( 'Home', 'dokan' ); ?></a>
                                         </div>
                                         <div class="collapse navbar-collapse navbar-ex1-collapse">
                                             <?php
                                                 wp_nav_menu( array(
                                                     'menu'              => 'primary',
                                                     'theme_location'    => 'primary',
-                                                    // 'depth'             => 3,
                                                     'container'         => 'div',
                                                     'container_class'   => 'collapse navbar-collapse navbar-ex1-collapse',
                                                     'menu_class'        => 'nav navbar-nav',

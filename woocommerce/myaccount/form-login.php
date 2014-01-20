@@ -57,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
         </form>
 
-<?php if (get_option('woocommerce_enable_myaccount_registration')=='yes') : ?>
+<?php if ( get_option('woocommerce_enable_myaccount_registration') == 'yes' && get_option( 'users_can_register' ) == '1' ) : ?>
 
     </div>
 
