@@ -18,13 +18,10 @@ class Dokan_Customizer {
         $wp_customize->add_section( 'dokan_logo_section', array(
             'title' => __( 'Theme Logo', 'dokan' ),
             'priority' => 9,
-            'description' => __( 'Upload your logo to replace the default Logo (dimension : 180 X 50)', 'dokan' ),
+            'description' => __( 'Upload your logo to replace the default Logo (dimension : 180 X 50)' ),
         ) );
 
-        $wp_customize->add_setting( 'dokan_logo', array(
-            // 'default' => get_stylesheet_directory_uri() . '/assets/images/logo.png',
-            'transport' => 'postMessage',
-        ) );
+        $wp_customize->add_setting( 'dokan_logo' );
 
         $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'dokan_logo', array(
             'label' => __( 'Upload Logo', 'dokan' ),

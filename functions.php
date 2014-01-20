@@ -103,10 +103,11 @@ class WeDevs_Dokan {
     function includes() {
         $lib_dir = __DIR__ . '/lib/';
         $inc_dir = __DIR__ . '/includes/';
+        $classes_dir = __DIR__ . '/classes/';
 
         require_once $inc_dir . 'theme-functions.php';
         require_once $inc_dir . 'widgets/menu-category.php';
-        require_once $inc_dir . 'customizer.php';
+        require_once $classes_dir . 'customizer.php';
 
         if ( is_admin() ) {
             require_once $inc_dir . 'admin.php';
