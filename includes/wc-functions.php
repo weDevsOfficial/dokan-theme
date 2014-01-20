@@ -134,7 +134,7 @@ function dokan_variable_product_type_options() {
                     $_width         = wc_format_localized_decimal( $_width );
                         $_height        = wc_format_localized_decimal( $_height );
 
-                    include dirname( __FILE__ ) . '/woo-views/variation-admin-html.php';
+                    include DOKAN_INC_DIR . '/woo-views/variation-admin-html.php';
 
                     $loop++;
                 }
@@ -1198,3 +1198,103 @@ function dokan_create_sub_order_shipping( $parent_order, $order_id, $seller_prod
 
     return 0;
 }
+
+
+add_action( 'register_forms', function() {
+    ?>
+        <p class="form-row form-row-wide">
+            <label for="reg_password" class="checkbox">
+                <?php _e( 'Password', 'woocommerce' ); ?>
+
+            </label>
+        </p>
+    <?php
+});
+
+function dokan_seller_registration_errors( $error ) {
+    $allowed_roles = array( 'customer', 'seller' );
+
+    // is the role name allowed or user is trying to manipulate?
+    if ( isset( $_POST['role'] ) && !in_array( $_POST['role'], $allowed_roles ) ) {
+        return new WP_Error( 'role-error', __( 'Cheating, eh?', 'dokan' ) );
+    }
+
+    $role = $_POST['role'];
+
+    if ( $role == 'seller' ) {
+
+        $first_name = trim( $_POST['fname'] );
+        if ( empty( $first_name ) ) {
+            return new WP_Error( 'fname-error', __( 'Please enter your first name.', 'dokan' ) );
+        }
+
+        $last_name = trim( $_POST['lname'] );
+        if ( empty( $last_name ) ) {
+            return new WP_Error( 'lname-error', __( 'Please enter your last name.', 'dokan' ) );
+        }
+
+        $address = trim( $_POST['address'] );
+        if ( empty( $address ) ) {
+            return new WP_Error( 'address-error', __( 'Please enter your address.', 'dokan' ) );
+        }
+
+        $phone = trim( $_POST['phone'] );
+        if ( empty( $phone ) ) {
+            return new WP_Error( 'phone-error', __( 'Please enter your phone number.', 'dokan' ) );
+        }
+    }
+
+    return $error;
+}
+
+add_filter( 'woocommerce_process_registration_errors', 'dokan_seller_registration_errors' );
+add_filter( 'registration_errors', 'dokan_seller_registration_errors' );
+
+function dokan_new_customer_data( $data ) {
+    $allowed_roles = array( 'customer', 'seller' );
+    $role = ( isset( $_POST['role'] ) && in_array( $_POST['role'], $allowed_roles ) ) ? $_POST['role'] : 'customer';
+
+    $data['role'] = $role;
+
+    if ( $role == 'seller' ) {
+        $data['first_name'] = strip_tags( $_POST['fname'] );
+        $data['last_name'] = strip_tags( $_POST['lname'] );
+    }
+
+    return $data;
+}
+
+add_filter( 'woocommerce_new_customer_data', 'dokan_new_customer_data');
+
+
+function dokan_on_create_seller( $user_id, $data ) {
+    if ( $data['role'] != 'seller' ) {
+        return;
+    }
+
+    $dokan_settings = array(
+        'store_name' => $_POST['shopname'],
+        'social' => array(),
+        'payment' => array(),
+        'phone' => $_POST['phone'],
+        'show_email' => 'no',
+        'address' => $_POST['address'],
+        'location' => '',
+        'find_address' => '',
+        'dokan_category' => '',
+        'banner' => 0,
+    );
+
+    update_user_meta( $user_id, 'dokan_profile_settings', $dokan_settings );
+}
+
+add_action( 'woocommerce_created_customer', 'dokan_on_create_seller', 10, 2);
+
+add_action( 'login_init', function(){
+    global $action;
+
+    if ( $action == 'register' ) {
+        wp_redirect( dokan_get_page_url( 'myaccount', 'woocommerce' ) );
+        exit;
+    }
+});

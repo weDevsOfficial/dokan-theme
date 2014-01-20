@@ -86,7 +86,7 @@
                                         'name' => ''
                                     );
                                     ob_start();
-                                    include dirname( dirname( __DIR__ ) ) . '/lib/woo-views/html-product-download.php';
+                                    include DOKAN_INC_DIR . '/woo-views/html-product-download.php';
                                     echo esc_attr( ob_get_clean() );
                                 ?>"><?php _e( 'Add File', 'dokan' ); ?></a>
                             </th>
@@ -98,7 +98,7 @@
 
                         if ( $downloadable_files ) {
                             foreach ( $downloadable_files as $key => $file ) {
-                                include dirname( dirname( __DIR__ ) ) . '/lib/woo-views/html-product-download.php';
+                                include DOKAN_INC_DIR . '/woo-views/html-product-download.php';
                             }
                         }
                         ?>

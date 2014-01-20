@@ -7,13 +7,65 @@
  */
 class Dokan_Installer {
 
+    private $theme_version = 0.1;
+
     function do_install() {
+
+        // upgrades
+        $this->do_upgrades();
+
+        // installs
+        $this->user_roles();
         $this->setup_pages();
         $this->create_tables();
+        dokan_generate_sync_table();
+
+        update_option( 'dokan_theme_version', $this->theme_version );
+    }
+
+    function do_upgrades() {
+        // do upgrades
+    }
+
+    /**
+     * Init dokan user roles
+     *
+     * @since Dokan 1.0
+     * @global WP_Roles $wp_roles
+     */
+    function user_roles() {
+        global $wp_roles;
+
+        if ( class_exists( 'WP_Roles' ) && !isset( $wp_roles ) ) {
+            $wp_roles = new WP_Roles();
+        }
+
+        add_role( 'seller', __( 'Seller', 'dokan' ), array(
+            'read' => true,
+            'publish_posts' => true,
+            'edit_posts' => true,
+            'delete_published_posts' => true,
+            'edit_published_posts' => true,
+            'delete_posts' => true,
+            'manage_categories' => true,
+            'moderate_comments' => true,
+            'unfiltered_html' => true,
+            'upload_files' => true,
+            'dokandar' => true
+        ) );
+
+        $wp_roles->add_cap( 'shop_manager', 'dokandar' );
+        $wp_roles->add_cap( 'administrator', 'dokandar' );
     }
 
     function setup_pages() {
         $meta_key = '_wp_page_template';
+
+        // return if pages were created before
+        $page_created = get_option( 'dokan_pages_created', false );
+        if ( $page_created ) {
+            return;
+        }
 
         $pages = array(
             array(
@@ -99,6 +151,7 @@ class Dokan_Installer {
         } // if pages
 
         update_option( 'dokan_pages', $dokan_page_settings );
+        update_option( 'dokan_pages_created', true );
     }
 
     function create_page( $page ) {
@@ -124,6 +177,45 @@ class Dokan_Installer {
     }
 
     function create_tables() {
+        include_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
+        $this->create_withdraw_table();
+        $this->create_sync_table();
+    }
+
+    function create_withdraw_table() {
+        global $wpdb;
+
+        $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->dokan_withdraw} (
+               `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+               `user_id` bigint(20) unsigned NOT NULL,
+               `amount` float(11) NOT NULL,
+               `date` timestamp NOT NULL,
+               `status` int(1) NOT NULL,
+               `method` varchar(30) NOT NULL,
+               `note` text NOT NULL,
+               `ip` varchar(15) NOT NULL,
+              PRIMARY KEY (id)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+
+        dbDelta( $sql );
+    }
+
+    function create_sync_table() {
+        global $wpdb;
+
+        $sql = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}dokan_orders` (
+          `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+          `order_id` bigint(20) DEFAULT NULL,
+          `seller_id` bigint(20) DEFAULT NULL,
+          `order_total` float(11,2) DEFAULT NULL,
+          `net_amount` float(11,2) DEFAULT NULL,
+          `order_status` varchar(30) DEFAULT NULL,
+          PRIMARY KEY (`id`),
+          KEY `order_id` (`order_id`),
+          KEY `seller_id` (`seller_id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
+        dbDelta( $sql );
     }
 }

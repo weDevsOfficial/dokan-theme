@@ -25,11 +25,11 @@ class Dokan_Template_Withdraw {
 
     function withdraw_csv() {
         if( ! isset( $_POST['dokan-withdraw-csv'] ) ) {
-            
+
             return;
         }
         global $wpdb;
-       
+
         if( ! isset( $_POST['id'] )  ) {
             return;
         }
@@ -40,8 +40,8 @@ class Dokan_Template_Withdraw {
         }
 
         $id = implode( "','", $_POST['id'] );
-  
-        $result = $wpdb->get_results( 
+
+        $result = $wpdb->get_results(
             "SELECT * FROM {$wpdb->dokan_withdraw}
             WHERE id in('$id') AND status=0"
         );
@@ -51,18 +51,18 @@ class Dokan_Template_Withdraw {
         }
 
         foreach( $result as $key => $obj ) {
-          
+
             $data[] = array(
                 'email' => get_user_by( 'id', $obj->user_id )->user_email,
                 'amount' => $obj->amount,
                 'currency' => get_option('woocommerce_currency') ,
-            ); 
-         
+            );
+
         }
-        
+
         header('Content-type: html/csv');
         header('Content-Disposition: attachment; filename="withdraw-'.date('d-m-y').'.csv"');
-        
+
         foreach ($data as $fields) {
             echo $fields['email']. ',';
             echo $fields['amount']. ',';
@@ -93,7 +93,7 @@ class Dokan_Template_Withdraw {
 
     function validate() {
 
-        if ( !isset( $_POST['withdraw_submit'] ) ) { 
+        if ( !isset( $_POST['withdraw_submit'] ) ) {
             return false;
         }
 
@@ -101,7 +101,7 @@ class Dokan_Template_Withdraw {
             wp_die( __( 'Are you cheating?', 'dokan' ) );
         }
 
-        
+
         $error = new WP_Error();
 
         if( empty($_POST['witdraw_amount']) ) {
@@ -151,7 +151,7 @@ class Dokan_Template_Withdraw {
         );
 
         $format = array('%d', '%f', '%s', '%d', '%s', '%s', '%s');
-     
+
         return $wpdb->insert( $wpdb->dokan_withdraw, $data, $format );
     }
 
@@ -171,44 +171,15 @@ class Dokan_Template_Withdraw {
         $update = $this->insert_withdraw( $data_info );
         if ( !defined('DOING_AJAX') && DOING_AJAX !== true &&  $update) {
             wp_redirect( add_query_arg( array( 'message' => 'request_success' ), get_permalink() ) );
-        } 
+        }
 
         if ( defined('DOING_AJAX') && DOING_AJAX === true &&  $update) {
 
             return $update;
-            
+
         }
 
 
-    }
-
-    function withdraw_table() {
-
-        global $wpdb;
-        $withdraw_db_version = '1.0';
-        $installed_ver = get_option( "withdraw_db_version" );
-
-        if ( version_compare( $withdraw_db_version, $installed_ver, '<=' ) ) {
-            return;
-        }
-
-        $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->dokan_withdraw} (
-               `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-               `user_id` bigint(20) unsigned NOT NULL,
-               `amount` float(11) NOT NULL,
-               `date` timestamp NOT NULL,
-               `status` int(1) NOT NULL,
-               `method` varchar(30) NOT NULL,
-               `note` text NOT NULL,
-               `ip` varchar(15) NOT NULL,
-              PRIMARY KEY (id)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-
-        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-        dbDelta( $sql );
-
-        add_option( "withdraw_db_version", $withdraw_db_version );
-        
     }
 
     function has_pending_request( $user_id ) {
@@ -232,7 +203,7 @@ class Dokan_Template_Withdraw {
     function get_withdraw_requests( $user_id='', $status = 0 ) {
         global $wpdb;
 
-        $where = empty( $user_id ) ? '' : sprintf( "user_id ='%d' &&", $user_id ); 
+        $where = empty( $user_id ) ? '' : sprintf( "user_id ='%d' &&", $user_id );
 
         $result = $wpdb->get_results( $wpdb->prepare(
             "SELECT * FROM {$wpdb->dokan_withdraw}
@@ -245,8 +216,9 @@ class Dokan_Template_Withdraw {
     function forntend_admin_withdraw_list() {
         $user_id = get_current_user_id();
         $result = $this->get_withdraw_requests($user_id, $status = 0);
-        if( ! count( $result ) ) {
-            echo '<h3 style="padding: 10px;">No pending withdraw request found</h3>';
+
+        if ( ! count( $result ) ) {
+            echo '<h3>' . __( 'No pending withdraw request found', 'dokan' ) . '</h3>';
             return;
         }
         ?>
@@ -276,7 +248,7 @@ class Dokan_Template_Withdraw {
                 <td><?php echo $result_array->amount; ?></td>
                 <td><?php echo $result_array->date; ?></td>
                 <td>
-                    <?php 
+                    <?php
                         echo $this->request_status( $result_array->status );
                     ?>
                 </td>
@@ -289,7 +261,7 @@ class Dokan_Template_Withdraw {
                         <a href="#" style="display: none; margin-left: 72px;" class="dokan-note-cancle button"><?php _e('X', 'dokan' ); ?></a>
                         <a href="#" class="dokan-note-field"><?php _e('Add note', 'dokan' ); ?></a>
                     </div>
-                    
+
                 </td>
                 <td><?php echo $result_array->ip; ?></td>
             </tr>
@@ -304,13 +276,14 @@ class Dokan_Template_Withdraw {
         <?php
         $this->add_note_script();
     }
-    
+
 
     function admin_withdraw_list() {
         $user_id = get_current_user_id();
         $result = $this->get_withdraw_requests($user_id, $status = 0);
-        if( ! count( $result ) ) {
-            echo '<h3 style="padding: 10px;">No pending withdraw request found</h3>';
+
+        if ( ! count( $result ) ) {
+            echo '<h3>' . __( 'No pending withdraw request found', 'dokan' ) . '</h3>';
             return;
         }
         ?>
@@ -342,7 +315,7 @@ class Dokan_Template_Withdraw {
                 <th><?php echo $result_array->amount; ?></th>
                 <th><?php echo $result_array->date; ?></th>
                 <th>
-                    <?php 
+                    <?php
                         echo $this->request_status( $result_array->status );
                     ?>
                 </th>
@@ -355,7 +328,7 @@ class Dokan_Template_Withdraw {
                         <a href="#" style="display: none; margin-left: 72px;" class="dokan-note-cancle button"><?php _e('X', 'dokan' ); ?></a>
                         <a href="#" class="dokan-note-field"><?php _e('Add note', 'dokan' ); ?></a>
                     </div>
-                    
+
                 </th>
                 <th><?php echo $result_array->ip; ?></th>
             </tr>
@@ -395,10 +368,10 @@ class Dokan_Template_Withdraw {
                         'row_id': row_id,
                         'note': note,
                     };
-                    
+
                     $.post( ajaxurl, data, function(resp) {
                         if(resp.success) {
-                        
+
                             self.siblings('p.ajax_note').text(resp.data['note']);
                             self.hide();
                             self.siblings('input.dokan-note-text').hide();
@@ -422,12 +395,12 @@ class Dokan_Template_Withdraw {
                 addnote: function(e) {
                     e.preventDefault();
                     var self = $(this);
-                    
+
                     self.hide();
                     self.siblings( "a.dokan-note-submit" ).show();
                     self.siblings('input.dokan-note-text').show();
                     self.siblings('a.dokan-note-cancle').show();
-                
+
                 }
             }
             dokan_admin.init();
@@ -449,7 +422,7 @@ class Dokan_Template_Withdraw {
         } else {
             wp_send_json_error();
         }
-        
+
     }
 
     function has_withdraw_balance( $user_id ) {
@@ -618,7 +591,7 @@ class Dokan_Template_Withdraw {
             <div class="form-group">
 
                 <label for="withdraw-amount" class="col-sm-3 control-label">
-                    <?php _e( 'Withdraw Amount' ); ?>
+                    <?php _e( 'Withdraw Amount', 'dokan' ); ?>
                 </label>
 
                 <div class="col-sm-3 ">

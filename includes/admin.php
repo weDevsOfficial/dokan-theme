@@ -1,6 +1,8 @@
 <?php
 
-require_once dirname( __FILE__ ) . '/class.settings-api.php';
+if ( !class_exists( 'WeDevs_Settings_API' ) ) {
+    require_once DOKAN_LIB_DIR . '/class.settings-api.php';
+}
 
 /**
  * WordPress settings API demo class

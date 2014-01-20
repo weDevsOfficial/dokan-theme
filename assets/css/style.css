@@ -491,8 +491,6 @@ a:hover {
   overflow: hidden;
 }
 .site-content article {
-  margin-bottom: 25px;
-  padding-bottom: 15px;
   position: relative;
 }
 .site-content article li {
@@ -2510,6 +2508,47 @@ a:hover {
 .woocommerce.single-product .upsells.products ul.products li.product,
 .woocommerce-page.single-product .upsells.products ul.products li.product {
   width: 20%;
+}
+.woocommerce .form-row.user-role label,
+.woocommerce-page .form-row.user-role label {
+  display: inline;
+}
+.woocommerce .form-row.user-role .radio,
+.woocommerce-page .form-row.user-role .radio {
+  padding: 0 10px 0 0;
+}
+.woocommerce .form-row.user-role input[type=radio],
+.woocommerce-page .form-row.user-role input[type=radio] {
+  float: none;
+  margin: 0;
+}
+.woocommerce .split-row p,
+.woocommerce-page .split-row p {
+  width: 50%;
+  float: left;
+}
+.woocommerce form.login,
+.woocommerce-page form.login,
+.woocommerce form.register,
+.woocommerce-page form.register {
+  border: none;
+  padding: 0;
+}
+.woocommerce .login-form,
+.woocommerce-page .login-form {
+  border-right: 1px solid #dddddd;
+}
+.woocommerce .login-form form,
+.woocommerce-page .login-form form {
+  width: 70%;
+}
+.woocommerce .reg-form,
+.woocommerce-page .reg-form {
+  padding-left: 12%;
+}
+.woocommerce .reg-form form,
+.woocommerce-page .reg-form form {
+  width: 90%;
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs li[class],
 .woocommerce-page div.product .woocommerce-tabs ul.tabs li[class],

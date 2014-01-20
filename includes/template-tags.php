@@ -205,7 +205,7 @@ function wedevs_page_navi( $before = '', $after = '', $wp_query ) {
     next_posts_link( __('Next &rarr;', 'wedevs') );
     echo '</li>';
     if ( $end_page < $max_page ) {
-        $last_page_text = "»";
+        $last_page_text = "&larr;";
         echo '<li class="next"><a href="' . get_pagenum_link( $max_page ) . '" title="Last">' . $last_page_text . '</a></li>';
     }
     echo '</ul></div>' . $after . "";
@@ -453,3 +453,66 @@ function dokan_category_widget() {
         )
     );
 }
+
+function dokan_seller_reg_form_fields() {
+    $role = isset( $_POST['role'] ) ? $_POST['role'] : 'customer';
+    $role_style = ( $role == 'customer' ) ? ' style="display:none"' : '';
+    ?>
+    <div class="show_if_seller"<?php echo $role_style; ?>>
+        <div class="split-row form-row-wide">
+            <p class="form-row">
+                <label for="first-name"><?php _e( 'First Name', 'dokan' ); ?> <span class="required">*</span></label>
+                <input type="text" class="input-text form-control" name="fname" id="first-name" value="<?php if ( ! empty( $_POST['fname'] ) ) echo esc_attr($_POST['fname']); ?>" />
+            </p>
+
+            <p class="form-row">
+                <label for="last-name"><?php _e( 'Last Name', 'dokan' ); ?> <span class="required">*</span></label>
+                <input type="text" class="input-text form-control" name="lname" id="last-name" value="<?php if ( ! empty( $_POST['lname'] ) ) echo esc_attr($_POST['lname']); ?>" />
+            </p>
+        </div>
+
+        <p class="form-row form-row-wide">
+            <label for="company-name"><?php _e( 'Shop Name', 'dokan' ); ?></label>
+            <input type="text" class="input-text form-control" name="shopname" id="company-name" value="<?php if ( ! empty( $_POST['shopname'] ) ) echo esc_attr($_POST['shopname']); ?>" />
+        </p>
+
+        <p class="form-row form-row-wide">
+            <label for="seller-address"><?php _e( 'Address', 'dokan' ); ?><span class="required">*</span></label>
+            <textarea type="text" id="seller-address" name="address" class="form-control input"><?php if ( ! empty( $_POST['address'] ) ) echo esc_textarea($_POST['address']); ?></textarea>
+        </p>
+
+        <p class="form-row form-row-wide">
+            <label for="shop-phone"><?php _e( 'Phone', 'dokan' ); ?><span class="required">*</span></label>
+            <input type="text" class="input-text form-control" name="phone" id="shop-phone" value="<?php if ( ! empty( $_POST['phone'] ) ) echo esc_attr($_POST['phone']); ?>" />
+        </p>
+    </div>
+
+    <p class="form-row user-role">
+        <label class="radio">
+            <input type="radio" name="role" value="customer"<?php checked( $role, 'customer' ); ?>>
+            <?php _e( 'I am a customer', 'dokan' ); ?>
+        </label>
+
+        <label class="radio">
+            <input type="radio" name="role" value="seller"<?php checked( $role, 'seller' ); ?>>
+            <?php _e( 'I am a seller', 'dokan' ); ?>
+        </label>
+    </p>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('.user-role input[type=radio]').on('change', function() {
+                var value = $(this).val();
+
+                if ( value === 'seller') {
+                    $('.show_if_seller').slideDown();
+                } else {
+                    $('.show_if_seller').slideUp();
+                }
+            });
+        });
+    </script>
+    <?php
+}
+
+add_action( 'register_form', 'dokan_seller_reg_form_fields' );
