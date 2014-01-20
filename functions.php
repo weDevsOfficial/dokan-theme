@@ -102,6 +102,7 @@ class WeDevs_Dokan {
 
         require_once $inc_dir . 'theme-functions.php';
         require_once $inc_dir . 'widgets/menu-category.php';
+        require_once $inc_dir . 'customizer.php';
 
         if ( is_admin() ) {
             require_once $inc_dir . 'admin.php';
