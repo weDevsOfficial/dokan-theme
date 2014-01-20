@@ -15,20 +15,20 @@ class Dokan_Customizer {
     function register_control( $wp_customize ) {
 
         // logo
-        $wp_customize->add_section( 'dokan_log_section', array(
+        $wp_customize->add_section( 'dokan_logo_section', array(
             'title' => __( 'Theme Logo', 'dokan' ),
             'priority' => 9,
             'description' => __( 'Upload your logo to replace the default Logo (dimension : 180 X 50)' ),
         ) );
 
         $wp_customize->add_setting( 'dokan_logo', array(
-            'default' => get_stylesheet_directory_uri() . '/assets/images/logo.png',
-            'type' => 'option',
+            // 'default' => get_stylesheet_directory_uri() . '/assets/images/logo.png',
+            'transport' => 'postMessage',
         ) );
 
         $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'dokan_logo', array(
             'label' => __( 'Upload Logo', 'dokan' ),
-            'section' => 'dokan_log_section',
+            'section' => 'dokan_logo_section',
             'settings' => 'dokan_logo',
         ) ) );
 
@@ -49,7 +49,6 @@ class Dokan_Customizer {
         // link hover color
         $wp_customize->add_setting( 'dokan_link_hover_color', array(
             'default' => '#aa0000',
-            'transport' => 'postMessage'
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_link_hover_color', array(
@@ -101,7 +100,6 @@ class Dokan_Customizer {
         // nav hover color
         $wp_customize->add_setting( 'dokan_nav_hover', array(
             'default' => '#333',
-            'transport' => 'postMessage'
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_nav_hover', array(
@@ -181,7 +179,6 @@ class Dokan_Customizer {
         // Siebar widget text hover color
         $wp_customize->add_setting( 'dokan_sidebar_link_hover', array(
             'default' => '#2A6496',
-            'transport' => 'postMessage',
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_sidebar_link_hover', array(
@@ -222,7 +219,6 @@ class Dokan_Customizer {
         // widget text hover color
         $wp_customize->add_setting( 'dokan_footer_link_hover', array(
             'default' => '#E8E8E8',
-            'transport' => 'postMessage',
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_footer_link_hover', array(
