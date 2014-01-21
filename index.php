@@ -118,6 +118,8 @@ get_header();
 <div id="secondary" class="col-md-3" role="complementary">
     <div class="widget-area">
 
+    <?php dynamic_sidebar( 'sidebar-home' ); ?>
+
     <?php $url = get_template_directory_uri() . '/assets/images/footer/'; ?>
     <div id="super-deals">
         <h3 class="deal-title">Super Deals</h3>

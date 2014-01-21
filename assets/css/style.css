@@ -728,14 +728,6 @@ a:hover {
   background: #363636;
   left: 117px;
 }
-.home .cat {
-  background: #f04023;
-  color: #fff;
-}
-.home .fav {
-  background: #fff;
-  color: #f04023;
-}
 .home .flexslider {
   padding: 15px;
   margin: 0 0 30px 0;
@@ -2395,6 +2387,16 @@ a:hover {
 .woocommerce ul.products li.product .item-button,
 .woocommerce-page ul.products li.product .item-button {
   float: right;
+}
+.woocommerce ul.products li.product .item-button a.add_to_cart_button,
+.woocommerce-page ul.products li.product .item-button a.add_to_cart_button {
+  background: #f05025;
+  color: #fff;
+}
+.woocommerce ul.products li.product .item-button a.fav i,
+.woocommerce-page ul.products li.product .item-button a.fav i {
+  color: #f05025;
+  background: #fff;
 }
 .woocommerce ul.products li.product .item-button a,
 .woocommerce-page ul.products li.product .item-button a {

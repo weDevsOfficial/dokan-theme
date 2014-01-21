@@ -19,6 +19,8 @@ $scheme = is_ssl() ? 'https' : 'http';
 wp_enqueue_script( 'google-maps', $scheme . '://maps.google.com/maps/api/js?sensor=true' );
 wp_enqueue_script( 'jquery-ui' );
 wp_enqueue_script( 'jquery-ui-autocomplete' );
+wp_enqueue_script( 'post' );
+wp_enqueue_media();
 
 get_header();
 ?>
