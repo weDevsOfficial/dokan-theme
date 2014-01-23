@@ -472,3 +472,7 @@ function dokan_redirect_to_register(){
 }
 
 add_action( 'login_init', 'dokan_redirect_to_register' );
+
+function dokan_pre( $value ) {
+    printf( '<pre>%s</pre>', print_r( $value, true ) );
+}
