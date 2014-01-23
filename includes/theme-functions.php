@@ -461,3 +461,14 @@ function dokan_product_editor_scripts() {
     wp_enqueue_media();
     wp_enqueue_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
 }
+
+function dokan_redirect_to_register(){
+    global $action;
+
+    if ( $action == 'register' ) {
+        wp_redirect( dokan_get_page_url( 'myaccount', 'woocommerce' ) );
+        exit;
+    }
+}
+
+add_action( 'login_init', 'dokan_redirect_to_register' );
