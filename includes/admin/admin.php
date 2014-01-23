@@ -20,6 +20,12 @@ class Dokan_Admin_Settings {
         add_action( 'admin_menu', array($this, 'admin_menu') );
     }
 
+    function dashboard_script() {
+        $template = get_template_directory_uri() . '/assets/';
+
+        wp_enqueue_style( 'dokan-admin-dash', $template . '/css/admin.css' );
+    }
+
     function admin_init() {
         Dokan_Template_Withdraw::init()->withdraw_csv();
         //set the settings
@@ -34,13 +40,19 @@ class Dokan_Admin_Settings {
         $menu_position = apply_filters( 'doakn_menu_position', 17 );
         $capability = apply_filters( 'doakn_menu_capability', 'activate_plugins' );
 
-        add_menu_page( __( 'Dokan', 'dokan' ), __( 'Dokan', 'dokan' ), $capability, 'dokan', array($this, 'settings_page'), 'dashicons-vault', $menu_position );
-        add_submenu_page( 'dokan', __( 'Settings', 'dokan' ), __( 'Settings', 'dokan' ), $capability, 'dokan', array($this, 'settings_page') );
+        $dashboard = add_menu_page( __( 'Dokan', 'dokan' ), __( 'Dokan', 'dokan' ), $capability, 'dokan', array($this, 'dashboard'), 'dashicons-vault', $menu_position );
         add_submenu_page( 'dokan', __( 'Withdraw', 'dokan' ), __( 'Withdraw', 'dokan' ), $capability, 'dokan-withdraw', array($this, 'withdraw_page') );
+        add_submenu_page( 'dokan', __( 'Settings', 'dokan' ), __( 'Settings', 'dokan' ), $capability, 'dokan-settings', array($this, 'settings_page') );
+
+        add_action( $dashboard, array($this, 'dashboard_script' ) );
     }
 
     function get_settings_sections() {
         $sections = array(
+            array(
+                'id' => 'dokan_home',
+                'title' => __( 'Home Page', 'dokan' )
+            ),
             array(
                 'id' => 'dokan_general',
                 'title' => __( 'General Settings', 'dokan' )
@@ -83,6 +95,50 @@ class Dokan_Admin_Settings {
                     'desc' => '',
                     'default' => sprintf( __( '&copy; %d. All rights are reserved', 'dokan' ), date('Y') ),
                     'type' => 'text',
+                ),
+            ),
+            'dokan_home' => array(
+                array(
+                    'name' => 'show_slider',
+                    'label' => __( 'Slider', 'dokan' ),
+                    'desc' => __( 'Show Slider', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
+                array(
+                    'name' => 'show_featured',
+                    'label' => __( 'Featured Products', 'dokan' ),
+                    'desc' => __( 'Show Featured Products', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
+                array(
+                    'name' => 'show_latest',
+                    'label' => __( 'Latest Products', 'dokan' ),
+                    'desc' => __( 'Show Latest Products', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
+                array(
+                    'name' => 'show_best_selling',
+                    'label' => __( 'Best Selling Products', 'dokan' ),
+                    'desc' => __( 'Show Best Selling Products', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
+                array(
+                    'name' => 'show_top_rated',
+                    'label' => __( 'Top Rated Products', 'dokan' ),
+                    'desc' => __( 'Show Top Rated Products', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
+                array(
+                    'name' => 'show_on_sale',
+                    'label' => __( 'On Sale Products', 'dokan' ),
+                    'desc' => __( 'Show On Sale Products', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
                 ),
             ),
             'dokan_pages' => array(
@@ -147,6 +203,10 @@ class Dokan_Admin_Settings {
         return apply_filters( 'dokan_settings_fields', $settings_fields );
     }
 
+    function dashboard() {
+        include __DIR__ . '/dashboard.php';
+    }
+
     function settings_page() {
         echo '<div class="wrap">';
         settings_errors();
@@ -158,9 +218,10 @@ class Dokan_Admin_Settings {
     }
 
     function withdraw_page() {
+        echo '<div class="wrap">';
         $dokan_admin_withdraw = Dokan_Template_Withdraw::init();
         $dokan_admin_withdraw->admin_withdraw_list();
-
+        echo '</div>';
     }
 
 }
