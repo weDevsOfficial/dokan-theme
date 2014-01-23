@@ -6,6 +6,74 @@
 /* workarounds */
 * html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
 
+.woo-product-list {
+    h3 {
+        background: #585858;
+        width: 100%;
+        padding: 5px;
+        color: #fff;
+        margin: 0;
+        font-size: 1em;
+    }
+
+    .item-bar {
+        background: white;
+        display:block;
+        width: 100%;
+        padding: 5px 0px;
+        border-bottom: 1px solid #eee;
+        border-left: 1px solid #eee;
+        border-right: 1px solid #eee;
+
+        .price {
+            padding: 0px 0 0 10px;
+            display: inline-block;
+            margin: 0;
+        }
+    }
+
+    .item-button {
+        float: right;
+
+        a.add_to_cart_button {
+            background: @orange;
+            color: #fff;
+        }
+
+        a.fav i {
+            color: @orange;
+            background: #fff;
+        }
+    }
+
+    .item-button a {
+        text-align: center;
+        padding: 0 8px;
+        border-radius: 2px;
+        border-color: #d3d3d3;
+        display: inline-block;
+        margin-right: 5px;
+
+        &.added_to_cart {
+            position: absolute;
+            right: 0;
+            background: #269C10;
+            color: #fff;
+            padding: 1px 10px;
+            font-size: 12px;
+        }
+    }
+
+    .item-button a span {
+        font-size: 16px;
+    }
+
+    a img {
+        .box-shadow-norm(none);
+        margin: 0;
+    }
+}
+
 .ui-menu {
     list-style:none;
     padding: 2px;
@@ -149,69 +217,7 @@
     }
 
     ul.products li.product {
-        h3 {
-            background: #585858;
-            width: 100%;
-            padding: 5px;
-            color: #fff;
-        }
-
-        .item-bar {
-            background: white;
-            display:block;
-            width: 100%;
-            padding: 5px 0px;
-            border-bottom: 1px solid #eee;
-            border-left: 1px solid #eee;
-            border-right: 1px solid #eee;
-
-            .price {
-                padding: 0px 0 0 10px;
-                display: inline-block;
-                margin: 0;
-            }
-        }
-
-        .item-button {
-            float: right;
-
-            a.add_to_cart_button {
-                background: @orange;
-                color: #fff;
-            }
-
-            a.fav i {
-                color: @orange;
-                background: #fff;
-            }
-        }
-
-        .item-button a {
-            text-align: center;
-            padding: 0 8px;
-            border-radius: 2px;
-            border-color: #d3d3d3;
-            display: inline-block;
-            margin-right: 5px;
-
-            &.added_to_cart {
-                position: absolute;
-                right: 0;
-                background: #269C10;
-                color: #fff;
-                padding: 1px 10px;
-                font-size: 12px;
-            }
-        }
-
-        .item-button a span {
-            font-size: 16px;
-        }
-
-        a img {
-            .box-shadow-norm(none);
-            margin: 0;
-        }
+        .woo-product-list;
     }
 
     &.single-product {

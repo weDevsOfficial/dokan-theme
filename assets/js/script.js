@@ -22,6 +22,21 @@ jQuery(function($) {
         dashboardMenu.css({ height: contentArea.height() });
     }
 
+    // tiny helper function to add breakpoints
+    function getGridSize() {
+        return (window.innerWidth < 600) ? 2 : (window.innerWidth < 900) ? 3 : 4;
+    }
+
+    $('.product-sliders').flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 190,
+        itemMargin: 10,
+        controlNav: false,
+        minItems: getGridSize(),
+        maxItems: getGridSize()
+    });
+
 });
 
 //dokan settings
