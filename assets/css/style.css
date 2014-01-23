@@ -1,30 +1,3 @@
-.clearfix {
-  *zoom: 1;
-}
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-.clearfix:after {
-  clear: both;
-}
-.hide-text {
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
-}
-.input-block-level {
-  display: block;
-  width: 100%;
-  min-height: 30px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
 h1,
 h2,
 h3 {
@@ -477,8 +450,8 @@ a:hover {
   font-weight: bold;
 }
 .site-header #navigation > ul > li.current-menu-item > a:hover {
-  -webkit-border-radius: 0;
   -moz-border-radius: 0;
+  -webkit-border-radius: 0;
   border-radius: 0;
 }
 .site-header #navigation > ul {
@@ -645,7 +618,6 @@ a:hover {
 }
 .home .product-sliders li a img {
   -webkit-box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none;
   margin: 0;
 }
@@ -660,14 +632,14 @@ a:hover {
 }
 .home .product-sliders .flex-direction-nav .flex-prev {
   opacity: 1;
-  top: -24px;
+  top: -26px;
   right: 22px;
   left: auto;
   padding: 2px 5px 0 3px;
 }
 .home .product-sliders .flex-direction-nav .flex-next {
   opacity: 1;
-  top: -24px;
+  top: -26px;
   right: 0px;
   padding: 2px 3px 0 0;
 }
@@ -838,8 +810,8 @@ a:hover {
 .home .flexslider {
   padding: 15px;
   margin: 0 0 30px 0;
-  -webkit-border-radius: 0;
   -moz-border-radius: 0;
+  -webkit-border-radius: 0;
   border-radius: 0;
   border: 1px solid #f7f7f7;
   box-shadow: none;
@@ -1213,22 +1185,25 @@ a:hover {
 .page-template-templatesreports-php .dokan-reports-wrap {
   margin-top: 20px;
 }
-.page-template-templatesreports-php .postbox {
-  border: 1px solid #dddddd;
-  margin-bottom: 10px;
+.page-template-templatesreports-php ul.chart-legend {
   background: #fff;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #efefef;
 }
-.page-template-templatesreports-php .postbox h3 {
-  padding: 8px 10px;
-  margin: 0 0 5px 0;
-  border-bottom: 1px solid #dddddd;
-  font-size: 14px;
+.page-template-templatesreports-php ul.chart-legend li {
+  color: #aaa;
+  padding: 13px 18px;
+  border-bottom: 1px solid #efefef;
+  font-weight: normal;
+  font-size: 13px;
 }
-.page-template-templatesreports-php .postbox .inside {
-  padding: 3px 10px;
+.page-template-templatesreports-php ul.chart-legend li strong {
+  display: block;
+  color: #464646;
+  font-size: 30px;
+  font-weight: normal;
 }
 .page-template-templatesreports-php .report-filter {
   margin-top: 15px;
@@ -1287,8 +1262,8 @@ a:hover {
   font-size: 32px;
 }
 .page-template-templatesdashboard-php .dashboard-widget.products .pull-right a {
-  -webkit-border-radius: 0;
   -moz-border-radius: 0;
+  -webkit-border-radius: 0;
   border-radius: 0;
   margin-top: -6px;
 }
@@ -1526,8 +1501,8 @@ a:hover {
 .widget .avatar {
   float: left;
   margin-right: 5px;
-  -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
 }
 .widget .avatar img {
@@ -1674,14 +1649,12 @@ a:hover {
 #comments #respond textarea {
   display: block;
   -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.15);
   border: 1px solid #ccc;
 }
 #comments #respond input:focus,
 #comments #respond textarea:focus {
   -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.25);
   box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.25);
   border-color: #ccc;
 }
@@ -1689,7 +1662,6 @@ a:hover {
   border: none;
   color: #fff;
   -webkit-box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none;
 }
 #comments #respond input[type=text] {
@@ -1718,8 +1690,8 @@ a:hover {
 }
 #comments ol.commentlist #respond {
   border-top: 1px solid #fff;
-  -webkit-border-radius: 0;
   -moz-border-radius: 0;
+  -webkit-border-radius: 0;
   border-radius: 0;
 }
 #comments ol.commentlist li article.comment {
@@ -1732,8 +1704,8 @@ a:hover {
 }
 #comments ol.commentlist li article.comment .comment-avatar {
   background: #dddddd;
-  -webkit-border-radius: 500px;
   -moz-border-radius: 500px;
+  -webkit-border-radius: 500px;
   border-radius: 500px;
   float: left;
   padding: 3px;
@@ -1742,8 +1714,8 @@ a:hover {
   margin: 0 10px 0 0;
 }
 #comments ol.commentlist li article.comment .comment-avatar img.avatar {
-  -webkit-border-radius: 500px;
   -moz-border-radius: 500px;
+  -webkit-border-radius: 500px;
   border-radius: 500px;
   background: #fff;
 }
@@ -2403,7 +2375,6 @@ a:hover {
 }
 .woo-product-list a img {
   -webkit-box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none;
   margin: 0;
 }
@@ -2445,8 +2416,8 @@ a:hover {
 ----------------------------------*/
 .alert {
   padding: 8px 15px;
-  -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
 }
 .navbar-brand {
@@ -2590,7 +2561,6 @@ a:hover {
 .woocommerce ul.products li.product a img,
 .woocommerce-page ul.products li.product a img {
   -webkit-box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none;
   margin: 0;
 }
