@@ -1358,3 +1358,31 @@ function dokan_get_top_rated_products( $per_page = 8 ) {
 
     return $top_rated_query;
 }
+
+function dokan_get_on_sale_products( $per_page = 10, $paged = 1 ) {
+    // Get products on sale
+    $product_ids_on_sale = wc_get_product_ids_on_sale();
+
+    $args = array(
+        'posts_per_page'    => $per_page,
+        'no_found_rows'     => 1,
+        'paged'             => $paged,
+        'post_status'       => 'publish',
+        'post_type'         => 'product',
+        'post__in'          => array_merge( array( 0 ), $product_ids_on_sale ),
+        'meta_query'        => array(
+            array(
+                'key'       => '_visibility',
+                'value'     => array('catalog', 'visible'),
+                'compare'   => 'IN'
+            ),
+            array(
+                'key'       => '_stock_status',
+                'value'     => 'instock',
+                'compare'   => '='
+            )
+        )
+    );
+
+    return new WP_Query( apply_filters( 'dokan_on_sale_products_query', $args ) );
+}
