@@ -27,90 +27,76 @@ get_header();
             </div>
         </div> <!-- #home-page-section-1 -->
 
-        <div id="home-page-section-2" class="row">
+        <div class="slider-container woocommerce">
+            <h2 class="slider-heading"><?php _e( 'Featured Products', 'dokan' ); ?></h2>
 
-            <div id="home-page-container" class="col-md-12">
+            <div class="product-sliders">
+                <ul class="slides">
+                    <?php
+                    $featured_query = dokan_get_featured_products();
+                    ?>
+                    <?php while ( $featured_query->have_posts() ) : $featured_query->the_post(); ?>
 
-                <div class="featured-tab-area clearfix">
-                    <ul id="dokan-feat-tab" class="nav nav-tabs">
-                        <li class="active"><a href="#latest-products" data-toggle="tab"><?php _e( 'Latest', 'dokan' ); ?></a></li>
-                        <li><a href="#featured-products" data-toggle="tab"><?php _e( 'Featured', 'dokan' ); ?></a></li>
-                        <li><a href="#special-products" data-toggle="tab"><?php _e( 'Special', 'dokan' ); ?></a></li>
-                    </ul>
+                        <?php woocommerce_get_template_part( 'content', 'product' ); ?>
 
-                    <div class="tab-content woocommerce">
-                        <div class="tab-pane fade in active" id="latest-products">
-                            <ul class="products list-inline">
-                                <?php
-                                $latest_query = new WP_Query( array(
-                                    'posts_per_page' => 8,
-                                    'post_type' => 'product'
-                                ) );
-                                ?>
-                                <?php while ( $latest_query->have_posts() ) : $latest_query->the_post(); ?>
+                    <?php endwhile; ?>
+                </ul>
+            </div>
+        </div> <!-- .slider-container -->
 
-                                    <?php woocommerce_get_template_part( 'content', 'product' ); ?>
+        <div class="slider-container woocommerce">
+            <h2 class="slider-heading"><?php _e( 'Latest Products', 'dokan' ); ?></h2>
 
-                                <?php endwhile; ?>
-                            </ul>
-                        </div>
+            <div class="product-sliders">
+                <ul class="slides">
+                    <?php
+                    $latest_query = new WP_Query( array(
+                        'posts_per_page' => 8,
+                        'post_type' => 'product'
+                    ) );
+                    ?>
+                    <?php while ( $latest_query->have_posts() ) : $latest_query->the_post(); ?>
 
-                        <div class="tab-pane fade" id="featured-products">
-                            <ul class="products list-inline">
-                                <?php
-                                $latest_query = new WP_Query( array(
-                                    'posts_per_page' => 8,
-                                    'post_type' => 'product'
-                                ) );
-                                ?>
-                                <?php while ( $latest_query->have_posts() ) : $latest_query->the_post(); ?>
+                        <?php woocommerce_get_template_part( 'content', 'product' ); ?>
 
-                                    <?php woocommerce_get_template_part( 'content', 'product' ); ?>
+                    <?php endwhile; ?>
+                </ul>
+            </div>
+        </div> <!-- .slider-container -->
 
-                                <?php endwhile; ?>
-                            </ul>
-                        </div>
+        <div class="slider-container woocommerce">
+            <h2 class="slider-heading"><?php _e( 'Best Selling Products', 'dokan' ); ?></h2>
 
-                        <div class="tab-pane fade" id="special-products">
-                            <ul class="products list-inline">
-                                <?php
-                                $latest_query = new WP_Query( array(
-                                    'posts_per_page' => 8,
-                                    'post_type' => 'product'
-                                ) );
-                                ?>
-                                <?php while ( $latest_query->have_posts() ) : $latest_query->the_post(); ?>
+            <div class="product-sliders">
+                <ul class="slides">
+                    <?php
+                    $best_selling_query = dokan_get_best_selling_products();
+                    ?>
+                    <?php while ( $best_selling_query->have_posts() ) : $best_selling_query->the_post(); ?>
 
-                                    <?php woocommerce_get_template_part( 'content', 'product' ); ?>
+                        <?php woocommerce_get_template_part( 'content', 'product' ); ?>
 
-                                <?php endwhile; ?>
-                            </ul>
-                        </div> <!-- .tab-pane -->
-                    </div> <!-- .tab-content -->
-                </div> <!-- .featured-tab-area -->
+                    <?php endwhile; ?>
+                </ul>
+            </div>
+        </div> <!-- .slider-container -->
 
-                <div class="best-sellers-area">
-                    <h2>Best Sellers</h2>
+        <div class="slider-container woocommerce">
+            <h2 class="slider-heading"><?php _e( 'Top Rated Products', 'dokan' ); ?></h2>
 
-                    <div class="best-sellers-sliders woocommerce clearfix">
-                        <ul class="products">
-                            <?php
-                            $latest_query = new WP_Query( array(
-                                'posts_per_page' => 8,
-                                'post_type' => 'product'
-                            ) );
-                            ?>
+            <div class="product-sliders">
+                <ul class="slides">
+                    <?php
+                    $top_rated_query = dokan_get_top_rated_products();
+                    ?>
+                    <?php while ( $top_rated_query->have_posts() ) : $top_rated_query->the_post(); ?>
 
-                            <?php while ( $latest_query->have_posts() ) : $latest_query->the_post(); ?>
+                        <?php woocommerce_get_template_part( 'content', 'product' ); ?>
 
-                                <?php woocommerce_get_template_part( 'content', 'product' ); ?>
-
-                            <?php endwhile; // end of the loop. ?>
-                        </ul>
-                    </div>
-                </div> <!-- .best-sellers-area -->
-            </div> <!-- #home-page-container -->
-        </div>
+                    <?php endwhile; ?>
+                </ul>
+            </div>
+        </div> <!-- .slider-container -->
 
     </div><!-- #content .site-content -->
 </div><!-- #primary .content-area -->

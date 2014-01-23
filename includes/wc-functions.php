@@ -1290,11 +1290,71 @@ function dokan_on_create_seller( $user_id, $data ) {
 
 add_action( 'woocommerce_created_customer', 'dokan_on_create_seller', 10, 2);
 
-add_action( 'login_init', function(){
-    global $action;
+function dokan_get_featured_products( $per_page = 9) {
+    $featured_query = new WP_Query( apply_filters( 'dokan_get_featured_products', array(
+        'posts_per_page' => $per_page,
+        'post_type' => 'product',
+        'ignore_sticky_posts' => 1,
+        'meta_query' => array(
+            array(
+                'key' => '_visibility',
+                'value' => array('catalog', 'visible'),
+                'compare' => 'IN'
+            ),
+            array(
+                'key' => '_featured',
+                'value' => 'yes'
+            )
+        )
+    ) ) );
 
-    if ( $action == 'register' ) {
-        wp_redirect( dokan_get_page_url( 'myaccount', 'woocommerce' ) );
-        exit;
-    }
-});
+    return $featured_query;
+}
+
+function dokan_get_best_selling_products( $per_page = 8 ) {
+
+    $args = array(
+        'post_type' => 'product',
+        'post_status' => 'publish',
+        'ignore_sticky_posts' => 1,
+        'posts_per_page' => $per_page,
+        'meta_key' => 'total_sales',
+        'orderby' => 'meta_value_num',
+        'meta_query' => array(
+            array(
+                'key' => '_visibility',
+                'value' => array( 'catalog', 'visible' ),
+                'compare' => 'IN'
+            )
+        )
+    );
+
+    $best_selling_query = new WP_Query( apply_filters( 'dokan_best_selling_query', $args ) );
+
+    return $best_selling_query;
+}
+
+function dokan_get_top_rated_products( $per_page = 8 ) {
+
+    $args = array(
+        'post_type'             => 'product',
+        'post_status'           => 'publish',
+        'ignore_sticky_posts'   => 1,
+        'posts_per_page'        => $per_page,
+        'meta_query'            => array(
+            array(
+                'key'           => '_visibility',
+                'value'         => array('catalog', 'visible'),
+                'compare'       => 'IN'
+            )
+        )
+    );
+
+    add_filter( 'posts_clauses', array( 'WC_Shortcodes', 'order_by_rating_post_clauses' ) );
+
+    $top_rated_query = new WP_Query( apply_filters( 'dokan_top_rated_query', $args ) );
+
+    remove_filter( 'posts_clauses', array( 'WC_Shortcodes', 'order_by_rating_post_clauses' ) );
+
+    return $top_rated_query;
+}
