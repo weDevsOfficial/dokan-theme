@@ -25,11 +25,6 @@ function dokan_get_reports_charts() {
                 'description' => '',
                 'function'    => 'dokan_monthly_sales'
             ),
-            // "product_sales"     => array(
-            //     'title'       => __( 'Product Sales', 'dokan' ),
-            //     'description' => '',
-            //     'function'    => 'dokan_product_sales'
-            // ),
             "top_sellers"       => array(
                 'title'       => __( 'Top sellers', 'dokan' ),
                 'description' => '',
@@ -122,13 +117,20 @@ function dokan_sales_overview_chart_data() {
     return json_encode( $order_data );
 }
 
-function dokan_sales_overview() {
-    global $start_date, $end_date, $woocommerce, $wpdb, $wp_locale, $current_user;
-
-    $total_sales = $total_orders = $order_items = $discount_total = $shipping_total = 0;
+function dokan_reports_order_statuses() {
     $order_status = implode( "','", apply_filters( 'dokan_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) );
 
-    $sql = "SELECT SUM(meta__order_total.meta_value) AS total_sales,
+    return $order_status;
+}
+
+function dokan_report_order_total( $start_date = '', $end_date ='' ) {
+    global $wpdb, $current_user;
+
+    $order_status = dokan_reports_order_statuses();
+    $start_date = $start_date ? $start_date : date( 'Y-m-01', current_time('timestamp') );
+    $end_date = $end_date ? $end_date : date( 'Y-m-d', current_time('timestamp') );
+
+    $order_total_sql = "SELECT SUM(meta__order_total.meta_value) AS total_sales,
                SUM(meta__order_shipping.meta_value) AS total_shipping,
                COUNT(posts.ID) AS total_orders
             FROM {$wpdb->posts} AS posts
@@ -137,106 +139,93 @@ function dokan_sales_overview() {
             LEFT JOIN {$wpdb->postmeta} AS meta__order_shipping ON posts.ID = meta__order_shipping.post_id
             WHERE posts.post_type = 'shop_order'
                 AND posts.post_status = 'publish'
+                AND posts.post_date >= '$start_date'
+                AND posts.post_date < '$end_date'
                 AND do.order_status IN ('$order_status')
                 AND do.seller_id = {$current_user->ID}
                 AND meta__order_total.meta_key = '_order_total'
                 AND meta__order_shipping.meta_key = '_order_shipping'";
 
-    $order_totals = apply_filters( 'dokan_reports_sales_overview_order_totals', $wpdb->get_row( $sql ) );
+    $order_totals = $wpdb->get_row( $order_total_sql );
 
+    return $order_totals;
+}
+
+function dokan_sales_overview() {
+    global $start_date, $end_date, $woocommerce, $wpdb, $wp_locale, $current_user;
+
+    $total_sales = $total_orders = $order_items = $discount_total = $shipping_total = 0;
+    $order_status = implode( "','", apply_filters( 'dokan_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) );
+
+
+
+    $total_items_sql = "SELECT SUM(order_item_meta__qty.meta_value) AS order_item_qty
+            FROM {$wpdb->posts} AS posts
+            LEFT JOIN {$wpdb->prefix}dokan_orders AS do ON posts.ID = do.order_id
+            LEFT JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_items.order_id
+            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS order_item_meta__qty ON order_items.order_item_id = order_item_meta__qty.order_item_id
+            WHERE posts.post_type = 'shop_order'
+                AND posts.post_status = 'publish'
+                AND do.order_status IN ('$order_status')
+                AND do.seller_id = {$current_user->ID}
+                AND order_items.order_item_type = 'line_item'
+                        AND order_item_meta__qty.meta_key = '_qty'";
+
+    $total_coupons_sql = "SELECT SUM(discount_meta_amount.meta_value) AS discount_amount
+            FROM {$wpdb->posts} AS posts
+
+            LEFT JOIN {$wpdb->prefix}dokan_orders AS do ON posts.ID = do.order_id
+            LEFT JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_items.order_id
+            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS discount_meta_amount ON order_items.order_item_id = discount_meta_amount.order_item_id
+
+            WHERE posts.post_type = 'shop_order'
+                AND posts.post_status = 'publish'
+                AND do.order_status IN ('$order_status')
+                AND do.seller_id = {$current_user->ID}
+                AND order_items.order_item_type = 'coupon'
+                AND discount_meta_amount.meta_key = 'discount_amount'
+                AND order_item_type = 'coupon'";
+
+    $order_totals = dokan_report_order_total();
     $total_sales    = $order_totals->total_sales;
+    $total_shipping = $order_totals->total_shipping;
     $total_orders   = absint( $order_totals->total_orders );
+    $total_items = $wpdb->get_row($total_items_sql );
+    $total_coupons = $wpdb->get_row( $total_coupons_sql );
+    $average_sales = $total_sales / ( 30 + 1 ); // fixme: $chart_interval
 
-    $discount_total = apply_filters( 'woocommerce_reports_sales_overview_discount_total', $wpdb->get_var( "
-        SELECT SUM(meta.meta_value) AS total_sales FROM {$wpdb->posts} AS posts
-
-        LEFT JOIN {$wpdb->postmeta} AS meta ON posts.ID = meta.post_id
-        LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID=rel.object_ID
-        LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
-        LEFT JOIN {$wpdb->terms} AS term USING( term_id )
-
-        WHERE   meta.meta_key       IN ('_order_discount', '_cart_discount')
-        AND     posts.post_type     = 'shop_order'
-        AND     posts.post_status   = 'publish'
-        AND     tax.taxonomy        = 'shop_order_status'
-
-        AND     term.slug           IN ('$order_status')
-    " ) );
-
-    $shipping_total = apply_filters( 'woocommerce_reports_sales_overview_shipping_total', $wpdb->get_var( "
-        SELECT SUM(meta.meta_value) AS total_sales FROM {$wpdb->posts} AS posts
-
-        LEFT JOIN {$wpdb->postmeta} AS meta ON posts.ID = meta.post_id
-        LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID=rel.object_ID
-        LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
-        LEFT JOIN {$wpdb->terms} AS term USING( term_id )
-
-        WHERE   meta.meta_key       = '_order_shipping'
-        AND     posts.post_type     = 'shop_order'
-        AND     posts.post_status   = 'publish'
-        AND     tax.taxonomy        = 'shop_order_status'
-
-        AND     term.slug           IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
-    " ) );
-
-
-    $order_items_sql = "
-        SELECT SUM(order_item_meta__qty.meta_value) AS order_item_qty
-        FROM {$wpdb->posts} AS posts
-        LEFT JOIN {$wpdb->prefix}dokan_orders AS do ON posts.ID = do.order_id
-        LEFT JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_items.order_id
-        LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS order_item_meta__qty ON order_items.order_item_id = order_item_meta__qty.order_item_id
-        WHERE posts.post_type = 'shop_order'
-          AND posts.post_status = 'publish'
-          AND do.order_status IN ('$order_status')
-          AND do.seller_id = {$current_user->ID}
-          AND order_items.order_item_type = 'line_item'
-          AND order_item_meta__qty.meta_key = '_qty'";
-
-    $order_items = apply_filters( 'woocommerce_reports_sales_overview_order_items', absint( $wpdb->get_var( $order_items_sql ) ) );
+    $legend = array();
+    $legend[] = array(
+        'title' => sprintf( __( '%s sales in this period', 'dokan' ), '<strong>' . wc_price( $total_sales ) . '</strong>' ),
+    );
+    $legend[] = array(
+        'title' => sprintf( __( '%s average daily sales', 'dokan' ), '<strong>' . wc_price( $average_sales ) . '</strong>' ),
+    );
+    $legend[] = array(
+        'title' => sprintf( __( '%s orders placed', 'dokan' ), '<strong>' . $total_orders . '</strong>' ),
+    );
+    $legend[] = array(
+        'title' => sprintf( __( '%s items purchased', 'dokan' ), '<strong>' . $total_items->order_item_qty . '</strong>' ),
+    );
+    $legend[] = array(
+        'title' => sprintf( __( '%s charged for shipping', 'dokan' ), '<strong>' . wc_price( $total_shipping ) . '</strong>' ),
+    );
+    $legend[] = array(
+        'title' => sprintf( __( '%s worth of coupons used', 'dokan' ), '<strong>' . wc_price( $total_coupons->discount_amount ) . '</strong>' ),
+    );
     ?>
     <div id="poststuff" class="dokan-reports-wrap row">
         <div class="dokan-reports-sidebar col-md-3">
-            <div class="postbox">
-                <h3><span><?php _e( 'Total sales', 'woocommerce' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ( $total_sales > 0 ) echo woocommerce_price($total_sales); else _e( 'n/a', 'woocommerce' ); ?></p>
-                </div>
-            </div>
-            <div class="postbox">
-                <h3><span><?php _e( 'Total orders', 'woocommerce' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ( $total_orders > 0 ) echo $total_orders . ' (' . $order_items . ' ' . __( 'items', 'woocommerce' ) . ')'; else _e( 'n/a', 'woocommerce' ); ?></p>
-                </div>
-            </div>
-            <div class="postbox">
-                <h3><span><?php _e( 'Average order total', 'woocommerce' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ($total_orders>0) echo woocommerce_price($total_sales/$total_orders); else _e( 'n/a', 'woocommerce' ); ?></p>
-                </div>
-            </div>
-            <div class="postbox">
-                <h3><span><?php _e( 'Average order items', 'woocommerce' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ($total_orders>0) echo number_format($order_items/$total_orders, 2); else _e( 'n/a', 'woocommerce' ); ?></p>
-                </div>
-            </div>
-            <div class="postbox">
-                <h3><span><?php _e( 'Discounts used', 'woocommerce' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ($discount_total>0) echo woocommerce_price($discount_total); else _e( 'n/a', 'woocommerce' ); ?></p>
-                </div>
-            </div>
-            <div class="postbox">
-                <h3><span><?php _e( 'Total shipping costs', 'woocommerce' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ($shipping_total>0) echo woocommerce_price($shipping_total); else _e( 'n/a', 'woocommerce' ); ?></p>
-                </div>
-            </div>
+            <ul class="chart-legend">
+                <?php foreach ($legend as $item) {
+                    printf( '<li>%s</li>', $item['title'] );
+                } ?>
+            </ul>
         </div>
+
         <div class="woocommerce-reports-main col-md-9">
             <div class="postbox">
-                <h3><span><?php _e( 'This month\'s sales', 'woocommerce' ); ?></span></h3>
+                <h3><span><?php _e( 'This month\'s sales', 'dokan' ); ?></span></h3>
                 <div class="inside chart">
                     <div id="placeholder" style="width:100%; overflow:hidden; height:440px; position:relative;"></div>
                     <div id="cart_legend"></div>
@@ -260,7 +249,7 @@ function dokan_sales_overview() {
 
             var placeholder = jQuery("#placeholder");
 
-            var plot = jQuery.plot(placeholder, [ { label: "<?php echo esc_js( __( 'Number of sales', 'woocommerce' ) ) ?>", data: d }, { label: "<?php echo esc_js( __( 'Sales amount', 'woocommerce' ) ) ?>", data: d2, yaxis: 2 } ], {
+            var plot = jQuery.plot(placeholder, [ { label: "<?php echo esc_js( __( 'Number of sales', 'dokan' ) ) ?>", data: d }, { label: "<?php echo esc_js( __( 'Sales amount', 'dokan' ) ) ?>", data: d2, yaxis: 2 } ], {
                 legend: {
                     container: jQuery('#cart_legend'),
                     noColumns: 2
@@ -398,47 +387,47 @@ function dokan_daily_sales() {
     ?>
     <form method="post" class="form-inline report-filter" action="">
         <div class="form-group">
-            <label for="from"><?php _e( 'From:', 'woocommerce' ); ?></label> <input type="text" class="datepicker" name="start_date" id="from" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $start_date) ); ?>" />
+            <label for="from"><?php _e( 'From:', 'dokan' ); ?></label> <input type="text" class="datepicker" name="start_date" id="from" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $start_date) ); ?>" />
         </div>
 
         <div class="form-group">
-            <label for="to"><?php _e( 'To:', 'woocommerce' ); ?></label>
+            <label for="to"><?php _e( 'To:', 'dokan' ); ?></label>
             <input type="text" name="end_date" id="to" class="datepicker" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $end_date) ); ?>" />
 
-            <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'woocommerce' ); ?>" />
+            <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'dokan' ); ?>" />
         </div>
     </form>
 
     <div id="poststuff" class="dokan-reports-wrap row">
         <div class="dokan-reports-sidebar col-md-3">
             <div class="postbox">
-                <h3><span><?php _e( 'Total sales in range', 'woocommerce' ); ?></span></h3>
+                <h3><span><?php _e( 'Total sales in range', 'dokan' ); ?></span></h3>
                 <div class="inside">
-                    <p class="stat"><?php if ( $total_sales > 0 ) echo woocommerce_price( $total_sales ); else _e( 'n/a', 'woocommerce' ); ?></p>
+                    <p class="stat"><?php if ( $total_sales > 0 ) echo woocommerce_price( $total_sales ); else _e( 'n/a', 'dokan' ); ?></p>
                 </div>
             </div>
             <div class="postbox">
-                <h3><span><?php _e( 'Total orders in range', 'woocommerce' ); ?></span></h3>
+                <h3><span><?php _e( 'Total orders in range', 'dokan' ); ?></span></h3>
                 <div class="inside">
-                    <p class="stat"><?php if ( $total_orders > 0 ) echo $total_orders . ' (' . $order_items . ' ' . __( 'items', 'woocommerce' ) . ')'; else _e( 'n/a', 'woocommerce' ); ?></p>
+                    <p class="stat"><?php if ( $total_orders > 0 ) echo $total_orders . ' (' . $order_items . ' ' . __( 'items', 'dokan' ) . ')'; else _e( 'n/a', 'dokan' ); ?></p>
                 </div>
             </div>
             <div class="postbox">
-                <h3><span><?php _e( 'Average order total in range', 'woocommerce' ); ?></span></h3>
+                <h3><span><?php _e( 'Average order total in range', 'dokan' ); ?></span></h3>
                 <div class="inside">
-                    <p class="stat"><?php if ( $total_orders > 0 ) echo woocommerce_price( $total_sales / $total_orders ); else _e( 'n/a', 'woocommerce' ); ?></p>
+                    <p class="stat"><?php if ( $total_orders > 0 ) echo woocommerce_price( $total_sales / $total_orders ); else _e( 'n/a', 'dokan' ); ?></p>
                 </div>
             </div>
             <div class="postbox">
-                <h3><span><?php _e( 'Average order items in range', 'woocommerce' ); ?></span></h3>
+                <h3><span><?php _e( 'Average order items in range', 'dokan' ); ?></span></h3>
                 <div class="inside">
-                    <p class="stat"><?php if ( $total_orders > 0 ) echo number_format( $order_items / $total_orders, 2 ); else _e( 'n/a', 'woocommerce' ); ?></p>
+                    <p class="stat"><?php if ( $total_orders > 0 ) echo number_format( $order_items / $total_orders, 2 ); else _e( 'n/a', 'dokan' ); ?></p>
                 </div>
             </div>
         </div>
         <div class="woocommerce-reports-main col-md-9">
             <div class="postbox">
-                <h3><span><?php _e( 'Sales in range', 'woocommerce' ); ?></span></h3>
+                <h3><span><?php _e( 'Sales in range', 'dokan' ); ?></span></h3>
                 <div class="inside chart">
                     <div id="placeholder" style="width:100%; overflow:hidden; height:568px; position:relative;"></div>
                     <div id="cart_legend"></div>
@@ -472,7 +461,7 @@ function dokan_daily_sales() {
 
             var placeholder = jQuery("#placeholder");
 
-            var plot = jQuery.plot(placeholder, [ { label: "<?php echo esc_js( __( 'Number of sales', 'woocommerce' ) ) ?>", data: d }, { label: "<?php echo esc_js( __( 'Sales amount', 'woocommerce' ) ) ?>", data: d2, yaxis: 2 } ], {
+            var plot = jQuery.plot(placeholder, [ { label: "<?php echo esc_js( __( 'Number of sales', 'dokan' ) ) ?>", data: d }, { label: "<?php echo esc_js( __( 'Sales amount', 'dokan' ) ) ?>", data: d2, yaxis: 2 } ], {
                 legend: {
                     container: jQuery('#cart_legend'),
                     noColumns: 2
@@ -490,7 +479,6 @@ function dokan_daily_sales() {
                     borderColor: '#aaa',
                     clickable: false,
                     hoverable: true,
-                    markings: weekendAreas
                 },
                 xaxis: {
                     mode: "time",
@@ -506,7 +494,7 @@ function dokan_daily_sales() {
             placeholder.resize();
 
             <?php //woocommerce_weekend_area_js(); ?>
-            <?php woocommerce_tooltip_js(); ?>
+            <?php //woocommerce_tooltip_js(); ?>
             <?php //woocommerce_datepicker_js(); ?>
         });
     </script>
@@ -588,7 +576,7 @@ function dokan_monthly_sales() {
     ?>
 
     <form method="post" action="" class="report-filter">
-        <p><label for="show_year"><?php _e( 'Year:', 'woocommerce' ); ?></label>
+        <p><label for="show_year"><?php _e( 'Year:', 'dokan' ); ?></label>
         <select name="show_year" id="show_year">
             <?php
                 for ( $i = $first_year; $i <= date( 'Y' ); $i++ ) {
@@ -596,39 +584,39 @@ function dokan_monthly_sales() {
                 }
             ?>
         </select>
-        <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'woocommerce' ); ?>" /></p>
+        <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'dokan' ); ?>" /></p>
     </form>
 
     <div id="poststuff" class="dokan-reports-wrap row">
         <div class="dokan-reports-sidebar col-md-3">
             <div class="postbox">
-                <h3><span><?php _e( 'Total sales for year', 'woocommerce' ); ?></span></h3>
+                <h3><span><?php _e( 'Total sales for year', 'dokan' ); ?></span></h3>
                 <div class="inside">
-                    <p class="stat"><?php if ($total_sales>0) echo woocommerce_price($total_sales); else _e( 'n/a', 'woocommerce' ); ?></p>
+                    <p class="stat"><?php if ($total_sales>0) echo woocommerce_price($total_sales); else _e( 'n/a', 'dokan' ); ?></p>
                 </div>
             </div>
             <div class="postbox">
-                <h3><span><?php _e( 'Total orders for year', 'woocommerce' ); ?></span></h3>
+                <h3><span><?php _e( 'Total orders for year', 'dokan' ); ?></span></h3>
                 <div class="inside">
-                    <p class="stat"><?php if ( $total_orders > 0 ) echo $total_orders . ' (' . $order_items . ' ' . __( 'items', 'woocommerce' ) . ')'; else _e( 'n/a', 'woocommerce' ); ?></p>
+                    <p class="stat"><?php if ( $total_orders > 0 ) echo $total_orders . ' (' . $order_items . ' ' . __( 'items', 'dokan' ) . ')'; else _e( 'n/a', 'dokan' ); ?></p>
                 </div>
             </div>
             <div class="postbox">
-                <h3><span><?php _e( 'Average order total for year', 'woocommerce' ); ?></span></h3>
+                <h3><span><?php _e( 'Average order total for year', 'dokan' ); ?></span></h3>
                 <div class="inside">
-                    <p class="stat"><?php if ($total_orders>0) echo woocommerce_price($total_sales/$total_orders); else _e( 'n/a', 'woocommerce' ); ?></p>
+                    <p class="stat"><?php if ($total_orders>0) echo woocommerce_price($total_sales/$total_orders); else _e( 'n/a', 'dokan' ); ?></p>
                 </div>
             </div>
             <div class="postbox">
-                <h3><span><?php _e( 'Average order items for year', 'woocommerce' ); ?></span></h3>
+                <h3><span><?php _e( 'Average order items for year', 'dokan' ); ?></span></h3>
                 <div class="inside">
-                    <p class="stat"><?php if ($total_orders>0) echo number_format($order_items/$total_orders, 2); else _e( 'n/a', 'woocommerce' ); ?></p>
+                    <p class="stat"><?php if ($total_orders>0) echo number_format($order_items/$total_orders, 2); else _e( 'n/a', 'dokan' ); ?></p>
                 </div>
             </div>
         </div>
         <div class="woocommerce-reports-main col-md-9">
             <div class="postbox">
-                <h3><span><?php _e( 'Monthly sales for year', 'woocommerce' ); ?></span></h3>
+                <h3><span><?php _e( 'Monthly sales for year', 'dokan' ); ?></span></h3>
                 <div class="inside chart">
                     <div id="placeholder" style="width:100%; overflow:hidden; height:568px; position:relative;"></div>
                     <div id="cart_legend"></div>
@@ -659,7 +647,7 @@ function dokan_monthly_sales() {
 
             var placeholder = jQuery("#placeholder");
 
-            var plot = jQuery.plot(placeholder, [ { label: "<?php echo esc_js( __( 'Number of sales', 'woocommerce' ) ) ?>", data: d }, { label: "<?php echo esc_js( __( 'Sales amount', 'woocommerce' ) ) ?>", data: d2, yaxis: 2 } ], {
+            var plot = jQuery.plot(placeholder, [ { label: "<?php echo esc_js( __( 'Number of sales', 'dokan' ) ) ?>", data: d }, { label: "<?php echo esc_js( __( 'Sales amount', 'dokan' ) ) ?>", data: d2, yaxis: 2 } ], {
                 legend: {
                     container: jQuery('#cart_legend'),
                     noColumns: 2
@@ -760,24 +748,24 @@ function dokan_top_sellers() {
     ?>
     <form method="post" action="" class="report-filter form-inline">
         <div class="form-group">
-            <label for="from"><?php _e( 'From:', 'woocommerce' ); ?></label>
+            <label for="from"><?php _e( 'From:', 'dokan' ); ?></label>
             <input type="text" class="datepicker" name="start_date" id="from" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $start_date) ); ?>" />
         </div>
 
         <div class="form-group">
-            <label for="to"><?php _e( 'To:', 'woocommerce' ); ?></label>
+            <label for="to"><?php _e( 'To:', 'dokan' ); ?></label>
             <input type="text" class="datepicker" name="end_date" id="to" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $end_date) ); ?>" />
         </div>
 
-        <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'woocommerce' ); ?>" />
+        <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'dokan' ); ?>" />
     </form>
 
 
     <table class="table table-striped">
         <thead>
             <tr>
-                <th><?php _e( 'Product', 'woocommerce' ); ?></th>
-                <th><?php _e( 'Sales', 'woocommerce' ); ?></th>
+                <th><?php _e( 'Product', 'dokan' ); ?></th>
+                <th><?php _e( 'Sales', 'dokan' ); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -791,7 +779,7 @@ function dokan_top_sellers() {
                         $product_name = '<a href="' . get_permalink( $product_id ) . '">'. __( $product_title ) .'</a>';
                         $orders_link = admin_url( 'edit.php?s&post_status=all&post_type=shop_order&action=-1&s=' . urlencode( $product_title ) . '&shop_order_status=' . implode( ",", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) );
                     } else {
-                        $product_name = __( 'Product does not exist', 'woocommerce' );
+                        $product_name = __( 'Product does not exist', 'dokan' );
                         $orders_link = admin_url( 'edit.php?s&post_status=all&post_type=shop_order&action=-1&s=&shop_order_status=' . implode( ",", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) );
                     }
 
@@ -870,23 +858,23 @@ function dokan_top_earners() {
     ?>
     <form method="post" action="" class="report-filter form-inline">
         <div class="form-group">
-            <label for="from"><?php _e( 'From:', 'woocommerce' ); ?></label>
+            <label for="from"><?php _e( 'From:', 'dokan' ); ?></label>
             <input type="text" class="datepicker" name="start_date" id="from" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $start_date) ); ?>" />
         </div>
 
         <div class="form-group">
-            <label for="to"><?php _e( 'To:', 'woocommerce' ); ?></label>
+            <label for="to"><?php _e( 'To:', 'dokan' ); ?></label>
             <input type="text" class="datepicker" name="end_date" id="to" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $end_date) ); ?>" />
         </div>
 
-        <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'woocommerce' ); ?>" />
+        <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'dokan' ); ?>" />
     </form>
 
     <table class="table table-striped">
         <thead>
             <tr>
-                <th><?php _e( 'Product', 'woocommerce' ); ?></th>
-                <th colspan="2"><?php _e( 'Sales', 'woocommerce' ); ?></th>
+                <th><?php _e( 'Product', 'dokan' ); ?></th>
+                <th colspan="2"><?php _e( 'Sales', 'dokan' ); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -901,7 +889,7 @@ function dokan_top_earners() {
                         $product_name = '<a href="'.get_permalink( $product_id ).'">'. __( $product_title ) .'</a>';
                         $orders_link = admin_url( 'edit.php?s&post_status=all&post_type=shop_order&action=-1&s=' . urlencode( $product_title ) . '&shop_order_status=' . implode( ",", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) );
                     } else {
-                        $product_name = __( 'Product no longer exists', 'woocommerce' );
+                        $product_name = __( 'Product no longer exists', 'dokan' );
                         $orders_link = admin_url( 'edit.php?s&post_status=all&post_type=shop_order&action=-1&s=&shop_order_status=' . implode( ",", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) );
                     }
 
@@ -995,12 +983,12 @@ function dokan_product_sales() {
             }
         }
         ?>
-        <h4><?php printf( __( 'Sales for %s:', 'woocommerce' ), implode( ', ', $chosen_product_titles ) ); ?></h4>
+        <h4><?php printf( __( 'Sales for %s:', 'dokan' ), implode( ', ', $chosen_product_titles ) ); ?></h4>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th><?php _e( 'Month', 'woocommerce' ); ?></th>
-                    <th colspan="2"><?php _e( 'Sales', 'woocommerce' ); ?></th>
+                    <th><?php _e( 'Month', 'dokan' ); ?></th>
+                    <th colspan="2"><?php _e( 'Sales', 'dokan' ); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -1021,7 +1009,7 @@ function dokan_product_sales() {
                             </td></tr>';
                         }
                     } else {
-                        echo '<tr><td colspan="3">' . __( 'No sales :(', 'woocommerce' ) . '</td></tr>';
+                        echo '<tr><td colspan="3">' . __( 'No sales :(', 'dokan' ) . '</td></tr>';
                     }
                 ?>
             </tbody>
@@ -1031,7 +1019,7 @@ function dokan_product_sales() {
     } else {
         ?>
         <form method="post" action="">
-            <p><select id="product_ids" name="product_ids[]" class="ajax_chosen_select_products" multiple="multiple" data-placeholder="<?php _e( 'Search for a product&hellip;', 'woocommerce' ); ?>" style="width: 400px;"></select> <input type="submit" style="vertical-align: top;" class="button" value="<?php _e( 'Show', 'woocommerce' ); ?>" /></p>
+            <p><select id="product_ids" name="product_ids[]" class="ajax_chosen_select_products" multiple="multiple" data-placeholder="<?php _e( 'Search for a product&hellip;', 'dokan' ); ?>" style="width: 400px;"></select> <input type="submit" style="vertical-align: top;" class="button" value="<?php _e( 'Show', 'dokan' ); ?>" /></p>
             <script type="text/javascript">
                 jQuery(function(){
                     jQuery("select.ajax_chosen_select_products").chosen();
@@ -1159,8 +1147,8 @@ function woocommerce_dashboard_sales_js() {
         'currency_symbol'   => get_woocommerce_currency_symbol(),
         'number_of_sales'   => absint( array_sum( $order_counts ) ),
         'sales_amount'      => woocommerce_price( array_sum( $order_amounts ) ),
-        'sold'              => __( 'Sold', 'woocommerce' ),
-        'earned'            => __( 'Earned', 'woocommerce' ),
+        'sold'              => __( 'Sold', 'dokan' ),
+        'earned'            => __( 'Earned', 'dokan' ),
         'month_names'       => array_values( $wp_locale->month_abbrev ),
     );
 
