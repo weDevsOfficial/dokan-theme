@@ -61,6 +61,8 @@ if ( isset( $_POST['add_product'] ) ) {
     }
 }
 
+dokan_product_editor_scripts();
+
 get_header();
 ?>
 
@@ -105,7 +107,7 @@ get_header();
 
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-addon">$</span>
+                            <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
                             <input class="form-control" name="price" id="product-price" type="text" placeholder="9.99" value="<?php echo dokan_posted_input( 'price' ); ?>">
                         </div>
                     </div>
