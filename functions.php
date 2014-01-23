@@ -26,8 +26,8 @@ define( 'DOKAN_LIB_DIR', __DIR__ . '/lib' );
 /**
  * Autoload class files on demand
  *
- * `WPUF_Form_Posting` becomes => form-posting.php
- * `WPUF_Dashboard` becomes => dashboard.php
+ * `Dokan_Installer` becomes => installer.php
+ * `Dokan_Template_Report` becomes => template-report.php
  *
  * @param string $class requested class name
  */
@@ -110,7 +110,7 @@ class WeDevs_Dokan {
         require_once $classes_dir . 'customizer.php';
 
         if ( is_admin() ) {
-            require_once $inc_dir . 'admin.php';
+            require_once $inc_dir . 'admin/admin.php';
         } else {
             require_once $lib_dir . 'bootstrap-walker.php';
             require_once $inc_dir . 'wc-functions.php';
