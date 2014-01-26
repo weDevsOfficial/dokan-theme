@@ -1218,6 +1218,19 @@ a:hover {
 .page-template-templatesreports-php table.table .progress {
   margin-bottom: 0;
 }
+.page-template-templatesreports-php .doakn-reports-main h3 {
+  margin: 0 0 15px 0;
+}
+.page-template-templatesreports-php .chart-tooltip {
+  position: absolute;
+  display: none;
+  line-height: 1;
+  background: #333;
+  color: #fff;
+  padding: 3px 5px;
+  font-size: 11px;
+  border-radius: 3px;
+}
 .page-template-templatesdashboard-php .site-content .entry-content {
   margin: 0;
 }

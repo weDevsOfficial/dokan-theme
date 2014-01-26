@@ -41,158 +41,378 @@ function dokan_get_reports_charts() {
     return apply_filters( 'dokan_reports_charts', $charts );
 }
 
-function dokan_sales_overview_chart_data() {
-    global $start_date, $end_date, $woocommerce, $wpdb, $wp_locale, $current_user;
+function dokan_get_order_report_data( $args = array(), $start_date, $end_date ) {
+    global $wpdb, $current_user;
 
-    $start_date = strtotime( date('Ymd', strtotime( date('Ym', current_time('timestamp') ) . '01' ) ) );
-    $end_date = strtotime( date('Ymd', current_time( 'timestamp' ) ) );
+    $defaults = array(
+        'data'         => array(),
+        'where'        => array(),
+        'where_meta'   => array(),
+        'query_type'   => 'get_row',
+        'group_by'     => '',
+        'order_by'     => '',
+        'limit'        => '',
+        'filter_range' => false,
+        'nocache'      => false,
+        'debug'        => false
+    );
 
-    // Blank date ranges to begin
-    $order_counts = $order_amounts = array();
+    $args = wp_parse_args( $args, $defaults );
 
-    $count = 0;
+    extract( $args );
 
-    $days = ( $end_date - $start_date ) / ( 60 * 60 * 24 );
+    if ( empty( $data ) )
+        return false;
 
-    if ( $days == 0 )
-        $days = 1;
+    $select = array();
 
-    while ( $count < $days ) {
-        $time = strtotime( date( 'Ymd', strtotime( '+ ' . $count . ' DAY', $start_date ) ) ) . '000';
+    foreach ( $data as $key => $value ) {
+        $distinct = '';
 
-        $order_counts[ $time ] = $order_amounts[ $time ] = 0;
+        if ( isset( $value['distinct'] ) )
+            $distinct = 'DISTINCT';
 
-        $count++;
+        if ( $value['type'] == 'meta' )
+            $get_key = "meta_{$key}.meta_value";
+        elseif( $value['type'] == 'post_data' )
+            $get_key = "posts.{$key}";
+        elseif( $value['type'] == 'order_item_meta' )
+            $get_key = "order_item_meta_{$key}.meta_value";
+        elseif( $value['type'] == 'order_item' )
+            $get_key = "order_items.{$key}";
+
+        if ( $value['function'] )
+            $get = "{$value['function']}({$distinct} {$get_key})";
+        else
+            $get = "{$distinct} {$get_key}";
+
+        $select[] = "{$get} as {$value['name']}";
     }
 
-    $user_orders = dokan_get_seller_order_ids( $current_user->ID );
-    $user_orders_in = count( $user_orders ) ? implode( ', ', $user_orders ) : 0;
+    $query['select'] = "SELECT " . implode( ',', $select );
+    $query['from']   = "FROM {$wpdb->posts} AS posts";
 
-    // Get order ids and dates in range
-    $orders = apply_filters('dokan_reports_sales_overview_orders', $wpdb->get_results( "
-        SELECT posts.ID, posts.post_date FROM {$wpdb->posts} AS posts
+    // Joins
+    $joins         = array();
+    $joins['do']  = "LEFT JOIN {$wpdb->prefix}dokan_orders AS do ON posts.ID = do.order_id";
 
-        LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID = rel.object_ID
-        LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
-        LEFT JOIN {$wpdb->terms} AS term USING( term_id )
+    foreach ( $data as $key => $value ) {
+        if ( $value['type'] == 'meta' ) {
 
-        WHERE   posts.post_type     = 'shop_order'
-        AND     posts.post_status   = 'publish'
-        AND     tax.taxonomy        = 'shop_order_status'
-        AND     term.slug           IN ('" . implode( "','", apply_filters( 'dokan_reports_order_statuses', array( 'completed', 'processing' ) ) ) . "')
-        AND     post_date > '" . date('Y-m-d', $start_date ) . "'
-        AND     post_date < '" . date('Y-m-d', strtotime('+1 day', $end_date ) ) . "'
-        AND     posts.ID IN( {$user_orders_in} )
-        ORDER BY post_date ASC
-    " ) );
+            $joins["meta_{$key}"] = "LEFT JOIN {$wpdb->postmeta} AS meta_{$key} ON posts.ID = meta_{$key}.post_id";
 
-    if ( $orders ) {
-        foreach ( $orders as $order ) {
+        } elseif ( $value['type'] == 'order_item_meta' ) {
 
-            $order_total = get_post_meta( $order->ID, '_order_total', true );
-            $time = strtotime( date( 'Ymd', strtotime( $order->post_date ) ) ) . '000';
+            $joins["order_items"] = "LEFT JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_items.order_id";
+            $joins["order_item_meta_{$key}"] = "LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS order_item_meta_{$key} ON order_items.order_item_id = order_item_meta_{$key}.order_item_id";
 
-            if ( isset( $order_counts[ $time ] ) )
-                $order_counts[ $time ]++;
-            else
-                $order_counts[ $time ] = 1;
+        } elseif ( $value['type'] == 'order_item' ) {
 
-            if ( isset( $order_amounts[ $time ] ) )
-                $order_amounts[ $time ] = $order_amounts[ $time ] + $order_total;
-            else
-                $order_amounts[ $time ] = floatval( $order_total );
+            $joins["order_items"] = "LEFT JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_id";
+
         }
     }
 
-    $order_counts_array = $order_amounts_array = array();
+    if ( ! empty( $where_meta ) ) {
+        foreach ( $where_meta as $value ) {
+            if ( ! is_array( $value ) )
+                continue;
 
-    foreach ( $order_counts as $key => $count )
-        $order_counts_array[] = array( esc_js( $key ), esc_js( $count ) );
+            $key = is_array( $value['meta_key'] ) ? $value['meta_key'][0] : $value['meta_key'];
 
-    foreach ( $order_amounts as $key => $amount )
-        $order_amounts_array[] = array( esc_js( $key ), esc_js( $amount ) );
+            if ( isset( $value['type'] ) && $value['type'] == 'order_item_meta' ) {
 
-    $order_data = array( 'order_counts' => $order_counts_array, 'order_amounts' => $order_amounts_array );
+                $joins["order_items"] = "LEFT JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_id";
+                $joins["order_item_meta_{$key}"] = "LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS order_item_meta_{$key} ON order_items.order_item_id = order_item_meta_{$key}.order_item_id";
 
-    return json_encode( $order_data );
+            } else {
+                // If we have a where clause for meta, join the postmeta table
+                $joins["meta_{$key}"] = "LEFT JOIN {$wpdb->postmeta} AS meta_{$key} ON posts.ID = meta_{$key}.post_id";
+            }
+        }
+    }
+
+    $query['join'] = implode( ' ', $joins );
+
+    $query['where']  = "
+        WHERE   posts.post_type     = 'shop_order'
+        AND     posts.post_status   = 'publish'
+        AND     do.seller_id = {$current_user->ID}
+        AND     do.order_status IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
+        ";
+
+    if ( $filter_range ) {
+        $query['where'] .= "
+            AND     post_date >= '" . $start_date . "'
+            AND     post_date < '" . $end_date . "'
+        ";
+    }
+
+    foreach ( $data as $key => $value ) {
+        if ( $value['type'] == 'meta' ) {
+
+            $query['where'] .= " AND meta_{$key}.meta_key = '{$key}'";
+
+        } elseif ( $value['type'] == 'order_item_meta' ) {
+
+            $query['where'] .= " AND order_items.order_item_type = '{$value['order_item_type']}'";
+            $query['where'] .= " AND order_item_meta_{$key}.meta_key = '{$key}'";
+
+        }
+    }
+
+    if ( ! empty( $where_meta ) ) {
+        $relation = isset( $where_meta['relation'] ) ? $where_meta['relation'] : 'AND';
+
+        $query['where'] .= " AND (";
+
+        foreach ( $where_meta as $index => $value ) {
+            if ( ! is_array( $value ) )
+                continue;
+
+            $key = is_array( $value['meta_key'] ) ? $value['meta_key'][0] : $value['meta_key'];
+
+            if ( strtolower( $value['operator'] ) == 'in' ) {
+                if ( is_array( $value['meta_value'] ) )
+                    $value['meta_value'] = implode( "','", $value['meta_value'] );
+                if ( ! empty( $value['meta_value'] ) )
+                    $where_value = "IN ('{$value['meta_value']}')";
+            } else {
+                $where_value = "{$value['operator']} '{$value['meta_value']}'";
+            }
+
+            if ( ! empty( $where_value ) ) {
+                if ( $index > 0 )
+                    $query['where'] .= ' ' . $relation;
+
+                if ( isset( $value['type'] ) && $value['type'] == 'order_item_meta' ) {
+                    if ( is_array( $value['meta_key'] ) )
+                        $query['where'] .= " ( order_item_meta_{$key}.meta_key   IN ('" . implode( "','", $value['meta_key'] ) . "')";
+                    else
+                        $query['where'] .= " ( order_item_meta_{$key}.meta_key   = '{$value['meta_key']}'";
+
+                    $query['where'] .= " AND order_item_meta_{$key}.meta_value {$where_value} )";
+                } else {
+                    if ( is_array( $value['meta_key'] ) )
+                        $query['where'] .= " ( meta_{$key}.meta_key   IN ('" . implode( "','", $value['meta_key'] ) . "')";
+                    else
+                        $query['where'] .= " ( meta_{$key}.meta_key   = '{$value['meta_key']}'";
+
+                    $query['where'] .= " AND meta_{$key}.meta_value {$where_value} )";
+                }
+            }
+        }
+
+        $query['where'] .= ")";
+    }
+
+    if ( ! empty( $where ) ) {
+        foreach ( $where as $value ) {
+            if ( strtolower( $value['operator'] ) == 'in' ) {
+                if ( is_array( $value['value'] ) )
+                    $value['value'] = implode( "','", $value['value'] );
+                if ( ! empty( $value['value'] ) )
+                    $where_value = "IN ('{$value['value']}')";
+            } else {
+                $where_value = "{$value['operator']} '{$value['value']}'";
+            }
+
+            if ( ! empty( $where_value ) )
+                $query['where'] .= " AND {$value['key']} {$where_value}";
+        }
+    }
+
+    if ( $group_by ) {
+        $query['group_by'] = "GROUP BY {$group_by}";
+    }
+
+    if ( $order_by ) {
+        $query['order_by'] = "ORDER BY {$order_by}";
+    }
+
+    if ( $limit ) {
+        $query['limit'] = "LIMIT {$limit}";
+    }
+
+    $query      = apply_filters( 'woocommerce_reports_get_order_report_query', $query );
+    $query      = implode( ' ', $query );
+    $query_hash = md5( $query_type . $query );
+
+    if ( $debug ) {
+        var_dump( $query );
+    }
+
+    if ( $debug || $nocache || ( false === ( $result = get_transient( 'dokan_wc_report_' . $query_hash ) ) ) ) {
+        $result = apply_filters( 'woocommerce_reports_get_order_report_data', $wpdb->$query_type( $query ), $data );
+
+        if ( $filter_range ) {
+            if ( $end_date == date('Y-m-d', current_time( 'timestamp' ) ) ) {
+                $expiration = 60 * 60 * 1; // 1 hour
+            } else {
+                $expiration = 60 * 60 * 24; // 24 hour
+            }
+        } else {
+            $expiration = 60 * 60 * 24; // 24 hour
+        }
+
+        set_transient( 'dokan_wc_report_' . $query_hash, $result, $expiration );
+    }
+
+    return $result;
 }
 
-function dokan_reports_order_statuses() {
-    $order_status = implode( "','", apply_filters( 'dokan_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) );
+    /**
+ * Put data with post_date's into an array of times
+ *
+ * @param  array $data array of your data
+ * @param  string $date_key key for the 'date' field. e.g. 'post_date'
+ * @param  string $data_key key for the data you are charting
+ * @param  int $interval
+ * @param  string $start_date
+ * @param  string $group_by
+ * @return string
+ */
+function dokan_prepare_chart_data( $data, $date_key, $data_key, $interval, $start_date, $group_by ) {
+    $prepared_data = array();
 
-    return $order_status;
-}
+    // Ensure all days (or months) have values first in this range
+    for ( $i = 0; $i <= $interval; $i ++ ) {
+        switch ( $group_by ) {
+            case 'day' :
+                $time = strtotime( date( 'Ymd', strtotime( "+{$i} DAY", $start_date ) ) ) * 1000;
+            break;
+            case 'month' :
+                $time = strtotime( date( 'Ym', strtotime( "+{$i} MONTH", $start_date ) ) . '01' ) * 1000;
+            break;
+        }
 
-function dokan_report_order_total( $start_date = '', $end_date ='' ) {
-    global $wpdb, $current_user;
+        if ( ! isset( $prepared_data[ $time ] ) )
+            $prepared_data[ $time ] = array( esc_js( $time ), 0 );
+    }
 
-    $order_status = dokan_reports_order_statuses();
-    $start_date = $start_date ? $start_date : date( 'Y-m-01', current_time('timestamp') );
-    $end_date = $end_date ? $end_date : date( 'Y-m-d', current_time('timestamp') );
+    foreach ( $data as $d ) {
+        switch ( $group_by ) {
+            case 'day' :
+                $time = strtotime( date( 'Ymd', strtotime( $d->$date_key ) ) ) * 1000;
+            break;
+            case 'month' :
+                $time = strtotime( date( 'Ym', strtotime( $d->$date_key ) ) . '01' ) * 1000;
+            break;
+        }
 
-    $order_total_sql = "SELECT SUM(meta__order_total.meta_value) AS total_sales,
-               SUM(meta__order_shipping.meta_value) AS total_shipping,
-               COUNT(posts.ID) AS total_orders
-            FROM {$wpdb->posts} AS posts
-            LEFT JOIN {$wpdb->prefix}dokan_orders AS do ON posts.ID = do.order_id
-            LEFT JOIN {$wpdb->postmeta} AS meta__order_total ON posts.ID = meta__order_total.post_id
-            LEFT JOIN {$wpdb->postmeta} AS meta__order_shipping ON posts.ID = meta__order_shipping.post_id
-            WHERE posts.post_type = 'shop_order'
-                AND posts.post_status = 'publish'
-                AND posts.post_date >= '$start_date'
-                AND posts.post_date < '$end_date'
-                AND do.order_status IN ('$order_status')
-                AND do.seller_id = {$current_user->ID}
-                AND meta__order_total.meta_key = '_order_total'
-                AND meta__order_shipping.meta_key = '_order_shipping'";
+        if ( ! isset( $prepared_data[ $time ] ) ) {
+            continue;
+        }
 
-    $order_totals = $wpdb->get_row( $order_total_sql );
+        if ( $data_key )
+            $prepared_data[ $time ][1] += $d->$data_key;
+        else
+            $prepared_data[ $time ][1] ++;
+    }
 
-    return $order_totals;
+    return $prepared_data;
 }
 
 function dokan_sales_overview() {
-    global $start_date, $end_date, $woocommerce, $wpdb, $wp_locale, $current_user;
+    $start_date = date( 'Y-m-01', current_time('timestamp') );
+    $end_date = date( 'Y-m-d', strtotime( 'midnight', current_time( 'timestamp' ) ) );
+
+    dokan_report_sales_overview( $start_date, $end_date, __( 'This month\'s sales', 'dokan' ) );
+}
+
+function dokan_daily_sales() {
+    global $wpdb;
+
+    $start_date = date( 'Y-m-01', current_time('timestamp') );
+    $end_date = date( 'Y-m-d', strtotime( 'midnight', current_time( 'timestamp' ) ) );
+
+    if ( isset( $_POST['dokan_report_filter'] ) ) {
+        $start_date = $_POST['start_date'];
+        $end_date = $_POST['end_date'];
+    }
+    ?>
+
+    <form method="post" class="form-inline report-filter" action="">
+        <div class="form-group">
+            <label for="from"><?php _e( 'From:', 'dokan' ); ?></label> <input type="text" class="datepicker" name="start_date" id="from" readonly="readonly" value="<?php echo esc_attr( $start_date ); ?>" />
+        </div>
+
+        <div class="form-group">
+            <label for="to"><?php _e( 'To:', 'dokan' ); ?></label>
+            <input type="text" name="end_date" id="to" class="datepicker" readonly="readonly" value="<?php echo esc_attr( $end_date ); ?>" />
+
+            <input type="submit" name="dokan_report_filter" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'dokan' ); ?>" />
+        </div>
+    </form>
+    <?php
+
+    dokan_report_sales_overview( $start_date, $end_date, __( 'Sales in this period', 'dokan' ) );
+}
+
+function dokan_report_sales_overview( $start_date, $end_date, $heading = '' ) {
+    global $woocommerce, $wpdb, $wp_locale, $current_user;
 
     $total_sales = $total_orders = $order_items = $discount_total = $shipping_total = 0;
-    $order_status = implode( "','", apply_filters( 'dokan_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) );
 
+    $order_totals = dokan_get_order_report_data( array(
+        'data' => array(
+            '_order_total' => array(
+                'type'     => 'meta',
+                'function' => 'SUM',
+                'name'     => 'total_sales'
+            ),
+            '_order_shipping' => array(
+                'type'     => 'meta',
+                'function' => 'SUM',
+                'name'     => 'total_shipping'
+            ),
+            'ID' => array(
+                'type'     => 'post_data',
+                'function' => 'COUNT',
+                'name'     => 'total_orders'
+            )
+        ),
+        'filter_range' => true
+    ), $start_date, $end_date );
 
-
-    $total_items_sql = "SELECT SUM(order_item_meta__qty.meta_value) AS order_item_qty
-            FROM {$wpdb->posts} AS posts
-            LEFT JOIN {$wpdb->prefix}dokan_orders AS do ON posts.ID = do.order_id
-            LEFT JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_items.order_id
-            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS order_item_meta__qty ON order_items.order_item_id = order_item_meta__qty.order_item_id
-            WHERE posts.post_type = 'shop_order'
-                AND posts.post_status = 'publish'
-                AND do.order_status IN ('$order_status')
-                AND do.seller_id = {$current_user->ID}
-                AND order_items.order_item_type = 'line_item'
-                        AND order_item_meta__qty.meta_key = '_qty'";
-
-    $total_coupons_sql = "SELECT SUM(discount_meta_amount.meta_value) AS discount_amount
-            FROM {$wpdb->posts} AS posts
-
-            LEFT JOIN {$wpdb->prefix}dokan_orders AS do ON posts.ID = do.order_id
-            LEFT JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_items.order_id
-            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS discount_meta_amount ON order_items.order_item_id = discount_meta_amount.order_item_id
-
-            WHERE posts.post_type = 'shop_order'
-                AND posts.post_status = 'publish'
-                AND do.order_status IN ('$order_status')
-                AND do.seller_id = {$current_user->ID}
-                AND order_items.order_item_type = 'coupon'
-                AND discount_meta_amount.meta_key = 'discount_amount'
-                AND order_item_type = 'coupon'";
-
-    $order_totals = dokan_report_order_total();
     $total_sales    = $order_totals->total_sales;
     $total_shipping = $order_totals->total_shipping;
     $total_orders   = absint( $order_totals->total_orders );
-    $total_items = $wpdb->get_row($total_items_sql );
-    $total_coupons = $wpdb->get_row( $total_coupons_sql );
-    $average_sales = $total_sales / ( 30 + 1 ); // fixme: $chart_interval
+    $total_items    = absint( dokan_get_order_report_data( array(
+        'data' => array(
+            '_qty' => array(
+                'type'            => 'order_item_meta',
+                'order_item_type' => 'line_item',
+                'function'        => 'SUM',
+                'name'            => 'order_item_qty'
+            )
+        ),
+        'query_type' => 'get_var',
+        'filter_range' => true
+    ), $start_date, $end_date ) );
+
+    // Get discount amounts in range
+    $total_coupons = dokan_get_order_report_data( array(
+        'data' => array(
+            'discount_amount' => array(
+                'type'            => 'order_item_meta',
+                'order_item_type' => 'coupon',
+                'function'        => 'SUM',
+                'name'            => 'discount_amount'
+            )
+        ),
+        'where' => array(
+            array(
+                'key'      => 'order_item_type',
+                'value'    => 'coupon',
+                'operator' => '='
+            )
+        ),
+        'query_type' => 'get_var',
+        'filter_range' => true
+    ), $start_date, $end_date );
+
+    $average_sales = $total_sales / ( 30 + 1 );
 
     $legend = array();
     $legend[] = array(
@@ -205,13 +425,13 @@ function dokan_sales_overview() {
         'title' => sprintf( __( '%s orders placed', 'dokan' ), '<strong>' . $total_orders . '</strong>' ),
     );
     $legend[] = array(
-        'title' => sprintf( __( '%s items purchased', 'dokan' ), '<strong>' . $total_items->order_item_qty . '</strong>' ),
+        'title' => sprintf( __( '%s items purchased', 'dokan' ), '<strong>' . $total_items . '</strong>' ),
     );
     $legend[] = array(
         'title' => sprintf( __( '%s charged for shipping', 'dokan' ), '<strong>' . wc_price( $total_shipping ) . '</strong>' ),
     );
     $legend[] = array(
-        'title' => sprintf( __( '%s worth of coupons used', 'dokan' ), '<strong>' . wc_price( $total_coupons->discount_amount ) . '</strong>' ),
+        'title' => sprintf( __( '%s worth of coupons used', 'dokan' ), '<strong>' . wc_price( $total_coupons ) . '</strong>' ),
     );
     ?>
     <div id="poststuff" class="dokan-reports-wrap row">
@@ -223,280 +443,166 @@ function dokan_sales_overview() {
             </ul>
         </div>
 
-        <div class="woocommerce-reports-main col-md-9">
+        <div class="doakn-reports-main col-md-9">
             <div class="postbox">
-                <h3><span><?php _e( 'This month\'s sales', 'dokan' ); ?></span></h3>
-                <div class="inside chart">
-                    <div id="placeholder" style="width:100%; overflow:hidden; height:440px; position:relative;"></div>
-                    <div id="cart_legend"></div>
-                </div>
+                <h3><span><?php echo $heading; ?></span></h3>
+
+                <?php dokan_sales_overview_chart_data( $start_date, $end_date, 'day' ); ?>
             </div>
         </div>
     </div>
-    <?php
-
-    $chart_data = dokan_sales_overview_chart_data();
-    ?>
-    <script type="text/javascript">
-        jQuery(function(){
-            var order_data = jQuery.parseJSON( '<?php echo $chart_data; ?>' );
-
-            var d = order_data.order_counts;
-            var d2 = order_data.order_amounts;
-
-            for (var i = 0; i < d.length; ++i) d[i][0] += 60 * 60 * 1000;
-            for (var i = 0; i < d2.length; ++i) d2[i][0] += 60 * 60 * 1000;
-
-            var placeholder = jQuery("#placeholder");
-
-            var plot = jQuery.plot(placeholder, [ { label: "<?php echo esc_js( __( 'Number of sales', 'dokan' ) ) ?>", data: d }, { label: "<?php echo esc_js( __( 'Sales amount', 'dokan' ) ) ?>", data: d2, yaxis: 2 } ], {
-                legend: {
-                    container: jQuery('#cart_legend'),
-                    noColumns: 2
-                },
-                series: {
-                    lines: { show: true, fill: true },
-                    points: { show: true }
-                },
-                grid: {
-                    show: true,
-                    aboveData: false,
-                    color: '#aaa',
-                    backgroundColor: '#fff',
-                    borderWidth: 2,
-                    borderColor: '#aaa',
-                    clickable: false,
-                    hoverable: true,
-                    // markings: weekendAreas
-                },
-                xaxis: {
-                    mode: "time",
-                    timeformat: "%d %b",
-                    monthNames: <?php echo json_encode( array_values( $wp_locale->month_abbrev ) ) ?>,
-                    tickLength: 1,
-                    minTickSize: [1, "day"]
-                },
-                yaxes: [ { min: 0, tickSize: 10, tickDecimals: 0 }, { position: "right", min: 0, tickDecimals: 2 } ],
-                colors: ["#f05025", "#47a03e"]
-            });
-
-            placeholder.resize();
-        });
-    </script>
     <?php
 }
 
-/**
- * Output the daily sales chart.
- *
- * @access public
- * @return void
- */
-function dokan_daily_sales() {
+function dokan_sales_overview_chart_data( $start_date, $end_date, $group_by ) {
+    global $wp_locale;
 
-    global $start_date, $end_date, $woocommerce, $wpdb, $wp_locale, $current_user;
+    $start_date_to_time = strtotime( $start_date );
+    $end_date_to_time = strtotime( $end_date );
 
-    $start_date = isset( $_POST['start_date'] ) ? $_POST['start_date'] : '';
-    $end_date   = isset( $_POST['end_date'] ) ? $_POST['end_date'] : '';
-    $user_orders = dokan_get_seller_order_ids( $current_user->ID );
-    $user_orders_in = count( $user_orders ) ? implode( ', ', $user_orders ) : 0;
-
-    if ( ! $start_date)
-        $start_date = date( 'Ymd', strtotime( date('Ym', current_time( 'timestamp' ) ) . '01' ) );
-    if ( ! $end_date)
-        $end_date = date( 'Ymd', current_time( 'timestamp' ) );
-
-    $start_date = strtotime( $start_date );
-    $end_date = strtotime( $end_date );
-
-    $total_sales = $total_orders = $order_items = 0;
-
-    // Blank date ranges to begin
-    $order_counts = $order_amounts = array();
-
-    $count = 0;
-
-    $days = ( $end_date - $start_date ) / ( 60 * 60 * 24 );
-
-    if ( $days == 0 )
-        $days = 1;
-
-    while ( $count < $days ) {
-        $time = strtotime( date( 'Ymd', strtotime( '+ ' . $count . ' DAY', $start_date ) ) ) . '000';
-
-        $order_counts[ $time ] = $order_amounts[ $time ] = 0;
-
-        $count++;
-    }
-
-    // Get order ids and dates in range
-    $orders = apply_filters( 'woocommerce_reports_daily_sales_orders', $wpdb->get_results( "
-        SELECT posts.ID, posts.post_date, meta.meta_value AS total_sales FROM {$wpdb->posts} AS posts
-
-        LEFT JOIN {$wpdb->postmeta} AS meta ON posts.ID = meta.post_id
-        LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID = rel.object_ID
-        LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
-        LEFT JOIN {$wpdb->terms} AS term USING( term_id )
-
-        WHERE   meta.meta_key       = '_order_total'
-        AND     posts.post_type     = 'shop_order'
-        AND     posts.post_status   = 'publish'
-        AND     tax.taxonomy        = 'shop_order_status'
-        AND     term.slug           IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
-        AND     post_date > '" . date('Y-m-d', $start_date ) . "'
-        AND     post_date < '" . date('Y-m-d', strtotime('+1 day', $end_date ) ) . "'
-        AND     posts.ID IN( {$user_orders_in} )
-        GROUP BY posts.ID
-        ORDER BY post_date ASC
-    " ), $start_date, $end_date );
-
-    if ( $orders ) {
-
-        $total_orders = sizeof( $orders );
-
-        foreach ( $orders as $order ) {
-
-            // get order timestamp
-            $time = strtotime( date( 'Ymd', strtotime( $order->post_date ) ) ) . '000';
-
-            // Add order total
-            $total_sales += $order->total_sales;
-
-            // Get items
-            $order_items += apply_filters( 'woocommerce_reports_daily_sales_order_items', absint( $wpdb->get_var( $wpdb->prepare( "
-                SELECT SUM( order_item_meta.meta_value )
-                FROM {$wpdb->prefix}woocommerce_order_items as order_items
-                LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
-                WHERE   order_id = %d
-                AND     order_items.order_item_type = 'line_item'
-                AND     order_item_meta.meta_key = '_qty'
-            ", $order->ID ) ) ), $order->ID );
-
-            // Set times
-            if ( isset( $order_counts[ $time ] ) )
-                $order_counts[ $time ]++;
-            else
-                $order_counts[ $time ] = 1;
-
-            if ( isset( $order_amounts[ $time ] ) )
-                $order_amounts[ $time ] = $order_amounts[ $time ] + $order->total_sales;
-            else
-                $order_amounts[ $time ] = floatval( $order->total_sales );
+    if ( $group_by == 'day' ) {
+        $group_by_query       = 'YEAR(post_date), MONTH(post_date), DAY(post_date)';
+        $chart_interval       = ceil( max( 0, ( $end_date_to_time - $start_date_to_time ) / ( 60 * 60 * 24 ) ) );
+        $barwidth             = 60 * 60 * 24 * 1000;
+    } else {
+        $group_by_query = 'YEAR(post_date), MONTH(post_date)';
+        $chart_interval = 0;
+        $min_date             = $start_date_to_time;
+        while ( ( $min_date   = strtotime( "+1 MONTH", $min_date ) ) <= $end_date_to_time ) {
+            $chart_interval ++;
         }
+        $barwidth             = 60 * 60 * 24 * 7 * 4 * 1000;
     }
+
+    // Get orders and dates in range - we want the SUM of order totals, COUNT of order items, COUNT of orders, and the date
+    $orders = dokan_get_order_report_data( array(
+        'data' => array(
+            '_order_total' => array(
+                'type'     => 'meta',
+                'function' => 'SUM',
+                'name'     => 'total_sales'
+            ),
+            'ID' => array(
+                'type'     => 'post_data',
+                'function' => 'COUNT',
+                'name'     => 'total_orders',
+                'distinct' => true,
+            ),
+            'post_date' => array(
+                'type'     => 'post_data',
+                'function' => '',
+                'name'     => 'post_date'
+            ),
+        ),
+        'group_by'     => $group_by_query,
+        'order_by'     => 'post_date ASC',
+        'query_type'   => 'get_results',
+        'filter_range' => true,
+        'debug' => false
+    ), $start_date, $end_date );
+
+    // Prepare data for report
+    $order_counts      = dokan_prepare_chart_data( $orders, 'post_date', 'total_orders', $chart_interval, $start_date_to_time, $group_by );
+    $order_amounts     = dokan_prepare_chart_data( $orders, 'post_date', 'total_sales', $chart_interval, $start_date_to_time, $group_by );
+
+    // Encode in json format
+    $chart_data = json_encode( array(
+        'order_counts'      => array_values( $order_counts ),
+        'order_amounts'     => array_values( $order_amounts )
+    ) );
+
+    $chart_colours = array(
+        'order_counts'  => '#3498db',
+        'order_amounts'   => '#1abc9c'
+    );
+
     ?>
-    <form method="post" class="form-inline report-filter" action="">
-        <div class="form-group">
-            <label for="from"><?php _e( 'From:', 'dokan' ); ?></label> <input type="text" class="datepicker" name="start_date" id="from" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $start_date) ); ?>" />
-        </div>
-
-        <div class="form-group">
-            <label for="to"><?php _e( 'To:', 'dokan' ); ?></label>
-            <input type="text" name="end_date" id="to" class="datepicker" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $end_date) ); ?>" />
-
-            <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'dokan' ); ?>" />
-        </div>
-    </form>
-
-    <div id="poststuff" class="dokan-reports-wrap row">
-        <div class="dokan-reports-sidebar col-md-3">
-            <div class="postbox">
-                <h3><span><?php _e( 'Total sales in range', 'dokan' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ( $total_sales > 0 ) echo woocommerce_price( $total_sales ); else _e( 'n/a', 'dokan' ); ?></p>
-                </div>
-            </div>
-            <div class="postbox">
-                <h3><span><?php _e( 'Total orders in range', 'dokan' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ( $total_orders > 0 ) echo $total_orders . ' (' . $order_items . ' ' . __( 'items', 'dokan' ) . ')'; else _e( 'n/a', 'dokan' ); ?></p>
-                </div>
-            </div>
-            <div class="postbox">
-                <h3><span><?php _e( 'Average order total in range', 'dokan' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ( $total_orders > 0 ) echo woocommerce_price( $total_sales / $total_orders ); else _e( 'n/a', 'dokan' ); ?></p>
-                </div>
-            </div>
-            <div class="postbox">
-                <h3><span><?php _e( 'Average order items in range', 'dokan' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ( $total_orders > 0 ) echo number_format( $order_items / $total_orders, 2 ); else _e( 'n/a', 'dokan' ); ?></p>
-                </div>
-            </div>
-        </div>
-        <div class="woocommerce-reports-main col-md-9">
-            <div class="postbox">
-                <h3><span><?php _e( 'Sales in range', 'dokan' ); ?></span></h3>
-                <div class="inside chart">
-                    <div id="placeholder" style="width:100%; overflow:hidden; height:568px; position:relative;"></div>
-                    <div id="cart_legend"></div>
-                </div>
-            </div>
-        </div>
+    <div class="chart-container">
+        <div class="chart-placeholder main" style="height:568px"></div>
     </div>
-    <?php
 
-    $order_counts_array = $order_amounts_array = array();
-
-    foreach ( $order_counts as $key => $count )
-        $order_counts_array[] = array( esc_js( $key ), esc_js( $count ) );
-
-    foreach ( $order_amounts as $key => $amount )
-        $order_amounts_array[] = array( esc_js( $key ), esc_js( $amount ) );
-
-    $order_data = array( 'order_counts' => $order_counts_array, 'order_amounts' => $order_amounts_array );
-
-    $chart_data = json_encode($order_data);
-    ?>
     <script type="text/javascript">
-        jQuery(function(){
+        jQuery(function($) {
+
             var order_data = jQuery.parseJSON( '<?php echo $chart_data; ?>' );
-
-            var d = order_data.order_counts;
-            var d2 = order_data.order_amounts;
-
-            for (var i = 0; i < d.length; ++i) d[i][0] += 60 * 60 * 1000;
-            for (var i = 0; i < d2.length; ++i) d2[i][0] += 60 * 60 * 1000;
-
-            var placeholder = jQuery("#placeholder");
-
-            var plot = jQuery.plot(placeholder, [ { label: "<?php echo esc_js( __( 'Number of sales', 'dokan' ) ) ?>", data: d }, { label: "<?php echo esc_js( __( 'Sales amount', 'dokan' ) ) ?>", data: d2, yaxis: 2 } ], {
-                legend: {
-                    container: jQuery('#cart_legend'),
-                    noColumns: 2
-                },
-                series: {
-                    lines: { show: true, fill: true },
-                    points: { show: true }
-                },
-                grid: {
-                    show: true,
-                    aboveData: false,
-                    color: '#aaa',
-                    backgroundColor: '#fff',
-                    borderWidth: 2,
-                    borderColor: '#aaa',
-                    clickable: false,
+            var series = [
+                {
+                    label: "<?php echo esc_js( __( 'Number of items sold', 'dokan' ) ) ?>",
+                    data: order_data.order_amounts,
+                    shadowSize: 0,
                     hoverable: true,
+                    points: { show: true, radius: 5, lineWidth: 3, fillColor: '#fff', fill: true },
+                    lines: { show: true, lineWidth: 4, fill: false },
+                    shadowSize: 0,
+                    prepend_tooltip: "<?php echo get_woocommerce_currency_symbol(); ?>"
                 },
-                xaxis: {
-                    mode: "time",
-                    timeformat: "%d %b",
-                    monthNames: <?php echo json_encode( array_values( $wp_locale->month_abbrev ) ) ?>,
-                    tickLength: 1,
-                    minTickSize: [1, "day"]
+                {
+                    label: "<?php echo esc_js( __( 'Number of orders', 'dokan' ) ) ?>",
+                    data: order_data.order_counts,
+                    shadowSize: 0,
+                    hoverable: true,
+                    points: { show: true, radius: 5, lineWidth: 3, fillColor: '#fff', fill: true },
+                    lines: { show: true, lineWidth: 4, fill: false },
+                    shadowSize: 0
                 },
-                yaxes: [ { min: 0, tickSize: 10, tickDecimals: 0 }, { position: "right", min: 0, tickDecimals: 2 } ],
-                colors: ["#8a4b75", "#47a447"]
-            });
+            ];
 
-            placeholder.resize();
+            var main_chart = jQuery.plot(
+                jQuery('.chart-placeholder.main'),
+                series,
+                {
+                    legend: {
+                        show: false
+                    },
+                    series: {
+                        lines: { show: true, lineWidth: 4, fill: false },
+                        points: { show: true }
+                    },
+                    grid: {
+                        borderColor: '#eee',
+                        color: '#aaa',
+                        borderWidth: 1,
+                        hoverable: true,
+                        show: true,
+                        aboveData: false,
+                    },
+                    xaxis: {
+                        color: '#aaa',
+                        position: "bottom",
+                        tickColor: 'transparent',
+                        mode: "time",
+                        timeformat: "<?php if ( $group_by == 'day' ) echo '%d %b'; else echo '%b'; ?>",
+                        monthNames: <?php echo json_encode( array_values( $wp_locale->month_abbrev ) ) ?>,
+                        tickLength: 1,
+                        minTickSize: [1, "<?php echo $group_by; ?>"],
+                        font: {
+                            color: "#aaa"
+                        }
+                    },
+                    yaxes: [
+                        {
+                            min: 0,
+                            minTickSize: 1,
+                            tickDecimals: 0,
+                            color: '#d4d9dc',
+                            font: { color: "#aaa" }
+                        },
+                        {
+                            position: "right",
+                            min: 0,
+                            tickDecimals: 2,
+                            alignTicksWithAxis: 1,
+                            color: 'transparent',
+                            font: { color: "#aaa" }
+                        }
+                    ],
+                    colors: ["<?php echo $chart_colours['order_counts']; ?>", "<?php echo $chart_colours['order_amounts']; ?>"]
+                }
+            );
 
-            <?php //woocommerce_weekend_area_js(); ?>
-            <?php //woocommerce_tooltip_js(); ?>
-            <?php //woocommerce_datepicker_js(); ?>
+            jQuery('.chart-placeholder').resize();
         });
+
     </script>
     <?php
 }

@@ -260,7 +260,10 @@ class WeDevs_Dokan {
 
         wp_register_script( 'dokan-order', $template_directory . '/assets/js/orders.js', false, null, true );
 
-        wp_register_script( 'jquery-flot', $template_directory . '/assets/js/jquery.flot.js', false, null, true );
+        wp_register_script( 'jquery-flot', $template_directory . '/assets/js/jquery.flot.min.js', false, null, true );
+        wp_register_script( 'jquery-flot-time', $template_directory . '/assets/js/jquery.flot.time.min.js', false, null, true );
+        wp_register_script( 'jquery-flot-pie', $template_directory . '/assets/js/jquery.flot.pie.min.js', false, null, true );
+        wp_register_script( 'jquery-flot-stack', $template_directory . '/assets/js/jquery.flot.stack.min.js', false, null, true );
         wp_register_script( 'jquery-chart', $template_directory . '/assets/js/Chart.min.js', false, null, true );
 
         // wp_enqueue_script( 'menu-aim', $template_directory . '/assets/js/jquery.menu-aim.js', false, null, true );
