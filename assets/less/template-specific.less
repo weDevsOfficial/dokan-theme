@@ -1,5 +1,16 @@
 @d-font-color: #676767;
 
+.dokan-chart-tooltip() {
+    position: absolute;
+    display: none;
+    line-height: 1;
+    background: #333;
+    color: #fff;
+    padding: 3px 5px;
+    font-size: 11px;
+    border-radius: 3px;
+}
+
 .home {
 
     .featured-tab-area {
@@ -806,17 +817,14 @@
         h3 {
             margin: 0 0 15px 0;
         }
+
+        .chart-placeholder.main {
+            height: 500px;
+        }
     }
 
     .chart-tooltip {
-        position: absolute;
-        display: none;
-        line-height: 1;
-        background: #333;
-        color: #fff;
-        padding: 3px 5px;
-        font-size: 11px;
-        border-radius: 3px;
+        .dokan-chart-tooltip;
     }
 }
 
@@ -887,11 +895,19 @@
             position: relative;
         }
 
+        .chart-placeholder.main {
+            height: 350px;
+        }
+
         .list-count {
             .count {
                 float: right;
             }
         }
+    }
+
+    .chart-tooltip {
+        .dokan-chart-tooltip;
     }
 
     article > .row {

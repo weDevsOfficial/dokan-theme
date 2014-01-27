@@ -1221,6 +1221,9 @@ a:hover {
 .page-template-templatesreports-php .doakn-reports-main h3 {
   margin: 0 0 15px 0;
 }
+.page-template-templatesreports-php .doakn-reports-main .chart-placeholder.main {
+  height: 500px;
+}
 .page-template-templatesreports-php .chart-tooltip {
   position: absolute;
   display: none;
@@ -1285,8 +1288,21 @@ a:hover {
   width: 100%;
   position: relative;
 }
+.page-template-templatesdashboard-php .dashboard-widget .chart-placeholder.main {
+  height: 350px;
+}
 .page-template-templatesdashboard-php .dashboard-widget .list-count .count {
   float: right;
+}
+.page-template-templatesdashboard-php .chart-tooltip {
+  position: absolute;
+  display: none;
+  line-height: 1;
+  background: #333;
+  color: #fff;
+  padding: 3px 5px;
+  font-size: 11px;
+  border-radius: 3px;
 }
 .page-template-templatesdashboard-php article > .row {
   margin-bottom: 15px;
