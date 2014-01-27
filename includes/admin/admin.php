@@ -50,12 +50,16 @@ class Dokan_Admin_Settings {
     function get_settings_sections() {
         $sections = array(
             array(
+                'id' => 'dokan_general',
+                'title' => __( 'General', 'dokan' )
+            ),
+            array(
                 'id' => 'dokan_home',
                 'title' => __( 'Home Page', 'dokan' )
             ),
             array(
-                'id' => 'dokan_general',
-                'title' => __( 'General Settings', 'dokan' )
+                'id' => 'dokan_selling',
+                'title' => __( 'Selling Options', 'dokan' )
             ),
             array(
                 'id' => 'dokan_pages',
@@ -83,17 +87,30 @@ class Dokan_Admin_Settings {
         $settings_fields = array(
             'dokan_general' => array(
                 array(
-                    'name' => 'seller_percentage',
-                    'label' => __( 'Seller Percentage', 'dokan' ),
-                    'desc' => __( 'How much amount (%) a seller will get from each order', 'dokan' ),
-                    'default' => '90',
-                    'type' => 'text',
-                ),
-                array(
                     'name' => 'footer_text',
                     'label' => __( 'Site footer text', 'dokan' ),
                     'desc' => '',
                     'default' => sprintf( __( '&copy; %d. All rights are reserved', 'dokan' ), date('Y') ),
+                    'type' => 'text',
+                ),
+            ),
+            'dokan_selling' => array(
+                array(
+                    'name' => 'product_status',
+                    'label' => __( 'New Product Status', 'dokan' ),
+                    'desc' => __( 'Product status when a seller creates a product', 'dokan' ),
+                    'type' => 'select',
+                    'default' => 'pending',
+                    'options' => array(
+                        'publish' => __( 'Published', 'dokan' ),
+                        'pending' => __( 'Pending Review', 'dokan' )
+                    )
+                ),
+                array(
+                    'name' => 'seller_percentage',
+                    'label' => __( 'Seller Percentage', 'dokan' ),
+                    'desc' => __( 'How much amount (%) a seller will get from each order', 'dokan' ),
+                    'default' => '90',
                     'type' => 'text',
                 ),
             ),
