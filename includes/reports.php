@@ -20,11 +20,6 @@ function dokan_get_reports_charts() {
                 'description' => '',
                 'function'    => 'dokan_daily_sales'
             ),
-            "sales_by_month"    => array(
-                'title'       => __( 'Sales by month', 'dokan' ),
-                'description' => '',
-                'function'    => 'dokan_monthly_sales'
-            ),
             "top_sellers"       => array(
                 'title'       => __( 'Top sellers', 'dokan' ),
                 'description' => '',
@@ -418,18 +413,23 @@ function dokan_report_sales_overview( $start_date, $end_date, $heading = '' ) {
     $legend[] = array(
         'title' => sprintf( __( '%s sales in this period', 'dokan' ), '<strong>' . wc_price( $total_sales ) . '</strong>' ),
     );
+
     $legend[] = array(
         'title' => sprintf( __( '%s average daily sales', 'dokan' ), '<strong>' . wc_price( $average_sales ) . '</strong>' ),
     );
+
     $legend[] = array(
         'title' => sprintf( __( '%s orders placed', 'dokan' ), '<strong>' . $total_orders . '</strong>' ),
     );
+
     $legend[] = array(
         'title' => sprintf( __( '%s items purchased', 'dokan' ), '<strong>' . $total_items . '</strong>' ),
     );
+
     $legend[] = array(
         'title' => sprintf( __( '%s charged for shipping', 'dokan' ), '<strong>' . wc_price( $total_shipping ) . '</strong>' ),
     );
+
     $legend[] = array(
         'title' => sprintf( __( '%s worth of coupons used', 'dokan' ), '<strong>' . wc_price( $total_coupons ) . '</strong>' ),
     );
@@ -603,190 +603,6 @@ function dokan_sales_overview_chart_data( $start_date, $end_date, $group_by ) {
             jQuery('.chart-placeholder').resize();
         });
 
-    </script>
-    <?php
-}
-
-
-/**
- * Output the monthly sales chart.
- *
- * @access public
- * @return void
- */
-function dokan_monthly_sales() {
-
-    global $start_date, $end_date, $woocommerce, $wpdb, $wp_locale, $current_user;
-
-    $first_year = $wpdb->get_var( "SELECT post_date FROM $wpdb->posts WHERE post_date != 0 ORDER BY post_date ASC LIMIT 1;" );
-
-    $first_year = $first_year ? date( 'Y', strtotime( $first_year ) ) : date('Y');
-
-    $current_year   = isset( $_POST['show_year'] ) ? $_POST['show_year'] : date( 'Y', current_time( 'timestamp' ) );
-    $start_date     = strtotime( $current_year . '0101' );
-
-    $total_sales = $total_orders = $order_items = 0;
-    $order_counts = $order_amounts = array();
-    $user_orders = dokan_get_seller_order_ids( $current_user->ID );
-    $user_orders_in = count( $user_orders ) ? implode( ', ', $user_orders ) : 0;
-
-    for ( $count = 0; $count < 12; $count++ ) {
-        $time = strtotime( date('Ym', strtotime( '+ ' . $count . ' MONTH', $start_date ) ) . '01' ) . '000';
-
-        if ( $time > current_time( 'timestamp' ) . '000' )
-            continue;
-
-        $month = date( 'Ym', strtotime(date('Ym', strtotime('+ '.$count.' MONTH', $start_date)).'01') );
-
-        $months_orders = apply_filters( 'woocommerce_reports_monthly_sales_orders', $wpdb->get_row( $wpdb->prepare( "
-            SELECT SUM(meta.meta_value) AS total_sales, COUNT(posts.ID) AS total_orders FROM {$wpdb->posts} AS posts
-
-            LEFT JOIN {$wpdb->postmeta} AS meta ON posts.ID = meta.post_id
-            LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID=rel.object_ID
-            LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
-            LEFT JOIN {$wpdb->terms} AS term USING( term_id )
-
-            WHERE   meta.meta_key       = '_order_total'
-            AND     posts.post_type     = 'shop_order'
-            AND     posts.post_status   = 'publish'
-            AND     tax.taxonomy        = 'shop_order_status'
-            AND     posts.ID IN( {$user_orders_in} )
-            AND     term.slug           IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
-            AND     %s                  = date_format(posts.post_date,'%%Y%%m')
-        ", $month ) ), $month );
-
-        $order_counts[ $time ]  = (int) $months_orders->total_orders;
-        $order_amounts[ $time ] = (float) $months_orders->total_sales;
-
-        $total_orders           += (int) $months_orders->total_orders;
-        $total_sales            += (float) $months_orders->total_sales;
-
-        // Count order items
-        $order_items += apply_filters( 'woocommerce_reports_monthly_sales_order_items', absint( $wpdb->get_var( $wpdb->prepare( "
-            SELECT SUM( order_item_meta.meta_value )
-            FROM {$wpdb->prefix}woocommerce_order_items as order_items
-            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
-            LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
-            LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID = rel.object_ID
-            LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
-            LEFT JOIN {$wpdb->terms} AS term USING( term_id )
-            WHERE   term.slug IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
-            AND     posts.post_status   = 'publish'
-            AND     tax.taxonomy        = 'shop_order_status'
-            AND     %s                  = date_format( posts.post_date, '%%Y%%m' )
-            AND     order_items.order_item_type = 'line_item'
-            AND     posts.ID IN( {$user_orders_in} )
-            AND     order_item_meta.meta_key = '_qty'
-        ", $month ) ) ), $month );
-    }
-    ?>
-
-    <form method="post" action="" class="report-filter">
-        <p><label for="show_year"><?php _e( 'Year:', 'dokan' ); ?></label>
-        <select name="show_year" id="show_year">
-            <?php
-                for ( $i = $first_year; $i <= date( 'Y' ); $i++ ) {
-                    printf('<option value="%s" %s>%s</option>', $i, selected( $current_year, $i, false ), $i );
-                }
-            ?>
-        </select>
-        <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'dokan' ); ?>" /></p>
-    </form>
-
-    <div id="poststuff" class="dokan-reports-wrap row">
-        <div class="dokan-reports-sidebar col-md-3">
-            <div class="postbox">
-                <h3><span><?php _e( 'Total sales for year', 'dokan' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ($total_sales>0) echo woocommerce_price($total_sales); else _e( 'n/a', 'dokan' ); ?></p>
-                </div>
-            </div>
-            <div class="postbox">
-                <h3><span><?php _e( 'Total orders for year', 'dokan' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ( $total_orders > 0 ) echo $total_orders . ' (' . $order_items . ' ' . __( 'items', 'dokan' ) . ')'; else _e( 'n/a', 'dokan' ); ?></p>
-                </div>
-            </div>
-            <div class="postbox">
-                <h3><span><?php _e( 'Average order total for year', 'dokan' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ($total_orders>0) echo woocommerce_price($total_sales/$total_orders); else _e( 'n/a', 'dokan' ); ?></p>
-                </div>
-            </div>
-            <div class="postbox">
-                <h3><span><?php _e( 'Average order items for year', 'dokan' ); ?></span></h3>
-                <div class="inside">
-                    <p class="stat"><?php if ($total_orders>0) echo number_format($order_items/$total_orders, 2); else _e( 'n/a', 'dokan' ); ?></p>
-                </div>
-            </div>
-        </div>
-        <div class="woocommerce-reports-main col-md-9">
-            <div class="postbox">
-                <h3><span><?php _e( 'Monthly sales for year', 'dokan' ); ?></span></h3>
-                <div class="inside chart">
-                    <div id="placeholder" style="width:100%; overflow:hidden; height:568px; position:relative;"></div>
-                    <div id="cart_legend"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php
-
-    $order_counts_array = $order_amounts_array = array();
-
-    foreach ( $order_counts as $key => $count )
-        $order_counts_array[] = array( esc_js( $key ), esc_js( $count ) );
-
-    foreach ( $order_amounts as $key => $amount )
-        $order_amounts_array[] = array( esc_js( $key ), esc_js( $amount ) );
-
-    $order_data = array( 'order_counts' => $order_counts_array, 'order_amounts' => $order_amounts_array );
-
-    $chart_data = json_encode( $order_data );
-    ?>
-    <script type="text/javascript">
-        jQuery(function(){
-            var order_data = jQuery.parseJSON( '<?php echo $chart_data; ?>' );
-
-            var d = order_data.order_counts;
-            var d2 = order_data.order_amounts;
-
-            var placeholder = jQuery("#placeholder");
-
-            var plot = jQuery.plot(placeholder, [ { label: "<?php echo esc_js( __( 'Number of sales', 'dokan' ) ) ?>", data: d }, { label: "<?php echo esc_js( __( 'Sales amount', 'dokan' ) ) ?>", data: d2, yaxis: 2 } ], {
-                legend: {
-                    container: jQuery('#cart_legend'),
-                    noColumns: 2
-                },
-                series: {
-                    lines: { show: true, fill: true },
-                    points: { show: true, align: "left" }
-                },
-                grid: {
-                    show: true,
-                    aboveData: false,
-                    color: '#aaa',
-                    backgroundColor: '#fff',
-                    borderWidth: 2,
-                    borderColor: '#aaa',
-                    clickable: false,
-                    hoverable: true
-                },
-                xaxis: {
-                    mode: "time",
-                    timeformat: "%b %y",
-                    monthNames: <?php echo json_encode( array_values( $wp_locale->month_abbrev ) ) ?>,
-                    tickLength: 1,
-                    minTickSize: [1, "month"]
-                },
-                yaxes: [ { min: 0, tickSize: 10, tickDecimals: 0 }, { position: "right", min: 0, tickDecimals: 2 } ],
-                colors: ["#8a4b75", "#47a03e"]
-            });
-
-            placeholder.resize();
-
-            <?php woocommerce_tooltip_js(); ?>
-        });
     </script>
     <?php
 }
