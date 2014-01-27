@@ -448,6 +448,15 @@ function dokan_get_option( $option, $section, $default = '' ) {
     return $default;
 }
 
+function dokan_reports_scripts() {
+    wp_enqueue_script( 'jquery' );
+    wp_enqueue_script( 'jquery-chart' );
+    wp_enqueue_script( 'jquery-flot' );
+    wp_enqueue_script( 'jquery-flot-time' );
+    wp_enqueue_script( 'jquery-flot-pie' );
+    wp_enqueue_script( 'jquery-flot-stack' );
+}
+
 function dokan_product_editor_scripts() {
     $template_directory = get_template_directory_uri();
 
