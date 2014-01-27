@@ -29,11 +29,13 @@ $reviews_url = dokan_get_page_url( 'reviews' );
 
         <?php while (have_posts()) : the_post(); ?>
 
-            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+            <?php
+            if ( !dokan_is_seller_enabled( $user_id ) ) {
+                dokan_seller_not_enabled_notice();
+            }
+            ?>
 
-                <div class="entry-content">
-                    <?php the_content(); ?>
-                </div><!-- .entry-content -->
+            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
                 <div class="row">
                     <div class="col-md-6">

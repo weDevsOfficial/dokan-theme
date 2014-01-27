@@ -66,7 +66,7 @@ dokan_product_editor_scripts();
 get_header();
 ?>
 
-    <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
+<?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
 
 <div id="primary" class="content-area col-md-9">
     <div id="content" class="site-content" role="main">
@@ -82,6 +82,8 @@ get_header();
                 <?php } ?>
             </div>
         <?php } ?>
+
+        <?php if ( dokan_is_seller_enabled( get_current_user_id() ) ) { ?>
 
         <form class="form" method="post">
 
@@ -146,6 +148,12 @@ get_header();
             </div>
 
         </form>
+
+        <?php } else { ?>
+
+            <?php dokan_seller_not_enabled_notice(); ?>
+
+        <?php } ?>
     </div><!-- #content .site-content -->
 </div><!-- #primary .content-area -->
 

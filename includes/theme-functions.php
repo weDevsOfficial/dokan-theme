@@ -485,3 +485,23 @@ add_action( 'login_init', 'dokan_redirect_to_register' );
 function dokan_pre( $value ) {
     printf( '<pre>%s</pre>', print_r( $value, true ) );
 }
+
+function dokan_is_seller_enabled( $user_id ) {
+    $selling = get_post_meta( $user_id, 'dokan_enable_selling', true );
+
+    if ( $selling == 'yes' ) {
+        return true;
+    }
+
+    return false;
+}
+
+function dokan_is_seller_trusted( $user_id ) {
+    $publishing = get_post_meta( $user_id, 'dokan_publishing', true );
+
+    if ( $publishing == 'yes' ) {
+        return true;
+    }
+
+    return false;
+}

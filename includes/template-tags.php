@@ -516,3 +516,12 @@ function dokan_seller_reg_form_fields() {
 }
 
 add_action( 'register_form', 'dokan_seller_reg_form_fields' );
+
+function dokan_seller_not_enabled_notice() {
+    ?>
+        <div class="alert alert-warning">
+            <strong><?php _e( 'Error!', 'dokan' ); ?></strong>
+            <?php _e( 'Your account is not enabled for selling, please contact the admin', 'dokan' ); ?>
+        </div>
+    <?php
+}
