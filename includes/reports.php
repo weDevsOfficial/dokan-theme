@@ -550,7 +550,8 @@ function dokan_sales_overview_chart_data( $start_date, $end_date, $group_by ) {
                     hoverable: true,
                     points: { show: true, radius: 5, lineWidth: 3, fillColor: '#fff', fill: true },
                     lines: { show: true, lineWidth: 4, fill: false },
-                    shadowSize: 0
+                    shadowSize: 0,
+                    append_tooltip: " <?php echo __( 'sales', 'dokan' ); ?>"
                 },
             ];
 
