@@ -34,7 +34,7 @@ if ( isset( $_POST['add_product'] ) ) {
 
         $post_data = array(
             'post_type' => 'product',
-            'post_status' => 'publish',
+            'post_status' => dokan_get_new_post_status(),
             'post_title' => $post_title,
             'post_content' => $post_content,
             'post_excerpt' => $post_excerpt,

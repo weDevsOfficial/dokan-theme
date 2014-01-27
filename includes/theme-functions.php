@@ -223,7 +223,21 @@ function dokan_generate_sync_table() {
 }
 
 function dokan_get_seller_percentage() {
-    return dokan_get_option( 'seller_percentage', 'dokan_general', '90' );
+    return dokan_get_option( 'seller_percentage', 'dokan_selling', '90' );
+}
+
+function dokan_get_new_post_status() {
+    $user_id = get_current_user_id();
+
+    // trusted seller
+    if ( dokan_is_seller_trusted( $user_id ) ) {
+        return 'publish';
+    }
+
+    // if not trusted, send the option
+    $status = dokan_get_option( 'product_status', 'dokan_selling', 'pending' );
+
+    return $status;
 }
 
 // Function to get the client ip address
@@ -487,7 +501,7 @@ function dokan_pre( $value ) {
 }
 
 function dokan_is_seller_enabled( $user_id ) {
-    $selling = get_post_meta( $user_id, 'dokan_enable_selling', true );
+    $selling = get_user_meta( $user_id, 'dokan_enable_selling', true );
 
     if ( $selling == 'yes' ) {
         return true;
@@ -497,7 +511,7 @@ function dokan_is_seller_enabled( $user_id ) {
 }
 
 function dokan_is_seller_trusted( $user_id ) {
-    $publishing = get_post_meta( $user_id, 'dokan_publishing', true );
+    $publishing = get_user_meta( $user_id, 'dokan_publishing', true );
 
     if ( $publishing == 'yes' ) {
         return true;
