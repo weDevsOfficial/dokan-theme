@@ -113,6 +113,13 @@ class Dokan_Admin_Settings {
                     'default' => '90',
                     'type' => 'text',
                 ),
+                array(
+                    'name' => 'withdraw_limit',
+                    'label' => __( 'Minimum Withdraw Limit', 'dokan' ),
+                    'desc' => __( 'Minimum balance required to make a withdraw request', 'dokan' ),
+                    'default' => '50',
+                    'type' => 'text',
+                ),
             ),
             'dokan_home' => array(
                 array(
@@ -235,10 +242,7 @@ class Dokan_Admin_Settings {
     }
 
     function withdraw_page() {
-        echo '<div class="wrap">';
-        $dokan_admin_withdraw = Dokan_Template_Withdraw::init();
-        $dokan_admin_withdraw->admin_withdraw_list();
-        echo '</div>';
+        include __DIR__ . '/withdraw.php';
     }
 
 }
