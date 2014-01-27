@@ -315,6 +315,13 @@ function dokan_sales_overview() {
     dokan_report_sales_overview( $start_date, $end_date, __( 'This month\'s sales', 'dokan' ) );
 }
 
+function dokan_dashboard_sales_overview() {
+    $start_date = date( 'Y-m-01', current_time('timestamp') );
+    $end_date = date( 'Y-m-d', strtotime( 'midnight', current_time( 'timestamp' ) ) );
+
+    dokan_sales_overview_chart_data( $start_date, $end_date, 'day' );
+}
+
 function dokan_daily_sales() {
     global $wpdb;
 
@@ -518,7 +525,7 @@ function dokan_sales_overview_chart_data( $start_date, $end_date, $group_by ) {
 
     ?>
     <div class="chart-container">
-        <div class="chart-placeholder main" style="height:568px"></div>
+        <div class="chart-placeholder main"></div>
     </div>
 
     <script type="text/javascript">
@@ -628,9 +635,6 @@ function dokan_top_sellers() {
     $start_date = strtotime( $start_date );
     $end_date = strtotime( $end_date );
 
-    $user_orders = dokan_get_seller_order_ids( $current_user->ID );
-    $user_orders_in = count( $user_orders ) ? implode( ', ', $user_orders ) : 0;
-
     // Get order ids and dates in range
     $order_items = apply_filters( 'woocommerce_reports_top_sellers_order_items', $wpdb->get_results( "
         SELECT order_item_meta_2.meta_value as product_id, SUM( order_item_meta.meta_value ) as item_quantity FROM {$wpdb->prefix}woocommerce_order_items as order_items
@@ -638,20 +642,16 @@ function dokan_top_sellers() {
         LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
         LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta_2 ON order_items.order_item_id = order_item_meta_2.order_item_id
         LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
-        LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID = rel.object_ID
-        LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
-        LEFT JOIN {$wpdb->terms} AS term USING( term_id )
+        LEFT JOIN {$wpdb->prefix}dokan_orders AS do ON posts.ID = do.order_id
 
         WHERE   posts.post_type     = 'shop_order'
         AND     posts.post_status   = 'publish'
-        AND     tax.taxonomy        = 'shop_order_status'
-        AND     term.slug           IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
+        AND     do.order_status IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
         AND     post_date > '" . date('Y-m-d', $start_date ) . "'
         AND     post_date < '" . date('Y-m-d', strtotime('+1 day', $end_date ) ) . "'
         AND     order_items.order_item_type = 'line_item'
         AND     order_item_meta.meta_key = '_qty'
         AND     order_item_meta_2.meta_key = '_product_id'
-        AND     posts.ID IN( {$user_orders_in} )
         GROUP BY order_item_meta_2.meta_value
     " ), $start_date, $end_date );
 
@@ -738,9 +738,6 @@ function dokan_top_earners() {
     $start_date = strtotime( $start_date );
     $end_date = strtotime( $end_date );
 
-    $user_orders = dokan_get_seller_order_ids( $current_user->ID );
-    $user_orders_in = count( $user_orders ) ? implode( ', ', $user_orders ) : 0;
-
     // Get order ids and dates in range
     $order_items = apply_filters( 'woocommerce_reports_top_earners_order_items', $wpdb->get_results( "
         SELECT order_item_meta_2.meta_value as product_id, SUM( order_item_meta.meta_value ) as line_total FROM {$wpdb->prefix}woocommerce_order_items as order_items
@@ -748,20 +745,16 @@ function dokan_top_earners() {
         LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
         LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta_2 ON order_items.order_item_id = order_item_meta_2.order_item_id
         LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
-        LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID = rel.object_ID
-        LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
-        LEFT JOIN {$wpdb->terms} AS term USING( term_id )
+        LEFT JOIN {$wpdb->prefix}dokan_orders AS do ON posts.ID = do.order_id
 
         WHERE   posts.post_type     = 'shop_order'
         AND     posts.post_status   = 'publish'
-        AND     tax.taxonomy        = 'shop_order_status'
-        AND     term.slug           IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
+        AND     do.order_status           IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
         AND     post_date > '" . date('Y-m-d', $start_date ) . "'
         AND     post_date < '" . date('Y-m-d', strtotime('+1 day', $end_date ) ) . "'
         AND     order_items.order_item_type = 'line_item'
         AND     order_item_meta.meta_key = '_line_total'
         AND     order_item_meta_2.meta_key = '_product_id'
-        AND     posts.ID IN( {$user_orders_in} )
         GROUP BY order_item_meta_2.meta_value
     " ), $start_date, $end_date );
 
@@ -823,279 +816,4 @@ function dokan_top_earners() {
         </tbody>
     </table>
     <?php
-}
-
-
-/**
- * Output the product sales chart for single products.
- *
- * @access public
- * @return void
- */
-function dokan_product_sales() {
-
-    global $wpdb, $woocommerce;
-
-    $chosen_product_ids = ( isset( $_POST['product_ids'] ) ) ? array_map( 'absint', (array) $_POST['product_ids'] ) : '';
-
-    if ( $chosen_product_ids && is_array( $chosen_product_ids ) ) {
-
-        $start_date = date( 'Ym', strtotime( '-12 MONTHS', current_time('timestamp') ) ) . '01';
-        $end_date   = date( 'Ymd', current_time( 'timestamp' ) );
-
-        $max_sales = $max_totals = 0;
-        $product_sales = $product_totals = array();
-
-        // Get titles and ID's related to product
-        $chosen_product_titles = array();
-        $children_ids = array();
-
-        foreach ( $chosen_product_ids as $product_id ) {
-            $children = (array) get_posts( 'post_parent=' . $product_id . '&fields=ids&post_status=any&numberposts=-1' );
-            $children_ids = $children_ids + $children;
-            $chosen_product_titles[] = get_the_title( $product_id );
-        }
-
-        // Get order items
-        $order_items = apply_filters( 'woocommerce_reports_product_sales_order_items', $wpdb->get_results( "
-            SELECT order_item_meta_2.meta_value as product_id, posts.post_date, SUM( order_item_meta.meta_value ) as item_quantity, SUM( order_item_meta_3.meta_value ) as line_total
-            FROM {$wpdb->prefix}woocommerce_order_items as order_items
-
-            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
-            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta_2 ON order_items.order_item_id = order_item_meta_2.order_item_id
-            LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta_3 ON order_items.order_item_id = order_item_meta_3.order_item_id
-            LEFT JOIN {$wpdb->posts} AS posts ON order_items.order_id = posts.ID
-            LEFT JOIN {$wpdb->term_relationships} AS rel ON posts.ID = rel.object_ID
-            LEFT JOIN {$wpdb->term_taxonomy} AS tax USING( term_taxonomy_id )
-            LEFT JOIN {$wpdb->terms} AS term USING( term_id )
-
-            WHERE   posts.post_type     = 'shop_order'
-            AND     order_item_meta_2.meta_value IN ('" . implode( "','", array_merge( $chosen_product_ids, $children_ids ) ) . "')
-            AND     posts.post_status   = 'publish'
-            AND     tax.taxonomy        = 'shop_order_status'
-            AND     term.slug           IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
-            AND     order_items.order_item_type = 'line_item'
-            AND     order_item_meta.meta_key = '_qty'
-            AND     order_item_meta_2.meta_key = '_product_id'
-            AND     order_item_meta_3.meta_key = '_line_total'
-            GROUP BY order_items.order_id
-            ORDER BY posts.post_date ASC
-        " ), array_merge( $chosen_product_ids, $children_ids ) );
-
-        $found_products = array();
-
-        if ( $order_items ) {
-            foreach ( $order_items as $order_item ) {
-
-                if ( $order_item->line_total == 0 && $order_item->item_quantity == 0 )
-                    continue;
-
-                // Get date
-                $date   = date( 'Ym', strtotime( $order_item->post_date ) );
-
-                // Set values
-                $product_sales[ $date ]     = isset( $product_sales[ $date ] ) ? $product_sales[ $date ] + $order_item->item_quantity : $order_item->item_quantity;
-                $product_totals[ $date ]    = isset( $product_totals[ $date ] ) ? $product_totals[ $date ] + $order_item->line_total : $order_item->line_total;
-
-                if ( $product_sales[ $date ] > $max_sales )
-                    $max_sales = $product_sales[ $date ];
-
-                if ( $product_totals[ $date ] > $max_totals )
-                    $max_totals = $product_totals[ $date ];
-            }
-        }
-        ?>
-        <h4><?php printf( __( 'Sales for %s:', 'dokan' ), implode( ', ', $chosen_product_titles ) ); ?></h4>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th><?php _e( 'Month', 'dokan' ); ?></th>
-                    <th colspan="2"><?php _e( 'Sales', 'dokan' ); ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    if ( sizeof( $product_sales ) > 0 ) {
-                        foreach ( $product_sales as $date => $sales ) {
-                            $width = ($sales>0) ? (round($sales) / round($max_sales)) * 100 : 0;
-                            $width2 = ($product_totals[$date]>0) ? (round($product_totals[$date]) / round($max_totals)) * 100 : 0;
-
-                            $orders_link = admin_url( 'edit.php?s&post_status=all&post_type=shop_order&action=-1&s=' . urlencode( implode( ' ', $chosen_product_titles ) ) . '&m=' . date( 'Ym', strtotime( $date . '01' ) ) . '&shop_order_status=' . implode( ",", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) );
-                            $orders_link = apply_filters( 'woocommerce_reports_order_link', $orders_link, $chosen_product_ids, $chosen_product_titles );
-
-                            echo '<tr><th><a href="' . esc_url( $orders_link ) . '">' . date_i18n( 'F', strtotime( $date . '01' ) ) . '</a></th>
-                            <td width="1%"><span>' . esc_html( $sales ) . '</span><span class="alt">' . woocommerce_price( $product_totals[ $date ] ) . '</span></td>
-                            <td class="bars">
-                                <span style="width:' . esc_attr( $width ) . '%">&nbsp;</span>
-                                <span class="alt" style="width:' . esc_attr( $width2 ) . '%">&nbsp;</span>
-                            </td></tr>';
-                        }
-                    } else {
-                        echo '<tr><td colspan="3">' . __( 'No sales :(', 'dokan' ) . '</td></tr>';
-                    }
-                ?>
-            </tbody>
-        </table>
-        <?php
-
-    } else {
-        ?>
-        <form method="post" action="">
-            <p><select id="product_ids" name="product_ids[]" class="ajax_chosen_select_products" multiple="multiple" data-placeholder="<?php _e( 'Search for a product&hellip;', 'dokan' ); ?>" style="width: 400px;"></select> <input type="submit" style="vertical-align: top;" class="button" value="<?php _e( 'Show', 'dokan' ); ?>" /></p>
-            <script type="text/javascript">
-                jQuery(function(){
-                    jQuery("select.ajax_chosen_select_products").chosen();
-
-                    // Ajax Chosen Product Selectors
-                    jQuery("select.ajax_chosen_select_products").ajaxChosen({
-                        method:     'GET',
-                        url:        '<?php echo admin_url('admin-ajax.php'); ?>',
-                        dataType:   'json',
-                        afterTypeDelay: 100,
-                        data:       {
-                            action:         'woocommerce_json_search_products',
-                            security:       '<?php echo wp_create_nonce("search-products"); ?>'
-                        }
-                    }, function (data) {
-
-                        var terms = {};
-
-                        jQuery.each(data, function (i, val) {
-                            terms[i] = val;
-                        });
-
-                        return terms;
-                    });
-
-                });
-            </script>
-        </form>
-        <?php
-    }
-}
-
-/**
- * Sales widget javascript
- *
- * @access public
- * @return void
- */
-function woocommerce_dashboard_sales_js() {
-
-    global $woocommerce, $wp_locale;
-
-    $screen = get_current_screen();
-
-    if (!$screen || $screen->id!=='dashboard') return;
-
-    global $current_month_offset, $the_month_num, $the_year;
-
-    // Get orders to display in widget
-    add_filter( 'posts_where', 'orders_this_month' );
-
-    $args = array(
-        'numberposts'     => -1,
-        'orderby'         => 'post_date',
-        'order'           => 'DESC',
-        'post_type'       => 'shop_order',
-        'post_status'     => 'publish' ,
-        'suppress_filters' => false,
-        'tax_query' => array(
-            array(
-                'taxonomy' => 'shop_order_status',
-                'terms' => apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ),
-                'field' => 'slug',
-                'operator' => 'IN'
-            )
-        )
-    );
-    $orders = get_posts( $args );
-
-    $order_counts = array();
-    $order_amounts = array();
-
-    // Blank date ranges to begin
-    $month = $the_month_num;
-    $year = (int) $the_year;
-
-    $first_day = strtotime("{$year}-{$month}-01");
-    $last_day = strtotime('-1 second', strtotime('+1 month', $first_day));
-
-    if ((date('m') - $the_month_num)==0) :
-        $up_to = date('d', strtotime('NOW'));
-    else :
-        $up_to = date('d', $last_day);
-    endif;
-    $count = 0;
-
-    while ($count < $up_to) :
-
-        $time = strtotime(date('Ymd', strtotime('+ '.$count.' DAY', $first_day))).'000';
-
-        $order_counts[$time] = 0;
-        $order_amounts[$time] = 0;
-
-        $count++;
-    endwhile;
-
-    if ($orders) :
-        foreach ($orders as $order) :
-
-            $order_data = new WC_Order($order->ID);
-
-            if ($order_data->status=='cancelled' || $order_data->status=='refunded') continue;
-
-            $time = strtotime(date('Ymd', strtotime($order->post_date))).'000';
-
-            if (isset($order_counts[$time])) :
-                $order_counts[$time]++;
-            else :
-                $order_counts[$time] = 1;
-            endif;
-
-            if (isset($order_amounts[$time])) :
-                $order_amounts[$time] = $order_amounts[$time] + $order_data->order_total;
-            else :
-                $order_amounts[$time] = (float) $order_data->order_total;
-            endif;
-
-        endforeach;
-    endif;
-
-    remove_filter( 'posts_where', 'orders_this_month' );
-
-    /* Script variables */
-    $params = array(
-        'currency_symbol'   => get_woocommerce_currency_symbol(),
-        'number_of_sales'   => absint( array_sum( $order_counts ) ),
-        'sales_amount'      => woocommerce_price( array_sum( $order_amounts ) ),
-        'sold'              => __( 'Sold', 'dokan' ),
-        'earned'            => __( 'Earned', 'dokan' ),
-        'month_names'       => array_values( $wp_locale->month_abbrev ),
-    );
-
-    $order_counts_array = array();
-    foreach ($order_counts as $key => $count) :
-        $order_counts_array[] = array($key, $count);
-    endforeach;
-
-    $order_amounts_array = array();
-    foreach ($order_amounts as $key => $amount) :
-        $order_amounts_array[] = array($key, $amount);
-    endforeach;
-
-    $order_data = array( 'order_counts' => $order_counts_array, 'order_amounts' => $order_amounts_array );
-
-    $params['order_data'] = json_encode($order_data);
-
-    // Queue scripts
-    $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-
-    wp_register_script( 'woocommerce_dashboard_sales', $woocommerce->plugin_url() . '/assets/js/admin/dashboard_sales' . $suffix . '.js', array( 'jquery', 'flot', 'flot-resize' ), '1.0' );
-    wp_register_script( 'flot', $woocommerce->plugin_url() . '/assets/js/admin/jquery.flot'.$suffix.'.js', 'jquery', '1.0' );
-    wp_register_script( 'flot-resize', $woocommerce->plugin_url() . '/assets/js/admin/jquery.flot.resize'.$suffix.'.js', 'jquery', '1.0' );
-
-    wp_localize_script( 'woocommerce_dashboard_sales', 'params', $params );
-
-    wp_print_scripts('woocommerce_dashboard_sales');
 }
