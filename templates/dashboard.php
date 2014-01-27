@@ -8,10 +8,7 @@ dokan_redirect_if_not_seller();
 
 get_header();
 
-wp_enqueue_script( 'jquery-chart' );
-wp_enqueue_script( 'jquery-flot' );
-
-global $wp_locale;
+dokan_reports_scripts();
 
 $user_id = get_current_user_id();
 $orders_counts = dokan_count_orders( $user_id );
@@ -151,8 +148,11 @@ $reviews_url = dokan_get_page_url( 'reviews' );
                         <div class="dashboard-widget sells-graph">
                             <div class="widget-title"><i class="fa fa-credit-card"></i> <?php _e( 'Sales', 'dokan' ); ?></div>
 
-                            <div id="placeholder" style="height: 350px;"></div>
-                            <?php require_once dirname( __DIR__ ) . '/includes/reports.php'; ?>
+                            <?php
+                            require_once dirname( __DIR__ ) . '/includes/reports.php';
+
+                            dokan_dashboard_sales_overview();
+                            ?>
                         </div> <!-- .sells-graph -->
 
 
@@ -203,50 +203,8 @@ $reviews_url = dokan_get_page_url( 'reviews' );
     jQuery(function($) {
         var order_stats = <?php echo json_encode( $order_data ); ?>;
 
-        var order_data = jQuery.parseJSON( '<?php echo dokan_sales_overview_chart_data(); ?>' );
-
-        var d = order_data.order_counts;
-        var d2 = order_data.order_amounts;
-
-        for (var i = 0; i < d.length; ++i) d[i][0] += 60 * 60 * 1000;
-        for (var i = 0; i < d2.length; ++i) d2[i][0] += 60 * 60 * 1000;
-
         var ctx = $("#order-stats").get(0).getContext("2d");
-        var poststats = new Chart(ctx).Doughnut(order_stats);
-
-        var placeholder = jQuery("#placeholder");
-        var plot = jQuery.plot(placeholder, [ { label: "<?php echo esc_js( __( 'Number of sales', 'woocommerce' ) ) ?>", data: d }, { label: "<?php echo esc_js( __( 'Sales amount', 'woocommerce' ) ) ?>", data: d2, yaxis: 2 } ], {
-            series: {
-                lines: { show: true, fill: true },
-                points: { show: true }
-            },
-            grid: {
-                show: true,
-                aboveData: false,
-                color: '#ccc',
-                backgroundColor: '#fff',
-                borderWidth: 0,
-                borderColor: '#ccc',
-                clickable: false,
-                hoverable: true,
-                // markings: weekendAreas
-            },
-            xaxis: {
-                mode: "time",
-                timeformat: "%d %b",
-                monthNames: <?php echo json_encode( array_values( $wp_locale->month_abbrev ) ) ?>,
-                tickLength: 1,
-                minTickSize: [1, "day"]
-            },
-            yaxes: [ { min: 0, tickSize: 10, tickDecimals: 0 }, { position: "right", min: 0, tickDecimals: 2 } ],
-            colors: ["#8a4b75", "#47a03e"],
-            legend: {
-                show: true,
-                position: "nw"
-            }
-        });
-
-        placeholder.resize();
+        new Chart(ctx).Doughnut(order_stats);
     })
 </script>
 
