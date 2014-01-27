@@ -15,7 +15,6 @@ if( $validate !== false && !is_wp_error( $validate ) ) {
     $dokan_withdraw->insert_withdraw_info();
 }
 
-
 $dokan_withdraw->cancel_pending();
 
 get_header();
