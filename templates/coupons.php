@@ -54,23 +54,31 @@ get_header();
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
 
-                <?php $dokan_template_coupons->user_coupons(); ?>
-
                 <?php
-                if ( is_wp_error( $validated )) {
-                    $messages = $validated->get_error_messages();
+                if ( !dokan_is_seller_enabled( get_current_user_id() ) ) {
+                    dokan_seller_not_enabled_notice();
+                } else {
+                    ?>
 
-                    foreach ($messages as $message) {
-                        ?>
-                        <div class="alert alert-danger" style="width: 40%; margin-left: 25%;">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong><?php _e( $message,'dokan'); ?></strong>
-                        </div>
-                        <?php
+                    <?php $dokan_template_coupons->user_coupons(); ?>
+
+                    <?php
+                    if ( is_wp_error( $validated )) {
+                        $messages = $validated->get_error_messages();
+
+                        foreach ($messages as $message) {
+                            ?>
+                            <div class="alert alert-danger" style="width: 40%; margin-left: 25%;">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong><?php _e( $message,'dokan'); ?></strong>
+                            </div>
+                            <?php
+                        }
                     }
-                }
-                ?>
-                <?php $dokan_template_coupons->add_coupons_form($validated); ?>
+                    ?>
+                    <?php $dokan_template_coupons->add_coupons_form($validated); ?>
+
+                <?php } ?>
 
             </article>
 
