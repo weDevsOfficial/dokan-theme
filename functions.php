@@ -85,12 +85,13 @@ class WeDevs_Dokan {
     function init_classes() {
         if ( is_admin() ) {
             Dokan_Slider::get_instance();
-            new Dokan_Rewrites();
             new Dokan_Admin_User_Profile();
 
         } else {
             new Dokan_Pageviews();
         }
+
+        new Dokan_Rewrites();
     }
 
     function init_ajax() {
