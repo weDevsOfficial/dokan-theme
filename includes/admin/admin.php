@@ -114,6 +114,14 @@ class Dokan_Admin_Settings {
                     'type' => 'text',
                 ),
                 array(
+                    'name' => 'withdraw_methods',
+                    'label' => __( 'Withdraw Methods', 'dokan' ),
+                    'desc' => __( 'Withdraw methods for sellers', 'dokan' ),
+                    'type' => 'multicheck',
+                    'default' => array( 'paypal' => 'paypal' ),
+                    'options' => dokan_withdraw_get_methods()
+                ),
+                array(
                     'name' => 'withdraw_limit',
                     'label' => __( 'Minimum Withdraw Limit', 'dokan' ),
                     'desc' => __( 'Minimum balance required to make a withdraw request', 'dokan' ),
