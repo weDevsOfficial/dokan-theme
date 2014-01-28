@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/order-functions.php';
+require_once __DIR__ . '/withdraw-functions.php';
 
 function dokan_is_user_seller( $user_id ) {
     if ( !user_can( $user_id, 'edit_shop_orders' ) ) {
