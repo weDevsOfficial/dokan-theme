@@ -24,11 +24,13 @@ class Dokan_Template_Withdraw {
     }
 
     function withdraw_csv() {
-        if( ! isset( $_POST['dokan-withdraw-csv'] ) ) {
-
+        if ( ! isset( $_POST['dokan_withdraw_bulk'] ) ) {
             return;
         }
-        global $wpdb;
+
+        if ( $_POST['dokan_withdraw_bulk'] != 'paypal' ) {
+            return;
+        }
 
         if( ! isset( $_POST['id'] )  ) {
             return;
@@ -41,6 +43,7 @@ class Dokan_Template_Withdraw {
 
         $id = implode( "','", $_POST['id'] );
 
+        global $wpdb;
         $result = $wpdb->get_results(
             "SELECT * FROM {$wpdb->dokan_withdraw}
             WHERE id in('$id') AND status=0"
@@ -191,56 +194,102 @@ class Dokan_Template_Withdraw {
         return false;
     }
 
-    function get_withdraw_requests( $user_id = '', $status = 0 ) {
+    function get_withdraw_requests( $user_id = '', $status = 0, $limit = 10, $offset = 0) {
         global $wpdb;
 
         $where = empty( $user_id ) ? '' : sprintf( "user_id ='%d' &&", $user_id );
 
-        $result = $wpdb->get_results( $wpdb->prepare(
-            "SELECT * FROM {$wpdb->dokan_withdraw}
-            WHERE $where status = %d", $status
-        ));
+        $sql = $wpdb->prepare( "SELECT * FROM {$wpdb->dokan_withdraw} WHERE $where status = %d LIMIT %d, %d", $status, $offset, $limit );
+        $result = $wpdb->get_results( $sql );
 
         return $result;
     }
 
+    function get_status_code( $status ) {
+        switch ($status) {
+            case 'pending':
+                return 0;
+                break;
+
+            case 'completed':
+                return 1;
+                break;
+
+            case 'cancelled':
+                return 2;
+                break;
+        }
+    }
+
+    function get_withdraw_count() {
+        global $wpdb;
+
+        $cache_key = 'dokan_withdraw_count';
+        $counts = wp_cache_get( $cache_key );
+
+        if ( false === $counts ) {
+
+            $counts = array( 'pending' => 0, 'completed' => 0, 'cancelled' => 0 );
+            $sql = "SELECT COUNT(id) as count, status FROM {$wpdb->dokan_withdraw} GROUP BY status";
+            $result = $wpdb->get_results( $sql );
+
+            if ( $result ) {
+                foreach ($result as $row) {
+                    if ( $row->status == '0' ) {
+                        $counts['pending'] = (int) $row->count;
+                    } elseif ( $row->status == '1' ) {
+                        $counts['completed'] = (int) $row->count;
+                    } elseif ( $row->status == '2' ) {
+                        $counts['cancelled'] = (int) $row->count;
+                    }
+                }
+            }
+        }
+
+        return $counts;
+    }
+
     function admin_withdraw_list( $status ) {
-        $result = $this->get_withdraw_requests( '', $status );
+        $pagenum = isset( $_GET['paged'] ) ? absint( $_GET['paged'] ) : 1;
+        $limit = 5;
+        $offset = ( $pagenum - 1 ) * $limit;
+        $result = $this->get_withdraw_requests( '', $this->get_status_code( $status ), $limit, $offset );
         ?>
         <form method="post" action="">
-            <table class="widefat" style="margin-top: 10px;">
+            <table class="widefat withdraw-table">
                 <thead>
                 <tr>
                     <th class="check-column"><input type="checkbox" id="cb-select-all-1" class="dokan-withdraw-allcheck"></th>
                     <th><?php _e( 'User Name', 'dokan' ); ?></th>
                     <th><?php _e( 'User Email', 'dokan' ); ?></th>
                     <th><?php _e( 'Amount', 'dokan' ); ?></th>
-                    <th><?php _e( 'Date', 'dokan' ); ?></th>
-                    <th><?php _e( 'Status', 'dokan' ); ?></th>
                     <th><?php _e( 'Method', 'dokan' ); ?></th>
                     <th><?php _e( 'Note', 'dokan' ); ?></th>
                     <th><?php _e( 'IP', 'dokan' ); ?></th>
+                    <th><?php _e( 'Date', 'dokan' ); ?></th>
                 </tr>
                 </thead>
 
             <?php
             if ( $result ) {
-                foreach( $result as $key=>$result_array ) {
+                $count = 0;
+                foreach( $result as $key => $result_array ) {
                     $user_data = get_userdata($result_array->user_id);
                     ?>
-
-                    <tr>
+                    <tr class="<?php echo ($count % 2) == 0 ? 'alternate': 'odd'; ?>">
                         <th class="check-column"><input type="checkbox" name="id[]" value="<?php echo $result_array->id;?>"></th>
-                        <th><?php echo $user_data->user_login; ?></th>
+                        <th>
+                            <a href="<?php echo admin_url( 'user-edit.php?user_id=' . $user_data->ID ); ?>"><?php echo $user_data->user_login; ?></a>
+                        </th>
                         <th><?php echo $user_data->user_email; ?></th>
                         <th><?php echo wc_price( $result_array->amount ); ?></th>
-                        <th><?php echo $result_array->date; ?></th>
                         <th>
-                            <?php
-                                echo $this->request_status( $result_array->status );
-                            ?>
+                            <?php if ( $result_array->method == 'bank' ) {
+                                echo __( 'Bank Transfer', 'dokan' );
+                            } elseif ( $result_array->method == 'paypal' ) {
+                                echo __( 'PayPal', 'dokan' );
+                            } ?>
                         </th>
-                        <th><?php echo $result_array->method; ?></th>
                         <th >
                             <div class="dokan-add-note" style="width: 130px;">
                                 <p class="ajax_note"><?php echo $result_array->note; ?></p>
@@ -252,10 +301,12 @@ class Dokan_Template_Withdraw {
 
                         </th>
                         <th><?php echo $result_array->ip; ?></th>
+                        <th><?php echo date_i18n( 'M j, Y g:ia', strtotime( $result_array->date ) ); ?></th>
                     </tr>
                     <?php
-
+                    $count++;
                 }
+
             } else {
                 ?>
 
@@ -270,13 +321,54 @@ class Dokan_Template_Withdraw {
             ?>
             </table>
 
-            <?php
-                if ( $result && $status == 0 ) {
-                    submit_button( __( 'Download PayPal mass payment file (csv)', 'dokan' ), 'primary', 'dokan-withdraw-csv' );
-                }
-            ?>
+            <div class="tablenav bottom">
+
+                <div class="alignleft actions bulkactions">
+                    <select name="dokan_withdraw_bulk">
+                        <option value="-1" selected="selected">Bulk Actions</option>
+                        <option value="trash"><?php _e( 'Delete', 'dokan' ); ?></option>
+
+                        <?php if ( $status == 'pending' ) { ?>
+                            <option value="cancel"><?php _e( 'Cancel', 'dokan' ); ?></option>
+                        <?php } ?>
+
+                        <?php if ( $result ) { ?>
+                            <option value="paypal"><?php _e( 'Download PayPal mass payment file', 'dokan' ); ?></option>
+                        <?php } ?>
+                    </select>
+
+                    <input type="submit" name="" id="doaction2" class="button button-primary" value="Apply">
+                </div>
+
+                <?php if ( $result ) {
+                    $counts = $this->get_withdraw_count();
+                    $num_of_pages = ceil( $counts[$status] / $limit );
+                    $page_links = paginate_links( array(
+                        'base' => add_query_arg( 'paged', '%#%' ),
+                        'format' => '',
+                        'prev_text' => __( '&laquo;', 'aag' ),
+                        'next_text' => __( '&raquo;', 'aag' ),
+                        'total' => $num_of_pages,
+                        'current' => $pagenum
+                    ) );
+
+                    if ( $page_links ) {
+                        echo '<div class="tablenav-pages">' . $page_links . '</div>';
+                    }
+                } ?>
+            </div>
 
         </form>
+
+        <style type="text/css">
+            .withdraw-table {
+                margin-top: 10px;
+            }
+
+            .withdraw-table td, .withdraw-table th {
+                vertical-align: top;
+            }
+        </style>
         <?php
 
         $this->add_note_script();
