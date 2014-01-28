@@ -68,7 +68,7 @@ class Dokan_Slider {
             'description' => '',
             'public' => false,
             'show_ui' => true,
-            'show_in_menu' => true,
+            'show_in_menu' => false,
             'capability_type' => 'post',
             'hierarchical' => false,
             'rewrite' => array('slug' => ''),
