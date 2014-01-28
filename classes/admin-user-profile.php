@@ -15,13 +15,40 @@ class Dokan_Admin_User_Profile {
             return;
         }
 
+        if ( !user_can( $user, 'dokandar' ) ) {
+            return;
+        }
+
         $selling = get_user_meta( $user->ID, 'dokan_enable_selling', true );
         $publishing = get_user_meta( $user->ID, 'dokan_publishing', true );
+        $store_settings = get_user_meta( $user->ID, 'dokan_profile_settings', true );
+        // var_dump($store_settings);
         ?>
         <h3><?php _e( 'Dokan Options', 'dokan' ); ?></h3>
 
         <table class="form-table">
             <tbody>
+                <tr>
+                    <th><?php _e( 'Store name', 'dokan' ); ?></th>
+                    <td>
+                        <?php echo isset( $store_settings['store_name'] ) ? esc_html( $store_settings['store_name'] ) : __( 'Not found', 'dokan' ); ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><?php _e( 'Address', 'dokan' ); ?></th>
+                    <td>
+                        <?php echo isset( $store_settings['address'] ) ? esc_html( $store_settings['address'] ) : __( 'Not found', 'dokan' ); ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><?php _e( 'Phone', 'dokan' ); ?></th>
+                    <td>
+                        <?php echo isset( $store_settings['phone'] ) ? esc_html( $store_settings['phone'] ) : __( 'Not found', 'dokan' ); ?>
+                    </td>
+                </tr>
+
                 <tr>
                     <th><?php _e( 'Selling', 'dokan' ); ?></th>
                     <td>
