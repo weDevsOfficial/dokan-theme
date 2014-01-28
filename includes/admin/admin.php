@@ -27,7 +27,8 @@ class Dokan_Admin_Settings {
     }
 
     function admin_init() {
-        Dokan_Template_Withdraw::init()->withdraw_csv();
+        Dokan_Template_Withdraw::init()->bulk_action_handler();
+
         //set the settings
         $this->settings_api->set_sections( $this->get_settings_sections() );
         $this->settings_api->set_fields( $this->get_settings_fields() );
@@ -39,9 +40,19 @@ class Dokan_Admin_Settings {
     function admin_menu() {
         $menu_position = apply_filters( 'doakn_menu_position', 17 );
         $capability = apply_filters( 'doakn_menu_capability', 'activate_plugins' );
+        $withdraw = dokan_get_withdraw_count();
+        $withdraw_text = __( 'Withdraw', 'dokan' );
+
+        if ( $withdraw['pending'] ) {
+            $withdraw_text = sprintf( __( 'Withdraw %s', 'dokan' ), '<span class="awaiting-mod count-1"><span class="pending-count">' . $withdraw['pending'] . '</span></span>');
+        }
 
         $dashboard = add_menu_page( __( 'Dokan', 'dokan' ), __( 'Dokan', 'dokan' ), $capability, 'dokan', array($this, 'dashboard'), 'dashicons-vault', $menu_position );
-        add_submenu_page( 'dokan', __( 'Withdraw', 'dokan' ), __( 'Withdraw', 'dokan' ), $capability, 'dokan-withdraw', array($this, 'withdraw_page') );
+        add_submenu_page( 'dokan', __( 'Withdraw', 'dokan' ), $withdraw_text, $capability, 'dokan-withdraw', array($this, 'withdraw_page') );
+
+        do_action( 'dokan_admin_menu' );
+
+        add_submenu_page( 'dokan', __( 'Slider', 'dokan' ), __( 'Slider', 'dokan' ), $capability, 'edit.php?post_type=dokan_slider' );
         add_submenu_page( 'dokan', __( 'Settings', 'dokan' ), __( 'Settings', 'dokan' ), $capability, 'dokan-settings', array($this, 'settings_page') );
 
         add_action( $dashboard, array($this, 'dashboard_script' ) );
