@@ -355,12 +355,12 @@ class Dokan_Template_Withdraw {
                             <input type="checkbox" name="id[]" value="<?php echo $result_array->id;?>">
                             <input type="hidden" name="user_id[]" value="<?php echo $result_array->user_id; ?>">
                         </th>
-                        <th>
+                        <td>
                             <strong><a href="<?php echo admin_url( 'user-edit.php?user_id=' . $user_data->ID ); ?>"><?php echo $user_data->user_login; ?></a></strong>
-                        </th>
-                        <th><?php echo $user_data->user_email; ?></th>
-                        <th><?php echo wc_price( $result_array->amount ); ?></th>
-                        <th>
+                        </td>
+                        <td><?php echo $user_data->user_email; ?></td>
+                        <td><?php echo wc_price( $result_array->amount ); ?></td>
+                        <td>
                             <?php if ( $result_array->method == 'bank' ) {
                                 echo __( 'Bank Transfer', 'dokan' );
                             } elseif ( $result_array->method == 'paypal' ) {
@@ -368,19 +368,24 @@ class Dokan_Template_Withdraw {
                             } elseif ( $result_array->method == 'skrill' ) {
                                 echo __( 'Skrill', 'dokan' );
                             } ?>
-                        </th>
-                        <th >
-                            <div class="dokan-add-note" style="width: 130px;">
-                                <p class="ajax_note"><?php echo $result_array->note; ?></p>
-                                <input type="text" class="dokan-note-text" style="display: none;" name="note">
-                                <a class="dokan-note-submit btn btn-info" style="display: none;" data-admin_url="<?php echo admin_url( 'admin-ajax.php' ); ?>" data-row_id=<?php echo $result_array->id; ?> data-user_id=<?php echo $result_array->user_id; ?> href="#" ><?php _e('Note', 'dokan' ); ?></a>
-                                <a href="#" style="display: none; margin-left: 72px;" class="dokan-note-cancle button"><?php _e('X', 'dokan' ); ?></a>
-                                <a href="#" class="dokan-note-field"><?php _e('Add note', 'dokan' ); ?></a>
+                        </td>
+                        <td>
+                            <div class="dokan-add-note">
+                                <div class="note-display">
+                                    <p class="ajax_note"><?php echo $result_array->note; ?></p>
+                                    <a href="#" class="dokan-note-field row-actions"><?php _e('Add note', 'dokan' ); ?></a>
+                                </div>
+
+                                <div class="note-form" style="display: none;">
+                                    <p><input type="text" class="dokan-note-text" name="note" value="<?php echo esc_attr( $result_array->note ); ?>"></p>
+                                    <a class="dokan-note-submit button" data-id=<?php echo $result_array->id; ?> href="#" ><?php _e('Save', 'dokan' ); ?></a>
+                                    <a href="#" class="dokan-note-cancel"><?php _e( 'cancel', 'dokan' ); ?></a>
+                                </div>
                             </div>
 
-                        </th>
-                        <th><?php echo $result_array->ip; ?></th>
-                        <th><?php echo date_i18n( 'M j, Y g:ia', strtotime( $result_array->date ) ); ?></th>
+                        </td>
+                        <td><?php echo $result_array->ip; ?></td>
+                        <td><?php echo date_i18n( 'M j, Y g:ia', strtotime( $result_array->date ) ); ?></td>
                     </tr>
                     <?php
                     $count++;
@@ -468,64 +473,57 @@ class Dokan_Template_Withdraw {
     function add_note_script() {
         ?>
         <script type="text/javascript">
+            jQuery(function($) {
+                var dokan_admin = {
+                    init: function() {
+                        $('div.dokan-add-note').on('click', 'a.dokan-note-field', this.addnote);
+                        $('div.dokan-add-note').on('click', 'a.dokan-note-cancel', this.cancel);
+                        $('div.dokan-add-note').on('click', 'a.dokan-note-submit', this.updateNote);
+                    },
 
-        jQuery(function($) {
-            var dokan_admin = {
-                init: function() {
-                    $('div.dokan-add-note').on('click', 'a.dokan-note-field', this.addnote);
-                    $('div.dokan-add-note').on('click', 'a.dokan-note-cancle', this.addnoteCancle);
-                    $('div.dokan-add-note').on('click', 'a.dokan-note-submit', this.noteUpdate);
-                },
+                    updateNote: function(e) {
+                        e.preventDefault();
 
-                noteUpdate: function(e) {
-                    e.preventDefault();
+                        var self = $(this),
+                            form_wrap = self.closest('.note-form'),
+                            row_id = self.data('id'),
+                            note = form_wrap.find('input.dokan-note-text').val(),
+                            data = {
+                                'action': 'note',
+                                'row_id': row_id,
+                                'note': note,
+                            };
 
-                    var self = $(this),
-                    row_id = self.data('row_id'),
-                    note = self.siblings('input.dokan-note-text').val(),
-                    ajaxurl = self.data('admin_url');
-                    data = {
-                        'action': 'note',
-                        'row_id': row_id,
-                        'note': note,
-                    };
+                        $.post( '<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(resp) {
+                            if ( resp.success ) {
+                                form_wrap.hide();
 
-                    $.post( ajaxurl, data, function(resp) {
-                        if(resp.success) {
+                                var display = form_wrap.siblings('.note-display');
+                                display.find('p.ajax_note').text(resp.data['note']);
+                                display.show();
+                            }
+                        });
+                    },
 
-                            self.siblings('p.ajax_note').text(resp.data['note']);
-                            self.hide();
-                            self.siblings('input.dokan-note-text').hide();
-                            self.siblings('a.dokan-note-cancle').hide();
-                            self.siblings('a.dokan-note-field').show();
-                        }
-                    });
-                },
+                    cancel: function(e) {
+                        e.preventDefault();
 
-                addnoteCancle: function(e) {
-                    e.preventDefault();
-                    var self = $(this);
-                    self.hide();
+                        var display = $(this).closest('.note-form');
+                        display.slideUp();
+                        display.siblings('.note-display').slideDown();
+                    },
 
-                    self.siblings( "a.dokan-note-submit" ).hide();
-                    self.siblings('input.dokan-note-text').hide();
-                    self.siblings('a.dokan-note-field').show();
+                    addnote: function(e) {
+                        e.preventDefault();
 
-                },
+                        var display = $(this).closest('.note-display');
+                        display.slideUp();
+                        display.siblings('.note-form').slideDown();
+                    }
+                };
 
-                addnote: function(e) {
-                    e.preventDefault();
-                    var self = $(this);
-
-                    self.hide();
-                    self.siblings( "a.dokan-note-submit" ).show();
-                    self.siblings('input.dokan-note-text').show();
-                    self.siblings('a.dokan-note-cancle').show();
-
-                }
-            }
-            dokan_admin.init();
-        })
+                dokan_admin.init();
+            });
         </script>
 
         <?php
