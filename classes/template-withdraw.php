@@ -283,7 +283,7 @@ class Dokan_Template_Withdraw {
 
     function admin_withdraw_list( $status ) {
         $pagenum = isset( $_GET['paged'] ) ? absint( $_GET['paged'] ) : 1;
-        $limit = 5;
+        $limit = 20;
         $offset = ( $pagenum - 1 ) * $limit;
         $result = $this->get_withdraw_requests( '', $this->get_status_code( $status ), $limit, $offset );
         ?>
@@ -347,45 +347,37 @@ class Dokan_Template_Withdraw {
             <?php
             if ( $result ) {
                 $count = 0;
-                foreach( $result as $key => $result_array ) {
-                    $user_data = get_userdata($result_array->user_id);
+                foreach( $result as $key => $row ) {
+                    $user_data = get_userdata($row->user_id);
                     ?>
                     <tr class="<?php echo ($count % 2) == 0 ? 'alternate': 'odd'; ?>">
                         <th class="check-column">
-                            <input type="checkbox" name="id[]" value="<?php echo $result_array->id;?>">
-                            <input type="hidden" name="user_id[]" value="<?php echo $result_array->user_id; ?>">
+                            <input type="checkbox" name="id[]" value="<?php echo $row->id;?>">
+                            <input type="hidden" name="user_id[]" value="<?php echo $row->user_id; ?>">
                         </th>
                         <td>
                             <strong><a href="<?php echo admin_url( 'user-edit.php?user_id=' . $user_data->ID ); ?>"><?php echo $user_data->user_login; ?></a></strong>
                         </td>
                         <td><?php echo $user_data->user_email; ?></td>
-                        <td><?php echo wc_price( $result_array->amount ); ?></td>
-                        <td>
-                            <?php if ( $result_array->method == 'bank' ) {
-                                echo __( 'Bank Transfer', 'dokan' );
-                            } elseif ( $result_array->method == 'paypal' ) {
-                                echo __( 'PayPal', 'dokan' );
-                            } elseif ( $result_array->method == 'skrill' ) {
-                                echo __( 'Skrill', 'dokan' );
-                            } ?>
-                        </td>
+                        <td><?php echo wc_price( $row->amount ); ?></td>
+                        <td><?php echo dokan_withdraw_get_method_title( $row->method ); ?></td>
                         <td>
                             <div class="dokan-add-note">
                                 <div class="note-display">
-                                    <p class="ajax_note"><?php echo $result_array->note; ?></p>
+                                    <p class="ajax_note"><?php echo $row->note; ?></p>
                                     <a href="#" class="dokan-note-field row-actions"><?php _e('Add note', 'dokan' ); ?></a>
                                 </div>
 
                                 <div class="note-form" style="display: none;">
-                                    <p><input type="text" class="dokan-note-text" name="note" value="<?php echo esc_attr( $result_array->note ); ?>"></p>
-                                    <a class="dokan-note-submit button" data-id=<?php echo $result_array->id; ?> href="#" ><?php _e('Save', 'dokan' ); ?></a>
+                                    <p><input type="text" class="dokan-note-text" name="note" value="<?php echo esc_attr( $row->note ); ?>"></p>
+                                    <a class="dokan-note-submit button" data-id=<?php echo $row->id; ?> href="#" ><?php _e('Save', 'dokan' ); ?></a>
                                     <a href="#" class="dokan-note-cancel"><?php _e( 'cancel', 'dokan' ); ?></a>
                                 </div>
                             </div>
 
                         </td>
-                        <td><?php echo $result_array->ip; ?></td>
-                        <td><?php echo date_i18n( 'M j, Y g:ia', strtotime( $result_array->date ) ); ?></td>
+                        <td><?php echo $row->ip; ?></td>
+                        <td><?php echo date_i18n( 'M j, Y g:ia', strtotime( $row->date ) ); ?></td>
                     </tr>
                     <?php
                     $count++;
@@ -670,8 +662,8 @@ class Dokan_Template_Withdraw {
         if ( $this->has_pending_request( $current_user->ID ) ) {
             ?>
             <div class="alert alert-warning">
-                <p><strong>You've already pending withdraw request(s).</strong></p>
-                <p>Until it's been cancelled or approved, you can't submit any new request.</p>
+                <p><strong><?php _e( 'You\'ve already pending withdraw request(s).', 'dokan' ); ?></strong></p>
+                <p><?php _e( 'Until it\'s been cancelled or approved, you can\'t submit any new request.', 'dokan' ) ?></p>
             </div>
 
             <?php
@@ -680,13 +672,13 @@ class Dokan_Template_Withdraw {
 
         } else if ( !$this->has_withdraw_balance( $current_user->ID ) ) {
 
-            print(__( 'You have no sufficient account balance for withdraw request', 'dokan' ) );
+            printf( '<div class="alert alert-danger">%s</div>', __( 'You don\'t have sufficient balance for a withdraw request!', 'dokan' ) );
             return;
         }
 
-        $payment_methods = $this->get_payment_methods();
+        $payment_methods = dokan_withdraw_get_active_methods();
 
-        if( is_wp_error($validate) ) {
+        if ( is_wp_error($validate) ) {
             $amount = $_POST['witdraw_amount'];
             $withdraw_method = $_POST['withdraw_method'];
         } else {
@@ -694,9 +686,7 @@ class Dokan_Template_Withdraw {
             $withdraw_method = '';
         }
         ?>
-
-
-        <div class="alert  alert-danger" style="display: none;">
+        <div class="alert alert-danger" style="display: none;">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong class="jquery_error_place"></strong>
         </div>
@@ -725,8 +715,8 @@ class Dokan_Template_Withdraw {
 
                 <div class="col-sm-3">
                     <select class="form-control" required name="withdraw_method" id="withdraw-method">
-                        <?php foreach ($payment_methods as $value => $name) { ?>
-                            <option <?php selected( $withdraw_method, $value );  ?>value="<?php echo esc_attr( $value ); ?>"><?php echo $name; ?></option>
+                        <?php foreach ($payment_methods as $method_name) { ?>
+                            <option <?php selected( $withdraw_method, $method_name );  ?>value="<?php echo esc_attr( $method_name ); ?>"><?php echo dokan_withdraw_get_method_title( $method_name ); ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -742,6 +732,40 @@ class Dokan_Template_Withdraw {
 
 
         <?php
+    }
+
+    function user_approved_withdraws( $user_id ) {
+        $requests = $this->get_withdraw_requests( $user_id, 1, 100 );
+
+        if ( $requests ) {
+            ?>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th><?php _e( 'Amount', 'dokan' ); ?></th>
+                        <th><?php _e( 'Method', 'dokan' ); ?></th>
+                        <th><?php _e( 'Date', 'dokan' ); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                <?php foreach ($requests as $row) { ?>
+                    <tr>
+                        <td><?php echo wc_price( $row->amount ); ?></td>
+                        <td><?php echo dokan_withdraw_get_method_title( $row->method ); ?></td>
+                        <td><?php echo date_i18n( 'M j, Y g:ia', strtotime( $row->date ) ); ?></td>
+                    </tr>
+                <?php } ?>
+
+                </tbody>
+            </table>
+
+        <?php } else { ?>
+            <div class="alert alert-warning">
+                <strong><?php _e( 'Err!', 'dokan' ); ?></strong> <?php _e( 'Sorry, no transactions found!', 'dokan' ); ?>
+            </div>
+            <?php
+        }
     }
 
 }
