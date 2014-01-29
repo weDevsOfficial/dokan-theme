@@ -1386,3 +1386,28 @@ function dokan_get_on_sale_products( $per_page = 10, $paged = 1 ) {
 
     return new WP_Query( apply_filters( 'dokan_on_sale_products_query', $args ) );
 }
+
+function dokan_get_seller_balance( $seller_id, $formatted = true ) {
+    global $wpdb;
+
+    $cache_key = 'dokan_seller_balance_' . $seller_id;
+    $earning = wp_cache_get( $cache_key, 'dokan' );
+
+    if ( false === $earning ) {
+        $sql = "SELECT SUM(net_amount) as earnings,
+            (SELECT SUM(amount) FROM wp_dokan_withdraw WHERE user_id = %d AND status = 1) as withdraw
+            FROM wp_dokan_orders
+            WHERE seller_id = %d AND order_status IN('completed', 'on-hold', 'processing')";
+
+        $result = $wpdb->get_row( $wpdb->prepare( $sql, $seller_id, $seller_id ) );
+        $earning = $result->earnings - $result->withdraw;
+
+        wp_cache_set( $cache_key, $earning, 'dokan' );
+    }
+
+    if ( $formatted ) {
+        return wc_price( $earning );
+    }
+
+    return $earning;
+}
