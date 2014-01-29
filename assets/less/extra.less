@@ -6,6 +6,27 @@
 /* workarounds */
 * html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
 
+ul.subsubsub {
+    font-size: 12px;
+    color: @borderColor;
+    margin: 0 0 10px 0;
+    padding: 0;
+
+    li {
+        line-height: 13px;
+        padding: 0 5px;
+        border-right: 1px solid @borderColor;
+
+        &:last-child {
+            border-right: none;
+        }
+
+        &.active a {
+            color: #999;
+        }
+    }
+}
+
 .woo-product-list {
     h3 {
         background: #585858;

@@ -318,7 +318,7 @@ function dokan_product_listing_status_filter() {
     $status_class = isset( $_GET['post_status'] ) ? $_GET['post_status'] : 'all';
     $post_counts = dokan_count_posts( 'product', get_current_user_id() );
     ?>
-    <ul class="list-inline col-md-9 post-statuses-filter">
+    <ul class="list-inline col-md-9 subsubsub">
         <li<?php echo $status_class == 'all' ? ' class="active"' : ''; ?>>
             <a href="<?php echo $permalink; ?>"><?php printf( __( 'All (%d)', 'dokan' ), $post_counts->total ); ?></a>
         </li>

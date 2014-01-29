@@ -1052,23 +1052,6 @@ a:hover {
 .page-template-templatesproducts-php table.product-listing-table td.post-date {
   font-size: 13px;
 }
-.page-template-templatesproducts-php ul.post-statuses-filter {
-  font-size: 12px;
-  color: #dddddd;
-  margin: 0;
-  padding: 0;
-}
-.page-template-templatesproducts-php ul.post-statuses-filter li {
-  line-height: 13px;
-  padding: 0 5px;
-  border-right: 1px solid #dddddd;
-}
-.page-template-templatesproducts-php ul.post-statuses-filter li:last-child {
-  border-right: none;
-}
-.page-template-templatesproducts-php ul.post-statuses-filter li.active a {
-  color: #999;
-}
 .page-template-templatesproducts-php del .amount {
   color: #dd5a43;
 }
@@ -2350,6 +2333,23 @@ a:hover {
   width: 1px;
 }
 /* without this, the menu expands to 100% in IE6 */
+ul.subsubsub {
+  font-size: 12px;
+  color: #dddddd;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+ul.subsubsub li {
+  line-height: 13px;
+  padding: 0 5px;
+  border-right: 1px solid #dddddd;
+}
+ul.subsubsub li:last-child {
+  border-right: none;
+}
+ul.subsubsub li.active a {
+  color: #999;
+}
 .woo-product-list h3 {
   background: #585858;
   width: 100%;
