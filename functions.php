@@ -191,6 +191,7 @@ class WeDevs_Dokan {
         global $wpdb;
 
         $wpdb->dokan_withdraw = $wpdb->prefix . 'dokan_withdraw';
+        $wpdb->dokan_orders = $wpdb->prefix . 'dokan_orders';
     }
 
     function install_theme() {
