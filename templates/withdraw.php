@@ -6,6 +6,7 @@
 dokan_redirect_login();
 dokan_redirect_if_not_seller();
 
+$user_id = get_current_user_id();
 $dokan_withdraw = Dokan_Template_Withdraw::init();
 
 $validate = $dokan_withdraw->validate();
@@ -50,7 +51,25 @@ get_header();
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
 
-                <?php $dokan_withdraw->withdraw_form($validate); ?>
+                <?php $current = isset( $_GET['type'] ) ? $_GET['type'] : 'pending'; ?>
+                <ul class="list-inline subsubsub">
+                    <li<?php echo $current == 'pending' ? ' class="active"' : ''; ?>>
+                        <a href="<?php echo get_permalink(); ?>"><?php _e( 'Withdraw Request', 'dokan' ); ?></a>
+                    </li>
+                    <li<?php echo $current == 'approved' ? ' class="active"' : ''; ?>>
+                        <a href="<?php echo add_query_arg( array( 'type' => 'approved' ), get_permalink() ); ?>"><?php _e( 'Approved Requests', 'dokan' ); ?></a>
+                    </li>
+                </ul>
+
+                <div class="alert alert-warning">
+                    <strong><?php printf( __( 'Current Balance: %s', 'dokan' ), dokan_get_seller_balance( $user_id ) ); ?></strong>
+                </div>
+
+                <?php if ( $current == 'pending' ) {
+                    $dokan_withdraw->withdraw_form( $validate );
+                } elseif ( $current == 'approved' ) {
+                    $dokan_withdraw->user_approved_withdraws( $user_id );
+                } ?>
 
             </article>
 
