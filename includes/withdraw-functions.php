@@ -1,7 +1,7 @@
 <?php
 
 function dokan_withdraw_register_methods() {
-    $methods = apply_filters( 'dokan_withdraw_methods', array(
+    $methods = array(
         'paypal' => array(
             'title' =>  __( 'PayPal', 'dokan' ),
             'callback' => 'dokan_withdraw_method_paypal'
@@ -14,9 +14,9 @@ function dokan_withdraw_register_methods() {
             'title' => __( 'Skrill', 'dokan' ),
             'callback' => 'dokan_withdraw_method_skrill'
         ),
-    ) );
+    );
 
-    return $methods;
+    return apply_filters( 'dokan_withdraw_methods', $methods );
 }
 
 function dokan_withdraw_get_methods() {
@@ -44,6 +44,16 @@ function dokan_withdraw_get_method( $method_key ) {
     }
 
     return false;
+}
+
+function dokan_withdraw_get_method_title( $method_key ) {
+    $registered = dokan_withdraw_register_methods();
+
+    if ( isset( $registered[$method_key]) ) {
+        return $registered[$method_key]['title'];
+    }
+
+    return '';
 }
 
 function dokan_withdraw_method_paypal( $store_settings ) {
