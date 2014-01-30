@@ -9,5 +9,6 @@ User Agent: %user_agent%
 ------------------------------
 
 
-- Sent from %site_name%
+---
+Sent from %site_name%
 %site_url%
