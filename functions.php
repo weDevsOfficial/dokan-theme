@@ -20,6 +20,7 @@ if ( !defined( '__DIR__' ) ) {
     define( '__DIR__', dirname( __FILE__ ) );
 }
 
+define( 'DOKAN_DIR', __DIR__ );
 define( 'DOKAN_INC_DIR', __DIR__ . '/includes' );
 define( 'DOKAN_LIB_DIR', __DIR__ . '/lib' );
 
@@ -84,7 +85,7 @@ class WeDevs_Dokan {
 
     function init_classes() {
         if ( is_admin() ) {
-            Dokan_Slider::get_instance();
+            Dokan_Slider::init();
             new Dokan_Admin_User_Profile();
 
         } else {
@@ -92,6 +93,7 @@ class WeDevs_Dokan {
         }
 
         new Dokan_Rewrites();
+        Dokan_Email::init();
     }
 
     function init_ajax() {
@@ -329,3 +331,17 @@ class WeDevs_Dokan {
 
 $dokan = new WeDevs_Dokan();
 
+function dokan_wc_email_recipient_add_seller( $admin_email, $order ) {
+    $emails = array( $admin_email );
+
+    $seller_id = dokan_get_seller_id_by_order( $order->id );
+    $seller_email = get_user_by( 'id', $seller_id )->user_email;
+
+    if ( $admin_email != $seller_email ) {
+        array_push( $emails, $seller_email );
+    }
+
+    return $emails;
+}
+
+add_filter( 'woocommerce_email_recipient_new_order', 'dokan_wc_email_recipient_add_seller', 10, 2 );
