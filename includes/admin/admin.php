@@ -81,20 +81,27 @@ class Dokan_Admin_Settings {
         return apply_filters( 'dokan_settings_sections', $sections );
     }
 
-    /**
-     * Returns all the settings fields
-     *
-     * @return array settings fields
-     */
-    function get_settings_fields() {
-        $pages_array = array();
-        $pages = get_posts( array('post_type' => 'page', 'numberposts' => -1) );
+    function get_post_type( $post_type ) {
+        $pages_array = array( '-1' => __( '- select -', 'dokan' ) );
+        $pages = get_posts( array('post_type' => $post_type, 'numberposts' => -1) );
 
         if ( $pages ) {
             foreach ($pages as $page) {
                 $pages_array[$page->ID] = $page->post_title;
             }
         }
+
+        return $pages_array;
+    }
+
+    /**
+     * Returns all the settings fields
+     *
+     * @return array settings fields
+     */
+    function get_settings_fields() {
+        $pages_array = $this->get_post_type( 'page' );
+        $slider_array = $this->get_post_type( 'dokan_slider' );
 
         $settings_fields = array(
             'dokan_general' => array(
@@ -148,6 +155,13 @@ class Dokan_Admin_Settings {
                     'desc' => __( 'Show Slider', 'dokan' ),
                     'type' => 'checkbox',
                     'default' => 'on'
+                ),
+                array(
+                    'name' => 'slider_id',
+                    'label' => __( 'Select Slider', 'dokan' ),
+                    'desc' => __( 'Select which slider to show on homepage', 'dokan' ),
+                    'type' => 'select',
+                    'options' => $slider_array
                 ),
                 array(
                     'name' => 'show_featured',
