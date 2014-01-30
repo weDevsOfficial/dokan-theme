@@ -273,7 +273,7 @@ jQuery(function($) {
                             $(form).find('.ajax-response').html(resp.data);
                         }
 
-                        $(form).find('input[type=text], input[type=email], textarea').val('');
+                        $(form).find('input[type=text], input[type=email], textarea').val('').removeClass('valid');
                     });
                 }
             });
