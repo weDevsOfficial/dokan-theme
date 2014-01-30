@@ -34,7 +34,10 @@ get_header();
 
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                 <header class="entry-header">
-                    <h1 class="entry-title"><?php the_title(); ?></h1>
+                    <h1 class="entry-title">
+                        <?php the_title(); ?>
+                        <small>&rarr; <a href="<?php echo dokan_get_store_url( get_current_user_id() ); ?>"><?php _e( 'Visit Store', 'dokan' ); ?></a></small>
+                    </h1>
                 </header><!-- .entry-header -->
 
                 <div class="entry-content">
