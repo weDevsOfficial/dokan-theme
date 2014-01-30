@@ -27,7 +27,7 @@ class Dokan_Slider {
         $this->actions();
     }
 
-    public static function get_instance() {
+    public static function init() {
         if ( !self::$instance ) {
             self::$instance = new self;
         }
