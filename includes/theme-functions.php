@@ -520,3 +520,14 @@ function dokan_is_seller_trusted( $user_id ) {
 
     return false;
 }
+
+function dokan_get_store_url( $user_id ) {
+    $userdata = get_userdata( $user_id );
+
+    return sprintf( '%s/%s/', home_url( '/store' ), $userdata->user_login );
+}
+
+function dokan_log( $message ) {
+    $message = sprintf( "[%s] %s\n", date( 'd.m.Y h:i:s' ), $message );
+    error_log( $message, 3, DOKAN_DIR . '/debug.log' );
+}
