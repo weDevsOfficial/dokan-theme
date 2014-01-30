@@ -35,7 +35,7 @@ get_header();
 
                 <div class="entry-content">
 
-                    <?php if( is_wp_error($validate) ) {
+                    <?php if ( is_wp_error($validate) ) {
                     $messages = $validate->get_error_messages();
 
                     foreach( $messages as $message ) {
