@@ -23,7 +23,15 @@ get_header();
             </div>
 
             <div class="col-md-8">
-                <?php Dokan_Slider::get_instance()->get_slider(384); ?>
+                <?php
+                 if ( dokan_get_option( 'show_slider', 'dokan_home', 'on' ) == 'on' ) {
+                    $slider_id = dokan_get_option( 'slider_id', 'dokan_home', '-1' );
+
+                    if ( $slider_id != '-1' ) {
+                        Dokan_Slider::init()->get_slider( $slider_id );
+                    }
+                }
+                ?>
             </div>
         </div> <!-- #home-page-section-1 -->
 
