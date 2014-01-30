@@ -76,7 +76,12 @@ class Dokan_Template_Withdraw {
             case 'approve':
 
                 foreach ($_POST['id'] as $key => $withdraw_id) {
-                    $this->update_status( $withdraw_id, $_POST['user_id'][$key], 1 );
+                    $user_id = $_POST['user_id'][$key];
+                    $amount = $_POST['amount'][$key];
+                    $method = $_POST['method'][$key];
+
+                    Dokan_Email::init()->withdraw_request_approve( $user_id, $amount, $method );
+                    $this->update_status( $withdraw_id, $user_id, 1 );
                 }
 
                 wp_redirect( admin_url( 'admin.php?page=dokan-withdraw&message=approved&status=' . $status ) );
@@ -160,17 +165,18 @@ class Dokan_Template_Withdraw {
         }
 
         $error = new WP_Error();
+        $limit = $this->get_withdraw_limit();
 
         if ( empty($_POST['witdraw_amount']) ) {
-            $error->add('dokan_empty_withdrad', __('Withdraw amount required ', 'dokan' ));
+            $error->add( 'dokan_empty_withdrad', __('Withdraw amount required ', 'dokan' ));
         } else  {
-            if( $_POST['witdraw_amount'] <= 49 ) {
-                $error->add('dokan_withdraw_amount', __('Withdraw amount must be greater than 49', 'dokan' ));
+            if( $_POST['witdraw_amount'] < $limit ) {
+                $error->add( 'dokan_withdraw_amount', sprintf( __('Withdraw amount must be greater than %d', 'dokan' ), $this->get_withdraw_limit() ) );
             }
         }
 
         if( empty($_POST['withdraw_method']) ) {
-            $error->add('dokan_withdraw_method', __('withdraw method required', 'dokan' ));
+            $error->add( 'dokan_withdraw_method', __('withdraw method required', 'dokan' ));
         }
 
         if ( $error->get_error_codes() ) {
@@ -216,16 +222,20 @@ class Dokan_Template_Withdraw {
 
         global $current_user, $wpdb;
 
+        $amount = filter_var( $_POST['witdraw_amount'], FILTER_SANITIZE_NUMBER_FLOAT );
+        $method = $_POST['withdraw_method'];
+
         $data_info = array(
             'user_id' => $current_user->ID,
-            'amount' => filter_var( $_POST['witdraw_amount'], FILTER_SANITIZE_NUMBER_FLOAT ),
+            'amount' => $amount,
             'status' => 0,
-            'method' => $_POST['withdraw_method'],
+            'method' => $method,
             'ip' => dokan_get_client_ip(),
             'notes' => ''
         );
 
         $update = $this->insert_withdraw( $data_info );
+        Dokan_Email::init()->new_withdraw_request( $current_user, $amount, $method );
 
         wp_redirect( add_query_arg( array( 'message' => 'request_success' ), get_permalink() ) );
     }
@@ -352,8 +362,10 @@ class Dokan_Template_Withdraw {
                     ?>
                     <tr class="<?php echo ($count % 2) == 0 ? 'alternate': 'odd'; ?>">
                         <th class="check-column">
-                            <input type="checkbox" name="id[]" value="<?php echo $row->id;?>">
-                            <input type="hidden" name="user_id[]" value="<?php echo $row->user_id; ?>">
+                            <input type="checkbox" name="id[<?php echo $row->id;?>]" value="<?php echo $row->id;?>">
+                            <input type="hidden" name="user_id[<?php echo $row->id;?>]" value="<?php echo $row->user_id; ?>">
+                            <input type="hidden" name="method[<?php echo $row->id;?>]" value="<?php echo $row->method; ?>">
+                            <input type="hidden" name="amount[<?php echo $row->id;?>]" value="<?php echo $row->amount; ?>">
                         </th>
                         <td>
                             <strong><a href="<?php echo admin_url( 'user-edit.php?user_id=' . $user_data->ID ); ?>"><?php echo $user_data->user_login; ?></a></strong>
@@ -702,7 +714,7 @@ class Dokan_Template_Withdraw {
                 <div class="col-sm-3 ">
                     <div class="input-group">
                         <span class="input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                        <input name="witdraw_amount" required number min="50" class="form-control" id="withdraw-amount" name="price" type="number" placeholder="9.99" value="<?php echo $amount; ?>"  >
+                        <input name="witdraw_amount" required number min="<?php echo esc_attr( dokan_get_option( 'withdraw_limit', 'dokan_selling', 50 ) ); ?>" class="form-control" id="withdraw-amount" name="price" type="number" placeholder="9.99" value="<?php echo $amount; ?>"  >
                     </div>
 
                 </div>
