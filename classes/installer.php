@@ -17,7 +17,9 @@ class Dokan_Installer {
         // installs
         $this->user_roles();
         $this->setup_pages();
+        $this->woocommerce_settings();
         $this->create_tables();
+
         dokan_generate_sync_table();
 
         flush_rewrite_rules();
@@ -27,6 +29,10 @@ class Dokan_Installer {
 
     function do_upgrades() {
         // do upgrades
+    }
+
+    function woocommerce_settings() {
+        update_option( 'woocommerce_enable_myaccount_registration', 'yes' );
     }
 
     /**
