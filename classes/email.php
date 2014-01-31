@@ -83,7 +83,7 @@ class Dokan_Email {
         $this->send( $seller_email, $subject, $body, $headers );
     }
 
-    function prepare_withdraw( $body, $user, $amount, $method ) {
+    function prepare_withdraw( $body, $user, $amount, $method, $note = '' ) {
         $find = array(
             '%username%',
             '%amount%',
@@ -91,7 +91,8 @@ class Dokan_Email {
             '%profile_url%',
             '%withdraw_page%',
             '%site_name%',
-            '%site_url%'
+            '%site_url%',
+            '%notes%'
         );
 
         $replace = array(
@@ -101,7 +102,8 @@ class Dokan_Email {
             admin_url( 'user-edit.php?user_id=' . $user->ID ),
             admin_url( 'admin.php?page=dokan-withdraw' ),
             $this->get_from_name(),
-            home_url()
+            home_url(),
+            $note
         );
 
         $body = str_replace( $find, $replace, $body);
@@ -130,6 +132,19 @@ class Dokan_Email {
         $user = get_user_by( 'id', $user_id );
         $subject = sprintf( __( '[%s] Your Withdraw Request has been approved', 'dokan' ), $this->get_from_name() );
         $body = $this->prepare_withdraw( $body, $user, $amount, $method );
+
+        $this->send( $this->admin_email(), $subject, $body );
+    }
+
+    function withdraw_request_cancel( $user_id, $amount, $method, $note = '' ) {
+        $template = DOKAN_INC_DIR . '/emails/withdraw-cancel.php';
+        ob_start();
+        include $template;
+        $body = ob_get_clean();
+
+        $user = get_user_by( 'id', $user_id );
+        $subject = sprintf( __( '[%s] Your Withdraw Request has been cancelled', 'dokan' ), $this->get_from_name() );
+        $body = $this->prepare_withdraw( $body, $user, $amount, $method, $note );
 
         $this->send( $this->admin_email(), $subject, $body );
     }

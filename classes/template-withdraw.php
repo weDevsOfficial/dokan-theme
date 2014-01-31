@@ -65,7 +65,13 @@ class Dokan_Template_Withdraw {
             case 'cancel':
 
                 foreach ($_POST['id'] as $key => $withdraw_id) {
-                    $this->update_status( $withdraw_id, $_POST['user_id'][$key], 2 );
+                    $user_id = $_POST['user_id'][$key];
+                    $amount = $_POST['amount'][$key];
+                    $method = $_POST['method'][$key];
+                    $note = $_POST['note'][$key];
+
+                    Dokan_Email::init()->withdraw_request_cancel( $user_id, $amount, $method, $note );
+                    $this->update_status( $withdraw_id, $user_id, 2 );
                 }
 
                 wp_redirect( admin_url( 'admin.php?page=dokan-withdraw&message=cancelled&status=' . $status ) );
@@ -364,8 +370,8 @@ class Dokan_Template_Withdraw {
                         <th class="check-column">
                             <input type="checkbox" name="id[<?php echo $row->id;?>]" value="<?php echo $row->id;?>">
                             <input type="hidden" name="user_id[<?php echo $row->id;?>]" value="<?php echo $row->user_id; ?>">
-                            <input type="hidden" name="method[<?php echo $row->id;?>]" value="<?php echo $row->method; ?>">
-                            <input type="hidden" name="amount[<?php echo $row->id;?>]" value="<?php echo $row->amount; ?>">
+                            <input type="hidden" name="method[<?php echo $row->id;?>]" value="<?php echo esc_attr( $row->method ); ?>">
+                            <input type="hidden" name="amount[<?php echo $row->id;?>]" value="<?php echo esc_attr( $row->amount ); ?>">
                         </th>
                         <td>
                             <strong><a href="<?php echo admin_url( 'user-edit.php?user_id=' . $user_data->ID ); ?>"><?php echo $user_data->user_login; ?></a></strong>
@@ -381,7 +387,7 @@ class Dokan_Template_Withdraw {
                                 </div>
 
                                 <div class="note-form" style="display: none;">
-                                    <p><input type="text" class="dokan-note-text" name="note" value="<?php echo esc_attr( $row->note ); ?>"></p>
+                                    <p><input type="text" class="dokan-note-text" name="note[<?php echo $row->id;?>]" value="<?php echo esc_attr( $row->note ); ?>"></p>
                                     <a class="dokan-note-submit button" data-id=<?php echo $row->id; ?> href="#" ><?php _e('Save', 'dokan' ); ?></a>
                                     <a href="#" class="dokan-note-cancel"><?php _e( 'cancel', 'dokan' ); ?></a>
                                 </div>
