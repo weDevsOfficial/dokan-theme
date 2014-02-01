@@ -26,7 +26,6 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
 ?>
 
 <li <?php post_class( $classes ); ?>>
-    <?php $url = get_template_directory_uri() . '/assets/images/footer'; ?>
     <figure>
 
         <a href="<?php the_permalink(); ?>"><?php echo woocommerce_get_product_thumbnail(); ?></a>
