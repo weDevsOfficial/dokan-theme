@@ -2924,6 +2924,21 @@ ul.subsubsub li.active a {
   border-left-color: transparent;
   border-top-color: transparent;
 }
+.woocommerce ul.product_list_widget li a,
+.woocommerce-page ul.product_list_widget li a {
+  font-weight: 400;
+}
+.woocommerce ul.product_list_widget li img,
+.woocommerce-page ul.product_list_widget li img {
+  width: 50px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid #dddddd;
+  padding: 2px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
 .woocommerce div.product .woocommerce-tabs ul.tabs li[class],
 .woocommerce-page div.product .woocommerce-tabs ul.tabs li[class],
 .woocommerce #content div.product .woocommerce-tabs ul.tabs li[class],
