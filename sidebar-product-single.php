@@ -10,7 +10,7 @@
     <div class="widget-area">
 
         <?php do_action( 'before_sidebar' ); ?>
-        <?php if ( !dynamic_sidebar( 'sidebar-home' ) ) : ?>
+        <?php if ( !dynamic_sidebar( 'sidebar-single-product' ) ) : ?>
 
             <aside id="search" class="widget widget_search">
                 <?php get_search_form(); ?>
