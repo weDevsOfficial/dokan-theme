@@ -36,7 +36,7 @@ function dokan_product_seller_tab( $val ) {
     $author = get_user_by( 'id', $product->post->post_author );
     ?>
 
-    Seller: <?php printf( '<a href="%s">%s</a>', get_author_posts_url( $author->ID ), $author->display_name ); ?>
+    <?php _e( 'Seller:', 'dokan' ); ?> <?php printf( '<a href="%s">%s</a>', dokan_get_store_url( $author->ID ), $author->display_name ); ?>
 
     <?php
 }
