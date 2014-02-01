@@ -31,7 +31,7 @@ class Dokan_Customizer {
 
         // link color
         $wp_customize->add_setting( 'dokan_link_color', array(
-            'default' => '#F04023',
+            'default' => '#f05025',
             'transport' => 'postMessage'
         ) );
 
