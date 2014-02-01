@@ -179,7 +179,7 @@ class WeDevs_Dokan {
          * and here we also set up the default background color.
          */
         add_theme_support( 'custom-background', array(
-            'default-color' => 'fcfcfc',
+            'default-color' => 'F7F7F7',
         ) );
 
         add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list' ) );
@@ -215,6 +215,7 @@ class WeDevs_Dokan {
         $sidebars = array(
             array( 'name' => __( 'General Sidebar', 'dokan' ), 'id' => 'sidebar-1' ),
             array( 'name' => __( 'Home Sidebar', 'dokan' ), 'id' => 'sidebar-home' ),
+            array( 'name' => __( 'Single Product', 'dokan' ), 'id' => 'sidebar-single-product' ),
             array( 'name' => __( 'Footer Sidebar - 1', 'dokan' ), 'id' => 'footer-1' ),
             array( 'name' => __( 'Footer Sidebar - 2', 'dokan' ), 'id' => 'footer-2' ),
             array( 'name' => __( 'Footer Sidebar - 3', 'dokan' ), 'id' => 'footer-3' ),
@@ -240,17 +241,21 @@ class WeDevs_Dokan {
      */
     function scripts() {
         $template_directory = get_template_directory_uri();
+        $skin = dokan_get_option( 'color_skin', 'dokan_general', 'orange.css' );
 
         wp_enqueue_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.css', false, null );
         wp_enqueue_style( 'icomoon', $template_directory . '/assets/css/icomoon.css', false, null );
         wp_enqueue_style( 'fontawesome', $template_directory . '/assets/css/font-awesome.css', false, null );
         wp_enqueue_style( 'jquery-ui', $template_directory . '/assets/css/jquery-ui-1.10.0.custom.css', false, null );
         wp_enqueue_style( 'flexslider', $template_directory . '/assets/css/flexslider.css', false, null );
-        wp_enqueue_style( 'dokan-style', $template_directory . '/assets/css/style.css', false, null );
-        wp_enqueue_style( 'style', $template_directory . '/style.css', false, null );
         wp_enqueue_style( 'chosen-style', $template_directory . '/assets/css/chosen.min.css', false, null );
-        //reviews
         wp_enqueue_style( 'reviows-style', $template_directory . '/assets/css/reviews.css', false, null );
+        wp_enqueue_style( 'dokan-style', $template_directory . '/assets/css/style.css', false, null );
+        wp_enqueue_style( 'dokan-skin', $template_directory . '/assets/css/skins/' . $skin, false, null );
+        wp_enqueue_style( 'style', $template_directory . '/style.css', false, null );
+
+
+        /****** Scripts ******/
 
         if ( is_single() && comments_open() && get_option( 'thread_comments' ) ) {
             wp_enqueue_script( 'comment-reply' );
