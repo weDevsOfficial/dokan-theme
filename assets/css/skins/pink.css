@@ -1,0 +1,21 @@
+a{color:#f17288}
+.home .slider-container h2.slider-heading{border-left:5px solid #f17288}
+.home .product-sliders .flex-direction-nav a{background:#f17288}
+.home .product-sliders li .item-button a.add_to_cart_button{background:#f17288}
+.home .product-sliders li .item-button a.fav i{color:#f17288}
+.home .product-sliders li span.onsale{background:#f17288}
+.widget.widget_search .btn-primary,.widget.widget_product_search .btn-primary{background-color:#f17288;border-color:#f17288}
+.widget.dokan-category-menu #cat-drop-stack>ul>li>a:hover{background:#f17288}
+.dokan-dash-sidebar ul.dokan-dashboard-menu li.active{background:#f17288}
+.dokan-dash-sidebar ul.dokan-dashboard-menu li:hover{background:#f17288}
+.woocommerce span.onsale,.woocommerce-page span.onsale{background:#f17288}
+.woocommerce ul.products li.product .item-button a.add_to_cart_button,.woocommerce-page ul.products li.product .item-button a.add_to_cart_button{background:#f17288}
+.woocommerce ul.products li.product .item-button a.fav i,.woocommerce-page ul.products li.product .item-button a.fav i{color:#f17288}
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active,.woocommerce-page div.product .woocommerce-tabs ul.tabs li.active,.woocommerce div.product .woocommerce-tabs ul.tabs li.active,.woocommerce-page div.product .woocommerce-tabs ul.tabs li.active,.woocommerce #content div.product .woocommerce-tabs ul.tabs li.active,.woocommerce-page #content div.product .woocommerce-tabs ul.tabs li.active,.woocommerce #content div.product .woocommerce-tabs ul.tabs li.active,.woocommerce-page #content div.product .woocommerce-tabs ul.tabs li.active{box-shadow:inset 0 4px 0 #f17288}
+.woocommerce nav.woocommerce-pagination ul li span.current,.woocommerce-page nav.woocommerce-pagination ul li span.current,.woocommerce #content nav.woocommerce-pagination ul li span.current,.woocommerce-page #content nav.woocommerce-pagination ul li span.current,.woocommerce nav.woocommerce-pagination ul li a:hover,.woocommerce-page nav.woocommerce-pagination ul li a:hover,.woocommerce #content nav.woocommerce-pagination ul li a:hover,.woocommerce-page #content nav.woocommerce-pagination ul li a:hover,.woocommerce nav.woocommerce-pagination ul li a:focus,.woocommerce-page nav.woocommerce-pagination ul li a:focus,.woocommerce #content nav.woocommerce-pagination ul li a:focus,.woocommerce-page #content nav.woocommerce-pagination ul li a:focus{background:#f17288}
+.woocommerce a.button.alt,.woocommerce-page a.button.alt,.woocommerce button.button.alt,.woocommerce-page button.button.alt,.woocommerce input.button.alt,.woocommerce-page input.button.alt,.woocommerce #respond input#submit.alt,.woocommerce-page #respond input#submit.alt,.woocommerce #content input.button.alt,.woocommerce-page #content input.button.alt{border:1px solid #f17288;background:#f17288}.woocommerce a.button.alt:hover,.woocommerce-page a.button.alt:hover,.woocommerce button.button.alt:hover,.woocommerce-page button.button.alt:hover,.woocommerce input.button.alt:hover,.woocommerce-page input.button.alt:hover,.woocommerce #respond input#submit.alt:hover,.woocommerce-page #respond input#submit.alt:hover,.woocommerce #content input.button.alt:hover,.woocommerce-page #content input.button.alt:hover{border:1px solid #ec4461;background:#ec4461}
+.woocommerce .woocommerce-message,.woocommerce-page .woocommerce-message,.woocommerce .woocommerce-error,.woocommerce-page .woocommerce-error,.woocommerce .woocommerce-info,.woocommerce-page .woocommerce-info{background:#fff;box-shadow:none;border-left:1px solid #f1f1f1;border-right:1px solid #f1f1f1;border-bottom:1px solid #f1f1f1}
+.woocommerce .woocommerce-info,.woocommerce-page .woocommerce-info{border-top:3px solid #f17288}.woocommerce .woocommerce-info:before,.woocommerce-page .woocommerce-info:before{background-color:#f17288}
+.pagination>.active>a,.pagination>.active>a:hover{background-color:#f17288;border-color:#f17288}
+.woocommerce.single-product .entry-summary form.cart .button,.woocommerce-page.single-product .entry-summary form.cart .button{background:#f17288}
+.woocommerce.single-product .entry-summary a.button.alt,.woocommerce-page.single-product .entry-summary a.button.alt{background:#f17288}

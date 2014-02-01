@@ -54,7 +54,6 @@
 
 .dokan-dash-sidebar {
 
-
     ul.dokan-dashboard-menu {
         background: #242424;
         list-style: none;
@@ -81,9 +80,7 @@
             }
 
             &.active {
-                background: @orange;
                 position: relative;
-                // border-left: 4px solid @orange;
 
                 &:after {
                     left: 92%;
@@ -94,16 +91,11 @@
                     width: 0;
                     position: absolute;
                     pointer-events: none;
-                    // border-color: rgba(213, 60, 36, 0);
                     border-color: transparent @bodyColor transparent transparent;
-                    border-left-color: #fff; //@orange;
+                    border-left-color: #fff;
                     border-width: 16px 16px 16px 0;
                     margin-top: -16px;
                 }
-            }
-
-            &:hover {
-                background: #f05025;
             }
 
             ul.sub-menu {

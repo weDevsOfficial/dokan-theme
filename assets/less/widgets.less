@@ -5,8 +5,14 @@
 
 }
 
+@widgetBorder: #EDEDED;
+
 .widget {
     margin-bottom: 25px;
+    background: #fff;
+    border: 1px solid @widgetBorder;
+    padding: 10px;
+    .border-radius(2px);
 
     select {
         max-width: 98%;
@@ -35,9 +41,10 @@
     }
 
     .widget-title {
-        margin-bottom: 7px;
-        border-bottom: 1px solid #DDD;
-        padding: 0 0 10px 0;
+        margin: 0 0 10px 0;
+        font-weight: lighter;
+        border: none;
+        font-size: 18px;
     }
 
     ul {
@@ -75,6 +82,57 @@
         }
     }
 
+    &.widget_search, &.widget_product_search {
+        // padding: 0;
+        // border: none;
+
+        input[type=text] {
+            border: 1px solid @widgetBorder;
+            box-shadow: none;
+        }
+    }
+
+    &.widget-on-sale {
+        ul.products {
+
+            li.product {
+                width: 100%;
+
+                a img {
+                    max-width: 60%;
+                    text-align: center;
+                }
+
+                span.onsale {
+                    background: @orange;
+                    .border-radius(0);
+                    font-weight: normal;
+                    padding: 0;
+                    top: 0;
+                    right: 0;
+                    min-height: auto;
+                    min-width: auto;
+                    text-shadow: none;
+                    .box-shadow(none);
+                    margin: 0;
+                    padding: 0 10px;
+                }
+
+                .deal-time-bar {
+                    // position: absolute;
+                    top: 20%;
+                    right: 0;
+                    width: 35%;
+                    background: #fff;
+
+                    .d-time-title {
+                        font-size: 11px;
+                    }
+                }
+            }
+        }
+    }
+
     &.store-contact {
         .form-group {
             margin-bottom: 0;
@@ -100,11 +158,15 @@
     }
 
     &.dokan-category-menu {
+        padding: 0;
+        border: none;
+
         h3.widget-title {
             margin: 0;
             padding: 10px 10px 10px 20px;
             background: #eee;
             border: 1px solid #eee;
+            color: #444;
         }
 
         #cat-drop-stack {
@@ -198,7 +260,6 @@
                         display: block;
 
                         &:hover {
-                            background: #f04023;
                             color: #fff;
                         }
                     }

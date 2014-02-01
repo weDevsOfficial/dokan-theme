@@ -106,6 +106,22 @@ class Dokan_Admin_Settings {
         $settings_fields = array(
             'dokan_general' => array(
                 array(
+                    'name' => 'color_skin',
+                    'label' => __( 'Color Skin', 'dokan' ),
+                    'desc' => __( 'Choose the color skin of the theme', 'dokan' ),
+                    'type' => 'select',
+                    'default' => 'orange',
+                    'options' => array(
+                        'orange.css' => __( 'Orange', 'dokan' ),
+                        'sky.css' => __( 'Sky', 'dokan' ),
+                        'blue.css' => __( 'Blue', 'dokan' ),
+                        'green.css' => __( 'Green', 'dokan' ),
+                        'purple.css' => __( 'Purple', 'dokan' ),
+                        'red.css' => __( 'Red', 'dokan' ),
+                        'pink.css' => __( 'Pink', 'dokan' ),
+                    )
+                ),
+                array(
                     'name' => 'footer_text',
                     'label' => __( 'Site footer text', 'dokan' ),
                     'desc' => '',

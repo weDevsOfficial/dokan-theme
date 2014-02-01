@@ -27,7 +27,7 @@ ul.subsubsub {
     }
 }
 
-.woo-product-list {
+.woo-product-list() {
     h3 {
         background: #585858;
         width: 100%;
@@ -57,12 +57,10 @@ ul.subsubsub {
         float: right;
 
         a.add_to_cart_button {
-            background: @orange;
             color: #fff;
         }
 
         a.fav i {
-            color: @orange;
             background: #fff;
         }
     }
@@ -92,6 +90,20 @@ ul.subsubsub {
     a img {
         .box-shadow(none);
         margin: 0;
+    }
+
+    span.onsale {
+        .border-radius(0);
+        top: 5px;
+        right: 0;
+        left: auto;
+        margin: 0;
+        box-shadow: none;
+        padding: 0px 15px;
+        text-shadow: none;
+        min-height: 26px;
+        line-height: 26px;
+        font-weight: normal;
     }
 }
 
@@ -180,11 +192,6 @@ ul.subsubsub {
     }
 }
 
-.pagination > .active > a,
-.pagination > .active > a:hover {
-    background-color: @orange;
-    border-color: @orange;
-}
 
 /* WooCommerce override
 -----------------------------------*/
@@ -332,6 +339,23 @@ ul.subsubsub {
                 padding-left: 3px;
                 margin: 20px 0px;
             }
+
+            form.cart {
+                .button {
+                    border: none;
+                    text-shadow: none;
+                    .box-shadow(none);
+                    font-weight: normal;
+                }
+            }
+
+            a.button.alt {
+                border: none;
+                text-shadow: none;
+                .box-shadow(none);
+                font-weight: normal;
+                .border-radius(2px);
+            }
         }
 
         .related ul.products li.product,
@@ -389,6 +413,80 @@ ul.subsubsub {
             width: 90%;
         }
     }
+
+    .quantity, #content .quantity {
+        input.qty {
+            border: 1px solid @borderColor;
+            border-right: 0;
+            .box-shadow(none);
+        }
+
+        .plus, .minus {
+            text-shadow: none;
+            background: #fff;
+            border: 1px solid @borderColor;
+            .box-shadow(none);
+
+            &:hover {
+                background: #F5F5F5;
+            }
+        }
+    }
+
+    nav.woocommerce-pagination, #content nav.woocommerce-pagination {
+        ul {
+            li {
+                span.current, a:hover, a:focus {
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    a.button, button.button, input.button, #respond input#submit, #content input.button {
+        text-shadow: none;
+        box-shadow: none;
+        background: #fff;
+        font-weight: normal;
+        border: 1px solid @borderColor;
+
+        &:hover {
+            background: #eee;
+        }
+
+        &.alt {
+            color: #fff;
+            text-shadow: none;
+            box-shadow: none;
+        }
+    }
+
+    form.checkout {
+        input[type=text] {
+            border: 1px solid @borderColor;
+            box-shadow: none;
+            padding: 5px 10px;
+        }
+
+        label {
+            display: inline-block;
+        }
+    }
+
+    #payment {
+
+        div.payment_box {
+            box-shadow: none;
+            background: #fff;
+
+            &:after {
+                border: 8px solid #fff;
+                border-right-color: transparent;
+                border-left-color: transparent;
+                border-top-color: transparent;
+            }
+        }
+    }
 }
 
 
@@ -422,15 +520,18 @@ ul.tabs li.active, .woocommerce
     background: #fff;
     z-index: 2;
     border-bottom-color: #fff;
-    box-shadow: inset 0px 4px 0px #f04023;
     padding: 4px 15px 0px;
+
+    a {
+        outline: none;
+    }
 }
 
 .woocommerce .site-content div.product .woocommerce-tabs .panel,
 .woocommerce-page .site-content div.product .woocommerce-tabs .panel,
 .woocommerce .site-content #content div.product .woocommerce-tabs .panel,
 .woocommerce-page .site-content #content div.product .woocommerce-tabs .panel {
-    margin: -23px 0 2em;
+    margin: -24px 0 2em;
     padding: 10px 15px 10px;
     border: 1px solid #d3d3d3;
     color: #676767;
