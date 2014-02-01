@@ -44,7 +44,8 @@ class Dokan_Slider {
     }
 
 	function do_metaboxes() {
-        add_meta_box( 'slider-meta-box', __('Slider Options', 'wedevs'), array($this, 'meta_boxes'), $this->post_type );
+        add_meta_box( 'slider-meta-box', __('Slides', 'wedevs'), array($this, 'meta_boxes'), $this->post_type );
+        add_meta_box( 'slider-options-box', __('Slider Options', 'wedevs'), array($this, 'meta_boxes_option'), $this->post_type, 'side' );
 	}
 
     function enqueue_scripts() {
@@ -93,8 +94,8 @@ class Dokan_Slider {
         ) );
     }
 
-    function meta_boxes() {
-		global $post;
+    function meta_boxes_option() {
+        global $post;
 
         $metas = array();
         foreach ($this->slider_meta as $meta) {
@@ -103,12 +104,10 @@ class Dokan_Slider {
         extract( $metas );
 
         $slider_speed = ($slider_speed == '') ? '7000' : $slider_speed;
-		?>
-        <input type="hidden" name="wedevs-slider" value="<?php echo wp_create_nonce( basename( __FILE__ ) ); ?>" />
-		<div id="slider-table">
+        ?>
             <table class="form-table">
                 <tr>
-                    <td><?php _e( 'Effect', 'dokan' ); ?></td>
+                    <th><?php _e( 'Effect', 'dokan' ); ?></th>
                     <td>
                         <select name="slider_effect" id="slider-effect">
                             <option value="fade"<?php selected( $slider_effect, 'fade' ); ?>>fade</option>
@@ -117,11 +116,11 @@ class Dokan_Slider {
                     </td>
                 </tr>
                 <tr>
-                    <td><?php _e( 'Slide Speed', 'dokan' ); ?></td>
-                    <td><input type="text" value="<?php echo esc_attr( $slider_speed ); ?>" name="slider_speed"></td>
+                    <th><?php _e( 'Slide Speed', 'dokan' ); ?></th>
+                    <td><input type="text" class="small-text" value="<?php echo esc_attr( $slider_speed ); ?>" name="slider_speed"></td>
                 </tr>
                 <tr>
-                    <td><?php _e( 'Show Pagination', 'dokan' ); ?></td>
+                    <th><?php _e( 'Pagination', 'dokan' ); ?></th>
                     <td>
                         <select name="slider_pagination">
                             <option value="true"<?php selected( $slider_pagination, 'true' ); ?>><?php _e( 'Show', 'dokan' ); ?></option>
@@ -130,7 +129,7 @@ class Dokan_Slider {
                     </td>
                 </tr>
                 <tr>
-                    <td><?php _e( 'Direction Navigation', 'dokan' ); ?></td>
+                    <th><?php _e( 'Direction Navigation', 'dokan' ); ?></th>
                     <td>
                         <select name="direction_nav">
                             <option value="true"<?php selected( $direction_nav, 'true' ); ?>><?php _e( 'Show', 'dokan' ); ?></option>
@@ -139,7 +138,7 @@ class Dokan_Slider {
                     </td>
                 </tr>
                 <tr>
-                    <td><?php _e( 'Sliding Direction', 'dokan' ); ?></td>
+                    <th><?php _e( 'Sliding Direction', 'dokan' ); ?></th>
                     <td>
                         <select name="slide_direction">
                             <option value="horizontal"<?php selected( $slide_direction, 'horizontal' ); ?>><?php _e( 'horizontal', 'dokan' ); ?></option>
@@ -148,7 +147,7 @@ class Dokan_Slider {
                     </td>
                 </tr>
                 <tr>
-                    <td><?php _e( 'Touch Swipe', 'dokan' ); ?></td>
+                    <th><?php _e( 'Touch Swipe', 'dokan' ); ?></th>
                     <td>
                         <select name="touch">
                             <option value="true"<?php selected( $touch, 'true' ); ?>><?php _e( 'Yes', 'dokan' ); ?></option>
@@ -157,7 +156,7 @@ class Dokan_Slider {
                     </td>
                 </tr>
                 <tr>
-                    <td><?php _e( 'Randomize', 'dokan' ); ?></td>
+                    <th><?php _e( 'Randomize', 'dokan' ); ?></th>
                     <td>
                         <select name="randomize">
                             <option value="false"<?php selected( $randomize, 'false' ); ?>><?php _e( 'No', 'dokan' ); ?></option>
@@ -166,7 +165,7 @@ class Dokan_Slider {
                     </td>
                 </tr>
                 <tr>
-                    <td><?php _e( 'Pause on Hover', 'dokan' ); ?></td>
+                    <th><?php _e( 'Pause on Hover', 'dokan' ); ?></th>
                     <td>
                         <select name="pauseOnHover">
                             <option value="false"<?php selected( $pauseOnHover, 'false' ); ?>><?php _e( 'No', 'dokan' ); ?></option>
@@ -175,7 +174,7 @@ class Dokan_Slider {
                     </td>
                 </tr>
                 <tr>
-                    <td><?php _e( 'Pause/Play', 'dokan' ); ?></td>
+                    <th><?php _e( 'Pause/Play', 'dokan' ); ?></th>
                     <td>
                         <select name="pausePlay">
                             <option value="false"<?php selected( $pausePlay, 'false' ); ?>><?php _e( 'No', 'dokan' ); ?></option>
@@ -184,6 +183,14 @@ class Dokan_Slider {
                     </td>
                 </tr>
             </table>
+        <?php
+    }
+
+    function meta_boxes() {
+		global $post;
+		?>
+        <input type="hidden" name="wedevs-slider" value="<?php echo wp_create_nonce( basename( __FILE__ ) ); ?>" />
+		<div id="slider-table">
 
             <p><a href="#" class="button add-slide"><?php _e( 'Add Slide', 'dokan' ); ?></a></p>
 
@@ -213,6 +220,7 @@ class Dokan_Slider {
                         $('#slider-table').on('click', '.submitdelete', this.removeSlide);
                         $('#slider-table').on('click', 'a.image_upload', WeDevs_Admin.imageUpload);
                         $('#slider-table').on('click', 'a.remove-image', WeDevs_Admin.removeImage);
+                        $('ul.slide-holder').sortable();
                     },
 
                     showHideField: function() {
@@ -328,36 +336,32 @@ class Dokan_Slider {
         ?>
         <li>
             <div class="slide-table">
-                <h3 class="slide-hndle"><span><?php _e( 'Slide', 'wedevs' ); ?></span></h3>
+                <h3 class="slide-hndle"><span><?php _e( 'Slide', 'dokan' ); ?></span></h3>
                 <table class="form-table">
                     <tr class="slider_type_select">
-                        <td><?php _e( 'Slide Type', 'wedevs' ); ?></td>
+                        <td><?php _e( 'Slide Type', 'dokan' ); ?></td>
                         <td>
                             <select class="slide_type" name="slide_type[]">
-                                <option value="text-image"<?php selected( $slide_type, 'text-image' ); ?>><?php _e( 'Text + Image', 'wedevs' ); ?></option>
-                                <option value="image-text"<?php selected( $slide_type, 'image-text' ); ?>><?php _e( 'Image + Text', 'wedevs' ); ?></option>
-                                <option value="text-video"<?php selected( $slide_type, 'text-video' ); ?>><?php _e( 'Text + Video', 'wedevs' ); ?></option>
-                                <option value="video-text"<?php selected( $slide_type, 'video-text' ); ?>><?php _e( 'Video + Text', 'wedevs' ); ?></option>
-                                <option value="image"<?php selected( $slide_type, 'image' ); ?>><?php _e( 'Full Image', 'wedevs' ); ?></option>
-                                <option value="video"<?php selected( $slide_type, 'video' ); ?>><?php _e( 'Full Video', 'wedevs' ); ?></option>
-                                <option value="text"<?php selected( $slide_type, 'text' ); ?>><?php _e( 'Text Only', 'wedevs' ); ?></option>
+                                <option value="text-image"<?php selected( $slide_type, 'text-image' ); ?>><?php _e( 'Text with Image', 'dokan' ); ?></option>
+                                <option value="image"<?php selected( $slide_type, 'image' ); ?>><?php _e( 'Full Image', 'dokan' ); ?></option>
+                                <option value="video"<?php selected( $slide_type, 'video' ); ?>><?php _e( 'Full Video', 'dokan' ); ?></option>
                             </select>
                         </td>
                     </tr>
                     <tr class="slide-title" style="display: <?php echo $slide_title_css; ?>">
-                        <td><?php _e( 'Title Text', 'wedevs' ); ?></td>
+                        <td><?php _e( 'Title Text', 'dokan' ); ?></td>
                         <td>
                             <input type="text" class="regular-text" name="slide_title[]" value="<?php echo esc_attr( $slide_title ); ?>">
                         </td>
                     </tr>
                     <tr class="slide-content" style="display: <?php echo $slide_content_css; ?>">
-                        <td><?php _e( 'Detail Text', 'wedevs' ); ?></td>
+                        <td><?php _e( 'Detail Text', 'dokan' ); ?></td>
                         <td>
                             <textarea name="slide_content[]" rows="5" cols="55"><?php echo esc_textarea( $slide_content ); ?></textarea>
                         </td>
                     </tr>
                     <tr class="slide-image" style="display: <?php echo $slide_image_css; ?>">
-                        <td><?php _e( 'Slide Image', 'wedevs' ); ?></td>
+                        <td><?php _e( 'Slide Image', 'dokan' ); ?></td>
                         <td>
                             <input type="text" class="regular-text image_url" name="slide_image[]" value="<?php echo esc_url( $slide_image ) ?>" />
                             <a href="#" class="image_upload button">Upload Image</a>
@@ -369,29 +373,29 @@ class Dokan_Slider {
                         </td>
                     </tr>
                     <tr class="video-link" style="display: <?php echo $slide_video_css; ?>">
-                        <td><?php _e( 'Video Embed Code', 'wedevs' ); ?></td>
+                        <td><?php _e( 'Video Embed Code', 'dokan' ); ?></td>
                         <td>
                             <textarea name="slide_video[]" rows="3" cols="55"><?php echo esc_textarea( $slide_video ); ?></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td><?php _e( 'Slide Link Url', 'wedevs' ); ?></td>
+                        <td><?php _e( 'Slide Link Url', 'dokan' ); ?></td>
                         <td>
                             <input type="text" class="regular-text" value="<?php echo esc_url( $slide_link ); ?>" placeholder="http://example.com" name="slide_link[]" />
                         </td>
                     </tr>
                     <tr>
-                        <td><?php _e( 'Open Link', 'wedevs' ); ?></td>
+                        <td><?php _e( 'Open Link', 'dokan' ); ?></td>
                         <td>
                             <select name="slide_link_open[]">
-                                <option value="_self"<?php selected( $slide_link_open, '_self'); ?>>Open link in same window</option>
-                                <option value="_blank"<?php selected( $slide_link_open, '_blank'); ?>>Open link in new window</option>
+                                <option value="_self"<?php selected( $slide_link_open, '_self'); ?>><?php _e( 'Open link in same window', 'dokan' ); ?></option>
+                                <option value="_blank"<?php selected( $slide_link_open, '_blank'); ?>><?php _e( 'Open link in new window', 'dokan' ); ?></option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2" class="submitbox">
-                            <a href="#" class="submitdelete">Remove</a>
+                            <a href="#" class="submitdelete"><?php _e( 'Remove', 'dokan' ); ?></a>
                         </td>
                     </tr>
                 </table>
@@ -449,7 +453,7 @@ class Dokan_Slider {
         }
     }
 
-    public function get_slider( $slider_id, $width_text = 'col-md-5', $width_image = 'col-md-7' ) {
+    public function get_slider( $slider_id ) {
         $metas = array();
         foreach ($this->slider_meta as $meta) {
             $metas[$meta] = get_post_meta( $slider_id, $meta, true );
@@ -463,28 +467,24 @@ class Dokan_Slider {
             printf( '<div class="flexslider" id="flexslider-%d">', $slider_id );
             printf( '<ul class="slides">' );
 
+            $slides = array_reverse( $slides );
             foreach ($slides as $slide) {
                 echo "<li>";
-                echo '<div class="row">';
+                echo '<div class="slide-container">';
 
                 extract( $slide );
 
+                // var_dump($slide);
+
                 $link_content = sprintf('<a href="%s" class="button" target="%s">%s</a>', esc_url( $slide_link ), $slide_link_open, __( 'Read More...', 'wedevs' ) );
 
-                if( in_array( $slide_type, array( 'image', 'text', 'video') ) ) {
-                    $text_width = $image_width = " full-width col-md-12";
-                } else {
-                    $text_width = " $width_text";
-                    $image_width = " $width_image";
-                }
-
-                $text_content = sprintf( '<div class="slide-textarea%s">', $text_width );
+                $text_content = '<div class="slide-textarea">';
                 $text_content .= '<h2>' . $slide_title . '</h2>';
                 $text_content .= '<div class="slide-detail">' . do_shortcode( $slide_content ) . '</div>';
                 $text_content .= ( !empty( $slide_link ) ) ? "<div class='more'>$link_content</div>" : '';
                 $text_content .= '</div>';
 
-                $video_content = sprintf( '<div class="slide-video%s">%s</div>', $image_width, $slide_video );
+                $video_content = sprintf( '<div class="slide-video">%s</div>', $slide_video );
 
                 $image = sprintf( '<img src="%s" alt="%s" />', $slide_image, esc_attr( $slide_title ) );
 
@@ -492,7 +492,7 @@ class Dokan_Slider {
                     $image = sprintf( '<a href="%s" target="%s">%s</a>', esc_url( $slide_link ), $slide_link_open, $image );
                 }
 
-                $image_content = sprintf( '<div class="slide-image%s">%s</div>', $image_width, $image );
+                $image_content = sprintf( '<div class="slide-image">%s</div>', $image );
 
                 switch ( $slide_type ) {
                     case 'text-image':
@@ -528,7 +528,7 @@ class Dokan_Slider {
                         break;
                 }
 
-                echo '</div>';
+                echo "</div>";
                 echo "</li>";
             }
             echo "</ul>";
