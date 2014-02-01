@@ -17,6 +17,8 @@ get_header();
 <div id="primary" class="home-content-area col-md-9">
     <div id="content" class="site-content" role="main">
 
+        <?php do_action( 'dokan_home_slider_top' ); ?>
+
         <div class="row">
             <div class="col-md-4">
                 <?php dokan_category_widget(); ?>
@@ -34,6 +36,8 @@ get_header();
                 ?>
             </div>
         </div> <!-- #home-page-section-1 -->
+
+        <?php do_action( 'dokan_home_slider_bottom' ); ?>
 
         <?php if ( dokan_get_option( 'show_featured', 'dokan_home', 'on' ) == 'on' ) { ?>
             <div class="slider-container woocommerce">
@@ -117,86 +121,6 @@ get_header();
     </div><!-- #content .site-content -->
 </div><!-- #primary .content-area -->
 
-<div id="secondary" class="col-md-3" role="complementary">
-    <div class="widget-area">
 
-    <?php dynamic_sidebar( 'sidebar-home' ); ?>
-
-    <?php $url = get_template_directory_uri() . '/assets/images/footer/'; ?>
-    <div id="super-deals">
-        <h3 class="deal-title">Super Deals</h3>
-        <ul class="deal-items">
-            <li>
-                <figure>
-                    <img src="<?php echo $url; ?>button.jpg" alt="Sports">
-                    <figcaption>
-                        <div class="deal-status">60% Off</div>
-                        <ul class="deal-time-bar">
-                            <li class="deal-day">
-                                <span class="d-time-title">Days</span>
-                                <span class="d-time">01</span>
-                            </li>
-                            <li class="deal-hours">
-                                <span class="d-time-title">Hours</span>
-                                <span class="d-time d-h">01</span>
-                            </li>
-                            <li class="deal-minutes">
-                                <span class="d-time-title">Minutes</span>
-                                <span class="d-time d-m">01</span>
-                            </li>
-                        </ul>
-                    </figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <img src="<?php echo $url; ?>button.jpg" alt="Sports">
-                    <figcaption>
-                        <div class="deal-status">60% Off</div>
-                        <ul class="deal-time-bar">
-                            <li class="deal-day">
-                                <span class="d-time-title">Days</span>
-                                <span class="d-time">01</span>
-                            </li>
-                            <li class="deal-hours">
-                                <span class="d-time-title">Hours</span>
-                                <span class="d-time d-h">01</span>
-                            </li>
-                            <li class="deal-minutes">
-                                <span class="d-time-title">Minutes</span>
-                                <span class="d-time d-m">01</span>
-                            </li>
-                        </ul>
-                    </figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <img src="<?php echo $url; ?>button.jpg" alt="Sports">
-                    <figcaption>
-                        <div class="deal-status">60% Off</div>
-                        <ul class="deal-time-bar">
-                            <li class="deal-day">
-                                <span class="d-time-title">Days</span>
-                                <span class="d-time">01</span>
-                            </li>
-                            <li class="deal-hours">
-                                <span class="d-time-title">Hours</span>
-                                <span class="d-time d-h">01</span>
-                            </li>
-                            <li class="deal-minutes">
-                                <span class="d-time-title">Minutes</span>
-                                <span class="d-time d-m">01</span>
-                            </li>
-                        </ul>
-                    </figcaption>
-                </figure>
-            </li>
-        </ul>
-    </div>
-
-
-    </div>
-</div>
-
+<?php get_sidebar( 'home' ); ?>
 <?php get_footer(); ?>
