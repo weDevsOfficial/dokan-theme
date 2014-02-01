@@ -277,6 +277,10 @@ a:hover {
 .navbar-top-area .navbar-nav > li > a:hover {
   color: #111;
 }
+.navbar-top-area .navbar-nav > li.active a {
+  background: #DDD;
+  color: #666;
+}
 .navbar-default {
   background-color: #fff;
   border: none;
@@ -1681,7 +1685,7 @@ a:hover {
   min-height: 250px;
   padding: 20px;
   position: absolute;
-  left: 250px;
+  left: 90%;
   top: -50px;
   white-space: nowrap;
   z-index: 99;
