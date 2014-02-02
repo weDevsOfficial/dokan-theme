@@ -572,17 +572,10 @@ a:hover {
 .home .product-sliders li h3 {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
-  padding: 10px;
+  padding: 5px 5px 5px 10px;
   color: #fff;
   margin: 0;
   font-size: 1em;
-  position: absolute;
-  bottom: 0;
-  visibility: hidden;
-}
-.home .product-sliders li:hover h3 {
-  bottom: 32px;
-  visibility: visible;
 }
 .home .product-sliders li .item-bar {
   background: white;
@@ -2581,18 +2574,10 @@ ul.subsubsub li.active a {
 .woocommerce-page ul.products li.product h3 {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
-  padding: 10px;
+  padding: 5px 5px 5px 10px;
   color: #fff;
   margin: 0;
   font-size: 1em;
-  position: absolute;
-  bottom: 0;
-  visibility: hidden;
-}
-.woocommerce ul.products li.product:hover h3,
-.woocommerce-page ul.products li.product:hover h3 {
-  bottom: 32px;
-  visibility: visible;
 }
 .woocommerce ul.products li.product .item-bar,
 .woocommerce-page ul.products li.product .item-bar {
