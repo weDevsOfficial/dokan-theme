@@ -19,6 +19,7 @@ a{color:#f17288}
 .woocommerce .woocommerce-message,.woocommerce-page .woocommerce-message,.woocommerce .woocommerce-error,.woocommerce-page .woocommerce-error,.woocommerce .woocommerce-info,.woocommerce-page .woocommerce-info{background:#fff;box-shadow:none;border-left:1px solid #f1f1f1;border-right:1px solid #f1f1f1;border-bottom:1px solid #f1f1f1}
 .woocommerce .woocommerce-info,.woocommerce-page .woocommerce-info{border-top:3px solid #f17288}.woocommerce .woocommerce-info:before,.woocommerce-page .woocommerce-info:before{background-color:#f17288}
 .pagination>.active>a,.pagination>.active>a:hover{background-color:#f17288;border-color:#f17288}
+.store-page-wrap .profile-frame{background-color:#f17288}
 .woocommerce.single-product .entry-summary form.cart .button,.woocommerce-page.single-product .entry-summary form.cart .button{background:#f17288}
 .woocommerce.single-product .entry-summary a.button.alt,.woocommerce-page.single-product .entry-summary a.button.alt{background:#f17288}
 #comments #respond #cancel-comment-reply-link{background:#f17288}
