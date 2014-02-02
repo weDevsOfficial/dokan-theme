@@ -11,7 +11,7 @@
         <input type="text" class="form-control" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" id="s" placeholder="<?php esc_attr_e( 'Search &hellip;', 'wedevs' ); ?>" />
 
         <span class="input-group-btn">
-            <button class="btn btn-primary" id="searchsubmit" type="button"><?php esc_attr_e( 'Search', 'wedevs' ); ?></button>
+            <button class="btn btn-primary" id="searchsubmit" type="submit"><?php esc_attr_e( 'Search', 'wedevs' ); ?></button>
         </span>
     </div><!-- /input-group -->
 </form>

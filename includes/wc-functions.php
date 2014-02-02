@@ -1435,7 +1435,7 @@ function get_product_search_form( $echo = true  ) {
             <input type="text" class="form-control" value="' . get_search_query() . '" name="s" id="s" placeholder="' . __( 'Search for products', 'dokan' ) . '" />
 
             <span class="input-group-btn">
-                <button type="button" id="searchsubmit" class="btn btn-primary">'. esc_attr__( 'Search', 'dokan' ) .'</button>
+                <button type="submit" id="searchsubmit" class="btn btn-primary">'. esc_attr__( 'Search', 'dokan' ) .'</button>
                 <input type="hidden" name="post_type" value="product" />
             </span>
         </div>
