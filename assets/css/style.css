@@ -3029,6 +3029,20 @@ span.error {
   .navbar-top-area .navbar-toggle {
     border-color: #BABABA;
   }
+  .navbar-top-area .navbar-collapse {
+    padding-left: 15px;
+  }
+  .navbar-top-area li {
+    border: none;
+  }
+  .navbar-top-area .navbar-toggle {
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  .navbar-inverse .navbar-collapse {
+    border: none;
+  }
   .menu-toggle {
     color: #FFFFFF;
     font-size: 22px;
