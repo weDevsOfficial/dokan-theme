@@ -11,6 +11,7 @@
 <html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php
     /*
@@ -83,7 +84,7 @@
                         </hgroup>
                     </div><!-- .col-md-6 -->
 
-                    <div class="col-md-8">
+                    <div class="col-md-8 clearfix">
                         <ul class="cart-area-top list-inline">
 
                             <?php if ( is_user_logged_in() ) { ?>
