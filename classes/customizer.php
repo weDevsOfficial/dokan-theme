@@ -158,33 +158,6 @@ class Dokan_Customizer {
             'priority' => 56
         ) ) );
 
-
-        // Siebar widget text color
-        $wp_customize->add_setting( 'dokan_sidebar_widget_link', array(
-            'default' => '#428BCA',
-            'transport' => 'postMessage',
-        ) );
-
-        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_sidebar_widget_link', array(
-            'label' => __( 'Sidebar Widget link', 'dokan' ),
-            'section' => 'colors',
-            'settings' => 'dokan_sidebar_widget_link',
-            'priority' => 57
-        ) ) );
-
-
-        // Siebar widget text hover color
-        $wp_customize->add_setting( 'dokan_sidebar_link_hover', array(
-            'default' => '#2A6496',
-        ) );
-
-        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_sidebar_link_hover', array(
-            'label' => __( 'Sidebar Widget link hover', 'dokan' ),
-            'section' => 'colors',
-            'settings' => 'dokan_sidebar_link_hover',
-            'priority' => 58
-        ) ) );
-
         // widget header color
         $wp_customize->add_setting( 'footer_widget_header', array(
             'default' => '#E8E8E8',
@@ -211,7 +184,6 @@ class Dokan_Customizer {
             'settings' => 'dokan_footer_widget_link',
             'priority' => 65
         ) ) );
-
 
         // widget text hover color
         $wp_customize->add_setting( 'dokan_footer_link_hover', array(
@@ -243,8 +215,6 @@ class Dokan_Customizer {
             .navbar-default .navbar-nav > li > a{ color: <?php echo get_theme_mod( 'dokan_nav_color' ); ?>; }
             .navbar-default .navbar-nav > li > a:hover { color: <?php echo get_theme_mod( 'dokan_nav_hover' ); ?>; }
             .widget-title{ color: <?php echo get_theme_mod( 'sidebar_widget_header' ); ?>; }
-            .widget ul li a{ color: <?php echo get_theme_mod( 'dokan_sidebar_widget_link' ); ?>; }
-            .widget ul li a:hover{ color: <?php echo get_theme_mod( 'dokan_sidebar_link_hover' ); ?>; }
             .site-footer .widget h3{ color: <?php echo get_theme_mod( 'footer_widget_header' ); ?>; }
             .site-footer .widget ul li a{ color: <?php echo get_theme_mod( 'dokan_footer_widget_link' ); ?>; }
             .site-footer .widget ul li a:hover{ color: <?php echo get_theme_mod( 'dokan_footer_link_hover' ); ?>; }
