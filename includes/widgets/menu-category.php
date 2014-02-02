@@ -33,7 +33,8 @@ class Dokan_Category_Walker extends Walker {
             $output .= $indent . '<div class="sub-block">' . "\n\t" .'<h3><a href="'. get_term_link( $category ) .'">' . $category->name . '</a></h3>' . "\n";
         } else {
             $caret = $args['has_children'] ? ' <span class="caret"></span>' : '';
-            $output .= $indent . '<li><a href="' . get_term_link( $category ) . '">' . $category->name . $caret . '</a>';
+            $class_name = $args['has_children'] ? ' class="has-children"' : '';
+            $output .= $indent . '<li' . $class_name . '><a href="' . get_term_link( $category ) . '">' . $category->name . $caret . '</a>';
         }
     }
 

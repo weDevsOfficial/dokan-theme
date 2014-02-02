@@ -3096,4 +3096,13 @@ span.error {
     margin-left: 15px;
     float: none;
   }
+  .widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category {
+    position: relative;
+    left: auto;
+    top: auto;
+    box-shadow: none;
+  }
+  .widget.dokan-category-menu #cat-drop-stack > ul > li:hover .sub-category {
+    display: none;
+  }
 }

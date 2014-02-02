@@ -22,6 +22,15 @@ jQuery(function($) {
         dashboardMenu.css({ height: contentArea.height() });
     }
 
+    // cat drop stack, disable parent anchors if has children
+    if ( $(window).width() < 767) {
+        $('#cat-drop-stack li.has-children').on('click', 'a', function(e) {
+            e.preventDefault();
+
+            $(this).siblings('.sub-category').slideToggle();
+        });
+    }
+
     // tiny helper function to add breakpoints
     function getGridSize() {
         return (window.innerWidth < 600) ? 2 : (window.innerWidth < 900) ? 3 : 4;
