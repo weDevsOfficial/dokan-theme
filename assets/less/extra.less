@@ -29,12 +29,20 @@ ul.subsubsub {
 
 .woo-product-list() {
     h3 {
-        background: #585858;
+        background: rgba(0, 0, 0, 0.5);
         width: 100%;
-        padding: 5px;
+        padding: 10px;
         color: #fff;
         margin: 0;
         font-size: 1em;
+        position: absolute;
+        bottom: 0;
+        visibility: hidden;
+    }
+
+    &:hover h3 {
+        bottom: 32px;
+        visibility: visible;
     }
 
     .item-bar {
@@ -60,7 +68,7 @@ ul.subsubsub {
             color: #fff;
         }
 
-        a.fav i {
+        a.fav {
             background: #fff;
         }
     }

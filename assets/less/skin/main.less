@@ -44,6 +44,8 @@ a {
             .item-button {
                 a.add_to_cart_button {
                     background: @skinColor;
+                    border-color: @skinColor;
+                    border-color: @skinColor;
                 }
 
                 a.fav i {
@@ -61,6 +63,12 @@ a {
 
 // widget
 .widget {
+    .widget-title {
+        border-left: 3px solid @skinColor;
+        margin-left: -10px;
+        padding-left: 6px;
+    }
+
     &.widget_search, &.widget_product_search {
         .btn-primary {
             background-color: @skinColor;
@@ -103,10 +111,23 @@ a {
         .item-button {
             a.add_to_cart_button {
                 background: @skinColor;
+                border-color: @skinColor;
+
+                &:hover {
+                    color: @skinColor;
+                    background: #fff;
+                    border-color: @borderColor;
+                }
             }
 
-            a.fav i {
-                color: @skinColor;
+            a.fav {
+                background: #fff;
+
+                &:hover {
+                    color: #fff;
+                    background: @skinColor;
+                    border-color: @skinColor;
+                }
             }
         }
     }

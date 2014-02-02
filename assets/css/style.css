@@ -570,12 +570,19 @@ a:hover {
   margin-right: 10px;
 }
 .home .product-sliders li h3 {
-  background: #585858;
+  background: rgba(0, 0, 0, 0.5);
   width: 100%;
-  padding: 5px;
+  padding: 10px;
   color: #fff;
   margin: 0;
   font-size: 1em;
+  position: absolute;
+  bottom: 0;
+  visibility: hidden;
+}
+.home .product-sliders li:hover h3 {
+  bottom: 32px;
+  visibility: visible;
 }
 .home .product-sliders li .item-bar {
   background: white;
@@ -597,7 +604,7 @@ a:hover {
 .home .product-sliders li .item-button a.add_to_cart_button {
   color: #fff;
 }
-.home .product-sliders li .item-button a.fav i {
+.home .product-sliders li .item-button a.fav {
   background: #fff;
 }
 .home .product-sliders li .item-button a {
@@ -2300,6 +2307,7 @@ a:hover {
 .site-footer .widget {
   background: transparent;
   border: none;
+  padding: 0;
 }
 .site-footer .widget h3 {
   color: #e8e8e8;
@@ -2310,6 +2318,8 @@ a:hover {
   border-bottom: 1px solid #535353;
   background: transparent;
   padding: 0 0 10px 0;
+  border-left: none;
+  margin-left: 0;
 }
 .site-footer .widget ul li {
   font-size: 14px;
@@ -2569,12 +2579,20 @@ ul.subsubsub li.active a {
 }
 .woocommerce ul.products li.product h3,
 .woocommerce-page ul.products li.product h3 {
-  background: #585858;
+  background: rgba(0, 0, 0, 0.5);
   width: 100%;
-  padding: 5px;
+  padding: 10px;
   color: #fff;
   margin: 0;
   font-size: 1em;
+  position: absolute;
+  bottom: 0;
+  visibility: hidden;
+}
+.woocommerce ul.products li.product:hover h3,
+.woocommerce-page ul.products li.product:hover h3 {
+  bottom: 32px;
+  visibility: visible;
 }
 .woocommerce ul.products li.product .item-bar,
 .woocommerce-page ul.products li.product .item-bar {
@@ -2600,8 +2618,8 @@ ul.subsubsub li.active a {
 .woocommerce-page ul.products li.product .item-button a.add_to_cart_button {
   color: #fff;
 }
-.woocommerce ul.products li.product .item-button a.fav i,
-.woocommerce-page ul.products li.product .item-button a.fav i {
+.woocommerce ul.products li.product .item-button a.fav,
+.woocommerce-page ul.products li.product .item-button a.fav {
   background: #fff;
 }
 .woocommerce ul.products li.product .item-button a,
