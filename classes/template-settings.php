@@ -62,9 +62,6 @@ class Dokan_Template_Settings{
             if ( !is_array( $_POST['setting_category'] ) || !count($_POST['setting_category']) ) {
                 $error->add('dokan_type', __('Dokan type required', 'dokan' ));
             }
-
-        } else if ( !isset( $_POST['setting_category'] ) ) {
-            $error->add('dokan_type', __('Dokan type required', 'dokan' ));
         }
 
         if( !empty( $_POST['setting_paypal_email'] ) ) {
@@ -210,7 +207,7 @@ class Dokan_Template_Settings{
                         <i class="fa fa-cloud-upload"></i>
 
                         <a href="#" class="dokan-banner-drag btn btn-info"><?php _e( 'Upload banner', 'dokan' ); ?></a>
-                        <p class="help-block"><?php _e( '(Upload a banner for your store. Recommended size is (760x270) pixel. )', 'dokan' ); ?></p>
+                        <p class="help-block"><?php _e( '(Upload a banner for your store. Banner size is (825x300) pixel. )', 'dokan' ); ?></p>
                     </div>
                 </div> <!-- .dokan-banner -->
 
