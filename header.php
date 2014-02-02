@@ -63,7 +63,7 @@
                                 'theme_location'    => 'top-left',
                                 'depth'             => 0,
                                 'container'         => 'div',
-                                'container_class'   => 'collapse navbar-top-collapse',
+                                'container_class'   => 'collapse navbar-collapse navbar-top-collapse',
                                 'menu_class'        => 'nav navbar-nav',
                                 'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
                                 'walker'            => new wp_bootstrap_navwalker())
