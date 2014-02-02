@@ -1518,6 +1518,9 @@ a:hover {
 /*--------------------------------------------------
 :: Sidebars
 -------------------------------------------------- */
+.widget-area.widget-collapse.collapse {
+  display: block;
+}
 .widget {
   margin-bottom: 25px;
   background: #fff;
@@ -3095,6 +3098,9 @@ span.error {
     margin-left: 15px;
     float: none;
   }
+  .widget-area.widget-collapse.collapse {
+    display: none;
+  }
   .widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category {
     position: relative;
     left: auto;
@@ -3108,11 +3114,44 @@ span.error {
   .widget.dokan-category-menu #cat-drop-stack > ul > li:hover .sub-category {
     display: none;
   }
+  .navbar-toggle.widget-area-toggle {
+    border: 1px solid #dddddd;
+    float: none;
+    margin: 0px 0 15px 0;
+  }
+  .navbar-toggle.widget-area-toggle:before,
+  .navbar-toggle.widget-area-toggle:after {
+    content: " ";
+    display: table;
+  }
+  .navbar-toggle.widget-area-toggle:after {
+    clear: both;
+  }
+  .navbar-toggle.widget-area-toggle .fa-bars {
+    color: #aaaaaa;
+  }
+  .navbar-toggle.widget-area-toggle .bar-title {
+    color: #aaaaaa;
+    font-size: 14px;
+    line-height: 14px;
+    padding-left: 10px;
+  }
   .woocommerce.single-product .related ul.products li.product,
   .woocommerce-page.single-product .related ul.products li.product,
   .woocommerce.single-product .upsells.products ul.products li.product,
   .woocommerce-page.single-product .upsells.products ul.products li.product {
     width: 45%;
+  }
+  .woocommerce .archive-title h1.page-title,
+  .woocommerce-page .archive-title h1.page-title {
+    float: none;
+    width: 100%;
+  }
+  .woocommerce .archive-title .woocommerce-ordering,
+  .woocommerce-page .archive-title .woocommerce-ordering,
+  .woocommerce .archive-title .woocommerce-result-count,
+  .woocommerce-page .archive-title .woocommerce-result-count {
+    width: 100%;
   }
   .site-footer .footer-copy {
     padding-bottom: 15px;

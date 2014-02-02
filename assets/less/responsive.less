@@ -103,6 +103,10 @@
         float: none;
     }
 
+    .widget-area.widget-collapse.collapse {
+        display: none;
+    }
+
     .widget.dokan-category-menu {
         #cat-drop-stack > ul > li {
             .sub-category {
@@ -123,12 +127,44 @@
         }
     }
 
+    .navbar-toggle.widget-area-toggle {
+        border: 1px solid @borderColor;
+        float: none;
+        margin: 0px 0 15px 0;
+        .clearfix;
+
+        .fa-bars {
+            color: darken(@borderColor, 20%);
+        }
+
+        .bar-title {
+            color: darken(@borderColor, 20%);
+            font-size: 14px;
+            line-height: 14px;
+            padding-left: 10px;
+        }
+    }
+
     .woocommerce,
     .woocommerce-page {
         &.single-product {
             .related ul.products li.product,
             .upsells.products ul.products li.product {
                 width: 45%;
+            }
+        }
+
+
+        .archive-title {
+
+            h1.page-title {
+                float: none;
+                width: 100%;
+            }
+
+            .woocommerce-ordering,
+            .woocommerce-result-count {
+                width: 100%;
             }
         }
     }

@@ -7,7 +7,13 @@
  */
 ?>
 <div id="secondary" class="col-md-3" role="complementary">
-    <div class="widget-area">
+
+    <button type="button" class="navbar-toggle widget-area-toggle" data-toggle="collapse" data-target=".widget-area">
+        <i class="fa fa-bars"></i>
+        <span class="bar-title"><?php _e( 'Toggle Sidebar', 'dokan' ); ?></span>
+    </button>
+
+    <div class="widget-area collapse widget-collapse">
 
         <?php do_action( 'before_sidebar' ); ?>
         <?php if ( !dynamic_sidebar( 'sidebar-1' ) ) : ?>
