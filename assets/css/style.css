@@ -501,7 +501,6 @@ a:hover {
 }
 .site-content footer.entry-meta {
   padding-top: 10px;
-  border-top: 1px solid #dddddd;
 }
 .site-content .pagination-container {
   text-align: center;
@@ -1754,7 +1753,6 @@ a:hover {
   color: #fff;
   padding: 5px 15px;
   margin-left: 20px;
-  background: #cccccc;
 }
 #comments #respond label {
   display: inline-block;
@@ -1850,8 +1848,7 @@ a:hover {
 }
 #comments ol.commentlist li article.comment .reply a.comment-reply-link {
   color: #fff;
-  padding: 3px 8px;
-  background: #cccccc;
+  padding: 3px 10px;
   font-size: 13px;
 }
 #comments ol.commentlist li .comment-content {

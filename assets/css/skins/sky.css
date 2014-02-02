@@ -21,3 +21,6 @@ a{color:#3498db}
 .pagination>.active>a,.pagination>.active>a:hover{background-color:#3498db;border-color:#3498db}
 .woocommerce.single-product .entry-summary form.cart .button,.woocommerce-page.single-product .entry-summary form.cart .button{background:#3498db}
 .woocommerce.single-product .entry-summary a.button.alt,.woocommerce-page.single-product .entry-summary a.button.alt{background:#3498db}
+#comments #respond #cancel-comment-reply-link{background:#3498db}
+#comments #respond input[type=submit]{background:#3498db;border:1px solid #3498db;padding:3px 10px}
+#comments ol.commentlist .reply a.comment-reply-link{background:#3498db}
