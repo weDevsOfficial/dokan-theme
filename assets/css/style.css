@@ -250,6 +250,7 @@ a:hover {
   border-radius: 0;
   margin-bottom: 0;
   min-height: 20px;
+  border: none;
   border-bottom: 1px solid #ddd;
 }
 .navbar-top-area.navbar-inverse {
