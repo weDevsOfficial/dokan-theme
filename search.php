@@ -8,13 +8,13 @@
 get_header();
 ?>
 
-<section id="primary" class="content-area col-md-8">
+<section id="primary" class="content-area col-md-9">
     <div id="content" class="site-content" role="main">
 
         <?php if ( have_posts() ) : ?>
 
             <header class="page-header">
-                <h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'wedevs' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
+                <h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'dokan' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
             </header><!-- .page-header -->
 
             <?php /* Start the Loop */ ?>

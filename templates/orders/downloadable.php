@@ -66,7 +66,7 @@
         </div>
 
         <div class="col-md-7">
-            <button type="button" class="btn btn-success grant_access" data-order-id="<?php echo $order->id; ?>" data-nonce="<?php echo wp_create_nonce( 'grant-access' ); ?>"><?php _e( 'Grant Access', 'woocommerce' ); ?></button>
+            <button type="button" class="btn btn-theme grant_access" data-order-id="<?php echo $order->id; ?>" data-nonce="<?php echo wp_create_nonce( 'grant-access' ); ?>"><?php _e( 'Grant Access', 'woocommerce' ); ?></button>
         </div>
 
     </div> <!-- .toolbar -->

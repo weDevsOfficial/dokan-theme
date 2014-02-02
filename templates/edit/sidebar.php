@@ -1,6 +1,6 @@
 
 <div class="update-button-wrap">
-    <input type="submit" name="update_product" class="btn btn-primary btn-lg btn-block" value="<?php esc_attr_e( 'Update Product', 'dokan' ); ?>"/>
+    <input type="submit" name="update_product" class="btn btn-theme btn-lg btn-block" value="<?php esc_attr_e( 'Update Product', 'dokan' ); ?>"/>
 </div>
 
 <div class="toggle-sidebar-container">

@@ -17,7 +17,7 @@ get_header();
                     <?php dokan_product_listing_status_filter(); ?>
 
                     <span class="col-md-3">
-                        <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-large btn-success pull-right"><i class="fa fa-briefcase">&nbsp;</i> <?php _e( 'Add new product', 'dokan' ); ?></a>
+                        <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-large btn-theme pull-right"><i class="fa fa-briefcase">&nbsp;</i> <?php _e( 'Add new product', 'dokan' ); ?></a>
                     </span>
                 </div>
 

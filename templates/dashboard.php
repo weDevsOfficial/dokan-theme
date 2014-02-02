@@ -163,7 +163,7 @@ $reviews_url = dokan_get_page_url( 'reviews' );
                                 <i class="icon-briefcase"></i> <?php _e( 'Products', 'dokan' ); ?>
 
                                 <span class="pull-right">
-                                    <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-success btn-sm">+ Add new product</a>
+                                    <a href="<?php echo dokan_get_page_url( 'new_product' ); ?>" class="btn btn-theme btn-sm"><?php _e( '+ Add new product', 'dokan' ); ?></a>
                                 </span>
                             </div>
 

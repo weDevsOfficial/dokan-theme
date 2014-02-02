@@ -661,7 +661,7 @@ class Dokan_Template_Coupons{
             <div class="form-group">
               <label class="col-md-3 control-label" for=""></label>
               <div class="col-md-4 ajax_prev">
-                <input type="submit" id="" name="coupon_creation" value="<?php _e( $button_name,'dokan'); ?>" class="btn btn-primary">
+                <input type="submit" id="" name="coupon_creation" value="<?php _e( $button_name,'dokan'); ?>" class="btn btn-theme">
               </div>
             </div>
 

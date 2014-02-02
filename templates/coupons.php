@@ -44,7 +44,7 @@ get_header();
 
                         <?php if ( !$is_edit_page ) { ?>
                             <span class="col-md-3">
-                                <a href="<?php echo add_query_arg( array( 'view' => 'add_coupons'), get_permalink() ); ?>" class="btn btn-large btn-success pull-right"><i class="fa fa-gift">&nbsp;</i> <?php _e( 'Add new Coupon', 'dokan' ); ?></a>
+                                <a href="<?php echo add_query_arg( array( 'view' => 'add_coupons'), get_permalink() ); ?>" class="btn btn-large btn-theme pull-right"><i class="fa fa-gift">&nbsp;</i> <?php _e( 'Add new Coupon', 'dokan' ); ?></a>
                             </span>
                         <?php } ?>
                     </div>

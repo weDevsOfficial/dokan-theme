@@ -67,7 +67,7 @@ $map_location = isset( $store_info['location'] ) ? esc_attr( $store_info['locati
                 <?php wp_nonce_field( 'dokan_contact_seller' ); ?>
                 <input type="hidden" name="seller_id" value="<?php echo $store_user->ID; ?>">
                 <input type="hidden" name="action" value="dokan_contact_seller">
-                <input type="submit" name="store_message_send" value="<?php esc_attr_e( 'Send Message', 'dokan' ); ?>" class="pull-right btn btn-success">
+                <input type="submit" name="store_message_send" value="<?php esc_attr_e( 'Send Message', 'dokan' ); ?>" class="pull-right btn btn-theme">
             </form>
         </aside>
     </div>

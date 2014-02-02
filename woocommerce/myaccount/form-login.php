@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
             <p class="form-row">
                 <?php wp_nonce_field( 'woocommerce-login' ); ?>
-                <input type="submit" class="btn btn-success" name="login" value="<?php _e( 'Login', 'dokan' ); ?>" />
+                <input type="submit" class="btn btn-theme" name="login" value="<?php _e( 'Login', 'dokan' ); ?>" />
             </p>
             <p class="lost_password">
                 <a href="<?php echo esc_url( wc_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'dokan' ); ?></a>
@@ -96,7 +96,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
             <p class="form-row">
                 <?php wp_nonce_field( 'woocommerce-register', 'register' ); ?>
-                <input type="submit" class="btn btn-success" name="register" value="<?php _e( 'Register', 'dokan' ); ?>" />
+                <input type="submit" class="btn btn-theme" name="register" value="<?php _e( 'Register', 'dokan' ); ?>" />
             </p>
 
             <?php do_action( 'woocommerce_register_form_end' ); ?>

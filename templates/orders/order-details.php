@@ -245,7 +245,7 @@ $order = new WC_Order( $order_id );
                                     <input type="hidden" name="delete-note-security" id="delete-note-security" value="<?php echo wp_create_nonce('delete-order-note'); ?>">
                                     <input type="hidden" name="post_id" value="<?php echo $order->id; ?>">
                                     <input type="hidden" name="action" value="woocommerce_add_order_note">
-                                    <input type="submit" name="add_order_note" class="add_note btn btn-sm btn-primary" value="<?php esc_attr_e( 'Add Note', 'dokan' ); ?>">
+                                    <input type="submit" name="add_order_note" class="add_note btn btn-sm btn-theme" value="<?php esc_attr_e( 'Add Note', 'dokan' ); ?>">
                                 </div>
                             </form>
                         </div> <!-- .add_note -->
