@@ -22,7 +22,7 @@
         }
 
         .navbar-toggle {
-            padding: 5px 10px;
+            padding: 8px 10px;
             margin-bottom: 5px;
             margin-top: 5px;
         }
@@ -45,10 +45,17 @@
         }
     }
 
-    .site-header #navigation {
-        background: @mainColor;
-        width: 100%;
-        overflow: hidden;
+    .site-header {
+        #navigation {
+            background: @mainColor;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .cart-area-top {
+            float: none;
+            margin-top: 0;
+        }
     }
 
     #navigation .menu {
@@ -113,6 +120,24 @@
             &:hover .sub-category {
                 display: none;
             }
+        }
+    }
+
+    .woocommerce,
+    .woocommerce-page {
+        &.single-product {
+            .related ul.products li.product,
+            .upsells.products ul.products li.product {
+                width: 45%;
+            }
+        }
+    }
+
+    .site-footer .footer-copy {
+        padding-bottom: 15px;
+
+        ul.pull-right {
+            float: none !important;
         }
     }
 }

@@ -2802,11 +2802,6 @@ ul.subsubsub li.active a {
   border: none;
   padding: 0;
 }
-.woocommerce .site-content .entry-header .entry-title,
-.woocommerce-page .site-content .entry-header .entry-title {
-  margin-bottom: 0;
-  padding-bottom: 20px;
-}
 .woocommerce .login-form,
 .woocommerce-page .login-form {
   padding-top: 20px;
@@ -3036,7 +3031,7 @@ span.error {
     border: none;
   }
   .navbar-top-area .navbar-toggle {
-    padding: 5px 10px;
+    padding: 8px 10px;
     margin-bottom: 5px;
     margin-top: 5px;
   }
@@ -3058,6 +3053,10 @@ span.error {
     background: #cccccc;
     width: 100%;
     overflow: hidden;
+  }
+  .site-header .cart-area-top {
+    float: none;
+    margin-top: 0;
   }
   #navigation .menu {
     display: none;
@@ -3108,5 +3107,17 @@ span.error {
   }
   .widget.dokan-category-menu #cat-drop-stack > ul > li:hover .sub-category {
     display: none;
+  }
+  .woocommerce.single-product .related ul.products li.product,
+  .woocommerce-page.single-product .related ul.products li.product,
+  .woocommerce.single-product .upsells.products ul.products li.product,
+  .woocommerce-page.single-product .upsells.products ul.products li.product {
+    width: 45%;
+  }
+  .site-footer .footer-copy {
+    padding-bottom: 15px;
+  }
+  .site-footer .footer-copy ul.pull-right {
+    float: none !important;
   }
 }
