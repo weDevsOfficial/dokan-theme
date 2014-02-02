@@ -27,7 +27,7 @@ jQuery(function($) {
         $('#cat-drop-stack li.has-children').on('click', 'a', function(e) {
             e.preventDefault();
 
-            $(this).siblings('.sub-category').slideToggle();
+            $(this).siblings('.sub-category').slideToggle('fast');
         });
     }
 

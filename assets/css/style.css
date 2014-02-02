@@ -3102,6 +3102,10 @@ span.error {
     top: auto;
     box-shadow: none;
   }
+  .widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block {
+    width: 50%;
+    float: left;
+  }
   .widget.dokan-category-menu #cat-drop-stack > ul > li:hover .sub-category {
     display: none;
   }
