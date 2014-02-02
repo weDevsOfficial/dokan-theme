@@ -61,7 +61,7 @@ add_action( 'woocommerce_after_shop_loop_item', 'dokan_product_loop_price' );
 
 function dokan_woo_breadcrumb( $args ) {
     return array(
-        'delimiter'   => '',
+        'delimiter'   => '&nbsp; <i class="fa fa-angle-right"></i> &nbsp;',
         'wrap_before' => '<nav class="breadcrumb" ' . ( is_single() ? 'itemprop="breadcrumb"' : '' ) . '>',
         'wrap_after'  => '</nav>',
         'before'      => '<li>',
