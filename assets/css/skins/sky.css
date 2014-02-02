@@ -1,4 +1,5 @@
 a{color:#3498db}
+.btn-theme{background:#3498db;color:#fff}.btn-theme:hover{background:#258cd1;color:#fff}
 .site-header .navbar-collapse ul.navbar-nav>li>ul.dropdown-menu>li.active a{background:#3498db}
 .navbar-top-area .navbar-nav>.open>a:hover,.navbar-top-area .navbar-nav>.open>a:focus{background-color:#3498db}
 .home .slider-container h2.slider-heading{border-left:5px solid #3498db}

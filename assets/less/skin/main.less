@@ -4,6 +4,16 @@ a {
     color: @skinColor;
 }
 
+.btn-theme {
+    background: @skinColor;
+    color: #fff;
+
+    &:hover {
+        background: darken(@skinColor, 5%);
+        color: #fff;
+    }
+}
+
 .site-header .navbar-collapse ul.navbar-nav > li > ul.dropdown-menu > li.active a {
     background: @skinColor;
 }
