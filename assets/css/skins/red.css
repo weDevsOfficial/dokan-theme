@@ -4,8 +4,8 @@ a{color:#e74c3c}
 .navbar-top-area .navbar-nav>.open>a:hover,.navbar-top-area .navbar-nav>.open>a:focus{background-color:#e74c3c}
 .home .slider-container h2.slider-heading{border-left:5px solid #e74c3c}
 .home .product-sliders .flex-direction-nav a{background:#e74c3c}
-.home .product-sliders li .item-button a.add_to_cart_button{background:#e74c3c;border-color:#e74c3c;border-color:#e74c3c}
-.home .product-sliders li .item-button a.fav i{color:#e74c3c}
+.home .product-sliders li .item-button a.add_to_cart_button{background:#e74c3c;border-color:#e74c3c}.home .product-sliders li .item-button a.add_to_cart_button:hover{color:#e74c3c;background:#fff;border-color:#ddd}
+.home .product-sliders li .item-button a.fav{background:#fff}.home .product-sliders li .item-button a.fav:hover{color:#fff;background:#e74c3c;border-color:#e74c3c}
 .home .product-sliders li span.onsale{background:#e74c3c}
 .widget .widget-title{border-left:3px solid #e74c3c;margin-left:-10px;padding-left:6px}
 .widget.widget_search .btn-primary,.widget.widget_product_search .btn-primary{background-color:#e74c3c;border-color:#e74c3c}

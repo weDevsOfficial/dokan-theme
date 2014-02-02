@@ -45,13 +45,25 @@ a {
                 a.add_to_cart_button {
                     background: @skinColor;
                     border-color: @skinColor;
-                    border-color: @skinColor;
+
+                    &:hover {
+                        color: @skinColor;
+                        background: #fff;
+                        border-color: @borderColor;
+                    }
                 }
 
-                a.fav i {
-                    color: @skinColor;
+                a.fav {
+                    background: #fff;
+
+                    &:hover {
+                        color: #fff;
+                        background: @skinColor;
+                        border-color: @skinColor;
+                    }
                 }
             }
+
 
             span.onsale {
                 background: @skinColor;
