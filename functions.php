@@ -253,7 +253,7 @@ class WeDevs_Dokan {
         wp_enqueue_style( 'reviows-style', $template_directory . '/assets/css/reviews.css', false, null );
         wp_enqueue_style( 'dokan-style', $template_directory . '/assets/css/style.css', false, null );
         wp_enqueue_style( 'dokan-skin', $template_directory . '/assets/css/skins/' . $skin, false, null );
-        wp_enqueue_style( 'dokan-opensans', $protocol . '://fonts.googleapis.com/css?family=Open+Sans' );
+        wp_enqueue_style( 'dokan-opensans', $protocol . '://fonts.googleapis.com/css?family=Open+Sans:400,700' );
         wp_enqueue_style( 'style', $template_directory . '/style.css', false, null );
 
 
