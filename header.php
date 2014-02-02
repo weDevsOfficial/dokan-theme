@@ -50,13 +50,20 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-top-collapse">
+                                <span class="sr-only"><?php _e( 'Toggle navigation', 'dokan' ); ?></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
                         <?php
                             wp_nav_menu( array(
                                 'menu'              => 'primary',
                                 'theme_location'    => 'top-left',
                                 'depth'             => 0,
                                 'container'         => 'div',
-                                'container_class'   => 'collapse navbar-collapse navbar-ex1-collapse',
+                                'container_class'   => 'collapse navbar-top-collapse',
                                 'menu_class'        => 'nav navbar-nav',
                                 'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
                                 'walker'            => new wp_bootstrap_navwalker())
@@ -118,7 +125,7 @@
                                 <div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'wedevs' ); ?>"><?php _e( 'Skip to content', 'wedevs' ); ?></a></div>
                                     <nav class="navbar navbar-default" role="navigation">
                                         <div class="navbar-header">
-                                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                                                 <span class="sr-only"><?php _e( 'Toggle navigation', 'dokan' ); ?></span>
                                                 <span class="icon-bar"></span>
                                                 <span class="icon-bar"></span>
@@ -126,13 +133,13 @@
                                             </button>
                                             <a class="navbar-brand" href="<?php echo home_url(); ?>"><i class="fa fa-home"></i> <?php _e( 'Home', 'dokan' ); ?></a>
                                         </div>
-                                        <div class="collapse navbar-collapse navbar-ex1-collapse">
+                                        <div class="collapse navbar-collapse navbar-main-collapse">
                                             <?php
                                                 wp_nav_menu( array(
                                                     'menu'              => 'primary',
                                                     'theme_location'    => 'primary',
                                                     'container'         => 'div',
-                                                    'container_class'   => 'collapse navbar-collapse navbar-ex1-collapse',
+                                                    'container_class'   => 'collapse navbar-collapse navbar-main-collapse',
                                                     'menu_class'        => 'nav navbar-nav',
                                                     'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
                                                     'walker'            => new wp_bootstrap_navwalker())
