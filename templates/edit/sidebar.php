@@ -8,7 +8,8 @@
     <div class="dokan-post-status dokan-toggle-sidebar">
         <label for="post_status"><?php _e( 'Product Status:', 'dokan' ); ?></label>
 
-        <span class="dokan-toggle-selected-display"><?php echo dokan_get_post_status( $post->post_status ); ?></span>
+        <?php $pending_class = $post->post_status == 'pending' ? '  label label-warning': ''; ?>
+        <span class="dokan-toggle-selected-display<?php echo $pending_class; ?>"><?php echo dokan_get_post_status( $post->post_status ); ?></span>
 
         <?php if ( $post->post_status != 'pending' ) { ?>
             <a class="dokan-toggle-edit label label-success" href="#"><?php _e( 'Edit', 'dokan' ); ?></a>
