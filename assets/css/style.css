@@ -259,14 +259,14 @@ a:hover {
 .navbar-top-area .navbar-collapse {
   padding-left: 0;
 }
-.navbar-top-area li {
+.navbar-top-area .navbar-nav > li {
   border-right: 1px solid #fff;
   border-left: 1px solid #ccc;
 }
-.navbar-top-area li:first-child {
+.navbar-top-area .navbar-nav > li:first-child {
   border-left: none;
 }
-.navbar-top-area li:last-child {
+.navbar-top-area .navbar-nav > li:last-child {
   border-right: none;
 }
 .navbar-top-area .navbar-nav > li > a {
@@ -278,8 +278,10 @@ a:hover {
 .navbar-top-area .navbar-nav > li > a:hover {
   color: #111;
 }
-.navbar-top-area .navbar-nav > li.active a {
-  background: #DDD;
+.navbar-top-area .navbar-nav > li.active > a,
+.navbar-top-area .navbar-nav > li.active > a:hover,
+.navbar-top-area .navbar-nav > li.active > a:focus {
+  background-color: #DDD;
   color: #666;
 }
 .navbar-default {
@@ -3056,22 +3058,30 @@ span.error {
 :: Responsive Menubar
 -------------------------------------------------- */
 @media (max-width: 768px) {
+  .navbar-top-area .navbar-nav {
+    background: #fff;
+  }
   .navbar-top-area .navbar-toggle .icon-bar {
     background-color: #BABABA;
-  }
-  .navbar-top-area .navbar-toggle {
-    border-color: #BABABA;
   }
   .navbar-top-area .navbar-collapse {
     padding-left: 15px;
   }
-  .navbar-top-area li {
+  .navbar-top-area .navbar-nav > li {
     border: none;
   }
-  .navbar-top-area .navbar-toggle {
-    padding: 8px 10px;
+  .navbar-top-area .navbar-nav .open .dropdown-menu > li > a {
+    color: #625D5D;
+  }
+  .navbar-toggle {
+    color: #BABABA;
+    border-color: #BABABA;
+    padding: 4px 10px;
     margin-bottom: 5px;
-    margin-top: 5px;
+    margin-top: 10px;
+  }
+  .navbar-inverse .navbar-toggle {
+    border-color: #BABABA;
   }
   .navbar-inverse .navbar-collapse {
     border: none;

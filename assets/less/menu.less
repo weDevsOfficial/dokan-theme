@@ -47,19 +47,17 @@
         padding-left: 0;
     }
 
-    li {
-        // border-right: 1px solid #111;
+    .navbar-nav > li {
         border-right: 1px solid #fff;
-        // border-left: 1px solid #555;
         border-left: 1px solid #ccc;
-    }
 
-    li:first-child {
-        border-left: none;
-    }
+        &:first-child {
+            border-left: none;
+        }
 
-    li:last-child {
-        border-right: none;
+        &:last-child {
+            border-right: none;
+        }
     }
 
     .navbar-nav > li > a {
@@ -74,8 +72,10 @@
         }
     }
 
-    .navbar-nav > li.active a {
-        background: #DDD;
+    .navbar-nav > li.active > a,
+    .navbar-nav > li.active > a:hover,
+    .navbar-nav > li.active > a:focus {
+        background-color: #DDD;
         color: #666;
     }
 }

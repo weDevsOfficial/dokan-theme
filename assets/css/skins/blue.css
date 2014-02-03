@@ -1,7 +1,8 @@
 a{color:#2980b9}
 .btn-theme{background:#2980b9;color:#fff}.btn-theme:hover{background:#2472a4;color:#fff}
-.site-header .navbar-collapse ul.navbar-nav>li>ul.dropdown-menu>li.active a{background:#2980b9}
-.navbar-top-area .navbar-nav>.open>a:hover,.navbar-top-area .navbar-nav>.open>a:focus{background-color:#2980b9}
+.site-header .navbar-collapse ul.navbar-nav>li>ul.dropdown-menu>li.active a{background:#2980b9;color:#fff}
+.navbar-top-area.navbar-inverse .navbar-nav>.open>a,.navbar-top-area.navbar-inverse .navbar-nav>.open>a:hover,.navbar-top-area.navbar-inverse .navbar-nav>.open>a:focus{background-color:#2980b9;color:#fff}
+.navbar-top-area.navbar-inverse .dropdown-menu>.active a,.navbar-top-area.navbar-inverse .dropdown-menu>.active a:hover,.navbar-top-area.navbar-inverse .dropdown-menu>.active a:focus{background-color:#2980b9;color:#fff}
 .home .slider-container h2.slider-heading{border-left:5px solid #2980b9}
 .home .product-sliders .flex-direction-nav a{background:#2980b9}
 .home .product-sliders li .item-button a.add_to_cart_button{background:#2980b9;border-color:#2980b9}.home .product-sliders li .item-button a.add_to_cart_button:hover{color:#2980b9;background:#fff;border-color:#ddd}

@@ -5,27 +5,37 @@
 
     .navbar-top-area {
 
-        .navbar-toggle .icon-bar {
-            background-color: #BABABA;
+        .navbar-nav {
+            background: #fff;
         }
 
-        .navbar-toggle {
-            border-color: #BABABA;
+        .navbar-toggle .icon-bar {
+            background-color: #BABABA;
         }
 
         .navbar-collapse {
             padding-left: 15px;
         }
 
-        li {
+        .navbar-nav > li {
             border: none;
         }
 
-        .navbar-toggle {
-            padding: 8px 10px;
-            margin-bottom: 5px;
-            margin-top: 5px;
+        .navbar-nav .open .dropdown-menu > li > a {
+            color: #625D5D;
         }
+    }
+
+    .navbar-toggle {
+        color: #BABABA;
+        border-color: #BABABA;
+        padding: 4px 10px;
+        margin-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    .navbar-inverse .navbar-toggle {
+        border-color: #BABABA;
     }
 
     .navbar-inverse .navbar-collapse {

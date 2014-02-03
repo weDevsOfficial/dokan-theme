@@ -16,12 +16,22 @@ a {
 
 .site-header .navbar-collapse ul.navbar-nav > li > ul.dropdown-menu > li.active a {
     background: @skinColor;
+    color: #fff;
 }
 
-.navbar-top-area {
+.navbar-top-area.navbar-inverse {
+    .navbar-nav > .open > a,
     .navbar-nav > .open > a:hover,
     .navbar-nav > .open > a:focus {
         background-color: @skinColor;
+        color: #fff;
+    }
+
+    .dropdown-menu > .active a,
+    .dropdown-menu > .active a:hover,
+    .dropdown-menu > .active a:focus {
+        background-color: @skinColor;
+        color: #fff;
     }
 }
 
