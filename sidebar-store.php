@@ -4,8 +4,13 @@ $store_info = get_user_meta( $store_user->ID, 'dokan_profile_settings', true );
 $map_location = isset( $store_info['location'] ) ? esc_attr( $store_info['location'] ) : '';
 ?>
 
-<div id="secondary" class="col-md-3" role="complementary">
-    <div class="widget-area">
+<div id="secondary" class="col-md-3 clearfix" role="complementary">
+    <button type="button" class="navbar-toggle widget-area-toggle" data-toggle="collapse" data-target=".widget-area">
+        <i class="fa fa-bars"></i>
+        <span class="bar-title"><?php _e( 'Toggle Sidebar', 'dokan' ); ?></span>
+    </button>
+
+    <div class="widget-area collapse widget-collapse">
 
         <?php dokan_category_widget(); ?>
 
