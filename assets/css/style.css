@@ -3034,10 +3034,10 @@ ul.subsubsub li.active a {
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
-.woocommerce div.product .woocommerce-tabs ul.tabs li[class],
-.woocommerce-page div.product .woocommerce-tabs ul.tabs li[class],
-.woocommerce #content div.product .woocommerce-tabs ul.tabs li[class],
-.woocommerce-page #content div.product .woocommerce-tabs ul.tabs li[class] {
+.woocommerce div.product .woocommerce-tabs ul.tabs li,
+.woocommerce-page div.product .woocommerce-tabs ul.tabs li,
+.woocommerce #content div.product .woocommerce-tabs ul.tabs li,
+.woocommerce-page #content div.product .woocommerce-tabs ul.tabs li {
   background: #fff;
   border: 1px solid #e0dadf;
   display: inline-block;
@@ -3240,6 +3240,18 @@ span.error {
   .woocommerce-page.single-product .upsells.products ul.products li.product {
     width: 45%;
   }
+  .woocommerce #reviews #respond .comment-form-rating label,
+  .woocommerce-page #reviews #respond .comment-form-rating label {
+    float: none;
+  }
+  .woocommerce #reviews #respond .comment-form-rating p.stars,
+  .woocommerce-page #reviews #respond .comment-form-rating p.stars {
+    float: none;
+  }
+  .woocommerce #reviews #respond .comment-form-comment,
+  .woocommerce-page #reviews #respond .comment-form-comment {
+    width: 80%;
+  }
   .woocommerce .archive-title h1.page-title,
   .woocommerce-page .archive-title h1.page-title {
     float: none;
@@ -3256,5 +3268,32 @@ span.error {
   }
   .site-footer .footer-copy ul.pull-right {
     float: none !important;
+  }
+}
+@media (max-width: 430px) {
+  .woocommerce #reviews #respond .comment-form-comment,
+  .woocommerce-page #reviews #respond .comment-form-comment {
+    margin-top: 40px;
+  }
+  .woocommerce #content div.product .woocommerce-tabs ul.tabs,
+  .woocommerce-page #content div.product .woocommerce-tabs ul.tabs {
+    padding: 0;
+  }
+  .woocommerce #content div.product .woocommerce-tabs ul.tabs li,
+  .woocommerce-page #content div.product .woocommerce-tabs ul.tabs li,
+  .woocommerce #content div.product .woocommerce-tabs ul.tabs li.active,
+  .woocommerce-page #content div.product .woocommerce-tabs ul.tabs li.active {
+    padding: 2px 5px;
+    margin: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .woocommerce #content div.product .woocommerce-tabs ul.tabs li a,
+  .woocommerce-page #content div.product .woocommerce-tabs ul.tabs li a,
+  .woocommerce #content div.product .woocommerce-tabs ul.tabs li.active a,
+  .woocommerce-page #content div.product .woocommerce-tabs ul.tabs li.active a {
+    font-weight: normal;
   }
 }
