@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<?php get_sidebar(); ?>
+<?php get_sidebar( 'shop' ); ?>
 
 <div id="primary" class="content-area col-md-9">
     <div id="content" class="site-content" role="main">
