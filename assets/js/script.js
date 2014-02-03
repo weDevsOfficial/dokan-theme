@@ -181,8 +181,8 @@ jQuery(function($) {
                 if ( resp.success ) {
 
                     $('.dokan-ajax-response').html( $('<div/>', {
-                        class: 'alert alert-success',
-                        html: '<p>' + resp.data + '</p>'
+                        'class': 'alert alert-success',
+                        'html': '<p>' + resp.data + '</p>'
                     }) );
 
                 } else {
