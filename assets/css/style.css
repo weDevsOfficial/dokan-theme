@@ -2654,6 +2654,42 @@ ul.subsubsub li.active a {
   line-height: 26px;
   font-weight: normal;
 }
+.woocommerce #reviews #comments h2,
+.woocommerce-page #reviews #comments h2 {
+  margin: 15px 0 25px 0;
+}
+.woocommerce #reviews h3,
+.woocommerce-page #reviews h3 {
+  margin: 0 0 20px 0;
+}
+.woocommerce #reviews #respond label,
+.woocommerce-page #reviews #respond label {
+  min-width: 110px;
+}
+.woocommerce #reviews #respond .comment-form-rating:before,
+.woocommerce-page #reviews #respond .comment-form-rating:before,
+.woocommerce #reviews #respond .comment-form-rating:after,
+.woocommerce-page #reviews #respond .comment-form-rating:after {
+  content: " ";
+  display: table;
+}
+.woocommerce #reviews #respond .comment-form-rating:after,
+.woocommerce-page #reviews #respond .comment-form-rating:after {
+  clear: both;
+}
+.woocommerce #reviews #respond .comment-form-rating label,
+.woocommerce-page #reviews #respond .comment-form-rating label {
+  float: left;
+  width: 110px;
+}
+.woocommerce #reviews #respond .comment-form-rating p.stars,
+.woocommerce-page #reviews #respond .comment-form-rating p.stars {
+  float: left;
+}
+.woocommerce #reviews #respond .comment-form-comment,
+.woocommerce-page #reviews #respond .comment-form-comment {
+  width: 50%;
+}
 .woocommerce.single-product div.product span.onsale,
 .woocommerce-page.single-product div.product span.onsale {
   -moz-border-radius: 0;

@@ -164,6 +164,18 @@ a {
         box-shadow: inset 0px 4px 0px @skinColor;
     }
 
+
+    #reviews #respond input[type=submit]{
+        background-color: @skinColor;
+        border-color: @skinColor;
+        color: #fff;
+
+        &:hover {
+            background-color: darken(@skinColor, 5%);
+            border-color: darken(@skinColor, 5%);
+        }
+    }
+
     nav.woocommerce-pagination, #content nav.woocommerce-pagination {
         ul {
             li {
