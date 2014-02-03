@@ -50,12 +50,11 @@
         <nav class="navbar navbar-inverse navbar-top-area">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-top-collapse">
                                 <span class="sr-only"><?php _e( 'Toggle navigation', 'dokan' ); ?></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
+                                <i class="fa fa-bars"></i>
                             </button>
                         </div>
                         <?php
@@ -70,6 +69,42 @@
                                 'walker'            => new wp_bootstrap_navwalker())
                             );
                         ?>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="collapse navbar-collapse navbar-top-collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <?php if ( is_user_logged_in() ) { ?>
+                                    <li><?php wp_loginout( home_url() ); ?></li>
+                                    <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'My Account', 'dokan' ); ?></a></li>
+
+                                    <?php
+                                    $user_id = get_current_user_id();
+                                    if ( dokan_is_user_seller( $user_id ) ) {
+                                        ?>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php _e( 'Seller Dashboard', 'dokan' ); ?> <b class="caret"></b></a>
+
+                                            <ul class="dropdown-menu">
+                                                <li><a href="<?php echo dokan_get_store_url( $user_id ); ?>" target="_blank"><?php _e( 'Visit your store', 'dokan' ); ?> <i class="fa fa-external-link"></i></a></li>
+                                                <li class="divider"></li>
+                                                <?php
+                                                $nav_urls = dokan_get_dashboard_nav();
+
+                                                foreach ($nav_urls as $key => $item) {
+                                                    printf( '<li><a href="%s">%s &nbsp;%s</a></li>', $item['url'], $item['icon'], $item['title'] );
+                                                }
+                                                ?>
+                                            </ul>
+                                        </li>
+                                    <?php } ?>
+
+                                <?php } else { ?>
+                                    <li><i class="icon-off"></i> <?php wp_loginout( home_url() ); ?></li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+
                     </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->
@@ -86,13 +121,6 @@
 
                     <div class="col-md-8 clearfix">
                         <ul class="cart-area-top list-inline">
-
-                            <?php if ( is_user_logged_in() ) { ?>
-                                <li><i class="icon-off"></i> <?php wp_loginout( home_url() ); ?></li>
-                                <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><i class="icon-user"></i> Account</a></li>
-                            <?php } else { ?>
-                                <li><i class="icon-off"></i> <?php wp_loginout( home_url() ); ?></li>
-                            <?php } ?>
 
                             <li class="nav-cart-link"><?php dokan_checkout_header_btn(); ?></li>
                             <script type="text/javascript">
@@ -128,9 +156,7 @@
                                         <div class="navbar-header">
                                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                                                 <span class="sr-only"><?php _e( 'Toggle navigation', 'dokan' ); ?></span>
-                                                <span class="icon-bar"></span>
-                                                <span class="icon-bar"></span>
-                                                <span class="icon-bar"></span>
+                                                <i class="fa fa-bars"></i>
                                             </button>
                                             <a class="navbar-brand" href="<?php echo home_url(); ?>"><i class="fa fa-home"></i> <?php _e( 'Home', 'dokan' ); ?></a>
                                         </div>
