@@ -1200,17 +1200,6 @@ function dokan_create_sub_order_shipping( $parent_order, $order_id, $seller_prod
 }
 
 
-add_action( 'register_forms', function() {
-    ?>
-        <p class="form-row form-row-wide">
-            <label for="reg_password" class="checkbox">
-                <?php _e( 'Password', 'woocommerce' ); ?>
-
-            </label>
-        </p>
-    <?php
-});
-
 function dokan_seller_registration_errors( $error ) {
     $allowed_roles = array( 'customer', 'seller' );
 
