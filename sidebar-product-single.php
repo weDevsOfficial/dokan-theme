@@ -6,7 +6,7 @@
  * @package _bootstraps - 2013 1.0
  */
 ?>
-<div id="secondary" class="col-md-3" role="complementary">
+<div id="secondary" class="col-md-3 clearfix" role="complementary">
     <button type="button" class="navbar-toggle widget-area-toggle" data-toggle="collapse" data-target=".widget-area">
         <i class="fa fa-bars"></i>
         <span class="bar-title"><?php _e( 'Toggle Sidebar', 'dokan' ); ?></span>
