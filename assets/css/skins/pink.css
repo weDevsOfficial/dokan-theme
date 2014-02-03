@@ -10,6 +10,7 @@ a{color:#f17288}
 .widget .widget-title{border-left:3px solid #f17288;margin-left:-10px;padding-left:6px}
 .widget.widget_search .btn-primary,.widget.widget_product_search .btn-primary{background-color:#f17288;border-color:#f17288}
 .widget.dokan-category-menu #cat-drop-stack>ul>li>a:hover{background:#f17288}
+.widget.dokan-category-menu #cat-drop-stack>ul>li .sub-block ul a:hover,.widget.dokan-category-menu #cat-drop-stack>ul>li .sub-block h3 a:hover{color:#f17288}
 .dokan-dash-sidebar ul.dokan-dashboard-menu li.active{background:#f17288}
 .dokan-dash-sidebar ul.dokan-dashboard-menu li:hover{background:#f17288}
 .woocommerce span.onsale,.woocommerce-page span.onsale{background:#f17288}

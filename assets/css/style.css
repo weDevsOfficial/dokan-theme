@@ -1553,10 +1553,11 @@ a:hover {
   color: #fff;
 }
 .widget .widget-title {
-  margin: 0 0 10px 0;
+  margin: 0 0 15px 0;
   font-weight: lighter;
   border: none;
   font-size: 18px;
+  line-height: 18px;
 }
 .widget ul {
   margin-left: 0;
@@ -2306,7 +2307,7 @@ a:hover {
   border: none;
   padding: 0;
 }
-.site-footer .widget h3 {
+.site-footer .widget .widget-title {
   color: #e8e8e8;
   font-weight: bold;
   font-size: 16px;
@@ -2314,9 +2315,9 @@ a:hover {
   text-shadow: 0px 0px 3px #000;
   border-bottom: 1px solid #535353;
   background: transparent;
-  padding: 0 0 10px 0;
+  padding: 0 0 15px 0;
   border-left: none;
-  margin-left: 0;
+  margin: 0 0 15px 0;
 }
 .site-footer .widget ul li {
   font-size: 14px;
@@ -3108,8 +3109,10 @@ span.error {
     box-shadow: none;
   }
   .widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block {
-    width: 50%;
+    width: 100%;
     float: left;
+    margin-bottom: 15px;
+    padding: 0;
   }
   .widget.dokan-category-menu #cat-drop-stack > ul > li:hover .sub-category {
     display: none;
@@ -3135,6 +3138,9 @@ span.error {
     font-size: 14px;
     line-height: 14px;
     padding-left: 10px;
+  }
+  .store-page-wrap .profile-frame {
+    background-size: auto 100%;
   }
   .woocommerce.single-product .related ul.products li.product,
   .woocommerce-page.single-product .related ul.products li.product,
