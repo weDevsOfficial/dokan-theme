@@ -21,7 +21,7 @@ get_header();
 <?php get_sidebar( 'store' ); ?>
 
 <div id="primary" class="content-area col-md-9">
-    <div id="content" class="site-content store-page-wrap" role="main">
+    <div id="content" class="site-content store-page-wrap woocommerce" role="main">
 
         <div class="profile-frame">
 
@@ -97,7 +97,7 @@ get_header();
 
         <?php if ( have_posts() ) { ?>
 
-            <div class="seller-items woocommerce">
+            <div class="seller-items">
 
                 <?php woocommerce_product_loop_start(); ?>
 
@@ -112,6 +112,10 @@ get_header();
             </div>
 
             <?php wedevs_content_nav( 'nav-below' ); ?>
+
+        <?php } else { ?>
+
+            <p class="woocommerce-info"><?php _e( 'No products were found of this seller!', 'dokan' ); ?></p>
 
         <?php } ?>
     </div>
