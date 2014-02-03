@@ -531,3 +531,20 @@ function dokan_log( $message ) {
     $message = sprintf( "[%s] %s\n", date( 'd.m.Y h:i:s' ), $message );
     error_log( $message, 3, DOKAN_DIR . '/debug.log' );
 }
+
+function dokan_media_uploader_restrict( $args ) {
+    // bail out for admin and editor
+    if ( current_user_can( 'delete_pages' ) ) {
+        return $args;
+    }
+
+    if ( current_user_can( 'dokandar' ) ) {
+        $args['author'] = get_current_user_id();
+
+        return $args;
+    }
+
+    return $args;
+}
+
+add_filter( 'ajax_query_attachments_args', 'dokan_media_uploader_restrict' );
