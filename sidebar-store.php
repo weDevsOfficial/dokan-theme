@@ -14,6 +14,8 @@ $map_location = isset( $store_info['location'] ) ? esc_attr( $store_info['locati
 
         <?php dokan_category_widget(); ?>
 
+        <?php do_action( 'dokan_sidebar_store_before', $store_user, $store_info ); ?>
+
         <?php if ( !empty( $map_location ) ) { ?>
         <aside class="widget store-location">
             <h3 class="widget-title"><?php _e( 'Store Location', 'dokan' ); ?></h3>
@@ -75,5 +77,7 @@ $map_location = isset( $store_info['location'] ) ? esc_attr( $store_info['locati
                 <input type="submit" name="store_message_send" value="<?php esc_attr_e( 'Send Message', 'dokan' ); ?>" class="pull-right btn btn-theme">
             </form>
         </aside>
+
+        <?php do_action( 'dokan_sidebar_store_after', $store_user, $store_info ); ?>
     </div>
 </div><!-- #secondary .widget-area -->
