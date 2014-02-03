@@ -53,6 +53,8 @@ $_stock_status = get_post_meta( $post_id, '_stock_status', true );
 $_visibility = get_post_meta( $post_id, '_visibility', true );
 $_enable_reviews = $post->comment_status;
 
+dokan_product_editor_scripts();
+
 get_header();
 ?>
 
@@ -71,7 +73,11 @@ get_header();
                         <?php if ( isset( $_GET['message'] ) && $_GET['message'] == 'success') { ?>
                             <div class="alert alert-success">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                <strong>Success!</strong> The product has been updated successfully. <a href="<?php echo get_permalink( $post_id ); ?>" target="_blank"><?php _e( 'View Product &rarr;', 'dokan' ); ?></a>
+                                <strong><?php _e( 'Success!', 'dokan' ); ?></strong> <?php _e( 'The product has been updated successfully.', 'dokan' ); ?>
+
+                                <?php if ( $post->post_status == 'publish' ) { ?>
+                                    <a href="<?php echo get_permalink( $post_id ); ?>" target="_blank"><?php _e( 'View Product &rarr;', 'dokan' ); ?></a>
+                                <?php } ?>
                             </div>
                         <?php } ?>
 
@@ -79,13 +85,13 @@ get_header();
 
                             <ul class="nav nav-tabs">
                                 <li class="active">
-                                    <a href="#edit-product" data-toggle="tab">Edit</a>
+                                    <a href="#edit-product" data-toggle="tab"><?php _e( 'Edit', 'dokan' ); ?></a>
                                 </li>
-                                <li><a href="#product-options" data-toggle="tab">Options</a></li>
-                                <li><a href="#product-inventory" data-toggle="tab">Inventory</a></li>
+                                <li><a href="#product-options" data-toggle="tab"><?php _e( 'Options', 'dokan' ); ?></a></li>
+                                <li><a href="#product-inventory" data-toggle="tab"><?php _e( 'Inventory', 'dokan' ); ?></a></li>
                                 <li class="show_if_simple"><a href="#product-shipping" data-toggle="tab"><?php _e( 'Shipping', 'dokan' ); ?></a></li>
-                                <li><a href="#product-attributes" data-toggle="tab">Attributes</a></li>
-                                <li class="show_if_variable"><a href="#product-variations" data-toggle="tab">Variations</a></li>
+                                <li><a href="#product-attributes" data-toggle="tab"><?php _e( 'Attributes', 'dokan' ); ?></a></li>
+                                <li class="show_if_variable"><a href="#product-variations" data-toggle="tab"><?php _e( 'Variations', 'dokan' ); ?></a></li>
                             </ul>
 
                             <div class="tab-content">
