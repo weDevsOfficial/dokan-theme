@@ -13,114 +13,35 @@
  */
 get_header();
 ?>
-<?php $url = get_template_directory_uri() . '/assets/images/footer'; ?>
-<div id="primary" class="home-content-area col-md-9">
+
+<div id="primary" class="content-area col-md-9">
     <div id="content" class="site-content" role="main">
 
-        <?php do_action( 'dokan_home_slider_top' ); ?>
+        <?php if ( have_posts() ) : ?>
 
-        <div class="row">
-            <div class="col-md-4">
-                <?php dokan_category_widget(); ?>
-            </div>
+            <?php /* Start the Loop */ ?>
+            <?php while (have_posts()) : the_post(); ?>
 
-            <div class="col-md-8">
                 <?php
-                 if ( dokan_get_option( 'show_slider', 'dokan_home', 'on' ) == 'on' ) {
-                    $slider_id = dokan_get_option( 'slider_id', 'dokan_home', '-1' );
-
-                    if ( $slider_id != '-1' ) {
-                        Dokan_Slider::init()->get_slider( $slider_id );
-                    }
-                }
+                /* Include the Post-Format-specific template for the content.
+                 * If you want to overload this in a child theme then include a file
+                 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+                 */
+                get_template_part( 'content', get_post_format() );
                 ?>
-            </div>
-        </div> <!-- #home-page-section-1 -->
 
-        <?php do_action( 'dokan_home_slider_bottom' ); ?>
+            <?php endwhile; ?>
 
-        <?php if ( dokan_get_option( 'show_featured', 'dokan_home', 'on' ) == 'on' ) { ?>
-            <div class="slider-container woocommerce">
-                <h2 class="slider-heading"><?php _e( 'Featured Products', 'dokan' ); ?></h2>
+            <?php wedevs_content_nav( 'nav-below' ); ?>
 
-                <div class="product-sliders">
-                    <ul class="slides">
-                        <?php
-                        $featured_query = dokan_get_featured_products();
-                        ?>
-                        <?php while ( $featured_query->have_posts() ) : $featured_query->the_post(); ?>
+        <?php else : ?>
 
-                            <?php woocommerce_get_template_part( 'content', 'product' ); ?>
+            <?php get_template_part( 'no-results', 'index' ); ?>
 
-                        <?php endwhile; ?>
-                    </ul>
-                </div>
-            </div> <!-- .slider-container -->
-        <?php } ?>
-
-        <?php if ( dokan_get_option( 'show_latest', 'dokan_home', 'on' ) == 'on' ) { ?>
-            <div class="slider-container woocommerce">
-                <h2 class="slider-heading"><?php _e( 'Latest Products', 'dokan' ); ?></h2>
-
-                <div class="product-sliders">
-                    <ul class="slides">
-                        <?php
-                        $latest_query = new WP_Query( array(
-                            'posts_per_page' => 8,
-                            'post_type' => 'product'
-                        ) );
-                        ?>
-                        <?php while ( $latest_query->have_posts() ) : $latest_query->the_post(); ?>
-
-                            <?php woocommerce_get_template_part( 'content', 'product' ); ?>
-
-                        <?php endwhile; ?>
-                    </ul>
-                </div>
-            </div> <!-- .slider-container -->
-        <?php } ?>
-
-        <?php if ( dokan_get_option( 'show_best_selling', 'dokan_home', 'on' ) == 'on' ) { ?>
-            <div class="slider-container woocommerce">
-                <h2 class="slider-heading"><?php _e( 'Best Selling Products', 'dokan' ); ?></h2>
-
-                <div class="product-sliders">
-                    <ul class="slides">
-                        <?php
-                        $best_selling_query = dokan_get_best_selling_products();
-                        ?>
-                        <?php while ( $best_selling_query->have_posts() ) : $best_selling_query->the_post(); ?>
-
-                            <?php woocommerce_get_template_part( 'content', 'product' ); ?>
-
-                        <?php endwhile; ?>
-                    </ul>
-                </div>
-            </div> <!-- .slider-container -->
-        <?php } ?>
-
-        <?php if ( dokan_get_option( 'show_top_rated', 'dokan_home', 'on' ) == 'on' ) { ?>
-            <div class="slider-container woocommerce">
-                <h2 class="slider-heading"><?php _e( 'Top Rated Products', 'dokan' ); ?></h2>
-
-                <div class="product-sliders">
-                    <ul class="slides">
-                        <?php
-                        $top_rated_query = dokan_get_top_rated_products();
-                        ?>
-                        <?php while ( $top_rated_query->have_posts() ) : $top_rated_query->the_post(); ?>
-
-                            <?php woocommerce_get_template_part( 'content', 'product' ); ?>
-
-                        <?php endwhile; ?>
-                    </ul>
-                </div>
-            </div> <!-- .slider-container -->
-        <?php } ?>
+        <?php endif; ?>
 
     </div><!-- #content .site-content -->
 </div><!-- #primary .content-area -->
 
-
-<?php get_sidebar( 'home' ); ?>
+<?php get_sidebar( 'blog' ); ?>
 <?php get_footer(); ?>
