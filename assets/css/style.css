@@ -612,7 +612,6 @@ a:hover {
 .home .product-sliders li .item-button a.added_to_cart {
   position: absolute;
   right: 0;
-  background: #269C10;
   color: #fff;
   padding: 1px 10px;
   font-size: 12px;
@@ -2625,7 +2624,6 @@ ul.subsubsub li.active a {
 .woocommerce-page ul.products li.product .item-button a.added_to_cart {
   position: absolute;
   right: 0;
-  background: #269C10;
   color: #fff;
   padding: 1px 10px;
   font-size: 12px;
