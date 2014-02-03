@@ -15,6 +15,14 @@
         padding: 15px;
     }
 
+    .nocomments {
+        color: #c09853;
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+        margin: 10px;
+        padding: 15px;
+    }
+
     #respond {
 
         padding: 20px;
@@ -90,7 +98,11 @@
             .border-radius(0);
         }
 
-        li{
+        li {
+
+            &.pingback {
+                padding: 0 10px;
+            }
 
             article.comment {
                 position: relative;

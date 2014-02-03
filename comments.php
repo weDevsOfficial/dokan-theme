@@ -7,8 +7,8 @@
  * handled by a callback to tp_comment() which is
  * located in the functions.php file.
  *
- * @package _bootstraps
- * @package _bootstraps - 2013 1.0
+ * @package dokan
+ * @package dokan - 2014 1.0
  */
 ?>
 
@@ -22,7 +22,7 @@ if ( post_password_required() )
     return;
 ?>
 
-<div id="comments" class="comments-area">
+<div id="comments" class="comments-area clearfix">
 
     <?php // You can start editing here -- including this comment! ?>
 

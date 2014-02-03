@@ -125,16 +125,16 @@ function wedevs_content_nav( $nav_id, $query = null ) {
         $nav_class = 'site-navigation post-navigation';
     ?>
     <nav role="navigation" id="<?php echo $nav_id; ?>" class="<?php echo $nav_class; ?>">
-        <h1 class="assistive-text"><?php _e( 'Post navigation', 'wedevs' ); ?></h1>
+        <h1 class="assistive-text"><?php _e( 'Post navigation', 'dokan' ); ?></h1>
 
         <ul class="pager">
         <?php if ( is_single() ) : // navigation links for single posts  ?>
 
             <li class="previous">
-                <?php previous_post_link( '%link', _x( '&larr;', 'Previous post link', 'wedevs' ) . ' %title' ); ?>
+                <?php previous_post_link( '%link', _x( '&larr;', 'Previous post link', 'dokan' ) . ' %title' ); ?>
             </li>
             <li class="next">
-                <?php next_post_link( '%link', '%title ' . _x( '&rarr;', 'Next post link', 'wedevs' ) ); ?>
+                <?php next_post_link( '%link', '%title ' . _x( '&rarr;', 'Next post link', 'dokan' ) ); ?>
             </li>
 
         <?php endif; ?>
@@ -183,7 +183,7 @@ function wedevs_page_navi( $before = '', $after = '', $wp_query ) {
 
     echo $before . '<div class="pagination-container"><ul class="pagination">' . "";
     if ( $paged > 1 ) {
-        $first_page_text = "&larr;";
+        $first_page_text = "&laquo;";
         echo '<li class="prev"><a href="' . get_pagenum_link() . '" title="First">' . $first_page_text . '</a></li>';
     }
 
@@ -191,7 +191,7 @@ function wedevs_page_navi( $before = '', $after = '', $wp_query ) {
     if ( $prevposts ) {
         echo '<li>' . $prevposts . '</li>';
     } else {
-        echo '<li class="disabled"><a href="#">' . __( '&larr; Previous', 'wedevs' ) . '</a></li>';
+        echo '<li class="disabled"><a href="#">' . __( '&larr; Previous', 'dokan' ) . '</a></li>';
     }
 
     for ($i = $start_page; $i <= $end_page; $i++) {
@@ -202,7 +202,7 @@ function wedevs_page_navi( $before = '', $after = '', $wp_query ) {
         }
     }
     echo '<li class="">';
-    next_posts_link( __('Next &rarr;', 'wedevs') );
+    next_posts_link( __('Next &rarr;', 'dokan') );
     echo '</li>';
     if ( $end_page < $max_page ) {
         $last_page_text = "&larr;";
