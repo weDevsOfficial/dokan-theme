@@ -2301,6 +2301,7 @@ a:hover {
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder img {
   padding: 0;
   margin: 0;
+  max-width: 100%;
 }
 .product-edit-container #dokan-product-images ul.product_images li.image ul.actions,
 .product-edit-container #dokan-product-images ul.product_images li.dokan-sortable-placeholder ul.actions {
