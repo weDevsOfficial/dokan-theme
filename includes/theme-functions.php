@@ -548,3 +548,29 @@ function dokan_media_uploader_restrict( $args ) {
 }
 
 add_filter( 'ajax_query_attachments_args', 'dokan_media_uploader_restrict' );
+
+function dokan_get_store_info( $seller_id ) {
+    return get_user_meta( $seller_id, 'dokan_profile_settings', true );
+}
+
+function dokan_get_sellers( $number = 10, $offset = 0 ) {
+    $args = apply_filters( 'dokan_seller_list_query', array(
+        'role' => 'seller',
+        'number' => $number,
+        'offset' => $offset,
+        'orderby' => 'registered',
+        'order' => 'ASC',
+        'meta_query' => array(
+            array(
+                'key' => 'dokan_enable_selling',
+                'value' => 'yes',
+                'compare' => '='
+            )
+        )
+    ) );
+
+    $user_query = new WP_User_Query( $args );
+    $sellers = $user_query->get_results();
+
+    return array( 'users' => $sellers, 'count' => $user_query->total_users );
+}
