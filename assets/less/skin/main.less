@@ -14,6 +14,22 @@ a {
     }
 }
 
+.pagination {
+    > li > span.current,
+    > li > a:hover {
+        background-color: @skinColor;
+        color: #fff;
+    }
+}
+
+.dokan-info {
+    border-top:3px solid @skinColor;
+
+    &:before {
+        background-color:@skinColor;
+    }
+}
+
 .site-header .navbar-collapse ul.navbar-nav > li > ul.dropdown-menu > li.active a {
     background: @skinColor;
     color: #fff;

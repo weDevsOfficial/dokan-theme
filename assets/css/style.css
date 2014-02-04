@@ -1554,6 +1554,19 @@ a:hover {
 .page-template-templatescoupons-php tr:hover .row-actions {
   visibility: visible;
 }
+.seller-listing .thumbnail > a > img {
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+  height: auto;
+  border: 1px solid #ededed;
+  padding: 3px;
+  width: 100%;
+  max-height: 160px;
+}
+.seller-listing .single-seller:nth-child(3n+1) {
+  clear: left;
+}
 /*--------------------------------------------------
 :: Sidebars
 -------------------------------------------------- */
@@ -2510,6 +2523,54 @@ ul.subsubsub li:last-child {
 }
 ul.subsubsub li.active a {
   color: #999;
+}
+.dokan-message,
+.dokan-info,
+.dokan-error {
+  padding: 15px 15px 15px 50px;
+  margin: 5px 0 15px 0;
+  position: relative;
+  background: #fff;
+  border-bottom: 1px solid #ededed;
+  border-left: 1px solid #ededed;
+  border-right: 1px solid #ededed;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+.dokan-message:before,
+.dokan-info:before,
+.dokan-error:before {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  padding-top: 15px;
+  font-family: sans-serif;
+  color: #fff;
+  width: 20px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  text-align: center;
+}
+.dokan-message {
+  border-top: 3px solid #8fae1b;
+}
+.dokan-message:before {
+  background-color: #8fae1b;
+  content: "\2713";
+}
+.dokan-info:before {
+  content: "i";
+  font-family: Times, Georgia, serif;
+  font-style: italic;
+}
+.dokan-error {
+  border-top: 3px solid #b81c23;
+}
+.dokan-error:before {
+  background-color: #b81c23;
+  content: "\00d7";
+  font-weight: 700;
 }
 .ui-menu {
   list-style: none;

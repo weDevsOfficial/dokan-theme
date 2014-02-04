@@ -1,5 +1,7 @@
 a{color:#2980b9}
 .btn-theme{background:#2980b9;color:#fff}.btn-theme:hover{background:#2472a4;color:#fff}
+.pagination>li>span.current,.pagination>li>a:hover{background-color:#2980b9;color:#fff}
+.dokan-info{border-top:3px solid #2980b9}.dokan-info:before{background-color:#2980b9}
 .site-header .navbar-collapse ul.navbar-nav>li>ul.dropdown-menu>li.active a{background:#2980b9;color:#fff}
 .navbar-top-area.navbar-inverse .navbar-nav>.open>a,.navbar-top-area.navbar-inverse .navbar-nav>.open>a:hover,.navbar-top-area.navbar-inverse .navbar-nav>.open>a:focus{background-color:#2980b9;color:#fff}
 .navbar-top-area.navbar-inverse .dropdown-menu>.active a,.navbar-top-area.navbar-inverse .dropdown-menu>.active a:hover,.navbar-top-area.navbar-inverse .dropdown-menu>.active a:focus{background-color:#2980b9;color:#fff}
