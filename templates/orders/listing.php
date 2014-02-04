@@ -147,7 +147,7 @@ if ( $user_orders ) {
 
 <?php } else { ?>
 
-    <div class="alert alert-danger">
+    <div class="dokan-error">
         <?php _e( 'No orders found', 'dokan' ); ?>
     </div>
 
