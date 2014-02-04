@@ -99,7 +99,6 @@ class Dokan_Template_Settings{
             'address' => $_POST['setting_address'],
             'location' => $_POST['location'],
             'find_address' => $_POST['find_address'],
-            'dokan_category' => $_POST['setting_category'],
             'banner' => $_POST['dokan_banner'],
         );
 
