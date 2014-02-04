@@ -71,7 +71,7 @@ get_header();
                     <div class="col-md-7">
 
                         <?php if ( isset( $_GET['message'] ) && $_GET['message'] == 'success') { ?>
-                            <div class="alert alert-success">
+                            <div class="dokan-message">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 <strong><?php _e( 'Success!', 'dokan' ); ?></strong> <?php _e( 'The product has been updated successfully.', 'dokan' ); ?>
 
