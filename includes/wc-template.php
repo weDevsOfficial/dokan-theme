@@ -84,8 +84,8 @@ function dokan_order_show_suborders( $parent_order ) {
         <h2><?php _e( 'Sub Orders', 'dokan' ); ?></h2>
     </header>
 
-    <div class="alert alert-info">
-        <label class="label label-success">Note:</label>
+    <label class="label label-success">Note:</label>
+    <div class="dokan-info">
         This order has products from multiple vendors/sellers. So we divided this order into multiple seller orders.
         Each order will be handled by their respective seller independently.
     </div>
@@ -111,7 +111,7 @@ function dokan_order_show_suborders( $parent_order ) {
             ?>
                 <tr class="order">
                     <td class="order-number">
-                        <a href="<?php echo esc_url( add_query_arg('order', $order->id, get_permalink( woocommerce_get_page_id( 'view_order' ) ) ) ); ?>">
+                        <a href="<?php echo $order->get_view_order_url(); ?>">
                             <?php echo $order->get_order_number(); ?>
                         </a>
                     </td>
@@ -141,7 +141,7 @@ function dokan_order_show_suborders( $parent_order ) {
                                 );
 
                             $actions['view'] = array(
-                                'url'  => add_query_arg( 'order', $order->id, get_permalink( woocommerce_get_page_id( 'view_order' ) ) ),
+                                'url'  => $order->get_view_order_url(),
                                 'name' => __( 'View', 'dokan' )
                             );
 

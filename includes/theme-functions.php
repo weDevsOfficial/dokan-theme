@@ -413,7 +413,7 @@ function dokan_get_template( $template_name, $args = array() ) {
 function dokan_get_page_url( $page, $context = 'dokan' ) {
 
     if ( $context == 'woocommerce' ) {
-        $page_id = woocommerce_get_page_id( $page );
+        $page_id = wc_get_page_id( $page );
     } else {
         $page_id = dokan_get_option( $page, 'dokan_pages' );
     }
@@ -574,3 +574,9 @@ function dokan_get_sellers( $number = 10, $offset = 0 ) {
 
     return array( 'users' => $sellers, 'count' => $user_query->total_users );
 }
+
+add_filter( 'add_to_cart_fragments', function($fragment) {
+    $fragment['amount'] = WC()->cart->get_cart_total();
+
+    return $fragment;
+});

@@ -74,9 +74,28 @@
                     <div class="col-md-6">
                         <div class="collapse navbar-collapse navbar-top-collapse">
                             <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php printf( __( 'Cart %s', 'dokan' ), '<span class="dokan-cart-amount-top">(' . WC()->cart->get_cart_total() . ')</span>' ); ?> <b class="caret"></b></a>
+
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="widget_shopping_cart_content"></div>
+                                        </li>
+                                    </ul>
+                                </li>
+
                                 <?php if ( is_user_logged_in() ) { ?>
                                     <li><?php wp_loginout( home_url() ); ?></li>
-                                    <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'My Account', 'dokan' ); ?></a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php _e( 'My Account', 'dokan' ); ?> <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'My Account', 'dokan' ); ?></a></li>
+                                            <li><a href="<?php echo wc_customer_edit_account_url(); ?>"><?php _e( 'Edit Account', 'dokan' ); ?></a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="<?php echo wc_get_endpoint_url( 'edit-address', 'billing', get_permalink( wc_get_page_id( 'myaccount' ) ) ); ?>"><?php _e( 'Billing Address', 'dokan' ); ?></a></li>
+                                            <li><a href="<?php echo wc_get_endpoint_url( 'edit-address', 'shipping', get_permalink( wc_get_page_id( 'myaccount' ) ) ); ?>"><?php _e( 'Shipping Address', 'dokan' ); ?></a></li>
+                                        </ul>
+                                    </li>
 
                                     <?php
                                     $user_id = get_current_user_id();
@@ -100,7 +119,7 @@
                                     <?php } ?>
 
                                 <?php } else { ?>
-                                    <li><i class="icon-off"></i> <?php wp_loginout( home_url() ); ?></li>
+                                    <li><?php wp_loginout( home_url() ); ?></li>
                                 <?php } ?>
                             </ul>
                         </div>
@@ -120,27 +139,7 @@
                     </div><!-- .col-md-6 -->
 
                     <div class="col-md-8 clearfix">
-                        <ul class="cart-area-top list-inline">
-
-                            <li class="nav-cart-link"><?php dokan_checkout_header_btn(); ?></li>
-                            <script type="text/javascript">
-                                // jQuery(function($) {
-                                //     $('a#nav-cart-pop').popover({
-                                //         html: true,
-                                //         placement: 'bottom',
-                                //         trigger: 'manual',
-                                //         content: $('.nav-cart-link .cart-items').html()
-                                //     }).click(function(evt) {
-                                //         evt.stopPropagation();
-                                //         $(this).popover('show');
-                                //     });;
-
-                                //     $('html').click(function() {
-                                //         $('a#nav-cart-pop').popover('hide');
-                                //     });
-                                // });
-                                </script>
-                        </ul>
+                        <?php dynamic_sidebar( 'sidebar-header' ) ?>
                     </div>
                 </div><!-- .row -->
             </div><!-- .container -->

@@ -151,7 +151,7 @@ function dokan_on_order_status_change( $order_id, $old_status, $new_status ) {
     $sub_orders = get_children( array( 'post_parent' => $order_id, 'post_type' => 'shop_order' ) );
     if ( $sub_orders ) {
         foreach ($sub_orders as $order_post) {
-            $order = new WC_Order( $order_post );
+            $order = new WC_Order( $order_post->ID );
             $order->update_status( $new_status );
         }
     }

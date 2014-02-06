@@ -99,6 +99,16 @@ jQuery(function($) {
         }
     });
 
+    $('body').on('added_to_cart', function(event, data) {
+        $('.dokan-cart-amount-top > .amount').fadeOut( 'fast', function(){
+            $('.dokan-cart-amount-top > .amount').html(data.amount).fadeIn('fast');
+        });
+    });
+
+    $('body').on('adding_to_cart', function(e, button) {
+        $(button).children('i').addClass('fa-spin');
+    });
+
 });
 
 //dokan settings

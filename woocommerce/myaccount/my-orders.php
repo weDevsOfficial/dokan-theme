@@ -18,7 +18,8 @@ $customer_orders = get_posts( array(
     'meta_key'    => '_customer_user',
     'meta_value'  => get_current_user_id(),
     'post_type'   => 'shop_order',
-    'post_status' => 'publish'
+    'post_status' => 'publish',
+    'post_parent' => 0
 ) );
 
 if ( $customer_orders ) : ?>

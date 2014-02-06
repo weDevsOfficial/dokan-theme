@@ -113,12 +113,12 @@ class WeDevs_Dokan {
         require_once $inc_dir . 'theme-functions.php';
         require_once $inc_dir . 'widgets/menu-category.php';
         require_once $classes_dir . 'customizer.php';
+        require_once $inc_dir . 'wc-functions.php';
 
         if ( is_admin() ) {
             require_once $inc_dir . 'admin/admin.php';
         } else {
             require_once $lib_dir . 'bootstrap-walker.php';
-            require_once $inc_dir . 'wc-functions.php';
             require_once $inc_dir . 'wc-template.php';
             require_once $inc_dir . 'template-tags.php';
         }

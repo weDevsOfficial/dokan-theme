@@ -41,7 +41,7 @@ get_header();
 
                                 <a href="<?php echo $store_url; ?>">
                                     <?php if ( $banner_id ) {
-                                        $banner_url = wp_get_attachment_image_src( $banner_id, 'thumbnail' );
+                                        $banner_url = wp_get_attachment_image_src( $banner_id, 'medium' );
                                         ?>
                                         <img src="<?php echo esc_url( $banner_url[0] ); ?> ?>" alt="<?php echo esc_attr( $store_name ); ?>">
                                     <?php } else { ?>

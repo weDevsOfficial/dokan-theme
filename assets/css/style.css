@@ -284,6 +284,13 @@ a:hover {
   background-color: #DDD;
   color: #666;
 }
+.navbar-top-area .widget_shopping_cart_content {
+  padding: 5px 10px;
+  min-width: 250px;
+}
+.navbar-top-area .dokan-cart-amount-top {
+  color: #aaa;
+}
 .navbar-default {
   background-color: #fff;
   border: none;
@@ -1561,8 +1568,6 @@ a:hover {
   height: auto;
   border: 1px solid #ededed;
   padding: 3px;
-  width: 100%;
-  max-height: 160px;
 }
 .seller-listing .single-seller:nth-child(3n+1) {
   clear: left;
