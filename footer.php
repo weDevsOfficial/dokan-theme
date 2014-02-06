@@ -73,5 +73,6 @@
 
 <?php wp_footer(); ?>
 
+<div id="yith-wcwl-popup-message" style="display:none;"><div id="yith-wcwl-message"></div></div>
 </body>
 </html>
