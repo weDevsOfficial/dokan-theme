@@ -575,8 +575,18 @@ function dokan_get_sellers( $number = 10, $offset = 0 ) {
     return array( 'users' => $sellers, 'count' => $user_query->total_users );
 }
 
-add_filter( 'add_to_cart_fragments', function($fragment) {
+function dokan_add_to_cart_fragments( $fragment ) {
     $fragment['amount'] = WC()->cart->get_cart_total();
 
     return $fragment;
-});
+}
+
+add_filter( 'add_to_cart_fragments', 'dokan_add_to_cart_fragments' );
+
+function dokan_add_to_wishlist_link() {
+    if ( class_exists( 'YITH_WCWL' ) ) {
+        global $yith_wcwl, $product;
+
+        printf( '<a href="%s" class="btn fav add_to_wishlist" data-product-id="%d" data-product-type=""><i class="fa fa-heart"></i></a>', $yith_wcwl->get_addtowishlist_url(), $product->id );
+    }
+}

@@ -50,7 +50,7 @@ function dokan_product_loop_price() {
 
         <span class="item-button">
             <?php woocommerce_template_loop_add_to_cart(); ?>
-            <a href="#" class="btn fav"><i class="fa fa-heart"></i></a>
+            <?php dokan_add_to_wishlist_link(); ?>
         </span>
     </span>
     <?php
