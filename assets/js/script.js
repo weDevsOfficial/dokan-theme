@@ -100,6 +100,8 @@ jQuery(function($) {
     });
 
     $('body').on('added_to_cart', function(event, data) {
+        $('i.fa-shopping-cart').removeClass('fa-spin');
+
         $('.dokan-cart-amount-top > .amount').fadeOut( 'fast', function(){
             $('.dokan-cart-amount-top > .amount').html(data.amount).fadeIn('fast');
         });
