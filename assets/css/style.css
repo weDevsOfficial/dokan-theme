@@ -1275,12 +1275,12 @@ a:hover {
   list-style: none;
   margin: 0;
   padding: 0;
-  border: 1px solid #ffffff;
+  border: 1px solid #ededed;
 }
 .page-template-templatesreports-php ul.chart-legend li {
   color: #aaa;
   padding: 13px 18px;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 1px solid #ededed;
   font-weight: normal;
   font-size: 13px;
 }
