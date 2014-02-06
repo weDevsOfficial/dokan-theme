@@ -85,17 +85,6 @@
                                 </li>
 
                                 <?php if ( is_user_logged_in() ) { ?>
-                                    <li><?php wp_loginout( home_url() ); ?></li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php _e( 'My Account', 'dokan' ); ?> <b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'My Account', 'dokan' ); ?></a></li>
-                                            <li><a href="<?php echo wc_customer_edit_account_url(); ?>"><?php _e( 'Edit Account', 'dokan' ); ?></a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="<?php echo wc_get_endpoint_url( 'edit-address', 'billing', get_permalink( wc_get_page_id( 'myaccount' ) ) ); ?>"><?php _e( 'Billing Address', 'dokan' ); ?></a></li>
-                                            <li><a href="<?php echo wc_get_endpoint_url( 'edit-address', 'shipping', get_permalink( wc_get_page_id( 'myaccount' ) ) ); ?>"><?php _e( 'Shipping Address', 'dokan' ); ?></a></li>
-                                        </ul>
-                                    </li>
 
                                     <?php
                                     $user_id = get_current_user_id();
@@ -117,6 +106,19 @@
                                             </ul>
                                         </li>
                                     <?php } ?>
+
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php _e( 'My Account', 'dokan' ); ?> <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'My Account', 'dokan' ); ?></a></li>
+                                            <li><a href="<?php echo wc_customer_edit_account_url(); ?>"><?php _e( 'Edit Account', 'dokan' ); ?></a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="<?php echo wc_get_endpoint_url( 'edit-address', 'billing', get_permalink( wc_get_page_id( 'myaccount' ) ) ); ?>"><?php _e( 'Billing Address', 'dokan' ); ?></a></li>
+                                            <li><a href="<?php echo wc_get_endpoint_url( 'edit-address', 'shipping', get_permalink( wc_get_page_id( 'myaccount' ) ) ); ?>"><?php _e( 'Shipping Address', 'dokan' ); ?></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li><?php wp_loginout( home_url() ); ?></li>
 
                                 <?php } else { ?>
                                     <li><?php wp_loginout( home_url() ); ?></li>
