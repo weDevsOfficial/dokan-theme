@@ -193,7 +193,7 @@ function dokan_variable_product_type_options() {
      */
     ob_start();
     ?>
-    jQuery(function(){
+    jQuery(function($){
 
         var variation_sortable_options = {
             items:'.woocommerce_variation',
@@ -231,14 +231,7 @@ function dokan_variable_product_type_options() {
             jQuery.post('<?php echo admin_url('admin-ajax.php'); ?>', data, function(response) {
 
                 jQuery('.woocommerce_variations').append( response );
-
-                /*
-                jQuery(".tips").tipTip({
-                    'attribute' : 'data-tip',
-                    'fadeIn' : 50,
-                    'fadeOut' : 50
-                });
-                */
+                jQuery(".tips").tooltip();
 
                 jQuery('input.variable_is_downloadable, input.variable_is_virtual').change();
 
@@ -269,11 +262,11 @@ function dokan_variable_product_type_options() {
                     var count = parseInt( response );
 
                     if (count==1) {
-                        alert( count + ' <?php echo esc_js( __( "variation added", 'woocommerce' ) ); ?>');
+                        alert( count + ' <?php echo esc_js( __( "variation added", 'dokan' ) ); ?>');
                     } else if (count==0 || count>1) {
-                        alert( count + ' <?php echo esc_js( __( "variations added", 'woocommerce' ) ); ?>');
+                        alert( count + ' <?php echo esc_js( __( "variations added", 'dokan' ) ); ?>');
                     } else {
-                        alert('<?php echo esc_js( __( "No variations added", 'woocommerce' ) ); ?>');
+                        alert('<?php echo esc_js( __( "No variations added", 'dokan' ) ); ?>');
                     }
 
                     if (count>0) {
@@ -296,7 +289,7 @@ function dokan_variable_product_type_options() {
 
         jQuery('#variable_product_options').on('click', 'button.remove_variation', function(e){
             e.preventDefault();
-            var answer = confirm('<?php echo esc_js( __( 'Are you sure you want to remove this variation?', 'woocommerce' ) ); ?>');
+            var answer = confirm('<?php echo esc_js( __( 'Are you sure you want to remove this variation?', 'dokan' ) ); ?>');
             if (answer){
 
                 var el = jQuery(this).parent().parent();

@@ -1,4 +1,4 @@
-(function($){
+;(function($){
 
     var variantsHolder = $('#variants-holder');
     var product_gallery_frame;
@@ -27,6 +27,13 @@
             $('#variants-holder').on('click', '.item-action a.row-add', this.variants.addItem);
             $('#variants-holder').on('click', '.item-action a.row-remove', this.variants.removeItem);
 
+
+            $('#variable_product_options').on( 'click', '.sale_schedule', this.variants.saleSchedule);
+            $('#variable_product_options').on( 'click', '.cancel_sale_schedule', this.variants.cancelSchedule);
+            $('#variable_product_options').on('woocommerce_variations_added', this.variants.onVariantAdded);
+            this.variants.dates();
+            this.variants.initSaleSchedule();
+
             // save attributes
             $('.save_attributes').on('click', this.variants.save);
 
@@ -48,12 +55,12 @@
             $('.dokan-toggle-sidebar').on('click', 'a.dokan-toggle-cacnel', this.sidebarToggle.cancel);
 
             // File inputs
-            $('.downloadable_files').on('click', 'a.insert-file-row', function(){
+            $('.product-edit-container').on('click', 'a.insert-file-row', function(){
                 $(this).closest('table').find('tbody').append( $(this).data( 'row' ) );
                 return false;
             });
 
-            $('.downloadable_files').on('click', 'a.delete', function(){
+            $('.product-edit-container').on('click', 'a.delete', function(){
                 $(this).closest('tr').remove();
                 return false;
             });
@@ -189,6 +196,77 @@
 
                     $('#variants-holder').unblock();
                 });
+            },
+
+            initSaleSchedule: function() {
+                // Sale price schedule
+                $('.sale_price_dates_fields').each(function() {
+
+                    var $these_sale_dates = $(this);
+                    var sale_schedule_set = false;
+                    var $wrap = $these_sale_dates.closest( 'div, table' );
+
+                    $these_sale_dates.find('input').each(function(){
+                        if ( $(this).val() != '' )
+                            sale_schedule_set = true;
+                    });
+
+                    if ( sale_schedule_set ) {
+
+                        $wrap.find('.sale_schedule').hide();
+                        $wrap.find('.sale_price_dates_fields').show();
+
+                    } else {
+
+                        $wrap.find('.sale_schedule').show();
+                        $wrap.find('.sale_price_dates_fields').hide();
+
+                    }
+
+                });
+            },
+
+            saleSchedule: function() {
+                var $wrap = $(this).closest( 'div, table' );
+
+                $(this).hide();
+                $wrap.find('.cancel_sale_schedule').show();
+                $wrap.find('.sale_price_dates_fields').show();
+
+                return false;
+            },
+
+            cancelSchedule: function() {
+                var $wrap = $(this).closest( 'div, table' );
+
+                $(this).hide();
+                $wrap.find('.sale_schedule').show();
+                $wrap.find('.sale_price_dates_fields').hide();
+                $wrap.find('.sale_price_dates_fields').find('input').val('');
+
+                return false;
+            },
+
+            dates: function() {
+                var dates = $( ".sale_price_dates_fields input" ).datepicker({
+                    defaultDate: "",
+                    dateFormat: "yy-mm-dd",
+                    numberOfMonths: 1,
+                    onSelect: function( selectedDate ) {
+                        var option = $(this).is('#_sale_price_dates_from, .sale_price_dates_from') ? "minDate" : "maxDate";
+
+                        var instance = $( this ).data( "datepicker" ),
+                            date = $.datepicker.parseDate(
+                                instance.settings.dateFormat ||
+                                $.datepicker._defaults.dateFormat,
+                                selectedDate, instance.settings );
+                        dates.not( this ).datepicker( "option", option, date );
+                    }
+                });
+            },
+
+            onVariantAdded: function() {
+                Dokan_Editor.variants.dates();
             }
         },
 
