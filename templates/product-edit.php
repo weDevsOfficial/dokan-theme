@@ -6,10 +6,16 @@ dokan_redirect_login();
 dokan_redirect_if_not_seller();
 
 $post_id = $post->ID;
+$seller_id = get_current_user_id();
 
 if ( isset( $_GET['product_id'] ) ) {
     $post_id = intval( $_GET['product_id'] );
     $post = get_post( $post_id );
+}
+
+// bail out if not author
+if ( $post->post_author != $seller_id ) {
+    wp_die( __( 'Access Denied', 'dokan' ) );
 }
 
 if ( isset( $_POST['update_product']) ) {
@@ -196,6 +202,7 @@ get_header();
 
                                                 <div class="form-group">
                                                     <?php
+                                                    $product_cat = -1;
                                                     $term = wp_get_post_terms( $post_id, 'product_cat', array( 'fields' => 'ids') );
                                                     if ( $term ) {
                                                         $product_cat = reset( $term );
