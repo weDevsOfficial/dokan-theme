@@ -50,6 +50,7 @@ class Dokan_Admin_Settings {
         $dashboard = add_menu_page( __( 'Dokan', 'dokan' ), __( 'Dokan', 'dokan' ), $capability, 'dokan', array($this, 'dashboard'), 'dashicons-vault', $menu_position );
         add_submenu_page( 'dokan', __( 'Dokan Dashboard', 'dokan' ), __( 'Dashboard', 'dokan' ), $capability, 'dokan', array($this, 'dashboard') );
         add_submenu_page( 'dokan', __( 'Withdraw', 'dokan' ), $withdraw_text, $capability, 'dokan-withdraw', array($this, 'withdraw_page') );
+        add_submenu_page( 'dokan', __( 'Sellers Listing', 'dokan' ), __( 'Sellers', 'dokan' ), $capability, 'dokan-sellers', array($this, 'seller_listing') );
         add_submenu_page( 'dokan', __( 'Slider', 'dokan' ), __( 'Slider', 'dokan' ), $capability, 'edit.php?post_type=dokan_slider' );
 
         do_action( 'dokan_admin_menu' );
@@ -293,6 +294,10 @@ class Dokan_Admin_Settings {
 
     function withdraw_page() {
         include __DIR__ . '/withdraw.php';
+    }
+
+    function seller_listing() {
+        include __DIR__ . '/sellers.php';
     }
 
 }

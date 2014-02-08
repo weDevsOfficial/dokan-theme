@@ -39,6 +39,8 @@ class Dokan_Ajax {
         add_action( 'wp_ajax_dokan_add_variation', array( $this, 'add_variation' ) );
         add_action( 'wp_ajax_dokan_link_all_variations', array( $this, 'link_all_variations' ) );
         add_action( 'wp_ajax_dokan_save_attributes', array( $this, 'save_attributes' ) );
+
+        add_action( 'wp_ajax_dokan_toggle_seller', array( $this, 'toggle_seller_status' ) );
     }
 
     function complete_order() {
@@ -574,5 +576,19 @@ class Dokan_Ajax {
         update_post_meta( $post_id, '_product_attributes', $attributes );
 
         die();
+    }
+
+    function toggle_seller_status() {
+        if ( !current_user_can( 'manage_options' ) ) {
+            return;
+        }
+
+        $user_id = isset( $_POST['user_id'] ) ? intval( $_POST['user_id'] ) : 0;
+        $status = sanitize_text_field( $_POST['type'] );
+
+        if ( $user_id && in_array( $status, array( 'yes', 'no' ) ) ) {
+            update_user_meta( $user_id, 'dokan_enable_selling', $status );
+        }
+        exit;
     }
 }

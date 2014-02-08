@@ -553,6 +553,19 @@ function dokan_get_store_info( $seller_id ) {
     $info = get_user_meta( $seller_id, 'dokan_profile_settings', true );
     $info = is_array( $info ) ? $info : array();
 
+    $defaults = array(
+        'store_name' => '',
+        'social' => array(),
+        'payment' => array(),
+        'phone' => '',
+        'show_email' => 'off',
+        'address' => '',
+        'location' => '',
+        'banner' => 0
+    );
+
+    $info = wp_parse_args( $info, $defaults );
+
     return $info;
 }
 
