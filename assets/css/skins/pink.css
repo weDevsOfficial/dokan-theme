@@ -5,6 +5,7 @@ a{color:#f17288}
 .site-header .navbar-collapse ul.navbar-nav>li>ul.dropdown-menu>li.active a{background:#f17288;color:#fff}
 .navbar-top-area.navbar-inverse .navbar-nav>.open>a,.navbar-top-area.navbar-inverse .navbar-nav>.open>a:hover,.navbar-top-area.navbar-inverse .navbar-nav>.open>a:focus{background-color:#f17288;color:#fff}
 .navbar-top-area.navbar-inverse .dropdown-menu>.active a,.navbar-top-area.navbar-inverse .dropdown-menu>.active a:hover,.navbar-top-area.navbar-inverse .dropdown-menu>.active a:focus{background-color:#f17288;color:#fff}
+.navbar-top-area.navbar-inverse .widget_shopping_cart_content a.button{background:#f17288;color:#fff;border:1px solid #f17288}
 .home .slider-container h2.slider-heading{border-left:5px solid #f17288}
 .home .product-sliders .flex-direction-nav a{background:#f17288}
 .home .product-sliders li .item-button a.add_to_cart_button{background:#f17288;border-color:#f17288}.home .product-sliders li .item-button a.add_to_cart_button:hover{color:#f17288;background:#fff;border-color:#ddd}

@@ -288,6 +288,42 @@ a:hover {
   padding: 5px 10px;
   min-width: 250px;
 }
+.navbar-top-area .widget_shopping_cart_content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navbar-top-area .widget_shopping_cart_content ul li {
+  border-bottom: 1px solid #ededed;
+  padding: 3px 0;
+}
+.navbar-top-area .widget_shopping_cart_content ul li:before,
+.navbar-top-area .widget_shopping_cart_content ul li:after {
+  content: " ";
+  display: table;
+}
+.navbar-top-area .widget_shopping_cart_content ul li:after {
+  clear: both;
+}
+.navbar-top-area .widget_shopping_cart_content ul li .quantity {
+  display: block;
+  margin: 0;
+}
+.navbar-top-area .widget_shopping_cart_content ul img {
+  border: 1px solid #ededed;
+  border-radius: 3px;
+  box-shadow: none;
+  padding: 2px;
+  width: 50px;
+  float: right;
+  height: auto;
+  margin-left: 4px;
+}
+.navbar-top-area .widget_shopping_cart_content a.button {
+  border: 1px solid #ededed;
+  box-shadow: none;
+  padding: 3px 8px;
+}
 .navbar-top-area .dokan-cart-amount-top {
   color: #aaa;
 }
