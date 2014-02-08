@@ -117,6 +117,7 @@ class WeDevs_Dokan {
 
         if ( is_admin() ) {
             require_once $inc_dir . 'admin/admin.php';
+            require_once $inc_dir . 'admin-functions.php';
         } else {
             require_once $lib_dir . 'bootstrap-walker.php';
             require_once $inc_dir . 'wc-template.php';
