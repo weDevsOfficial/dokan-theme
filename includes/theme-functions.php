@@ -550,7 +550,10 @@ function dokan_media_uploader_restrict( $args ) {
 add_filter( 'ajax_query_attachments_args', 'dokan_media_uploader_restrict' );
 
 function dokan_get_store_info( $seller_id ) {
-    return get_user_meta( $seller_id, 'dokan_profile_settings', true );
+    $info = get_user_meta( $seller_id, 'dokan_profile_settings', true );
+    $info = is_array( $info ) ? $info : array();
+
+    return $info;
 }
 
 function dokan_get_sellers( $number = 10, $offset = 0 ) {

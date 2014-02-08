@@ -148,7 +148,7 @@ class Dokan_Template_Settings{
             <?php
         }
 
-        $profile_info = get_user_meta( get_current_user_id(), 'dokan_profile_settings', true );
+        $profile_info = dokan_get_store_info( $current_user->ID );
 
         $banner = isset( $profile_info['banner'] ) ? absint( $profile_info['banner'] ) : 0;
         $storename = isset( $profile_info['store_name'] ) ? esc_attr( $profile_info['store_name'] ) : '';
