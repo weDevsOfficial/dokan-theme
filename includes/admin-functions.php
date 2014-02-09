@@ -36,18 +36,18 @@ function dokan_admin_shop_order_edit_columns( $existing_columns ) {
     $columns = array();
 
     $columns['cb']               = '<input type="checkbox" />';
-    $columns['order_status']     = '<span class="status_head tips" data-tip="' . esc_attr__( 'Status', 'woocommerce' ) . '">' . esc_attr__( 'Status', 'woocommerce' ) . '</span>';
-    $columns['order_title']      = __( 'Order', 'woocommerce' );
-    $columns['order_items']      = __( 'Purchased', 'woocommerce' );
-    $columns['shipping_address'] = __( 'Ship to', 'woocommerce' );
+    $columns['order_status']     = '<span class="status_head tips" data-tip="' . esc_attr__( 'Status', 'dokan' ) . '">' . esc_attr__( 'Status', 'dokan' ) . '</span>';
+    $columns['order_title']      = __( 'Order', 'dokan' );
+    $columns['order_items']      = __( 'Purchased', 'dokan' );
+    $columns['shipping_address'] = __( 'Ship to', 'dokan' );
 
-    $columns['customer_message'] = '<span class="notes_head tips" data-tip="' . esc_attr__( 'Customer Message', 'woocommerce' ) . '">' . esc_attr__( 'Customer Message', 'woocommerce' ) . '</span>';
-    $columns['order_notes']      = '<span class="order-notes_head tips" data-tip="' . esc_attr__( 'Order Notes', 'woocommerce' ) . '">' . esc_attr__( 'Order Notes', 'woocommerce' ) . '</span>';
-    $columns['order_date']       = __( 'Date', 'woocommerce' );
-    $columns['order_total']      = __( 'Total', 'woocommerce' );
-    $columns['order_actions']    = __( 'Actions', 'woocommerce' );
-    $columns['suborder']        = __( 'Sub Order', 'woocommerce' );
-    $columns['seller']        = __( 'Seller', 'woocommerce' );
+    $columns['customer_message'] = '<span class="notes_head tips" data-tip="' . esc_attr__( 'Customer Message', 'dokan' ) . '">' . esc_attr__( 'Customer Message', 'dokan' ) . '</span>';
+    $columns['order_notes']      = '<span class="order-notes_head tips" data-tip="' . esc_attr__( 'Order Notes', 'dokan' ) . '">' . esc_attr__( 'Order Notes', 'dokan' ) . '</span>';
+    $columns['order_date']       = __( 'Date', 'dokan' );
+    $columns['order_total']      = __( 'Total', 'dokan' );
+    $columns['order_actions']    = __( 'Actions', 'dokan' );
+    $columns['seller']        = __( 'Seller', 'dokan' );
+    $columns['suborder']        = __( 'Sub Order', 'dokan' );
 
     return $columns;
 }
@@ -233,7 +233,7 @@ add_action( 'delete_post', 'dokan_admin_on_delete_order' );
 
 /**
  * Show a toggle button to toggle all the sub orders
- * 
+ *
  * @global WP_Query $wp_query
  */
 function dokan_admin_shop_order_toggle_sub_orders() {
