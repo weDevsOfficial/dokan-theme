@@ -44,16 +44,14 @@ if ( $user_orders ) {
 
                         if ( !empty( $user_info ) ) {
 
-                            $user = '<a href="user-edit.php?user_id=' . absint( $user_info->ID ) . '">';
+                            $user = '';
 
                             if ( $user_info->first_name || $user_info->last_name )
                                 $user .= esc_html( $user_info->first_name . ' ' . $user_info->last_name );
                             else
                                 $user .= esc_html( $user_info->display_name );
-
-                            $user .= '</a>';
                         } else {
-                            $user = __( 'Guest', 'woocommerce' );
+                            $user = __( 'Guest', 'dokan' );
                         }
 
                         echo $user;
@@ -62,17 +60,17 @@ if ( $user_orders ) {
                     <td>
                         <?php
                         if ( '0000-00-00 00:00:00' == $post->post_date ) {
-                            $t_time = $h_time = __( 'Unpublished', 'woocommerce' );
+                            $t_time = $h_time = __( 'Unpublished', 'dokan' );
                         } else {
-                            $t_time = get_the_time( __( 'Y/m/d g:i:s A', 'woocommerce' ), $post );
+                            $t_time = get_the_time( __( 'Y/m/d g:i:s A', 'dokan' ), $post );
 
                             $gmt_time = strtotime( $post->post_date_gmt . ' UTC' );
                             $time_diff = current_time( 'timestamp', 1 ) - $gmt_time;
 
                             if ( $time_diff > 0 && $time_diff < 24 * 60 * 60 )
-                                $h_time = sprintf( __( '%s ago', 'woocommerce' ), human_time_diff( $gmt_time, current_time( 'timestamp', 1 ) ) );
+                                $h_time = sprintf( __( '%s ago', 'dokan' ), human_time_diff( $gmt_time, current_time( 'timestamp', 1 ) ) );
                             else
-                                $h_time = get_the_time( __( 'Y/m/d', 'woocommerce' ), $post );
+                                $h_time = get_the_time( __( 'Y/m/d', 'dokan' ), $post );
                         }
 
                         echo '<abbr title="' . esc_attr( $t_time ) . '">' . esc_html( apply_filters( 'post_date_column_time', $h_time, $post ) ) . '</abbr>';
@@ -87,7 +85,7 @@ if ( $user_orders ) {
                         if ( in_array( $the_order->status, array('pending', 'on-hold') ) )
                             $actions['processing'] = array(
                                 'url' => wp_nonce_url( admin_url( 'admin-ajax.php?action=dokan-mark-order-processing&order_id=' . $the_order->id ), 'dokan-mark-order-processing' ),
-                                'name' => __( 'Processing', 'woocommerce' ),
+                                'name' => __( 'Processing', 'dokan' ),
                                 'action' => "processing",
                                 'icon' => '<i class="fa fa-clock-o">&nbsp;</i>'
                             );
@@ -95,14 +93,14 @@ if ( $user_orders ) {
                         if ( in_array( $the_order->status, array('pending', 'on-hold', 'processing') ) )
                             $actions['complete'] = array(
                                 'url' => wp_nonce_url( admin_url( 'admin-ajax.php?action=dokan-mark-order-complete&order_id=' . $the_order->id ), 'dokan-mark-order-complete' ),
-                                'name' => __( 'Complete', 'woocommerce' ),
+                                'name' => __( 'Complete', 'dokan' ),
                                 'action' => "complete",
                                 'icon' => '<i class="fa fa-check">&nbsp;</i>'
                             );
 
                         $actions['view'] = array(
                             'url' => wp_nonce_url( add_query_arg( array( 'order_id' => $the_order->id ), get_permalink() ), 'dokan_view_order' ),
-                            'name' => __( 'View', 'woocommerce' ),
+                            'name' => __( 'View', 'dokan' ),
                             'action' => "view",
                             'icon' => '<i class="fa fa-eye">&nbsp;</i>'
                         );
