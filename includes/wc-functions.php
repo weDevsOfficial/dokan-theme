@@ -998,13 +998,14 @@ function dokan_create_sub_order( $parent_order_id ) {
 
     // return if we've only ONE seller
     if ( count( $sellers ) == 1 ) {
-        dokan_log('one seller only');
         return;
     }
 
+    // flag it as it has a suborder
+    update_post_meta( $parent_order_id, 'has_sub_order', true );
+
     // seems like we've got multiple sellers
     foreach ($sellers as $seller_id => $seller_products ) {
-        dokan_log('seller_' . $seller_id);
         dokan_create_seller_order( $parent_order, $seller_products );
     }
 }
