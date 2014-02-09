@@ -199,7 +199,7 @@ $order = new WC_Order( $order_id );
                             'type' => 'order_note'
                         );
 
-                        remove_filter('comments_clauses', 'woocommerce_exclude_order_comments');
+                        remove_filter( 'comments_clauses', array( 'WC_Comments', 'exclude_order_comments' ), 10, 1 );
                         $notes = get_comments( $args );
 
                         echo '<ul class="order_notes list-unstyled">';
@@ -225,7 +225,7 @@ $order = new WC_Order( $order_id );
 
                         echo '</ul>';
 
-                        add_filter('comments_clauses', 'woocommerce_exclude_order_comments');
+                        add_filter( 'comments_clauses', array( 'WC_Comments', 'exclude_order_comments' ), 10, 1 );
                         ?>
                         <div class="add_note">
                             <h4><?php _e( 'Add note', 'woocommerce' ); ?></h4>
