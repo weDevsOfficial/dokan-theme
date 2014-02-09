@@ -159,6 +159,12 @@ function dokan_on_order_status_change( $order_id, $old_status, $new_status ) {
 
 add_action( 'woocommerce_order_status_changed', 'dokan_on_order_status_change', 10, 3 );
 
+function dokan_delete_sync_order( $order_id ) {
+    global $wpdb;
+
+    $wpdb->delete( $wpdb->prefix . 'dokan_orders', array( 'order_id' => $order_id ) );
+}
+
 function dokan_sync_insert_order( $order_id ) {
     global $wpdb;
 
