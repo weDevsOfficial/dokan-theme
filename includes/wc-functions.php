@@ -998,6 +998,9 @@ function dokan_create_sub_order( $parent_order_id ) {
 
     // return if we've only ONE seller
     if ( count( $sellers ) == 1 ) {
+        $temp = array_keys( $sellers );
+        $seller_id = reset( $temp );
+        wp_update_post( array( 'ID' => $parent_order_id, 'post_author' => $seller_id ) );
         return;
     }
 
@@ -1006,20 +1009,20 @@ function dokan_create_sub_order( $parent_order_id ) {
 
     // seems like we've got multiple sellers
     foreach ($sellers as $seller_id => $seller_products ) {
-        dokan_create_seller_order( $parent_order, $seller_products );
+        dokan_create_seller_order( $parent_order, $seller_id, $seller_products );
     }
 }
 
 add_action( 'woocommerce_checkout_update_order_meta', 'dokan_create_sub_order' );
 
-function dokan_create_seller_order( $parent_order, $seller_products ) {
+function dokan_create_seller_order( $parent_order, $seller_id, $seller_products ) {
     $order_data = apply_filters( 'woocommerce_new_order_data', array(
         'post_type'     => 'shop_order',
         'post_title'    => sprintf( __( 'Order &ndash; %s', 'woocommerce' ), strftime( _x( '%b %d, %Y @ %I:%M %p', 'Order date parsed by strftime', 'woocommerce' ) ) ),
         'post_status'   => 'publish',
         'ping_status'   => 'closed',
         'post_excerpt'  => isset( $posted['order_comments'] ) ? $posted['order_comments'] : '',
-        'post_author'   => 1,
+        'post_author'   => $seller_id,
         'post_parent'   => $parent_order->id,
         'post_password' => uniqid( 'order_' )   // Protects the post just in case
     ) );
