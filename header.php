@@ -122,7 +122,7 @@
                                     <li><?php wp_loginout( home_url() ); ?></li>
 
                                 <?php } else { ?>
-                                    <li><?php wp_loginout( home_url() ); ?></li>
+                                    <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'Log in', 'dokan' ); ?></a></li>
                                 <?php } ?>
                             </ul>
                         </div>
