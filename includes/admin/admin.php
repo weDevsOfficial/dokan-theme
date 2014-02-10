@@ -24,6 +24,7 @@ class Dokan_Admin_Settings {
         $template = get_template_directory_uri() . '/assets/';
 
         wp_enqueue_style( 'dokan-admin-dash', $template . '/css/admin.css' );
+        $this->report_scripts();
     }
 
     function report_scripts() {

@@ -15,6 +15,15 @@ function dokan_admin_dash_metabox( $title = '', $callback = null ) {
     <?php
 }
 
+function dokan_admin_dash_metabox_report() {
+    dokan_admin_report();
+    ?>
+    <div class="chart-container">
+        <div class="chart-placeholder main" style="width: 100%; height: 350px;"></div>
+    </div>
+    <?php
+}
+
 function dokan_admin_dash_widget_news() {
     wp_widget_rss_output( 'http://wedevs.com/tag/dokan/feed/', array( 'items' => 8, 'show_summary' => true, 'show_date' => true ) );
 }
@@ -90,6 +99,7 @@ function dokan_admin_dash_metabox_glance() {
         <div class="post-box-container">
             <div class="meta-box-sortables">
                 <?php dokan_admin_dash_metabox( __( 'At a Glance', 'dokan' ), 'dokan_admin_dash_metabox_glance' ); ?>
+                <?php dokan_admin_dash_metabox( __( 'Dokan News Updates', 'dokan' ), 'dokan_admin_dash_widget_news'); ?>
 
                 <?php do_action( 'dokan_admin_dashboard_metabox_left' ); ?>
             </div>
@@ -97,7 +107,7 @@ function dokan_admin_dash_metabox_glance() {
 
         <div class="post-box-container">
             <div class="meta-box-sortables">
-                <?php dokan_admin_dash_metabox( __( 'Dokan News Updates', 'dokan' ), 'dokan_admin_dash_widget_news'); ?>
+                <?php dokan_admin_dash_metabox( __( 'Overview', 'dokan' ), 'dokan_admin_dash_metabox_report' ); ?>
 
                 <?php do_action( 'dokan_admin_dashboard_metabox_right' ); ?>
             </div>
