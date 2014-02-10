@@ -50,7 +50,9 @@ get_header();
                         <?php } ?>
 
                         <?php if ( isset( $store_info['phone'] ) && !empty( $store_info['phone'] ) ) { ?>
-                            <li><i class="fa fa-mobile"></i> <?php echo esc_html( $store_info['phone'] ); ?></li>
+                            <li><i class="fa fa-mobile"></i>
+                                <a href="tel:<?php echo esc_html( $store_info['phone'] ); ?>"><?php echo esc_html( $store_info['phone'] ); ?></a>
+                            </li>
                         <?php } ?>
 
                         <?php if ( isset( $store_info['show_email'] ) && $store_info['show_email'] == 'yes' ) { ?>
