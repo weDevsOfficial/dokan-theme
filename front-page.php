@@ -13,7 +13,7 @@
  */
 get_header();
 ?>
-<?php $url = get_template_directory_uri() . '/assets/images/footer'; ?>
+
 <div id="primary" class="home-content-area col-md-9">
     <div id="content" class="site-content" role="main">
 
@@ -52,7 +52,7 @@ get_header();
                         ?>
                         <?php while ( $featured_query->have_posts() ) : $featured_query->the_post(); ?>
 
-                            <?php woocommerce_get_template_part( 'content', 'product' ); ?>
+                            <?php wc_get_template_part( 'content', 'product' ); ?>
 
                         <?php endwhile; ?>
                     </ul>
@@ -76,7 +76,7 @@ get_header();
                         ?>
                         <?php while ( $latest_query->have_posts() ) : $latest_query->the_post(); ?>
 
-                            <?php woocommerce_get_template_part( 'content', 'product' ); ?>
+                            <?php wc_get_template_part( 'content', 'product' ); ?>
 
                         <?php endwhile; ?>
                     </ul>
@@ -95,7 +95,7 @@ get_header();
                         ?>
                         <?php while ( $best_selling_query->have_posts() ) : $best_selling_query->the_post(); ?>
 
-                            <?php woocommerce_get_template_part( 'content', 'product' ); ?>
+                            <?php wc_get_template_part( 'content', 'product' ); ?>
 
                         <?php endwhile; ?>
                     </ul>
@@ -114,7 +114,7 @@ get_header();
                         ?>
                         <?php while ( $top_rated_query->have_posts() ) : $top_rated_query->the_post(); ?>
 
-                            <?php woocommerce_get_template_part( 'content', 'product' ); ?>
+                            <?php wc_get_template_part( 'content', 'product' ); ?>
 
                         <?php endwhile; ?>
                     </ul>
