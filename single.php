@@ -2,8 +2,8 @@
 /**
  * The Template for displaying all single posts.
  *
- * @package _bootstraps
- * @package _bootstraps - 2013 1.0
+ * @package dokan
+ * @package dokan - 2014 1.0
  */
 get_header();
 ?>
@@ -15,7 +15,7 @@ get_header();
 
             <?php get_template_part( 'content', 'single' ); ?>
 
-            <?php wedevs_content_nav( 'nav-below' ); ?>
+            <?php dokan_content_nav( 'nav-below' ); ?>
 
             <?php
             // If comments are open or we have at least one comment, load up the comment template

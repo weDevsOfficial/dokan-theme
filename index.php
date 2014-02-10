@@ -32,7 +32,7 @@ get_header();
 
             <?php endwhile; ?>
 
-            <?php wedevs_content_nav( 'nav-below' ); ?>
+            <?php dokan_content_nav( 'nav-below' ); ?>
 
         <?php else : ?>
 

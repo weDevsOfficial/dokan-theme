@@ -4,8 +4,8 @@
  *
  * Displays all of the <head> section and everything up till <div id="main">
  *
- * @package _bootstraps
- * @package _bootstraps - 2013 1.0
+ * @package dokan
+ * @package dokan - 2014 1.0
  */
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -31,7 +31,7 @@
 
     // Add a page number if necessary:
     if ( $paged >= 2 || $page >= 2 )
-        echo ' | ' . sprintf( __( 'Page %s', 'wedevs' ), max( $paged, $page ) );
+        echo ' | ' . sprintf( __( 'Page %s', 'dokan' ), max( $paged, $page ) );
 
     ?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
@@ -152,8 +152,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <nav role="navigation" class="site-navigation main-navigation clearfix">
-                                <h1 class="assistive-text"><i class="icon-reorder"></i> <?php _e( 'Menu', 'wedevs' ); ?></h1>
-                                <div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'wedevs' ); ?>"><?php _e( 'Skip to content', 'wedevs' ); ?></a></div>
+                                <h1 class="assistive-text"><i class="icon-reorder"></i> <?php _e( 'Menu', 'dokan' ); ?></h1>
+                                <div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'dokan' ); ?>"><?php _e( 'Skip to content', 'dokan' ); ?></a></div>
                                     <nav class="navbar navbar-default" role="navigation">
                                         <div class="navbar-header">
                                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">

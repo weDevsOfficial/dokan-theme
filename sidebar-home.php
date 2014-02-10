@@ -2,8 +2,8 @@
 /**
  * The Sidebar containing the main widget areas.
  *
- * @package _bootstraps
- * @package _bootstraps - 2013 1.0
+ * @package dokan
+ * @package dokan - 2013 1.0
  */
 ?>
 <div id="secondary" class="col-md-3" role="complementary">
@@ -17,14 +17,14 @@
             </aside>
 
             <aside id="archives" class="widget">
-                <h1 class="widget-title"><?php _e( 'Archives', 'wedevs' ); ?></h1>
+                <h1 class="widget-title"><?php _e( 'Archives', 'dokan' ); ?></h1>
                 <ul>
                     <?php wp_get_archives( array('type' => 'monthly') ); ?>
                 </ul>
             </aside>
 
             <aside id="meta" class="widget">
-                <h1 class="widget-title"><?php _e( 'Meta', 'wedevs' ); ?></h1>
+                <h1 class="widget-title"><?php _e( 'Meta', 'dokan' ); ?></h1>
                 <ul>
                     <?php wp_register(); ?>
                     <li><?php wp_loginout(); ?></li>

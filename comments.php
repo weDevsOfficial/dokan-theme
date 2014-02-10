@@ -29,15 +29,15 @@ if ( post_password_required() )
     <?php if ( have_comments() ) : ?>
         <h2 class="comments-title">
             <?php
-            printf( _n( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'wedevs' ), number_format_i18n( get_comments_number() ), '<span>' . get_the_title() . '</span>' );
+            printf( _n( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'dokan' ), number_format_i18n( get_comments_number() ), '<span>' . get_the_title() . '</span>' );
             ?>
         </h2>
 
         <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through  ?>
             <nav role="navigation" id="comment-nav-above" class="site-navigation comment-navigation">
-                <h1 class="assistive-text"><?php _e( 'Comment navigation', 'wedevs' ); ?></h1>
-                <div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'wedevs' ) ); ?></div>
-                <div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'wedevs' ) ); ?></div>
+                <h1 class="assistive-text"><?php _e( 'Comment navigation', 'dokan' ); ?></h1>
+                <div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'dokan' ) ); ?></div>
+                <div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'dokan' ) ); ?></div>
             </nav><!-- #comment-nav-before .site-navigation .comment-navigation -->
         <?php endif; // check for comment navigation  ?>
 
@@ -49,15 +49,15 @@ if ( post_password_required() )
              * define tp_comment() and that will be used instead.
              * See tp_comment() in inc/template-tags.php for more.
              */
-            wp_list_comments( array('callback' => 'wedevs_comment') );
+            wp_list_comments( array('callback' => 'dokan_comment') );
             ?>
         </ol><!-- .commentlist -->
 
         <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through  ?>
             <nav role="navigation" id="comment-nav-below" class="site-navigation comment-navigation">
-                <h1 class="assistive-text"><?php _e( 'Comment navigation', 'wedevs' ); ?></h1>
-                <div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'wedevs' ) ); ?></div>
-                <div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'wedevs' ) ); ?></div>
+                <h1 class="assistive-text"><?php _e( 'Comment navigation', 'dokan' ); ?></h1>
+                <div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'dokan' ) ); ?></div>
+                <div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'dokan' ) ); ?></div>
             </nav><!-- #comment-nav-below .site-navigation .comment-navigation -->
         <?php endif; // check for comment navigation  ?>
 
@@ -67,7 +67,7 @@ if ( post_password_required() )
     // If comments are closed and there are comments, let's leave a little note, shall we?
     if ( !comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
         ?>
-        <p class="nocomments"><?php _e( 'Comments are closed.', 'wedevs' ); ?></p>
+        <p class="nocomments"><?php _e( 'Comments are closed.', 'dokan' ); ?></p>
     <?php endif; ?>
 
     <?php comment_form(); ?>

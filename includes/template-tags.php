@@ -8,7 +8,7 @@
  */
 
 
-if ( ! function_exists( 'wedevs_comment' ) ) :
+if ( ! function_exists( 'dokan_comment' ) ) :
 /**
  * Template for comments and pingbacks.
  *
@@ -16,14 +16,14 @@ if ( ! function_exists( 'wedevs_comment' ) ) :
  *
  * @package _bootstraps - 2013 1.0
  */
-function wedevs_comment( $comment, $args, $depth ) {
+function dokan_comment( $comment, $args, $depth ) {
     $GLOBALS['comment'] = $comment;
     switch ( $comment->comment_type ) :
         case 'pingback' :
         case 'trackback' :
     ?>
     <li class="post pingback">
-        <p><?php _e( 'Pingback:', 'wedevs' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'wedevs' ), ' ' ); ?></p>
+        <p><?php _e( 'Pingback:', 'dokan' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'dokan' ), ' ' ); ?></p>
     <?php
             break;
         default :
@@ -35,20 +35,20 @@ function wedevs_comment( $comment, $args, $depth ) {
                     <div class="comment-avatar">
                         <?php echo get_avatar( $comment, 75 ); ?>
                     </div>
-                    <?php printf( __( '%s <span class="says">says:</span>', 'wedevs' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
+                    <?php printf( __( '%s <span class="says">says:</span>', 'dokan' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
 
                     <a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time pubdate datetime="<?php comment_time( 'c' ); ?>">
                         <?php
                         /* translators: 1: date, 2: time */
-                        printf( __( '%1$s at %2$s', 'wedevs' ), get_comment_date(), get_comment_time() );
+                        printf( __( '%1$s at %2$s', 'dokan' ), get_comment_date(), get_comment_time() );
                         ?>
                         </time>
                     </a>
-                    <?php edit_comment_link( __( '(Edit)', 'wedevs' ), ' ' );
+                    <?php edit_comment_link( __( '(Edit)', 'dokan' ), ' ' );
                     ?>
                 </div><!-- .comment-author .vcard -->
                 <?php if ( $comment->comment_approved == '0' ) : ?>
-                    <em><?php _e( 'Your comment is awaiting moderation.', 'wedevs' ); ?></em>
+                    <em><?php _e( 'Your comment is awaiting moderation.', 'dokan' ); ?></em>
                     <br />
                 <?php endif; ?>
             </footer>
@@ -66,41 +66,30 @@ function wedevs_comment( $comment, $args, $depth ) {
 }
 endif; // ends check for tp_comment()
 
-if ( ! function_exists( 'wedevs_posted_on' ) ) :
+if ( ! function_exists( 'dokan_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
  *
  * @package _bootstraps - 2013 1.0
  */
-function wedevs_posted_on() {
-    printf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="byline"></span>', 'wedevs' ),
+function dokan_posted_on() {
+    printf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="byline"></span>', 'dokan' ),
         esc_url( get_permalink() ),
         esc_attr( get_the_time() ),
         esc_attr( get_the_date( 'c' ) ),
         esc_html( get_the_date() ),
         esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-        esc_attr( sprintf( __( 'View all posts by %s', 'wedevs' ), get_the_author() ) ),
+        esc_attr( sprintf( __( 'View all posts by %s', 'dokan' ), get_the_author() ) ),
         esc_html( get_the_author() )
     );
 }
 endif;
 
-/**
- * Flush out the transients used in tp_categorized_blog
- *
- * @return void
- */
-function tp_category_transient_flusher() {
-    // Like, beat it. Dig?
-    delete_transient( 'all_the_cool_cats' );
-}
-add_action( 'edit_category', 'tp_category_transient_flusher' );
-add_action( 'save_post', 'tp_category_transient_flusher' );
 
 /**
  * Display navigation to next/previous pages when applicable
  */
-function wedevs_content_nav( $nav_id, $query = null ) {
+function dokan_content_nav( $nav_id, $query = null ) {
     global $wp_query, $post;
 
     if ( $query ) {
@@ -142,14 +131,14 @@ function wedevs_content_nav( $nav_id, $query = null ) {
 
 
         <?php if ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : // navigation links for home, archive, and search pages ?>
-            <?php wedevs_page_navi( '', '', $wp_query ); ?>
+            <?php dokan_page_navi( '', '', $wp_query ); ?>
         <?php endif; ?>
 
     </nav><!-- #<?php echo $nav_id; ?> -->
     <?php
 }
 
-function wedevs_page_navi( $before = '', $after = '', $wp_query ) {
+function dokan_page_navi( $before = '', $after = '', $wp_query ) {
 
     $posts_per_page = intval( get_query_var( 'posts_per_page' ) );
     $paged = intval( get_query_var( 'paged' ) );
@@ -209,86 +198,6 @@ function wedevs_page_navi( $before = '', $after = '', $wp_query ) {
         echo '<li class="next"><a href="' . get_pagenum_link( $max_page ) . '" title="Last">' . $last_page_text . '</a></li>';
     }
     echo '</ul></div>' . $after . "";
-}
-
-function dokan_checkout_header_btn() {
-    global $woocommerce;
-
-    $items = $woocommerce->cart->get_cart();
-    ?>
-    <span class="cart-link">
-        <a href="<?php echo $woocommerce->cart->get_cart_url(); ?>"
-           title="<?php _e( 'View your shopping cart', 'woothemes' ); ?>">
-            <i class="icon-shopping-cart"></i>
-            <span><?php printf( __( 'Cart (%d) %s', 'wedevs' ), $woocommerce->cart->get_cart_contents_count(), $woocommerce->cart->get_cart_total() ); ?></span>
-        </a>
-
-        <div class="cart-items">
-            <span class="border"></span>
-
-            <?php if ( $items ) { ?>
-
-            <ul class="mini-product-list">
-                <?php
-                foreach ( $items as $hash => $item ) {
-                    $product = $item['data'];
-                    ?>
-
-                    <li class="item clearfix">
-
-                        <?php
-                        $thumbnail = apply_filters( 'woocommerce_in_cart_product_thumbnail', $product->get_image(), $item, $hash );
-                        printf( '<a href="%s">%s</a>', esc_url( get_permalink( apply_filters( 'woocommerce_in_cart_product_id', $item['product_id'] ) ) ), $thumbnail );
-                        ?>
-
-                        <div class="product-details">
-                            <?php echo apply_filters( 'woocommerce_cart_item_remove_link', sprintf( '<a href="%s" class="remove" title="%s">&times;</a>', esc_url( $woocommerce->cart->get_remove_url( $hash ) ), __( 'Remove this item', 'woocommerce' ) ), $hash ); ?>
-
-                            <p class="product-name">
-                                <?php
-                                if ( $product->exists() && $item['quantity'] > 0 ) {
-
-                                    if ( !$product->is_visible() || ($product instanceof WC_Product_Variation && !$product->parent_is_visible()) ) {
-                                        echo apply_filters( 'woocommerce_in_cart_product_title', $product->get_title(), $item, $hash );
-                                    } else {
-                                        printf( '<a href="%s">%s</a>', esc_url( get_permalink( apply_filters( 'woocommerce_in_cart_product_id', $item['product_id'] ) ) ), apply_filters( 'woocommerce_in_cart_product_title', $product->get_title(), $item, $hash ) );
-                                    }
-
-                                }
-                                ?>
-                            </p>
-
-                            <?php echo $item['quantity'] ?> x
-
-                            <span class="price">
-                                <?php
-                                $product_price = get_option( 'woocommerce_display_cart_prices_excluding_tax' ) == 'yes' || $woocommerce->customer->is_vat_exempt() ? $product->get_price_excluding_tax() : $product->get_price();
-
-                                echo apply_filters( 'woocommerce_cart_item_price_html', woocommerce_price( $product_price ), $item, $hash );
-                                ?>
-                            </span>
-
-                        </div>
-                        <!-- .product-details -->
-                    </li>
-                    <?php } ?>
-            </ul>
-
-            <div class="buttons clearfix">
-                <a class="btn btn-info"
-                   href="<?php echo $woocommerce->cart->get_cart_url(); ?>"><?php _e( 'View Cart', 'dokan' ); ?></a>
-                <a class="btn btn-warning"
-                   href="<?php echo $woocommerce->cart->get_checkout_url(); ?>"><?php _e( 'Checkout', 'dokan' ); ?></a>
-            </div>
-            <?php } else { ?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <?php _e( 'No items found in cart', 'dokan' ); ?>
-            </div>
-            <?php } ?>
-        </div>
-    </span>
-<?php
 }
 
 function dokan_product_dashboard_errors() {

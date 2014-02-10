@@ -2,8 +2,8 @@
 /**
  * The template for displaying Search Results pages.
  *
- * @package _bootstraps
- * @package _bootstraps - 2013 1.0
+ * @package dokan
+ * @package dokan - 2014 1.0
  */
 get_header();
 ?>
@@ -24,7 +24,7 @@ get_header();
 
             <?php endwhile; ?>
 
-            <?php wedevs_content_nav( 'nav-below' ); ?>
+            <?php dokan_content_nav( 'nav-below' ); ?>
 
         <?php else : ?>
 
