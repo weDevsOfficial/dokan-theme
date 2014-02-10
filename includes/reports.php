@@ -138,8 +138,8 @@ function dokan_get_order_report_data( $args = array(), $start_date, $end_date ) 
 
     if ( $filter_range ) {
         $query['where'] .= "
-            AND     post_date >= '" . $start_date . "'
-            AND     post_date < '" . $end_date . "'
+            AND     DATE(post_date) >= '" . $start_date . "'
+            AND     DATE(post_date) <= '" . $end_date . "'
         ";
     }
 
@@ -229,16 +229,17 @@ function dokan_get_order_report_data( $args = array(), $start_date, $end_date ) 
         $query['limit'] = "LIMIT {$limit}";
     }
 
-    $query      = apply_filters( 'woocommerce_reports_get_order_report_query', $query );
+    $query      = apply_filters( 'dokan_reports_get_order_report_query', $query );
     $query      = implode( ' ', $query );
     $query_hash = md5( $query_type . $query );
 
     if ( $debug ) {
-        var_dump( $query );
+        // var_dump( $query );
+        printf( '<pre>%s</pre>', print_r( $query, true ) );
     }
 
     if ( $debug || $nocache || ( false === ( $result = get_transient( 'dokan_wc_report_' . $query_hash ) ) ) ) {
-        $result = apply_filters( 'woocommerce_reports_get_order_report_data', $wpdb->$query_type( $query ), $data );
+        $result = apply_filters( 'dokan_reports_get_order_report_data', $wpdb->$query_type( $query ), $data );
 
         if ( $filter_range ) {
             if ( $end_date == date('Y-m-d', current_time( 'timestamp' ) ) ) {
@@ -254,58 +255,6 @@ function dokan_get_order_report_data( $args = array(), $start_date, $end_date ) 
     }
 
     return $result;
-}
-
-    /**
- * Put data with post_date's into an array of times
- *
- * @param  array $data array of your data
- * @param  string $date_key key for the 'date' field. e.g. 'post_date'
- * @param  string $data_key key for the data you are charting
- * @param  int $interval
- * @param  string $start_date
- * @param  string $group_by
- * @return string
- */
-function dokan_prepare_chart_data( $data, $date_key, $data_key, $interval, $start_date, $group_by ) {
-    $prepared_data = array();
-
-    // Ensure all days (or months) have values first in this range
-    for ( $i = 0; $i <= $interval; $i ++ ) {
-        switch ( $group_by ) {
-            case 'day' :
-                $time = strtotime( date( 'Ymd', strtotime( "+{$i} DAY", $start_date ) ) ) * 1000;
-            break;
-            case 'month' :
-                $time = strtotime( date( 'Ym', strtotime( "+{$i} MONTH", $start_date ) ) . '01' ) * 1000;
-            break;
-        }
-
-        if ( ! isset( $prepared_data[ $time ] ) )
-            $prepared_data[ $time ] = array( esc_js( $time ), 0 );
-    }
-
-    foreach ( $data as $d ) {
-        switch ( $group_by ) {
-            case 'day' :
-                $time = strtotime( date( 'Ymd', strtotime( $d->$date_key ) ) ) * 1000;
-            break;
-            case 'month' :
-                $time = strtotime( date( 'Ym', strtotime( $d->$date_key ) ) . '01' ) * 1000;
-            break;
-        }
-
-        if ( ! isset( $prepared_data[ $time ] ) ) {
-            continue;
-        }
-
-        if ( $data_key )
-            $prepared_data[ $time ][1] += $d->$data_key;
-        else
-            $prepared_data[ $time ][1] ++;
-    }
-
-    return $prepared_data;
 }
 
 function dokan_sales_overview() {
@@ -374,7 +323,8 @@ function dokan_report_sales_overview( $start_date, $end_date, $heading = '' ) {
                 'name'     => 'total_orders'
             )
         ),
-        'filter_range' => true
+        'filter_range' => true,
+        // 'debug' => true
     ), $start_date, $end_date );
 
     $total_sales    = $order_totals->total_sales;
@@ -560,7 +510,8 @@ function dokan_sales_overview_chart_data( $start_date, $end_date, $group_by ) {
                 series,
                 {
                     legend: {
-                        show: false
+                        show: true,
+                        position: 'nw'
                     },
                     series: {
                         lines: { show: true, lineWidth: 4, fill: false },

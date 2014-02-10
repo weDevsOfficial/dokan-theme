@@ -606,3 +606,55 @@ function dokan_add_to_wishlist_link() {
         printf( '<a href="%s" class="btn fav add_to_wishlist" data-product-id="%d" data-product-type=""><i class="fa fa-heart"></i></a>', $yith_wcwl->get_addtowishlist_url(), $product->id );
     }
 }
+
+/**
+ * Put data with post_date's into an array of times
+ *
+ * @param  array $data array of your data
+ * @param  string $date_key key for the 'date' field. e.g. 'post_date'
+ * @param  string $data_key key for the data you are charting
+ * @param  int $interval
+ * @param  string $start_date
+ * @param  string $group_by
+ * @return string
+ */
+function dokan_prepare_chart_data( $data, $date_key, $data_key, $interval, $start_date, $group_by ) {
+    $prepared_data = array();
+
+    // Ensure all days (or months) have values first in this range
+    for ( $i = 0; $i <= $interval; $i ++ ) {
+        switch ( $group_by ) {
+            case 'day' :
+                $time = strtotime( date( 'Ymd', strtotime( "+{$i} DAY", $start_date ) ) ) * 1000;
+            break;
+            case 'month' :
+                $time = strtotime( date( 'Ym', strtotime( "+{$i} MONTH", $start_date ) ) . '01' ) * 1000;
+            break;
+        }
+
+        if ( ! isset( $prepared_data[ $time ] ) )
+            $prepared_data[ $time ] = array( esc_js( $time ), 0 );
+    }
+
+    foreach ( $data as $d ) {
+        switch ( $group_by ) {
+            case 'day' :
+                $time = strtotime( date( 'Ymd', strtotime( $d->$date_key ) ) ) * 1000;
+            break;
+            case 'month' :
+                $time = strtotime( date( 'Ym', strtotime( $d->$date_key ) ) . '01' ) * 1000;
+            break;
+        }
+
+        if ( ! isset( $prepared_data[ $time ] ) ) {
+            continue;
+        }
+
+        if ( $data_key )
+            $prepared_data[ $time ][1] += $d->$data_key;
+        else
+            $prepared_data[ $time ][1] ++;
+    }
+
+    return $prepared_data;
+}

@@ -79,32 +79,32 @@ $reviews_url = dokan_get_page_url( 'reviews' );
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'completed' ), $orders_url ); ?>">
+                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'completed' ), $orders_url ); ?>" style="color: <?php echo $order_data[0]['color']; ?>">
                                                 <span class="title"><?php _e( 'Completed', 'dokan' ); ?></span> <span class="count"><?php echo $orders_counts->completed; ?></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'pending' ), $orders_url ); ?>">
+                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'pending' ), $orders_url ); ?>" style="color: <?php echo $order_data[1]['color']; ?>">
                                                 <span class="title"><?php _e( 'Pending', 'dokan' ); ?></span> <span class="count"><?php echo $orders_counts->pending; ?></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'processing' ), $orders_url ); ?>">
+                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'processing' ), $orders_url ); ?>" style="color: <?php echo $order_data[2]['color']; ?>">
                                                 <span class="title"><?php _e( 'Processing', 'dokan' ); ?></span> <span class="count"><?php echo $orders_counts->processing; ?></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'cancelled' ), $orders_url ); ?>">
+                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'cancelled' ), $orders_url ); ?>" style="color: <?php echo $order_data[3]['color']; ?>">
                                                 <span class="title"><?php _e( 'Cancelled', 'dokan' ); ?></span> <span class="count"><?php echo $orders_counts->cancelled; ?></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'refunded' ), $orders_url ); ?>">
+                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'refunded' ), $orders_url ); ?>" style="color: <?php echo $order_data[4]['color']; ?>">
                                                 <span class="title"><?php _e( 'Refunded', 'dokan' ); ?></span> <span class="count"><?php echo $orders_counts->refunded; ?></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'on-hold' ), $orders_url ); ?>">
+                                            <a href="<?php echo add_query_arg( array( 'order_status' => 'on-hold' ), $orders_url ); ?>" style="color: <?php echo $order_data[5]['color']; ?>">
                                                 <span class="title"><?php _e( 'On hold', 'dokan' ); ?></span> <span class="count"><?php echo $orders_counts->{'on-hold'}; ?></span>
                                             </a>
                                         </li>

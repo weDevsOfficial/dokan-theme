@@ -245,3 +245,252 @@ function dokan_admin_shop_order_toggle_sub_orders() {
 }
 
 add_action( 'restrict_manage_posts', 'dokan_admin_shop_order_toggle_sub_orders');
+
+function dokan_site_total_earning() {
+    global $wpdb;
+
+    $sql = "SELECT  SUM((do.order_total - do.net_amount)) as earning
+            FROM {$wpdb->prefix}dokan_orders do
+            LEFT JOIN $wpdb->posts p ON do.order_id = p.ID
+            WHERE seller_id != 0 AND p.post_status = 'publish' AND do.order_status IN ('on-hold', 'completed', 'processing')
+            ORDER BY do.order_id DESC";
+
+    return $wpdb->get_var( $sql );
+}
+
+function dokan_admin_report( $group_by = 'day', $year = '' ) {
+    global $wpdb, $wp_locale;
+
+    $start_date = isset( $_POST['start_date'] ) ? $_POST['start_date'] : '';
+    $end_date   = isset( $_POST['end_date'] ) ? $_POST['end_date'] : '';
+    $current_year = date( 'Y' );
+
+    if ( ! $start_date ) {
+        $start_date = date( 'Y-m-d', strtotime( date( 'Ym', current_time( 'timestamp' ) ) . '01' ) );
+
+        if ( $group_by == 'month' ) {
+            $start_date = $year . '-01-01';
+        }
+    }
+
+    if ( ! $end_date ) {
+        $end_date = date( 'Y-m-d', current_time( 'timestamp' ) );
+
+        if ( $group_by == 'month' && ( $year < $current_year ) ) {
+            $end_date = $year . '-12-31';
+        }
+    }
+
+    $start_date_to_time = strtotime( $start_date );
+    $end_date_to_time = strtotime( $end_date );
+
+    $date_where = '';
+
+    if ( $group_by == 'day' ) {
+        $group_by_query       = 'YEAR(p.post_date), MONTH(p.post_date), DAY(p.post_date)';
+        $date_where           = " AND DATE(p.post_date) >= '$start_date' AND DATE(p.post_date) <= '$end_date'";
+        $chart_interval       = ceil( max( 0, ( $end_date_to_time - $start_date_to_time ) / ( 60 * 60 * 24 ) ) );
+        $barwidth             = 60 * 60 * 24 * 1000;
+    } else {
+        $group_by_query = 'YEAR(p.post_date), MONTH(p.post_date)';
+        $chart_interval = 0;
+        $min_date             = $start_date_to_time;
+        while ( ( $min_date   = strtotime( "+1 MONTH", $min_date ) ) <= $end_date_to_time ) {
+            $chart_interval ++;
+        }
+        $barwidth             = 60 * 60 * 24 * 7 * 4 * 1000;
+    }
+
+    $sql = "SELECT
+                SUM((do.order_total - do.net_amount)) as earning,
+                SUM(do.order_total) as order_total,
+                COUNT(DISTINCT p.ID) as total_orders,
+                p.post_date as order_date
+            FROM {$wpdb->prefix}dokan_orders do
+            LEFT JOIN $wpdb->posts p ON do.order_id = p.ID
+            WHERE
+                seller_id != 0 AND
+                p.post_status = 'publish' AND
+                do.order_status IN ('on-hold', 'completed', 'processing')
+                $date_where
+            GROUP BY $group_by_query";
+
+    $data = $wpdb->get_results( $sql );
+
+    // echo $sql;
+    // var_dump($data);
+    // var_dump($data, $barwidth, $start_date, $end_date);
+    // Prepare data for report
+    $order_counts      = dokan_prepare_chart_data( $data, 'order_date', 'total_orders', $chart_interval, $start_date_to_time, $group_by );
+    $order_amounts     = dokan_prepare_chart_data( $data, 'order_date', 'order_total', $chart_interval, $start_date_to_time, $group_by );
+    $order_commision     = dokan_prepare_chart_data( $data, 'order_date', 'earning', $chart_interval, $start_date_to_time, $group_by );
+
+    // Encode in json format
+    $chart_data = json_encode( array(
+        'order_counts'      => array_values( $order_counts ),
+        'order_amounts'     => array_values( $order_amounts ),
+        'order_commision'     => array_values( $order_commision )
+    ) );
+
+    $chart_colours = array(
+        'order_counts'  => '#3498db',
+        'order_amounts'   => '#1abc9c',
+        'order_commision'   => '#73a724'
+    );
+
+    ?>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+
+            var order_data = jQuery.parseJSON( '<?php echo $chart_data; ?>' );
+            var series = [
+                {
+                    label: "<?php echo esc_js( __( 'Total Sales', 'dokan' ) ) ?>",
+                    data: order_data.order_amounts,
+                    shadowSize: 0,
+                    hoverable: true,
+                    points: { show: true, radius: 5, lineWidth: 3, fillColor: '#fff', fill: true },
+                    lines: { show: true, lineWidth: 4, fill: false },
+                    shadowSize: 0,
+                    prepend_tooltip: "<?php echo __('Total: ', 'dokan') . get_woocommerce_currency_symbol(); ?>"
+                },
+                {
+                    label: "<?php echo esc_js( __( 'Number of orders', 'dokan' ) ) ?>",
+                    data: order_data.order_counts,
+                    shadowSize: 0,
+                    hoverable: true,
+                    points: { show: true, radius: 5, lineWidth: 3, fillColor: '#fff', fill: true },
+                    lines: { show: true, lineWidth: 4, fill: false },
+                    shadowSize: 0,
+                    append_tooltip: " <?php echo __( 'sales', 'dokan' ); ?>"
+                },
+                {
+                    label: "<?php echo esc_js( __( 'Commision', 'dokan' ) ) ?>",
+                    data: order_data.order_commision,
+                    shadowSize: 0,
+                    hoverable: true,
+                    points: { show: true, radius: 5, lineWidth: 3, fillColor: '#fff', fill: true },
+                    lines: { show: true, lineWidth: 4, fill: false },
+                    shadowSize: 0,
+                    prepend_tooltip: "<?php echo __('Commision: ', 'dokan') . get_woocommerce_currency_symbol(); ?>"
+                },
+            ];
+
+            var main_chart = jQuery.plot(
+                jQuery('.chart-placeholder.main'),
+                series,
+                {
+                    legend: {
+                        show: true,
+                        position: 'nw'
+                    },
+                    series: {
+                        lines: { show: true, lineWidth: 4, fill: false },
+                        points: { show: true }
+                    },
+                    grid: {
+                        borderColor: '#eee',
+                        color: '#aaa',
+                        backgroundColor: '#fff',
+                        borderWidth: 1,
+                        hoverable: true,
+                        show: true,
+                        aboveData: false,
+                    },
+                    xaxis: {
+                        color: '#aaa',
+                        position: "bottom",
+                        tickColor: 'transparent',
+                        mode: "time",
+                        timeformat: "<?php if ( $group_by == 'day' ) echo '%d %b'; else echo '%b'; ?>",
+                        monthNames: <?php echo json_encode( array_values( $wp_locale->month_abbrev ) ) ?>,
+                        tickLength: 1,
+                        minTickSize: [1, "<?php echo $group_by; ?>"],
+                        font: {
+                            color: "#aaa"
+                        }
+                    },
+                    yaxes: [
+                        {
+                            min: 0,
+                            minTickSize: 1,
+                            tickDecimals: 0,
+                            color: '#d4d9dc',
+                            font: { color: "#aaa" }
+                        },
+                        {
+                            position: "right",
+                            min: 0,
+                            tickDecimals: 2,
+                            alignTicksWithAxis: 1,
+                            color: 'transparent',
+                            font: { color: "#aaa" }
+                        }
+                    ],
+                    colors: ["<?php echo $chart_colours['order_counts']; ?>", "<?php echo $chart_colours['order_amounts']; ?>", "<?php echo $chart_colours['order_commision']; ?>"]
+                }
+            );
+
+            jQuery('.chart-placeholder').resize();
+
+
+            function showTooltip(x, y, contents) {
+                jQuery('<div class="chart-tooltip">' + contents + '</div>').css({
+                    top: y - 16,
+                    left: x + 20
+                }).appendTo("body").fadeIn(200);
+            }
+
+            var prev_data_index = null;
+            var prev_series_index = null;
+
+            jQuery(".chart-placeholder").bind("plothover", function(event, pos, item) {
+                if (item) {
+                    if (prev_data_index != item.dataIndex || prev_series_index != item.seriesIndex) {
+                        prev_data_index = item.dataIndex;
+                        prev_series_index = item.seriesIndex;
+
+                        jQuery(".chart-tooltip").remove();
+
+                        if (item.series.points.show || item.series.enable_tooltip) {
+
+                            var y = item.series.data[item.dataIndex][1];
+
+                            tooltip_content = '';
+
+                            if (item.series.prepend_label)
+                                tooltip_content = tooltip_content + item.series.label + ": ";
+
+                            if (item.series.prepend_tooltip)
+                                tooltip_content = tooltip_content + item.series.prepend_tooltip;
+
+                            tooltip_content = tooltip_content + y;
+
+                            if (item.series.append_tooltip)
+                                tooltip_content = tooltip_content + item.series.append_tooltip;
+
+                            if (item.series.pie.show) {
+
+                                showTooltip(pos.pageX, pos.pageY, tooltip_content);
+
+                            } else {
+
+                                showTooltip(item.pageX, item.pageY, tooltip_content);
+
+                            }
+
+                        }
+                    }
+                } else {
+                    jQuery(".chart-tooltip").remove();
+                    prev_data_index = null;
+                }
+            });
+        });
+
+    </script>
+    <?php
+
+    return $data;
+}

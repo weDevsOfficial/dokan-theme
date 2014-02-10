@@ -84,10 +84,10 @@ function dokan_order_show_suborders( $parent_order ) {
         <h2><?php _e( 'Sub Orders', 'dokan' ); ?></h2>
     </header>
 
-    <label class="label label-success">Note:</label>
     <div class="dokan-info">
-        This order has products from multiple vendors/sellers. So we divided this order into multiple seller orders.
-        Each order will be handled by their respective seller independently.
+        <label class="label label-danger"><?php _e( 'Note:', 'dokan' ); ?></label>
+        <?php _e( 'This order has products from multiple vendors/sellers. So we divided this order into multiple seller orders.
+        Each order will be handled by their respective seller independently.', 'dokan' ); ?>
     </div>
 
 

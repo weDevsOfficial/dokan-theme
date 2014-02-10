@@ -1,5 +1,6 @@
 a{color:#f17288}
 .btn-theme{background:#f17288;color:#fff}.btn-theme:hover{background:#ef5b74;color:#fff}
+mark{color:#fff;background:#f17288;border-radius:3px;padding:0 3px}
 .pagination>li>span.current,.pagination>li>a:hover{background-color:#f17288;color:#fff}
 .dokan-info{border-top:3px solid #f17288}.dokan-info:before{background-color:#f17288}
 .site-header .navbar-collapse ul.navbar-nav>li>ul.dropdown-menu>li.active a{background:#f17288;color:#fff}
