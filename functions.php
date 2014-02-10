@@ -87,6 +87,7 @@ class WeDevs_Dokan {
         if ( is_admin() ) {
             Dokan_Slider::init();
             new Dokan_Admin_User_Profile();
+            new Dokan_Update();
 
         } else {
             new Dokan_Pageviews();

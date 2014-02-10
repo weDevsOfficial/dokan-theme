@@ -72,6 +72,7 @@ class Dokan_Admin_Settings {
         do_action( 'dokan_admin_menu' );
 
         add_submenu_page( 'dokan', __( 'Settings', 'dokan' ), __( 'Settings', 'dokan' ), $capability, 'dokan-settings', array($this, 'settings_page') );
+        add_submenu_page( 'dokan', __( 'Add Ons', 'dokan' ), __( 'Add-ons', 'dokan' ), $capability, 'dokan-ons', array($this, 'addon_page') );
 
         add_action( $dashboard, array($this, 'dashboard_script' ) );
         add_action( $report, array($this, 'report_scripts' ) );
@@ -328,6 +329,10 @@ class Dokan_Admin_Settings {
         dokan_reports_scripts();
 
         include __DIR__ . '/reports.php';
+    }
+
+    function addon_page() {
+        include __DIR__ . '/add-on.php';
     }
 
 }
