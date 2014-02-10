@@ -27,15 +27,19 @@ function dokan_admin_dash_metabox_glance() {
 
     <ul class="main">
         <li class="seller-count">
+            <div class="dashicons dashicons-businessman"></div>
             <a href="<?php echo admin_url( 'admin.php?page=dokan-sellers' ); ?>"><?php printf( __( '%d Sellers', 'dokan' ), $seller_count ); ?></a>
         </li>
         <li class="withdraw-pending">
+            <div class="dashicons dashicons-visibility"></div>
             <a href="<?php echo admin_url( 'admin.php?page=dokan-withdraw' ); ?>"><?php printf( __( '%d Pending Withdraw', 'dokan' ), $withdraw_counts['pending'] ); ?></a>
         </li>
         <li class="withdraw-completed">
+            <div class="dashicons dashicons-yes"></div>
             <a href="<?php echo admin_url( 'admin.php?page=dokan-withdraw&amp;status=completed' ); ?>"><?php printf( __( '%d Completed Withdraw', 'dokan' ), $withdraw_counts['completed'] ); ?></a>
         </li>
         <li class="withdraw-pending">
+            <div class="dashicons dashicons-dismiss"></div>
             <a href="<?php echo admin_url( 'admin.php?page=dokan-withdraw&amp;status=cancelled' ); ?>"><?php printf( __( '%d Cancelled Withdraw', 'dokan' ), $withdraw_counts['cancelled'] ); ?></a>
         </li>
     </ul>
