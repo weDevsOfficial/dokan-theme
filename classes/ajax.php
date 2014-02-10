@@ -1,7 +1,17 @@
 <?php
-
+/**
+ * Ajax handler for Dokan
+ * 
+ * @package Dokan
+ */
 class Dokan_Ajax {
 
+    /**
+     * Singleton object
+     * 
+     * @staticvar boolean $instance
+     * @return \self
+     */
     public static function init() {
 
         static $instance = false;
@@ -13,6 +23,11 @@ class Dokan_Ajax {
         return $instance;
     }
 
+    /**
+     * Init ajax handlers
+     * 
+     * @return void 
+     */
     function init_ajax() {
         //withdraw note
         $withdraw = Dokan_Template_Withdraw::init();
@@ -43,16 +58,21 @@ class Dokan_Ajax {
         add_action( 'wp_ajax_dokan_toggle_seller', array( $this, 'toggle_seller_status' ) );
     }
 
+    /**
+     * Mark a order as complete
+     * 
+     * Fires from seller dashboard in frontend
+     */
     function complete_order() {
         if ( !is_admin() ) {
             die();
         }
 
-        if ( !current_user_can('edit_shop_orders') ) {
+        if ( !current_user_can( 'dokandar' ) ) {
             wp_die( __( 'You do not have sufficient permissions to access this page.', 'dokan' ) );
         }
 
-        if ( !check_admin_referer('dokan-mark-order-complete')) {
+        if ( !check_admin_referer( 'dokan-mark-order-complete' ) ) {
             wp_die( __( 'You have taken too long. Please go back and retry.', 'dokan' ) );
         }
 
@@ -69,22 +89,28 @@ class Dokan_Ajax {
         $order->update_status( 'completed' );
 
         wp_safe_redirect( wp_get_referer() );
+        die();
     }
 
+    /**
+     * Mark a order as processing
+     * 
+     * Fires from frontend seller dashboard
+     */
     function process_order() {
         if ( !is_admin() ) {
             die();
         }
 
-        if ( !current_user_can('edit_shop_orders') ) {
+        if ( !current_user_can( 'edit_shop_orders' ) ) {
             wp_die( __( 'You do not have sufficient permissions to access this page.', 'dokan' ) );
         }
 
-        if ( !check_admin_referer('dokan-mark-order-processing')) {
+        if ( !check_admin_referer( 'dokan-mark-order-processing' ) ) {
             wp_die( __( 'You have taken too long. Please go back and retry.', 'dokan' ) );
         }
 
-        $order_id = isset($_GET['order_id']) && (int) $_GET['order_id'] ? (int) $_GET['order_id'] : '';
+        $order_id = isset( $_GET['order_id'] ) && (int) $_GET['order_id'] ? (int) $_GET['order_id'] : '';
         if ( !$order_id ) {
             die();
         }
@@ -201,6 +227,8 @@ class Dokan_Ajax {
 
     /**
      * Add variation via ajax function
+     * 
+     * @return void 
      */
     public function add_variation() {
         global $woocommerce;
@@ -438,6 +466,11 @@ class Dokan_Ajax {
         die();
     }
 
+    /**
+     * Update a order status
+     * 
+     * @return void
+     */
     function change_order_status() {
 
         check_ajax_referer( 'dokan_change_status' );
@@ -453,6 +486,11 @@ class Dokan_Ajax {
         exit;
     }
 
+    /**
+     * Seller store page email contact form handler
+     * 
+     * Catches the form submission from store page 
+     */
     function contact_seller() {
         $posted = $_POST;
 
@@ -475,6 +513,11 @@ class Dokan_Ajax {
         exit;
     }
 
+    /**
+     * Save attributes from edit product page
+     * 
+     * @return void
+     */
     function save_attributes() {
 
         // check_ajax_referer( 'save-attributes', 'security' );
@@ -578,6 +621,11 @@ class Dokan_Ajax {
         die();
     }
 
+    /**
+     * Enable/disable seller selling capability from admin seller listing page
+     * 
+     * @return type
+     */
     function toggle_seller_status() {
         if ( !current_user_can( 'manage_options' ) ) {
             return;

@@ -1,7 +1,8 @@
 <?php
-
 /**
- *
+ * Dokan email handler class
+ * 
+ * @package Dokan
  */
 class Dokan_Email {
 

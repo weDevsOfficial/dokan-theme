@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * User profile related tasks for wp-admin
+ * 
+ * @package Dokan
+ */
 class Dokan_Admin_User_Profile {
 
     public function __construct() {
@@ -10,6 +14,12 @@ class Dokan_Admin_User_Profile {
         add_action( 'edit_user_profile_update', array( $this, 'save_meta_fields' ) );
     }
 
+    /**
+     * Add fields to user profile
+     * 
+     * @param WP_User $user
+     * @return void|false
+     */
     function add_meta_fields( $user ) {
         if ( ! current_user_can( 'manage_woocommerce' ) ) {
             return;
@@ -79,6 +89,12 @@ class Dokan_Admin_User_Profile {
         <?php
     }
 
+    /**
+     * Save user data
+     * 
+     * @param int $user_id
+     * @return void
+     */
     function save_meta_fields( $user_id ) {
         if ( ! current_user_can( 'manage_woocommerce' ) ) {
             return;
