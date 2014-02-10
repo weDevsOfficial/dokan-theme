@@ -131,6 +131,12 @@ class Dokan_Installer {
                         'page_id' => 'settings',
                     )
                 )
+            ),
+            array(
+                'post_title' => __( 'My Orders', 'dokan' ),
+                'slug' => 'my-orders',
+                'template' => 'templates/my-orders.php',
+                'page_id' => 'my_orders',
             )
         );
 

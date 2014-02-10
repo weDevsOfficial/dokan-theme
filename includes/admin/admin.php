@@ -287,7 +287,12 @@ class Dokan_Admin_Settings {
                     'type' => 'select',
                     'options' => $pages_array
                 ),
-
+                array(
+                    'name' => 'my_orders',
+                    'label' => __( 'My Orders', 'dokan' ),
+                    'type' => 'select',
+                    'options' => $pages_array
+                ),
             )
         );
 
