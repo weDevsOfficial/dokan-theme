@@ -305,6 +305,9 @@ a:hover {
 .navbar-top-area .widget_shopping_cart_content ul li:after {
   clear: both;
 }
+.navbar-top-area .widget_shopping_cart_content ul li.empty {
+  border-bottom: none;
+}
 .navbar-top-area .widget_shopping_cart_content ul li .quantity {
   display: block;
   margin: 0;
