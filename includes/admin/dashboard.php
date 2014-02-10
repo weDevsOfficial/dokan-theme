@@ -22,27 +22,61 @@ function dokan_admin_dash_widget_news() {
 function dokan_admin_dash_metabox_glance() {
     $user_count = count_users();
     $withdraw_counts = dokan_get_withdraw_count();
-    $seller_count = isset( $user_count['avail_roles']['seller'] ) ? $user_count['avail_roles']['seller'] : 0;
+    $seller_counts = dokan_get_seller_count();
+    $total_seller = isset( $user_count['avail_roles']['seller'] ) ? $user_count['avail_roles']['seller'] : 0;
     ?>
 
-    <ul class="main">
-        <li class="seller-count">
-            <div class="dashicons dashicons-businessman"></div>
-            <a href="<?php echo admin_url( 'admin.php?page=dokan-sellers' ); ?>"><?php printf( __( '%d Sellers', 'dokan' ), $seller_count ); ?></a>
-        </li>
-        <li class="withdraw-pending">
-            <div class="dashicons dashicons-visibility"></div>
-            <a href="<?php echo admin_url( 'admin.php?page=dokan-withdraw' ); ?>"><?php printf( __( '%d Pending Withdraw', 'dokan' ), $withdraw_counts['pending'] ); ?></a>
-        </li>
-        <li class="withdraw-completed">
-            <div class="dashicons dashicons-yes"></div>
-            <a href="<?php echo admin_url( 'admin.php?page=dokan-withdraw&amp;status=completed' ); ?>"><?php printf( __( '%d Completed Withdraw', 'dokan' ), $withdraw_counts['completed'] ); ?></a>
-        </li>
-        <li class="withdraw-pending">
-            <div class="dashicons dashicons-dismiss"></div>
-            <a href="<?php echo admin_url( 'admin.php?page=dokan-withdraw&amp;status=cancelled' ); ?>"><?php printf( __( '%d Cancelled Withdraw', 'dokan' ), $withdraw_counts['cancelled'] ); ?></a>
-        </li>
-    </ul>
+    <div class="dokan-left">
+        <h4><?php _e( 'Sellers', 'dokan' ); ?></h4>
+
+        <ul>
+            <li class="seller-count">
+                <div class="dashicons dashicons-businessman"></div>
+                <a href="<?php echo admin_url( 'admin.php?page=dokan-sellers' ); ?>"><?php printf( _n( __( '%d Total Seller', 'dokan' ), __( '%d Total Sellers', 'dokan' ), $total_seller, 'dokan' ), $total_seller ); ?></a>
+            </li>
+            <li class="seller-count mark-green">
+                <div class="dashicons dashicons-awards"></div>
+                <a href="<?php echo admin_url( 'admin.php?page=dokan-sellers' ); ?>">
+                    <?php
+                    if ( $seller_counts['yes'] ) {
+                        printf( _n( __( '%d Active Seller', 'dokan' ), __( '%d Active Sellers', 'dokan' ), $seller_counts['yes'], 'dokan' ), $seller_counts['yes'] );
+                    } else {
+                        _e( 'No Active Seller', 'dokan' );
+                    }  ?>
+                </a>
+            </li>
+            <li class="seller-count <?php echo ($seller_counts['no'] < 1) ? 'mark-green' : 'mark-red'; ?>">
+                <div class="dashicons dashicons-editor-help"></div>
+                <a href="<?php echo admin_url( 'admin.php?page=dokan-sellers' ); ?>">
+                    <?php
+                    if ( $seller_counts['no'] ) {
+                        printf( _n( __( '%d Pending Seller', 'dokan' ), __( '%d Pending Sellers', 'dokan' ), $seller_counts['no'], 'dokan' ), $seller_counts['no'] );
+                    } else {
+                        _e( 'No Pending Seller', 'dokan' );
+                    }  ?>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dokan-right">
+        <h4><?php _e( 'Withdraw', 'dokan' ); ?></h4>
+
+        <ul>
+            <li class="withdraw-pending <?php echo ($withdraw_counts['pending'] < 1) ? 'mark-green' : 'mark-red'; ?>">
+                <div class="dashicons dashicons-visibility"></div>
+                <a href="<?php echo admin_url( 'admin.php?page=dokan-withdraw' ); ?>"><?php printf( __( '%d Pending Withdraw', 'dokan' ), $withdraw_counts['pending'] ); ?></a>
+            </li>
+            <li class="withdraw-completed mark-green">
+                <div class="dashicons dashicons-yes"></div>
+                <a href="<?php echo admin_url( 'admin.php?page=dokan-withdraw&amp;status=completed' ); ?>"><?php printf( __( '%d Completed Withdraw', 'dokan' ), $withdraw_counts['completed'] ); ?></a>
+            </li>
+            <li class="withdraw-cancelled">
+                <div class="dashicons dashicons-dismiss"></div>
+                <a href="<?php echo admin_url( 'admin.php?page=dokan-withdraw&amp;status=cancelled' ); ?>"><?php printf( __( '%d Cancelled Withdraw', 'dokan' ), $withdraw_counts['cancelled'] ); ?></a>
+            </li>
+        </ul>
+    </div>
 
     <?php
 }

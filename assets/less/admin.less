@@ -1,3 +1,5 @@
+@import "mixins.less";
+
 .dokan-dashboard {
     .post-box-container {
         width: 49%;
@@ -12,6 +14,7 @@
     .postbox {
         .main {
             padding: 0 12px 11px;
+            .clearfix;
 
             a {
                 text-decoration: none;
@@ -20,11 +23,35 @@
             p {
                 margin: 0;
             }
+
+            h4 {
+                margin: 0 0 7px 0;
+                padding: 0 0 7px 0;
+                border-bottom: 1px solid #EEE;
+            }
         }
 
         .inside {
             margin: 10px 0 0 0;
             padding: 0;
         }
+    }
+
+    .mark-red a {
+        color: red;
+    }
+
+    .mark-green a {
+        color: green;
+    }
+
+    .dokan-left {
+        float: left;
+        width: 45%;
+    }
+
+    .dokan-right {
+        float: right;
+        width: 45%;
     }
 }

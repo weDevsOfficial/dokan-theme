@@ -658,3 +658,37 @@ function dokan_prepare_chart_data( $data, $date_key, $data_key, $interval, $star
 
     return $prepared_data;
 }
+
+function dokan_admin_user_register( $user_id ) {
+    $user = new WP_User( $user_id );
+    $role = reset( $user->roles );
+
+    if ( $role == 'seller' ) {
+        update_user_meta( $user_id, 'dokan_enable_selling', 'no' );
+    }
+}
+
+add_action( 'user_register', 'dokan_admin_user_register' );
+
+
+function dokan_get_seller_count() {
+    global $wpdb;
+
+
+    $counts = array( 'yes' => 0, 'no' => 0 );
+
+    $result = $wpdb->get_results( "SELECT COUNT(um.user_id) as count, um1.meta_value as type
+                FROM $wpdb->usermeta um
+                LEFT JOIN $wpdb->usermeta um1 ON um1.user_id = um.user_id
+                WHERE um.meta_key = 'wp_capabilities' AND um1.meta_key = 'dokan_enable_selling'
+                AND um.meta_value LIKE '%seller%'
+                GROUP BY um1.meta_value" );
+
+    if ( $result ) {
+        foreach ($result as $row) {
+            $counts[$row->type] = (int) $row->count;
+        }
+    }
+
+    return $counts;
+}
