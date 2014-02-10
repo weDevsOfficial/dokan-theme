@@ -26,7 +26,7 @@ if ( $customer_orders ) : ?>
 
 	<h2><?php echo apply_filters( 'woocommerce_my_account_my_orders_title', __( 'Recent Orders', 'woocommerce' ) ); ?></h2>
 
-	<table class="shop_table my_account_orders">
+	<table class="shop_table my_account_orders table table-striped">
 
 		<thead>
 			<tr>
