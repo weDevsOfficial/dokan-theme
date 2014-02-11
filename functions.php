@@ -149,19 +149,9 @@ class WeDevs_Dokan {
          */
         add_theme_support( 'post-thumbnails' );
 
-        // set_post_thumbnail_size(150, 150, false);
-        // add_image_size('category-thumb', 300, 9999); // 300px wide (and unlimited height)
-        // Add post formats (http://codex.wordpress.org/Post_Formats)
         // add_theme_support('post-formats', array('aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat'));
         // Tell the TinyMCE editor to use a custom stylesheet
         add_editor_style( '/assets/css/editor-style.css' );
-
-        add_theme_support( 'root-relative-urls' );    // Enable relative URLs
-        add_theme_support( 'rewrites' );              // Enable URL rewrites
-        add_theme_support( 'bootstrap-top-navbar' );  // Enable Bootstrap's top navbar
-        add_theme_support( 'bootstrap-gallery' );     // Enable Bootstrap's thumbnails component on [gallery]
-        add_theme_support( 'nice-search' );           // Enable /?s= to /search/ redirect
-        // add_theme_support( 'jquery-cdn' );            // Enable to load jQuery from the Google CDN
 
         /**
          * This theme uses wp_nav_menu() in one location.
@@ -169,7 +159,6 @@ class WeDevs_Dokan {
         register_nav_menus( array(
             'primary' => __( 'Primary Menu', 'dokan' ),
             'top-left' => __( 'Top Left', 'dokan' ),
-            'product-cat' => __( 'Product Category', 'dokan' ),
             'footer' => __( 'Footer Menu', 'dokan' ),
         ) );
 
@@ -185,11 +174,6 @@ class WeDevs_Dokan {
         ) );
 
         add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list' ) );
-
-        /**
-         * Add support for the Aside Post Formats
-         */
-        // add_theme_support( 'post-formats', array('aside',) );
 
         // setup global tables
         global $wpdb;
