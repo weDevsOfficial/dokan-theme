@@ -516,14 +516,18 @@ a:hover {
 /*--------------------------------------------------
 :: Content
 -------------------------------------------------- */
-.site-content {
-  overflow: hidden;
-}
 .site-content article {
   position: relative;
 }
 .site-content article li {
   line-height: 25px;
+}
+.site-content article.error404 {
+  text-align: center;
+}
+.site-content article.error404 form {
+  margin: 30px auto 30px auto;
+  max-width: 50%;
 }
 .site-content .entry-header .entry-title {
   border-bottom: 1px solid #ededed;
