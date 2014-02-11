@@ -159,6 +159,42 @@ function dokan_on_order_status_change( $order_id, $old_status, $new_status ) {
 
 add_action( 'woocommerce_order_status_changed', 'dokan_on_order_status_change', 10, 3 );
 
+function dokan_on_child_order_status_change( $order_id, $old_status, $new_status ) {
+    $order_post = get_post( $order_id );
+
+    // we are monitoring only child orders
+    if ( $order_post->post_parent === 0 ) {
+        return;
+    }
+
+    // get all the child orders and monitor the status
+    $parent_order_id = $order_post->post_parent;
+    $sub_orders = get_children( array( 'post_parent' => $parent_order_id, 'post_type' => 'shop_order' ) );
+
+
+    // return if any child order is not completed
+    $all_complete = true;
+
+    if ( $sub_orders ) {
+        foreach ($sub_orders as $sub) {
+            $order = new WC_Order( $sub->ID );
+
+            if ( $order->status != 'completed' ) {
+                $all_complete = false;
+            }
+        }
+    }
+
+    // seems like all the child orders are completed
+    // mark the parent order as complete
+    if ( $all_complete ) {
+        $parent_order = new WC_Order( $parent_order_id );
+        $parent_order->update_status( 'completed', __( 'Mark parent order completed as all child orders are completed.', 'dokan' ) );
+    }
+}
+
+add_action( 'woocommerce_order_status_changed', 'dokan_on_child_order_status_change', 99, 3 );
+
 function dokan_delete_sync_order( $order_id ) {
     global $wpdb;
 
