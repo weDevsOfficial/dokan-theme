@@ -1382,8 +1382,8 @@ function dokan_get_seller_balance( $seller_id, $formatted = true ) {
 
     if ( false === $earning ) {
         $sql = "SELECT SUM(net_amount) as earnings,
-            (SELECT SUM(amount) FROM wp_dokan_withdraw WHERE user_id = %d AND status = 1) as withdraw
-            FROM wp_dokan_orders
+            (SELECT SUM(amount) FROM {$wpdb->prefix}dokan_withdraw WHERE user_id = %d AND status = 1) as withdraw
+            FROM {$wpdb->prefix}dokan_orders
             WHERE seller_id = %d AND order_status IN('completed', 'on-hold', 'processing')";
 
         $result = $wpdb->get_row( $wpdb->prepare( $sql, $seller_id, $seller_id ) );
