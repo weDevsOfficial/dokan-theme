@@ -556,7 +556,7 @@ function dokan_get_store_info( $seller_id ) {
     $defaults = array(
         'store_name' => '',
         'social' => array(),
-        'payment' => array(),
+        'payment' => array( 'paypal' => array( 'email' ), 'bank' => array() ),
         'phone' => '',
         'show_email' => 'off',
         'address' => '',
@@ -567,6 +567,36 @@ function dokan_get_store_info( $seller_id ) {
     $info = wp_parse_args( $info, $defaults );
 
     return $info;
+}
+
+function dokan_get_seller_withdraw_mail( $seller_id, $type = 'paypal' ) {
+    $info = dokan_get_store_info( $seller_id );
+
+    return $info['payment'][$type]['email'];
+}
+
+function dokan_get_seller_bank_details( $seller_id ) {
+    $info = dokan_get_store_info( $seller_id );
+    $payment = $info['payment']['bank'];
+    $details = array();
+
+    if ( isset( $payment['ac_name'] ) ) {
+        $details[] = sprintf( __( 'Account Name: %s', 'dokan' ), $payment['ac_name'] );
+    }
+    if ( isset( $payment['ac_number'] ) ) {
+        $details[] = sprintf( __( 'Account Number: %s', 'dokan' ), $payment['ac_number'] );
+    }
+    if ( isset( $payment['bank_name'] ) ) {
+        $details[] = sprintf( __( 'Bank Name: %s', 'dokan' ), $payment['bank_name'] );
+    }
+    if ( isset( $payment['bank_addr'] ) ) {
+        $details[] = sprintf( __( 'Address: %s', 'dokan' ), $payment['bank_addr'] );
+    }
+    if ( isset( $payment['swift'] ) ) {
+        $details[] = sprintf( __( 'SWIFT: %s', 'dokan' ), $payment['swift'] );
+    }
+
+    return nl2br( implode( "\n", $details ) );
 }
 
 function dokan_get_sellers( $number = 10, $offset = 0 ) {
