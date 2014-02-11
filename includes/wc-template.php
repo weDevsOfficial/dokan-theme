@@ -85,13 +85,13 @@ function dokan_order_show_suborders( $parent_order ) {
     </header>
 
     <div class="dokan-info">
-        <label class="label label-danger"><?php _e( 'Note:', 'dokan' ); ?></label>
+        <strong><?php _e( 'Note:', 'dokan' ); ?></strong>
         <?php _e( 'This order has products from multiple vendors/sellers. So we divided this order into multiple seller orders.
         Each order will be handled by their respective seller independently.', 'dokan' ); ?>
     </div>
 
 
-    <table class="shop_table my_account_orders">
+    <table class="shop_table my_account_orders table table-striped">
 
         <thead>
             <tr>
@@ -128,24 +128,12 @@ function dokan_order_show_suborders( $parent_order ) {
                         <?php
                             $actions = array();
 
-                            if ( in_array( $order->status, apply_filters( 'woocommerce_valid_order_statuses_for_payment', array( 'pending', 'failed' ), $order ) ) )
-                                $actions['pay'] = array(
-                                    'url'  => $order->get_checkout_payment_url(),
-                                    'name' => __( 'Pay', 'dokan' )
-                                );
-
-                            if ( in_array( $order->status, apply_filters( 'woocommerce_valid_order_statuses_for_cancel', array( 'pending', 'failed' ), $order ) ) )
-                                $actions['cancel'] = array(
-                                    'url'  => $order->get_cancel_order_url(),
-                                    'name' => __( 'Cancel', 'dokan' )
-                                );
-
                             $actions['view'] = array(
                                 'url'  => $order->get_view_order_url(),
                                 'name' => __( 'View', 'dokan' )
                             );
 
-                            $actions = apply_filters( 'woocommerce_my_account_my_orders_actions', $actions, $order );
+                            $actions = apply_filters( 'dokan_my_account_my_sub_orders_actions', $actions, $order );
 
                             foreach( $actions as $key => $action ) {
                                 echo '<a href="' . esc_url( $action['url'] ) . '" class="button ' . sanitize_html_class( $key ) . '">' . esc_html( $action['name'] ) . '</a>';

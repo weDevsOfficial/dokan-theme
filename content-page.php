@@ -3,7 +3,7 @@
  * The template used for displaying page content in page.php
  *
  * @package dokan
- * @package dokan - 2013 1.0
+ * @package dokan - 2014 1.0
  */
 ?>
 
