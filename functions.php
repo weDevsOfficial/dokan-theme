@@ -255,7 +255,6 @@ class WeDevs_Dokan {
         $skin = dokan_get_option( 'color_skin', 'dokan_general', 'orange.css' );
 
         wp_register_style( 'jquery-ui', $template_directory . '/assets/css/jquery-ui-1.10.0.custom.css', false, null );
-        wp_register_style( 'flexslider', $template_directory . '/assets/css/flexslider.css', false, null );
         wp_register_style( 'chosen-style', $template_directory . '/assets/css/chosen.min.css', false, null );
 
         wp_enqueue_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.css', false, null );
@@ -263,7 +262,7 @@ class WeDevs_Dokan {
         wp_enqueue_style( 'fontawesome', $template_directory . '/assets/css/font-awesome.css', false, null );
 
 
-        // wp_enqueue_style( 'reviows-style', $template_directory . '/assets/css/reviews.css', false, null );
+        wp_enqueue_style( 'flexslider', $template_directory . '/assets/css/flexslider.css', false, null );
         wp_enqueue_style( 'dokan-style', $template_directory . '/assets/css/style.css', false, null );
         wp_enqueue_style( 'dokan-skin', $template_directory . '/assets/css/skins/' . $skin, false, null );
         wp_enqueue_style( 'dokan-opensans', $protocol . '://fonts.googleapis.com/css?family=Open+Sans:400,700' );
