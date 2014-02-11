@@ -87,7 +87,7 @@ a:hover{text-decoration:none}
 .site-header #navigation>ul>li{border-left:1px solid #dedede;border-right:1px solid #bababa}
 .site-header #navigation>ul>li.current-menu-item>a{background:#999;text-shadow:none;font-weight:bold}.site-header #navigation>ul>li.current-menu-item>a:hover{-moz-border-radius:0;-webkit-border-radius:0;border-radius:0}
 .site-header #navigation>ul{height:36px}
-.site-content article{position:relative}.site-content article li{line-height:25px}
+.site-content{min-height:250px}.site-content article{position:relative}.site-content article li{line-height:25px}
 .site-content article.error404{text-align:center}.site-content article.error404 form{margin:30px auto 30px auto;max-width:50%}
 .site-content .entry-header .entry-title{border-bottom:1px solid #ededed;padding-bottom:10px;margin-bottom:10px;margin-top:0}.site-content .entry-header .entry-title a{color:#222}.site-content .entry-header .entry-title a:hover{text-decoration:none;color:#5aabd6}
 .site-content .entry-content{margin-bottom:15px}
