@@ -472,7 +472,6 @@ function dokan_process_product_meta( $post_id ) {
 
     update_post_meta( $post_id, '_visibility', stripslashes( $_POST['_visibility'] ) );
     update_post_meta( $post_id, '_purchase_note', stripslashes( $_POST['_purchase_note'] ) );
-    update_post_meta( $post_id, '_featured', isset( $_POST['_featured'] ) ? 'yes' : 'no' );
 
     // Dimensions
     if ( $is_virtual == 'no' ) {
