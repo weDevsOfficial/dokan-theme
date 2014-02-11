@@ -122,23 +122,31 @@ class Dokan_Template_Withdraw {
 
         foreach( $result as $key => $obj ) {
 
+            if ( $obj->method != 'paypal' ) {
+                continue;
+            }
+
             $data[] = array(
-                'email' => get_user_by( 'id', $obj->user_id )->user_email,
+                'email' => dokan_get_seller_withdraw_mail( $obj->user_id ),
                 'amount' => $obj->amount,
-                'currency' => get_option('woocommerce_currency') ,
+                'currency' => get_option( 'woocommerce_currency' )
             );
 
         }
 
-        header('Content-type: html/csv');
-        header('Content-Disposition: attachment; filename="withdraw-'.date('d-m-y').'.csv"');
+        if ( $data ) {
 
-        foreach ($data as $fields) {
-            echo $fields['email']. ',';
-            echo $fields['amount']. ',';
-            echo $fields['currency'] . "\n";
+            header('Content-type: html/csv');
+            header('Content-Disposition: attachment; filename="withdraw-'.date('d-m-y').'.csv"');
+
+            foreach ($data as $fields) {
+                echo $fields['email']. ',';
+                echo $fields['amount']. ',';
+                echo $fields['currency'] . "\n";
+            }
+
+            die();
         }
-        die();
     }
 
 
@@ -337,9 +345,9 @@ class Dokan_Template_Withdraw {
                             <input type="checkbox" class="dokan-withdraw-allcheck">
                         </th>
                         <th><?php _e( 'User Name', 'dokan' ); ?></th>
-                        <th><?php _e( 'User Email', 'dokan' ); ?></th>
                         <th><?php _e( 'Amount', 'dokan' ); ?></th>
                         <th><?php _e( 'Method', 'dokan' ); ?></th>
+                        <th><?php _e( 'Method Details', 'dokan' ); ?></th>
                         <th><?php _e( 'Note', 'dokan' ); ?></th>
                         <th><?php _e( 'IP', 'dokan' ); ?></th>
                         <th><?php _e( 'Date', 'dokan' ); ?></th>
@@ -351,9 +359,9 @@ class Dokan_Template_Withdraw {
                             <input type="checkbox" class="dokan-withdraw-allcheck">
                         </th>
                         <th><?php _e( 'User Name', 'dokan' ); ?></th>
-                        <th><?php _e( 'User Email', 'dokan' ); ?></th>
                         <th><?php _e( 'Amount', 'dokan' ); ?></th>
                         <th><?php _e( 'Method', 'dokan' ); ?></th>
+                        <th><?php _e( 'Method Details', 'dokan' ); ?></th>
                         <th><?php _e( 'Note', 'dokan' ); ?></th>
                         <th><?php _e( 'IP', 'dokan' ); ?></th>
                         <th><?php _e( 'Date', 'dokan' ); ?></th>
@@ -364,7 +372,8 @@ class Dokan_Template_Withdraw {
             if ( $result ) {
                 $count = 0;
                 foreach( $result as $key => $row ) {
-                    $user_data = get_userdata($row->user_id);
+                    $user_data = get_userdata( $row->user_id );
+                    $store_info = dokan_get_store_info( $row->user_id );
                     ?>
                     <tr class="<?php echo ($count % 2) == 0 ? 'alternate': 'odd'; ?>">
                         <th class="check-column">
@@ -376,9 +385,19 @@ class Dokan_Template_Withdraw {
                         <td>
                             <strong><a href="<?php echo admin_url( 'user-edit.php?user_id=' . $user_data->ID ); ?>"><?php echo $user_data->user_login; ?></a></strong>
                         </td>
-                        <td><?php echo $user_data->user_email; ?></td>
                         <td><?php echo wc_price( $row->amount ); ?></td>
                         <td><?php echo dokan_withdraw_get_method_title( $row->method ); ?></td>
+                        <td>
+                            <?php
+                            if ( $row->method != 'bank' ) {
+                                if ( isset( $store_info['payment'][$row->method]) ) {
+                                    echo $store_info['payment'][$row->method]['email'];
+                                }
+                            } elseif( $row->method == 'bank' ) {
+                                echo dokan_get_seller_bank_details( $row->user_id );
+                            }
+                            ?>
+                        </td>
                         <td>
                             <div class="dokan-add-note">
                                 <div class="note-display">
