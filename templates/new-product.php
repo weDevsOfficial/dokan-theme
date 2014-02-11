@@ -47,8 +47,7 @@ if ( isset( $_POST['add_product'] ) ) {
         if ( $product_id ) {
 
             /** set images **/
-
-            if( $featured_image ) {
+            if ( $featured_image ) {
                 set_post_thumbnail( $product_id, $featured_image );
             }
 
