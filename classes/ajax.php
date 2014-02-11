@@ -1,14 +1,14 @@
 <?php
 /**
  * Ajax handler for Dokan
- * 
+ *
  * @package Dokan
  */
 class Dokan_Ajax {
 
     /**
      * Singleton object
-     * 
+     *
      * @staticvar boolean $instance
      * @return \self
      */
@@ -25,8 +25,8 @@ class Dokan_Ajax {
 
     /**
      * Init ajax handlers
-     * 
-     * @return void 
+     *
+     * @return void
      */
     function init_ajax() {
         //withdraw note
@@ -60,7 +60,7 @@ class Dokan_Ajax {
 
     /**
      * Mark a order as complete
-     * 
+     *
      * Fires from seller dashboard in frontend
      */
     function complete_order() {
@@ -94,7 +94,7 @@ class Dokan_Ajax {
 
     /**
      * Mark a order as processing
-     * 
+     *
      * Fires from frontend seller dashboard
      */
     function process_order() {
@@ -227,8 +227,8 @@ class Dokan_Ajax {
 
     /**
      * Add variation via ajax function
-     * 
-     * @return void 
+     *
+     * @return void
      */
     public function add_variation() {
         global $woocommerce;
@@ -468,7 +468,7 @@ class Dokan_Ajax {
 
     /**
      * Update a order status
-     * 
+     *
      * @return void
      */
     function change_order_status() {
@@ -488,8 +488,8 @@ class Dokan_Ajax {
 
     /**
      * Seller store page email contact form handler
-     * 
-     * Catches the form submission from store page 
+     *
+     * Catches the form submission from store page
      */
     function contact_seller() {
         $posted = $_POST;
@@ -515,7 +515,7 @@ class Dokan_Ajax {
 
     /**
      * Save attributes from edit product page
-     * 
+     *
      * @return void
      */
     function save_attributes() {
@@ -623,7 +623,7 @@ class Dokan_Ajax {
 
     /**
      * Enable/disable seller selling capability from admin seller listing page
-     * 
+     *
      * @return type
      */
     function toggle_seller_status() {
@@ -636,7 +636,31 @@ class Dokan_Ajax {
 
         if ( $user_id && in_array( $status, array( 'yes', 'no' ) ) ) {
             update_user_meta( $user_id, 'dokan_enable_selling', $status );
+
+            if ( $status == 'no' ) {
+                $this->make_products_pending( $user_id );
+            }
         }
         exit;
+    }
+
+    function make_products_pending( $seller_id ) {
+        $args = array(
+            'post_type' => 'product',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'author' => $seller_id,
+            'orderby' => 'post_date',
+            'order' => 'DESC'
+        );
+
+        $product_query = new WP_Query( $args );
+        $products = $product_query->get_posts();
+
+        if ( $products ) {
+            foreach ($products as $pro) {
+                wp_update_post( array( 'ID' => $pro->ID, 'post_status' => 'pending' ) );
+            }
+        }
     }
 }
