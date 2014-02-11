@@ -623,7 +623,7 @@ class Dokan_Template_Withdraw {
 
                     <tr>
                         <td><?php echo wc_price( $request->amount ); ?></td>
-                        <td><?php echo $request->method; ?></td>
+                        <td><?php echo dokan_withdraw_get_method_title( $request->method ); ?></td>
                         <td><?php echo dokan_format_time( $request->date ); ?></td>
                         <td>
                             <?php
