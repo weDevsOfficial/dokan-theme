@@ -125,6 +125,13 @@ class Dokan_Admin_Settings {
         $settings_fields = array(
             'dokan_general' => array(
                 array(
+                    'name' => 'admin_access',
+                    'label' => __( 'Admin area access', 'dokan' ),
+                    'desc' => __( 'Disable sellers and customers from accessing wp-admin area', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
+                array(
                     'name' => 'color_skin',
                     'label' => __( 'Color Skin', 'dokan' ),
                     'desc' => __( 'Choose the color skin of the theme', 'dokan' ),

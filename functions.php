@@ -81,6 +81,7 @@ class WeDevs_Dokan {
         add_action( 'login_enqueue_scripts', array($this, 'login_scripts') );
 
         add_action( 'admin_init', array($this, 'install_theme' ) );
+        add_action( 'admin_init', array($this, 'block_admin_access' ) );
     }
 
     function init_classes() {
@@ -321,6 +322,29 @@ class WeDevs_Dokan {
         }
 
         return $where;
+    }
+
+    /**
+     * Block user access to admin panel for specific roles
+     *
+     * @global string $pagenow
+     */
+    function block_admin_access() {
+        global $pagenow, $current_user;
+
+        // bail out if we are from WP Cli
+        if ( defined( 'WP_CLI' ) ) {
+            return;
+        }
+
+        $no_access = dokan_get_option( 'admin_access', 'dokan_general', 'on' );
+        $valid_pages = array('admin-ajax.php', 'admin-post.php', 'async-upload.php', 'media-upload.php');
+        $user_role = reset( $current_user->roles );
+
+        if ( ( $no_access == 'on' ) && (!in_array( $pagenow, $valid_pages ) ) && in_array( $user_role, array( 'seller', 'customer' ) ) ) {
+            wp_redirect( home_url() );
+            exit;
+        }
     }
 
 }
