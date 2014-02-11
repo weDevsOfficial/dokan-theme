@@ -292,7 +292,7 @@ function dokan_daily_sales() {
             <label for="to"><?php _e( 'To:', 'dokan' ); ?></label>
             <input type="text" name="end_date" id="to" class="datepicker" readonly="readonly" value="<?php echo esc_attr( $end_date ); ?>" />
 
-            <input type="submit" name="dokan_report_filter" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'dokan' ); ?>" />
+            <input type="submit" name="dokan_report_filter" class="btn btn-theme btn-sm" value="<?php _e( 'Show', 'dokan' ); ?>" />
         </div>
     </form>
     <?php
@@ -598,6 +598,7 @@ function dokan_top_sellers() {
 
         WHERE   posts.post_type     = 'shop_order'
         AND     posts.post_status   = 'publish'
+        AND     do.seller_id = {$current_user->ID}
         AND     do.order_status IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
         AND     post_date > '" . date('Y-m-d', $start_date ) . "'
         AND     post_date < '" . date('Y-m-d', strtotime('+1 day', $end_date ) ) . "'
@@ -701,6 +702,7 @@ function dokan_top_earners() {
 
         WHERE   posts.post_type     = 'shop_order'
         AND     posts.post_status   = 'publish'
+        AND     do.seller_id = {$current_user->ID}
         AND     do.order_status           IN ('" . implode( "','", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "')
         AND     post_date > '" . date('Y-m-d', $start_date ) . "'
         AND     post_date < '" . date('Y-m-d', strtotime('+1 day', $end_date ) ) . "'
@@ -734,7 +736,7 @@ function dokan_top_earners() {
             <input type="text" class="datepicker" name="end_date" id="to" readonly="readonly" value="<?php echo esc_attr( date('Y-m-d', $end_date) ); ?>" />
         </div>
 
-        <input type="submit" class="btn btn-success btn-sm" value="<?php _e( 'Show', 'dokan' ); ?>" />
+        <input type="submit" class="btn btn-theme btn-sm" value="<?php _e( 'Show', 'dokan' ); ?>" />
     </form>
 
     <table class="table table-striped">
