@@ -84,8 +84,6 @@ class Dokan_Rewrites {
     function product_edit_template( $template ) {
         if ( get_query_var( 'edit' ) && is_singular( 'product' ) ) {
 
-            dokan_product_editor_scripts();
-
             return get_template_directory() . '/templates/product-edit.php';
         }
 

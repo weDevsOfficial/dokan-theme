@@ -65,9 +65,9 @@ $_stock_status = get_post_meta( $post_id, '_stock_status', true );
 $_visibility = get_post_meta( $post_id, '_visibility', true );
 $_enable_reviews = $post->comment_status;
 
-dokan_frontend_dashboard_scripts();
-
 get_header();
+
+dokan_frontend_dashboard_scripts();
 ?>
 
 <div id="primary" class="content-area col-md-12">
