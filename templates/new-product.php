@@ -54,7 +54,12 @@ if ( isset( $_POST['add_product'] ) ) {
 
             /** set product category * */
             wp_set_object_terms( $product_id, (int) $_POST['product_cat'], 'product_cat' );
+            wp_set_object_terms( $product_id, 'simple', 'product_type' );
+
             update_post_meta( $product_id, '_regular_price', $price );
+            update_post_meta( $product_id, '_sale_price', '' );
+            update_post_meta( $product_id, '_price', $price );
+            update_post_meta( $product_id, '_visibility', 'hidden' );
 
             wp_redirect( dokan_edit_product_url( $product_id ) );
         }
