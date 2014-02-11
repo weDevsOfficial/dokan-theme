@@ -201,26 +201,50 @@ class Dokan_Customizer {
     function generate_styles() {
         ?>
         <style type="text/css">
-
             <?php if ( $logo = get_theme_mod( 'dokan_logo' ) ) : ?>
                 .site-header h1.site-title a { background: url("<?php echo esc_url( $logo ); ?>") no-repeat scroll 0 0 rgba(0, 0, 0, 0);}
             <?php endif; ?>
-
-            .site-header .cart-area-top a, .site-footer .footer-copy a,
-            a { color: <?php echo get_theme_mod( 'dokan_link_color' ); ?>; }
-            .site-header .cart-area-top a:hover, .site-footer .footer-copy a:hover,
-            a:hover { color: <?php echo get_theme_mod( 'dokan_link_hover_color' ); ?>; }
-            .site-header { background-color: <?php echo get_theme_mod( 'dokan_header_bg' ); ?> ; }
-            .navbar-default{ background-color: <?php echo get_theme_mod( 'dokan_nav_bg' ); ?>; }
-            .navbar-default .navbar-nav > li > a{ color: <?php echo get_theme_mod( 'dokan_nav_color' ); ?>; }
-            .navbar-default .navbar-nav > li > a:hover { color: <?php echo get_theme_mod( 'dokan_nav_hover' ); ?>; }
-            .widget-title{ color: <?php echo get_theme_mod( 'sidebar_widget_header' ); ?>; }
-            .site-footer .widget h3{ color: <?php echo get_theme_mod( 'footer_widget_header' ); ?>; }
-            .site-footer .widget ul li a{ color: <?php echo get_theme_mod( 'dokan_footer_widget_link' ); ?>; }
-            .site-footer .widget ul li a:hover{ color: <?php echo get_theme_mod( 'dokan_footer_link_hover' ); ?>; }
-            .site-footer { color: <?php echo get_theme_mod( 'dokan_footer_text' ); ?>; }
-            .site-footer .footer-widget-area { background: <?php echo get_theme_mod( 'dokan_footer_bg' ); ?> ; }
-            .site-footer .copy-container { background: <?php echo get_theme_mod( 'dokan_footer_bottom_bar_bg_color' ); ?> ; }
+            <?php if ( $dokan_link_color = get_theme_mod( 'dokan_link_color' ) ) { ?>
+                .site-header .cart-area-top a, .site-footer .footer-copy a,
+                a { color: <?php echo $dokan_link_color; ?>; }
+            <?php } ?>
+            <?php if ( $dokan_link_hover_color = get_theme_mod( 'dokan_link_hover_color' ) ) { ?>
+                .site-header .cart-area-top a:hover, .site-footer .footer-copy a:hover,
+                a:hover { color: <?php echo $dokan_link_hover_color; ?>; }
+            <?php } ?>
+            <?php if ( $dokan_header_bg = get_theme_mod( 'dokan_header_bg' ) ) { ?>
+                .site-header { background-color: <?php echo $dokan_header_bg; ?> ; }
+            <?php } ?>
+            <?php if ( $dokan_nav_bg = get_theme_mod( 'dokan_nav_bg' ) ) { ?>
+                .navbar-default{ background-color: <?php echo $dokan_nav_bg; ?>; }
+            <?php } ?>
+            <?php if ( $dokan_nav_color = get_theme_mod( 'dokan_nav_color' ) ) { ?>
+            .navbar-default .navbar-nav > li > a{ color: <?php echo $dokan_nav_color; ?>; }
+            <?php } ?>
+            <?php if ( $dokan_nav_hover = get_theme_mod( 'dokan_nav_hover' ) ) { ?>
+                .navbar-default .navbar-nav > li > a:hover { color: <?php echo $dokan_nav_hover; ?>; }
+            <?php } ?>
+            <?php if ( $sidebar_widget_header = get_theme_mod( 'sidebar_widget_header' ) ) { ?>
+                .widget-title{ color: <?php echo $sidebar_widget_header; ?>; }
+            <?php } ?>
+            <?php if ( $footer_widget_header = get_theme_mod( 'footer_widget_header' ) ) { ?>
+                .site-footer .widget h3{ color: <?php echo $footer_widget_header; ?>; }
+            <?php } ?>
+            <?php if ( $dokan_footer_widget_link = get_theme_mod( 'dokan_footer_widget_link' ) ) { ?>
+                .site-footer .widget ul li a{ color: <?php echo $dokan_footer_widget_link; ?>; }
+            <?php } ?>
+            <?php if ( $dokan_footer_link_hover = get_theme_mod( 'dokan_footer_link_hover' ) ) { ?>
+                .site-footer .widget ul li a:hover{ color: <?php echo $dokan_footer_link_hover; ?>; }
+            <?php } ?>
+            <?php if ( $dokan_footer_text = get_theme_mod( 'dokan_footer_text' ) ) { ?>
+                .site-footer { color: <?php echo $dokan_footer_text; ?>; }
+            <?php } ?>
+            <?php if ( $dokan_footer_bg = get_theme_mod( 'dokan_footer_bg' ) ) { ?>
+                .site-footer .footer-widget-area { background: <?php echo $dokan_footer_bg; ?> ; }
+            <?php } ?>
+            <?php if ( $dokan_footer_bottom_bar_bg_color = get_theme_mod( 'dokan_footer_bottom_bar_bg_color' ) ) { ?>
+                .site-footer .copy-container { background: <?php echo $dokan_footer_bottom_bar_bg_color; ?> ; }
+            <?php } ?>
         </style>
         <?php
     }
