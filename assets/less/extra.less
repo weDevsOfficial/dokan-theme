@@ -555,9 +555,9 @@ ul.subsubsub {
         background: #fff;
         font-weight: normal;
         display: inline-block;
-        padding: 6px 12px;
+        padding: 4px 10px;
         margin-bottom: 0;
-        font-size: 14px;
+        // font-size: 14px;
         line-height: 1.428571429;
         text-align: center;
         white-space: nowrap;
@@ -614,6 +614,29 @@ ul.subsubsub {
             border: 1px solid @borderColor;
             padding: 2px;
             .border-radius(3px);
+        }
+    }
+
+    .addresses {
+        margin: 10px 0 0 0;
+
+        .address {
+            background: #fff;
+            padding: 10px;
+            border: 1px solid @borderColor;
+        }
+
+        .title {
+            h3 {
+                padding: 0;
+                margin: 0 0 10px 0;
+            }
+
+            .edit {
+                border: 1px solid @borderColor;
+                padding: 2px 8px;
+                background: #F5F5F5;
+            }
         }
     }
 }
