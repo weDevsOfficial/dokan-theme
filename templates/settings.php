@@ -17,10 +17,7 @@ if( $validate !== false && !is_wp_error( $validate ) ) {
 
 $scheme = is_ssl() ? 'https' : 'http';
 wp_enqueue_script( 'google-maps', $scheme . '://maps.google.com/maps/api/js?sensor=true' );
-wp_enqueue_script( 'jquery-ui' );
-wp_enqueue_script( 'jquery-ui-autocomplete' );
-wp_enqueue_script( 'post' );
-wp_enqueue_media();
+dokan_frontend_dashboard_scripts();
 
 get_header();
 ?>

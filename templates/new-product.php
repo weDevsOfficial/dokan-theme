@@ -65,7 +65,7 @@ if ( isset( $_POST['add_product'] ) ) {
     }
 }
 
-dokan_product_editor_scripts();
+dokan_frontend_dashboard_scripts();
 
 get_header();
 ?>

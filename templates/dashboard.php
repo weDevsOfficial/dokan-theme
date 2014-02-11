@@ -9,6 +9,7 @@ dokan_redirect_if_not_seller();
 get_header();
 
 dokan_reports_scripts();
+dokan_frontend_dashboard_scripts();
 
 $user_id = get_current_user_id();
 $orders_counts = dokan_count_orders( $user_id );

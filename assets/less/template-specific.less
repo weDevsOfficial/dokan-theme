@@ -1143,6 +1143,90 @@
 }
 
 // seller listing
+.dokan-comments-wrap {
+    ul.dokan-cmt-row-actions {
+        visibility: hidden;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 13px;
+
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            display: inline;
+            border-right: 1px solid #EDEDED;
+            padding-right: 5px;
+            margin: 0 !important;
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+    }
+
+    #dokan-comments-table {
+        th.col-check {
+            width: 5%;
+            padding: 0 0 0 10px;
+            vertical-align: middle;
+        }
+
+        td.col-author,
+        th.col-author {
+            width: 15%;
+        }
+
+        td.col-content,
+        th.col-content {
+            width: 60%;
+        }
+
+        td.col-link,
+        th.col-link {
+            width: 25%;
+        }
+
+        td, th {
+            vertical-align: top;
+        }
+
+        tr.pending {
+            background: #FFFFE0;
+        }
+
+        tr:hover .dokan-cmt-row-actions {
+            visibility: visible;
+        }
+
+        .dokan-comments-subdate {
+            font-size: 12px;
+            color: #7C7C7C;
+            margin-bottom: 8px;
+        }
+
+        .dokan-comment-edit-row {
+            tr.dokan-comment-edit-contact td {
+                padding-bottom: 10px;
+                padding-right: 10px;
+
+                label {
+                    padding-right: 10px;
+                }
+            }
+
+            tr.dokan-comment-edit-body td,
+            tr.dokan-comment-edit-actions td {
+                padding-left: 55px;
+                padding-bottom: 10px;
+            }
+        }
+    }
+
+}
+
 .seller-listing {
     .thumbnail > a > img {
         max-width: 100%;
@@ -1156,4 +1240,44 @@
     .single-seller:nth-child(3n+1) {
         clear: left;
     }
+}
+
+// reviews
+#wpuf_comments-form .star-rating:before{
+  content:"\73\73\73\73\73";
+
+  font-family: 'star';
+}
+
+.dokan-rating .star-rating {
+    float: right;
+    font-family: 'star';
+    font-size: 1em;
+    height: 1em;
+    line-height: 1em;
+    overflow: hidden;
+    position: relative;
+    width: 5.4em;
+}
+.dokan-rating .star-rating:before {
+    color: #E0DADF;
+    content: "sssss";
+    float: left;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+.dokan-rating .star-rating span {
+    float: left;
+    left: 0;
+    overflow: hidden;
+    padding-top: 1.5em;
+    position: absolute;
+    top: 0;
+}
+.dokan-rating .star-rating span:before {
+    content: "SSSSS";
+    left: 0;
+    position: absolute;
+    top: 0;
 }

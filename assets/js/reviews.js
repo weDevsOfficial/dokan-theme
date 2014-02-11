@@ -1,22 +1,22 @@
-(function($){
+;(function($){
 
-    var WPUF_Comments = {
+    var Dokan_Comments = {
 
         init: function() {
-            $('#wpuf-comments-table').on('click', '.wpuf-cmt-action', this.setCommentStatus);
-            $('#wpuf-comments-table').on('click', 'button.wpuf-cmt-close-form', this.closeForm);
-            $('#wpuf-comments-table').on('click', 'button.wpuf-cmt-submit-form', this.submitForm);
-            $('#wpuf-comments-table').on('click', '.wpuf-cmt-edit', this.populateForm);
-            $('#wpuf-check-all').on('click', this.toggleCheckbox);
+            $('#dokan-comments-table').on('click', '.dokan-cmt-action', this.setCommentStatus);
+            $('#dokan-comments-table').on('click', 'button.dokan-cmt-close-form', this.closeForm);
+            $('#dokan-comments-table').on('click', 'button.dokan-cmt-submit-form', this.submitForm);
+            $('#dokan-comments-table').on('click', '.dokan-cmt-edit', this.populateForm);
+            $('.dokan-check-all').on('click', this.toggleCheckbox);
         },
 
         toggleCheckbox: function() {
-            $(".wpuf-check-col").prop('checked', $(this).prop('checked'));
+            $(".dokan-check-col").prop('checked', $(this).prop('checked'));
         },
 
         setCommentStatus: function(e) {
             e.preventDefault();
-            
+
             var self = $(this),
                 comment_id = self.data('comment_id'),
                 comment_status = self.data('cmt_status'),
@@ -70,19 +70,19 @@
             var tr = $(this).closest('tr');
 
             // toggle the edit area
-            if ( tr.next().hasClass('wpuf-comment-edit-row')) {
+            if ( tr.next().hasClass('dokan-comment-edit-row')) {
                 tr.next().remove();
                 return;
             }
 
-            var table_form = $('#wpuf-edit-comment-row').html(),
+            var table_form = $('#dokan-edit-comment-row').html(),
                 data = {
-                    'author': tr.find('.wpuf-cmt-hid-author').text(),
-                    'email': tr.find('.wpuf-cmt-hid-email').text(),
-                    'url': tr.find('.wpuf-cmt-hid-url').text(),
-                    'body': tr.find('.wpuf-cmt-hid-body').text(),
-                    'id': tr.find('.wpuf-cmt-hid-id').text(),
-                    'status': tr.find('.wpuf-cmt-hid-status').text(),
+                    'author': tr.find('.dokan-cmt-hid-author').text(),
+                    'email': tr.find('.dokan-cmt-hid-email').text(),
+                    'url': tr.find('.dokan-cmt-hid-url').text(),
+                    'body': tr.find('.dokan-cmt-hid-body').text(),
+                    'id': tr.find('.dokan-cmt-hid-id').text(),
+                    'status': tr.find('.dokan-cmt-hid-status').text(),
                 };
 
 
@@ -92,24 +92,24 @@
         closeForm: function(e) {
             e.preventDefault();
 
-            $(this).closest('tr.wpuf-comment-edit-row').remove();
+            $(this).closest('tr.dokan-comment-edit-row').remove();
         },
 
         submitForm: function(e) {
             e.preventDefault();
 
             var self = $(this),
-                parent = self.closest('tr.wpuf-comment-edit-row'),
+                parent = self.closest('tr.dokan-comment-edit-row'),
                 data = {
-                    'action': 'wpuf_update_comment',
-                    'comment_id': parent.find('input.wpuf-cmt-id').val(),
-                    'content': parent.find('textarea.wpuf-cmt-body').val(),
-                    'author': parent.find('input.wpuf-cmt-author').val(),
-                    'email': parent.find('input.wpuf-cmt-author-email').val(),
-                    'url': parent.find('input.wpuf-cmt-author-url').val(),
-                    'status': parent.find('input.wpuf-cmt-status').val(),
+                    'action': 'dokan_update_comment',
+                    'comment_id': parent.find('input.dokan-cmt-id').val(),
+                    'content': parent.find('textarea.dokan-cmt-body').val(),
+                    'author': parent.find('input.dokan-cmt-author').val(),
+                    'email': parent.find('input.dokan-cmt-author-email').val(),
+                    'url': parent.find('input.dokan-cmt-author-url').val(),
+                    'status': parent.find('input.dokan-cmt-status').val(),
 					'nonce': dokan.nonce,
-					'post_type' : parent.find('input.wpuf-cmt-post-type').val(),
+					'post_type' : parent.find('input.dokan-cmt-post-type').val(),
                 };
 
             $.post(dokan.ajaxurl, data, function(res) {
@@ -125,7 +125,7 @@
 
     $(function(){
 
-        WPUF_Comments.init();
+        Dokan_Comments.init();
     });
 
 })(jQuery);

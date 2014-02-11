@@ -10,6 +10,7 @@ $dokan_template_reviews = Dokan_Template_reviews::init();
 $dokan_template_reviews->handle_status();
 
 get_header();
+dokan_frontend_dashboard_scripts();
 ?>
 
 <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'reviews' ) ); ?>

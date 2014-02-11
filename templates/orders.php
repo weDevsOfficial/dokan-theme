@@ -7,9 +7,7 @@ dokan_redirect_login();
 dokan_redirect_if_not_seller();
 
 get_header();
-wp_enqueue_script( 'chosen' );
-wp_enqueue_script( 'chosen-ajax' );
-wp_enqueue_script( 'dokan-order' );
+dokan_frontend_dashboard_scripts();
 ?>
 
 <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'order' ) ); ?>

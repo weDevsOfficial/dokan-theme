@@ -3,6 +3,36 @@
 require_once __DIR__ . '/order-functions.php';
 require_once __DIR__ . '/withdraw-functions.php';
 
+function dokan_reports_scripts() {
+    wp_enqueue_script( 'jquery' );
+    wp_enqueue_script( 'jquery-ui-datepicker' );
+    wp_enqueue_script( 'jquery-chart' );
+    wp_enqueue_script( 'jquery-flot' );
+    wp_enqueue_script( 'jquery-flot-time' );
+    wp_enqueue_script( 'jquery-flot-pie' );
+    wp_enqueue_script( 'jquery-flot-stack' );
+
+    wp_enqueue_style( 'jquery-ui' );
+}
+
+function dokan_frontend_dashboard_scripts() {
+    wp_enqueue_script( 'jquery' );
+    wp_enqueue_script( 'jquery-ui' );
+    wp_enqueue_script( 'jquery-ui-autocomplete' );
+    wp_enqueue_script( 'jquery-ui-datepicker' );
+    wp_enqueue_script( 'underscore' );
+    wp_enqueue_script( 'post' );
+    wp_enqueue_media();
+    wp_enqueue_script( 'dokan-product-editor' );
+    wp_enqueue_script( 'chosen' );
+    wp_enqueue_script( 'reviews' );
+    wp_enqueue_script( 'dokan-order' );
+    wp_enqueue_script( 'jquery-ui-autocomplete' );
+
+    wp_enqueue_style( 'jquery-ui' );
+    wp_enqueue_style( 'chosen' );
+}
+
 function dokan_is_user_seller( $user_id ) {
     if ( !user_can( $user_id, 'dokandar' ) ) {
         return false;
@@ -461,29 +491,6 @@ function dokan_get_option( $option, $section, $default = '' ) {
     }
 
     return $default;
-}
-
-function dokan_reports_scripts() {
-    wp_enqueue_script( 'jquery' );
-    wp_enqueue_script( 'jquery-chart' );
-    wp_enqueue_script( 'jquery-flot' );
-    wp_enqueue_script( 'jquery-flot-time' );
-    wp_enqueue_script( 'jquery-flot-pie' );
-    wp_enqueue_script( 'jquery-flot-stack' );
-}
-
-function dokan_product_editor_scripts() {
-    $template_directory = get_template_directory_uri();
-
-    wp_enqueue_script( 'jquery' );
-    wp_enqueue_script( 'jquery-ui' );
-    wp_enqueue_script( 'jquery-ui-autocomplete' );
-    wp_enqueue_script( 'jquery-ui-datepicker' );
-    wp_enqueue_script( 'underscore' );
-
-    wp_enqueue_script( 'post' );
-    wp_enqueue_media();
-    wp_enqueue_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
 }
 
 function dokan_redirect_to_register(){

@@ -243,8 +243,25 @@ a:hover{text-decoration:none}
 .page-template-templatescoupons-php .code:hover{background:#975e83;color:#fff;text-shadow:0 1px 0 #5a324b}.page-template-templatescoupons-php .code:hover a,.page-template-templatescoupons-php .code:hover span{color:#fff}.page-template-templatescoupons-php .code:hover a span,.page-template-templatescoupons-php .code:hover span span{border:1px dashed #bb82a7}
 .page-template-templatescoupons-php .row-actions{visibility:hidden;font-size:12px;color:#ccc;clear:both;padding-top:8px}.page-template-templatescoupons-php .row-actions .delete a{color:#a05}.page-template-templatescoupons-php .row-actions .delete a:hover{color:#f00}
 .page-template-templatescoupons-php tr:hover .row-actions{visibility:visible}
+.dokan-comments-wrap ul.dokan-cmt-row-actions{visibility:hidden;list-style:none;margin:0;padding:0;font-size:13px}.dokan-comments-wrap ul.dokan-cmt-row-actions a{text-decoration:none}
+.dokan-comments-wrap ul.dokan-cmt-row-actions li{display:inline;border-right:1px solid #ededed;padding-right:5px;margin:0 !important}.dokan-comments-wrap ul.dokan-cmt-row-actions li:last-child{border-right:none}
+.dokan-comments-wrap #dokan-comments-table th.col-check{width:5%;padding:0 0 0 10px;vertical-align:middle}
+.dokan-comments-wrap #dokan-comments-table td.col-author,.dokan-comments-wrap #dokan-comments-table th.col-author{width:15%}
+.dokan-comments-wrap #dokan-comments-table td.col-content,.dokan-comments-wrap #dokan-comments-table th.col-content{width:60%}
+.dokan-comments-wrap #dokan-comments-table td.col-link,.dokan-comments-wrap #dokan-comments-table th.col-link{width:25%}
+.dokan-comments-wrap #dokan-comments-table td,.dokan-comments-wrap #dokan-comments-table th{vertical-align:top}
+.dokan-comments-wrap #dokan-comments-table tr.pending{background:#ffffe0}
+.dokan-comments-wrap #dokan-comments-table tr:hover .dokan-cmt-row-actions{visibility:visible}
+.dokan-comments-wrap #dokan-comments-table .dokan-comments-subdate{font-size:12px;color:#7c7c7c;margin-bottom:8px}
+.dokan-comments-wrap #dokan-comments-table .dokan-comment-edit-row tr.dokan-comment-edit-contact td{padding-bottom:10px;padding-right:10px}.dokan-comments-wrap #dokan-comments-table .dokan-comment-edit-row tr.dokan-comment-edit-contact td label{padding-right:10px}
+.dokan-comments-wrap #dokan-comments-table .dokan-comment-edit-row tr.dokan-comment-edit-body td,.dokan-comments-wrap #dokan-comments-table .dokan-comment-edit-row tr.dokan-comment-edit-actions td{padding-left:55px;padding-bottom:10px}
 .seller-listing .thumbnail>a>img{max-width:100%;margin:0 auto;display:block;height:auto;border:1px solid #ededed;padding:3px}
 .seller-listing .single-seller:nth-child(3n+1){clear:left}
+#wpuf_comments-form .star-rating:before{content:"\73\73\73\73\73";font-family:'star'}
+.dokan-rating .star-rating{float:right;font-family:'star';font-size:1em;height:1em;line-height:1em;overflow:hidden;position:relative;width:5.4em}
+.dokan-rating .star-rating:before{color:#e0dadf;content:"sssss";float:left;left:0;position:absolute;top:0}
+.dokan-rating .star-rating span{float:left;left:0;overflow:hidden;padding-top:1.5em;position:absolute;top:0}
+.dokan-rating .star-rating span:before{content:"SSSSS";left:0;position:absolute;top:0}
 .widget-area.widget-collapse.collapse{display:block}
 .widget{margin-bottom:25px;background:#fff;border:1px solid #ededed;padding:10px;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px}.widget select{max-width:98%}
 .widget caption{padding:0 0 5px 0}

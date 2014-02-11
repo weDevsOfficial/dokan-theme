@@ -34,7 +34,7 @@ define( 'DOKAN_LIB_DIR', __DIR__ . '/lib' );
  */
 function dokan_autoload( $class ) {
     if ( stripos( $class, 'Dokan_' ) !== false ) {
-        $class_name = str_replace( array('Dokan_', '_'), array('', '-'), $class);
+        $class_name = str_replace( array('Dokan_', '_'), array('', '-'), $class );
         $file_path = __DIR__ . '/classes/' . strtolower( $class_name ) . '.php';
 
         if ( file_exists( $file_path ) ) {
@@ -68,10 +68,20 @@ class WeDevs_Dokan {
         $this->init_ajax();
     }
 
+    /**
+     * Initialize filters
+     *
+     * @return void
+     */
     function init_filters() {
         add_filter( 'posts_where', array($this, 'hide_others_uploads') );
     }
 
+    /**
+     * Init action hooks
+     *
+     * @return void
+     */
     function init_actions() {
         add_action( 'after_setup_theme', array($this, 'setup') );
         add_action( 'widgets_init', array($this, 'widgets_init') );
@@ -80,16 +90,20 @@ class WeDevs_Dokan {
         add_action( 'admin_enqueue_scripts', array($this, 'admin_enqueue_scripts') );
         add_action( 'login_enqueue_scripts', array($this, 'login_scripts') );
 
-        add_action( 'admin_init', array($this, 'install_theme' ) );
-        add_action( 'admin_init', array($this, 'block_admin_access' ) );
+        add_action( 'admin_init', array($this, 'install_theme') );
+        add_action( 'admin_init', array($this, 'block_admin_access') );
     }
 
+    /**
+     * Init all the classes
+     *
+     * @return void
+     */
     function init_classes() {
         if ( is_admin() ) {
             Dokan_Slider::init();
             new Dokan_Admin_User_Profile();
             new Dokan_Update();
-
         } else {
             new Dokan_Pageviews();
         }
@@ -98,8 +112,13 @@ class WeDevs_Dokan {
         Dokan_Email::init();
     }
 
+    /**
+     * Init ajax classes
+     *
+     * @return void
+     */
     function init_ajax() {
-        $doing_ajax = defined('DOING_AJAX') && DOING_AJAX;
+        $doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
 
         if ( $doing_ajax ) {
             Dokan_Ajax::init()->init_ajax();
@@ -124,6 +143,7 @@ class WeDevs_Dokan {
             require_once $lib_dir . 'bootstrap-walker.php';
             require_once $inc_dir . 'wc-template.php';
             require_once $inc_dir . 'template-tags.php';
+            require_once $inc_dir . 'scripts.php';
         }
     }
 
@@ -234,13 +254,16 @@ class WeDevs_Dokan {
         $template_directory = get_template_directory_uri();
         $skin = dokan_get_option( 'color_skin', 'dokan_general', 'orange.css' );
 
+        wp_register_style( 'jquery-ui', $template_directory . '/assets/css/jquery-ui-1.10.0.custom.css', false, null );
+        wp_register_style( 'flexslider', $template_directory . '/assets/css/flexslider.css', false, null );
+        wp_register_style( 'chosen-style', $template_directory . '/assets/css/chosen.min.css', false, null );
+
         wp_enqueue_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.css', false, null );
         wp_enqueue_style( 'icomoon', $template_directory . '/assets/css/icomoon.css', false, null );
         wp_enqueue_style( 'fontawesome', $template_directory . '/assets/css/font-awesome.css', false, null );
-        wp_enqueue_style( 'jquery-ui', $template_directory . '/assets/css/jquery-ui-1.10.0.custom.css', false, null );
-        wp_enqueue_style( 'flexslider', $template_directory . '/assets/css/flexslider.css', false, null );
-        wp_enqueue_style( 'chosen-style', $template_directory . '/assets/css/chosen.min.css', false, null );
-        wp_enqueue_style( 'reviows-style', $template_directory . '/assets/css/reviews.css', false, null );
+
+
+        // wp_enqueue_style( 'reviows-style', $template_directory . '/assets/css/reviews.css', false, null );
         wp_enqueue_style( 'dokan-style', $template_directory . '/assets/css/style.css', false, null );
         wp_enqueue_style( 'dokan-skin', $template_directory . '/assets/css/skins/' . $skin, false, null );
         wp_enqueue_style( 'dokan-opensans', $protocol . '://fonts.googleapis.com/css?family=Open+Sans:400,700' );
@@ -261,23 +284,20 @@ class WeDevs_Dokan {
         wp_enqueue_script( 'jquery-ui' );
         wp_enqueue_script( 'jquery-ui-datepicker' );
 
-        wp_register_script( 'dokan-order', $template_directory . '/assets/js/orders.js', false, null, true );
-
         wp_register_script( 'jquery-flot', $template_directory . '/assets/js/jquery.flot.min.js', false, null, true );
         wp_register_script( 'jquery-flot-time', $template_directory . '/assets/js/jquery.flot.time.min.js', false, null, true );
         wp_register_script( 'jquery-flot-pie', $template_directory . '/assets/js/jquery.flot.pie.min.js', false, null, true );
         wp_register_script( 'jquery-flot-stack', $template_directory . '/assets/js/jquery.flot.stack.min.js', false, null, true );
         wp_register_script( 'jquery-chart', $template_directory . '/assets/js/Chart.min.js', false, null, true );
+        wp_register_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
+        wp_register_script( 'dokan-order', $template_directory . '/assets/js/orders.js', false, null, true );
+        wp_register_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
+        wp_register_script( 'reviews', $template_directory . '/assets/js/reviews.js', array('jquery'), null, true );
 
-        // wp_enqueue_script( 'menu-aim', $template_directory . '/assets/js/jquery.menu-aim.js', false, null, true );
+        wp_enqueue_script( 'form-validate', $template_directory . '/assets/js/form-validate.js', array('jquery'), null, true  );
         wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
-
-        wp_enqueue_script( 'dokan-reviews', $template_directory . '/assets/js/reviews.js', array('jquery', 'underscore') );
         wp_enqueue_script( 'flexslider', $template_directory . '/assets/js/jquery.flexslider-min.js', array('jquery') );
 
-        wp_enqueue_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
-        wp_enqueue_script( 'chosen-ajax', $template_directory . '/assets/js/ajax-chosen.jquery.min.js', array('jquery'), null, true );
-        wp_enqueue_script( 'form-validate', $template_directory . '/assets/js/form-validate.js', array('jquery'), null, true  );
         wp_enqueue_script( 'dokan-scripts', $template_directory . '/assets/js/script.js', false, null, true );
         wp_localize_script( 'dokan-scripts', 'dokan', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' ),
