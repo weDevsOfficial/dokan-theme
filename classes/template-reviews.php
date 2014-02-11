@@ -76,14 +76,14 @@ class Dokan_Template_reviews {
 
             $this->get_count( $post_type );
 
-            echo '<div class="wpuf-comments-wrap">';
+            echo '<div class="dokan-comments-wrap">';
             //menu
             $this->wpuf_comments_menu( $post_type );
 
             //Show all comments in this form
             $this->show_comment_table( $post_type );
 
-            echo '</div> <!-- .wpuf-comments-wrap -->';
+            echo '</div> <!-- .dokan-comments-wrap -->';
         }
 
 
@@ -115,14 +115,16 @@ class Dokan_Template_reviews {
         ?>
 
         <form id="wpuf_comments-form" action="" method="post">
-            <table id="wpuf-comments-table">
-                <tr>
-                    <th class="col-check"><input id="wpuf-check-all" type="checkbox" ></th>
-                    <th class="col-author"><?php _e( 'Author', 'wpuf-comment' ); ?></th>
-                    <th class="col-content"><?php _e( 'Comment', 'wpuf-comment' ); ?></th>
-                    <th class="col-link"><?php _e( 'Link To', 'wpuf-comment' ); ?></th>
-                    <th class="col-link"><?php _e( 'Rating', 'wpuf-comment' ); ?></th>
-                </tr>
+            <table id="dokan-comments-table" class="table">
+                <thead>
+                    <tr>
+                        <th class="col-check"><input id="wpuf-check-all" type="checkbox" ></th>
+                        <th class="col-author"><?php _e( 'Author', 'dokan' ); ?></th>
+                        <th class="col-content"><?php _e( 'Comment', 'dokan' ); ?></th>
+                        <th class="col-link"><?php _e( 'Link To', 'dokan' ); ?></th>
+                        <th class="col-link"><?php _e( 'Rating', 'dokan' ); ?></th>
+                    </tr>
+                </thead>
 
                 <?php echo $this->status( $post_type ); ?>
 
@@ -134,26 +136,24 @@ class Dokan_Template_reviews {
 
             <?php wp_nonce_field('wpuf_comment_nonce', 'wpuf_nonce'); ?>
 
-            <input type="submit" value="<?php _e( 'Submit', 'wpuf-comment' ); ?>" class="btn btn-primary" name="comt_stat_sub">
+            <input type="submit" value="<?php _e( 'Submit', 'dokan' ); ?>" class="btn btn-theme btn-sm" name="comt_stat_sub">
         </form>
 
-
-
         <script type="text/template" id="wpuf-edit-comment-row">
-            <tr class="wpuf-comment-edit-row">
+            <tr class="dokan-comment-edit-row">
                 <td colspan="4">
                     <table>
                         <tr>
                             <td>
-                                <label for="author"><?php _e( 'Name', 'wpuf-comment' ); ?></label>
+                                <label for="author"><?php _e( 'Name', 'dokan' ); ?></label>
                                 <input type="text" class="wpuf-cmt-author" value="<%= author %>" name="newcomment_author">
                             </td>
                             <td>
-                                <label for="author-email"><?php _e( 'E-mail', 'wpuf-comment' ); ?></label>
+                                <label for="author-email"><?php _e( 'E-mail', 'dokan' ); ?></label>
                                 <input type="text" class="wpuf-cmt-author-email" value="<%= email %>" name="newcomment_author_email">
                             </td>
                             <td>
-                                <label for="author-url"><?php _e( 'URL', 'wpuf-comment' ); ?></label>
+                                <label for="author-url"><?php _e( 'URL', 'dokan' ); ?></label>
                                 <input type="text" class="wpuf-cmt-author-url" value="<%= url %>" name="newcomment_author_url">
                             </td>
                         </tr>
@@ -166,8 +166,8 @@ class Dokan_Template_reviews {
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2"><button class="wpuf-cmt-close-form"><?php _e( 'Close', 'wpuf-comment' ); ?></button></td>
-                            <td colspan="1"><button class="wpuf-cmt-submit-form button"><?php _e( 'Update Comment', 'wpuf-comment' ); ?></button></td>
+                            <td colspan="2"><button class="wpuf-cmt-close-form"><?php _e( 'Close', 'dokan' ); ?></button></td>
+                            <td colspan="1"><button class="wpuf-cmt-submit-form button"><?php _e( 'Update Comment', 'dokan' ); ?></button></td>
                         </tr>
                     </table>
                 </td>
@@ -230,23 +230,23 @@ class Dokan_Template_reviews {
 
         if ( $comment_status == 'hold' ) {
             ?>
-            <option value="none"><?php _e( '-None-', 'wpuf-comment' ); ?></option>
-            <option value="approve"><?php _e( 'Mark Approve', 'wpuf-comment' ); ?></option>
-            <option value="spam"><?php _e( 'Mark Spam', 'wpuf-comment' ); ?></option>
-            <option value="trash"><?php _e( 'Mark Trash', 'wpuf-comment' ); ?></option>
+            <option value="none"><?php _e( '-None-', 'dokan' ); ?></option>
+            <option value="approve"><?php _e( 'Mark Approve', 'dokan' ); ?></option>
+            <option value="spam"><?php _e( 'Mark Spam', 'dokan' ); ?></option>
+            <option value="trash"><?php _e( 'Mark Trash', 'dokan' ); ?></option>
         <?php } else if ( $comment_status == 'spam' ) { ?>
-            <option value="none"><?php _e( '-None-', 'wpuf-comment' ); ?></option>
-            <option value="approve"><?php _e( 'Mark Not Spam', 'wpuf-comment' ); ?></option>
-            <option value="delete"><?php _e( 'Delete permanently', 'wpuf-comment' ); ?></option>
+            <option value="none"><?php _e( '-None-', 'dokan' ); ?></option>
+            <option value="approve"><?php _e( 'Mark Not Spam', 'dokan' ); ?></option>
+            <option value="delete"><?php _e( 'Delete permanently', 'dokan' ); ?></option>
         <?php } else if ( $comment_status == 'trash' ) { ?>
-            <option value="none"><?php _e( '-None-', 'wpuf-comment' ); ?></option>
-            <option value="approve"><?php _e( 'Resore', 'wpuf-comment' ); ?></option>
-            <option value="delete"><?php _e( 'Delete permanently', 'wpuf-comment' ); ?></option>
+            <option value="none"><?php _e( '-None-', 'dokan' ); ?></option>
+            <option value="approve"><?php _e( 'Resore', 'dokan' ); ?></option>
+            <option value="delete"><?php _e( 'Delete permanently', 'dokan' ); ?></option>
         <?php } else { ?>
-            <option value="none"><?php _e( '-None-', 'wpuf-comment' ); ?></option>
-            <option value="hold"><?php _e( 'Mark Pending', 'wpuf-comment' ); ?></option>
-            <option value="spam"><?php _e( 'Mark Spam', 'wpuf-comment' ); ?></option>
-            <option value="trash"><?php _e( 'Mark Trash', 'wpuf-comment' ); ?></option>
+            <option value="none"><?php _e( '-None-', 'dokan' ); ?></option>
+            <option value="hold"><?php _e( 'Mark Pending', 'dokan' ); ?></option>
+            <option value="spam"><?php _e( 'Mark Spam', 'dokan' ); ?></option>
+            <option value="trash"><?php _e( 'Mark Trash', 'dokan' ); ?></option>
             <?php
         }
     }
@@ -319,7 +319,7 @@ class Dokan_Template_reviews {
         );
 
         if ( count( $comments ) == 0 ) {
-            return '<tr><td colspan="4">' . __( 'No Result Found', 'wpuf-comment' ) . '</td></tr>';
+            return '<tr><td colspan="5">' . __( 'No Result Found', 'dokan' ) . '</td></tr>';
         }
 
         foreach ($comments as $comment) {
@@ -342,18 +342,18 @@ class Dokan_Template_reviews {
                 <a href="<?php echo $comment->comment_author_url; ?>"><?php echo $comment->comment_author_url; ?></a><br>
                 <?php echo $comment->comment_author_email; ?>
             </td>
-            <td class="col-content"><div class="wpuf-comments-subdate">
-                <?php _e( 'Submitted on ', 'wpuf-comment' );
+            <td class="col-content"><div class="dokan-comments-subdate">
+                <?php _e( 'Submitted on ', 'dokan' );
                 echo $comment_date; ?> </div>
 
-                <div class="wpuf-comments-content"><?php echo $comment->comment_content; ?></div>
+                <div class="dokan-comments-content"><?php echo $comment->comment_content; ?></div>
 
                 <ul class="wpuf-cmt-row-actions">
                     <?php $this->row_action( $comment, $post_type ); ?>
                 </ul>
             </td>
             <td class="col-link">
-                <a href="<?php echo $permalink; ?>"><?php _e( 'View Comment', 'wpuf-comment' ); ?></a>
+                <a href="<?php echo $permalink; ?>"><?php _e( 'View Comment', 'dokan' ); ?></a>
 
                 <div style="display:none">
                     <div class="wpuf-cmt-hid-email"><?php echo esc_attr( $comment->comment_author_email ); ?></div>
@@ -369,8 +369,8 @@ class Dokan_Template_reviews {
                 <?php $rating =  intval( get_comment_meta( $comment->comment_ID, 'rating', true ) ); ?>
 
             <div class="dokan-rating">
-                <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="star-rating" title="<?php echo sprintf(__( 'Rated %d out of 5', 'woocommerce' ), $rating) ?>">
-                    <span style="width:<?php echo ( intval( get_comment_meta( $comment->comment_ID, 'rating', true ) ) / 5 ) * 100; ?>%"><strong itemprop="ratingValue"><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'woocommerce' ); ?></span>
+                <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="star-rating" title="<?php echo sprintf(__( 'Rated %d out of 5', 'dokan' ), $rating) ?>">
+                    <span style="width:<?php echo ( intval( get_comment_meta( $comment->comment_ID, 'rating', true ) ) / 5 ) * 100; ?>%"><strong itemprop="ratingValue"><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'dokan' ); ?></span>
                 </div>
             </div>
 
@@ -386,31 +386,31 @@ class Dokan_Template_reviews {
         if ( $page_status == '0' ) {
             ?>
 
-            <li><a href="#" data-curr_page="<?php echo $page_status; ?>"  data-post_type="<?php echo $post_type; ?>" data-page_status="0" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="1" class="wpuf-cmt-action"><?php _e( 'Approve', 'wpuf-comment' ); ?></a></li>
-            <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="0" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="spam" class="wpuf-cmt-action"><?php _e( 'Spam', 'wpuf-comment' ); ?></a></li>
-            <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="0" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="trash" class="wpuf-cmt-action"><?php _e( 'Trash', 'wpuf-comment' ); ?></a></li>
+            <li><a href="#" data-curr_page="<?php echo $page_status; ?>"  data-post_type="<?php echo $post_type; ?>" data-page_status="0" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="1" class="wpuf-cmt-action"><?php _e( 'Approve', 'dokan' ); ?></a></li>
+            <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="0" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="spam" class="wpuf-cmt-action"><?php _e( 'Spam', 'dokan' ); ?></a></li>
+            <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="0" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="trash" class="wpuf-cmt-action"><?php _e( 'Trash', 'dokan' ); ?></a></li>
 
             <?php } else if ( $page_status == 'spam' ) { ?>
 
-                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="spam" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="1" class="wpuf-cmt-action"><?php _e( 'Not Spam', 'wpuf-comment' ); ?></a></li>
-                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="spam" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="delete" class="wpuf-cmt-action"><?php _e( 'Delete Permanently', 'wpuf-comment' ); ?></a></li>
+                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="spam" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="1" class="wpuf-cmt-action"><?php _e( 'Not Spam', 'dokan' ); ?></a></li>
+                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="spam" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="delete" class="wpuf-cmt-action"><?php _e( 'Delete Permanently', 'dokan' ); ?></a></li>
 
             <?php } else if ( $page_status == 'trash' ) { ?>
 
-                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="trash" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="1" class="wpuf-cmt-action"><?php _e( 'Restore', 'wpuf-comment' ); ?></a></li>
-                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="trash" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="delete" class="wpuf-cmt-action"><?php _e( 'Delete Permanently', 'wpuf-comment' ); ?></a></li>
+                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="trash" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="1" class="wpuf-cmt-action"><?php _e( 'Restore', 'dokan' ); ?></a></li>
+                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="trash" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="delete" class="wpuf-cmt-action"><?php _e( 'Delete Permanently', 'dokan' ); ?></a></li>
 
             <?php } else { ?>
 
                 <?php if ( $this->get_comment_status( $comment->comment_approved ) == 'approved' ) { ?>
-                    <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="1" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="0" class="wpuf-cmt-action"><?php _e( 'Unapprove', 'wpuf-comment' ); ?></a></li>
+                    <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="1" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="0" class="wpuf-cmt-action"><?php _e( 'Unapprove', 'dokan' ); ?></a></li>
                 <?php } else { ?>
-                    <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="1" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="1" class="wpuf-cmt-action"><?php _e( 'Approve', 'wpuf-comment' ); ?></a></li>
+                    <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="1" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="1" class="wpuf-cmt-action"><?php _e( 'Approve', 'dokan' ); ?></a></li>
                 <?php } ?>
 
-                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="1" class="wpuf-cmt-edit"><?php _e( 'Quick Edit', 'wpuf-comment' ); ?></a></li>
-                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="1" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="spam" class="wpuf-cmt-action"><?php _e( 'Spam', 'wpuf-comment' ); ?></a></li>
-                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="1" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="trash" class="wpuf-cmt-action"><?php _e( 'Trash', 'wpuf-comment' ); ?></a></li>
+                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="1" class="wpuf-cmt-edit"><?php _e( 'Quick Edit', 'dokan' ); ?></a></li>
+                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="1" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="spam" class="wpuf-cmt-action"><?php _e( 'Spam', 'dokan' ); ?></a></li>
+                <li><a href="#" data-curr_page="<?php echo $page_status; ?>" data-post_type="<?php echo $post_type; ?>" data-page_status="1" data-comment_id="<?php echo $comment->comment_ID; ?>" data-cmt_status="trash" class="wpuf-cmt-action"><?php _e( 'Trash', 'dokan' ); ?></a></li>
             <?php
         }
     }
@@ -489,17 +489,17 @@ class Dokan_Template_reviews {
         $spam = isset( $this->spam ) ? $this->spam : 0;
         $trash = isset( $this->trash ) ? $this->trash : 0;
         ?>
-        <div id="wpuf-comments_menu">
-            <ul>
-                <li><a href="<?php echo $url; ?>"><?php _e( 'All', 'wpuf' ); ?></a></li>
+        <div id="dokan-comments_menu">
+            <ul class="subsubsub list-inline">
+                <li><a href="<?php echo $url; ?>"><?php _e( 'All', 'dokan' ); ?></a></li>
                 <li>
-                    <a href="<?php echo add_query_arg( array('comment_status' => 'hold'), $url ); ?>"><?php _e( 'Pending (', 'wpuf' ); ?><span class="comments-menu-pending"><?php echo $pending; ?></span><?php _e( ')', 'wpuf' ); ?></a>
+                    <a href="<?php echo add_query_arg( array('comment_status' => 'hold'), $url ); ?>"><?php _e( 'Pending (', 'dokan' ); ?><span class="comments-menu-pending"><?php echo $pending; ?></span><?php _e( ')', 'dokan' ); ?></a>
                 </li>
                 <li>
-                    <a href="<?php echo add_query_arg( array('comment_status' => 'spam'), $url ); ?>"><?php _e( 'Spam (', 'wpuf' ); ?><span class="comments-menu-spam"><?php echo $spam; ?></span><?php _e( ')', 'wpuf' ); ?></a>
+                    <a href="<?php echo add_query_arg( array('comment_status' => 'spam'), $url ); ?>"><?php _e( 'Spam (', 'dokan' ); ?><span class="comments-menu-spam"><?php echo $spam; ?></span><?php _e( ')', 'dokan' ); ?></a>
                 </li>
                 <li>
-                    <a href="<?php echo add_query_arg( array('comment_status' => 'trash'), $url ); ?>"><?php _e( 'Trash (', 'wpuf' ); ?><span class="comments-menu-trash"><?php echo $trash; ?></span><?php _e( ')', 'wpuf' ); ?></a>
+                    <a href="<?php echo add_query_arg( array('comment_status' => 'trash'), $url ); ?>"><?php _e( 'Trash (', 'dokan' ); ?><span class="comments-menu-trash"><?php echo $trash; ?></span><?php _e( ')', 'dokan' ); ?></a>
                 </li>
             </ul>
         </div>
