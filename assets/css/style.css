@@ -3092,7 +3092,16 @@ ul.subsubsub li.active a {
   box-shadow: none;
   background: #fff;
   font-weight: normal;
-  border: 1px solid #ededed;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border-radius: 4px;
+  border: 1px solid transparent;
 }
 .woocommerce a.button:hover,
 .woocommerce-page a.button:hover,
