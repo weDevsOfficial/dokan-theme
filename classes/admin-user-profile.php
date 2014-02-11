@@ -1,7 +1,7 @@
 <?php
 /**
  * User profile related tasks for wp-admin
- * 
+ *
  * @package Dokan
  */
 class Dokan_Admin_User_Profile {
@@ -16,7 +16,7 @@ class Dokan_Admin_User_Profile {
 
     /**
      * Add fields to user profile
-     * 
+     *
      * @param WP_User $user
      * @return void|false
      */
@@ -91,12 +91,16 @@ class Dokan_Admin_User_Profile {
 
     /**
      * Save user data
-     * 
+     *
      * @param int $user_id
      * @return void
      */
     function save_meta_fields( $user_id ) {
         if ( ! current_user_can( 'manage_woocommerce' ) ) {
+            return;
+        }
+
+        if ( ! isset( $_POST['dokan_enable_selling'] ) ) {
             return;
         }
 
