@@ -724,7 +724,7 @@ function dokan_get_seller_count() {
 }
 
 /**
- * Prevent sellers from seeing the admin bar
+ * Prevent sellers and customers from seeing the admin bar
  *
  * @param bool $show_admin_bar
  * @return bool
@@ -735,7 +735,7 @@ function dokan_disable_admin_bar( $show_admin_bar ) {
     if ( $current_user->ID !== 0 ) {
         $role = reset( $current_user->roles );
 
-        if ( $role == 'seller' ) {
+        if ( in_array( $role, array( 'seller', 'customer' ) ) ) {
             return false;
         }
     }
