@@ -31,6 +31,12 @@ if ( isset( $_POST['update_product']) ) {
     wp_update_post( $product_info );
     dokan_process_product_meta( $post_id );
 
+    /** set images **/
+    $featured_image = absint( $_POST['feat_image_id'] );
+    if ( $featured_image ) {
+        set_post_thumbnail( $post_id, $featured_image );
+    }
+
     $edit_url = dokan_edit_product_url( $post_id );
     wp_redirect( add_query_arg( array( 'message' => 'success' ), $edit_url ) );
 }
