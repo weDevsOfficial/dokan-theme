@@ -347,10 +347,13 @@ function dokan_wc_email_recipient_add_seller( $admin_email, $order ) {
     $emails = array( $admin_email );
 
     $seller_id = dokan_get_seller_id_by_order( $order->id );
-    $seller_email = get_user_by( 'id', $seller_id )->user_email;
 
-    if ( $admin_email != $seller_email ) {
-        array_push( $emails, $seller_email );
+    if ( $seller_id ) {
+        $seller_email = get_user_by( 'id', $seller_id )->user_email;
+
+        if ( $admin_email != $seller_email ) {
+            array_push( $emails, $seller_email );
+        }
     }
 
     return $emails;
