@@ -692,3 +692,25 @@ function dokan_get_seller_count() {
 
     return $counts;
 }
+
+/**
+ * Prevent sellers from seeing the admin bar
+ *
+ * @param bool $show_admin_bar
+ * @return bool
+ */
+function dokan_disable_admin_bar( $show_admin_bar ) {
+    global $current_user;
+
+    if ( $current_user->ID !== 0 ) {
+        $role = reset( $current_user->roles );
+
+        if ( $role == 'seller' ) {
+            return false;
+        }
+    }
+
+    return $show_admin_bar;
+}
+
+add_filter( 'show_admin_bar', 'dokan_disable_admin_bar' );
