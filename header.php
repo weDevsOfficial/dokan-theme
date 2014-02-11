@@ -1,4 +1,7 @@
 <?php
+if ( !function_exists( 'WC' ) ) {
+    wp_die( sprintf( __( 'Please install <a href="%s"><strong>WooCommerce</strong></a> plugin first', 'dokan' ), 'http://wordpress.org/plugins/woocommerce/' ) );
+}
 /**
  * The Header for our theme.
  *
@@ -123,6 +126,7 @@
 
                                 <?php } else { ?>
                                     <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'Log in', 'dokan' ); ?></a></li>
+                                    <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'Sign Up', 'dokan' ); ?></a></li>
                                 <?php } ?>
                             </ul>
                         </div>
