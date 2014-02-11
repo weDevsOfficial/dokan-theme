@@ -29,7 +29,7 @@ function dokan_is_product_author( $product_id = 0 ) {
 
 function dokan_redirect_login() {
     if ( ! is_user_logged_in() ) {
-        wp_redirect( wp_login_url( get_permalink() ) );
+        wp_redirect( dokan_get_page_url( 'myaccount', 'woocommerce' ) );
         exit;
     }
 }
