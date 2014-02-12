@@ -18,8 +18,8 @@ if ( !is_wp_error( $validated ) ) {
 $dokan_template_coupons->coupun_delete();
 $is_edit_page = isset( $_GET['view'] ) && $_GET['view'] == 'add_coupons';
 
-dokan_frontend_dashboard_scripts();
 get_header();
+dokan_frontend_dashboard_scripts();
 ?>
 
 

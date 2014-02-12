@@ -30,7 +30,7 @@ function dokan_frontend_dashboard_scripts() {
     wp_enqueue_script( 'jquery-ui-autocomplete' );
 
     wp_enqueue_style( 'jquery-ui' );
-    wp_enqueue_style( 'chosen' );
+    wp_enqueue_style( 'chosen-style' );
 }
 
 function dokan_is_user_seller( $user_id ) {
