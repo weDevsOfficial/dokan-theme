@@ -41,7 +41,7 @@ class Dokan_Template_Coupons{
         if ( !isset( $_POST['coupon_creation'] ) ) {
             return;
         }
-        
+
         if ( !wp_verify_nonce( $_POST['coupon_nonce_field'], 'coupon_nonce' ) ) {
             wp_die( __( 'Are you cheating?', 'dokan' ) );
         }
@@ -85,7 +85,7 @@ class Dokan_Template_Coupons{
                 'post_status' => 'publish',
                 'post_type' => 'shop_coupon',
             );
-            
+
             $post_id = wp_insert_post( $post );
 
             $message = 'coupon_saved';
@@ -150,27 +150,27 @@ class Dokan_Template_Coupons{
     function message() {
         if ( isset( $_GET['message'] ) && $_GET['message'] == 'delete_succefully' ) {
             ?>
-            <div class="alert alert-success">
+            <div class="dokan-message">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong><?php _e('Coupon has been delete successfully!','dokan'); ?></strong>
+                <strong><?php _e( 'Coupon has been deleted successfully!', 'dokan' ); ?></strong>
             </div>
             <?php
         }
 
         if ( isset( $_GET['message'] ) && $_GET['message'] == 'coupon_saved' ) {
             ?>
-            <div class="alert alert-success">
+            <div class="dokan-message">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong><?php _e('Coupon has been save successfully!','dokan'); ?></strong>
+                <strong><?php _e('Coupon has been saved successfully!','dokan'); ?></strong>
             </div>
             <?php
         }
 
         if ( isset( $_GET['message'] ) && $_GET['message'] == 'coupon_update' ) {
             ?>
-            <div class="alert alert-success">
+            <div class="dokan-message">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong><?php _e('Coupon has been update successfully!','dokan'); ?></strong>
+                <strong><?php _e('Coupon has been updated successfully!','dokan'); ?></strong>
             </div>
             <?php
         }
@@ -186,7 +186,7 @@ class Dokan_Template_Coupons{
         if( isset($_GET['post']) &&  $_GET['action'] == 'edit' ) {
             return;
         }
-            
+
         $perpage = $this->perpage;
         $pagenum = isset( $_GET['pagenum'] ) ? absint( $_GET['pagenum'] ) : 1;
         $offset = ( $pagenum - 1 ) * $perpage;
@@ -315,7 +315,7 @@ class Dokan_Template_Coupons{
             <?php
         }
     }
-        
+
     function pagination() {
 
         $pagenum = isset( $_GET['pagenum'] ) ? absint( $_GET['pagenum'] ) : 1;
@@ -336,14 +336,14 @@ class Dokan_Template_Coupons{
     }
 
     function add_coupons_form($validated) {
-        
+
         //intial time hide this function
         if ( !isset( $_GET['view'] ) ) {
             return;
         } else if ( $_GET['view'] != 'add_coupons' ) {
             return;
         }
-        
+
         $button_name = __( 'Create Coupon', 'dokan' );
 
         if ( isset( $_GET['post'] ) && $_GET['action'] == 'edit' ) {
@@ -367,7 +367,7 @@ class Dokan_Template_Coupons{
             $minimum_amount = get_post_meta( $post->ID, 'minimum_amount', true );
             $customer_email = get_post_meta( $post->ID, 'customer_email', true );
         }
-            
+
         $post_id = isset( $post->ID ) ? $post->ID : '';
         $post_title = isset( $post->post_title ) ? $post->post_title : '';
         $description = isset( $post->post_content ) ? $post->post_content : '';
@@ -378,7 +378,7 @@ class Dokan_Template_Coupons{
                 $discount_type = 'selected';
             }
         }
-        
+
         $amount = isset( $amount ) ? $amount : '';
         $products = isset( $products ) ? $products : '';
         $exclude_products = isset( $exclude_products ) ? $exclude_products : '';
@@ -390,14 +390,14 @@ class Dokan_Template_Coupons{
         } else {
             $free_shipping = '';
         }
-        
+
         if ( isset( $apply_before_tax ) && $apply_before_tax == 'yes' ) {
             $apply_before_tax = 'checked';
         } else {
             $apply_before_tax = '';
         }
 
-            
+
         if ( isset( $exclide_sale_item ) && $exclide_sale_item == 'yes' ) {
             $exclide_sale_item = 'checked';
         } else {
@@ -445,7 +445,7 @@ class Dokan_Template_Coupons{
             } else {
                 $free_shipping = '';
             }
-            
+
             if ( isset( $_POST['apply_before_tax'] ) && $_POST['apply_before_tax'] == 'yes' ) {
                 $apply_before_tax = 'checked';
             } else {
@@ -458,7 +458,7 @@ class Dokan_Template_Coupons{
             } else {
                 $exclide_sale_item = '';
             }
-            
+
             $minimum_amount = $_POST['minium_ammount'];
             $customer_email = $_POST['email_restrictions'];
         }
@@ -580,20 +580,6 @@ class Dokan_Template_Coupons{
                     </div>
                 </div>
             </div>
-
-
-            <div class="form-group">
-                <label class="col-md-3 control-label" for="checkboxes"><?php _e( 'Apply Before Tax', 'dokan' ); ?></label>
-                <div class="col-md-9">
-                    <div class="checkbox">
-                        <label for="checkboxes-1">
-                            <input name="apply_before_tax" <?php echo $apply_before_tax; ?> id="checkboxes-1" value="yes" type="checkbox">
-                            <?php _e( 'Check this box if the coupon should be applied before calculating cart tax.', 'dokan' ); ?>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
 
             <div class="form-group">
                 <label class="col-md-3 control-label" for="checkboxes"><?php _e( 'Exclude Sale Items', 'dokan' ); ?></label>
