@@ -1,6 +1,7 @@
 jQuery(function($) {
 
     $('.tips').tooltip();
+    $('select.grant_access_id').chosen();
 
     $('ul.order-status').on('click', 'a.dokan-edit-status', function(e) {
         $(this).addClass('dokan-hide').closest('li').next('li').removeClass('dokan-hide');
@@ -81,7 +82,7 @@ jQuery(function($) {
 
         var data = {
             action: 'dokan_grant_access_to_download',
-            product_id: product,
+            product_ids: product,
             loop: $('.order_download_permissions .panel').size(),
             order_id: self.data('order-id'),
             security: self.data('nonce')

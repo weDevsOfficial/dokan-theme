@@ -208,6 +208,7 @@ a:hover{text-decoration:none}
 .page-template-templatesorders-php .order_download_permissions label{font-weight:normal}
 .page-template-templatesorders-php .order_download_permissions button.revoke_access{padding:3px 10px;margin-top:-2px}
 .page-template-templatesorders-php .order_download_permissions .toolbar{margin-top:15px}
+.page-template-templatesorders-php .chosen-container-multi .chosen-choices li.search-field input[type="text"]{min-height:27px}
 .page-template-templatesreports-php .dokan-reports-wrap{margin-top:20px}
 .page-template-templatesreports-php ul.chart-legend{background:#fff;list-style:none;margin:0;padding:0;border:1px solid #ededed}.page-template-templatesreports-php ul.chart-legend li{color:#aaa;padding:13px 18px;border-bottom:1px solid #ededed;font-weight:normal;font-size:13px}.page-template-templatesreports-php ul.chart-legend li strong{display:block;color:#464646;font-size:30px;font-weight:normal}
 .page-template-templatesreports-php .report-filter{margin-top:15px}.page-template-templatesreports-php .report-filter select{border:1px solid #ededed;padding:2px 5px}

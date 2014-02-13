@@ -137,87 +137,41 @@ class Dokan_Ajax {
 
         global $wpdb;
 
-        $order_id   = intval( $_POST['order_id'] );
-        $product_id = intval( $_POST['product_id'] );
-        $loop       = intval( $_POST['loop'] );
-        $file_count = 0;
+        $order_id       = intval( $_POST['order_id'] );
+        $product_ids    = $_POST['product_ids'];
+        $loop           = intval( $_POST['loop'] );
+        $file_counter   = 0;
+        $order          = new WC_Order( $order_id );
 
-        $order      = new WC_Order( $order_id );
-        $product    = get_product( $product_id );
+        if ( ! is_array( $product_ids ) ) {
+            $product_ids = array( $product_ids );
+        }
 
-        $user_email = sanitize_email( $order->billing_email );
+        foreach ( $product_ids as $product_id ) {
+            $product    = get_product( $product_id );
+            $files      = $product->get_files();
 
-        if ( ! $user_email )
-            die();
+            if ( ! $order->billing_email )
+                die();
 
-        $limit      = trim( get_post_meta( $product_id, '_download_limit', true ) );
-        $expiry     = trim( get_post_meta( $product_id, '_download_expiry', true ) );
-        $file_paths = apply_filters( 'woocommerce_file_download_paths', get_post_meta( $product_id, '_file_paths', true ), $product_id, $order_id, null );
+            if ( $files ) {
+                foreach ( $files as $download_id => $file ) {
+                    if ( $inserted_id = wc_downloadable_file_permission( $download_id, $product_id, $order ) ) {
 
-        $limit      = empty( $limit ) ? '' : (int) $limit;
+                        // insert complete - get inserted data
+                        $download = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}woocommerce_downloadable_product_permissions WHERE permission_id = %d", $inserted_id ) );
 
-        // Default value is NULL in the table schema
-        $expiry     = empty( $expiry ) ? null : (int) $expiry;
+                        $loop ++;
+                        $file_counter ++;
 
-        if ( $expiry )
-            $expiry = date_i18n( "Y-m-d", strtotime( 'NOW + ' . $expiry . ' DAY' ) );
+                        if ( isset( $file['name'] ) ) {
+                            $file_count = $file['name'];
+                        } else {
+                            $file_count = sprintf( __( 'File %d', 'woocommerce' ), $file_counter );
+                        }
 
-        $wpdb->hide_errors();
-
-        $response = array();
-        if ( $file_paths ) {
-            foreach ( $file_paths as $download_id => $file_path ) {
-
-                $data = array(
-                    'download_id'           => $download_id,
-                    'product_id'            => $product_id,
-                    'user_id'               => (int) $order->user_id,
-                    'user_email'            => $user_email,
-                    'order_id'              => $order->id,
-                    'order_key'             => $order->order_key,
-                    'downloads_remaining'   => $limit,
-                    'access_granted'        => current_time( 'mysql' ),
-                    'download_count'        => 0
-                );
-
-                $format = array(
-                    '%s',
-                    '%s',
-                    '%s',
-                    '%s',
-                    '%s',
-                    '%s',
-                    '%s',
-                    '%s',
-                    '%d'
-                );
-
-                if ( ! is_null( $expiry ) ) {
-                    $data['access_expires'] = $expiry;
-                    $format[] = '%s';
-                }
-
-                // Downloadable product - give access to the customer
-                $success = $wpdb->insert( $wpdb->prefix . 'woocommerce_downloadable_product_permissions',
-                    $data,
-                    $format
-                );
-
-                if ( $success ) {
-
-                    $download = new stdClass();
-                    $download->product_id   = $product_id;
-                    $download->download_id  = $download_id;
-                    $download->order_id     = $order->id;
-                    $download->order_key    = $order->order_key;
-                    $download->download_count       = 0;
-                    $download->downloads_remaining  = $limit;
-                    $download->access_expires       = $expiry;
-
-                    $loop++;
-                    $file_count++;
-
-                    include dirname( dirname( __FILE__ ) ) . '/templates/orders/order-download-permission-html.php';
+                        include dirname( dirname( __FILE__ ) ) . '/templates/orders/order-download-permission-html.php';
+                    }
                 }
             }
         }

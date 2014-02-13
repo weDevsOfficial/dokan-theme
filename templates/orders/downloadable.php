@@ -31,9 +31,9 @@
 
     <div class="toolbar row">
 
-        <div class="col-md-5">
+        <div class="col-md-8">
 
-            <select name="grant_access_id" class="grant_access_id form-control" data-placeholder="<?php _e( 'Choose a downloadable product&hellip;', 'woocommerce' ) ?>">
+            <select name="grant_access_id" class="grant_access_id form-control" data-placeholder="<?php _e( 'Choose a downloadable product&hellip;', 'woocommerce' ) ?>" multiple="multiple">
                 <?php
                     echo '<option value=""></option>';
 
@@ -65,7 +65,7 @@
             </select>
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-4">
             <button type="button" class="btn btn-theme grant_access" data-order-id="<?php echo $order->id; ?>" data-nonce="<?php echo wp_create_nonce( 'grant-access' ); ?>"><?php _e( 'Grant Access', 'woocommerce' ); ?></button>
         </div>
 

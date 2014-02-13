@@ -59,21 +59,21 @@ if ( $user_orders ) {
                     </td>
                     <td>
                         <?php
-                        if ( '0000-00-00 00:00:00' == $post->post_date ) {
+                        if ( '0000-00-00 00:00:00' == $the_order->order_date ) {
                             $t_time = $h_time = __( 'Unpublished', 'dokan' );
                         } else {
-                            $t_time = get_the_time( __( 'Y/m/d g:i:s A', 'dokan' ), $post );
+                            $t_time = get_the_time( __( 'Y/m/d g:i:s A', 'dokan' ), $the_order );
 
-                            $gmt_time = strtotime( $post->post_date_gmt . ' UTC' );
+                            $gmt_time = strtotime( $the_order->order_date . ' UTC' );
                             $time_diff = current_time( 'timestamp', 1 ) - $gmt_time;
 
                             if ( $time_diff > 0 && $time_diff < 24 * 60 * 60 )
                                 $h_time = sprintf( __( '%s ago', 'dokan' ), human_time_diff( $gmt_time, current_time( 'timestamp', 1 ) ) );
                             else
-                                $h_time = get_the_time( __( 'Y/m/d', 'dokan' ), $post );
+                                $h_time = get_the_time( __( 'Y/m/d', 'dokan' ), $the_order->id );
                         }
 
-                        echo '<abbr title="' . esc_attr( $t_time ) . '">' . esc_html( apply_filters( 'post_date_column_time', $h_time, $post ) ) . '</abbr>';
+                        echo '<abbr title="' . esc_attr( $t_time ) . '">' . esc_html( apply_filters( 'post_date_column_time', $h_time, $the_order->id ) ) . '</abbr>';
                         ?>
                     </td>
                     <td width="15%">
@@ -131,7 +131,7 @@ if ( $user_orders ) {
         echo '<div class="pagination-container">';
         $page_links = paginate_links( array(
             'current' => $paged,
-            'total' => $order_count,
+            'total' => $num_of_pages,
             'base' => str_replace( $post->ID, '%#%', esc_url( get_pagenum_link( $post->ID ) ) ),
             'type' => 'array',
         ) );

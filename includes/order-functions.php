@@ -23,6 +23,7 @@ function dokan_get_seller_orders( $seller_id, $status = 'all', $limit = 10, $off
                     p.post_status = 'publish'
                     $status_where
                 GROUP BY do.order_id
+                ORDER BY p.post_date DESC
                 LIMIT $offset, $limit";
 
         $orders = $wpdb->get_results( $wpdb->prepare( $sql, $seller_id ) );
