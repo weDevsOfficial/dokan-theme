@@ -245,6 +245,7 @@ a:hover{text-decoration:none}
 .page-template-templatescoupons-php tr:hover .row-actions{visibility:visible}
 .dokan-comments-wrap ul.dokan-cmt-row-actions{visibility:hidden;list-style:none;margin:0;padding:0;font-size:13px}.dokan-comments-wrap ul.dokan-cmt-row-actions a{text-decoration:none}
 .dokan-comments-wrap ul.dokan-cmt-row-actions li{display:inline;border-right:1px solid #ededed;padding-right:5px;margin:0 !important}.dokan-comments-wrap ul.dokan-cmt-row-actions li:last-child{border-right:none}
+.dokan-comments-wrap select{padding:5px;border:1px solid #ededed}
 .dokan-comments-wrap #dokan-comments-table th.col-check{width:5%;padding:0 0 0 10px;vertical-align:middle}
 .dokan-comments-wrap #dokan-comments-table td.col-author,.dokan-comments-wrap #dokan-comments-table th.col-author{width:15%}
 .dokan-comments-wrap #dokan-comments-table td.col-content,.dokan-comments-wrap #dokan-comments-table th.col-content{width:60%}

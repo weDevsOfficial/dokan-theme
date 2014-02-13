@@ -141,7 +141,7 @@ class Dokan_Template_Coupons{
         update_post_meta( $post_id, 'minimum_amount', $minimum_amount );
         update_post_meta( $post_id, 'customer_email', $customer_email );
 
-        if ( !defined('DOING_AJAX') && DOING_AJAX !== true ) {
+        if ( !defined('DOING_AJAX') ) {
             wp_redirect( add_query_arg( array( 'message' => $message ), get_permalink() ) );
         }
     }
