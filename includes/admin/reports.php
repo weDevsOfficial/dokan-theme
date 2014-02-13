@@ -171,7 +171,7 @@
 
         <div class="tablenav bottom">
         <?php if ( $all_logs ) {
-            $count = $wpdb->get_var( "SELECT COUNT(id) FROM {$wpdb->prefix}dokan_orders");
+            $count = $wpdb->get_var( "SELECT COUNT(id) FROM {$wpdb->prefix}dokan_orders WHERE seller_id != 0");
             $num_of_pages = ceil( $count / $limit );
             $page_links = paginate_links( array(
                 'base' => add_query_arg( 'paged', '%#%' ),
