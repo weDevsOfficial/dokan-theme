@@ -47,10 +47,13 @@
                                 <strong><a href="<?php echo $edit_link ?>"><?php echo $user->user_login; ?></strong></a>
                                 <div class="row-actions toggle-seller-status">
                                     <?php if ( !$seller_enable ) { ?>
-                                        <span class="active"><a href="#" data-id="<?php echo $user->ID; ?>" data-type="yes"><?php _e( 'Activate Selling', 'dokan' ); ?></a></span>
+                                        <span class="active"><a class="toggle-seller" href="#" data-id="<?php echo $user->ID; ?>" data-type="yes"><?php _e( 'Activate Selling', 'dokan' ); ?></a> | </span>
                                     <?php } else { ?>
-                                        <span class="active delete"><a href="#" data-id="<?php echo $user->ID; ?>" data-type="no"><?php _e( 'Make Inactivate', 'dokan' ); ?></a></span>
+                                        <span class="active delete"><a class="toggle-seller" href="#" data-id="<?php echo $user->ID; ?>" data-type="no"><?php _e( 'Make Inactivate', 'dokan' ); ?></a> | </span>
                                     <?php } ?>
+
+                                    <span class="products-link"><a href="<?php echo admin_url( 'edit.php?post_type=product&author=' . $user->ID ); ?>"><?php _e( 'Products', 'dokan' ); ?></a> | </span>
+                                    <span class="orders-link"><a href="<?php echo admin_url( 'edit.php?post_type=shop_order&author=' . $user->ID ); ?>"><?php _e( 'Orders', 'dokan' ); ?></a></span>
                                 </div>
                             </td>
                             <td><?php echo $user->display_name; ?></td>
@@ -135,7 +138,7 @@
 
     <script type="text/javascript">
         jQuery(function($) {
-            $('.toggle-seller-status').on('click', 'a', function(e) {
+            $('.toggle-seller-status').on('click', 'a.toggle-seller', function(e) {
                 e.preventDefault();
 
                 var data = {
