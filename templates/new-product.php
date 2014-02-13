@@ -65,9 +65,9 @@ if ( isset( $_POST['add_product'] ) ) {
     }
 }
 
-dokan_frontend_dashboard_scripts();
-
 get_header();
+
+dokan_frontend_dashboard_scripts();
 ?>
 
 <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
