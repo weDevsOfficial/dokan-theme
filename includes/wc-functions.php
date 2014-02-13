@@ -1039,20 +1039,20 @@ function dokan_create_seller_order( $parent_order, $seller_id, $seller_products 
             $order_tax += (float) $item['line_tax'];
             $product_ids[] = $item['product_id'];
 
-            $item_id = woocommerce_add_order_item( $order_id, array(
+            $item_id = wc_add_order_item( $order_id, array(
                 'order_item_name' => $item['name'],
                 'order_item_type' => 'line_item'
             ) );
 
             if ( $item_id ) {
-                woocommerce_add_order_item_meta( $item_id, '_qty', $item['qty'] );
-                woocommerce_add_order_item_meta( $item_id, '_tax_class', $item['tax_class'] );
-                woocommerce_add_order_item_meta( $item_id, '_product_id', $item['product_id'] );
-                woocommerce_add_order_item_meta( $item_id, '_variation_id', $item['variation_id'] );
-                woocommerce_add_order_item_meta( $item_id, '_line_subtotal', $item['line_subtotal'] );
-                woocommerce_add_order_item_meta( $item_id, '_line_total', $item['line_total'] );
-                woocommerce_add_order_item_meta( $item_id, '_line_tax', $item['line_tax'] );
-                woocommerce_add_order_item_meta( $item_id, '_line_subtotal_tax', $item['line_subtotal_tax'] );
+                wc_add_order_item_meta( $item_id, '_qty', $item['qty'] );
+                wc_add_order_item_meta( $item_id, '_tax_class', $item['tax_class'] );
+                wc_add_order_item_meta( $item_id, '_product_id', $item['product_id'] );
+                wc_add_order_item_meta( $item_id, '_variation_id', $item['variation_id'] );
+                wc_add_order_item_meta( $item_id, '_line_subtotal', $item['line_subtotal'] );
+                wc_add_order_item_meta( $item_id, '_line_total', $item['line_total'] );
+                wc_add_order_item_meta( $item_id, '_line_tax', $item['line_tax'] );
+                wc_add_order_item_meta( $item_id, '_line_subtotal_tax', $item['line_subtotal_tax'] );
             }
         } // foreach
 
@@ -1075,17 +1075,21 @@ function dokan_create_seller_order( $parent_order, $seller_id, $seller_products 
 
         // add coupons if any
         dokan_create_sub_order_coupon( $parent_order, $order_id, $product_ids );
+        $discount = dokan_sub_order_get_total_coupon( $order_id );
+
+        // calculate the total
+        $order_in_total = $order_total + $shipping_cost + $order_tax - $discount;
 
         // set order meta
         update_post_meta( $order_id, '_payment_method',         $parent_order->payment_method );
         update_post_meta( $order_id, '_payment_method_title',   $parent_order->payment_method_title );
 
-        update_post_meta( $order_id, '_order_shipping',         $shipping_cost );
-        update_post_meta( $order_id, '_order_discount',         '0' );
+        update_post_meta( $order_id, '_order_shipping',         woocommerce_format_decimal( $shipping_cost ) );
+        update_post_meta( $order_id, '_order_discount',         woocommerce_format_decimal( $discount ) );
         update_post_meta( $order_id, '_cart_discount',          '0' );
-        update_post_meta( $order_id, '_order_tax',              woocommerce_format_total( $order_tax ) );
+        update_post_meta( $order_id, '_order_tax',              woocommerce_format_decimal( $order_tax ) );
         update_post_meta( $order_id, '_order_shipping_tax',     '0' );
-        update_post_meta( $order_id, '_order_total',            woocommerce_format_total( $order_total + $shipping_cost ) );
+        update_post_meta( $order_id, '_order_total',            woocommerce_format_decimal( $order_in_total ) );
         update_post_meta( $order_id, '_order_key',              apply_filters('woocommerce_generate_order_key', uniqid('order_') ) );
         update_post_meta( $order_id, '_customer_user',          $parent_order->customer_user );
         update_post_meta( $order_id, '_order_currency',         get_post_meta( $parent_order->id, '_order_currency', true ) );
@@ -1100,30 +1104,46 @@ function dokan_create_seller_order( $parent_order, $seller_id, $seller_products 
     } // if order
 }
 
+function dokan_sub_order_get_total_coupon( $order_id ) {
+    global $wpdb;
+
+    $sql = $wpdb->prepare( "SELECT SUM(oim.meta_value) FROM {$wpdb->prefix}woocommerce_order_itemmeta oim
+            LEFT JOIN {$wpdb->prefix}woocommerce_order_items oi ON oim.order_item_id = oi.order_item_id
+            WHERE oi.order_id = %d AND oi.order_item_type = 'coupon'", $order_id );
+
+    $result = $wpdb->get_var( $sql );
+    if ( $result ) {
+        return $result;
+    }
+
+    return 0;
+}
+
 
 function dokan_create_sub_order_coupon( $parent_order, $order_id, $product_ids ) {
     $used_coupons = $parent_order->get_used_coupons();
-
-    dokan_log( var_export( $used_coupons ) );
 
     if ( ! count( $used_coupons ) ) {
         return;
     }
 
-    // seems like we've got some coupons
-    $code = reset( $used_coupons ); // get the first one as we assume only 1 coupon can be applied at once
-    $coupon = new WC_Coupon( $code );
+    if ( $used_coupons ) {
+        foreach ($used_coupons as $coupon_code) {
+            $coupon = new WC_Coupon( $coupon_code );
 
-    if ( $coupon && !is_wp_error( $coupon ) && array_intersect( $product_ids, $coupon->product_ids ) ) {
-        // we found some match
-        $item_id = wc_add_order_item( $order_id, array(
-            'order_item_name' => $code,
-            'order_item_type' => 'coupon'
-        ) );
+            if ( $coupon && !is_wp_error( $coupon ) && array_intersect( $product_ids, $coupon->product_ids ) ) {
 
-        // Add line item meta
-        if ( $item_id ) {
-            wc_add_order_item_meta( $item_id, 'discount_amount', 0 );
+                // we found some match
+                $item_id = wc_add_order_item( $order_id, array(
+                    'order_item_name' => $coupon_code,
+                    'order_item_type' => 'coupon'
+                ) );
+
+                // Add line item meta
+                if ( $item_id ) {
+                    wc_add_order_item_meta( $item_id, 'discount_amount', isset( WC()->cart->coupon_discount_amounts[ $coupon_code ] ) ? WC()->cart->coupon_discount_amounts[ $coupon_code ] : 0 );
+                }
+            }
         }
     }
 }
