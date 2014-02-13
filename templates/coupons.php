@@ -61,7 +61,7 @@ dokan_frontend_dashboard_scripts();
                 } else {
                     ?>
 
-                    <?php $dokan_template_coupons->user_coupons(); ?>
+                    <?php $dokan_template_coupons->list_user_coupons(); ?>
 
                     <?php
                     if ( is_wp_error( $validated )) {
