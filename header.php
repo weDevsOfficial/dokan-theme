@@ -90,7 +90,9 @@ if ( !function_exists( 'WC' ) ) {
                                 <?php if ( is_user_logged_in() ) { ?>
 
                                     <?php
-                                    $user_id = get_current_user_id();
+                                    global $current_user;
+
+                                    $user_id = $current_user->ID;
                                     if ( dokan_is_user_seller( $user_id ) ) {
                                         ?>
                                         <li class="dropdown">
@@ -111,7 +113,7 @@ if ( !function_exists( 'WC' ) ) {
                                     <?php } ?>
 
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php _e( 'My Account', 'dokan' ); ?> <b class="caret"></b></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo esc_html( $current_user->display_name ); ?> <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="<?php echo dokan_get_page_url( 'my_orders' ); ?>"><?php _e( 'My Orders', 'dokan' ); ?></a></li>
                                             <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'My Account', 'dokan' ); ?></a></li>
