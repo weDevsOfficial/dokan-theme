@@ -1088,10 +1088,10 @@ function dokan_create_seller_order( $parent_order, $seller_id, $seller_products 
         update_post_meta( $order_id, '_order_total',            woocommerce_format_total( $order_total + $shipping_cost ) );
         update_post_meta( $order_id, '_order_key',              apply_filters('woocommerce_generate_order_key', uniqid('order_') ) );
         update_post_meta( $order_id, '_customer_user',          $parent_order->customer_user );
-        update_post_meta( $order_id, '_order_currency',         $parent_order->order_custom_fields['_order_currency'] );
+        update_post_meta( $order_id, '_order_currency',         get_post_meta( $parent_order->id, '_order_currency', true ) );
         update_post_meta( $order_id, '_prices_include_tax',     $parent_order->prices_include_tax );
-        update_post_meta( $order_id, '_customer_ip_address',    $parent_order->order_custom_fields['_customer_ip_address'] );
-        update_post_meta( $order_id, '_customer_user_agent',    $parent_order->order_custom_fields['_customer_user_agent'] );
+        update_post_meta( $order_id, '_customer_ip_address',    get_post_meta( $parent_order->id, '_customer_ip_address', true ) );
+        update_post_meta( $order_id, '_customer_user_agent',    get_post_meta( $parent_order->id, '_customer_user_agent', true ) );
 
         do_action( 'dokan_checkout_update_order_meta', $order_id );
 
@@ -1103,6 +1103,8 @@ function dokan_create_seller_order( $parent_order, $seller_id, $seller_products 
 
 function dokan_create_sub_order_coupon( $parent_order, $order_id, $product_ids ) {
     $used_coupons = $parent_order->get_used_coupons();
+
+    dokan_log( var_export( $used_coupons ) );
 
     if ( ! count( $used_coupons ) ) {
         return;
