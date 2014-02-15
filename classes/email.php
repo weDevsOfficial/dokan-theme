@@ -193,6 +193,40 @@ class Dokan_Email {
         $this->send( $this->admin_email(), $subject, $body );
     }
 
+    function product_published( $post, $seller ) {
+
+        $template = DOKAN_INC_DIR . '/emails/product-published.php';
+
+        ob_start();
+        include $template;
+        $body = ob_get_clean();
+
+        $product = get_product( $post->ID );
+
+        $find = array(
+            '%seller_name%',
+            '%title%',
+            '%product_link%',
+            '%product_edit_link%',
+            '%site_name%',
+            '%site_url%'
+        );
+
+        $replace = array(
+            $seller->display_name,
+            $product->get_title(),
+            get_permalink( $post->ID ),
+            dokan_edit_product_url( $post->ID ),
+            $this->get_from_name(),
+            home_url(),
+        );
+
+        $body = str_replace( $find, $replace, $body);
+        $subject = sprintf( __( '[%s] Your product has been approved!', 'dokan' ), $this->get_from_name() );
+
+        $this->send( $seller->user_email, $subject, $body );
+    }
+
     /**
      * Send the email.
      *
@@ -213,6 +247,4 @@ class Dokan_Email {
         remove_filter( 'wp_mail_from', array( $this, 'get_from_address' ) );
         remove_filter( 'wp_mail_from_name', array( $this, 'get_from_name' ) );
     }
-
-
 }

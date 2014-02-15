@@ -494,3 +494,14 @@ function dokan_admin_report( $group_by = 'day', $year = '' ) {
 
     return $data;
 }
+
+function dokan_send_notification_on_product_publish( $post ) {
+    if ( $post->post_type != 'product' ) {
+        return;
+    }
+
+    $seller = get_user_by( 'id', $post->post_author );
+    Dokan_Email::init()->product_published( $post, $seller );
+}
+
+add_action( 'pending_to_publish', 'dokan_send_notification_on_product_publish' );
