@@ -1,4 +1,14 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying Archive pages.
+ *
+ * Learn more: http://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package Dokan
+ * @subpackage WooCommerce/Templates
+ * @version 2.0.0
+ */
+get_header(); ?>
 
 <?php get_sidebar( 'shop' ); ?>
 

@@ -2,8 +2,9 @@
 /**
  * The Template for displaying all single products.
  *
- * @package dokan
- * @package dokan - 2013 1.0
+ * @package Dokan
+ * @subpackage WooCommerce/Templates
+ * @version 1.6.4
  */
 get_header();
 ?>

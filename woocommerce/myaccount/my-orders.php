@@ -5,7 +5,8 @@
  * Shows recent orders on the account page
  *
  * @package Dokan
- * @version 1.0
+ * @subpackage WooCommerce/Templates
+ * @version 2.1.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
