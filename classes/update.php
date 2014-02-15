@@ -297,6 +297,12 @@ class Dokan_Update {
             }
         }
 
+        if ( isset( $_POST['delete_license'] ) ) {
+            delete_option( self::option );
+            delete_transient( self::option );
+            delete_option( 'dokan_license_status' );
+        }
+
         $license = $this->get_license_key();
         $email = $license ? $license['email'] : '';
         $key = $license ? $license['key'] : '';
@@ -348,6 +354,10 @@ class Dokan_Update {
                 <div class="updated">
                     <p><?php _e( 'Theme is activated', 'dokan' ); ?></p>
                 </div>
+
+                <form method="post" action="">
+                    <?php submit_button( __( 'Delete License', 'dokan' ), 'delete', 'delete_license' ); ?>
+                </form>
 
             <?php } ?>
         </div>
