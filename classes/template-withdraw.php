@@ -167,7 +167,7 @@ class Dokan_Template_Withdraw {
             wp_redirect( add_query_arg( array( 'message' => 'request_cancelled' ), get_permalink() ) );
         }
     }
-        
+
     function validate() {
 
         if ( !isset( $_POST['withdraw_submit'] ) ) {
@@ -405,7 +405,10 @@ class Dokan_Template_Withdraw {
                             <div class="dokan-add-note">
                                 <div class="note-display">
                                     <p class="ajax_note"><?php echo $row->note; ?></p>
-                                    <a href="#" class="dokan-note-field row-actions"><?php _e('Add note', 'dokan' ); ?></a>
+
+                                    <div class="row-actions">
+                                        <a href="#" class="dokan-note-field"><?php _e('Add note', 'dokan' ); ?></a>
+                                    </div>
                                 </div>
 
                                 <div class="note-form" style="display: none;">
