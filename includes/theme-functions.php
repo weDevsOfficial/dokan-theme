@@ -92,7 +92,7 @@ function dokan_delete_product_handler() {
             return;
         }
 
-        // wp_delete_post( $product_id );
+        wp_delete_post( $product_id );
         wp_redirect( add_query_arg( array( 'message' => 'product_deleted' ), get_permalink() ) );
         exit;
     }
