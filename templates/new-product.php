@@ -32,15 +32,14 @@ if ( isset( $_POST['add_product'] ) ) {
 
     if ( !$errors ) {
 
+        $product_status = dokan_get_new_post_status();
         $post_data = array(
             'post_type' => 'product',
-            'post_status' => dokan_get_new_post_status(),
+            'post_status' => $product_status,
             'post_title' => $post_title,
             'post_content' => $post_content,
             'post_excerpt' => $post_excerpt,
         );
-
-        // var_dump( $post_data, $_POST );
 
         $product_id = wp_insert_post( $post_data );
 
@@ -59,6 +58,10 @@ if ( isset( $_POST['add_product'] ) ) {
             update_post_meta( $product_id, '_sale_price', '' );
             update_post_meta( $product_id, '_price', $price );
             update_post_meta( $product_id, '_visibility', 'hidden' );
+
+            do_action( 'dokan_new_product_added', $product_id, $post_data );
+
+            Dokan_Email::init()->new_product_added( $product_id, $product_status );
 
             wp_redirect( dokan_edit_product_url( $product_id ) );
         }
@@ -146,6 +149,7 @@ dokan_frontend_dashboard_scripts();
                 <?php wp_editor( $post_content, 'post_content', array('editor_height' => 50, 'quicktags' => false, 'media_buttons' => false, 'teeny' => true, 'editor_class' => 'post_content') ); ?>
             </div>
 
+            <?php do_action( 'dokan_new_product_form' ); ?>
 
             <div class="form-group">
                 <input type="submit" name="add_product" class="btn btn-primary" value="Add Product"/>

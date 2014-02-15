@@ -1,7 +1,7 @@
 <?php
 /**
  * Dokan email handler class
- * 
+ *
  * @package Dokan
  */
 class Dokan_Email {
@@ -37,7 +37,7 @@ class Dokan_Email {
     }
 
     function admin_email() {
-        return get_option( 'admin_email' );
+        return apply_filters( 'dokan_email_admin_mail', get_option( 'admin_email' ) );
     }
 
     function get_user_agent() {
@@ -146,6 +146,49 @@ class Dokan_Email {
         $user = get_user_by( 'id', $user_id );
         $subject = sprintf( __( '[%s] Your Withdraw Request has been cancelled', 'dokan' ), $this->get_from_name() );
         $body = $this->prepare_withdraw( $body, $user, $amount, $method, $note );
+
+        $this->send( $this->admin_email(), $subject, $body );
+    }
+
+    function new_product_added( $product_id, $status = 'pending' ) {
+        $template = DOKAN_INC_DIR . '/emails/new-product-pending.php';
+
+        if ( $status == 'publish' ) {
+            $template = DOKAN_INC_DIR . '/emails/new-product.php';
+        }
+        ob_start();
+        include $template;
+        $body = ob_get_clean();
+
+        $product = get_product( $product_id );
+        $seller = get_user_by( 'id', $product->post->post_author );
+        $category = wp_get_post_terms($product->id, 'product_cat', array( 'fields' => 'names' ) );
+        $category_name = $category ? reset( $category ) : 'N/A';
+
+        $find = array(
+            '%title%',
+            '%price%',
+            '%seller_name%',
+            '%seller_url%',
+            '%category%',
+            '%product_link%',
+            '%site_name%',
+            '%site_url%'
+        );
+
+        $replace = array(
+            $product->get_title(),
+            $this->currency_symbol( $product->get_price() ),
+            $seller->display_name,
+            dokan_get_store_url( $seller->ID ),
+            $category_name,
+            admin_url( 'post.php?action=edit&post=' . $product_id ),
+            $this->get_from_name(),
+            home_url(),
+        );
+
+        $body = str_replace( $find, $replace, $body);
+        $subject = sprintf( __( '[%s] New Product Added', 'dokan' ), $this->get_from_name() );
 
         $this->send( $this->admin_email(), $subject, $body );
     }
