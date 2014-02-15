@@ -167,30 +167,33 @@ class Dokan_Template_Withdraw {
             wp_redirect( add_query_arg( array( 'message' => 'request_cancelled' ), get_permalink() ) );
         }
     }
-
+        
     function validate() {
 
         if ( !isset( $_POST['withdraw_submit'] ) ) {
             return false;
         }
 
-        if( !wp_verify_nonce( $_POST['dokan_withdraw_nonce'], 'dokan_withdraw' ) ) {
+        if ( !wp_verify_nonce( $_POST['dokan_withdraw_nonce'], 'dokan_withdraw' ) ) {
             wp_die( __( 'Are you cheating?', 'dokan' ) );
         }
 
         $error = new WP_Error();
         $limit = $this->get_withdraw_limit();
+        $balance = dokan_get_seller_balance( $user_id, false );
+        $withdraw_amount = (float) $_POST['witdraw_amount'];
 
-        if ( empty($_POST['witdraw_amount']) ) {
-            $error->add( 'dokan_empty_withdrad', __('Withdraw amount required ', 'dokan' ));
-        } else  {
-            if( $_POST['witdraw_amount'] < $limit ) {
-                $error->add( 'dokan_withdraw_amount', sprintf( __('Withdraw amount must be greater than %d', 'dokan' ), $this->get_withdraw_limit() ) );
-            }
+        if ( empty( $_POST['witdraw_amount'] ) ) {
+            $error->add( 'dokan_empty_withdrad', __( 'Withdraw amount required ', 'dokan' ) );
+        } elseif ( $withdraw_amount > $balance ) {
+
+            $error->add( 'enough_balance', __( 'You don\'t have enough balance for this request', 'dokan' ) );
+        } elseif ( $withdraw_amount < $limit ) {
+            $error->add( 'dokan_withdraw_amount', sprintf( __( 'Withdraw amount must be greater than %d', 'dokan' ), $this->get_withdraw_limit() ) );
         }
 
-        if( empty($_POST['withdraw_method']) ) {
-            $error->add( 'dokan_withdraw_method', __('withdraw method required', 'dokan' ));
+        if ( empty( $_POST['withdraw_method'] ) ) {
+            $error->add( 'dokan_withdraw_method', __( 'withdraw method required', 'dokan' ) );
         }
 
         if ( $error->get_error_codes() ) {
