@@ -393,6 +393,7 @@ a:hover{text-decoration:none}
 * html .ui-autocomplete{width:1px}
 ul.subsubsub{font-size:12px;color:#ededed;margin:0 0 10px 0;padding:0}ul.subsubsub li{line-height:13px;padding:0 5px;border-right:1px solid #ededed}ul.subsubsub li:last-child{border-right:none}
 ul.subsubsub li.active a{color:#999}
+.wp-editor-wrap{border:1px solid #ededed}
 .dokan-message,.dokan-info,.dokan-error{padding:15px 15px 15px 50px;margin:5px 0 15px 0;position:relative;background:#fff;border-bottom:1px solid #ededed;border-left:1px solid #ededed;border-right:1px solid #ededed;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px}.dokan-message:before,.dokan-info:before,.dokan-error:before{position:absolute;top:0;left:15px;padding-top:15px;font-family:sans-serif;color:#fff;width:20px;border-bottom-left-radius:4px;border-bottom-right-radius:4px;text-align:center}
 .dokan-message{border-top:3px solid #8fae1b}.dokan-message:before{background-color:#8fae1b;content:"\2713"}
 .dokan-info:before{content:"i";font-family:Times,Georgia,serif;font-style:italic}
