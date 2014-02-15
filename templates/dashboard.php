@@ -15,8 +15,8 @@ $user_id = get_current_user_id();
 $orders_counts = dokan_count_orders( $user_id );
 $post_counts = dokan_count_posts( 'product', $user_id );
 $comment_counts = dokan_count_comments( 'product', $user_id );
-$pageviews = dokan_author_pageviews( $user_id );
-$earning = dokan_author_total_earning( $user_id );
+$pageviews = (int) dokan_author_pageviews( $user_id );
+$earning = dokan_author_total_sales( $user_id );
 
 $products_url = dokan_get_page_url( 'products' );
 $orders_url = dokan_get_page_url( 'orders' );
@@ -44,14 +44,14 @@ $reviews_url = dokan_get_page_url( 'reviews' );
                             <ul class="list-inline">
                                 <li>
                                     <div class="title"><?php _e( 'Pageview', 'dokan' ); ?></div>
-                                    <div class="count"><?php echo (int) $pageviews; ?></div>
+                                    <div class="count"><?php echo dokan_number_format( $pageviews ); ?></div>
                                 </li>
                                 <li>
-                                    <div class="title"><?php _e( 'Sales', 'dokan' ); ?></div>
+                                    <div class="title"><?php _e( 'Order', 'dokan' ); ?></div>
                                     <div class="count"><?php echo ($orders_counts->completed + $orders_counts->processing + $orders_counts->{'on-hold'}); ?></div>
                                 </li>
                                 <li>
-                                    <div class="title"><?php _e( 'Earned', 'dokan' ); ?></div>
+                                    <div class="title"><?php _e( 'Sales', 'dokan' ); ?></div>
                                     <div class="count"><?php echo woocommerce_price( $earning ); ?></div>
                                 </li>
                             </ul>

@@ -180,7 +180,7 @@ function dokan_author_pageviews( $seller_id ) {
 }
 
 
-function dokan_author_total_earning( $seller_id ) {
+function dokan_author_total_sales( $seller_id ) {
     global $wpdb;
 
     $cache_key = 'dokan-earning-' . $seller_id;
@@ -196,7 +196,7 @@ function dokan_author_total_earning( $seller_id ) {
                 LEFT JOIN {$wpdb->term_relationships} rel ON oi.order_id = rel.object_id
                 LEFT JOIN {$wpdb->term_taxonomy} tax ON rel.term_taxonomy_id = tax.term_taxonomy_id
                 LEFT JOIN {$wpdb->terms} terms ON tax.term_id = terms.term_id
-                WHERE oi.order_id IN ($order_ids) AND oim.meta_key = '_line_total' AND terms.slug IN ('completed', 'processing')";
+                WHERE oi.order_id IN ($order_ids) AND oim.meta_key = '_line_total' AND terms.slug IN ('completed', 'processing', 'on-hold')";
 
         $count = $wpdb->get_row( $wpdb->prepare( $sql, $seller_id ) );
         $earnings = $count->earnings;
@@ -751,3 +751,13 @@ function dokan_disable_admin_bar( $show_admin_bar ) {
 }
 
 add_filter( 'show_admin_bar', 'dokan_disable_admin_bar' );
+
+function dokan_number_format( $number ) {
+    $threshold = 10000;
+
+    if ( $number > $threshold ) {
+        return number_format( $number/1000, 0, '.', '' ) . ' K';
+    }
+
+    return $number;
+}
