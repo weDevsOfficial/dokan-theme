@@ -180,7 +180,7 @@ class Dokan_Template_Withdraw {
 
         $error = new WP_Error();
         $limit = $this->get_withdraw_limit();
-        $balance = dokan_get_seller_balance( $user_id, false );
+        $balance = dokan_get_seller_balance( get_current_user_id(), false );
         $withdraw_amount = (float) $_POST['witdraw_amount'];
 
         if ( empty( $_POST['witdraw_amount'] ) ) {

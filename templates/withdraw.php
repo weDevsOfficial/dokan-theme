@@ -40,7 +40,7 @@ get_header();
 
                     foreach( $messages as $message ) {
                         ?>
-                        <div class="alert alert-danger" style="width: 40%; margin-left: 25%;">
+                        <div class="alert alert-danger" style="width: 55%; margin-left: 10%;">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <strong><?php echo $message; ?></strong>
                         </div>
