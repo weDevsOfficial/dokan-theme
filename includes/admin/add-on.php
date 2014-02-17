@@ -5,7 +5,7 @@
     $add_ons = get_transient( 'dokan_addons' );
 
     if ( false === $add_ons ) {
-        $response = wp_remote_get( 'http://wedevs.com/api/wpuf/addons.php', array('timeout' => 15) );
+        $response = wp_remote_get( 'http://wedevs.com/api/dokan/addons.php', array('timeout' => 15) );
         $update = wp_remote_retrieve_body( $response );
 
         if ( is_wp_error( $response ) || $response['response']['code'] != 200 ) {
@@ -48,7 +48,7 @@
             <?php
         }
     } else {
-        echo '<div class="error"><p>Error fetching add-ons</p></div>';
+        echo '<div class="error"><p>Error fetching add-ons. Please reload the page again!</p></div>';
     }
     ?>
 

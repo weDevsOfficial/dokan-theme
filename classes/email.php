@@ -36,14 +36,33 @@ class Dokan_Email {
         return sanitize_email( get_option( 'woocommerce_email_from_address' ) );
     }
 
+    
+    /**
+     * Get admin email address
+     * 
+     * @return string
+     */
     function admin_email() {
         return apply_filters( 'dokan_email_admin_mail', get_option( 'admin_email' ) );
     }
 
+    
+    /**
+     * Get user agent string
+     * 
+     * @return string
+     */
     function get_user_agent() {
         return substr( $_SERVER['HTTP_USER_AGENT'], 0, 150 );
     }
 
+    
+    /**
+     * Replace currency HTML entities with symbol
+     * 
+     * @param string $amount
+     * @return string
+     */
     function currency_symbol( $amount ) {
         $price = sprintf( get_woocommerce_price_format(), get_woocommerce_currency_symbol(), $amount );
         $price = str_replace( array('&#163;', '&#8364;', '&#36;'), array('£', 'EUR', '$'), $price);
@@ -51,6 +70,15 @@ class Dokan_Email {
         return $price;
     }
 
+    
+    /**
+     * Send email to seller from the seller contact form
+     * 
+     * @param string $seller_email
+     * @param string $from_name
+     * @param string $from_email
+     * @param string $message
+     */
     function contact_seller( $seller_email, $from_name, $from_email, $message ) {
         $template = DOKAN_INC_DIR . '/emails/contact-seller.php';
         ob_start();
@@ -84,6 +112,17 @@ class Dokan_Email {
         $this->send( $seller_email, $subject, $body, $headers );
     }
 
+    
+    /**
+     * Prepare body for withdraw email
+     * 
+     * @param string $body
+     * @param WP_User $user
+     * @param float $amount
+     * @param string $method
+     * @param string $note
+     * @return string
+     */
     function prepare_withdraw( $body, $user, $amount, $method, $note = '' ) {
         $find = array(
             '%username%',
@@ -112,6 +151,14 @@ class Dokan_Email {
         return $body;
     }
 
+    
+    /**
+     * Send admin email notification when a new withdraw request is made
+     * 
+     * @param WP_User $user
+     * @param float $amount
+     * @param string $method
+     */
     function new_withdraw_request( $user, $amount, $method ) {
         $template = DOKAN_INC_DIR . '/emails/withdraw-new.php';
         ob_start();
@@ -124,6 +171,14 @@ class Dokan_Email {
         $this->send( $this->admin_email(), $subject, $body );
     }
 
+    
+    /**
+     * Send email to user once a withdraw request is approved
+     * 
+     * @param int $user_id
+     * @param float $amount
+     * @param string $method
+     */
     function withdraw_request_approve( $user_id, $amount, $method ) {
         $template = DOKAN_INC_DIR . '/emails/withdraw-approve.php';
         ob_start();
@@ -134,9 +189,18 @@ class Dokan_Email {
         $subject = sprintf( __( '[%s] Your Withdraw Request has been approved', 'dokan' ), $this->get_from_name() );
         $body = $this->prepare_withdraw( $body, $user, $amount, $method );
 
-        $this->send( $this->admin_email(), $subject, $body );
+        $this->send( $user->user_email, $subject, $body );
     }
 
+    
+    /**
+     * Send email to user once a order has been cancelled
+     * 
+     * @param int $user_id
+     * @param float $amount
+     * @param string $method
+     * @param string $note
+     */
     function withdraw_request_cancel( $user_id, $amount, $method, $note = '' ) {
         $template = DOKAN_INC_DIR . '/emails/withdraw-cancel.php';
         ob_start();
@@ -147,9 +211,16 @@ class Dokan_Email {
         $subject = sprintf( __( '[%s] Your Withdraw Request has been cancelled', 'dokan' ), $this->get_from_name() );
         $body = $this->prepare_withdraw( $body, $user, $amount, $method, $note );
 
-        $this->send( $this->admin_email(), $subject, $body );
+        $this->send( $user->user_email, $subject, $body );
     }
 
+    
+    /**
+     * Send email to admin once a product is added
+     * 
+     * @param int $product_id
+     * @param string $status
+     */
     function new_product_added( $product_id, $status = 'pending' ) {
         $template = DOKAN_INC_DIR . '/emails/new-product-pending.php';
 
@@ -193,6 +264,13 @@ class Dokan_Email {
         $this->send( $this->admin_email(), $subject, $body );
     }
 
+    
+    /**
+     * Send email to seller once a product is published
+     * 
+     * @param WP_Post $post
+     * @param WP_User $seller
+     */
     function product_published( $post, $seller ) {
 
         $template = DOKAN_INC_DIR . '/emails/product-published.php';

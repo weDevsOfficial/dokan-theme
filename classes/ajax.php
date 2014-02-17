@@ -598,6 +598,11 @@ class Dokan_Ajax {
         exit;
     }
 
+    /**
+     * Make all the products to pending once a seller is deactivated for selling
+     * 
+     * @param int $seller_id
+     */
     function make_products_pending( $seller_id ) {
         $args = array(
             'post_type' => 'product',

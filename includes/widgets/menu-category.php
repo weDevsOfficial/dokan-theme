@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Category walker for generating doakn category
+ */
 class Dokan_Category_Walker extends Walker {
 
     var $tree_type = 'category';
