@@ -3,6 +3,11 @@
 require_once __DIR__ . '/order-functions.php';
 require_once __DIR__ . '/withdraw-functions.php';
 
+/**
+ * Enqueue report related scripts
+ *
+ * @return void
+ */
 function dokan_reports_scripts() {
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'jquery-ui-datepicker' );
@@ -15,6 +20,12 @@ function dokan_reports_scripts() {
     wp_enqueue_style( 'jquery-ui' );
 }
 
+
+/**
+ * Includes frontend-dashboard scripts for seller
+ *
+ * @return void
+ */
 function dokan_frontend_dashboard_scripts() {
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'jquery-ui' );
@@ -33,6 +44,13 @@ function dokan_frontend_dashboard_scripts() {
     wp_enqueue_style( 'chosen-style' );
 }
 
+
+/**
+ * Check if a user is seller
+ *
+ * @param int $user_id
+ * @return boolean
+ */
 function dokan_is_user_seller( $user_id ) {
     if ( !user_can( $user_id, 'dokandar' ) ) {
         return false;
@@ -41,6 +59,14 @@ function dokan_is_user_seller( $user_id ) {
     return true;
 }
 
+
+/**
+ * Check if current user is the product author
+ *
+ * @global WP_Post $post
+ * @param int $product_id
+ * @return boolean
+ */
 function dokan_is_product_author( $product_id = 0 ) {
     global $post;
 
@@ -57,6 +83,12 @@ function dokan_is_product_author( $product_id = 0 ) {
     return false;
 }
 
+
+/**
+ * Redirect to login page if not already logged in
+ *
+ * @return void
+ */
 function dokan_redirect_login() {
     if ( ! is_user_logged_in() ) {
         wp_redirect( dokan_get_page_url( 'myaccount', 'woocommerce' ) );
@@ -64,6 +96,13 @@ function dokan_redirect_login() {
     }
 }
 
+
+
+/**
+ * If the current user is not seller, redirect to homepage
+ *
+ * @param string $redirect
+ */
 function dokan_redirect_if_not_seller( $redirect = '' ) {
     if ( !dokan_is_user_seller( get_current_user_id() ) ) {
         $redirect = empty( $redirect ) ? home_url( '/' ) : $redirect;
@@ -73,6 +112,13 @@ function dokan_redirect_if_not_seller( $redirect = '' ) {
     }
 }
 
+
+
+/**
+ * Handles the product delete action
+ *
+ * @return void
+ */
 function dokan_delete_product_handler() {
     if ( isset( $_GET['action'] ) && $_GET['action'] == 'dokan-delete-product' ) {
         $product_id = isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : 0;
@@ -98,6 +144,16 @@ function dokan_delete_product_handler() {
     }
 }
 
+
+
+/**
+ * Count post type from a user
+ *
+ * @global WPDB $wpdb
+ * @param string $post_type
+ * @param int $user_id
+ * @return array
+ */
 function dokan_count_posts( $post_type, $user_id ) {
     global $wpdb;
 
@@ -123,6 +179,17 @@ function dokan_count_posts( $post_type, $user_id ) {
     return $counts;
 }
 
+
+
+/**
+ * Get comment count based on post type and user id
+ *
+ * @global WPDB $wpdb
+ * @global WP_User $current_user
+ * @param string $post_type
+ * @param int $user_id
+ * @return array
+ */
 function dokan_count_comments( $post_type, $user_id ) {
     global $wpdb, $current_user;
 
@@ -158,6 +225,15 @@ function dokan_count_comments( $post_type, $user_id ) {
     return $counts;
 }
 
+
+
+/**
+ * Get total pageview for a seller
+ *
+ * @global WPDB $wpdb
+ * @param int $seller_id
+ * @return int
+ */
 function dokan_author_pageviews( $seller_id ) {
     global $wpdb;
 
@@ -180,6 +256,13 @@ function dokan_author_pageviews( $seller_id ) {
 }
 
 
+/**
+ * Get total sales amount of a seller
+ *
+ * @global WPDB $wpdb
+ * @param int $seller_id
+ * @return float
+ */
 function dokan_author_total_sales( $seller_id ) {
     global $wpdb;
 
@@ -203,6 +286,13 @@ function dokan_author_total_sales( $seller_id ) {
     return $earnings;
 }
 
+
+
+/**
+ * Generate dokan sync table
+ *
+ * @global WPDB $wpdb
+ */
 function dokan_generate_sync_table() {
     global $wpdb;
 
@@ -249,10 +339,23 @@ function dokan_generate_sync_table() {
     } // if
 }
 
+
+/**
+ * Get store seller percentage settings
+ *
+ * @return int
+ */
 function dokan_get_seller_percentage() {
     return dokan_get_option( 'seller_percentage', 'dokan_selling', '90' );
 }
 
+
+
+/**
+ * Get product status based on user id and settings
+ *
+ * @return string
+ */
 function dokan_get_new_post_status() {
     $user_id = get_current_user_id();
 
@@ -267,7 +370,12 @@ function dokan_get_new_post_status() {
     return $status;
 }
 
-// Function to get the client ip address
+
+/**
+ * Function to get the client ip address
+ *
+ * @return string
+ */
 function dokan_get_client_ip() {
     $ipaddress = '';
 
@@ -291,6 +399,14 @@ function dokan_get_client_ip() {
     return $ipaddress;
 }
 
+
+
+/**
+ * Datetime format helper function
+ *
+ * @param string $datetime
+ * @return string
+ */
 function dokan_format_time( $datetime ) {
     $timestamp = strtotime( $datetime );
 
@@ -300,6 +416,16 @@ function dokan_format_time( $datetime ) {
     return date_i18n( $date_format . ' ' . $time_format, $timestamp );
 }
 
+
+
+/**
+ * generate a input box based on arguments
+ *
+ * @param int $post_id
+ * @param string $meta_key
+ * @param array $attr
+ * @param string $type
+ */
 function dokan_post_input_box( $post_id, $meta_key, $attr = array(), $type = 'text'  ) {
     $placeholder = isset( $attr['placeholder'] ) ? esc_attr( $attr['placeholder'] ) : '';
     $class = isset( $attr['class'] ) ? esc_attr( $attr['class'] ) : 'form-control';
@@ -355,6 +481,14 @@ function dokan_post_input_box( $post_id, $meta_key, $attr = array(), $type = 'te
     }
 }
 
+
+
+/**
+ * Get user friendly post status based on post
+ *
+ * @param string $status
+ * @return string
+ */
 function dokan_get_post_status( $status ) {
     switch ($status) {
         case 'publish':
@@ -379,6 +513,13 @@ function dokan_get_post_status( $status ) {
     }
 }
 
+
+/**
+ * Get readable product type based on product
+ *
+ * @param string $status
+ * @return string
+ */
 function dokan_get_product_status( $status ) {
     switch ($status) {
         case 'simple':
@@ -415,6 +556,7 @@ function dokan_posted_input( $key ) {
     return esc_attr( $value );
 }
 
+
 /**
  * Helper function for input textarea
  *
@@ -427,6 +569,14 @@ function dokan_posted_textarea( $key ) {
     return esc_textarea( $value );
 }
 
+
+
+/**
+ * Helper function to include a file
+ *
+ * @param type $template_name
+ * @param type $args
+ */
 function dokan_get_template( $template_name, $args = array() ) {
 
     if ( file_exists( $template_name ) ) {
@@ -436,6 +586,14 @@ function dokan_get_template( $template_name, $args = array() ) {
     }
 }
 
+
+/**
+ * Get page permalink based on context
+ *
+ * @param string $page
+ * @param string $context
+ * @return string url of the page
+ */
 function dokan_get_page_url( $page, $context = 'dokan' ) {
 
     if ( $context == 'woocommerce' ) {
@@ -447,6 +605,13 @@ function dokan_get_page_url( $page, $context = 'dokan' ) {
     return get_permalink( $page_id );
 }
 
+
+/**
+ * Get edit product url
+ *
+ * @param type $product_id
+ * @return type
+ */
 function dokan_edit_product_url( $product_id ) {
     if ( get_post_field( 'post_status', $product_id ) == 'publish' ) {
         return trailingslashit( get_permalink( $product_id ) ). 'edit/';
@@ -489,6 +654,14 @@ function dokan_get_option( $option, $section, $default = '' ) {
     return $default;
 }
 
+
+
+/**
+ * Redirect users from standard WordPress register page to woocommerce
+ * my account page
+ *
+ * @global string $action
+ */
 function dokan_redirect_to_register(){
     global $action;
 
@@ -500,10 +673,25 @@ function dokan_redirect_to_register(){
 
 add_action( 'login_init', 'dokan_redirect_to_register' );
 
+
+
+/**
+ * Pretty print a variable
+ *
+ * @param var $value
+ */
 function dokan_pre( $value ) {
     printf( '<pre>%s</pre>', print_r( $value, true ) );
 }
 
+
+
+/**
+ * Check if the seller is enabled
+ *
+ * @param int $user_id
+ * @return boolean
+ */
 function dokan_is_seller_enabled( $user_id ) {
     $selling = get_user_meta( $user_id, 'dokan_enable_selling', true );
 
@@ -514,6 +702,14 @@ function dokan_is_seller_enabled( $user_id ) {
     return false;
 }
 
+
+
+/**
+ * Check if the seller is trusted
+ *
+ * @param int $user_id
+ * @return boolean
+ */
 function dokan_is_seller_trusted( $user_id ) {
     $publishing = get_user_meta( $user_id, 'dokan_publishing', true );
 
@@ -524,17 +720,42 @@ function dokan_is_seller_trusted( $user_id ) {
     return false;
 }
 
+
+
+/**
+ * Get store page url of a seller
+ *
+ * @param int $user_id
+ * @return string
+ */
 function dokan_get_store_url( $user_id ) {
     $userdata = get_userdata( $user_id );
 
     return sprintf( '%s/%s/', home_url( '/store' ), $userdata->user_nicename );
 }
 
+
+
+/**
+ * Helper function for loggin
+ *
+ * @param string $message
+ */
 function dokan_log( $message ) {
     $message = sprintf( "[%s] %s\n", date( 'd.m.Y h:i:s' ), $message );
     error_log( $message, 3, DOKAN_DIR . '/debug.log' );
 }
 
+
+
+/**
+ * Filter WP Media Manager files if the current user is seller.
+ *
+ * Do not show other sellers images to a seller. He can see images only by him
+ *
+ * @param array $args
+ * @return array
+ */
 function dokan_media_uploader_restrict( $args ) {
     // bail out for admin and editor
     if ( current_user_can( 'delete_pages' ) ) {
@@ -552,6 +773,14 @@ function dokan_media_uploader_restrict( $args ) {
 
 add_filter( 'ajax_query_attachments_args', 'dokan_media_uploader_restrict' );
 
+
+
+/**
+ * Get store info based on seller ID
+ *
+ * @param int $seller_id
+ * @return array
+ */
 function dokan_get_store_info( $seller_id ) {
     $info = get_user_meta( $seller_id, 'dokan_profile_settings', true );
     $info = is_array( $info ) ? $info : array();
@@ -572,12 +801,29 @@ function dokan_get_store_info( $seller_id ) {
     return $info;
 }
 
+
+
+/**
+ * Get withdraw email method based on seller ID and type
+ *
+ * @param int $seller_id
+ * @param string $type
+ * @return string
+ */
 function dokan_get_seller_withdraw_mail( $seller_id, $type = 'paypal' ) {
     $info = dokan_get_store_info( $seller_id );
 
     return $info['payment'][$type]['email'];
 }
 
+
+
+/**
+ * Get seller bank details
+ *
+ * @param int $seller_id
+ * @return string
+ */
 function dokan_get_seller_bank_details( $seller_id ) {
     $info = dokan_get_store_info( $seller_id );
     $payment = $info['payment']['bank'];
@@ -602,6 +848,15 @@ function dokan_get_seller_bank_details( $seller_id ) {
     return nl2br( implode( "\n", $details ) );
 }
 
+
+
+/**
+ * Get seller listing
+ *
+ * @param int $number
+ * @param int $offset
+ * @return array
+ */
 function dokan_get_sellers( $number = 10, $offset = 0 ) {
     $args = apply_filters( 'dokan_seller_list_query', array(
         'role' => 'seller',
@@ -624,6 +879,14 @@ function dokan_get_sellers( $number = 10, $offset = 0 ) {
     return array( 'users' => $sellers, 'count' => $user_query->total_users );
 }
 
+
+
+/**
+ * Add cart total amount on add_to_cart_fragments
+ *
+ * @param array $fragment
+ * @return array
+ */
 function dokan_add_to_cart_fragments( $fragment ) {
     $fragment['amount'] = WC()->cart->get_cart_total();
 
@@ -632,6 +895,14 @@ function dokan_add_to_cart_fragments( $fragment ) {
 
 add_filter( 'add_to_cart_fragments', 'dokan_add_to_cart_fragments' );
 
+
+
+/**
+ * Get wishlist url if YITH Wishlist plugin is installed
+ *
+ * @global WITH_WCWL $yith_wcwl
+ * @global WC_Product $product
+ */
 function dokan_add_to_wishlist_link() {
     if ( class_exists( 'YITH_WCWL' ) ) {
         global $yith_wcwl, $product;
@@ -692,6 +963,13 @@ function dokan_prepare_chart_data( $data, $date_key, $data_key, $interval, $star
     return $prepared_data;
 }
 
+
+
+/**
+ * Disable selling capability by default once a seller is registered
+ *
+ * @param int $user_id
+ */
 function dokan_admin_user_register( $user_id ) {
     $user = new WP_User( $user_id );
     $role = reset( $user->roles );
@@ -704,6 +982,13 @@ function dokan_admin_user_register( $user_id ) {
 add_action( 'user_register', 'dokan_admin_user_register' );
 
 
+
+/**
+ * Get seller count based on enable and disabled sellers
+ *
+ * @global WPDB $wpdb
+ * @return array
+ */
 function dokan_get_seller_count() {
     global $wpdb;
 
@@ -748,6 +1033,15 @@ function dokan_disable_admin_bar( $show_admin_bar ) {
 
 add_filter( 'show_admin_bar', 'dokan_disable_admin_bar' );
 
+
+/**
+ * Human readable number format.
+ *
+ * Shortens the number by dividing 1000
+ *
+ * @param type $number
+ * @return type
+ */
 function dokan_number_format( $number ) {
     $threshold = 10000;
 
