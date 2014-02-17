@@ -143,7 +143,6 @@ class WeDevs_Dokan {
             require_once $lib_dir . 'bootstrap-walker.php';
             require_once $inc_dir . 'wc-template.php';
             require_once $inc_dir . 'template-tags.php';
-            require_once $inc_dir . 'scripts.php';
         }
     }
 

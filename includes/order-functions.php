@@ -66,18 +66,6 @@ function dokan_get_seller_orders_number( $seller_id, $status = 'all' ) {
     return $count;
 }
 
-function dokan_get_seller_order_ids( $seller_id ) {
-    $orders = dokan_get_seller_orders( $seller_id );
-    $order_ids = array();
-
-    if ( $orders ) {
-        $order_ids = wp_list_pluck( $orders, 'order_id' );
-    }
-
-    return $order_ids;
-}
-
-
 /**
  * Get all the orders from a specific seller
  *
@@ -100,6 +88,13 @@ function dokan_is_seller_has_order( $seller_id, $order_id ) {
     return $wpdb->get_row( $wpdb->prepare( $sql, $seller_id, $order_id ) );
 }
 
+/**
+ * Count orders for a seller
+ * 
+ * @global WPDB $wpdb
+ * @param int $user_id
+ * @return array
+ */
 function dokan_count_orders( $user_id ) {
     global $wpdb;
 
@@ -137,6 +132,14 @@ function dokan_count_orders( $user_id ) {
     return $counts;
 }
 
+/**
+ * Update the child order status when a parent order status is changed
+ * 
+ * @global object $wpdb
+ * @param int $order_id
+ * @param string $old_status
+ * @param string $new_status
+ */
 function dokan_on_order_status_change( $order_id, $old_status, $new_status ) {
     global $wpdb;
 
@@ -160,6 +163,15 @@ function dokan_on_order_status_change( $order_id, $old_status, $new_status ) {
 
 add_action( 'woocommerce_order_status_changed', 'dokan_on_order_status_change', 10, 3 );
 
+
+/**
+ * Mark the parent order as complete when all the child order are completed
+ * 
+ * @param int $order_id
+ * @param string $old_status
+ * @param string $new_status
+ * @return void
+ */
 function dokan_on_child_order_status_change( $order_id, $old_status, $new_status ) {
     $order_post = get_post( $order_id );
 
@@ -196,12 +208,26 @@ function dokan_on_child_order_status_change( $order_id, $old_status, $new_status
 
 add_action( 'woocommerce_order_status_changed', 'dokan_on_child_order_status_change', 99, 3 );
 
+
+/**
+ * Delete a order row from sync table when a order is deleted from WooCommerce
+ * 
+ * @global object $wpdb
+ * @param type $order_id
+ */
 function dokan_delete_sync_order( $order_id ) {
     global $wpdb;
 
     $wpdb->delete( $wpdb->prefix . 'dokan_orders', array( 'order_id' => $order_id ) );
 }
 
+
+/**
+ * Insert a order in sync table once a order is created
+ * 
+ * @global object $wpdb
+ * @param int $order_id
+ */
 function dokan_sync_insert_order( $order_id ) {
     global $wpdb;
 
@@ -231,6 +257,16 @@ add_action( 'woocommerce_checkout_update_order_meta', 'dokan_sync_insert_order' 
 add_action( 'dokan_checkout_update_order_meta', 'dokan_sync_insert_order' );
 
 
+/**
+ * Get a seller ID based on WooCommerce order.
+ * 
+ * If multiple post author is found, then this order contains products
+ * from multiple sellers. In that case, the seller ID becomes `0`.
+ * 
+ * @global object $wpdb
+ * @param int $order_id
+ * @return int
+ */
 function dokan_get_seller_id_by_order( $order_id ) {
     global $wpdb;
 
@@ -249,6 +285,13 @@ function dokan_get_seller_id_by_order( $order_id ) {
     return 0;
 }
 
+
+/**
+ * Get bootstrap label class based on order status
+ * 
+ * @param string $status
+ * @return string
+ */
 function dokan_get_order_status_class( $status ) {
     switch ($status) {
         case 'completed':

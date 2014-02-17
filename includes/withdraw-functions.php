@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Get default withdraw methods
+ * 
+ * @return array
+ */
 function dokan_withdraw_register_methods() {
     $methods = array(
         'paypal' => array(
@@ -19,6 +24,12 @@ function dokan_withdraw_register_methods() {
     return apply_filters( 'dokan_withdraw_methods', $methods );
 }
 
+
+/**
+ * Get registered withdraw methods suitable for Settings Api
+ * 
+ * @return array
+ */
 function dokan_withdraw_get_methods() {
     $methods = array();
     $registered = dokan_withdraw_register_methods();
@@ -30,12 +41,27 @@ function dokan_withdraw_get_methods() {
     return $methods;
 }
 
+
+/**
+ * Get active withdraw methods.
+ * 
+ * Default is paypal 
+ * 
+ * @return array
+ */
 function dokan_withdraw_get_active_methods() {
     $methods = dokan_get_option( 'withdraw_methods', 'dokan_selling', array( 'paypal' ) );
 
     return $methods;
 }
 
+
+/**
+ * Get a single withdraw method based on key
+ * 
+ * @param string $method_key
+ * @return boolean|array
+ */
 function dokan_withdraw_get_method( $method_key ) {
     $methods = dokan_withdraw_register_methods();
 
@@ -46,6 +72,14 @@ function dokan_withdraw_get_method( $method_key ) {
     return false;
 }
 
+
+
+/**
+ * Get title from a withdraw method
+ * 
+ * @param string $method_key
+ * @return string
+ */
 function dokan_withdraw_get_method_title( $method_key ) {
     $registered = dokan_withdraw_register_methods();
 
@@ -56,6 +90,14 @@ function dokan_withdraw_get_method_title( $method_key ) {
     return '';
 }
 
+
+
+/**
+ * Callback for PayPal in store settings
+ * 
+ * @global WP_User $current_user
+ * @param array $store_settings
+ */
 function dokan_withdraw_method_paypal( $store_settings ) {
     global $current_user;
 
@@ -72,6 +114,14 @@ function dokan_withdraw_method_paypal( $store_settings ) {
     <?php
 }
 
+
+
+/**
+ * Callback for Skrill in store settings
+ * 
+ * @global WP_User $current_user
+ * @param array $store_settings
+ */
 function dokan_withdraw_method_skrill( $store_settings ) {
     global $current_user;
 
@@ -88,6 +138,14 @@ function dokan_withdraw_method_skrill( $store_settings ) {
     <?php
 }
 
+
+
+/**
+ * Callback for Bank in store settings
+ * 
+ * @global WP_User $current_user
+ * @param array $store_settings
+ */
 function dokan_withdraw_method_bank( $store_settings ) {
     $account_name = isset( $store_settings['payment']['bank']['ac_name'] ) ? esc_attr( $store_settings['payment']['bank']['ac_name'] ) : '';
     $account_number = isset( $store_settings['payment']['bank']['ac_number'] ) ? esc_attr( $store_settings['payment']['bank']['ac_number'] ) : '';
@@ -127,6 +185,14 @@ function dokan_withdraw_method_bank( $store_settings ) {
     <?php
 }
 
+
+
+/**
+ * Get withdraw counts, used in admin area
+ * 
+ * @global WPDB $wpdb
+ * @return array
+ */
 function dokan_get_withdraw_count() {
     global $wpdb;
 

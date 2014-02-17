@@ -4,6 +4,14 @@ remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_l
 remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 
+
+/**
+ * Injects seller name on cart and other areas
+ * 
+ * @param array $item_data
+ * @param array $cart_item
+ * @return array
+ */
 function dokan_product_seller_info( $item_data, $cart_item ) {
     $seller_info = get_userdata( $cart_item['data']->post->post_author );
 
@@ -17,6 +25,14 @@ function dokan_product_seller_info( $item_data, $cart_item ) {
 
 add_filter( 'woocommerce_get_item_data', 'dokan_product_seller_info', 10, 2 );
 
+
+
+/**
+ * Adds a seller tab in product single page
+ * 
+ * @param array $tabs
+ * @return array
+ */
 function dokan_seller_product_tab( $tabs) {
 
     $tabs['seller'] = array(
@@ -30,17 +46,34 @@ function dokan_seller_product_tab( $tabs) {
 
 add_filter( 'woocommerce_product_tabs', 'dokan_seller_product_tab' );
 
+
+/**
+ * Prints seller info in product single page
+ * 
+ * @global WC_Product $product
+ * @param type $val
+ */
 function dokan_product_seller_tab( $val ) {
     global $product;
 
     $author = get_user_by( 'id', $product->post->post_author );
     ?>
 
-    <?php _e( 'Seller:', 'dokan' ); ?> <?php printf( '<a href="%s">%s</a>', dokan_get_store_url( $author->ID ), $author->display_name ); ?>
+    <span class="seller-name">
+        <?php _e( 'Seller:', 'dokan' ); ?>
+    </span>
+
+     <?php printf( '<a href="%s">%s</a>', dokan_get_store_url( $author->ID ), $author->display_name ); ?>
 
     <?php
 }
 
+
+/**
+ * Renders item-bar of products in the loop
+ * 
+ * @global WC_Product $product
+ */
 function dokan_product_loop_price() {
     global $product;
     ?>
@@ -59,6 +92,12 @@ function dokan_product_loop_price() {
 add_action( 'woocommerce_after_shop_loop_item', 'dokan_product_loop_price' );
 
 
+/**
+ * Filters WC breadcrumb parameters
+ * 
+ * @param type $args
+ * @return type
+ */
 function dokan_woo_breadcrumb( $args ) {
     return array(
         'delimiter'   => '&nbsp; <i class="fa fa-angle-right"></i> &nbsp;',
@@ -72,6 +111,14 @@ function dokan_woo_breadcrumb( $args ) {
 
 add_filter( 'woocommerce_breadcrumb_defaults', 'dokan_woo_breadcrumb' );
 
+
+
+/**
+ * Show sub-orders on a parent order if available
+ * 
+ * @param WC_Order $parent_order
+ * @return void
+ */
 function dokan_order_show_suborders( $parent_order ) {
 
     $sub_orders = get_children( array( 'post_parent' => $parent_order->id, 'post_type' => 'shop_order' ) );

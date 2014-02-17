@@ -983,8 +983,19 @@ function dokan_save_variations( $post_id ) {
     update_post_meta( $post_id, '_default_attributes', $default_attributes );
 }
 
+
+
+/**
+ * Monitors a new order and attempts to create sub-orders
+ * 
+ * If an order contains products from multiple vendor, we can't show the order
+ * to each seller dashboard. That's why we need to divide the main order to
+ * some sub-orders based on the number of sellers.
+ * 
+ * @param int $parent_order_id
+ * @return void
+ */
 function dokan_create_sub_order( $parent_order_id ) {
-    global $woocommerce;
 
     $parent_order = new WC_Order( $parent_order_id );
     $order_items = $parent_order->get_items();
@@ -1014,6 +1025,15 @@ function dokan_create_sub_order( $parent_order_id ) {
 
 add_action( 'woocommerce_checkout_update_order_meta', 'dokan_create_sub_order' );
 
+
+
+/**
+ * Creates a sub order
+ * 
+ * @param int $parent_order
+ * @param int $seller_id
+ * @param array $seller_products
+ */
 function dokan_create_seller_order( $parent_order, $seller_id, $seller_products ) {
     $order_data = apply_filters( 'woocommerce_new_order_data', array(
         'post_type'     => 'shop_order',
@@ -1104,6 +1124,15 @@ function dokan_create_seller_order( $parent_order, $seller_id, $seller_products 
     } // if order
 }
 
+
+
+/**
+ * Get discount coupon total from a order 
+ * 
+ * @global WPDB $wpdb
+ * @param int $order_id
+ * @return int
+ */
 function dokan_sub_order_get_total_coupon( $order_id ) {
     global $wpdb;
 
@@ -1120,6 +1149,15 @@ function dokan_sub_order_get_total_coupon( $order_id ) {
 }
 
 
+
+/**
+ * Create coupons for a sub-order if neccessary
+ * 
+ * @param WC_Order $parent_order
+ * @param int $order_id
+ * @param array $product_ids
+ * @return type
+ */
 function dokan_create_sub_order_coupon( $parent_order, $order_id, $product_ids ) {
     $used_coupons = $parent_order->get_used_coupons();
 
@@ -1148,6 +1186,15 @@ function dokan_create_sub_order_coupon( $parent_order, $order_id, $product_ids )
     }
 }
 
+
+/**
+ * Create shipping for a sub-order if neccessary
+ * 
+ * @param WC_Order $parent_order
+ * @param int $order_id
+ * @param array $product_ids
+ * @return type
+ */
 function dokan_create_sub_order_shipping( $parent_order, $order_id, $seller_products ) {
     // take only the first shipping method
     $shipping_methods = $parent_order->get_shipping_methods();
@@ -1220,6 +1267,13 @@ function dokan_create_sub_order_shipping( $parent_order, $order_id, $seller_prod
 }
 
 
+
+/**
+ * Validates seller registration form from my-account page
+ * 
+ * @param WP_Error $error
+ * @return \WP_Error
+ */
 function dokan_seller_registration_errors( $error ) {
     $allowed_roles = array( 'customer', 'seller' );
 
@@ -1259,6 +1313,14 @@ function dokan_seller_registration_errors( $error ) {
 add_filter( 'woocommerce_process_registration_errors', 'dokan_seller_registration_errors' );
 add_filter( 'registration_errors', 'dokan_seller_registration_errors' );
 
+
+
+/**
+ * Inject first and last name to WooCommerce for new seller registraion
+ * 
+ * @param array $data
+ * @return array
+ */
 function dokan_new_customer_data( $data ) {
     $allowed_roles = array( 'customer', 'seller' );
     $role = ( isset( $_POST['role'] ) && in_array( $_POST['role'], $allowed_roles ) ) ? $_POST['role'] : 'customer';
@@ -1276,6 +1338,14 @@ function dokan_new_customer_data( $data ) {
 add_filter( 'woocommerce_new_customer_data', 'dokan_new_customer_data');
 
 
+
+/**
+ * Adds default dokan store settings when a new seller registers
+ * 
+ * @param int $user_id
+ * @param array $data
+ * @return void
+ */
 function dokan_on_create_seller( $user_id, $data ) {
     if ( $data['role'] != 'seller' ) {
         return;
@@ -1299,6 +1369,16 @@ function dokan_on_create_seller( $user_id, $data ) {
 
 add_action( 'woocommerce_created_customer', 'dokan_on_create_seller', 10, 2);
 
+
+
+/**
+ * Get featured products
+ * 
+ * Shown on homepage
+ * 
+ * @param int $per_page
+ * @return \WP_Query
+ */
 function dokan_get_featured_products( $per_page = 9) {
     $featured_query = new WP_Query( apply_filters( 'dokan_get_featured_products', array(
         'posts_per_page' => $per_page,
@@ -1320,6 +1400,16 @@ function dokan_get_featured_products( $per_page = 9) {
     return $featured_query;
 }
 
+
+
+/**
+ * Get best selling products
+ * 
+ * Shown on homepage
+ * 
+ * @param int $per_page
+ * @return \WP_Query
+ */
 function dokan_get_best_selling_products( $per_page = 8 ) {
 
     $args = array(
@@ -1343,6 +1433,16 @@ function dokan_get_best_selling_products( $per_page = 8 ) {
     return $best_selling_query;
 }
 
+
+
+/**
+ * Get top rated products
+ * 
+ * Shown on homepage
+ * 
+ * @param int $per_page
+ * @return \WP_Query
+ */
 function dokan_get_top_rated_products( $per_page = 8 ) {
 
     $args = array(
@@ -1368,6 +1468,17 @@ function dokan_get_top_rated_products( $per_page = 8 ) {
     return $top_rated_query;
 }
 
+
+
+/**
+ * Get products on-sale
+ * 
+ * Shown on homepage
+ * 
+ * @param type $per_page
+ * @param type $paged
+ * @return \WP_Query
+ */
 function dokan_get_on_sale_products( $per_page = 10, $paged = 1 ) {
     // Get products on sale
     $product_ids_on_sale = wc_get_product_ids_on_sale();
@@ -1396,6 +1507,18 @@ function dokan_get_on_sale_products( $per_page = 10, $paged = 1 ) {
     return new WP_Query( apply_filters( 'dokan_on_sale_products_query', $args ) );
 }
 
+
+
+/**
+ * Get current balance of a seller
+ * 
+ * Total = SUM(net_amount) - SUM(withdraw) 
+ * 
+ * @global WPDB $wpdb
+ * @param type $seller_id
+ * @param type $formatted
+ * @return type
+ */
 function dokan_get_seller_balance( $seller_id, $formatted = true ) {
     global $wpdb;
 

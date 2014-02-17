@@ -187,16 +187,12 @@ function dokan_author_total_sales( $seller_id ) {
     $earnings = wp_cache_get( $cache_key, 'dokan' );
 
     if ( $earnings === false ) {
-        $order_ids = dokan_get_seller_order_ids( $seller_id );
-        $order_ids = count( $order_ids ) ? implode( ', ', $order_ids ) : 0;
 
         $sql = "SELECT SUM(oim.meta_value) as earnings
                 FROM {$wpdb->prefix}woocommerce_order_items AS oi
                 LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS oim ON oim.order_item_id = oi.order_item_id
-                LEFT JOIN {$wpdb->term_relationships} rel ON oi.order_id = rel.object_id
-                LEFT JOIN {$wpdb->term_taxonomy} tax ON rel.term_taxonomy_id = tax.term_taxonomy_id
-                LEFT JOIN {$wpdb->terms} terms ON tax.term_id = terms.term_id
-                WHERE oi.order_id IN ($order_ids) AND oim.meta_key = '_line_total' AND terms.slug IN ('completed', 'processing', 'on-hold')";
+                LEFT JOIN {$wpdb->prefix}dokan_orders do ON oi.order_id = do.order_id
+                WHERE do.seller_id = %d AND oim.meta_key = '_line_total' AND do.order_status IN ('completed', 'processing', 'on-hold')";
 
         $count = $wpdb->get_row( $wpdb->prepare( $sql, $seller_id ) );
         $earnings = $count->earnings;

@@ -3,6 +3,7 @@
 /**
  * Returns the definitions for the reports and charts
  *
+ * @since 1.0
  * @return array
  */
 function dokan_get_reports_charts() {
@@ -36,6 +37,21 @@ function dokan_get_reports_charts() {
     return apply_filters( 'dokan_reports_charts', $charts );
 }
 
+
+/**
+ * Generate SQL query and fetch the report data based on the arguments passed
+ * 
+ * This function was cloned from WC_Admin_Report class.
+ * 
+ * @since 1.0
+ * 
+ * @global WPDB $wpdb
+ * @global WP_User $current_user
+ * @param array $args
+ * @param string $start_date
+ * @param string $end_date
+ * @return obj
+ */
 function dokan_get_order_report_data( $args = array(), $start_date, $end_date ) {
     global $wpdb, $current_user;
 
@@ -257,6 +273,14 @@ function dokan_get_order_report_data( $args = array(), $start_date, $end_date ) 
     return $result;
 }
 
+
+/**
+ * Generate sales overview report chart in report area
+ * 
+ * @since 1.0
+ * 
+ * @return void
+ */
 function dokan_sales_overview() {
     $start_date = date( 'Y-m-01', current_time('timestamp') );
     $end_date = date( 'Y-m-d', strtotime( 'midnight', current_time( 'timestamp' ) ) );
@@ -264,6 +288,13 @@ function dokan_sales_overview() {
     dokan_report_sales_overview( $start_date, $end_date, __( 'This month\'s sales', 'dokan' ) );
 }
 
+
+/**
+ * Generate seller dashboard overview chart
+ * 
+ * @since 1.0
+ * @return void
+ */
 function dokan_dashboard_sales_overview() {
     $start_date = date( 'Y-m-01', current_time('timestamp') );
     $end_date = date( 'Y-m-d', strtotime( 'midnight', current_time( 'timestamp' ) ) );
@@ -271,6 +302,13 @@ function dokan_dashboard_sales_overview() {
     dokan_sales_overview_chart_data( $start_date, $end_date, 'day' );
 }
 
+
+/**
+ * Generates daily sales report
+ * 
+ * @since 1.0
+ * @global WPDB $wpdb
+ */
 function dokan_daily_sales() {
     global $wpdb;
 
@@ -300,6 +338,21 @@ function dokan_daily_sales() {
     dokan_report_sales_overview( $start_date, $end_date, __( 'Sales in this period', 'dokan' ) );
 }
 
+
+
+/**
+ * Sales overview factory function
+ * 
+ * @since 1.0
+ * 
+ * @global type $woocommerce
+ * @global WPDB $wpdb
+ * @global type $wp_locale
+ * @global WP_User $current_user
+ * @param type $start_date
+ * @param type $end_date
+ * @param type $heading
+ */
 function dokan_report_sales_overview( $start_date, $end_date, $heading = '' ) {
     global $woocommerce, $wpdb, $wp_locale, $current_user;
 
@@ -411,6 +464,18 @@ function dokan_report_sales_overview( $start_date, $end_date, $heading = '' ) {
     <?php
 }
 
+
+
+/**
+ * Prepares chart data for sales overview
+ * 
+ * @since 1.0
+ * 
+ * @global type $wp_locale
+ * @param type $start_date
+ * @param type $end_date
+ * @param type $group_by
+ */
 function dokan_sales_overview_chart_data( $start_date, $end_date, $group_by ) {
     global $wp_locale;
 

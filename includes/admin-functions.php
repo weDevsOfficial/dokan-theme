@@ -31,6 +31,9 @@ add_filter( 'woocommerce_reports_get_order_report_query', 'dokan_admin_order_rep
 
 /**
  * Change the columns shown in admin.
+ * 
+ * @param array $existing_columns
+ * @return array
  */
 function dokan_admin_shop_order_edit_columns( $existing_columns ) {
     $columns = array();
@@ -246,6 +249,12 @@ function dokan_admin_shop_order_toggle_sub_orders() {
 
 add_action( 'restrict_manage_posts', 'dokan_admin_shop_order_toggle_sub_orders');
 
+/**
+ * Get total commision earning of the site
+ * 
+ * @global WPDB $wpdb
+ * @return int
+ */
 function dokan_site_total_earning() {
     global $wpdb;
 
@@ -258,6 +267,15 @@ function dokan_site_total_earning() {
     return $wpdb->get_var( $sql );
 }
 
+/**
+ * Generate report in admin area
+ * 
+ * @global WPDB $wpdb
+ * @global type $wp_locale
+ * @param string $group_by
+ * @param string $year
+ * @return obj
+ */
 function dokan_admin_report( $group_by = 'day', $year = '' ) {
     global $wpdb, $wp_locale;
 
@@ -495,6 +513,12 @@ function dokan_admin_report( $group_by = 'day', $year = '' ) {
     return $data;
 }
 
+/**
+ * Send notification to the seller once a product is published from pending
+ * 
+ * @param WP_Post $post
+ * @return void
+ */
 function dokan_send_notification_on_product_publish( $post ) {
     if ( $post->post_type != 'product' ) {
         return;
