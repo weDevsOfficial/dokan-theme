@@ -22,7 +22,6 @@ class Dokan_Update {
         }
 
         add_filter( 'pre_set_site_transient_update_themes', array($this, 'check_update') );
-        add_filter( 'themes_api', array(&$this, 'check_info'), 10, 3 );
     }
 
     /**
@@ -137,66 +136,35 @@ class Dokan_Update {
      * @param object $transient
      * @return object
      */
-    function check_update( $transient ) {
-        if ( empty( $transient->checked ) ) {
-            return $transient;
+    function check_update( $checked_data ) {
+        if ( empty( $checked_data->checked ) ) {
+            return $checked_data;
         }
 
-        $remote_info = $this->get_info();
+        $remote_info = $this->get_update_info();
 
         if ( !$remote_info ) {
-            return $transient;
+            return $checked_data;
         }
 
-        list( $plugin_name, $theme_version) = $this->get_current_plugin_info();
+        list( $theme_name, $theme_version) = $this->get_theme_info();
 
         if ( version_compare( $theme_version, $remote_info->latest, '<' ) ) {
 
-            $obj = new stdClass();
-            $obj->slug = self::slug;
-            $obj->new_version = $remote_info->latest;
-            $obj->url = self::base_url;
+            $obj = array();
+            $obj['new_version'] = $remote_info->latest;
+            $obj['url'] = self::base_url . 'changelog/theme/dokan.txt';
+            $obj['package'] = '';
 
             if ( isset( $remote_info->latest_url ) ) {
-                $obj->package = $remote_info->latest_url;
+                $obj['package'] = $remote_info->latest_url;
             }
 
-            $basefile = plugin_basename( dirname( dirname( __FILE__ ) ) . '/dokan.php' );
-            $transient->response[$basefile] = $obj;
+            $basefile = self::slug;
+            $checked_data->response[$basefile] = $obj;
         }
 
-        return $transient;
-    }
-
-    /**
-     * Plugin changelog information popup
-     *
-     * @param type $false
-     * @param type $action
-     * @param type $args
-     * @return \stdClass|boolean
-     */
-    function check_info( $false, $action, $args ) {
-        if ( self::slug == $args->slug ) {
-
-            $remote_info = $this->get_info();
-
-            $obj = new stdClass();
-            $obj->slug = self::slug;
-            $obj->new_version = $remote_info->latest;
-
-            if ( isset( $remote_info->latest_url ) ) {
-                $obj->download_link = $remote_info->latest_url;
-            }
-
-            $obj->sections = array(
-                'description' => $remote_info->msg
-            );
-
-            return $obj;
-        }
-
-        return false;
+        return $checked_data;
     }
 
     /**
@@ -204,9 +172,7 @@ class Dokan_Update {
      *
      * @return array
      */
-    function get_current_plugin_info() {
-        require_once ABSPATH . '/wp-admin/includes/plugin.php';
-
+    function get_theme_info() {
         $theme_data = wp_get_theme( get_option( 'template' ) );
         $theme_name = $theme_data->Name;
         $theme_version = $theme_data->Version;
@@ -221,10 +187,10 @@ class Dokan_Update {
      * @global object $wpdb
      * @return boolean
      */
-    function get_info() {
+    function get_update_info() {
         global $wp_version, $wpdb;
 
-        list( $theme_name, $theme_version) = $this->get_current_plugin_info();
+        list( $theme_name, $theme_version) = $this->get_theme_info();
 
         if ( is_multisite() ) {
             $wp_install = network_site_url();
@@ -235,14 +201,13 @@ class Dokan_Update {
         $license = $this->get_license_key();
 
         $params = array(
-            'timeout' => ( ( defined( 'DOING_CRON' ) && DOING_CRON ) ? 30 : 3 ),
+            'timeout' => 30,
             'user-agent' => 'WordPress/' . $wp_version . '; ' . home_url( '/' ),
             'body' => array(
                 'name' => $theme_name,
                 'slug' => self::slug,
                 'type' => 'theme',
                 'version' => $theme_version,
-                'action' => 'theme_check',
                 'site_url' => $wp_install,
                 'license' => isset( $license['key'] ) ? $license['key'] : '',
                 'license_email' => isset( $license['email'] ) ? $license['email'] : '',
@@ -256,8 +221,6 @@ class Dokan_Update {
         if ( is_wp_error( $response ) || $response['response']['code'] != 200 ) {
             return false;
         }
-
-        dokan_log( 'dokan update check' );
 
         return json_decode( $update );
     }
