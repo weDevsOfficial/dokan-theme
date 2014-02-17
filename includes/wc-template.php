@@ -7,7 +7,7 @@ remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_ad
 
 /**
  * Injects seller name on cart and other areas
- * 
+ *
  * @param array $item_data
  * @param array $cart_item
  * @return array
@@ -29,7 +29,7 @@ add_filter( 'woocommerce_get_item_data', 'dokan_product_seller_info', 10, 2 );
 
 /**
  * Adds a seller tab in product single page
- * 
+ *
  * @param array $tabs
  * @return array
  */
@@ -49,7 +49,7 @@ add_filter( 'woocommerce_product_tabs', 'dokan_seller_product_tab' );
 
 /**
  * Prints seller info in product single page
- * 
+ *
  * @global WC_Product $product
  * @param type $val
  */
@@ -57,13 +57,42 @@ function dokan_product_seller_tab( $val ) {
     global $product;
 
     $author = get_user_by( 'id', $product->post->post_author );
+    $store_info = dokan_get_store_info( $author->ID );
+//    var_dump( $store_info );
     ?>
+    <ul class="list-unstyled">
 
-    <span class="seller-name">
-        <?php _e( 'Seller:', 'dokan' ); ?>
-    </span>
+        <?php if ( !empty( $store_info['store_name'] ) ) { ?>
+            <li class="store-name">
+                <span><?php _e( 'Store Name:', 'dokan' ); ?></span>
+                <span class="details">
+                    <?php echo esc_html( $store_info['store_name'] ); ?>
+                </span>
+            </li>
+        <?php } ?>
 
-     <?php printf( '<a href="%s">%s</a>', dokan_get_store_url( $author->ID ), $author->display_name ); ?>
+        <li class="seller-name">
+            <span>
+                <?php _e( 'Seller:', 'dokan' ); ?>
+            </span>
+
+            <span class="details">
+                <?php printf( '<a href="%s">%s</a>', dokan_get_store_url( $author->ID ), $author->display_name ); ?>
+            </span>
+        </li>
+        <?php if ( !empty( $store_info['address'] ) ) { ?>
+            <li class="store-address">
+                <span><?php _e( 'Address:', 'dokan' ); ?></span>
+                <span class="details">
+                    <?php echo esc_html( $store_info['address'] ); ?>
+                </span>
+            </li>
+        <?php } ?>
+
+        <li class="clearfix">
+            <?php dokan_get_readable_seller_rating( $author->ID ); ?>
+        </li>
+    </ul>
 
     <?php
 }
@@ -71,7 +100,7 @@ function dokan_product_seller_tab( $val ) {
 
 /**
  * Renders item-bar of products in the loop
- * 
+ *
  * @global WC_Product $product
  */
 function dokan_product_loop_price() {
@@ -94,7 +123,7 @@ add_action( 'woocommerce_after_shop_loop_item', 'dokan_product_loop_price' );
 
 /**
  * Filters WC breadcrumb parameters
- * 
+ *
  * @param type $args
  * @return type
  */
@@ -115,7 +144,7 @@ add_filter( 'woocommerce_breadcrumb_defaults', 'dokan_woo_breadcrumb' );
 
 /**
  * Show sub-orders on a parent order if available
- * 
+ *
  * @param WC_Order $parent_order
  * @return void
  */
@@ -195,3 +224,10 @@ function dokan_order_show_suborders( $parent_order ) {
 }
 
 add_action( 'woocommerce_order_details_after_order_table', 'dokan_order_show_suborders' );
+
+
+function dokan_get_no_seller_image() {
+    $image = get_template_directory_uri() . '/assets/images/no-seller-image.png';
+
+    return apply_filters( 'dokan_no_seller_image', $image );
+}

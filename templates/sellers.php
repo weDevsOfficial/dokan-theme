@@ -33,7 +33,6 @@ get_header();
                         $banner_id = isset( $store_info['banner'] ) ? $store_info['banner'] : 0;
                         $store_name = isset( $store_info['store_name'] ) ? esc_html( $store_info['store_name'] ) : __( 'N/A', 'dokan' );
                         $store_url = dokan_get_store_url( $seller->ID );
-                        // var_dump( $store_info );
                         ?>
 
                         <div class="col-sm-6 col-md-4 single-seller">
@@ -45,7 +44,7 @@ get_header();
                                         ?>
                                         <img src="<?php echo esc_url( $banner_url[0] ); ?> ?>" alt="<?php echo esc_attr( $store_name ); ?>">
                                     <?php } else { ?>
-                                        <img src="http://lorempixel.com/240/160/nature/<?php echo rand(1, 10) ?>" alt="...">
+                                        <img src="<?php echo dokan_get_no_seller_image(); ?>" alt="<?php _e( 'No Image', 'dokan' ); ?>">
                                     <?php } ?>
                                 </a>
 
