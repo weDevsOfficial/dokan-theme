@@ -1051,3 +1051,22 @@ function dokan_number_format( $number ) {
 
     return $number;
 }
+
+
+/**
+ * Get coupon edit url
+ * 
+ * @param int $coupon_id
+ * @param string $coupon_page
+ * @return string
+ */
+function dokan_get_coupon_edit_url( $coupon_id, $coupon_page = '' ) {
+
+    if ( !$coupon_page ) {
+        $coupon_page = dokan_get_page_url( 'coupons' );
+    }
+
+    $edit_url = wp_nonce_url( add_query_arg( array('post' => $coupon_id, 'action' => 'edit', 'view' => 'add_coupons'), $coupon_page ), '_coupon_nonce', 'coupon_nonce_url' );
+
+    return $edit_url;
+}
