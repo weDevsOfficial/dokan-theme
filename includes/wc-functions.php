@@ -1605,7 +1605,7 @@ function dokan_get_seller_rating( $seller_id ) {
 
 /**
  * Get seller rating in a readable rating format
- * 
+ *
  * @param int $seller_id
  * @return void
  */
@@ -1617,7 +1617,7 @@ function dokan_get_readable_seller_rating( $seller_id ) {
         return;
     }
 
-    $long_text = _n( __( '%s rating from %d vote', 'dokan' ), __( '%s rating from %d votes', 'dokan' ), $rating['count'], 'dokan' );
+    $long_text = _n( __( '%s rating from %d review', 'dokan' ), __( '%s rating from %d reviews', 'dokan' ), $rating['count'], 'dokan' );
     $text = sprintf( __( 'Rated %s out of %d', 'dokan' ), $rating['rating'], number_format( 5 ) );
     $width = ( $rating['rating']/5 ) * 100;
     ?>

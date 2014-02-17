@@ -35,7 +35,7 @@ get_header();
 
             <div class="col-md-4 profile-info-box">
                 <div class="profile-img">
-                    <?php echo get_avatar( $store_user->ID ); ?>
+                    <?php echo get_avatar( $store_user->ID, 80 ); ?>
                 </div>
 
                 <div class="profile-info">
@@ -60,6 +60,11 @@ get_header();
                                 <a href="mailto:<?php echo antispambot( $store_user->user_email ); ?>"><?php echo antispambot( $store_user->user_email ); ?></a>
                             </li>
                         <?php } ?>
+
+                        <li>
+                            <i class="fa fa-star"></i>
+                            <?php dokan_get_readable_seller_rating( $store_user->ID ); ?>
+                        </li>
                     </ul>
 
                     <ul class="list-inline store-social">
