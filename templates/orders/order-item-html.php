@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 ?>
 <tr class="item <?php if ( ! empty( $class ) ) echo $class; ?>" data-order_item_id="<?php echo $item_id; ?>">
-	<td class="thumb" width="3%">
+	<td class="thumb" width="10%">
 		<?php if ( $_product ) : ?>
 			<a href="<?php echo esc_url( get_permalink( $_product->id ) ); ?>">
 				<?php echo $_product->get_image( 'shop_thumbnail', array( 'title' => '' ) ); ?>

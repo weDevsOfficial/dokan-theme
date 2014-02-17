@@ -1,7 +1,7 @@
 <div class="wrap">
     <h2><?php _e( 'Seller Listing', 'dokan' ); ?></h2>
 
-    <form action="<?php echo admin_url( 'users.php' ); ?>" method="get">
+    <form action="<?php echo admin_url( 'users.php' ); ?>" method="get" style="margin-top: 15px;">
 
         <input type="hidden" name="s" value="">
         <?php wp_nonce_field( 'bulk-users' ); ?>
