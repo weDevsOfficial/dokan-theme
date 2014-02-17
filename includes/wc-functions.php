@@ -987,11 +987,11 @@ function dokan_save_variations( $post_id ) {
 
 /**
  * Monitors a new order and attempts to create sub-orders
- * 
+ *
  * If an order contains products from multiple vendor, we can't show the order
  * to each seller dashboard. That's why we need to divide the main order to
  * some sub-orders based on the number of sellers.
- * 
+ *
  * @param int $parent_order_id
  * @return void
  */
@@ -1029,7 +1029,7 @@ add_action( 'woocommerce_checkout_update_order_meta', 'dokan_create_sub_order' )
 
 /**
  * Creates a sub order
- * 
+ *
  * @param int $parent_order
  * @param int $seller_id
  * @param array $seller_products
@@ -1127,8 +1127,8 @@ function dokan_create_seller_order( $parent_order, $seller_id, $seller_products 
 
 
 /**
- * Get discount coupon total from a order 
- * 
+ * Get discount coupon total from a order
+ *
  * @global WPDB $wpdb
  * @param int $order_id
  * @return int
@@ -1152,7 +1152,7 @@ function dokan_sub_order_get_total_coupon( $order_id ) {
 
 /**
  * Create coupons for a sub-order if neccessary
- * 
+ *
  * @param WC_Order $parent_order
  * @param int $order_id
  * @param array $product_ids
@@ -1189,7 +1189,7 @@ function dokan_create_sub_order_coupon( $parent_order, $order_id, $product_ids )
 
 /**
  * Create shipping for a sub-order if neccessary
- * 
+ *
  * @param WC_Order $parent_order
  * @param int $order_id
  * @param array $product_ids
@@ -1270,7 +1270,7 @@ function dokan_create_sub_order_shipping( $parent_order, $order_id, $seller_prod
 
 /**
  * Validates seller registration form from my-account page
- * 
+ *
  * @param WP_Error $error
  * @return \WP_Error
  */
@@ -1317,7 +1317,7 @@ add_filter( 'registration_errors', 'dokan_seller_registration_errors' );
 
 /**
  * Inject first and last name to WooCommerce for new seller registraion
- * 
+ *
  * @param array $data
  * @return array
  */
@@ -1341,7 +1341,7 @@ add_filter( 'woocommerce_new_customer_data', 'dokan_new_customer_data');
 
 /**
  * Adds default dokan store settings when a new seller registers
- * 
+ *
  * @param int $user_id
  * @param array $data
  * @return void
@@ -1373,9 +1373,9 @@ add_action( 'woocommerce_created_customer', 'dokan_on_create_seller', 10, 2);
 
 /**
  * Get featured products
- * 
+ *
  * Shown on homepage
- * 
+ *
  * @param int $per_page
  * @return \WP_Query
  */
@@ -1404,9 +1404,9 @@ function dokan_get_featured_products( $per_page = 9) {
 
 /**
  * Get best selling products
- * 
+ *
  * Shown on homepage
- * 
+ *
  * @param int $per_page
  * @return \WP_Query
  */
@@ -1437,9 +1437,9 @@ function dokan_get_best_selling_products( $per_page = 8 ) {
 
 /**
  * Get top rated products
- * 
+ *
  * Shown on homepage
- * 
+ *
  * @param int $per_page
  * @return \WP_Query
  */
@@ -1472,9 +1472,9 @@ function dokan_get_top_rated_products( $per_page = 8 ) {
 
 /**
  * Get products on-sale
- * 
+ *
  * Shown on homepage
- * 
+ *
  * @param type $per_page
  * @param type $paged
  * @return \WP_Query
@@ -1511,9 +1511,9 @@ function dokan_get_on_sale_products( $per_page = 10, $paged = 1 ) {
 
 /**
  * Get current balance of a seller
- * 
- * Total = SUM(net_amount) - SUM(withdraw) 
- * 
+ *
+ * Total = SUM(net_amount) - SUM(withdraw)
+ *
  * @global WPDB $wpdb
  * @param type $seller_id
  * @param type $formatted
@@ -1577,4 +1577,58 @@ function get_product_search_form( $echo = true  ) {
         echo apply_filters( 'get_product_search_form', $form );
     else
         return apply_filters( 'get_product_search_form', $form );
+}
+
+
+/**
+ * Get seller rating
+ *
+ * @global WPDB $wpdb
+ * @param type $seller_id
+ * @return type
+ */
+function dokan_get_seller_rating( $seller_id ) {
+    global $wpdb;
+
+    $sql = "SELECT AVG(cm.meta_value) as average, COUNT(wc.comment_ID) as count FROM $wpdb->posts p
+        INNER JOIN $wpdb->comments wc ON p.ID = wc.comment_post_ID
+        LEFT JOIN $wpdb->commentmeta cm ON cm.comment_id = wc.comment_ID
+        WHERE p.post_author = %d AND p.post_type = 'product' AND p.post_status = 'publish'
+        AND ( cm.meta_key = 'rating' OR cm.meta_key IS NULL) AND wc.comment_approved = 1
+        ORDER BY wc.comment_post_ID";
+
+    $result = $wpdb->get_row( $wpdb->prepare( $sql, $seller_id ) );
+
+    return array( 'rating' => number_format( $result->average, 2), 'count' => (int) $result->count );
+}
+
+
+/**
+ * Get seller rating in a readable rating format
+ * 
+ * @param int $seller_id
+ * @return void
+ */
+function dokan_get_readable_seller_rating( $seller_id ) {
+    $rating = dokan_get_seller_rating($seller_id);
+
+    if ( ! $rating['count'] ) {
+        echo __( 'No ratings found yet!', 'dokan' );
+        return;
+    }
+
+    $long_text = _n( __( '%s rating from %d vote', 'dokan' ), __( '%s rating from %d votes', 'dokan' ), $rating['count'], 'dokan' );
+    $text = sprintf( __( 'Rated %s out of %d', 'dokan' ), $rating['rating'], number_format( 5 ) );
+    $width = ( $rating['rating']/5 ) * 100;
+    ?>
+        <span class="seller-rating">
+            <span title="<?php echo esc_attr( $text ); ?>" class="star-rating" itemtype="http://schema.org/Rating" itemscope="" itemprop="reviewRating">
+                <span class="width" style="width: <?php echo $width; ?>%"></span>
+                <span style=""><strong itemprop="ratingValue"><?php echo $rating['rating']; ?></strong></span>
+            </span>
+        </span>
+
+        <span class="text"><?php printf( $long_text, $rating['rating'], $rating['count'] ); ?></span>
+
+    <?php
 }
