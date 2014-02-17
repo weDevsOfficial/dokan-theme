@@ -23,6 +23,7 @@ a:hover{text-decoration:none}
 .site-header{padding:0;box-shadow:0 1px 2px #e9e9e9;border-bottom:1px solid #dedede;background:#fff;margin-bottom:20px}.site-header .header{margin-bottom:10px;overflow:hidden}
 .site-header h1.site-title{font-size:32px;font-weight:normal;margin-bottom:7px;padding-bottom:0;margin-top:10px}.site-header h1.site-title a{color:#ccc;background:url('../images/logo.png') no-repeat 0 0;width:300px;height:60px;display:block;text-indent:-9999px}.site-header h1.site-title a small{display:none}
 .site-header h1.site-title a:hover{text-decoration:none}
+.site-header .widget{border:none;background:transparent;margin:22px 0 0 0;padding:0}.site-header .widget .widget-title{display:none}
 .site-header .divider{border-left:1px solid #dedede;border-right:1px solid #bababa}
 .site-header .site-navigation{position:relative;background:#ccc}
 .site-header .menu-container{margin-bottom:20px;position:relative}
@@ -214,7 +215,7 @@ a:hover{text-decoration:none}
 .page-template-templatesreports-php .report-filter{margin-top:15px}.page-template-templatesreports-php .report-filter select{border:1px solid #ededed;padding:2px 5px}
 .page-template-templatesreports-php table.table{margin-top:15px}.page-template-templatesreports-php table.table .progress{margin-bottom:0}
 .page-template-templatesreports-php .doakn-reports-main h3{margin:0 0 15px 0}
-.page-template-templatesreports-php .doakn-reports-main .chart-placeholder.main{height:500px}
+.page-template-templatesreports-php .doakn-reports-main .chart-placeholder.main{height:435px}
 .page-template-templatesreports-php .chart-tooltip{position:absolute;display:none;line-height:1;background:#333;color:#fff;padding:3px 5px;font-size:11px;border-radius:3px}
 .page-template-templatesdashboard-php .site-content .entry-content{margin:0}
 .page-template-templatesdashboard-php .dashboard-widget{background:#fff;border:1px solid #ebebeb;padding:10px 15px;position:relative;-webkit-box-shadow:0 1px 1px rgba(0,0,0,0.04);box-shadow:0 1px 1px rgba(0,0,0,0.04);margin-bottom:15px}.page-template-templatesdashboard-php .dashboard-widget a{font-size:13px}
