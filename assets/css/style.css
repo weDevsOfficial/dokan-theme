@@ -265,6 +265,7 @@ a:hover{text-decoration:none}
 .dokan-rating .star-rating:before{color:#e0dadf;content:"sssss";float:left;left:0;position:absolute;top:0}
 .dokan-rating .star-rating span{float:left;left:0;overflow:hidden;padding-top:1.5em;position:absolute;top:0}
 .dokan-rating .star-rating span:before{content:"SSSSS";left:0;position:absolute;top:0}
+.seller-rating{position:relative}.seller-rating .star-rating{float:left;margin:.5em 4px 0 0}
 .widget-area.widget-collapse.collapse{display:block}
 .widget{margin-bottom:25px;background:#fff;border:1px solid #ededed;padding:10px;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px}.widget select{max-width:98%}
 .widget caption{padding:0 0 5px 0}
