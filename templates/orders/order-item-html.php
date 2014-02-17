@@ -25,19 +25,24 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		<small><?php if ( $_product && $_product->get_sku() ) echo '<br>' . esc_html( $_product->get_sku() ); ?></small>
 
 		<?php
-			if ( $_product && isset( $_product->variation_data ) )
-				echo '<br/>' . woocommerce_get_formatted_variation( $_product->variation_data, true );
-		?>
+            if ( $_product && isset( $_product->variation_data ) )
+                echo '<br/>' . wc_get_formatted_variation( $_product->variation_data, true );
+        ?>
 	</td>
 
 	<?php do_action( 'woocommerce_admin_order_item_values', $_product, $item, absint( $item_id ) ); ?>
 
-	<td class="line-quantity" width="1%">
-		<?php echo esc_attr( $item['qty'] ); ?>
-	</td>
+    <td width="1%">
+        <?php if ( isset( $item['qty'] ) ) echo esc_html( $item['qty'] ); ?>
+    </td>
 
-	<td class="line_cost" width="1%">
-		<?php if ( isset( $item['line_subtotal'] ) ) echo woocommerce_price( $item['line_subtotal'] ); ?>
-	</td>
+    <td class="line_cost" width="1%">
+        <?php
+            if ( isset( $item['line_total'] ) ) {
+                if ( isset( $item['line_subtotal'] ) && $item['line_subtotal'] != $item['line_total'] ) echo '<del>' . wc_price( $item['line_subtotal'] ) . '</del> ';
 
+                echo wc_price( $item['line_total'] );
+            }
+        ?>
+    </td>
 </tr>
