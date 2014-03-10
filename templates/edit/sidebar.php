@@ -65,6 +65,8 @@
     </div> <!-- .product-type -->
 </div>
 
+<?php do_action( 'dokan_product_edit_before_sidebar' ); ?>
+
 <aside class="downloadable downloadable_files">
     <div class="dokan-side-head">
         <label class="checkbox-inline">
@@ -123,6 +125,8 @@
     </div> <!-- .dokan-side-body -->
 </aside> <!-- .downloadable -->
 
+<?php do_action( 'dokan_product_edit_after_downloadable' ); ?>
+
 <aside class="product-gallery">
     <div class="dokan-side-head">
         Image Gallery
@@ -162,3 +166,5 @@
         <a href="#" class="add-product-images btn btn-success">+ Add product images</a>
     </div>
 </aside> <!-- .product-gallery -->
+
+<?php do_action( 'dokan_product_edit_after_sidebar' ); ?>

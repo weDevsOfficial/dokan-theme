@@ -290,11 +290,7 @@ dokan_frontend_dashboard_scripts();
 
                     <div class="col-md-3 dokan-edit-sidebar">
 
-                        <?php do_action( 'dokan_product_edit_before_sidebar' ); ?>
-
                         <?php include_once __DIR__ . '/edit/sidebar.php'; ?>
-
-                        <?php do_action( 'dokan_product_edit_after_sidebar' ); ?>
 
                     </div> <!-- .dokan-edit-sidebar -->
                 </div> <!-- .product-edit-container -->
