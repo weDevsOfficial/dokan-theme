@@ -9,6 +9,8 @@ get_header();
 <div id="primary" class="content-area col-md-10">
     <div id="content" class="site-content" role="main">
 
+        <?php do_action( 'dokan_before_listing_product' ); ?>
+
         <?php while (have_posts()) : the_post(); ?>
 
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -210,6 +212,8 @@ get_header();
             </article>
 
         <?php endwhile; // end of the loop. ?>
+
+        <?php do_action( 'dokan_after_listing_product' ); ?>
 
     </div><!-- #content .site-content -->
 </div><!-- #primary .content-area -->

@@ -30,6 +30,8 @@ if ( isset( $_POST['add_product'] ) ) {
         $errors[] = __( 'Please select a category', 'dokan' );
     }
 
+    $errors = apply_filters( 'dokan_can_add_product', $errors );
+
     if ( !$errors ) {
 
         $product_status = dokan_get_new_post_status();
