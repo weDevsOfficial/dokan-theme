@@ -13,7 +13,7 @@ get_header();
 dokan_frontend_dashboard_scripts();
 ?>
 
-<?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'reviews' ) ); ?>
+<?php dokan_get_template( dirname(__FILE__) . '/dashboard-nav.php', array( 'active_menu' => 'reviews' ) ); ?>
 
 <div id="primary" class="content-area col-md-10">
     <div id="content" class="site-content" role="main">

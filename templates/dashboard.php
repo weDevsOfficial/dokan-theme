@@ -23,7 +23,7 @@ $orders_url = dokan_get_page_url( 'orders' );
 $reviews_url = dokan_get_page_url( 'reviews' );
 ?>
 
-<?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'dashboard' ) ); ?>
+<?php dokan_get_template( dirname(__FILE__) . '/dashboard-nav.php', array( 'active_menu' => 'dashboard' ) ); ?>
 
 <div id="primary" class="content-area col-md-10">
     <div id="content" class="site-content" role="main">
@@ -152,7 +152,7 @@ $reviews_url = dokan_get_page_url( 'reviews' );
                             <div class="widget-title"><i class="fa fa-credit-card"></i> <?php _e( 'Sales', 'dokan' ); ?></div>
 
                             <?php
-                            require_once dirname( __DIR__ ) . '/includes/reports.php';
+                            require_once dirname( dirname(__FILE__) ) . '/includes/reports.php';
 
                             dokan_dashboard_sales_overview();
                             ?>

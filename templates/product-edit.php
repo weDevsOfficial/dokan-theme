@@ -74,7 +74,7 @@ dokan_frontend_dashboard_scripts();
     <div id="content" class="site-content" role="main">
 
         <div class="row">
-            <?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
+            <?php dokan_get_template( dirname(__FILE__) . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
 
             <form class="form" role="form" method="post">
 
@@ -243,7 +243,7 @@ dokan_frontend_dashboard_scripts();
 
                                 <div class="tab-pane" id="product-options">
 
-                                    <?php include_once __DIR__ . '/edit/options.php'; ?>
+                                    <?php include_once dirname(__FILE__) . '/edit/options.php'; ?>
 
                                     <?php do_action( 'dokan_product_edit_after_options' ); ?>
 
@@ -251,14 +251,14 @@ dokan_frontend_dashboard_scripts();
 
                                 <div class="tab-pane" id="product-inventory">
 
-                                    <?php include_once __DIR__ . '/edit/inventory.php'; ?>
+                                    <?php include_once dirname(__FILE__) . '/edit/inventory.php'; ?>
 
                                     <?php do_action( 'dokan_product_edit_after_inventory' ); ?>
 
                                 </div> <!-- #product-inventory -->
 
                                 <div class="tab-pane" id="product-shipping">
-                                    <?php include_once __DIR__ . '/edit/shipping.php'; ?>
+                                    <?php include_once dirname(__FILE__) . '/edit/shipping.php'; ?>
 
                                     <?php do_action( 'dokan_product_edit_after_shipping' ); ?>
                                 </div>
@@ -267,8 +267,8 @@ dokan_frontend_dashboard_scripts();
 
                                 <div class="tab-pane show_if_simple" id="product-attributes">
 
-                                    <?php include_once __DIR__ . '/edit/attributes.php'; ?>
-                                    <?php include_once __DIR__ . '/edit/templates-js.php'; ?>
+                                    <?php include_once dirname(__FILE__) . '/edit/attributes.php'; ?>
+                                    <?php include_once dirname(__FILE__) . '/edit/templates-js.php'; ?>
 
                                     <?php do_action( 'dokan_product_edit_after_attributes' ); ?>
 
@@ -290,7 +290,7 @@ dokan_frontend_dashboard_scripts();
 
                     <div class="col-md-3 dokan-edit-sidebar">
 
-                        <?php include_once __DIR__ . '/edit/sidebar.php'; ?>
+                        <?php include_once dirname(__FILE__) . '/edit/sidebar.php'; ?>
 
                     </div> <!-- .dokan-edit-sidebar -->
                 </div> <!-- .product-edit-container -->

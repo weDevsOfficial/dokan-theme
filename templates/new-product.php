@@ -75,7 +75,7 @@ get_header();
 dokan_frontend_dashboard_scripts();
 ?>
 
-<?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
+<?php dokan_get_template( dirname(__FILE__) . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
 
 <div id="primary" class="content-area col-md-9">
     <div id="content" class="site-content" role="main">

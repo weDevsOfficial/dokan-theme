@@ -4,7 +4,7 @@ dokan_delete_product_handler();
 get_header();
 ?>
 
-<?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
+<?php dokan_get_template( dirname(__FILE__) . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
 
 <div id="primary" class="content-area col-md-10">
     <div id="content" class="site-content" role="main">
