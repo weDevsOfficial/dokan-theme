@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/order-functions.php';
-require_once __DIR__ . '/withdraw-functions.php';
+require_once dirname(__FILE__) . '/order-functions.php';
+require_once dirname(__FILE__) . '/withdraw-functions.php';
 
 /**
  * Enqueue report related scripts

@@ -309,7 +309,7 @@ class Dokan_Admin_Settings {
     }
 
     function dashboard() {
-        include __DIR__ . '/dashboard.php';
+        include dirname(__FILE__) . '/dashboard.php';
     }
 
     function settings_page() {
@@ -323,11 +323,11 @@ class Dokan_Admin_Settings {
     }
 
     function withdraw_page() {
-        include __DIR__ . '/withdraw.php';
+        include dirname(__FILE__) . '/withdraw.php';
     }
 
     function seller_listing() {
-        include __DIR__ . '/sellers.php';
+        include dirname(__FILE__) . '/sellers.php';
     }
 
     function report_page() {
@@ -335,11 +335,11 @@ class Dokan_Admin_Settings {
 
         dokan_reports_scripts();
 
-        include __DIR__ . '/reports.php';
+        include dirname(__FILE__) . '/reports.php';
     }
 
     function addon_page() {
-        include __DIR__ . '/add-on.php';
+        include dirname(__FILE__) . '/add-on.php';
     }
 
 }

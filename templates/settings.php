@@ -22,7 +22,7 @@ dokan_frontend_dashboard_scripts();
 get_header();
 ?>
 
-<?php dokan_get_template( __DIR__ . '/dashboard-nav.php', array( 'active_menu' => 'settings' ) ); ?>
+<?php dokan_get_template( dirname(__FILE__) . '/dashboard-nav.php', array( 'active_menu' => 'settings' ) ); ?>
 
 <div id="primary" class="content-area col-md-10">
     <div id="content" class="site-content" role="main">
