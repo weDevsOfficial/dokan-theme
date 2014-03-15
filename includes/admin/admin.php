@@ -175,6 +175,13 @@ class Dokan_Admin_Settings {
                     'type' => 'text',
                 ),
                 array(
+                    'name' => 'order_status_change',
+                    'label' => __( 'Order Status Change', 'dokan' ),
+                    'desc' => __( 'Seller Could Change Order Status', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
+                array(
                     'name' => 'withdraw_methods',
                     'label' => __( 'Withdraw Methods', 'dokan' ),
                     'desc' => __( 'Withdraw methods for sellers', 'dokan' ),

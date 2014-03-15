@@ -103,7 +103,7 @@ class Dokan_Ajax {
             die();
         }
 
-        if ( !current_user_can( 'dokandar' ) ) {
+        if ( !current_user_can( 'dokandar' ) || dokan_get_option( 'order_status_change', 'dokan_selling', 'on' ) != 'on' ) {
             wp_die( __( 'You do not have sufficient permissions to access this page.', 'dokan' ) );
         }
 
@@ -137,7 +137,7 @@ class Dokan_Ajax {
             die();
         }
 
-        if ( !current_user_can( 'edit_shop_orders' ) ) {
+        if ( !current_user_can( 'edit_shop_orders' ) || dokan_get_option( 'order_status_change', 'dokan_selling', 'on' ) != 'on' ) {
             wp_die( __( 'You do not have sufficient permissions to access this page.', 'dokan' ) );
         }
 
