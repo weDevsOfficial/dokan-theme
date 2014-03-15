@@ -301,11 +301,32 @@ jQuery(function($) {
         }
     };
 
+    var Dokan_Add_Seller = {
+        init: function() {
+            this.validate(this);
+        },
+
+        validate: function(self) {
+            // e.preventDefault();
+
+            $('form#register').validate({
+                errorPlacement: validatorError,
+                success: validatorSuccess,
+                submitHandler: function(form) {
+
+                    $(form).find('input[type=text], input[type=text], textarea').val('').removeClass('valid');
+                    // from.submit();
+                }
+            });
+        }
+    };
+
     $(function() {
         Dokan_Settings.init();
         Dokan_Withdraw.init();
         Dokan_Coupons.init();
         Dokan_Seller.init();
+        Dokan_Add_Seller.init();
     });
 
 })(jQuery);

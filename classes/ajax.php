@@ -56,6 +56,41 @@ class Dokan_Ajax {
         add_action( 'wp_ajax_dokan_save_attributes', array( $this, 'save_attributes' ) );
 
         add_action( 'wp_ajax_dokan_toggle_seller', array( $this, 'toggle_seller_status' ) );
+
+
+        add_action( 'wp_ajax_nopriv_shop_url', array($this, 'shop_url_check') );
+    }
+
+    /**
+     * chop url check
+     */
+    function shop_url_check() {
+        
+        if ( !wp_verify_nonce( $_POST['_nonce'], 'dokan_reviews' ) ) {
+            wp_send_json_error( array(
+                'type' => 'nonce',
+                'message' => 'Are you cheating?'
+            ) );
+        }
+
+        $url_slug = $_POST['url_slug'];
+        //print_r($_POST);
+
+        global $wpdb;
+
+        $usreinfo = get_users();
+        $check = true;
+        foreach ($usreinfo as $user) {
+            
+            if( $url_slug == $user->data->user_nicename || $url_slug == '' ) {
+                $check = false;
+            }
+        }
+
+        //print_r($usreinfo);
+        echo $check;
+
+
     }
 
     /**

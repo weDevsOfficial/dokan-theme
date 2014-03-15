@@ -30,11 +30,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
             <p class="form-row form-row-wide">
                 <label for="username"><?php _e( 'Username or email address', 'dokan' ); ?> <span class="required">*</span></label>
-                <input type="text" class="input-text" name="username" id="username" />
+                <input type="text" class="input-text form-control" name="username" id="username" />
             </p>
             <p class="form-row form-row-wide">
                 <label for="password"><?php _e( 'Password', 'dokan' ); ?> <span class="required">*</span></label>
-                <input class="input-text" type="password" name="password" id="password" />
+                <input class="input-text form-control" type="password" name="password" id="password" />
             </p>
 
             <?php do_action( 'woocommerce_login_form' ); ?>
@@ -65,27 +65,26 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
         <h2><?php _e( 'Register', 'dokan' ); ?></h2>
 
-        <form method="post" class="register">
-
+        <form id="register" method="post" class="register">
             <?php do_action( 'woocommerce_register_form_start' ); ?>
 
             <?php if ( get_option( 'woocommerce_registration_generate_username' ) == 'no' ) : ?>
 
-                <p class="form-row form-row-wide">
+                <p class="form-row form-group form-row-wide">
                     <label for="reg_username"><?php _e( 'Username', 'dokan' ); ?> <span class="required">*</span></label>
-                    <input type="text" class="input-text form-control" name="username" id="reg_username" value="<?php if ( ! empty( $_POST['username'] ) ) esc_attr_e($_POST['username']); ?>" />
+                    <input type="text" class="input-text form-control" name="username" id="reg_username" value="<?php if ( ! empty( $_POST['username'] ) ) esc_attr_e($_POST['username']); ?>" required="required" />
                 </p>
 
             <?php endif; ?>
 
-            <p class="form-row form-row-wide">
+            <p class="form-row form-group form-row-wide">
                 <label for="reg_email"><?php _e( 'Email address', 'dokan' ); ?> <span class="required">*</span></label>
-                <input type="email" class="input-text form-control" name="email" id="reg_email" value="<?php if ( ! empty( $_POST['email'] ) ) esc_attr_e($_POST['email']); ?>" />
+                <input type="email" class="input-text form-control" name="email" id="reg_email" value="<?php if ( ! empty( $_POST['email'] ) ) esc_attr_e($_POST['email']); ?>" required="required" />
             </p>
 
-            <p class="form-row form-row-wide">
+            <p class="form-row form-group form-row-wide">
                 <label for="reg_password"><?php _e( 'Password', 'dokan' ); ?> <span class="required">*</span></label>
-                <input type="password" class="input-text form-control" name="password" id="reg_password" value="<?php if ( ! empty( $_POST['password'] ) ) esc_attr_e( $_POST['password'] ); ?>" />
+                <input type="password" class="input-text form-control" name="password" id="reg_password" value="<?php if ( ! empty( $_POST['password'] ) ) esc_attr_e( $_POST['password'] ); ?>" required="required" minlength="6" />
             </p>
 
             <!-- Spam Trap -->

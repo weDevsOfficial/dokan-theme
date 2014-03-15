@@ -1330,6 +1330,7 @@ function dokan_new_customer_data( $data ) {
     if ( $role == 'seller' ) {
         $data['first_name'] = strip_tags( $_POST['fname'] );
         $data['last_name'] = strip_tags( $_POST['lname'] );
+        $data['user_nicename'] = sanitize_title( $_POST['shopurl'] );
     }
 
     return $data;
