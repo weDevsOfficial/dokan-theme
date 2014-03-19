@@ -113,6 +113,75 @@ jQuery(function($) {
 
 });
 
+// Dokan Register
+
+jQuery(function($) {
+    $('.user-role input[type=radio]').on('change', function() {
+        var value = $(this).val();
+
+        if ( value === 'seller') {
+            $('.show_if_seller').slideDown();
+        } else {
+            $('.show_if_seller').slideUp();
+        }
+    });
+
+    $('#company-name').on('focusout', function() {
+        var value = $(this).val().toLowerCase().replace(/-+/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        $('#seller-url').val(value);
+        $('#url-alart').text( value );
+        $('#seller-url').focus();
+    });
+
+    $('#seller-url').keyup(function() {
+        var self = $(this);
+        var value = self.val().toLowerCase().replace(/\s+/g, '-').replace(/[^-a-z0-9-]/g, '');
+
+        self.val(value);
+        $('#url-alart').text( value );
+
+        $('#url-alart').removeClass('text-danger');
+        $('#url-alart').removeClass('text-success');
+        $('#url-alart-mgs').text('');
+        $('#url-alart-mgs').removeClass('text-danger');
+        $('#url-alart-mgs').removeClass('text-success');
+        return;
+    });
+
+    $('#shop-phone').keyup(function() {
+        var self = $(this);
+        var value = self.val().replace(/[^-+0-9-]/g, '');
+        self.val(value);
+        return;
+    });
+
+    $('#seller-url').on('focusout', function() {
+        var self = $(this),
+        data = {
+            action : 'shop_url',
+            url_slug : self.val(),
+            _nonce : dokan.nonce,
+        };
+
+        // self({ message: null, overlayCSS: { background: '#fff url(' + dokan.ajax_loader + ') no-repeat center', opacity: 0.6 } });
+
+        $.post( dokan.ajaxurl, data, function(resp) {
+
+           if( resp == 0){
+                $('#url-alart').addClass('text-danger');
+                $('#url-alart-mgs').text('Not Availavle');
+                $('#url-alart-mgs').addClass('text-danger');
+           }else{
+                $('#url-alart').addClass('text-success');
+                $('#url-alart-mgs').text('Availavle');
+                $('#url-alart-mgs').addClass('text-success');
+           }
+
+        } );
+
+    });
+});
+
 //dokan settings
 
 (function($) {
@@ -135,6 +204,9 @@ jQuery(function($) {
             //image upload
             $('a.dokan-banner-drag').on('click', this.imageUpload);
             $('a.dokan-remove-banner-image').on('click', this.removeBanner);
+
+            $('a.dokan-gravatar-drag').on('click', this.gragatarImageUpload);
+            $('a.dokan-remove-gravatar-image').on('click', this.removeGravatar);
 
             this.validateForm(self);
 
@@ -171,6 +243,40 @@ jQuery(function($) {
                 $('.image-wrap', wrap).removeClass('dokan-hide');
 
                 $('.button-area').addClass('dokan-hide');
+            });
+
+            // Finally, open the modal
+            file_frame.open();
+
+        },
+        gragatarImageUpload: function() {
+            var file_frame,
+                self = $(this);
+
+            // If the media frame already exists, reopen it.
+            if ( file_frame ) {
+                file_frame.open();
+                return;
+            }
+
+            // Create the media frame.
+            file_frame = wp.media.frames.file_frame = wp.media({
+                title: jQuery( this ).data( 'uploader_title' ),
+                button: {
+                    text: jQuery( this ).data( 'uploader_button_text' )
+                },
+                multiple: false
+            });
+
+            // When an image is selected, run a callback.
+            file_frame.on( 'select', function() {
+                var attachment = file_frame.state().get('selection').first().toJSON();
+
+                var wrap = self.closest('.dokan-gravatar');
+                wrap.find('input.dokan-file-field').val(attachment.id);
+                wrap.find('img.dokan-gravatar-img').attr('src', attachment.url);
+                $('.gravatar-wrap', wrap).removeClass('dokan-hide');
+                $('.gravatar-button-area').addClass('dokan-hide');
             });
 
             // Finally, open the modal
@@ -232,7 +338,19 @@ jQuery(function($) {
             wrap.find('input.dokan-file-field').val('0');
             wrap.addClass('dokan-hide');
             instruction.removeClass('dokan-hide');
-        }
+        },
+
+        removeGravatar: function(e) {
+            e.preventDefault();
+
+            var self = $(this);
+            var wrap = self.closest('.gravatar-wrap');
+            var instruction = wrap.siblings('.gravatar-button-area');
+
+            wrap.find('input.dokan-file-field').val('0');
+            wrap.addClass('dokan-hide');
+            instruction.removeClass('dokan-hide');
+        },
     };
 
     var Dokan_Withdraw = {

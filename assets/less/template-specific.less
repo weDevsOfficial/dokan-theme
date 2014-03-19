@@ -527,6 +527,38 @@
         }
     }
 
+    .dokan-gravatar {
+        .dokan-remove-gravatar-image {
+            position:absolute;
+            width:80px;
+            height:80px;
+            background:#000;
+            top:0;
+            left:15px;
+            opacity:.7;
+            font-size:70px;
+            text-align: center;
+            color:#f00;
+            padding-top:5px;
+            isplay:none;
+            border-radius: 50%;
+        }
+        .gravatar-wrap {
+            .dokan-gravatar-img {
+                border-radius: 50%;
+                height: 80px !important;
+                width: 80px;
+            }
+        }
+
+        &:hover {
+            .dokan-remove-gravatar-image {
+                display: block;
+            }
+        }
+
+    }
+
     .button-area {
         margin-top: 35px;
 
