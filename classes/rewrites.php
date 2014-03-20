@@ -32,6 +32,9 @@ class Dokan_Rewrites {
 
         add_rewrite_rule( 'store/([^/]+)/?$', 'index.php?store=$matches[1]', 'top' );
         add_rewrite_rule( 'store/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&paged=$matches[2]', 'top' );
+
+        add_rewrite_rule( 'store/([^/]+)/reviews?$', 'index.php?store_review=$matches[1]', 'top' );
+        add_rewrite_rule( 'store/([^/]+)/reviews/page/?([0-9]{1,})/?$', 'index.php?store_review=$matches[1]&paged=$matches[2]', 'top' );
     }
 
     /**
@@ -42,6 +45,7 @@ class Dokan_Rewrites {
      */
     function register_query_var( $vars ) {
         $vars[] = 'store';
+        $vars[] = 'store_review';
         $vars[] = 'edit';
 
         return $vars;

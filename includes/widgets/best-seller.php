@@ -37,7 +37,7 @@ class Dokan_Best_Seller_Widget extends WP_Widget {
 
         if ( false === $seller ) {
         
-            $qry = "SELECT seller_id,user_nicename, display_name,SUM( net_amount ) AS total_sell
+            $qry = "SELECT seller_id, display_name,SUM( net_amount ) AS total_sell
                 FROM {$wpdb->prefix}dokan_orders AS o,{$wpdb->prefix}users AS u
                 WHERE o.seller_id = u.ID
                 GROUP BY o.seller_id
@@ -66,7 +66,7 @@ class Dokan_Best_Seller_Widget extends WP_Widget {
                         }
                         ?>
                         <li>
-                            <a href="<?php echo home_url(); ?>/store/<?php echo $value->user_nicename; ?>">
+                            <a href="<?php echo dokan_get_store_url( $value->seller_id ); ?>">
                                 <?php echo $value->display_name; ?>
                             </a><br />
                             <i class='fa fa-star'></i> 

@@ -216,6 +216,45 @@ class Dokan_Email {
 
     
     /**
+     * Send email to admin once a new seller registered
+     * 
+     * @param int $seller_id
+     */
+    function new_seller_registered_mail( $seller_id ) {
+        $template = DOKAN_INC_DIR . '/emails/new-seller-registered.php';
+
+        ob_start();
+        include $template;
+        $body = ob_get_clean();
+
+        $seller = get_user_by( 'id', $seller_id );
+
+        $find = array(
+            '%seller_name%',
+            '%store_url%',
+            '%seller_edit%',
+            '%site_name%',
+            '%site_url%'
+        );
+
+        $replace = array(
+            $seller->display_name,
+            dokan_get_store_url( $seller_id ),
+            admin_url( 'user-edit.php?user_id=' . $seller_id ),
+            $this->get_from_name(),
+            home_url(),
+        );
+
+        $body = str_replace( $find, $replace, $body);
+        $subject = sprintf( __( '[%s] New Seller Registered', 'dokan' ), $this->get_from_name() );
+
+        $this->send( $this->admin_email(), $subject, $body );
+    }
+
+    
+
+    
+    /**
      * Send email to admin once a product is added
      * 
      * @param int $product_id

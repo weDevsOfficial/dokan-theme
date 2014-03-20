@@ -1366,6 +1366,8 @@ function dokan_on_create_seller( $user_id, $data ) {
     );
 
     update_user_meta( $user_id, 'dokan_profile_settings', $dokan_settings );
+
+    Dokan_Email::init()->new_seller_registered_mail( $user_id );
 }
 
 add_action( 'woocommerce_created_customer', 'dokan_on_create_seller', 10, 2);
