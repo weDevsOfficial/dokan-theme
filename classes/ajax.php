@@ -75,12 +75,12 @@ class Dokan_Ajax {
 
         $url_slug = $_POST['url_slug'];
 
-        $check = false;
+        $check = true;
 
         $user = get_user_by( 'slug', $url_slug );
 
-        if ( empty($user ) ) {
-            $check = true;
+        if ( $user != '' ) {
+            $check = false;
         }
 
         echo $check;

@@ -432,8 +432,9 @@ jQuery(function($) {
                 success: validatorSuccess,
                 submitHandler: function(form) {
 
-                    $(form).find('input[type=text], input[type=text], textarea').val('').removeClass('valid');
-                    // from.submit();
+                    // console.log('elkdf');
+                    // $(form).find('input[type=text], input[type=text], textarea').val('').removeClass('valid');
+                    form.submit();
                 }
             });
         }

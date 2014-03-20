@@ -177,8 +177,10 @@ class Dokan_Template_reviews {
         </script>
 
         <?php
+        global $current_user;
         echo $this->pagination( $post_type );
     }
+
 
     /**
      * Pagination
@@ -211,6 +213,53 @@ class Dokan_Template_reviews {
         $page_links = paginate_links( array(
             'base' => add_query_arg( 'pagenum', '%#%' ),
             'format' => '',
+            'prev_text' => __( '&laquo;', 'aag' ),
+            'next_text' => __( '&raquo;', 'aag' ),
+            'total' => $num_of_pages,
+            'current' => $pagenum
+        ) );
+
+        if ( $page_links ) {
+            return '<div class="wpuf-pagination">' . $page_links . '</div>';
+        }
+    }
+
+
+
+    /**
+     * Pagination
+     * @param int $id
+     * @param string $post_type
+     * @param int $limit
+     * @param string $status
+     * @return string
+     */
+    function review_pagination( $id, $post_type, $limit, $status ) {
+        global $wpdb;
+        // $status = $this->page_status();
+
+        if ( $status == '1' ) {
+            $query = "$wpdb->comments.comment_approved IN ('1','0') AND";
+        } else {
+            $query = "$wpdb->comments.comment_approved='$status' AND";
+        }
+
+        $total = $wpdb->get_var(
+                "SELECT COUNT(*)
+            FROM $wpdb->comments, $wpdb->posts
+            WHERE   $wpdb->posts.post_author='$id' AND
+            $wpdb->posts.post_status='publish' AND
+            $wpdb->comments.comment_post_ID=$wpdb->posts.ID AND
+            $query
+            $wpdb->posts.post_type='$post_type'"
+        );
+
+        $pagenum = max(get_query_var('paged' ), 1);
+        $num_of_pages = ceil( $total / $limit );
+
+        $page_links = paginate_links( array(
+            'base' => dokan_get_store_url( $id ) . 'reviews/%_%',
+            'format' => 'page/%#%',
             'prev_text' => __( '&laquo;', 'aag' ),
             'next_text' => __( '&raquo;', 'aag' ),
             'total' => $num_of_pages,
@@ -292,14 +341,28 @@ class Dokan_Template_reviews {
      * @return string
      */
     function render_body( $post_type ) {
-        global $current_user, $wpdb;
+        global $current_user;
 
         $status = $this->page_status();
 
         $limit = $this->limit;
-        $pagenum = isset( $_GET['pagenum'] ) ? absint( $_GET['pagenum'] ) : 1;
-        $offset = ( $pagenum - 1 ) * $limit;
+        
+        $comments = $this->comment_query( $current_user->ID, $post_type, $limit, $status );
 
+        if ( count( $comments ) == 0 ) {
+            return '<tr><td colspan="5">' . __( 'No Result Found', 'dokan' ) . '</td></tr>';
+        }
+
+        foreach ($comments as $comment) {
+            $this->render_row( $comment, $post_type );
+        }
+    }
+
+    function comment_query( $id, $post_type, $limit, $status ) {
+        global $wpdb;
+
+        $pagenum = max(get_query_var('paged' ), 1);
+        $offset = ( $pagenum - 1 ) * $limit;
 
         if ( $status == '1' ) {
             $query = "c.comment_approved IN ('1','0') AND";
@@ -310,9 +373,9 @@ class Dokan_Template_reviews {
         $comments = $wpdb->get_results(
             "SELECT c.comment_content, c.comment_ID, c.comment_author,
                 c.comment_author_email, c.comment_author_url,
-                p.post_title, p.guid, c.comment_post_ID, c.comment_approved
+                p.post_title, c.user_id, c.comment_post_ID, c.comment_approved
             FROM $wpdb->comments as c, $wpdb->posts as p
-            WHERE p.post_author='$current_user->ID' AND
+            WHERE p.post_author='$id' AND
                 p.post_status='publish' AND
                 c.comment_post_ID=p.ID AND
                 $query
@@ -320,13 +383,7 @@ class Dokan_Template_reviews {
             LIMIT $offset,$limit"
         );
 
-        if ( count( $comments ) == 0 ) {
-            return '<tr><td colspan="5">' . __( 'No Result Found', 'dokan' ) . '</td></tr>';
-        }
-
-        foreach ($comments as $comment) {
-            $this->render_row( $comment, $post_type );
-        }
+        return $comments;
     }
 
     function render_row( $comment, $post_type ) {
