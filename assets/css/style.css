@@ -473,3 +473,5 @@ span.error{color:#b00;display:inline-block}
 .gravatar-wrap .dokan-gravatar-img,.profile-img .dokan-gravatar-img{border-radius: 50%;height: 80px !important;width: 80px;}
 .page-template-templatessettings-php .dokan-gravatar .dokan-remove-gravatar-image{position:absolute;width:80px;height:80px;background:#000;top:0;left:15px;opacity:.7;font-size:70px;text-align: center;color:#f00;padding-top:5px;display:none;border-radius: 50%;}
 .page-template-templatessettings-php .dokan-gravatar .gravatar-wrap:hover .dokan-remove-gravatar-image{display:block}
+.woocommerce #reviews #comments ol.commentlist li img.avatar, .woocommerce-page #reviews #comments ol.commentlist li img.avatar{width:80px;}
+.woocommerce #reviews #comments ol.commentlist li .comment-text, .woocommerce-page #reviews #comments ol.commentlist li .comment-text{margin:0 0 0 90px;}
