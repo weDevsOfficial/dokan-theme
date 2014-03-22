@@ -229,7 +229,7 @@ a:hover{text-decoration:none}
 .page-template-templatesdashboard-php .dashboard-widget .list-count .count{float:right}
 .page-template-templatesdashboard-php .chart-tooltip{position:absolute;display:none;line-height:1;background:#333;color:#fff;padding:3px 5px;font-size:11px;border-radius:3px}
 .page-template-templatesdashboard-php article>.row{margin-bottom:15px}
-.store-page-wrap .profile-frame{height:300px;padding:0;margin-bottom:30px;position:relative;background-size:100% auto}.store-page-wrap .profile-frame .profile-info-box{height:100%;background:rgba(0,0,0,0.65);color:#fff}.store-page-wrap .profile-frame .profile-info-box a{color:#ccc}
+.store-page-wrap .profile-frame{height:300px;padding:0;margin-bottom:30px;position:relative;background-size:100% auto}.store-page-wrap .profile-frame .profile-info-box{height:100%;background:rgba(0,0,0,0.65);color:#fff}.store-page-wrap .profile-frame .profile-info-box a{color:#ccc}.store-page-wrap .profile-frame .profile-info-box a:hover{color:#fff}
 .store-page-wrap .profile-frame .profile-info-box .profile-img{height:105px;text-align:center;padding-top:15px}.store-page-wrap .profile-frame .profile-info-box .profile-img img{background:#000;border-radius:500px}
 .store-page-wrap .profile-frame .profile-info-box .profile-info{margin-left:25px}.store-page-wrap .profile-frame .profile-info-box .profile-info li{padding-bottom:5px}.store-page-wrap .profile-frame .profile-info-box .profile-info li.store-name{font-weight:bold;padding-bottom:10px;font-size:15px}
 .store-page-wrap .profile-frame .profile-info-box .profile-info i{font-weight:bold;float:left;margin-left:-25px;margin-top:4px}

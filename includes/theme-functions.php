@@ -735,6 +735,19 @@ function dokan_get_store_url( $user_id ) {
 }
 
 
+/**
+ * Get review page url of a seller
+ *
+ * @param int $user_id
+ * @return string
+ */
+function dokan_get_review_url( $user_id ) {
+    $userstore = dokan_get_store_url( $user_id );
+
+    return $userstore ."reviews";
+}
+
+
 
 /**
  * Helper function for loggin

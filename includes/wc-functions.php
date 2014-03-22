@@ -1614,7 +1614,7 @@ function dokan_get_seller_rating( $seller_id ) {
  * @return void
  */
 function dokan_get_readable_seller_rating( $seller_id ) {
-    $rating = dokan_get_seller_rating($seller_id);
+    $rating = dokan_get_seller_rating( $seller_id );
 
     if ( ! $rating['count'] ) {
         echo __( 'No ratings found yet!', 'dokan' );
@@ -1632,7 +1632,7 @@ function dokan_get_readable_seller_rating( $seller_id ) {
             </span>
         </span>
 
-        <span class="text"><?php printf( $long_text, $rating['rating'], $rating['count'] ); ?></span>
+        <span class="text"><a href="<?php echo dokan_get_review_url( $seller_id ); ?>"><?php printf( $long_text, $rating['rating'], $rating['count'] ); ?></a></span>
 
     <?php
 }

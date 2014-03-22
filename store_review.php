@@ -119,34 +119,36 @@ get_header();
                     if ( count( $comments ) == 0 ) {
                         return '<span colspan="5">' . __( 'No Result Found', 'dokan' ) . '</span>';
                     }
-                    foreach ($comments as $comment) { 
-                        $comment_date = get_comment_date( 'Y/m/d \a\t g:i a', $comment->comment_ID );
-                        $comment_author_img = get_avatar( $comment->comment_author_email, 180 );
-                        $permalink = get_comment_link( $comment );
+                    foreach ($comments as $single_comment) { 
+                        $comment_date = get_comment_date( 'l, F jS, Y \a\t g:i a', $single_comment->comment_ID );
+                        $comment_author_img = get_avatar( $single_comment->comment_author_email, 180 );
+                        $permalink = get_comment_link( $single_comment );
                     ?>
 
                         <li class="comment byuser comment-author-sk-shaikat" itemtype="http://schema.org/Review" itemscope="" itemprop="reviews">
                             <div class="review_comment_container">
                                 <div class="dokan-review-author-img"><?php echo $comment_author_img; ?></div>
                                 <div class="comment-text">
-                                    <?php 
-                                    if ( get_option('woocommerce_enable_review_rating') == 'yes' ) : 
-                                        $rating =  intval( get_comment_meta( $comment->comment_ID, 'rating', true ) ); ?>
-                                        <div class="dokan-rating">
-                                            <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="star-rating" title="<?php echo sprintf(__( 'Rated %d out of 5', 'dokan' ), $rating) ?>">
-                                                <span style="width:<?php echo ( intval( get_comment_meta( $comment->comment_ID, 'rating', true ) ) / 5 ) * 100; ?>%"><strong itemprop="ratingValue"><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'dokan' ); ?></span>
+                                    <a href="<?php echo $permalink; ?>">
+                                        <?php 
+                                        if ( get_option('woocommerce_enable_review_rating') == 'yes' ) : 
+                                            $rating =  intval( get_comment_meta( $single_comment->comment_ID, 'rating', true ) ); ?>
+                                            <div class="dokan-rating">
+                                                <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="star-rating" title="<?php echo sprintf(__( 'Rated %d out of 5', 'dokan' ), $rating) ?>">
+                                                    <span style="width:<?php echo ( intval( get_comment_meta( $single_comment->comment_ID, 'rating', true ) ) / 5 ) * 100; ?>%"><strong itemprop="ratingValue"><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'dokan' ); ?></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    <?php endif; ?>
+                                        <?php endif; ?>
+                                    </a>
                                     <p>
-                                        <strong itemprop="author"><?php echo $comment->comment_author; ?></strong>
-                                        <em class="verified"><?php echo $comment->user_id == 0 ? '(Guest)' : ''; ?></em>
+                                        <strong itemprop="author"><?php echo $single_comment->comment_author; ?></strong>
+                                        <em class="verified"><?php echo $single_comment->user_id == 0 ? '(Guest)' : ''; ?></em>
                                         –
                                         <time datetime="2014-02-15T18:56:11+00:00" itemprop="datePublished"><?php echo $comment_date; ?></time>
                                         :
                                     </p>
                                     <div class="description" itemprop="description">
-                                        <p><?php echo $comment->comment_content; ?></p>
+                                        <p><?php echo $single_comment->comment_content; ?></p>
                                     </div>
                                 </div>
                             </div>
