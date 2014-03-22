@@ -74,23 +74,12 @@ class Dokan_Ajax {
         }
 
         $url_slug = $_POST['url_slug'];
-        //print_r($_POST);
 
-        global $wpdb;
-
-        $usreinfo = get_users();
-        $check = true;
-        foreach ($usreinfo as $user) {
-            
-            if( $url_slug == $user->data->user_nicename || $url_slug == '' ) {
-                $check = false;
-            }
+        $user = get_user_by( 'slug', $url_slug );
+        
+        if ( !$user ) {
+            wp_send_json_success();
         }
-
-        //print_r($usreinfo);
-        echo $check;
-
-
     }
 
     /**
