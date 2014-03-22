@@ -190,6 +190,14 @@ class Dokan_Admin_Settings {
                     'options' => dokan_withdraw_get_methods()
                 ),
                 array(
+                    'name' => 'withdraw_order_status',
+                    'label' => __( 'Order Status for Withdraw', 'dokan' ),
+                    'desc' => __( 'Order status for which seller could make a withdraw request', 'dokan' ),
+                    'type' => 'multicheck',
+                    'default' => array( 'completed' => 'Completed', 'processing' => 'Processing', 'on-hold' => 'On-hold' ),
+                    'options' => array( 'completed' => 'Completed', 'processing' => 'Processing', 'on-hold' => 'On-hold' )
+                ),
+                array(
                     'name' => 'withdraw_limit',
                     'label' => __( 'Minimum Withdraw Limit', 'dokan' ),
                     'desc' => __( 'Minimum balance required to make a withdraw request', 'dokan' ),

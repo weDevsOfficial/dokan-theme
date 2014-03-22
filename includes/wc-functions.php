@@ -1525,6 +1525,7 @@ function dokan_get_on_sale_products( $per_page = 10, $paged = 1 ) {
 function dokan_get_seller_balance( $seller_id, $formatted = true ) {
     global $wpdb;
 
+    $status = dokan_withdraw_get_active_order_status_in_comma();
     $cache_key = 'dokan_seller_balance_' . $seller_id;
     $earning = wp_cache_get( $cache_key, 'dokan' );
 
@@ -1532,7 +1533,7 @@ function dokan_get_seller_balance( $seller_id, $formatted = true ) {
         $sql = "SELECT SUM(net_amount) as earnings,
             (SELECT SUM(amount) FROM {$wpdb->prefix}dokan_withdraw WHERE user_id = %d AND status = 1) as withdraw
             FROM {$wpdb->prefix}dokan_orders
-            WHERE seller_id = %d AND order_status IN('completed', 'on-hold', 'processing')";
+            WHERE seller_id = %d AND order_status IN({$status})";
 
         $result = $wpdb->get_row( $wpdb->prepare( $sql, $seller_id, $seller_id ) );
         $earning = $result->earnings - $result->withdraw;

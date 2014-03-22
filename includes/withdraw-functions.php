@@ -220,3 +220,27 @@ function dokan_get_withdraw_count() {
 
     return $counts;
 }
+
+
+
+/**
+ * Get active withdraw order status.
+ * 
+ * Default is 'completed', 'processing', 'on-hold' 
+ * 
+ */
+function dokan_withdraw_get_active_order_status() {
+    $order_status = dokan_get_option( 'withdraw_order_status', 'dokan_selling', array( 'completed', 'processing', 'on-hold' ) );
+
+    return $order_status;
+}
+
+/**
+ * get comma seperated value from "dokan_withdraw_get_active_order_status()" return array
+ * @param array array
+ */
+function dokan_withdraw_get_active_order_status_in_comma() {
+    $order_status = dokan_withdraw_get_active_order_status();
+    $status = "'".implode("', '", $order_status )."'";
+    return $status;
+}
