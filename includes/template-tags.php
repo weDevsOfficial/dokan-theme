@@ -436,26 +436,47 @@ function dokan_seller_reg_form_fields() {
                 $('#seller-url').focus();
             });
 
-            $('#seller-url').keyup(function() {
-                var self = $(this);
-                var value = self.val().toLowerCase().replace(/\s+/g, '-').replace(/[^-a-z0-9-]/g, '');
+            $('#seller-url').keydown(function(e) {
+                var text = $(this).val();
 
-                self.val(value);
-                $('#url-alart').text( value );
+                // console.log(e.keyCode);
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 91, 109, 110, 189, 190]) !== -1 ||
+                     // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) || 
+                     // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                         // let it happen, don't do anything
+                        $('#url-alart').text( text );
+                         return;
+                }
 
-                $('#url-alart').removeClass('text-danger');
-                $('#url-alart').removeClass('text-success');
-                $('#url-alart-mgs').text('');
-                $('#url-alart-mgs').removeClass('text-danger');
-                $('#url-alart-mgs').removeClass('text-success');
-                return;
+                if ((e.shiftKey || (e.keyCode < 65 || e.keyCode > 90) && (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105) ) {
+                    e.preventDefault();
+                }
+
+                $('#url-alart').text( text );
+
+                // $('#url-alart').removeClass('text-danger').removeClass('text-success');
+                // $('#url-alart-mgs').text('').removeClass('text-danger').removeClass('text-success');
             });
 
-            $('#shop-phone').keyup(function() {
-                var self = $(this);
-                var value = self.val().replace(/[^-+-0-9-]/g, '');
-                self.val(value);
-                return;
+            $('#shop-phone').keydown(function(e) {
+
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 91, 107, 109, 110, 187, 189, 190]) !== -1 ||
+                     // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) || 
+                     // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                         // let it happen, don't do anything
+                         return;
+                }
+
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
             });
 
             $('#seller-url').on('focusout', function() {
@@ -466,19 +487,26 @@ function dokan_seller_reg_form_fields() {
                     _nonce : dokan.nonce,
                 };
 
-                // self({ message: null, overlayCSS: { background: '#fff url(' + dokan.ajax_loader + ') no-repeat center', opacity: 0.6 } });
+                if ( self.val() === '' ) {
+                    return;
+                }
+
+                var row = self.closest('.form-row');
+                row.block({ message: null, overlayCSS: { background: '#fff url(' + dokan.ajax_loader + ') no-repeat center', opacity: 0.6 } });
 
                 $.post( dokan.ajaxurl, data, function(resp) {
 
-                   if( resp == 0){
+                   if ( resp == 0){
                         $('#url-alart').addClass('text-danger');
-                        $('#url-alart-mgs').text('Not Availavle');
+                        $('#url-alart-mgs').text('Not Available');
                         $('#url-alart-mgs').addClass('text-danger');
-                   }else{
+                   } else {
                         $('#url-alart').addClass('text-success');
-                        $('#url-alart-mgs').text('Availavle');
+                        $('#url-alart-mgs').text('Available');
                         $('#url-alart-mgs').addClass('text-success');
                    }
+
+                   row.unblock();
 
                 } );
 
