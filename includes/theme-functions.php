@@ -1068,7 +1068,7 @@ function dokan_number_format( $number ) {
 
 /**
  * Get coupon edit url
- * 
+ *
  * @param int $coupon_id
  * @param string $coupon_page
  * @return string
@@ -1112,11 +1112,12 @@ function dokan_get_avatar( $avatar, $id_or_email, $size, $default, $alt ) {
 
     // see if there is a user_avatar meta field
     $user_avatar = get_user_meta( $user->ID, 'dokan_profile_settings', true );
-    $gravatar_id = $user_avatar['gravatar'];
-    $avater_url = wp_get_attachment_thumb_url( $gravatar_id );
+    $gravatar_id = isset( $user_avatar['gravatar'] ) ? $user_avatar['gravatar'] : 0;
     if ( empty( $gravatar_id ) ) {
         return $avatar;
     }
+
+    $avater_url = wp_get_attachment_thumb_url( $gravatar_id );
 
     return sprintf( '<img src="%1$s" alt="%2$s" width="%3$s" height="%3$s" class="avatar photo">', esc_url( $avater_url ), $alt, $size );
 }
