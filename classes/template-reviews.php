@@ -379,7 +379,7 @@ class Dokan_Template_reviews {
                 p.post_status='publish' AND
                 c.comment_post_ID=p.ID AND
                 $query
-                p.post_type='$post_type'
+                p.post_type='$post_type'  ORDER BY c.comment_ID DESC
             LIMIT $offset,$limit"
         );
 
