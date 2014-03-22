@@ -82,21 +82,25 @@ if ( $user_orders ) {
 
                         $actions = array();
 
-                        if ( in_array( $the_order->status, array('pending', 'on-hold') ) )
-                            $actions['processing'] = array(
-                                'url' => wp_nonce_url( admin_url( 'admin-ajax.php?action=dokan-mark-order-processing&order_id=' . $the_order->id ), 'dokan-mark-order-processing' ),
-                                'name' => __( 'Processing', 'dokan' ),
-                                'action' => "processing",
-                                'icon' => '<i class="fa fa-clock-o">&nbsp;</i>'
-                            );
+                        if ( dokan_get_option( 'order_status_change', 'dokan_selling', 'on' ) == 'on' ) {
 
-                        if ( in_array( $the_order->status, array('pending', 'on-hold', 'processing') ) )
-                            $actions['complete'] = array(
-                                'url' => wp_nonce_url( admin_url( 'admin-ajax.php?action=dokan-mark-order-complete&order_id=' . $the_order->id ), 'dokan-mark-order-complete' ),
-                                'name' => __( 'Complete', 'dokan' ),
-                                'action' => "complete",
-                                'icon' => '<i class="fa fa-check">&nbsp;</i>'
-                            );
+                            if ( in_array( $the_order->status, array('pending', 'on-hold') ) )
+                                $actions['processing'] = array(
+                                    'url' => wp_nonce_url( admin_url( 'admin-ajax.php?action=dokan-mark-order-processing&order_id=' . $the_order->id ), 'dokan-mark-order-processing' ),
+                                    'name' => __( 'Processing', 'dokan' ),
+                                    'action' => "processing",
+                                    'icon' => '<i class="fa fa-clock-o">&nbsp;</i>'
+                                );
+
+                            if ( in_array( $the_order->status, array('pending', 'on-hold', 'processing') ) )
+                                $actions['complete'] = array(
+                                    'url' => wp_nonce_url( admin_url( 'admin-ajax.php?action=dokan-mark-order-complete&order_id=' . $the_order->id ), 'dokan-mark-order-complete' ),
+                                    'name' => __( 'Complete', 'dokan' ),
+                                    'action' => "complete",
+                                    'icon' => '<i class="fa fa-check">&nbsp;</i>'
+                                );
+                            
+                        }
 
                         $actions['view'] = array(
                             'url' => wp_nonce_url( add_query_arg( array( 'order_id' => $the_order->id ), get_permalink() ), 'dokan_view_order' ),

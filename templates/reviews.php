@@ -29,7 +29,7 @@ dokan_frontend_dashboard_scripts();
                     <?php the_content(); ?>
                 </div><!-- .entry-content -->
 
-                <?php $dokan_template_reviews->reviews_view();; ?>
+                <?php $dokan_template_reviews->reviews_view(); ?>
 
             </article>
 

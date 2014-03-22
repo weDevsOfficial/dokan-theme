@@ -175,12 +175,27 @@ class Dokan_Admin_Settings {
                     'type' => 'text',
                 ),
                 array(
+                    'name' => 'order_status_change',
+                    'label' => __( 'Order Status Change', 'dokan' ),
+                    'desc' => __( 'Seller Could Change Order Status', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
+                array(
                     'name' => 'withdraw_methods',
                     'label' => __( 'Withdraw Methods', 'dokan' ),
                     'desc' => __( 'Withdraw methods for sellers', 'dokan' ),
                     'type' => 'multicheck',
                     'default' => array( 'paypal' => 'paypal' ),
                     'options' => dokan_withdraw_get_methods()
+                ),
+                array(
+                    'name' => 'withdraw_order_status',
+                    'label' => __( 'Order Status for Withdraw', 'dokan' ),
+                    'desc' => __( 'Order status for which seller could make a withdraw request', 'dokan' ),
+                    'type' => 'multicheck',
+                    'default' => array( 'completed' => 'Completed', 'processing' => 'Processing', 'on-hold' => 'On-hold' ),
+                    'options' => array( 'completed' => 'Completed', 'processing' => 'Processing', 'on-hold' => 'On-hold' )
                 ),
                 array(
                     'name' => 'withdraw_limit',

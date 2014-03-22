@@ -1366,6 +1366,8 @@ function dokan_on_create_seller( $user_id, $data ) {
     );
 
     update_user_meta( $user_id, 'dokan_profile_settings', $dokan_settings );
+
+    Dokan_Email::init()->new_seller_registered_mail( $user_id );
 }
 
 add_action( 'woocommerce_created_customer', 'dokan_on_create_seller', 10, 2);
@@ -1523,6 +1525,7 @@ function dokan_get_on_sale_products( $per_page = 10, $paged = 1 ) {
 function dokan_get_seller_balance( $seller_id, $formatted = true ) {
     global $wpdb;
 
+    $status = dokan_withdraw_get_active_order_status_in_comma();
     $cache_key = 'dokan_seller_balance_' . $seller_id;
     $earning = wp_cache_get( $cache_key, 'dokan' );
 
@@ -1530,7 +1533,7 @@ function dokan_get_seller_balance( $seller_id, $formatted = true ) {
         $sql = "SELECT SUM(net_amount) as earnings,
             (SELECT SUM(amount) FROM {$wpdb->prefix}dokan_withdraw WHERE user_id = %d AND status = 1) as withdraw
             FROM {$wpdb->prefix}dokan_orders
-            WHERE seller_id = %d AND order_status IN('completed', 'on-hold', 'processing')";
+            WHERE seller_id = %d AND order_status IN({$status})";
 
         $result = $wpdb->get_row( $wpdb->prepare( $sql, $seller_id, $seller_id ) );
         $earning = $result->earnings - $result->withdraw;
@@ -1611,7 +1614,7 @@ function dokan_get_seller_rating( $seller_id ) {
  * @return void
  */
 function dokan_get_readable_seller_rating( $seller_id ) {
-    $rating = dokan_get_seller_rating($seller_id);
+    $rating = dokan_get_seller_rating( $seller_id );
 
     if ( ! $rating['count'] ) {
         echo __( 'No ratings found yet!', 'dokan' );
@@ -1629,7 +1632,7 @@ function dokan_get_readable_seller_rating( $seller_id ) {
             </span>
         </span>
 
-        <span class="text"><?php printf( $long_text, $rating['rating'], $rating['count'] ); ?></span>
+        <span class="text"><a href="<?php echo dokan_get_review_url( $seller_id ); ?>"><?php printf( $long_text, $rating['rating'], $rating['count'] ); ?></a></span>
 
     <?php
 }

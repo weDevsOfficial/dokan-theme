@@ -147,7 +147,9 @@ $order = new WC_Order( $order_id );
                                 <span><?php _e( 'Order Status:', 'dokan' ); ?></span>
                                 <label class="label label-<?php echo dokan_get_order_status_class( $order->status ); ?>"><?php echo $order->status; ?></label>
 
-                                <a href="#" class="dokan-edit-status"><small><?php _e( '&nbsp; Edit', 'dokan' ); ?></small></a>
+                                <?php if ( dokan_get_option( 'order_status_change', 'dokan_selling', 'on' ) == 'on' ) {?>
+                                    <a href="#" class="dokan-edit-status"><small><?php _e( '&nbsp; Edit', 'dokan' ); ?></small></a>
+                                <?php } ?>
                             </li>
                             <li class="dokan-hide">
                                 <form id="dokan-order-status-form" action="" method="post">

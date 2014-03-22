@@ -100,6 +100,7 @@ class Dokan_Template_Settings{
             'location' => $_POST['location'],
             'find_address' => $_POST['find_address'],
             'banner' => $_POST['dokan_banner'],
+            'gravatar' => $_POST['dokan_gravatar'],
         );
 
         if ( isset( $_POST['settings']['bank'] ) ) {
@@ -152,6 +153,7 @@ class Dokan_Template_Settings{
 
         $banner = isset( $profile_info['banner'] ) ? absint( $profile_info['banner'] ) : 0;
         $storename = isset( $profile_info['store_name'] ) ? esc_attr( $profile_info['store_name'] ) : '';
+        $gravatar = isset( $profile_info['gravatar'] ) ? absint( $profile_info['gravatar'] ) : 0;
 
         $fb = isset( $profile_info['social']['fb'] ) ? esc_url( $profile_info['social']['fb'] ) : '';
         $twitter = isset( $profile_info['social']['twitter'] ) ? esc_url( $profile_info['social']['twitter'] ) : '';
@@ -216,6 +218,24 @@ class Dokan_Template_Settings{
 
                     <div class="col-md-5">
                         <input id="dokan_store_name" required value="<?php echo $storename; ?>" name="dokan_store_name" placeholder="store name" class="form-control input-md" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="dokan_gravatar"><?php _e( 'Seller Gravater', 'dokan' ); ?></label>
+
+                    <div class="col-md-5 dokan-gravatar">
+                        <div class="pull-left gravatar-wrap<?php echo $gravatar ? '' : ' dokan-hide'; ?>">
+                            <?php $gravatar_url = $gravatar ? wp_get_attachment_url( $gravatar ) : ''; ?>
+                            <input type="hidden" class="dokan-file-field" value="<?php echo $gravatar; ?>" name="dokan_gravatar">
+                            <img class="dokan-gravatar-img" src="<?php echo esc_url( $gravatar_url ); ?>">
+                            <a class="close dokan-remove-gravatar-image">&times;</a>
+                        </div>
+                        <div class="gravatar-button-area<?php echo $gravatar ? ' dokan-hide' : ''; ?>">
+                            <i class="fa fa-cloud-upload"></i>
+
+                            <a href="#" class="dokan-gravatar-drag btn btn-info"><?php _e( 'Upload gravatar', 'dokan' ); ?></a>
+                        </div>
                     </div>
                 </div>
 

@@ -11,6 +11,7 @@ class Dokan_Rewrites {
         add_action( 'init', array($this, 'register_rule') );
         add_filter( 'template_include', array($this, 'store_template') );
         add_filter( 'template_include', array($this, 'product_edit_template'), 11 );
+        add_filter( 'template_include', array($this, 'store_review_template'), 11 );
         add_filter( 'query_vars', array($this, 'register_query_var') );
         add_filter( 'pre_get_posts', array($this, 'store_query_filter') );
     }
@@ -32,6 +33,9 @@ class Dokan_Rewrites {
 
         add_rewrite_rule( 'store/([^/]+)/?$', 'index.php?store=$matches[1]', 'top' );
         add_rewrite_rule( 'store/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&paged=$matches[2]', 'top' );
+
+        add_rewrite_rule( 'store/([^/]+)/reviews?$', 'index.php?store=$matches[1]&store_review=true', 'top' );
+        add_rewrite_rule( 'store/([^/]+)/reviews/page/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&paged=$matches[2]&store_review=true', 'top' );
     }
 
     /**
@@ -42,6 +46,7 @@ class Dokan_Rewrites {
      */
     function register_query_var( $vars ) {
         $vars[] = 'store';
+        $vars[] = 'store_review';
         $vars[] = 'edit';
 
         return $vars;
@@ -85,6 +90,16 @@ class Dokan_Rewrites {
         if ( get_query_var( 'edit' ) && is_singular( 'product' ) ) {
 
             return get_template_directory() . '/templates/product-edit.php';
+        }
+
+        return $template;
+    }
+
+    function store_review_template( $template ) {
+
+        if ( $var = get_query_var( 'store_review' ) ) {
+
+            return get_template_directory() . '/store_review.php';
         }
 
         return $template;
