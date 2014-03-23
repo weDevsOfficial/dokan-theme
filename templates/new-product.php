@@ -59,7 +59,7 @@ if ( isset( $_POST['add_product'] ) ) {
             update_post_meta( $product_id, '_regular_price', $price );
             update_post_meta( $product_id, '_sale_price', '' );
             update_post_meta( $product_id, '_price', $price );
-            update_post_meta( $product_id, '_visibility', 'hidden' );
+            update_post_meta( $product_id, '_visibility', 'visible' );
 
             do_action( 'dokan_new_product_added', $product_id, $post_data );
 
