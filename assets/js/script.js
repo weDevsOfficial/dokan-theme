@@ -133,26 +133,43 @@ jQuery(function($) {
         $('#seller-url').focus();
     });
 
-    $('#seller-url').keyup(function() {
-        var self = $(this);
-        var value = self.val().toLowerCase().replace(/\s+/g, '-').replace(/[^-a-z0-9-]/g, '');
+    $('#seller-url').keydown(function(e) {
+        var text = $(this).val();
 
-        self.val(value);
-        $('#url-alart').text( value );
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 91, 109, 110, 173, 189, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                return;
+        }
 
-        $('#url-alart').removeClass('text-danger');
-        $('#url-alart').removeClass('text-success');
-        $('#url-alart-mgs').text('');
-        $('#url-alart-mgs').removeClass('text-danger');
-        $('#url-alart-mgs').removeClass('text-success');
-        return;
+        if ((e.shiftKey || (e.keyCode < 65 || e.keyCode > 90) && (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105) ) {
+            e.preventDefault();
+        }
     });
 
-    $('#shop-phone').keyup(function() {
-        var self = $(this);
-        var value = self.val().replace(/[^-+0-9-]/g, '');
-        self.val(value);
-        return;
+    $('#seller-url').keyup(function(e) {
+        $('#url-alart').text( $(this).val() );
+    });
+
+    $('#shop-phone').keydown(function(e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 91, 107, 109, 110, 187, 189, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
     });
 
     $('#seller-url').on('focusout', function() {
@@ -163,19 +180,24 @@ jQuery(function($) {
             _nonce : dokan.nonce,
         };
 
-        // self({ message: null, overlayCSS: { background: '#fff url(' + dokan.ajax_loader + ') no-repeat center', opacity: 0.6 } });
+        if ( self.val() === '' ) {
+            return;
+        }
+
+        var row = self.closest('.form-row');
+        row.block({ message: null, overlayCSS: { background: '#fff url(' + dokan.ajax_loader + ') no-repeat center', opacity: 0.6 } });
 
         $.post( dokan.ajaxurl, data, function(resp) {
 
-           if( resp == 0){
-                $('#url-alart').addClass('text-danger');
-                $('#url-alart-mgs').text('Not Availavle');
-                $('#url-alart-mgs').addClass('text-danger');
-           }else{
-                $('#url-alart').addClass('text-success');
-                $('#url-alart-mgs').text('Availavle');
-                $('#url-alart-mgs').addClass('text-success');
-           }
+            if ( resp == 0){
+                $('#url-alart').removeClass('text-success').addClass('text-danger');
+                $('#url-alart-mgs').removeClass('text-success').addClass('text-danger').text(dokan.seller.notAvailable);
+            } else {
+                $('#url-alart').removeClass('text-danger').addClass('text-success');
+                $('#url-alart-mgs').removeClass('text-danger').addClass('text-success').text(dokan.seller.available);
+            }
+
+            row.unblock();
 
         } );
 
@@ -431,9 +453,6 @@ jQuery(function($) {
                 errorPlacement: validatorError,
                 success: validatorSuccess,
                 submitHandler: function(form) {
-
-                    // console.log('elkdf');
-                    // $(form).find('input[type=text], input[type=text], textarea').val('').removeClass('valid');
                     form.submit();
                 }
             });

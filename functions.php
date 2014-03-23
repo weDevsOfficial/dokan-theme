@@ -298,10 +298,14 @@ class WeDevs_Dokan {
         wp_enqueue_script( 'flexslider', $template_directory . '/assets/js/jquery.flexslider-min.js', array('jquery') );
 
         wp_enqueue_script( 'dokan-scripts', $template_directory . '/assets/js/script.js', false, null, true );
-        wp_localize_script( 'dokan-scripts', 'dokan', array(
+        wp_localize_script( 'jquery', 'dokan', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' ),
             'nonce' => wp_create_nonce( 'dokan_reviews' ),
-            'ajax_loader' => $template_directory . '/assets/images/ajax-loader.gif'
+            'ajax_loader' => $template_directory . '/assets/images/ajax-loader.gif',
+            'seller' => array(
+                'available' => __( 'Available', 'dokan' ),
+                'notAvailable' => __( 'Not Available', 'dokan' )
+            )
         ) );
     }
 
