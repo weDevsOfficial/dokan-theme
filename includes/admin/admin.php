@@ -192,10 +192,10 @@ class Dokan_Admin_Settings {
                 array(
                     'name' => 'withdraw_order_status',
                     'label' => __( 'Order Status for Withdraw', 'dokan' ),
-                    'desc' => __( 'Order status for which seller could make a withdraw request', 'dokan' ),
+                    'desc' => __( 'Order status for which seller can make a withdraw request.', 'dokan' ),
                     'type' => 'multicheck',
-                    'default' => array( 'completed' => 'Completed', 'processing' => 'Processing', 'on-hold' => 'On-hold' ),
-                    'options' => array( 'completed' => 'Completed', 'processing' => 'Processing', 'on-hold' => 'On-hold' )
+                    'default' => array( 'completed' => __( 'Completed', 'dokan' ), 'processing' => __( 'Processing', 'dokan' ), 'on-hold' => __( 'On-hold', 'dokan' ) ),
+                    'options' => array( 'completed' => __( 'Completed', 'dokan' ), 'processing' => __( 'Processing', 'dokan' ), 'on-hold' => __( 'On-hold', 'dokan' ) )
                 ),
                 array(
                     'name' => 'withdraw_limit',

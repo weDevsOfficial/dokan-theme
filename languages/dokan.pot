@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Dokan\n"
-"POT-Creation-Date: 2014-03-23 19:46+0600\n"
-"PO-Revision-Date: 2014-03-23 19:46+0600\n"
+"POT-Creation-Date: 2014-03-23 20:01+0600\n"
+"PO-Revision-Date: 2014-03-23 20:01+0600\n"
 "Last-Translator: Tareq Hasan <tareq@wedevs.com>\n"
 "Language-Team: weDevs Team <info@wedevs.com>\n"
 "Language: English\n"
@@ -364,25 +364,25 @@ msgstr ""
 msgid "Contact Seller"
 msgstr ""
 
-#: ../store.php:125
-msgid "No products were found of this seller!"
-msgstr ""
-
-#: ../store_review.php:116
+#: ../store-reviews.php:117
 msgid "Seller Review"
 msgstr ""
 
-#: ../store_review.php:120 ../classes/template-reviews.php:353
+#: ../store-reviews.php:122 ../classes/template-reviews.php:353
 msgid "No Result Found"
 msgstr ""
 
-#: ../store_review.php:137 ../classes/template-reviews.php:434
+#: ../store-reviews.php:140 ../classes/template-reviews.php:434
 #, php-format
 msgid "Rated %d out of 5"
 msgstr ""
 
-#: ../store_review.php:138 ../classes/template-reviews.php:435
+#: ../store-reviews.php:141 ../classes/template-reviews.php:435
 msgid "out of 5"
+msgstr ""
+
+#: ../store.php:125
+msgid "No products were found of this seller!"
 msgstr ""
 
 #: ../classes/admin-user-profile.php:37
@@ -2097,6 +2097,20 @@ msgstr ""
 msgid "Order status for which seller could make a withdraw request"
 msgstr ""
 
+#: ../includes/admin/admin.php:197 ../includes/admin/admin.php:198
+#: ../templates/dashboard.php:84
+msgid "Completed"
+msgstr ""
+
+#: ../includes/admin/admin.php:197 ../includes/admin/admin.php:198
+#: ../templates/dashboard.php:94 ../templates/orders/listing.php:90
+msgid "Processing"
+msgstr ""
+
+#: ../includes/admin/admin.php:197 ../includes/admin/admin.php:198
+msgid "On-hold"
+msgstr ""
+
 #: ../includes/admin/admin.php:202
 msgid "Minimum Withdraw Limit"
 msgstr ""
@@ -2520,14 +2534,6 @@ msgstr ""
 
 #: ../templates/dashboard.php:46
 msgid "Pageview"
-msgstr ""
-
-#: ../templates/dashboard.php:84
-msgid "Completed"
-msgstr ""
-
-#: ../templates/dashboard.php:94 ../templates/orders/listing.php:90
-msgid "Processing"
 msgstr ""
 
 #: ../templates/dashboard.php:104
