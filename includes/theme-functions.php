@@ -1110,6 +1110,10 @@ function dokan_get_avatar( $avatar, $id_or_email, $size, $default, $alt ) {
         $user = get_user_by( 'email', $id_or_email );
     }
 
+    if ( !$user ) {
+        return $avatar;
+    }
+
     // see if there is a user_avatar meta field
     $user_avatar = get_user_meta( $user->ID, 'dokan_profile_settings', true );
     $gravatar_id = isset( $user_avatar['gravatar'] ) ? $user_avatar['gravatar'] : 0;
