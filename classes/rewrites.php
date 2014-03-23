@@ -99,7 +99,7 @@ class Dokan_Rewrites {
 
         if ( $var = get_query_var( 'store_review' ) ) {
 
-            return get_template_directory() . '/store_review.php';
+            return get_template_directory() . '/store-reviews.php';
         }
 
         return $template;
