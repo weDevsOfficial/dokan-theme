@@ -222,7 +222,7 @@ class Dokan_Template_Settings{
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-3 control-label" for="dokan_gravatar"><?php _e( 'Seller Gravater', 'dokan' ); ?></label>
+                    <label class="col-md-3 control-label" for="dokan_gravatar"><?php _e( 'Profile Picture', 'dokan' ); ?></label>
 
                     <div class="col-md-5 dokan-gravatar">
                         <div class="pull-left gravatar-wrap<?php echo $gravatar ? '' : ' dokan-hide'; ?>">
@@ -234,7 +234,7 @@ class Dokan_Template_Settings{
                         <div class="gravatar-button-area<?php echo $gravatar ? ' dokan-hide' : ''; ?>">
                             <i class="fa fa-cloud-upload"></i>
 
-                            <a href="#" class="dokan-gravatar-drag btn btn-info"><?php _e( 'Upload gravatar', 'dokan' ); ?></a>
+                            <a href="#" class="dokan-gravatar-drag btn btn-info"><?php _e( 'Upload Photo', 'dokan' ); ?></a>
                         </div>
                     </div>
                 </div>
