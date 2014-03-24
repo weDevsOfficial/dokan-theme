@@ -239,7 +239,7 @@ class Dokan_Template_Withdraw {
 
         global $current_user, $wpdb;
 
-        $amount = filter_var( $_POST['witdraw_amount'], FILTER_SANITIZE_NUMBER_FLOAT );
+        $amount = floatval( $_POST['witdraw_amount'] );
         $method = $_POST['withdraw_method'];
 
         $data_info = array(
@@ -596,7 +596,7 @@ class Dokan_Template_Withdraw {
     }
 
     function get_user_balance( $user_id ) {
-        return 99;
+        return dokan_get_seller_balance( $user_id, false );
     }
 
     function request_status( $status ) {
