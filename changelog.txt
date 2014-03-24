@@ -1,0 +1,17 @@
+v1.0.1 -> Mar 24, 2014
+-----------------------
+- Sold individually option added
+- New action hooks and filters
+- PHP 5.2 support with replacing __DIR__
+- Seller shop url customization choice
+- Seller order status change enable/disable option added
+- Seller reviews shown on store page
+- Withdraw balance control -> order status choice option
+- Avatar upload feature
+- New seller notification mail
+- New product visibility to visible
+
+
+v1.0 -> Feb 17, 2014
+-----------------------
+- Initial Release
