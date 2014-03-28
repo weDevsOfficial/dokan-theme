@@ -26,9 +26,21 @@ class Dokan_Rewrites {
         if( isset( $permalinks['product_base'] ) ) {
             $base = substr( $permalinks['product_base'], 1 );
         }
-
+        
         if ( !empty( $base ) ) {
-            add_rewrite_rule( $base . '/([^/]+)(/[0-9]+)?/edit/?$', 'index.php?product=$matches[1]&page=$matches[2]&edit=true', 'top' );
+            
+            // special treatment for product cat
+            if ( stripos( $base, 'product_cat' ) ) {
+                
+                // get the category base. usually: shop
+                $base_array = explode( '/', ltrim( $base, '/' ) ); // remove first '/' and explode
+                $cat_base = isset( $base_array[0] ) ? $base_array[0] : 'shop';
+                
+                add_rewrite_rule( $cat_base . '/(.+?)/([^/]+)(/[0-9]+)?/edit?$', 'index.php?product_cat=$matches[1]&product=$matches[2]&page=$matches[3]&edit=true', 'top' );
+                
+            } else {
+                add_rewrite_rule( $base . '/([^/]+)(/[0-9]+)?/edit/?$', 'index.php?product=$matches[1]&page=$matches[2]&edit=true', 'top' );
+            }
         }
 
         add_rewrite_rule( 'store/([^/]+)/?$', 'index.php?store=$matches[1]', 'top' );
