@@ -62,7 +62,6 @@ if ( !function_exists( 'WC' ) ) {
                         </div>
                         <?php
                             wp_nav_menu( array(
-                                'menu'              => 'primary',
                                 'theme_location'    => 'top-left',
                                 'depth'             => 0,
                                 'container'         => 'div',
@@ -171,7 +170,6 @@ if ( !function_exists( 'WC' ) ) {
                                         <div class="collapse navbar-collapse navbar-main-collapse">
                                             <?php
                                                 wp_nav_menu( array(
-                                                    'menu'              => 'primary',
                                                     'theme_location'    => 'primary',
                                                     'container'         => 'div',
                                                     'container_class'   => 'collapse navbar-collapse navbar-main-collapse',
