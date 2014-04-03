@@ -36,44 +36,43 @@ class Dokan_Email {
         return sanitize_email( get_option( 'woocommerce_email_from_address' ) );
     }
 
-    
+
     /**
      * Get admin email address
-     * 
+     *
      * @return string
      */
     function admin_email() {
         return apply_filters( 'dokan_email_admin_mail', get_option( 'admin_email' ) );
     }
 
-    
+
     /**
      * Get user agent string
-     * 
+     *
      * @return string
      */
     function get_user_agent() {
         return substr( $_SERVER['HTTP_USER_AGENT'], 0, 150 );
     }
 
-    
+
     /**
      * Replace currency HTML entities with symbol
-     * 
+     *
      * @param string $amount
      * @return string
      */
     function currency_symbol( $amount ) {
         $price = sprintf( get_woocommerce_price_format(), get_woocommerce_currency_symbol(), $amount );
-        $price = str_replace( array('&#163;', '&#8364;', '&#36;'), array('£', 'EUR', '$'), $price);
 
-        return $price;
+        return html_entity_decode( $price );
     }
 
-    
+
     /**
      * Send email to seller from the seller contact form
-     * 
+     *
      * @param string $seller_email
      * @param string $from_name
      * @param string $from_email
@@ -112,10 +111,10 @@ class Dokan_Email {
         $this->send( $seller_email, $subject, $body, $headers );
     }
 
-    
+
     /**
      * Prepare body for withdraw email
-     * 
+     *
      * @param string $body
      * @param WP_User $user
      * @param float $amount
@@ -151,10 +150,10 @@ class Dokan_Email {
         return $body;
     }
 
-    
+
     /**
      * Send admin email notification when a new withdraw request is made
-     * 
+     *
      * @param WP_User $user
      * @param float $amount
      * @param string $method
@@ -171,10 +170,10 @@ class Dokan_Email {
         $this->send( $this->admin_email(), $subject, $body );
     }
 
-    
+
     /**
      * Send email to user once a withdraw request is approved
-     * 
+     *
      * @param int $user_id
      * @param float $amount
      * @param string $method
@@ -192,10 +191,10 @@ class Dokan_Email {
         $this->send( $user->user_email, $subject, $body );
     }
 
-    
+
     /**
      * Send email to user once a order has been cancelled
-     * 
+     *
      * @param int $user_id
      * @param float $amount
      * @param string $method
@@ -214,10 +213,10 @@ class Dokan_Email {
         $this->send( $user->user_email, $subject, $body );
     }
 
-    
+
     /**
      * Send email to admin once a new seller registered
-     * 
+     *
      * @param int $seller_id
      */
     function new_seller_registered_mail( $seller_id ) {
@@ -251,12 +250,12 @@ class Dokan_Email {
         $this->send( $this->admin_email(), $subject, $body );
     }
 
-    
 
-    
+
+
     /**
      * Send email to admin once a product is added
-     * 
+     *
      * @param int $product_id
      * @param string $status
      */
@@ -303,10 +302,10 @@ class Dokan_Email {
         $this->send( $this->admin_email(), $subject, $body );
     }
 
-    
+
     /**
      * Send email to seller once a product is published
-     * 
+     *
      * @param WP_Post $post
      * @param WP_User $seller
      */
