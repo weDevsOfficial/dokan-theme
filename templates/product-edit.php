@@ -29,6 +29,11 @@ if ( isset( $_POST['update_product']) ) {
     );
 
     wp_update_post( $product_info );
+
+    /** set product category * */
+    wp_set_object_terms( $post_id, (int) $_POST['product_cat'], 'product_cat' );
+    wp_set_object_terms( $post_id, 'simple', 'product_type' );
+
     dokan_process_product_meta( $post_id );
 
     /** set images **/
