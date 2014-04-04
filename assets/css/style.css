@@ -173,7 +173,7 @@ a:hover{text-decoration:none}
 .page-template-templatessettings-php .dokan-banner{border:4px dashed #d8d8d8;height:270px;margin:30px;margin-left:65px;max-width:760px;text-align:center;overflow:hidden;position:relative}.page-template-templatessettings-php .dokan-banner img{max-width:100%}
 .page-template-templatessettings-php .dokan-banner .dokan-remove-banner-image{position:absolute;width:100%;height:270px;background:#000;top:0;left:0;opacity:.7;font-size:100px;color:#f00;padding-top:70px;display:none}
 .page-template-templatessettings-php .dokan-banner:hover .dokan-remove-banner-image{display:block}
-.page-template-templatessettings-php .dokan-gravatar .dokan-remove-gravatar-image{position:absolute;width:80px;height:80px;background:#000;top:0;left:15px;opacity:.7;font-size:70px;text-align:center;color:#f00;padding-top:5px;isplay:none;border-radius:50%}
+.page-template-templatessettings-php .dokan-gravatar .dokan-remove-gravatar-image{position:absolute;width:80px;height:80px;background:#000;top:0;left:15px;opacity:.7;font-size:70px;text-align:center;color:#f00;padding-top:5px;display:none;border-radius:50%}
 .page-template-templatessettings-php .dokan-gravatar .gravatar-wrap .dokan-gravatar-img{border-radius:50%;height:80px !important;width:80px}
 .page-template-templatessettings-php .dokan-gravatar:hover .dokan-remove-gravatar-image{display:block}
 .page-template-templatessettings-php .button-area{margin-top:35px}.page-template-templatessettings-php .button-area i.fa-cloud-upload{display:block;font-size:80px;color:#dfdfdf}
