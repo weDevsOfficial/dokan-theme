@@ -764,6 +764,7 @@ function dokan_process_product_meta( $post_id ) {
 
     // Do action for product type
     do_action( 'woocommerce_process_product_meta_' . $product_type, $post_id );
+    do_action( 'dokan_process_product_meta', $post_id );
 
     // Clear cache/transients
     wc_delete_product_transients( $post_id );
