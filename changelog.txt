@@ -1,3 +1,17 @@
+v1.0.3 ->
+-----------------------
+- [new] Profile settings can be updated from admin area
+- [new] Per user seller percentage
+- [new] Some new hooks added.
+- [bugfix] Product category won't update
+- [bugfix] Menu parameter removed from wp_nav_menu
+- [bugfix] Currency entity fix in withdraw email
+- [bugfix] Downloadable file upload directory
+- [bugfix] Price validation removed from new product page.
+- [improve] Demo store notice compatibility
+- [improve] Edit permalink support for category base
+
+
 v1.0.2 -> Mar 24, 2014
 -----------------------
 - [buxfix] Withdraw request balance float
