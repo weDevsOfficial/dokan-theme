@@ -90,7 +90,7 @@ function dokan_is_seller_has_order( $seller_id, $order_id ) {
 
 /**
  * Count orders for a seller
- * 
+ *
  * @global WPDB $wpdb
  * @param int $user_id
  * @return array
@@ -134,7 +134,7 @@ function dokan_count_orders( $user_id ) {
 
 /**
  * Update the child order status when a parent order status is changed
- * 
+ *
  * @global object $wpdb
  * @param int $order_id
  * @param string $old_status
@@ -166,7 +166,7 @@ add_action( 'woocommerce_order_status_changed', 'dokan_on_order_status_change', 
 
 /**
  * Mark the parent order as complete when all the child order are completed
- * 
+ *
  * @param int $order_id
  * @param string $old_status
  * @param string $new_status
@@ -211,7 +211,7 @@ add_action( 'woocommerce_order_status_changed', 'dokan_on_child_order_status_cha
 
 /**
  * Delete a order row from sync table when a order is deleted from WooCommerce
- * 
+ *
  * @global object $wpdb
  * @param type $order_id
  */
@@ -224,7 +224,7 @@ function dokan_delete_sync_order( $order_id ) {
 
 /**
  * Insert a order in sync table once a order is created
- * 
+ *
  * @global object $wpdb
  * @param int $order_id
  */
@@ -232,13 +232,14 @@ function dokan_sync_insert_order( $order_id ) {
     global $wpdb;
 
     $order = new WC_Order( $order_id );
-    $percentage = dokan_get_seller_percentage();
+    $seller_id = dokan_get_seller_id_by_order( $order_id );
+    $percentage = dokan_get_seller_percentage( $seller_id );
     $order_total = $order->get_total();
 
     $wpdb->insert( $wpdb->prefix . 'dokan_orders',
         array(
             'order_id' => $order_id,
-            'seller_id' => dokan_get_seller_id_by_order( $order_id ),
+            'seller_id' => $seller_id,
             'order_total' => $order_total,
             'net_amount' => ($order_total * $percentage)/100,
             'order_status' => $order->status,
@@ -259,10 +260,10 @@ add_action( 'dokan_checkout_update_order_meta', 'dokan_sync_insert_order' );
 
 /**
  * Get a seller ID based on WooCommerce order.
- * 
+ *
  * If multiple post author is found, then this order contains products
  * from multiple sellers. In that case, the seller ID becomes `0`.
- * 
+ *
  * @global object $wpdb
  * @param int $order_id
  * @return int
@@ -288,7 +289,7 @@ function dokan_get_seller_id_by_order( $order_id ) {
 
 /**
  * Get bootstrap label class based on order status
- * 
+ *
  * @param string $status
  * @return string
  */

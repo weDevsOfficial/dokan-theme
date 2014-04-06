@@ -312,12 +312,13 @@ function dokan_generate_sync_table() {
 
     $orders = $wpdb->get_results( $sql );
     $table_name = $wpdb->prefix . 'dokan_orders';
-    $percentage = dokan_get_seller_percentage();
 
     $wpdb->query( 'TRUNCATE TABLE ' . $table_name );
 
     if ( $orders ) {
         foreach ($orders as $order) {
+            $percentage = dokan_get_seller_percentage( $order->seller_id );
+
             $wpdb->insert(
                 $table_name,
                 array(
@@ -343,13 +344,23 @@ function dokan_generate_sync_table() {
 /**
  * Get store seller percentage settings
  *
+ * @param int $seller_id
  * @return int
  */
-function dokan_get_seller_percentage() {
-    return dokan_get_option( 'seller_percentage', 'dokan_selling', '90' );
+function dokan_get_seller_percentage( $seller_id = 0 ) {
+    $global_percentage = (int) dokan_get_option( 'seller_percentage', 'dokan_selling', '90' );
+
+    if ( ! $seller_id ) {
+        return $global_percentage;
+    }
+
+    $seller_percentage = (int) get_user_meta( $seller_id, 'dokan_seller_percentage', true );
+    if ( $seller_percentage ) {
+        return $seller_percentage;
+    }
+
+    return $global_percentage;
 }
-
-
 
 /**
  * Get product status based on user id and settings
