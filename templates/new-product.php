@@ -22,10 +22,6 @@ if ( isset( $_POST['add_product'] ) ) {
         $errors[] = __( 'Please enter product title', 'dokan' );
     }
 
-    if ( !$price ) {
-        $errors[] = __( 'Please enter product price', 'dokan' );
-    }
-
     if ( $product_cat < 0 ) {
         $errors[] = __( 'Please select a category', 'dokan' );
     }
