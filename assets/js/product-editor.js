@@ -457,6 +457,12 @@
                     });
                 });
 
+                downloadable_frame.on( 'ready', function() {
+                    downloadable_frame.uploader.options.uploader.params = {
+                        type: 'downloadable_product'
+                    };
+                });
+
                 downloadable_frame.open();
         },
 
