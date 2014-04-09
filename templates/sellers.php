@@ -42,7 +42,7 @@ get_header();
                                     <?php if ( $banner_id ) {
                                         $banner_url = wp_get_attachment_image_src( $banner_id, 'medium' );
                                         ?>
-                                        <img src="<?php echo esc_url( $banner_url[0] ); ?> ?>" alt="<?php echo esc_attr( $store_name ); ?>">
+                                        <img src="<?php echo esc_url( $banner_url[0] ); ?>" alt="<?php echo esc_attr( $store_name ); ?>">
                                     <?php } else { ?>
                                         <img src="<?php echo dokan_get_no_seller_image(); ?>" alt="<?php _e( 'No Image', 'dokan' ); ?>">
                                     <?php } ?>
