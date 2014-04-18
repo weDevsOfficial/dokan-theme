@@ -412,7 +412,7 @@ ul.subsubsub li.active a{color:#999}
 .ui-helper-hidden-accessible{display:none}
 .alert{padding:8px 15px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px}
 .navbar-brand{font-size:14px;padding:7px}
-@media (max-width:768px){.navbar-brand{padding:15px 15px;font-size:18px}}.breadcrumb{margin:0;background:transparent;padding:0;color:#999}.breadcrumb>li+li:before{content:"\f105";font-family:FontAwesome}
+@media (max-width:767px){.navbar-brand{padding:15px 15px;font-size:18px}}.breadcrumb{margin:0;background:transparent;padding:0;color:#999}.breadcrumb>li+li:before{content:"\f105";font-family:FontAwesome}
 .woocommerce .woocommerce-breadcrumb,.woocommerce-page .woocommerce-breadcrumb{margin:0;padding:0}
 .woocommerce .shop_table.cart .coupon input,.woocommerce-page .shop_table.cart .coupon input{min-width:150px}
 .woocommerce .archive-title,.woocommerce-page .archive-title{margin-bottom:20px;border-bottom:1px solid #ededed}.woocommerce .archive-title h1.page-title,.woocommerce-page .archive-title h1.page-title{margin:0;float:left;width:49%;line-height:42px}
