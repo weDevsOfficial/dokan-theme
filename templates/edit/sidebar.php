@@ -111,7 +111,7 @@
             </li>
             <li class="form-group">
                 <div class="input-group">
-                    <span class="input-group-addon">Limit</span>
+                    <span class="input-group-addon"><?php _e( 'Limit', 'dokan' ); ?></span>
                     <?php dokan_post_input_box( $post->ID, '_download_limit', array( 'placeholder' => __( 'Download Limit. e.g: 4', 'dokan' ) ) ); ?>
                 </div>
             </li>
@@ -129,7 +129,7 @@
 
 <aside class="product-gallery">
     <div class="dokan-side-head">
-        Image Gallery
+        <?php _e( 'Image Gallery', 'dokan' ); ?>
     </div>
 
     <div class="dokan-side-body" id="dokan-product-images">
@@ -163,7 +163,7 @@
             <input type="hidden" id="product_image_gallery" name="product_image_gallery" value="<?php echo esc_attr( $product_images ); ?>">
         </div>
 
-        <a href="#" class="add-product-images btn btn-success">+ Add product images</a>
+        <a href="#" class="add-product-images btn btn-success"><?php _e( '+ Add product images', 'dokan' ); ?></a>
     </div>
 </aside> <!-- .product-gallery -->
 

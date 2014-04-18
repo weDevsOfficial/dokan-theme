@@ -1,27 +1,27 @@
 <div class="form-horizontal">
     <div class="form-group">
-        <label class="col-md-4 control-label" for="_sku">SKU</label>
+        <label class="col-md-4 control-label" for="_sku"><?php _e( 'SKU', 'dokan' ); ?></label>
         <div class="col-md-4">
             <?php dokan_post_input_box( $post->ID, '_sku', array( 'placeholder' => 'SKU' ) ); ?>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-md-4 control-label" for="">Manage Stock?</label>
+        <label class="col-md-4 control-label" for=""><?php _e( 'Manage Stock?', 'dokan' ); ?></label>
         <div class="col-md-6">
             <?php dokan_post_input_box( $post->ID, '_manage_stock', array('label' => __( 'Enable stock management at product level', 'dokan' ) ), 'checkbox' ); ?>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-md-4 control-label" for="_stock_qty">Stock Qty</label>
+        <label class="col-md-4 control-label" for="_stock_qty"><?php _e( 'Stock Qty', 'dokan' ); ?></label>
         <div class="col-md-4">
             <?php dokan_post_input_box( $post->ID, '_stock', array( 'placeholder' => '10' ) ); ?>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-md-4 control-label" for="_stock_status">Stock Status</label>
+        <label class="col-md-4 control-label" for="_stock_status"><?php _e( 'Stock Status', 'dokan' ); ?></label>
         <div class="col-md-4">
             <?php dokan_post_input_box( $post->ID, '_stock_status', array( 'options' => array(
                 'instock' => __( 'In Stock', 'dokan' ),
@@ -32,7 +32,7 @@
     </div>
 
     <div class="form-group">
-        <label class="col-md-4 control-label" for="_backorders">Allow Backorders</label>
+        <label class="col-md-4 control-label" for="_backorders"><?php _e( 'Allow Backorders', 'dokan' ); ?></label>
         <div class="col-md-4">
             <?php dokan_post_input_box( $post->ID, '_backorders', array( 'options' => array(
                 'no' => __( 'Do not allow', 'dokan' ),

@@ -1,4 +1,4 @@
-<h4>Attributes <small>Different types of this product (e.g. size, color)</small></h4>
+<h4><?php _e( 'Attributes', 'dokan' ); ?> <small><?php _e( 'Different types of this product (e.g. size, color)', 'dokan' ); ?></small></h4>
 
 <div id="variants-holder" class="woocommerce_attributes">
 
@@ -59,7 +59,7 @@
 
 
                     <span class="actions">
-                        <button class="row-remove btn pull-right btn-danger btn-sm">Remove</button>
+                        <button class="row-remove btn pull-right btn-danger btn-sm"><?php _e( 'Remove', 'dokan' ); ?></button>
                     </span>
                 </div>
 
@@ -77,7 +77,7 @@
                                     else
                                         checked( apply_filters( 'default_attribute_visibility', false, $tax ), true );
 
-                                    ?> name="attribute_visibility[<?php echo $i; ?>]" value="1" /> <?php _e( 'Visible on the product page', 'woocommerce' ); ?>
+                                    ?> name="attribute_visibility[<?php echo $i; ?>]" value="1" /> <?php _e( 'Visible on the product page', 'dokan' ); ?>
                                 </label>
                             </li>
 
@@ -90,7 +90,7 @@
                                 else
                                     checked( apply_filters( 'default_attribute_variation', false, $tax ), true );
 
-                            ?> name="attribute_variation[<?php echo $i; ?>]" value="1" /> <?php _e( 'Used for variations', 'woocommerce' ); ?></label>
+                            ?> name="attribute_variation[<?php echo $i; ?>]" value="1" /> <?php _e( 'Used for variations', 'dokan' ); ?></label>
                             </li>
                         </ul>
                     </div>
@@ -104,7 +104,7 @@
                                     ?>
 
                                     <li>
-                                        <input type="text" class="option" placeholder="Option..." name="attribute_values[<?php echo $i; ?>][<?php echo $count; ?>]" value="<?php echo esc_attr( $option ); ?>">
+                                        <input type="text" class="option" placeholder="<?php _e( 'Option...', 'dokan' ); ?>" name="attribute_values[<?php echo $i; ?>][<?php echo $count; ?>]" value="<?php echo esc_attr( $option ); ?>">
 
                                         <span class="item-action actions">
                                             <a href="#" class="row-add">+</a>
@@ -118,7 +118,7 @@
                                 ?>
 
                                 <li>
-                                    <input type="text" class="option" name="attribute_values[<?php echo $i; ?>][0]" placeholder="Option...">
+                                    <input type="text" class="option" name="attribute_values[<?php echo $i; ?>][0]" placeholder="<?php _e( 'Option...', 'dokan' ); ?>">
 
                                     <span class="item-action actions">
                                         <a href="#" class="row-add">+</a>
@@ -141,6 +141,6 @@
 </div> <!-- #variants-holder -->
 
 <p class="toolbar">
-    <button class="btn btn-success add-variant-category">+ Add a category</button>
-    <button type="button" class="btn btn-default save_attributes" data-id="<?php echo $thepostid; ?>"><?php _e( 'Save attributes', 'woocommerce' ); ?></button>
+    <button class="btn btn-success add-variant-category"><?php _e( '+ Add a category', 'dokan' ); ?></button>
+    <button type="button" class="btn btn-default save_attributes" data-id="<?php echo $thepostid; ?>"><?php _e( 'Save attributes', 'dokan' ); ?></button>
 </p>

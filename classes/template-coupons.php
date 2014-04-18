@@ -481,7 +481,7 @@ class Dokan_Template_Coupons{
             <?php wp_nonce_field('coupon_nonce','coupon_nonce_field'); ?>
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-3 control-label" for="title"><?php _e( 'Copon Title', 'dokan' ); ?><span class="required"> *</span></label>
+                <label class="col-md-3 control-label" for="title"><?php _e( 'Coupon Title', 'dokan' ); ?><span class="required"> *</span></label>
                 <div class="col-md-5">
                     <input id="title" name="title" required value="<?php echo esc_attr( $post_title ); ?>" placeholder="Title" class="form-control input-md" type="text">
                 </div>
@@ -594,9 +594,9 @@ class Dokan_Template_Coupons{
             </div>
 
             <div class="form-group">
-                <label class="col-md-3 control-label" for="minium_ammount"><?php _e( 'Minimum Ammount', 'dokan' ); ?></label>
+                <label class="col-md-3 control-label" for="minium_ammount"><?php _e( 'Minimum Amount', 'dokan' ); ?></label>
                 <div class="col-md-5">
-                    <input id="minium_ammount" value="<?php echo $minimum_amount; ?>" name="minium_ammount" placeholder="Minimum Ammount" class="form-control input-md" type="text">
+                    <input id="minium_ammount" value="<?php echo $minimum_amount; ?>" name="minium_ammount" placeholder="<?php esc_attr_e( 'Minimum Amount', 'dokan' ); ?>" class="form-control input-md" type="text">
                 </div>
             </div>
 

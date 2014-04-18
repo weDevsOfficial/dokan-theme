@@ -41,7 +41,7 @@
             ?>
 
             <?php wp_dropdown_categories( $args ); ?>
-            <p class="help-block"><?php _e( 'Shipping classes are used by certain shipping methods to group similar products.', 'woocommerce' ); ?></p>
+            <p class="help-block"><?php _e( 'Shipping classes are used by certain shipping methods to group similar products.', 'dokan' ); ?></p>
         </div>
     </div>
 

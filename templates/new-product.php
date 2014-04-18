@@ -115,7 +115,7 @@ dokan_frontend_dashboard_scripts();
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <input class="form-control" name="post_title" id="post-title" type="text" placeholder="Product name.." value="<?php echo dokan_posted_input( 'post_title' ); ?>">
+                            <input class="form-control" name="post_title" id="post-title" type="text" placeholder="<?php esc_attr_e( 'Product name..', 'dokan' ); ?>" value="<?php echo dokan_posted_input( 'post_title' ); ?>">
                         </div>
 
                         <div class="form-group">
@@ -126,7 +126,7 @@ dokan_frontend_dashboard_scripts();
                         </div>
 
                         <div class="form-group">
-                            <textarea name="post_excerpt" id="post-excerpt" rows="5" class="form-control" placeholder="Short description about the product..."><?php echo dokan_posted_textarea( 'post_excerpt' ); ?></textarea>
+                            <textarea name="post_excerpt" id="post-excerpt" rows="5" class="form-control" placeholder="<?php esc_attr_e( 'Short description about the product...', 'dokan' ); ?>"><?php echo dokan_posted_textarea( 'post_excerpt' ); ?></textarea>
                         </div>
 
                         <div class="form-group">
@@ -156,7 +156,7 @@ dokan_frontend_dashboard_scripts();
                 <?php do_action( 'dokan_new_product_form' ); ?>
 
                 <div class="form-group">
-                    <input type="submit" name="add_product" class="btn btn-primary" value="Add Product"/>
+                    <input type="submit" name="add_product" class="btn btn-primary" value="<?php esc_attr_e( 'Add Product', 'dokan' ); ?>"/>
                 </div>
 
             </form>
