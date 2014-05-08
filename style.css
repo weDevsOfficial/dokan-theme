@@ -127,7 +127,7 @@ a:hover {
 }
 .site-header h1.site-title a {
   color: #cccccc;
-  background: url('../images/logo.png') no-repeat 0% 0%;
+  background: url('/assets/images/logo.png') no-repeat 0% 0%;
   width: 300px;
   height: 60px;
   display: block;
@@ -2161,7 +2161,7 @@ a:hover {
 #comments ol.commentlist li ul.children .depth-5 {
   padding-left: 40px;
   border-left: 1px solid #ededed;
-  background: url(../images/comment-nav.png) 0 45px no-repeat;
+  background: url('assets/images/comment-nav.png') 0 45px no-repeat;
   clear: left;
 }
 #comments ol.commentlist .nocomments {
@@ -3068,7 +3068,7 @@ ul.subsubsub li.active a {
   color: #545454;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: url('../images/drop-down-arow.png') no-repeat;
+  background: url('assets/images/drop-down-arow.png') no-repeat;
   background-position: 95% 50%;
   width: 100%;
 }
@@ -3404,7 +3404,7 @@ ul.subsubsub li.active a {
   display: none;
 }
 span.dokan-loading {
-  background: url("../images/wpspin_light.gif") no-repeat;
+  background: url("assets/images/wpspin_light.gif") no-repeat;
   float: right;
   height: 16px;
   margin: 5px 5px 0;
@@ -3419,7 +3419,7 @@ span.error {
  */
 @media print, (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
   .site-header h1.site-title a {
-    background: url('../images/logo@2x.png') no-repeat 0% 0%;
+    background: url('assets/images/logo@2x.png') no-repeat 0% 0%;
     background-size: 180px auto;
   }
 }
