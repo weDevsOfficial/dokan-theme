@@ -529,7 +529,7 @@ class Dokan_Template_Coupons{
             <div class="form-group">
                 <label class="col-md-3 control-label" for="dokan-expire"><?php _e( 'Expire Date', 'dokan' ); ?></label>
                 <div class="col-md-5">
-                    <input id="dokan-expire" value="<?php echo esc_attr( $expire ); ?>" name="expire" placeholder="<?php _e( 'Expire Date', 'dokan' ); ?>" class="form-control input-md" type="text">
+                    <input id="dokan-expire" value="<?php echo esc_attr( $expire ); ?>" name="expire" placeholder="<?php _e( 'Expire Date', 'dokan' ); ?>" class="form-control input-md datepicker" type="text">
                 </div>
             </div>
 
@@ -639,7 +639,6 @@ class Dokan_Template_Coupons{
             jQuery(function($){
                 $("#product").chosen({width: "95%"});
                 $("#coupon_exclude_categories").chosen({width: "95%"});
-                $("#dokan-expire").datepicker();
             });
 
         </script>
