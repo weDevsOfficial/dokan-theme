@@ -4,7 +4,7 @@ Theme URI: http://tareq.wedevs.com/
 Author: Tareq Hasan
 Author URI: http://tareq.weDevs.com
 Description: An e-commerce marketplace theme for WordPress. Powered by WooCommerce and weDevs.
-Version: 1.0.3
+Version: 1.0.4
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -250,7 +250,9 @@ a:hover {
   border-bottom: 4px solid transparent;
   border-left: 4px solid #000;
 }
-.dropdown-menu a:hover .caret {
+.dropdown-menu .open > a .caret,
+.dropdown-menu .open > a:hover .caret,
+.dropdown-menu .open > a:focus .caret {
   border-top-color: transparent;
   border-bottom-color: transparent;
 }

@@ -11,7 +11,9 @@
         border-left: 4px solid #000;
     }
 
-    a:hover .caret {
+    .open > a .caret,
+    .open > a:hover .caret,
+    .open > a:focus .caret {
         border-top-color: transparent;
         border-bottom-color: transparent;
     }
