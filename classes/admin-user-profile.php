@@ -131,13 +131,6 @@ class Dokan_Admin_User_Profile {
                 </tr>
 
                 <tr>
-                    <th><?php _e( 'Phone', 'dokan' ); ?></th>
-                    <td>
-                        <input type="text" name="dokan_store_phone" class="regular-text" value="<?php echo esc_attr( $store_settings['phone'] ); ?>">
-                    </td>
-                </tr>
-
-                <tr>
                     <th><?php _e( 'Selling', 'dokan' ); ?></th>
                     <td>
                         <label for="dokan_enable_selling">
@@ -211,7 +204,6 @@ class Dokan_Admin_User_Profile {
             var Dokan_Settings = {
 
                 init: function() {
-                    console.log('init');
                     $('a.dokan-banner-drag').on('click', this.imageUpload);
                     $('a.dokan-remove-banner-image').on('click', this.removeBanner);
                 },
@@ -222,7 +214,6 @@ class Dokan_Admin_User_Profile {
                     var file_frame,
                         self = $(this);
 
-                    // If the media frame already exists, reopen it.
                     if ( file_frame ) {
                         file_frame.open();
                         return;
@@ -237,7 +228,6 @@ class Dokan_Admin_User_Profile {
                         multiple: false
                     });
 
-                    // When an image is selected, run a callback.
                     file_frame.on( 'select', function() {
                         var attachment = file_frame.state().get('selection').first().toJSON();
 
@@ -249,15 +239,12 @@ class Dokan_Admin_User_Profile {
                         $('.button-area').addClass('dokan-hide');
                     });
 
-                    // Finally, open the modal
                     file_frame.open();
 
                 },
 
                 removeBanner: function(e) {
                     e.preventDefault();
-
-                    console.log('remove banner');
 
                     var self = $(this);
                     var wrap = self.closest('.image-wrap');
