@@ -33,7 +33,7 @@ if ( !function_exists( 'WC' ) ) {
         <nav class="navbar navbar-inverse navbar-top-area">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-5">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-top-collapse">
                                 <span class="sr-only"><?php _e( 'Toggle navigation', 'dokan' ); ?></span>
@@ -53,7 +53,7 @@ if ( !function_exists( 'WC' ) ) {
                         ?>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-7">
                         <div class="collapse navbar-collapse navbar-top-collapse">
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
@@ -120,13 +120,13 @@ if ( !function_exists( 'WC' ) ) {
         <header id="masthead" class="site-header" role="banner">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-5">
                         <hgroup>
                             <h1 class="site-title"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?> <small> - <?php bloginfo( 'description' ); ?></small></a></h1>
                         </hgroup>
                     </div><!-- .col-md-6 -->
 
-                    <div class="col-md-8 clearfix">
+                    <div class="col-md-8 col-sm-7 clearfix">
                         <?php dynamic_sidebar( 'sidebar-header' ) ?>
                     </div>
                 </div><!-- .row -->

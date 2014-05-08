@@ -2844,7 +2844,7 @@ ul.subsubsub li.active a {
   font-size: 14px;
   padding: 7px;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .navbar-brand {
     padding: 15px 15px;
     font-size: 18px;
@@ -3429,7 +3429,7 @@ span.error {
 /*--------------------------------------------------
 :: Responsive Menubar
 -------------------------------------------------- */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .navbar-top-area .navbar-nav {
     background: #fff;
   }
