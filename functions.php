@@ -257,16 +257,21 @@ class WeDevs_Dokan {
         wp_register_style( 'jquery-ui', $template_directory . '/assets/css/jquery-ui-1.10.0.custom.css', false, null );
         wp_register_style( 'chosen-style', $template_directory . '/assets/css/chosen.min.css', false, null );
 
-        wp_enqueue_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.css', false, null );
-        wp_enqueue_style( 'icomoon', $template_directory . '/assets/css/icomoon.css', false, null );
-        wp_enqueue_style( 'fontawesome', $template_directory . '/assets/css/font-awesome.css', false, null );
+        wp_register_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.css', false, null );
+        wp_register_style( 'icomoon', $template_directory . '/assets/css/icomoon.css', false, null );
+        wp_register_style( 'fontawesome', $template_directory . '/assets/css/font-awesome.css', false, null );
+        wp_register_style( 'flexslider', $template_directory . '/assets/css/flexslider.css', false, null );
+        wp_register_style( 'dokan-skin', $template_directory . '/assets/css/skins/' . $skin, false, null );
+        wp_register_style( 'dokan-opensans', $protocol . '://fonts.googleapis.com/css?family=Open+Sans:400,700' );
+        wp_register_style( 'dokan-style', $template_directory . '/style.css', false, null );
 
-
-        wp_enqueue_style( 'flexslider', $template_directory . '/assets/css/flexslider.css', false, null );
-        wp_enqueue_style( 'dokan-style', $template_directory . '/assets/css/style.css', false, null );
-        wp_enqueue_style( 'dokan-skin', $template_directory . '/assets/css/skins/' . $skin, false, null );
-        wp_enqueue_style( 'dokan-opensans', $protocol . '://fonts.googleapis.com/css?family=Open+Sans:400,700' );
-        wp_enqueue_style( 'style', $template_directory . '/style.css', false, null );
+        wp_enqueue_style( 'bootstrap' );
+        wp_enqueue_style( 'icomoon' );
+        wp_enqueue_style( 'fontawesome' );
+        wp_enqueue_style( 'flexslider' );
+        wp_enqueue_style( 'dokan-skin' );
+        wp_enqueue_style( 'dokan-opensans' );
+        wp_enqueue_style( 'dokan-style' );
 
 
         /****** Scripts ******/
