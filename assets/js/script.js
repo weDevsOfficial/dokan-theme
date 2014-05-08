@@ -29,6 +29,14 @@ jQuery(function($) {
 
             $(this).siblings('.sub-category').slideToggle('fast');
         });
+    } else {
+        $('#cat-drop-stack li.has-children > .sub-category').each(function(index, el) {
+            var sub_cat = $(el);
+
+            if( sub_cat.find('.sub-block').length > 2 ) {
+                sub_cat.css('width', '340%');
+            }
+        });
     }
 
     // tiny helper function to add breakpoints

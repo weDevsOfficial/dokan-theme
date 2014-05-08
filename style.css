@@ -1964,7 +1964,7 @@ a:hover {
   position: absolute;
   left: 90%;
   top: -50px;
-  white-space: nowrap;
+  min-width: 200%;
   z-index: 99;
 }
 .widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block {
@@ -1974,6 +1974,7 @@ a:hover {
   zoom: 1;
   vertical-align: top;
   padding-right: 20px;
+  padding-bottom: 20px;
   width: 200px;
   font-size: 12px;
 }
