@@ -24,7 +24,7 @@ jQuery(function($) {
 
     // cat drop stack, disable parent anchors if has children
     if ( $(window).width() < 767) {
-        $('#cat-drop-stack li.has-children').on('click', 'a', function(e) {
+        $('#cat-drop-stack li.has-children').on('click', '> a', function(e) {
             e.preventDefault();
 
             $(this).siblings('.sub-category').slideToggle('fast');
