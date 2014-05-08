@@ -269,10 +269,9 @@ class WeDevs_Dokan {
         wp_enqueue_style( 'icomoon' );
         wp_enqueue_style( 'fontawesome' );
         wp_enqueue_style( 'flexslider' );
-        wp_enqueue_style( 'dokan-skin' );
         wp_enqueue_style( 'dokan-opensans' );
         wp_enqueue_style( 'dokan-style' );
-
+        wp_enqueue_style( 'dokan-skin' );
 
         /****** Scripts ******/
 
