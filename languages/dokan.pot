@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Dokan\n"
-"POT-Creation-Date: 2014-04-18 22:39+0600\n"
-"PO-Revision-Date: 2014-04-18 22:39+0600\n"
+"POT-Creation-Date: 2014-05-09 15:37+0600\n"
+"PO-Revision-Date: 2014-05-09 15:37+0600\n"
 "Last-Translator: Tareq Hasan <tareq@wedevs.com>\n"
 "Language-Team: weDevs Team <info@wedevs.com>\n"
 "Language: English\n"
@@ -210,42 +210,47 @@ msgstr ""
 msgid "Footer Sidebar - 4"
 msgstr ""
 
-#: ../functions.php:306
+#: ../functions.php:310
 msgid "Available"
 msgstr ""
 
-#: ../functions.php:307
+#: ../functions.php:311
 msgid "Not Available"
 msgstr ""
 
-#: ../functions.php:405 ../includes/admin/admin.php:65
+#: ../functions.php:409 ../includes/admin/admin.php:65
 msgid "Dokan"
 msgstr ""
 
-#: ../functions.php:414 ../includes/admin/admin.php:66
+#: ../functions.php:418 ../includes/admin/admin.php:66
 #: ../includes/admin/dashboard.php:96
 msgid "Dokan Dashboard"
 msgstr ""
 
-#: ../functions.php:421 ../classes/installer.php:122
+#: ../functions.php:425 ../classes/installer.php:122
 #: ../includes/template-tags.php:326 ../includes/admin/admin.php:59
 #: ../includes/admin/admin.php:67 ../includes/admin/admin.php:304
 #: ../includes/admin/dashboard.php:72
 msgid "Withdraw"
 msgstr ""
 
-#: ../functions.php:428 ../includes/admin/admin.php:68
+#: ../functions.php:432 ../includes/admin/admin.php:68
 msgid "All Sellers"
 msgstr ""
 
-#: ../functions.php:435 ../includes/admin/admin.php:69
+#: ../functions.php:439 ../includes/admin/admin.php:69
 msgid "Earning Reports"
 msgstr ""
 
-#: ../functions.php:442 ../classes/installer.php:128
+#: ../functions.php:446 ../classes/installer.php:128
 #: ../includes/template-tags.php:331 ../includes/admin/admin.php:74
 #: ../includes/admin/admin.php:310
 msgid "Settings"
+msgstr ""
+
+#: ../functions.php:482
+#, php-format
+msgid "Page %s"
 msgstr ""
 
 #: ../header.php:3
@@ -254,68 +259,63 @@ msgid ""
 "Please install <a href=\"%s\"><strong>WooCommerce</strong></a> plugin first"
 msgstr ""
 
-#: ../header.php:37
-#, php-format
-msgid "Page %s"
-msgstr ""
-
-#: ../header.php:59 ../header.php:165
+#: ../header.php:39 ../header.php:145
 msgid "Toggle navigation"
 msgstr ""
 
-#: ../header.php:80
+#: ../header.php:60
 #, php-format
 msgid "Cart %s"
 msgstr ""
 
-#: ../header.php:98
+#: ../header.php:78
 msgid "Seller Dashboard"
 msgstr ""
 
-#: ../header.php:101
+#: ../header.php:81
 msgid "Visit your store"
 msgstr ""
 
-#: ../header.php:117 ../classes/installer.php:136
+#: ../header.php:97 ../classes/installer.php:136
 #: ../includes/admin/admin.php:316
 msgid "My Orders"
 msgstr ""
 
-#: ../header.php:118
+#: ../header.php:98
 msgid "My Account"
 msgstr ""
 
-#: ../header.php:119
+#: ../header.php:99
 msgid "Edit Account"
 msgstr ""
 
-#: ../header.php:121 ../templates/orders/order-details.php:110
+#: ../header.php:101 ../templates/orders/order-details.php:110
 #: ../woocommerce/order/order-details.php:123
 msgid "Billing Address"
 msgstr ""
 
-#: ../header.php:122 ../templates/orders/order-details.php:119
+#: ../header.php:102 ../templates/orders/order-details.php:119
 #: ../woocommerce/order/order-details.php:138
 msgid "Shipping Address"
 msgstr ""
 
-#: ../header.php:129
+#: ../header.php:109
 msgid "Log in"
 msgstr ""
 
-#: ../header.php:130
+#: ../header.php:110
 msgid "Sign Up"
 msgstr ""
 
-#: ../header.php:160
+#: ../header.php:140
 msgid "Menu"
 msgstr ""
 
-#: ../header.php:161
+#: ../header.php:141
 msgid "Skip to content"
 msgstr ""
 
-#: ../header.php:168
+#: ../header.php:148
 msgid "Home"
 msgstr ""
 
@@ -410,9 +410,9 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: ../classes/admin-user-profile.php:92 ../classes/admin-user-profile.php:134
-#: ../includes/template-tags.php:403 ../includes/admin/sellers.php:21
-#: ../includes/admin/sellers.php:96 ../templates/sellers.php:62
+#: ../classes/admin-user-profile.php:92 ../includes/template-tags.php:403
+#: ../includes/admin/sellers.php:21 ../includes/admin/sellers.php:96
+#: ../templates/sellers.php:62
 msgid "Phone"
 msgstr ""
 
@@ -436,35 +436,35 @@ msgstr ""
 msgid "YouTube Profile"
 msgstr ""
 
-#: ../classes/admin-user-profile.php:141
+#: ../classes/admin-user-profile.php:134
 msgid "Selling"
 msgstr ""
 
-#: ../classes/admin-user-profile.php:146
+#: ../classes/admin-user-profile.php:139
 msgid "Enable Selling"
 msgstr ""
 
-#: ../classes/admin-user-profile.php:149
+#: ../classes/admin-user-profile.php:142
 msgid "Enable or disable product selling capability"
 msgstr ""
 
-#: ../classes/admin-user-profile.php:154
+#: ../classes/admin-user-profile.php:147
 msgid "Publishing"
 msgstr ""
 
-#: ../classes/admin-user-profile.php:159
+#: ../classes/admin-user-profile.php:152
 msgid "Publish product directly"
 msgstr ""
 
-#: ../classes/admin-user-profile.php:162
+#: ../classes/admin-user-profile.php:155
 msgid "Instead going pending, products will be published directly"
 msgstr ""
 
-#: ../classes/admin-user-profile.php:167 ../includes/admin/admin.php:172
+#: ../classes/admin-user-profile.php:160 ../includes/admin/admin.php:172
 msgid "Seller Percentage"
 msgstr ""
 
-#: ../classes/admin-user-profile.php:171
+#: ../classes/admin-user-profile.php:164
 msgid "How much amount (%) will get from each order"
 msgstr ""
 
