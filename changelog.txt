@@ -1,3 +1,18 @@
+v1.0.4 -> May 9, 2014
+-----------------------
+- [new] RTL support
+- [fix] Responsive style problems
+- [fix] page title fix for homepage
+- [fix] category dropdown widget width with many categories
+- [fix] clicking category dropdown widget on mobile
+- [improve] child categories in main navigation are clickable now
+- [fix] main dropdown selected color fix
+- [fix] coupon expire date formatting fix
+- [fix] style.css is the main stylesheet now
+- [fix] duplicate phone number in admin edit profile removed
+- [fix] missing translation strings
+- [fix] small problem in seller listing
+
 v1.0.3 -> April 7, 2014
 -----------------------
 - [new] Profile settings can be updated from admin area
