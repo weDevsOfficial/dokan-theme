@@ -1,0 +1,188 @@
+body {
+  direction: rtl;
+  unicode-bidi: embed;
+}
+blockquote::before {
+  content: "\201D";
+  left: auto;
+  right: -20px;
+}
+/* WordPress
+--------------------------------------------- */
+.avatar {
+  float: right;
+}
+.alignleft .avatar {
+  margin-left: 24px;
+  margin-left: 2.4rem;
+  margin-right: auto;
+}
+.alignright .avatar {
+  margin-left: auto;
+  margin-right: 24px;
+  margin-right: 2.4rem;
+}
+.alignleft {
+  float: right;
+  text-align: right;
+}
+.alignright {
+  float: left;
+  text-align: left;
+}
+img.alignleft,
+.wp-caption.alignleft {
+  margin: 0 0 24px 24px;
+  margin: 0 0 2.4rem 2.4rem;
+}
+img.alignright,
+.wp-caption.alignright {
+  margin: 0 24px 24px 0;
+  margin: 0 2.4rem 2.4rem 0;
+}
+.product-sliders {
+  direction: ltr;
+}
+/* Bootstrap Grid
+--------------------------------------------- */
+.col-md-1,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11,
+.col-sm-1,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-10,
+.col-sm-11,
+.navbar-nav,
+.navbar-brand,
+.navbar-header {
+  float: right;
+}
+.navbar-right,
+.pull-right {
+  float: left !important;
+}
+ul.navbar-nav,
+ul.list-inline,
+ul.list-unstyled {
+  padding-right: 0;
+}
+.input-group .form-control:first-child,
+.input-group-addon:first-child,
+.input-group-btn:first-child > .btn,
+.input-group-btn:first-child > .dropdown-toggle,
+.input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle) {
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.dropdown-menu {
+  float: right;
+}
+.dropdown-menu .dropdown-menu {
+  right: 100%;
+  left: auto;
+}
+.dropdown-menu .caret {
+  border-top: 4px solid transparent;
+  border-right: 4px solid #000;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+/* Theme styles
+--------------------------------------------- */
+.home .slider-container h2.slider-heading {
+  padding: 5px 10px;
+}
+.home .product-sliders .flex-direction-nav .flex-prev {
+  left: 10px;
+  right: auto;
+}
+.home .product-sliders .flex-direction-nav .flex-next {
+  left: 33px;
+  right: auto;
+}
+.site-header .widget_dokna_product_search {
+  float: left;
+}
+.widget ul {
+  padding-right: 0;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul {
+  padding-right: 0;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li > a {
+  padding: 7px 20px 8px 0;
+}
+.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category {
+  right: 90%;
+  left: auto;
+}
+.dokan-dash-sidebar ul.dokan-dashboard-menu {
+  padding: 0;
+}
+.dokan-dash-sidebar ul.dokan-dashboard-menu li a {
+  padding: 10px 18px 10px 0;
+}
+.dokan-dash-sidebar ul.dokan-dashboard-menu li a i {
+  float: right;
+  padding-left: 15px;
+  padding-right: 0;
+}
+.dokan-dash-sidebar ul.dokan-dashboard-menu li.active {
+  position: relative;
+}
+.dokan-dash-sidebar ul.dokan-dashboard-menu li.active:after {
+  right: 80%;
+  left: auto;
+  border: transparent solid;
+  content: " ";
+  border-color: transparent transparent transparent #fafafa;
+  border-width: 16px;
+}
+.navbar-top-area .dropdown-menu i {
+  float: right;
+}
+.navbar-top-area .dropdown-menu > li > a {
+  padding: 3px 20px 3px 0;
+}
+/* WooCommerce override
+-----------------------------------*/
+.woocommerce ul.products li.product .item-bar,
+.woocommerce-page ul.products li.product .item-bar {
+  padding: 5px 0 5px 10px;
+}
+.woocommerce ul.products li.product .item-bar .price,
+.woocommerce-page ul.products li.product .item-bar .price {
+  padding: 0px 10px 0 0;
+}
+.woocommerce ul.products li.product .item-button,
+.woocommerce-page ul.products li.product .item-button {
+  float: left;
+  width: 75px;
+}
+.woocommerce ul.products li.product .item-button a.add_to_cart_button,
+.woocommerce-page ul.products li.product .item-button a.add_to_cart_button {
+  color: #fff;
+  float: left;
+}
+.woocommerce ul.products li.product .item-button a.fav,
+.woocommerce-page ul.products li.product .item-button a.fav {
+  background: #fff;
+  float: left;
+}
