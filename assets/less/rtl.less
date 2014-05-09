@@ -1,67 +1,67 @@
 @bodyColor: #fafafa;
 
 body {
-	direction: rtl;
-	unicode-bidi: embed;
+    direction: rtl;
+    unicode-bidi: embed;
 }
 
 blockquote::before {
-	content: "\201D";
-	left: auto;
-	right: -20px;
+    content: "\201D";
+    left: auto;
+    right: -20px;
 }
 
 /* WordPress
 --------------------------------------------- */
 
 .avatar {
-	float: right;
+    float: right;
 }
 
 .alignleft .avatar {
-	margin-left: 24px;
-	margin-left: 2.4rem;
-	margin-right: auto;
+    margin-left: 24px;
+    margin-left: 2.4rem;
+    margin-right: auto;
 }
 
 .alignright .avatar {
-	margin-left: auto;
-	margin-right: 24px;
-	margin-right: 2.4rem;
+    margin-left: auto;
+    margin-right: 24px;
+    margin-right: 2.4rem;
 }
 
 .alignleft {
-	float: right;
-	text-align: right;
+    float: right;
+    text-align: right;
 }
 
 .alignright {
-	float: left;
-	text-align: left;
+    float: left;
+    text-align: left;
 }
 
 img.alignleft,
 .wp-caption.alignleft {
-	margin: 0 0 24px 24px;
-	margin: 0 0 2.4rem 2.4rem;
+    margin: 0 0 24px 24px;
+    margin: 0 0 2.4rem 2.4rem;
 }
 
 img.alignright,
 .wp-caption.alignright {
-	margin: 0 24px 24px 0;
-	margin: 0 2.4rem 2.4rem 0;
+    margin: 0 24px 24px 0;
+    margin: 0 2.4rem 2.4rem 0;
 }
 
 .product-sliders {
-	direction:ltr;
+    direction:ltr;
 
-	ul.slides li {
-		// float: right !important;
-	}
+    ul.slides li {
+        // float: right !important;
+    }
 
-	.flex-viewport {
-		// direction: ltr;
-	}
+    .flex-viewport {
+        // direction: ltr;
+    }
 }
 
 /* Bootstrap Grid
@@ -69,15 +69,15 @@ img.alignright,
 .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11,
 .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11,
 .navbar-nav, .navbar-brand, .navbar-header {
-	float: right;
+    float: right;
 }
 
 .navbar-right, .pull-right {
-	float: left !important;
+    float: left !important;
 }
 
 ul.navbar-nav, ul.list-inline, ul.list-unstyled {
-	padding-right: 0;
+    padding-right: 0;
 }
 
 .input-group .form-control:first-child,
@@ -85,42 +85,42 @@ ul.navbar-nav, ul.list-inline, ul.list-unstyled {
 .input-group-btn:first-child > .btn,
 .input-group-btn:first-child > .dropdown-toggle,
 .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle) {
-	border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
 }
 
 .dropdown-menu {
-	float: right;
+    float: right;
 
-	.dropdown-menu {
-		right: 100%;
-		left: auto;
-	}
+    .dropdown-menu {
+        right: 100%;
+        left: auto;
+    }
 
-	.caret {
-		border-top: 4px solid transparent;
+    .caret {
+        border-top: 4px solid transparent;
         border-right: 4px solid #000;
         border-bottom: 4px solid transparent;
         border-left: 4px solid transparent;
-	}
+    }
 }
 
 /* Theme styles
 --------------------------------------------- */
 .home {
 
-	.slider-container {
+    .slider-container {
 
         h2.slider-heading {
             padding: 5px 10px;
         }
     }
 
-	.product-sliders {
-		.flex-direction-nav {
-			.flex-prev {
+    .product-sliders {
+        .flex-direction-nav {
+            .flex-prev {
                 left: 10px;
                 right: auto;
             }
@@ -129,36 +129,36 @@ ul.navbar-nav, ul.list-inline, ul.list-unstyled {
                 left: 33px;
                 right: auto;
             }
-		}
-	}
+        }
+    }
 }
 
 .site-header .widget_dokna_product_search {
-	float: left;
+    float: left;
 }
 
 .widget {
 
-	ul {
-		padding-right: 0;
-	}
+    ul {
+        padding-right: 0;
+    }
 
-	&.dokan-category-menu #cat-drop-stack {
-		> ul {
-			padding-right: 0;
+    &.dokan-category-menu #cat-drop-stack {
+        > ul {
+            padding-right: 0;
 
-			> li > a {
-				padding: 7px 20px 8px 0;
-			}
+            > li > a {
+                padding: 7px 20px 8px 0;
+            }
 
-			> li {
-				.sub-category {
-					right: 90%;
-					left: auto;
-				}
-			}
-		}
-	}
+            > li {
+                .sub-category {
+                    right: 90%;
+                    left: auto;
+                }
+            }
+        }
+    }
 }
 
 .dokan-dash-sidebar {
@@ -174,8 +174,8 @@ ul.navbar-nav, ul.list-inline, ul.list-unstyled {
 
                 i {
                     float: right;
-				    padding-left: 15px;
-				    padding-right: 0;
+                    padding-left: 15px;
+                    padding-right: 0;
                 }
             }
 
@@ -198,15 +198,15 @@ ul.navbar-nav, ul.list-inline, ul.list-unstyled {
 }
 
 .navbar-top-area {
-	.dropdown-menu {
-		i {
-			float: right;
-		}
+    .dropdown-menu {
+        i {
+            float: right;
+        }
 
-		> li > a {
-			padding: 3px 20px 3px 0;
-		}
-	}
+        > li > a {
+            padding: 3px 20px 3px 0;
+        }
+    }
 }
 
 /* WooCommerce override
@@ -214,29 +214,29 @@ ul.navbar-nav, ul.list-inline, ul.list-unstyled {
 
 .woocommerce,
 .woocommerce-page {
-	ul.products li.product {
+    ul.products li.product {
 
-		.item-bar {
-			padding: 5px 0 5px 10px;
+        .item-bar {
+            padding: 5px 0 5px 10px;
 
-	        .price {
-	            padding: 0px 10px 0 0;
-	        }
-	    }
+            .price {
+                padding: 0px 10px 0 0;
+            }
+        }
 
-	    .item-button {
-	        float: left;
-	        width: 75px;
+        .item-button {
+            float: left;
+            width: 75px;
 
-	        a.add_to_cart_button {
-	            color: #fff;
-	            float: left;
-	        }
+            a.add_to_cart_button {
+                color: #fff;
+                float: left;
+            }
 
-	        a.fav {
-	            background: #fff;
-	            float: left;
-	        }
-	    }
-	}
+            a.fav {
+                background: #fff;
+                float: left;
+            }
+        }
+    }
 }
