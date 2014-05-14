@@ -486,3 +486,65 @@ function dokan_wp_title( $title, $sep ) {
 }
 
 add_filter( 'wp_title', 'dokan_wp_title', 10, 2 );
+
+
+
+
+/**
+ * Display form field with list of authors.
+ *
+ * @since 2.6.0
+ *
+ * @param object $post
+ */
+function dokan_seller_meta_box($post) {
+    global $user_ID;
+    ?>
+    <label class="screen-reader-text" for="post_author_override"><?php _e('Seller'); ?></label>
+    
+     <?php
+    wp_dropdown_users( array(
+        'role' => 'seller',
+        'name' => 'post_author_override',
+        'selected' => empty($post->ID) ? $user_ID : $post->post_author,
+        'include_selected' => true
+    ) );
+}
+
+function dokan_add_seller_meta_box(){
+    remove_meta_box( 'authordiv', 'product', 'core' );
+    add_meta_box('sellerdiv', __('Seller'), 'dokan_seller_meta_box', 'product', 'normal', 'core');
+}
+
+add_action( 'add_meta_boxes', 'dokan_add_seller_meta_box' );
+
+
+// add_filter( 'woocommerce_variable_sale_price_html', function($html, $product) {
+
+//     $prices = array( $product->get_variation_price( 'min', true ), $product->get_variation_price( 'max', true ) );
+//     $price = $prices[0] !== $prices[1] ? sprintf( _x( '%1$s&ndash;%2$s', 'Price range: from-to', 'woocommerce' ), wc_price( $prices[0] ), wc_price( $prices[1] ) ) : wc_price( $prices[0] );
+
+//     return $price;
+
+//     return $html;
+// }, 10 ,2 );
+
+
+// add_filter( 'woocommerce_sale_price_html', function($price, $product){
+
+//     $tax_display_mode      = get_option( 'woocommerce_tax_display_shop' );
+//     $display_price         = $tax_display_mode == 'incl' ? $product->get_price_including_tax() : $product->get_price_excluding_tax();
+
+//     $price = wc_price( $display_price ) . $product->get_price_suffix();
+    
+//     return $price;
+
+// }, 10 ,2 );
+
+
+// add_filter( 'dokan_get_dashboard_nav', 'dashboard_nav', 10, 1);
+// function dashboard_nav($nav) {
+//     unset($nav['coupon']);
+//     return( $nav );
+// }
+
