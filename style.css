@@ -3629,3 +3629,9 @@ span.error {
 .woocommerce-page #reviews #comments ol.commentlist li .comment-text {
   margin: 0 0 0 90px;
 }
+
+@media (max-width: 991px) {
+  .widget.dokan-category-menu #cat-drop-stack > ul > li:hover .sub-category {
+    display: none;
+  }
+}

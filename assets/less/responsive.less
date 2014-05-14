@@ -1,6 +1,29 @@
 /*--------------------------------------------------
 :: Responsive Menubar
 -------------------------------------------------- */
+@media (max-width: 991px) {
+    .widget.dokan-category-menu {
+        #cat-drop-stack > ul > li {
+            .sub-category {
+                position: relative;
+                left: auto;
+                top: auto;
+                box-shadow: none;
+
+                .sub-block {
+                    width: 100%;
+                    float: left;
+                    margin-bottom: 15px;
+                    padding: 0;
+                }
+            }
+
+            &:hover .sub-category {
+                display: none;
+            }
+        }
+    }
+}
 @media (max-width: 767px) {
 
     .navbar-top-area {
