@@ -32,8 +32,11 @@ jQuery(function($) {
     } else {
         $('#cat-drop-stack li.has-children > .sub-category').each(function(index, el) {
             var sub_cat = $(el);
+            var length = sub_cat.find('.sub-block').length;
 
-            if( sub_cat.find('.sub-block').length > 2 ) {
+            if ( length == 3 ) {
+                sub_cat.css('width', '260%');
+            } else if ( length > 3) {
                 sub_cat.css('width', '340%');
             }
         });
