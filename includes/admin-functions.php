@@ -529,3 +529,33 @@ function dokan_send_notification_on_product_publish( $post ) {
 }
 
 add_action( 'pending_to_publish', 'dokan_send_notification_on_product_publish' );
+
+
+
+/**
+ * Display form field with list of authors.
+ *
+ * @since 2.6.0
+ *
+ * @param object $post
+ */
+function dokan_seller_meta_box($post) {
+    global $user_ID;
+    ?>
+    <label class="screen-reader-text" for="post_author_override"><?php _e('Seller'); ?></label>
+    
+     <?php
+    wp_dropdown_users( array(
+        'role' => 'seller',
+        'name' => 'post_author_override',
+        'selected' => empty($post->ID) ? $user_ID : $post->post_author,
+        'include_selected' => true
+    ) );
+}
+
+function dokan_add_seller_meta_box(){
+    remove_meta_box( 'authordiv', 'product', 'core' );
+    add_meta_box('sellerdiv', __('Seller'), 'dokan_seller_meta_box', 'product', 'normal', 'core');
+}
+
+add_action( 'add_meta_boxes', 'dokan_add_seller_meta_box' );

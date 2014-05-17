@@ -486,3 +486,4 @@ function dokan_wp_title( $title, $sep ) {
 }
 
 add_filter( 'wp_title', 'dokan_wp_title', 10, 2 );
+
