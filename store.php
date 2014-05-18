@@ -102,6 +102,8 @@ get_header();
             </div> <!-- .profile-info-box -->
         </div> <!-- .profile-frame -->
 
+        <?php do_action( 'dokan_store_profile_frame_after', $store_user, $store_info ); ?>
+
         <?php if ( have_posts() ) { ?>
 
             <div class="seller-items">
