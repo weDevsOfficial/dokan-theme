@@ -133,6 +133,7 @@ class WeDevs_Dokan {
 
         require_once $inc_dir . 'theme-functions.php';
         require_once $inc_dir . 'widgets/menu-category.php';
+        require_once $inc_dir . 'widgets/store-menu-category.php';
         require_once $inc_dir . 'widgets/best-seller.php';
         require_once $classes_dir . 'customizer.php';
         require_once $inc_dir . 'wc-functions.php';

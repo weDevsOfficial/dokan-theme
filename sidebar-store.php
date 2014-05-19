@@ -12,7 +12,7 @@ $map_location = isset( $store_info['location'] ) ? esc_attr( $store_info['locati
 
     <div class="widget-area collapse widget-collapse">
 
-        <?php dokan_category_widget(); ?>
+        <?php dokan_store_category_menu( $store_user->ID ); ?>
 
         <?php do_action( 'dokan_sidebar_store_before', $store_user, $store_info ); ?>
 
