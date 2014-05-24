@@ -12,46 +12,48 @@ $map_location = isset( $store_info['location'] ) ? esc_attr( $store_info['locati
 
     <div class="widget-area collapse widget-collapse">
 
-        <?php dokan_category_widget(); ?>
+        <?php dokan_store_category_menu( $store_user->ID ); ?>
 
         <?php do_action( 'dokan_sidebar_store_before', $store_user, $store_info ); ?>
 
-        <?php if ( !empty( $map_location ) ) { ?>
-        <aside class="widget store-location">
-            <h3 class="widget-title"><?php _e( 'Store Location', 'dokan' ); ?></h3>
+        <?php if ( apply_filters( 'doakn_store_show_map', true ) ) { ?>
+            <?php if ( !empty( $map_location ) ) { ?>
+            <aside class="widget store-location">
+                <h3 class="widget-title"><?php _e( 'Store Location', 'dokan' ); ?></h3>
 
-            <div class="location-container">
-                <div id="dokan-store-location"></div>
+                <div class="location-container">
+                    <div id="dokan-store-location"></div>
 
-                <script type="text/javascript">
-                    jQuery(function($) {
-                        <?php
-                        $locations = explode( ',', $map_location );
-                        $def_lat = isset( $locations[0] ) ? $locations[0] : 90.40714300000002;
-                        $def_long = isset( $locations[1] ) ? $locations[1] : 23.709921;
-                        ?>
+                    <script type="text/javascript">
+                        jQuery(function($) {
+                            <?php
+                            $locations = explode( ',', $map_location );
+                            $def_lat = isset( $locations[0] ) ? $locations[0] : 90.40714300000002;
+                            $def_long = isset( $locations[1] ) ? $locations[1] : 23.709921;
+                            ?>
 
-                        var def_longval = <?php echo $def_long; ?>;
-                        var def_latval = <?php echo $def_lat; ?>;
+                            var def_longval = <?php echo $def_long; ?>;
+                            var def_latval = <?php echo $def_lat; ?>;
 
-                        var curpoint = new google.maps.LatLng(def_latval, def_longval),
-                            $map_area = $('#dokan-store-location');
+                            var curpoint = new google.maps.LatLng(def_latval, def_longval),
+                                $map_area = $('#dokan-store-location');
 
-                        var gmap = new google.maps.Map( $map_area[0], {
-                            center: curpoint,
-                            zoom: 15,
-                            mapTypeId: window.google.maps.MapTypeId.ROADMAP
-                        });
+                            var gmap = new google.maps.Map( $map_area[0], {
+                                center: curpoint,
+                                zoom: 15,
+                                mapTypeId: window.google.maps.MapTypeId.ROADMAP
+                            });
 
-                        var marker = new window.google.maps.Marker({
-                            position: curpoint,
-                            map: gmap
-                        });
-                    })
+                            var marker = new window.google.maps.Marker({
+                                position: curpoint,
+                                map: gmap
+                            });
+                        })
 
-                </script>
-            </div>
-        </aside>
+                    </script>
+                </div>
+            </aside>
+            <?php } ?>
         <?php } ?>
 
         <aside class="widget store-contact">

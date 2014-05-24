@@ -364,6 +364,58 @@ function dokan_category_widget() {
 }
 
 
+function dokan_store_category_menu( $seller_id ) { ?>
+    <aside class="widget dokan-category-menu">
+        <h3 class="widget-title">Store Product Category</h3>
+        <div id="cat-drop-stack">
+            <?php
+            global $wpdb;
+
+            $categories = get_transient( 'dokan-store-category-'.$seller_id );
+
+            if ( false === $categories ) {
+                $sql = "SELECT t.term_id,t.name, tt.parent FROM $wpdb->terms as t
+                        LEFT JOIN $wpdb->term_taxonomy as tt on t.term_id = tt.term_id
+                        LEFT JOIN $wpdb->term_relationships AS tr on tt.term_taxonomy_id = tr.term_taxonomy_id
+                        LEFT JOIN $wpdb->posts AS p on tr.object_id = p.ID
+                        WHERE tt.taxonomy = 'product_cat'
+                        AND p.post_type = 'product'
+                        AND p.post_status = 'publish'
+                        AND p.post_author = $seller_id GROUP BY t.term_id";
+
+                $categories = $wpdb->get_results( $sql );
+                set_transient( 'dokan-store-category-'.$seller_id , $categories );
+            }
+
+            $args = array(
+                'taxonomy' => 'product_cat',
+                'selected_cats' => ''
+            );
+
+            $walker = new Dokan_Store_Category_Walker( $seller_id );
+            echo "<ul>";
+            echo call_user_func_array( array(&$walker, 'walk'), array($categories, 0, array()) );
+            echo "</ul>";
+            ?>
+        </div>
+    </aside>
+<?php
+}
+
+
+function dokan_store_category_delete_transient( $post_id ) {
+
+    $post_tmp = get_post($post_id);
+    $seller_id = $post_tmp->post_author;
+    //delete store category transient
+    delete_transient( 'dokan-store-category-'.$seller_id );
+}
+
+add_action( 'deleted_post', 'dokan_store_category_delete_transient' );
+add_action( 'save_post', 'dokan_store_category_delete_transient' );
+
+
+
 function dokan_seller_reg_form_fields() {
     $role = isset( $_POST['role'] ) ? $_POST['role'] : 'customer';
     $role_style = ( $role == 'customer' ) ? ' style="display:none"' : '';

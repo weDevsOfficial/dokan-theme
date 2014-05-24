@@ -48,6 +48,9 @@ class Dokan_Rewrites {
 
         add_rewrite_rule( 'store/([^/]+)/reviews?$', 'index.php?store=$matches[1]&store_review=true', 'top' );
         add_rewrite_rule( 'store/([^/]+)/reviews/page/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&paged=$matches[2]&store_review=true', 'top' );
+
+        add_rewrite_rule( 'store/([^/]+)/section/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&term=$matches[2]&term_section=true', 'top' );
+        add_rewrite_rule( 'store/([^/]+)/section/?([0-9]{1,})/page/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&term=$matches[2]&paged=$matches[3]&term_section=true', 'top' );
     }
 
     /**
@@ -60,6 +63,7 @@ class Dokan_Rewrites {
         $vars[] = 'store';
         $vars[] = 'store_review';
         $vars[] = 'edit';
+        $vars[] = 'term_section';
 
         return $vars;
     }
@@ -125,7 +129,17 @@ class Dokan_Rewrites {
         if ( !is_admin() && $query->is_main_query() && !empty( $author ) ) {
             $query->set( 'post_type', 'product' );
             $query->set( 'author_name', $author );
+
+            if ( $query->query['term_section'] ) {
+                $query->set( 'tax_query',
+                array(
+                    array(
+                        'taxonomy' => 'product_cat', 
+                        'field' => 'term_id', 
+                        'terms' => $query->query['term'])
+                    )
+                );
+            }
         }
     }
-
 }
