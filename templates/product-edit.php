@@ -101,14 +101,53 @@ dokan_frontend_dashboard_scripts();
                         <div class="tabbable"> <!-- Only required for left/right tabs -->
 
                             <ul class="nav nav-tabs">
-                                <li class="active">
-                                    <a href="#edit-product" data-toggle="tab"><?php _e( 'Edit', 'dokan' ); ?></a>
-                                </li>
-                                <li><a href="#product-options" data-toggle="tab"><?php _e( 'Options', 'dokan' ); ?></a></li>
-                                <li><a href="#product-inventory" data-toggle="tab"><?php _e( 'Inventory', 'dokan' ); ?></a></li>
-                                <li class="show_if_simple"><a href="#product-shipping" data-toggle="tab"><?php _e( 'Shipping', 'dokan' ); ?></a></li>
-                                <li><a href="#product-attributes" data-toggle="tab"><?php _e( 'Attributes', 'dokan' ); ?></a></li>
-                                <li class="show_if_variable"><a href="#product-variations" data-toggle="tab"><?php _e( 'Variations', 'dokan' ); ?></a></li>
+                                <?php $dokan_product_data_tabs = apply_filters( 'dokan_product_data_tabs', array( 
+
+                                    'edit' => array(
+                                        'label'  => __( 'Edit', 'dokan' ),
+                                        'target' => 'edit-product',
+                                        'class'  => array( 'active' ),
+                                    ),
+                                    'options' => array(
+                                        'label'  => __( 'Options', 'dokan' ),
+                                        'target' => 'product-options',
+                                        'class'  => array(),
+                                    ),
+                                    'inventory' => array(
+                                        'label'  => __( 'Inventory', 'dokan' ),
+                                        'target' => 'product-inventory',
+                                        'class'  => array(),
+                                    ),
+                                    'shipping' => array(
+                                        'label'  => __( 'Shipping', 'dokan' ),
+                                        'target' => 'product-shipping',
+                                        'class'  => array( 'show_if_simple' ),
+                                    ),
+                                    'attributes' => array(
+                                        'label'  => __( 'Attributes', 'dokan' ),
+                                        'target' => 'product-attributes',
+                                        'class'  => array(),
+                                    ),
+                                    'variations' => array(
+                                        'label'  => __( 'Variations', 'dokan' ),
+                                        'target' => 'product-variations',
+                                        'class'  => array( 'show_if_variable' ),
+                                    ),
+
+                                ) );
+
+                                foreach ( $dokan_product_data_tabs as $key => $tab ) { ?>
+
+                                    <li class="<?php echo $key; ?>_options <?php echo $key; ?>_tab <?php echo implode( ' ' , $tab['class'] ); ?>">
+                                        <a href="#<?php echo $tab['target']; ?>"><?php echo esc_html( $tab['label'] ); ?></a>
+                                    </li>
+
+                                <?php
+                                }
+
+                                do_action( 'dokan_product_data_panel_tabs' );
+                                ?>
+
                             </ul>
 
                             <div class="tab-content">
@@ -286,6 +325,9 @@ dokan_frontend_dashboard_scripts();
                                     <?php do_action( 'dokan_product_edit_after_variations' ); ?>
 
                                 </div> <!-- #product-variations -->
+
+                                <?php do_action( 'dokan_product_tab_content', $post, $seller_id ); ?>
+                                
                             </div> <!-- .tab-content -->
                         </div> <!-- .tabbable -->
 
