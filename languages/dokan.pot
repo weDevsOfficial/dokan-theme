@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Dokan\n"
-"POT-Creation-Date: 2014-05-09 15:37+0600\n"
-"PO-Revision-Date: 2014-05-09 15:37+0600\n"
+"POT-Creation-Date: 2014-05-24 18:06+0600\n"
+"PO-Revision-Date: 2014-05-24 18:06+0600\n"
 "Last-Translator: Tareq Hasan <tareq@wedevs.com>\n"
 "Language-Team: weDevs Team <info@wedevs.com>\n"
 "Language: English\n"
@@ -10,7 +10,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.5\n"
-"X-Poedit-KeywordsList: __;_e;_n\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
@@ -71,7 +73,9 @@ msgstr ""
 #: ../comments.php:32
 #, php-format
 msgid "One thought on &ldquo;%2$s&rdquo;"
-msgstr ""
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../comments.php:38 ../comments.php:58
 msgid "Comment navigation"
@@ -346,6 +350,15 @@ msgstr ""
 msgid "Search Results for: %s"
 msgstr ""
 
+#: ../searchform.php:11
+msgid "Search &hellip;"
+msgstr ""
+
+#: ../searchform.php:14 ../includes/wc-functions.php:1575
+#: ../templates/edit/options.php:23
+msgid "Search"
+msgstr ""
+
 #: ../sidebar-blog.php:13 ../sidebar-product-single.php:12
 #: ../sidebar-shop.php:13 ../sidebar-store.php:10 ../sidebar.php:13
 msgid "Toggle Sidebar"
@@ -362,6 +375,22 @@ msgstr ""
 
 #: ../sidebar-store.php:58
 msgid "Contact Seller"
+msgstr ""
+
+#: ../sidebar-store.php:64
+msgid "Your Name"
+msgstr ""
+
+#: ../sidebar-store.php:67
+msgid "you@example.com"
+msgstr ""
+
+#: ../sidebar-store.php:70
+msgid "Type your messsage..."
+msgstr ""
+
+#: ../sidebar-store.php:77
+msgid "Send Message"
 msgstr ""
 
 #: ../store-reviews.php:117
@@ -602,6 +631,7 @@ msgid "[%s] Your product has been approved!"
 msgstr ""
 
 #: ../classes/installer.php:51 ../includes/admin-functions.php:52
+#: ../includes/admin-functions.php:545 ../includes/admin-functions.php:558
 #: ../includes/wc-template.php:19 ../includes/admin/reports.php:119
 #: ../includes/admin/reports.php:129
 msgid "Seller"
@@ -881,6 +911,10 @@ msgid "Expiry date"
 msgstr ""
 
 #: ../classes/template-coupons.php:247
+msgid "Are you sure want to delete"
+msgstr ""
+
+#: ../classes/template-coupons.php:247
 msgid "delete"
 msgstr ""
 
@@ -992,7 +1026,7 @@ msgid ""
 "only work if there are no sale items in the cart."
 msgstr ""
 
-#: ../classes/template-coupons.php:597
+#: ../classes/template-coupons.php:597 ../classes/template-coupons.php:599
 msgid "Minimum Amount"
 msgstr ""
 
@@ -1207,6 +1241,10 @@ msgstr ""
 msgid "Find Address"
 msgstr ""
 
+#: ../classes/template-settings.php:382
+msgid "Update Settings"
+msgstr ""
+
 #: ../classes/template-settings.php:522
 msgid "Book"
 msgstr ""
@@ -1318,6 +1356,10 @@ msgstr ""
 msgid "Download PayPal mass payment file"
 msgstr ""
 
+#: ../classes/template-withdraw.php:471 ../includes/admin/sellers.php:109
+msgid "Apply"
+msgstr ""
+
 #: ../classes/template-withdraw.php:605
 msgid "Pending Reivew"
 msgstr ""
@@ -1332,11 +1374,11 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: ../classes/template-withdraw.php:625 ../includes/wc-template.php:176
-#: ../includes/admin/reports.php:123 ../includes/admin/reports.php:133
-#: ../includes/admin/sellers.php:22 ../includes/admin/sellers.php:97
-#: ../templates/my-orders.php:42 ../templates/products-listing.php:33
-#: ../templates/orders/listing.php:19
+#: ../classes/template-withdraw.php:625 ../includes/admin-functions.php:42
+#: ../includes/wc-template.php:176 ../includes/admin/reports.php:123
+#: ../includes/admin/reports.php:133 ../includes/admin/sellers.php:22
+#: ../includes/admin/sellers.php:97 ../templates/my-orders.php:42
+#: ../templates/products-listing.php:33 ../templates/orders/listing.php:19
 #: ../woocommerce/myaccount/my-orders.php:35
 msgid "Status"
 msgstr ""
@@ -1380,6 +1422,10 @@ msgstr ""
 
 #: ../classes/template-withdraw.php:742
 msgid "Withdraw Amount"
+msgstr ""
+
+#: ../classes/template-withdraw.php:771
+msgid "Submit Request"
 msgstr ""
 
 #: ../classes/template-withdraw.php:808
@@ -1479,6 +1525,15 @@ msgstr ""
 
 #: ../includes/admin-functions.php:45
 msgid "Ship to"
+msgstr ""
+
+#: ../includes/admin-functions.php:47
+msgid "Customer Message"
+msgstr ""
+
+#: ../includes/admin-functions.php:48
+#: ../templates/orders/order-details.php:221
+msgid "Order Notes"
 msgstr ""
 
 #: ../includes/admin-functions.php:50 ../includes/wc-template.php:177
@@ -1660,6 +1715,16 @@ msgstr ""
 
 #: ../includes/template-tags.php:117
 msgid "Post navigation"
+msgstr ""
+
+#: ../includes/template-tags.php:123
+msgctxt "Previous post link"
+msgid "&larr;"
+msgstr ""
+
+#: ../includes/template-tags.php:126
+msgctxt "Next post link"
+msgid "&rarr;"
 msgstr ""
 
 #: ../includes/template-tags.php:183 ../includes/admin/sellers.php:122
@@ -1889,6 +1954,11 @@ msgstr ""
 msgid "Order &ndash; %s"
 msgstr ""
 
+#: ../includes/wc-functions.php:1041
+msgctxt "Order date parsed by strftime"
+msgid "%b %d, %Y @ %I:%M %p"
+msgstr ""
+
 #: ../includes/wc-functions.php:1283
 msgid "Cheating, eh?"
 msgstr ""
@@ -1948,6 +2018,11 @@ msgstr ""
 msgid "Address:"
 msgstr ""
 
+#: ../includes/wc-template.php:137
+msgctxt "breadcrumb"
+msgid "<i class=\"fa fa-home\"></i> Home"
+msgstr ""
+
 #: ../includes/wc-template.php:160
 msgid "Sub Orders"
 msgstr ""
@@ -1967,7 +2042,9 @@ msgstr ""
 #: ../woocommerce/myaccount/my-orders.php:63
 #, php-format
 msgid "%s for %s item"
-msgstr ""
+msgid_plural "%s for %s items"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../includes/wc-template.php:209 ../templates/my-orders.php:90
 #: ../templates/products-listing.php:80 ../templates/orders/listing.php:107
@@ -1983,8 +2060,24 @@ msgstr ""
 msgid "Skrill"
 msgstr ""
 
+#: ../includes/withdraw-functions.php:158
+msgid "Your bank account name"
+msgstr ""
+
+#: ../includes/withdraw-functions.php:164
+msgid "Your bank account number"
+msgstr ""
+
 #: ../includes/withdraw-functions.php:170
 msgid "Name of bank"
+msgstr ""
+
+#: ../includes/withdraw-functions.php:176
+msgid "Address of your bank"
+msgstr ""
+
+#: ../includes/withdraw-functions.php:182
+msgid "Swift code"
 msgstr ""
 
 #: ../includes/admin/add-on.php:2
@@ -2461,8 +2554,18 @@ msgstr ""
 msgid "Sale start date:"
 msgstr ""
 
+#: ../includes/woo-views/variation-admin-html.php:85
+msgctxt "placeholder"
+msgid "From&hellip;"
+msgstr ""
+
 #: ../includes/woo-views/variation-admin-html.php:88
 msgid "Sale end date:"
+msgstr ""
+
+#: ../includes/woo-views/variation-admin-html.php:89
+msgctxt "placeholder"
+msgid "To&hellip;"
 msgstr ""
 
 #: ../includes/woo-views/variation-admin-html.php:97
@@ -2608,8 +2711,20 @@ msgstr ""
 msgid "Upload a product cover image"
 msgstr ""
 
+#: ../templates/new-product.php:118
+msgid "Product name.."
+msgstr ""
+
+#: ../templates/new-product.php:129
+msgid "Short description about the product..."
+msgstr ""
+
 #: ../templates/new-product.php:135 ../templates/product-edit.php:223
 msgid "- Select a category -"
+msgstr ""
+
+#: ../templates/new-product.php:159
+msgid "Add Product"
 msgstr ""
 
 #: ../templates/orders.php:23
@@ -2872,10 +2987,6 @@ msgstr ""
 msgid "Catalog"
 msgstr ""
 
-#: ../templates/edit/options.php:23
-msgid "Search"
-msgstr ""
-
 #: ../templates/edit/options.php:24
 msgid "Hidden"
 msgstr ""
@@ -2922,6 +3033,10 @@ msgid ""
 "products."
 msgstr ""
 
+#: ../templates/edit/sidebar.php:3
+msgid "Update Product"
+msgstr ""
+
 #: ../templates/edit/sidebar.php:9
 msgid "Product Status:"
 msgstr ""
@@ -2952,6 +3067,10 @@ msgstr ""
 
 #: ../templates/edit/sidebar.php:132
 msgid "Image Gallery"
+msgstr ""
+
+#: ../templates/edit/sidebar.php:154
+msgid "Delete image"
 msgstr ""
 
 #: ../templates/edit/sidebar.php:166
@@ -3056,10 +3175,6 @@ msgstr ""
 msgid "Customer Note:"
 msgstr ""
 
-#: ../templates/orders/order-details.php:221
-msgid "Order Notes"
-msgstr ""
-
 #: ../templates/orders/order-details.php:245
 #, php-format
 msgid "added %s ago"
@@ -3081,6 +3196,10 @@ msgstr ""
 msgid "Private note"
 msgstr ""
 
+#: ../templates/orders/order-details.php:276
+msgid "Add Note"
+msgstr ""
+
 #: ../templates/orders/order-download-permission-html.php:7
 #, php-format
 msgid "File %d: %s"
@@ -3097,7 +3216,9 @@ msgstr ""
 #: ../templates/orders/order-download-permission-html.php:22
 #, php-format
 msgid "%s time"
-msgstr ""
+msgid_plural "%s times"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../templates/orders/order-download-permission-html.php:25
 msgid "Downloads Remaining"
