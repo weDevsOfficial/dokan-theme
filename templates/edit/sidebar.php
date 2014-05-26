@@ -37,7 +37,10 @@
         <label for="product_type"><?php _e( 'Product Type:', 'dokan' ); ?></label>
 
         <?php
-        $supported_types = array( 'simple', 'variable' );
+        $supported_types = apply_filters( 'dokan_product_type_selector', array(
+            'simple'    => __( 'Simple product', 'dokan' ),
+            'variable'  => __( 'Variable product', 'dokan' )
+        ) );
         if ( $terms = wp_get_object_terms( $post->ID, 'product_type' ) ) {
             $product_type = sanitize_title( current( $terms )->name );
         } else {
@@ -54,8 +57,12 @@
 
             <div class="dokan-toggle-select-container dokan-hide">
                 <select name="_product_type" id="_product_type" class="dokan-toggle-select">
-                    <option value="simple" <?php selected( $product_type, 'simple' ); ?>><?php _e( 'Simple Product', 'dokan' ); ?></option>
-                    <option value="variable" <?php selected( $product_type, 'variable' ); ?>><?php _e( 'Variable Product', 'dokan' ); ?></option>
+                    <?php 
+                    foreach ( $supported_types as $value => $label ) { 
+                        echo '<option value="' . esc_attr( $value ) . '" ' . selected( $product_type, $value, false ) .'>' . esc_html( $label ) . '</option>';
+                    }
+                    ?>
+                    
                 </select>
 
                 <a class="dokan-toggle-save btn btn-default btn-sm" href="#"><?php _e( 'OK', 'dokan' ); ?></a>
