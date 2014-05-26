@@ -151,7 +151,7 @@ dokan_frontend_dashboard_scripts();
                             </ul>
 
                             <div class="tab-content">
-                                <div class="tab-pane active" id="edit-product">
+                                <div class="tab-pane fade in active" id="edit-product">
 
                                     <?php do_action( 'dokan_product_edit_before_main' ); ?>
 
@@ -285,7 +285,7 @@ dokan_frontend_dashboard_scripts();
 
                                 </div> <!-- #edit-product -->
 
-                                <div class="tab-pane" id="product-options">
+                                <div class="tab-pane fade" id="product-options">
 
                                     <?php include_once dirname(__FILE__) . '/edit/options.php'; ?>
 
@@ -293,7 +293,7 @@ dokan_frontend_dashboard_scripts();
 
                                 </div> <!-- #product-options -->
 
-                                <div class="tab-pane" id="product-inventory">
+                                <div class="tab-pane fade" id="product-inventory">
 
                                     <?php include_once dirname(__FILE__) . '/edit/inventory.php'; ?>
 
@@ -301,7 +301,7 @@ dokan_frontend_dashboard_scripts();
 
                                 </div> <!-- #product-inventory -->
 
-                                <div class="tab-pane" id="product-shipping">
+                                <div class="tab-pane fade" id="product-shipping">
                                     <?php include_once dirname(__FILE__) . '/edit/shipping.php'; ?>
 
                                     <?php do_action( 'dokan_product_edit_after_shipping' ); ?>
@@ -309,7 +309,7 @@ dokan_frontend_dashboard_scripts();
 
                                 <!-- ===== Attributes ===== -->
 
-                                <div class="tab-pane show_if_simple" id="product-attributes">
+                                <div class="tab-pane fade show_if_simple" id="product-attributes">
 
                                     <?php include_once dirname(__FILE__) . '/edit/attributes.php'; ?>
                                     <?php include_once dirname(__FILE__) . '/edit/templates-js.php'; ?>
@@ -318,7 +318,7 @@ dokan_frontend_dashboard_scripts();
 
                                 </div> <!-- #product-attributes -->
 
-                                <div class="tab-pane show_if_variable" id="product-variations">
+                                <div class="tab-pane fade show_if_variable" id="product-variations">
 
                                     <?php dokan_variable_product_type_options(); ?>
 
@@ -327,7 +327,7 @@ dokan_frontend_dashboard_scripts();
                                 </div> <!-- #product-variations -->
 
                                 <?php do_action( 'dokan_product_tab_content', $post, $seller_id ); ?>
-                                
+
                             </div> <!-- .tab-content -->
                         </div> <!-- .tabbable -->
 
