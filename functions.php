@@ -24,6 +24,7 @@ define( 'DOKAN_DIR', __DIR__ );
 define( 'DOKAN_INC_DIR', __DIR__ . '/includes' );
 define( 'DOKAN_LIB_DIR', __DIR__ . '/lib' );
 
+// give a way to turn off loading styles from parent theme
 if ( !defined( 'DOKAN_LOAD_STYLE' ) ) {
     define( 'DOKAN_LOAD_STYLE', true );
 }
@@ -189,7 +190,6 @@ class WeDevs_Dokan {
         ) );
 
         add_theme_support( 'woocommerce' );
-        add_post_type_support( 'product', 'author' );
 
         /*
          * This theme supports custom background color and image,
