@@ -157,6 +157,13 @@ class Dokan_Admin_Settings {
             ),
             'dokan_selling' => array(
                 array(
+                    'name' => 'new_seller_enable_selling',
+                    'label' => __( 'New Seller Enable Selling', 'dokan' ),
+                    'desc' => __( 'Make selling status enable for new registred seller', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
+                array(
                     'name' => 'product_status',
                     'label' => __( 'New Product Status', 'dokan' ),
                     'desc' => __( 'Product status when a seller creates a product', 'dokan' ),
