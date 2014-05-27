@@ -24,9 +24,13 @@ define( 'DOKAN_DIR', __DIR__ );
 define( 'DOKAN_INC_DIR', __DIR__ . '/includes' );
 define( 'DOKAN_LIB_DIR', __DIR__ . '/lib' );
 
-// give a way to turn off loading styles from parent theme
+// give a way to turn off loading styles and scripts from parent theme
 if ( !defined( 'DOKAN_LOAD_STYLE' ) ) {
     define( 'DOKAN_LOAD_STYLE', true );
+}
+
+if ( !defined( 'DOKAN_LOAD_SCRIPTS' ) ) {
+    define( 'DOKAN_LOAD_SCRIPTS', true );
 }
 
 /**
@@ -256,17 +260,13 @@ class WeDevs_Dokan {
      */
     function scripts() {
 
-        if ( DOKAN_LOAD_STYLE !== true ) {
-            return;
-        }
-
         $protocol           = is_ssl() ? 'https' : 'http';
         $template_directory = get_template_directory_uri();
         $skin               = dokan_get_option( 'color_skin', 'dokan_general', 'orange.css' );
 
+        // register styles
         wp_register_style( 'jquery-ui', $template_directory . '/assets/css/jquery-ui-1.10.0.custom.css', false, null );
         wp_register_style( 'chosen-style', $template_directory . '/assets/css/chosen.min.css', false, null );
-
         wp_register_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.css', false, null );
         wp_register_style( 'icomoon', $template_directory . '/assets/css/icomoon.css', false, null );
         wp_register_style( 'fontawesome', $template_directory . '/assets/css/font-awesome.css', false, null );
@@ -275,28 +275,7 @@ class WeDevs_Dokan {
         wp_register_style( 'dokan-opensans', $protocol . '://fonts.googleapis.com/css?family=Open+Sans:400,700' );
         wp_register_style( 'dokan-style', $template_directory . '/style.css', false, null );
 
-        wp_enqueue_style( 'bootstrap' );
-        wp_enqueue_style( 'icomoon' );
-        wp_enqueue_style( 'fontawesome' );
-        wp_enqueue_style( 'flexslider' );
-        wp_enqueue_style( 'dokan-opensans' );
-        wp_enqueue_style( 'dokan-style' );
-        wp_enqueue_style( 'dokan-skin' );
-
-        /****** Scripts ******/
-
-        if ( is_single() && comments_open() && get_option( 'thread_comments' ) ) {
-            wp_enqueue_script( 'comment-reply' );
-        }
-
-        if ( is_singular() && wp_attachment_is_image() ) {
-            wp_enqueue_script( 'keyboard-image-navigation', $template_directory . '/assets/js/keyboard-image-navigation.js', array('jquery'), '20120202' );
-        }
-
-        wp_enqueue_script( 'jquery' );
-        wp_enqueue_script( 'jquery-ui' );
-        wp_enqueue_script( 'jquery-ui-datepicker' );
-
+        // register scripts
         wp_register_script( 'jquery-flot', $template_directory . '/assets/js/jquery.flot.min.js', false, null, true );
         wp_register_script( 'jquery-flot-time', $template_directory . '/assets/js/jquery.flot.time.min.js', false, null, true );
         wp_register_script( 'jquery-flot-pie', $template_directory . '/assets/js/jquery.flot.pie.min.js', false, null, true );
@@ -307,20 +286,47 @@ class WeDevs_Dokan {
         wp_register_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
         wp_register_script( 'reviews', $template_directory . '/assets/js/reviews.js', array('jquery'), null, true );
 
-        wp_enqueue_script( 'form-validate', $template_directory . '/assets/js/form-validate.js', array('jquery'), null, true  );
-        wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
-        wp_enqueue_script( 'flexslider', $template_directory . '/assets/js/jquery.flexslider-min.js', array('jquery') );
+        if ( DOKAN_LOAD_STYLE === true ) {
+            wp_enqueue_style( 'bootstrap' );
+            wp_enqueue_style( 'icomoon' );
+            wp_enqueue_style( 'fontawesome' );
+            wp_enqueue_style( 'flexslider' );
+            wp_enqueue_style( 'dokan-opensans' );
+            wp_enqueue_style( 'dokan-style' );
+            wp_enqueue_style( 'dokan-skin' );
+        }
 
-        wp_enqueue_script( 'dokan-scripts', $template_directory . '/assets/js/script.js', false, null, true );
-        wp_localize_script( 'jquery', 'dokan', array(
-            'ajaxurl' => admin_url( 'admin-ajax.php' ),
-            'nonce' => wp_create_nonce( 'dokan_reviews' ),
-            'ajax_loader' => $template_directory . '/assets/images/ajax-loader.gif',
-            'seller' => array(
-                'available' => __( 'Available', 'dokan' ),
-                'notAvailable' => __( 'Not Available', 'dokan' )
-            )
-        ) );
+        /****** Scripts ******/
+
+        if ( DOKAN_LOAD_SCRIPTS === true ) {
+
+            if ( is_single() && comments_open() && get_option( 'thread_comments' ) ) {
+                wp_enqueue_script( 'comment-reply' );
+            }
+
+            if ( is_singular() && wp_attachment_is_image() ) {
+                wp_enqueue_script( 'keyboard-image-navigation', $template_directory . '/assets/js/keyboard-image-navigation.js', array('jquery'), '20120202' );
+            }
+
+            wp_enqueue_script( 'jquery' );
+            wp_enqueue_script( 'jquery-ui' );
+            wp_enqueue_script( 'jquery-ui-datepicker' );
+
+            wp_enqueue_script( 'form-validate', $template_directory . '/assets/js/form-validate.js', array('jquery'), null, true  );
+            wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
+            wp_enqueue_script( 'flexslider', $template_directory . '/assets/js/jquery.flexslider-min.js', array('jquery') );
+
+            wp_enqueue_script( 'dokan-scripts', $template_directory . '/assets/js/script.js', false, null, true );
+            wp_localize_script( 'jquery', 'dokan', array(
+                'ajaxurl'     => admin_url( 'admin-ajax.php' ),
+                'nonce'       => wp_create_nonce( 'dokan_reviews' ),
+                'ajax_loader' => $template_directory . '/assets/images/ajax-loader.gif',
+                'seller'      => array(
+                    'available'    => __( 'Available', 'dokan' ),
+                    'notAvailable' => __( 'Not Available', 'dokan' )
+                )
+            ) );
+        }
     }
 
     function login_scripts() {
