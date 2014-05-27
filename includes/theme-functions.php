@@ -341,6 +341,8 @@ function dokan_generate_sync_table() {
 }
 
 
+if ( !function_exists( 'dokan_get_seller_percentage' ) ) :
+
 /**
  * Get store seller percentage settings
  *
@@ -361,6 +363,8 @@ function dokan_get_seller_percentage( $seller_id = 0 ) {
 
     return $global_percentage;
 }
+
+endif;
 
 /**
  * Get product status based on user id and settings
@@ -426,7 +430,6 @@ function dokan_format_time( $datetime ) {
 
     return date_i18n( $date_format . ' ' . $time_format, $timestamp );
 }
-
 
 
 /**
