@@ -134,7 +134,7 @@ get_header();
                                                 echo '<span class="product-type tips variable" title="' . __( 'Variable', 'woocommerce' ) . '"></span>';
                                             else:
                                                 // Assuming that we have other types in future
-                                                echo '<span class="product-type tips ' . $product->product_type . '" title="' . ucfirst( $the_product->product_type ) . '"></span>';
+                                                echo '<span class="product-type tips ' . $product->product_type . '" title="' . ucfirst( $product->product_type ) . '"></span>';
                                             endif;
                                         ?>
                                     </td>
