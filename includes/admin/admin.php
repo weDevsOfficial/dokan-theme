@@ -124,20 +124,20 @@ class Dokan_Admin_Settings {
 
         $settings_fields = array(
             'dokan_general' => array(
-                array(
+                'admin_access' => array(
                     'name' => 'admin_access',
                     'label' => __( 'Admin area access', 'dokan' ),
                     'desc' => __( 'Disable sellers and customers from accessing wp-admin area', 'dokan' ),
                     'type' => 'checkbox',
                     'default' => 'on'
                 ),
-                array(
+                'color_skin' => array(
                     'name' => 'color_skin',
                     'label' => __( 'Color Skin', 'dokan' ),
                     'desc' => __( 'Choose the color skin of the theme', 'dokan' ),
                     'type' => 'select',
                     'default' => 'orange',
-                    'options' => array(
+                    'options' => apply_filters( 'dokan_color_skin', array(
                         'orange.css' => __( 'Orange', 'dokan' ),
                         'sky.css' => __( 'Sky', 'dokan' ),
                         'blue.css' => __( 'Blue', 'dokan' ),
@@ -145,9 +145,9 @@ class Dokan_Admin_Settings {
                         'purple.css' => __( 'Purple', 'dokan' ),
                         'red.css' => __( 'Red', 'dokan' ),
                         'pink.css' => __( 'Pink', 'dokan' ),
-                    )
+                    ) )
                 ),
-                array(
+                'footer_text' => array(
                     'name' => 'footer_text',
                     'label' => __( 'Site footer text', 'dokan' ),
                     'desc' => '',
@@ -156,14 +156,14 @@ class Dokan_Admin_Settings {
                 ),
             ),
             'dokan_selling' => array(
-                array(
+                'new_seller_enable_selling' => array(
                     'name' => 'new_seller_enable_selling',
                     'label' => __( 'New Seller Enable Selling', 'dokan' ),
                     'desc' => __( 'Make selling status enable for new registred seller', 'dokan' ),
                     'type' => 'checkbox',
                     'default' => 'on'
                 ),
-                array(
+                'product_status' => array(
                     'name' => 'product_status',
                     'label' => __( 'New Product Status', 'dokan' ),
                     'desc' => __( 'Product status when a seller creates a product', 'dokan' ),
@@ -174,21 +174,21 @@ class Dokan_Admin_Settings {
                         'pending' => __( 'Pending Review', 'dokan' )
                     )
                 ),
-                array(
+                'seller_percentage' => array(
                     'name' => 'seller_percentage',
                     'label' => __( 'Seller Percentage', 'dokan' ),
                     'desc' => __( 'How much amount (%) a seller will get from each order', 'dokan' ),
                     'default' => '90',
                     'type' => 'text',
                 ),
-                array(
+                'order_status_change' => array(
                     'name' => 'order_status_change',
                     'label' => __( 'Order Status Change', 'dokan' ),
                     'desc' => __( 'Seller Could Change Order Status', 'dokan' ),
                     'type' => 'checkbox',
                     'default' => 'on'
                 ),
-                array(
+                'withdraw_methods' => array(
                     'name' => 'withdraw_methods',
                     'label' => __( 'Withdraw Methods', 'dokan' ),
                     'desc' => __( 'Withdraw methods for sellers', 'dokan' ),
@@ -196,7 +196,7 @@ class Dokan_Admin_Settings {
                     'default' => array( 'paypal' => 'paypal' ),
                     'options' => dokan_withdraw_get_methods()
                 ),
-                array(
+                'withdraw_order_status' => array(
                     'name' => 'withdraw_order_status',
                     'label' => __( 'Order Status for Withdraw', 'dokan' ),
                     'desc' => __( 'Order status for which seller can make a withdraw request.', 'dokan' ),
@@ -204,7 +204,7 @@ class Dokan_Admin_Settings {
                     'default' => array( 'completed' => __( 'Completed', 'dokan' ), 'processing' => __( 'Processing', 'dokan' ), 'on-hold' => __( 'On-hold', 'dokan' ) ),
                     'options' => array( 'completed' => __( 'Completed', 'dokan' ), 'processing' => __( 'Processing', 'dokan' ), 'on-hold' => __( 'On-hold', 'dokan' ) )
                 ),
-                array(
+                'withdraw_limit' => array(
                     'name' => 'withdraw_limit',
                     'label' => __( 'Minimum Withdraw Limit', 'dokan' ),
                     'desc' => __( 'Minimum balance required to make a withdraw request', 'dokan' ),
@@ -213,49 +213,49 @@ class Dokan_Admin_Settings {
                 ),
             ),
             'dokan_home' => array(
-                array(
+                'show_slider' => array(
                     'name' => 'show_slider',
                     'label' => __( 'Slider', 'dokan' ),
                     'desc' => __( 'Show Slider', 'dokan' ),
                     'type' => 'checkbox',
                     'default' => 'on'
                 ),
-                array(
+                'slider_id' => array(
                     'name' => 'slider_id',
                     'label' => __( 'Select Slider', 'dokan' ),
                     'desc' => __( 'Select which slider to show on homepage', 'dokan' ),
                     'type' => 'select',
                     'options' => $slider_array
                 ),
-                array(
+                'show_featured' => array(
                     'name' => 'show_featured',
                     'label' => __( 'Featured Products', 'dokan' ),
                     'desc' => __( 'Show Featured Products', 'dokan' ),
                     'type' => 'checkbox',
                     'default' => 'on'
                 ),
-                array(
+                'show_latest' => array(
                     'name' => 'show_latest',
                     'label' => __( 'Latest Products', 'dokan' ),
                     'desc' => __( 'Show Latest Products', 'dokan' ),
                     'type' => 'checkbox',
                     'default' => 'on'
                 ),
-                array(
+                'show_best_selling' => array(
                     'name' => 'show_best_selling',
                     'label' => __( 'Best Selling Products', 'dokan' ),
                     'desc' => __( 'Show Best Selling Products', 'dokan' ),
                     'type' => 'checkbox',
                     'default' => 'on'
                 ),
-                array(
+                'show_top_rated' => array(
                     'name' => 'show_top_rated',
                     'label' => __( 'Top Rated Products', 'dokan' ),
                     'desc' => __( 'Show Top Rated Products', 'dokan' ),
                     'type' => 'checkbox',
                     'default' => 'on'
                 ),
-                array(
+                'show_on_sale' => array(
                     'name' => 'show_on_sale',
                     'label' => __( 'On Sale Products', 'dokan' ),
                     'desc' => __( 'Show On Sale Products', 'dokan' ),
@@ -264,61 +264,61 @@ class Dokan_Admin_Settings {
                 ),
             ),
             'dokan_pages' => array(
-                array(
+                'dashboard' => array(
                     'name' => 'dashboard',
                     'label' => __( 'Dashboard', 'dokan' ),
                     'type' => 'select',
                     'options' => $pages_array
                 ),
-                array(
+                'products' => array(
                     'name' => 'products',
                     'label' => __( 'Products Listing', 'dokan' ),
                     'type' => 'select',
                     'options' => $pages_array
                 ),
-                array(
+                'new_product' => array(
                     'name' => 'new_product',
                     'label' => __( 'Create Product Page', 'dokan' ),
                     'type' => 'select',
                     'options' => $pages_array
                 ),
-                array(
+                'orders' => array(
                     'name' => 'orders',
                     'label' => __( 'Orders', 'dokan' ),
                     'type' => 'select',
                     'options' => $pages_array
                 ),
-                array(
+                'coupons' => array(
                     'name' => 'coupons',
                     'label' => __( 'Coupons', 'dokan' ),
                     'type' => 'select',
                     'options' => $pages_array
                 ),
-                array(
+                'reports' => array(
                     'name' => 'reports',
                     'label' => __( 'Reports', 'dokan' ),
                     'type' => 'select',
                     'options' => $pages_array
                 ),
-                array(
+                'reviews' => array(
                     'name' => 'reviews',
                     'label' => __( 'Reviews', 'dokan' ),
                     'type' => 'select',
                     'options' => $pages_array
                 ),
-                array(
+                'withdraw' => array(
                     'name' => 'withdraw',
                     'label' => __( 'Withdraw', 'dokan' ),
                     'type' => 'select',
                     'options' => $pages_array
                 ),
-                array(
+                'settings' => array(
                     'name' => 'settings',
                     'label' => __( 'Settings', 'dokan' ),
                     'type' => 'select',
                     'options' => $pages_array
                 ),
-                array(
+                'my_orders' => array(
                     'name' => 'my_orders',
                     'label' => __( 'My Orders', 'dokan' ),
                     'type' => 'select',
