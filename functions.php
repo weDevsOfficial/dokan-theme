@@ -144,7 +144,13 @@ class WeDevs_Dokan {
         require_once $inc_dir . 'widgets/menu-category.php';
         require_once $inc_dir . 'widgets/store-menu-category.php';
         require_once $inc_dir . 'widgets/best-seller.php';
-        require_once $classes_dir . 'customizer.php';
+
+        if ( is_child_theme() && file_exists( get_stylesheet_directory() . '/classes/customizer.php' ) ) {
+            require_once get_stylesheet_directory() . '/classes/customizer.php';
+        } else {
+            require_once $classes_dir . 'customizer.php';
+        }
+
         require_once $inc_dir . 'wc-functions.php';
 
         if ( is_admin() ) {
