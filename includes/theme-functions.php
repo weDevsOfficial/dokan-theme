@@ -999,7 +999,12 @@ function dokan_admin_user_register( $user_id ) {
     $role = reset( $user->roles );
 
     if ( $role == 'seller' ) {
-        update_user_meta( $user_id, 'dokan_enable_selling', 'no' );
+
+        if ( dokan_get_option( 'new_seller_enable_selling', 'dokan_selling' ) == 'off' ) {
+            update_user_meta( $user_id, 'dokan_enable_selling', 'no' );
+        } else {
+            update_user_meta( $user_id, 'dokan_enable_selling', 'yes' );
+        }
     }
 }
 
