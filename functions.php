@@ -394,6 +394,13 @@ class WeDevs_Dokan {
 
 $dokan = new WeDevs_Dokan();
 
+/**
+ * Adds seller email to the new order notification email
+ *
+ * @param  string $admin_email
+ * @param  WC_Order $order
+ * @return array
+ */
 function dokan_wc_email_recipient_add_seller( $admin_email, $order ) {
     $emails = array( $admin_email );
 
