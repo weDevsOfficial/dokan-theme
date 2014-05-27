@@ -24,6 +24,10 @@ define( 'DOKAN_DIR', __DIR__ );
 define( 'DOKAN_INC_DIR', __DIR__ . '/includes' );
 define( 'DOKAN_LIB_DIR', __DIR__ . '/lib' );
 
+if ( !defined( 'DOKAN_LOAD_STYLE' ) ) {
+    define( 'DOKAN_LOAD_STYLE', true );
+}
+
 /**
  * Autoload class files on demand
  *
@@ -251,9 +255,14 @@ class WeDevs_Dokan {
      * @since Dokan 1.0
      */
     function scripts() {
-        $protocol = is_ssl() ? 'https' : 'http';
+
+        if ( DOKAN_LOAD_STYLE !== true ) {
+            return;
+        }
+
+        $protocol           = is_ssl() ? 'https' : 'http';
         $template_directory = get_template_directory_uri();
-        $skin = dokan_get_option( 'color_skin', 'dokan_general', 'orange.css' );
+        $skin               = dokan_get_option( 'color_skin', 'dokan_general', 'orange.css' );
 
         wp_register_style( 'jquery-ui', $template_directory . '/assets/css/jquery-ui-1.10.0.custom.css', false, null );
         wp_register_style( 'chosen-style', $template_directory . '/assets/css/chosen.min.css', false, null );
