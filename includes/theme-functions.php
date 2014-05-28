@@ -537,25 +537,27 @@ function dokan_get_post_status( $status ) {
 function dokan_get_product_status( $status ) {
     switch ($status) {
         case 'simple':
-            return __( 'Simple Product', 'dokan' );
+            $name = __( 'Simple Product', 'dokan' );
             break;
 
         case 'variable':
-            return __( 'Variable Product', 'dokan' );
+            $name = __( 'Variable Product', 'dokan' );
             break;
 
         case 'grouped':
-            return __( 'Grouped Product', 'dokan' );
+            $name = __( 'Grouped Product', 'dokan' );
             break;
 
         case 'external':
-            return __( 'Scheduled', 'dokan' );
+            $name = __( 'Scheduled', 'dokan' );
             break;
 
         default:
-            return '';
+            $name = '';
             break;
     }
+
+    return apply_filters( 'dokan_product_status_case', $name, $status );
 }
 
 /**
