@@ -39,11 +39,11 @@ if ( !defined( 'DOKAN_LOAD_SCRIPTS' ) ) {
  * `Dokan_Installer` becomes => installer.php
  * `Dokan_Template_Report` becomes => template-report.php
  *
- * @param string $class requested class name
+ * @param string  $class requested class name
  */
 function dokan_autoload( $class ) {
     if ( stripos( $class, 'Dokan_' ) !== false ) {
-        $class_name = str_replace( array('Dokan_', '_'), array('', '-'), $class );
+        $class_name = str_replace( array( 'Dokan_', '_' ), array( '', '-' ), $class );
         $file_path = __DIR__ . '/classes/' . strtolower( $class_name ) . '.php';
 
         if ( file_exists( $file_path ) ) {
@@ -83,7 +83,7 @@ class WeDevs_Dokan {
      * @return void
      */
     function init_filters() {
-        add_filter( 'posts_where', array($this, 'hide_others_uploads') );
+        add_filter( 'posts_where', array( $this, 'hide_others_uploads' ) );
     }
 
     /**
@@ -92,15 +92,15 @@ class WeDevs_Dokan {
      * @return void
      */
     function init_actions() {
-        add_action( 'after_setup_theme', array($this, 'setup') );
-        add_action( 'widgets_init', array($this, 'widgets_init') );
+        add_action( 'after_setup_theme', array( $this, 'setup' ) );
+        add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 
-        add_action( 'wp_enqueue_scripts', array($this, 'scripts') );
-        add_action( 'admin_enqueue_scripts', array($this, 'admin_enqueue_scripts') );
-        add_action( 'login_enqueue_scripts', array($this, 'login_scripts') );
+        add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ) );
+        add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+        add_action( 'login_enqueue_scripts', array( $this, 'login_scripts' ) );
 
-        add_action( 'admin_init', array($this, 'install_theme') );
-        add_action( 'admin_init', array($this, 'block_admin_access') );
+        add_action( 'admin_init', array( $this, 'install_theme' ) );
+        add_action( 'admin_init', array( $this, 'block_admin_access' ) );
     }
 
     /**
@@ -221,7 +221,7 @@ class WeDevs_Dokan {
     function install_theme() {
         global $pagenow;
 
-        if ( is_admin() && isset($_GET['activated'] ) && $pagenow == 'themes.php' ) {
+        if ( is_admin() && isset( $_GET['activated'] ) && $pagenow == 'themes.php' ) {
             $installer = new Dokan_Installer();
             $installer->do_install();
         }
@@ -247,14 +247,14 @@ class WeDevs_Dokan {
             array( 'name' => __( 'Footer Sidebar - 4', 'dokan' ), 'id' => 'footer-4' ),
         );
 
-        foreach ($sidebars as $sidebar) {
+        foreach ( $sidebars as $sidebar ) {
             register_sidebar( array(
-                'name' => $sidebar['name'],
-                'id' => $sidebar['id'],
+                'name'          => $sidebar['name'],
+                'id'            => $sidebar['id'],
                 'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-                'after_widget' => '</aside>',
-                'before_title' => '<h3 class="widget-title">',
-                'after_title' => '</h3>',
+                'after_widget'  => '</aside>',
+                'before_title'  => '<h3 class="widget-title">',
+                'after_title'   => '</h3>',
             ) );
         }
     }
@@ -289,8 +289,8 @@ class WeDevs_Dokan {
         wp_register_script( 'jquery-chart', $template_directory . '/assets/js/Chart.min.js', false, null, true );
         wp_register_script( 'dokan-product-editor', $template_directory . '/assets/js/product-editor.js', false, null, true );
         wp_register_script( 'dokan-order', $template_directory . '/assets/js/orders.js', false, null, true );
-        wp_register_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array('jquery'), null, true );
-        wp_register_script( 'reviews', $template_directory . '/assets/js/reviews.js', array('jquery'), null, true );
+        wp_register_script( 'chosen', $template_directory . '/assets/js/chosen.jquery.min.js', array( 'jquery' ), null, true );
+        wp_register_script( 'reviews', $template_directory . '/assets/js/reviews.js', array( 'jquery' ), null, true );
 
         if ( DOKAN_LOAD_STYLE === true ) {
             wp_enqueue_style( 'bootstrap' );
@@ -311,16 +311,16 @@ class WeDevs_Dokan {
             }
 
             if ( is_singular() && wp_attachment_is_image() ) {
-                wp_enqueue_script( 'keyboard-image-navigation', $template_directory . '/assets/js/keyboard-image-navigation.js', array('jquery'), '20120202' );
+                wp_enqueue_script( 'keyboard-image-navigation', $template_directory . '/assets/js/keyboard-image-navigation.js', array( 'jquery' ), '20120202' );
             }
 
             wp_enqueue_script( 'jquery' );
             wp_enqueue_script( 'jquery-ui' );
             wp_enqueue_script( 'jquery-ui-datepicker' );
 
-            wp_enqueue_script( 'form-validate', $template_directory . '/assets/js/form-validate.js', array('jquery'), null, true  );
+            wp_enqueue_script( 'form-validate', $template_directory . '/assets/js/form-validate.js', array( 'jquery' ), null, true  );
             wp_enqueue_script( 'bootstrap-min', $template_directory . '/assets/js/bootstrap.min.js', false, null, true );
-            wp_enqueue_script( 'flexslider', $template_directory . '/assets/js/jquery.flexslider-min.js', array('jquery') );
+            wp_enqueue_script( 'flexslider', $template_directory . '/assets/js/jquery.flexslider-min.js', array( 'jquery' ) );
 
             wp_enqueue_script( 'dokan-scripts', $template_directory . '/assets/js/script.js', false, null, true );
             wp_localize_script( 'jquery', 'dokan', array(
@@ -345,7 +345,7 @@ class WeDevs_Dokan {
     function admin_enqueue_scripts() {
         $template_directory = get_template_directory_uri();
 
-        wp_enqueue_script( 'dokan_slider_admin', $template_directory . '/assets/js/admin.js', array('jquery') );
+        wp_enqueue_script( 'dokan_slider_admin', $template_directory . '/assets/js/admin.js', array( 'jquery' ) );
     }
 
     /**
@@ -358,13 +358,13 @@ class WeDevs_Dokan {
      *
      * @global string $pagenow
      * @global object $wpdb
-     * @param string $where
+     * @param string  $where
      * @return string
      */
     function hide_others_uploads( $where ) {
         global $pagenow, $wpdb;
 
-        if ( ( $pagenow == 'upload.php' || $pagenow == 'media-upload.php') && current_user_can( 'dokandar' ) ) {
+        if ( ( $pagenow == 'upload.php' || $pagenow == 'media-upload.php' ) && current_user_can( 'dokandar' ) ) {
             $user_id = get_current_user_id();
 
             $where .= " AND $wpdb->posts.post_author = $user_id";
@@ -386,11 +386,11 @@ class WeDevs_Dokan {
             return;
         }
 
-        $no_access = dokan_get_option( 'admin_access', 'dokan_general', 'on' );
-        $valid_pages = array('admin-ajax.php', 'admin-post.php', 'async-upload.php', 'media-upload.php');
-        $user_role = reset( $current_user->roles );
+        $no_access   = dokan_get_option( 'admin_access', 'dokan_general', 'on' );
+        $valid_pages = array( 'admin-ajax.php', 'admin-post.php', 'async-upload.php', 'media-upload.php' );
+        $user_role   = reset( $current_user->roles );
 
-        if ( ( $no_access == 'on' ) && (!in_array( $pagenow, $valid_pages ) ) && in_array( $user_role, array( 'seller', 'customer' ) ) ) {
+        if ( ( $no_access == 'on' ) && ( !in_array( $pagenow, $valid_pages ) ) && in_array( $user_role, array( 'seller', 'customer' ) ) ) {
             wp_redirect( home_url() );
             exit;
         }
@@ -403,8 +403,8 @@ $dokan = new WeDevs_Dokan();
 /**
  * Adds seller email to the new order notification email
  *
- * @param  string $admin_email
- * @param  WC_Order $order
+ * @param string  $admin_email
+ * @param WC_Order $order
  * @return array
  */
 function dokan_wc_email_recipient_add_seller( $admin_email, $order ) {
@@ -445,35 +445,35 @@ function dokan_admin_toolbar() {
         'id'     => 'dokan-dashboard',
         'parent' => 'dokan',
         'title'  => __( 'Dokan Dashboard', 'dokan' ),
-        'href'  => admin_url( 'admin.php?page=dokan' )
+        'href'   => admin_url( 'admin.php?page=dokan' )
     ) );
 
     $wp_admin_bar->add_menu( array(
         'id'     => 'dokan-withdraw',
         'parent' => 'dokan',
         'title'  => __( 'Withdraw', 'dokan' ),
-        'href'  => admin_url( 'admin.php?page=dokan-withdraw' )
+        'href'   => admin_url( 'admin.php?page=dokan-withdraw' )
     ) );
 
     $wp_admin_bar->add_menu( array(
         'id'     => 'dokan-sellers',
         'parent' => 'dokan',
         'title'  => __( 'All Sellers', 'dokan' ),
-        'href'  => admin_url( 'admin.php?page=dokan-sellers' )
+        'href'   => admin_url( 'admin.php?page=dokan-sellers' )
     ) );
 
     $wp_admin_bar->add_menu( array(
         'id'     => 'dokan-reports',
         'parent' => 'dokan',
         'title'  => __( 'Earning Reports', 'dokan' ),
-        'href'  => admin_url( 'admin.php?page=dokan-reports' )
+        'href'   => admin_url( 'admin.php?page=dokan-reports' )
     ) );
 
     $wp_admin_bar->add_menu( array(
         'id'     => 'dokan-settings',
         'parent' => 'dokan',
         'title'  => __( 'Settings', 'dokan' ),
-        'href'  => admin_url( 'admin.php?page=dokan-settings' )
+        'href'   => admin_url( 'admin.php?page=dokan-settings' )
     ) );
 }
 
@@ -486,8 +486,8 @@ add_action( 'wp_before_admin_bar_render', 'dokan_admin_toolbar' );
  *
  * @since Dokan 1.0.4
  *
- * @param string $title Default title text for current view.
- * @param string $sep Optional separator.
+ * @param string  $title Default title text for current view.
+ * @param string  $sep   Optional separator.
  * @return string The filtered title.
  */
 function dokan_wp_title( $title, $sep ) {
@@ -515,4 +515,3 @@ function dokan_wp_title( $title, $sep ) {
 }
 
 add_filter( 'wp_title', 'dokan_wp_title', 10, 2 );
-
