@@ -129,6 +129,7 @@ class Dokan_Rewrites {
         if ( !is_admin() && $query->is_main_query() && !empty( $author ) ) {
             $query->set( 'post_type', 'product' );
             $query->set( 'author_name', $author );
+            $query->query['term_section'] = isset( $query->query['term_section'] ) ? $query->query['term_section'] : array();
 
             if ( $query->query['term_section'] ) {
                 $query->set( 'tax_query',
