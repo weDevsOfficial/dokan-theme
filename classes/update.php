@@ -11,15 +11,8 @@ class Dokan_Update {
 
         add_action( 'dokan_admin_menu', array($this, 'admin_menu'), 99 );
 
-        if ( is_multisite() ) {
-            if ( is_main_site() ) {
-                add_action( 'admin_notices', array($this, 'license_enter_notice') );
-                add_action( 'admin_notices', array($this, 'license_check_notice') );
-            }
-        } else {
-            add_action( 'admin_notices', array($this, 'license_enter_notice') );
-            add_action( 'admin_notices', array($this, 'license_check_notice') );
-        }
+        add_action( 'admin_notices', array($this, 'license_enter_notice') );
+        add_action( 'admin_notices', array($this, 'license_check_notice') );
 
         add_filter( 'pre_set_site_transient_update_themes', array($this, 'check_update') );
     }
@@ -30,7 +23,7 @@ class Dokan_Update {
      * @return void
      */
     function admin_menu() {
-        add_submenu_page( 'dokan', __( 'Updates', 'dokan' ), __( 'Updates', 'dokan' ), 'activate_plugins', 'dokan_updates', array($this, 'plugin_update') );
+        add_submenu_page( 'dokan', __( 'Updates', 'dokan' ), __( 'Updates', 'dokan' ), 'manage_options', 'dokan_updates', array($this, 'plugin_update') );
     }
 
     /**
