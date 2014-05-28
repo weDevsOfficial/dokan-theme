@@ -25,7 +25,7 @@ function dokan_admin_dash_metabox_report() {
 }
 
 function dokan_admin_dash_widget_news() {
-    wp_widget_rss_output( 'http://wedevs.com/tag/dokan/feed/', array( 'items' => 8, 'show_summary' => true, 'show_date' => true ) );
+    wp_widget_rss_output( 'http://wedevs.com/tag/dokan/feed/', array( 'items' => 5, 'show_summary' => false, 'show_date' => true ) );
 }
 
 function dokan_admin_dash_metabox_glance() {
