@@ -142,7 +142,7 @@ function dokan_content_nav( $nav_id, $query = null ) {
 endif;
 
 
-if ( ! function_exists( 'dokan_content_nav' ) ) :
+if ( ! function_exists( 'dokan_page_navi' ) ) :
 
 function dokan_page_navi( $before = '', $after = '', $wp_query ) {
 
