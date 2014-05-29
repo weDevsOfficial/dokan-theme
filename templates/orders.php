@@ -12,7 +12,7 @@ dokan_frontend_dashboard_scripts();
 
 <?php dokan_get_template( dirname(__FILE__) . '/dashboard-nav.php', array( 'active_menu' => 'order' ) ); ?>
 
-<div id="primary" class="content-area col-md-10">
+<div id="primary" class="content-area col-md-10 col-sm-9">
     <div id="content" class="site-content" role="main">
 
         <?php while (have_posts()) : the_post(); ?>

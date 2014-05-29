@@ -75,7 +75,7 @@ get_header();
 dokan_frontend_dashboard_scripts();
 ?>
 
-<div id="primary" class="content-area col-md-12">
+<div id="primary" class="content-area col-md-12 col-sm-9">
     <div id="content" class="site-content" role="main">
 
         <div class="row">
@@ -101,7 +101,7 @@ dokan_frontend_dashboard_scripts();
                         <div class="tabbable"> <!-- Only required for left/right tabs -->
 
                             <ul class="nav nav-tabs">
-                                <?php $dokan_product_data_tabs = apply_filters( 'dokan_product_data_tabs', array( 
+                                <?php $dokan_product_data_tabs = apply_filters( 'dokan_product_data_tabs', array(
 
                                     'edit' => array(
                                         'label'  => __( 'Edit', 'dokan' ),

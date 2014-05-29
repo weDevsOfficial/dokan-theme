@@ -25,7 +25,7 @@ $reviews_url = dokan_get_page_url( 'reviews' );
 
 <?php dokan_get_template( dirname(__FILE__) . '/dashboard-nav.php', array( 'active_menu' => 'dashboard' ) ); ?>
 
-<div id="primary" class="content-area col-md-10">
+<div id="primary" class="content-area col-md-10 col-sm-9">
     <div id="content" class="site-content" role="main">
 
         <?php while (have_posts()) : the_post(); ?>
