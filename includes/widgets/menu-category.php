@@ -52,6 +52,8 @@ class Dokan_Category_Walker extends Walker {
     }
 }
 
+if ( ! class_exists( 'Dokan_Category_Widget' ) ) :
+
 /**
  * new WordPress Widget format
  * Wordpress 2.8 and above
@@ -150,3 +152,5 @@ class Dokan_Category_Widget extends WP_Widget {
 }
 
 add_action( 'widgets_init', create_function( '', "register_widget( 'Dokan_Category_Widget' );" ) );
+
+endif;
