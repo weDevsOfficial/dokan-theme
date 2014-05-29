@@ -85,6 +85,7 @@ function dokan_posted_on() {
 }
 endif;
 
+if ( ! function_exists( 'dokan_content_nav' ) ) :
 
 /**
  * Display navigation to next/previous pages when applicable
@@ -137,6 +138,11 @@ function dokan_content_nav( $nav_id, $query = null ) {
     </nav><!-- #<?php echo $nav_id; ?> -->
     <?php
 }
+
+endif;
+
+
+if ( ! function_exists( 'dokan_content_nav' ) ) :
 
 function dokan_page_navi( $before = '', $after = '', $wp_query ) {
 
@@ -199,6 +205,8 @@ function dokan_page_navi( $before = '', $after = '', $wp_query ) {
     }
     echo '</ul></div>' . $after . "";
 }
+
+endif;
 
 function dokan_product_dashboard_errors() {
     $type = isset( $_GET['message'] ) ? $_GET['message'] : '';
@@ -350,6 +358,13 @@ function dokan_dashboard_nav( $active_menu ) {
     return $menu;
 }
 
+if ( ! function_exists( 'dokan_category_widget' ) ) :
+
+/**
+ * Display the product category widget
+ *
+ * @return void
+ */
 function dokan_category_widget() {
      the_widget( 'Dokan_Category_Widget', array(
         'title' => __( 'Product Categories', 'dokan' )
@@ -363,7 +378,16 @@ function dokan_category_widget() {
     );
 }
 
+endif;
 
+if ( ! function_exists( 'dokan_store_category_menu' ) ) :
+
+/**
+ * Store category menu for a store
+ *
+ * @param  int $seller_id
+ * @return void
+ */
 function dokan_store_category_menu( $seller_id ) { ?>
     <aside class="widget dokan-category-menu">
         <h3 class="widget-title">Store Product Category</h3>
@@ -401,6 +425,8 @@ function dokan_store_category_menu( $seller_id ) { ?>
     </aside>
 <?php
 }
+
+endif;
 
 
 function dokan_store_category_delete_transient( $post_id ) {
@@ -481,3 +507,72 @@ function dokan_seller_not_enabled_notice() {
         </div>
     <?php
 }
+
+if ( !function_exists( 'dokan_header_user_menu' ) ) :
+
+/**
+ * User top navigation menu
+ *
+ * @return void
+ */
+function dokan_header_user_menu() {
+    ?>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php printf( __( 'Cart %s', 'dokan' ), '<span class="dokan-cart-amount-top">(' . WC()->cart->get_cart_total() . ')</span>' ); ?> <b class="caret"></b></a>
+
+            <ul class="dropdown-menu">
+                <li>
+                    <div class="widget_shopping_cart_content"></div>
+                </li>
+            </ul>
+        </li>
+
+        <?php if ( is_user_logged_in() ) { ?>
+
+            <?php
+            global $current_user;
+
+            $user_id = $current_user->ID;
+            if ( dokan_is_user_seller( $user_id ) ) {
+                ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php _e( 'Seller Dashboard', 'dokan' ); ?> <b class="caret"></b></a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo dokan_get_store_url( $user_id ); ?>" target="_blank"><?php _e( 'Visit your store', 'dokan' ); ?> <i class="fa fa-external-link"></i></a></li>
+                        <li class="divider"></li>
+                        <?php
+                        $nav_urls = dokan_get_dashboard_nav();
+
+                        foreach ($nav_urls as $key => $item) {
+                            printf( '<li><a href="%s">%s &nbsp;%s</a></li>', $item['url'], $item['icon'], $item['title'] );
+                        }
+                        ?>
+                    </ul>
+                </li>
+            <?php } ?>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo esc_html( $current_user->display_name ); ?> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="<?php echo dokan_get_page_url( 'my_orders' ); ?>"><?php _e( 'My Orders', 'dokan' ); ?></a></li>
+                    <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'My Account', 'dokan' ); ?></a></li>
+                    <li><a href="<?php echo wc_customer_edit_account_url(); ?>"><?php _e( 'Edit Account', 'dokan' ); ?></a></li>
+                    <li class="divider"></li>
+                    <li><a href="<?php echo wc_get_endpoint_url( 'edit-address', 'billing', get_permalink( wc_get_page_id( 'myaccount' ) ) ); ?>"><?php _e( 'Billing Address', 'dokan' ); ?></a></li>
+                    <li><a href="<?php echo wc_get_endpoint_url( 'edit-address', 'shipping', get_permalink( wc_get_page_id( 'myaccount' ) ) ); ?>"><?php _e( 'Shipping Address', 'dokan' ); ?></a></li>
+                </ul>
+            </li>
+
+            <li><?php wp_loginout( home_url() ); ?></li>
+
+        <?php } else { ?>
+            <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'Log in', 'dokan' ); ?></a></li>
+            <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'Sign Up', 'dokan' ); ?></a></li>
+        <?php } ?>
+    </ul>
+    <?php
+}
+
+endif;
