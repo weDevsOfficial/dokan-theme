@@ -41,13 +41,15 @@
             'simple'    => __( 'Simple product', 'dokan' ),
             'variable'  => __( 'Variable product', 'dokan' )
         ) );
+
         if ( $terms = wp_get_object_terms( $post->ID, 'product_type' ) ) {
             $product_type = sanitize_title( current( $terms )->name );
         } else {
             $product_type = 'simple';
         }
-
-        if ( !in_array( $product_type, $supported_types ) ) {
+        
+         
+        if ( !array_key_exists( $product_type, $supported_types) ) {
             $product_type = 'simple';
         }
         ?>
