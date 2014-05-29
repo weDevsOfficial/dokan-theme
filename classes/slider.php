@@ -469,10 +469,12 @@ class Dokan_Slider {
             printf( '<div class="flexslider" id="flexslider-%d">', $slider_id );
             printf( '<ul class="slides">' );
 
-            $slides = array_reverse( $slides );
+            $slide_html = '';
+            $slides     = array_reverse( $slides );
+
             foreach ($slides as $slide) {
-                echo "<li>";
-                echo '<div class="slide-container">';
+                $slide_html .= '<li>';
+                $slide_html .= '<div class="slide-container">';
 
                 extract( $slide );
 
@@ -498,41 +500,45 @@ class Dokan_Slider {
 
                 switch ( $slide_type ) {
                     case 'text-image':
-                        echo $text_content . "\n";
-                        echo $image_content . "\n";
+                        $slide_html .= $text_content . "\n";
+                        $slide_html .= $image_content . "\n";
                         break;
 
                     case 'image-text':
-                        echo $image_content . "\n";
-                        echo $text_content . "\n";
+                        $slide_html .= $image_content . "\n";
+                        $slide_html .= $text_content . "\n";
                         break;
 
                     case 'text-video':
-                        echo $text_content . "\n";
-                        echo $video_content . "\n";
+                        $slide_html .= $text_content . "\n";
+                        $slide_html .= $video_content . "\n";
                         break;
 
                     case 'video-text':
-                        echo $video_content . "\n";
-                        echo $text_content . "\n";
+                        $slide_html .= $video_content . "\n";
+                        $slide_html .= $text_content . "\n";
                         break;
 
                     case 'image':
-                        echo $image_content . "\n";
+                        $slide_html .= $image_content . "\n";
                         break;
 
                     case 'video':
-                        echo $video_content . "\n";
+                        $slide_html .= $video_content . "\n";
                         break;
 
                     case 'text':
-                        echo $text_content . "\n";
+                        $slide_html .= $text_content . "\n";
                         break;
                 }
 
-                echo "</div>";
-                echo "</li>";
+                $slide_html .= "</div>";
+                $slide_html .= "</li>";
+
+                $slide_html = apply_filters( 'dokan_slider_item_html', $slide_html, $slide );
+                echo $slide_html;
             }
+
             echo "</ul>";
             echo '</div>';
         }
