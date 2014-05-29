@@ -462,7 +462,9 @@ class Dokan_Slider {
 
         $slides = get_post_meta( $slider_id, 'slide_detail' );
 
-        if( $slides ) {
+        ob_start();
+
+        if ( $slides ) {
 
             printf( '<div class="flexslider" id="flexslider-%d">', $slider_id );
             printf( '<ul class="slides">' );
@@ -553,5 +555,10 @@ class Dokan_Slider {
         // 'slide_direction', 'touch', 'randomize', 'pauseOnHover', 'pausePlay');
         </script>
         <?php
+
+        $slider_content = ob_get_clean();
+        $slider_content = apply_filters( 'dokan_slider_html', $slider_content, $slides, $metas );
+
+        echo $slider_content;
     }
 }
