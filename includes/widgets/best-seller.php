@@ -25,60 +25,46 @@ class Dokan_Best_Seller_Widget extends WP_Widget {
      * @return void Echoes it's output
      **/
     function widget( $args, $instance ) {
-        global  $wpdb;
 
         extract( $args, EXTR_SKIP );
 
         $title = apply_filters( 'widget_title', $instance['title'] );
         $limit = absint( $instance['count'] ) ? absint( $instance['count'] ) : 10;
 
-        $cache_key = 'dokan-best-seller-'.$limit;
-        $seller = wp_cache_get( $cache_key, 'widget' );
-
-        if ( false === $seller ) {
-        
-            $qry = "SELECT seller_id, display_name,SUM( net_amount ) AS total_sell
-                FROM {$wpdb->prefix}dokan_orders AS o,{$wpdb->prefix}users AS u
-                WHERE o.seller_id = u.ID
-                GROUP BY o.seller_id
-                ORDER BY total_sell DESC LIMIT ".$limit;
-            
-            $seller = $wpdb->get_results( $qry );
-            wp_cache_set( $cache_key, $seller, 'widget' );
-        }
+        $seller = dokan_get_best_sellers( $limit );
 
         echo $before_widget;
 
-        if ( ! empty( $title ) )
+        if ( ! empty( $title ) ) {
             echo $args['before_title'] . $title . $args['after_title'];
-
+        }
         ?>
-            <ul> 
-                <?php
+        <ul class="dokan-best-sellers">
+            <?php
 
-                if ( $seller ) {
-                    
-                    foreach ($seller as $key => $value) {
-                        $rating = dokan_get_seller_rating( $value->seller_id );
-                        $display_rating = $rating['rating'];
-                        if ( ! $rating['count'] ) {
-                            $display_rating = 'No ratings found yet!';
-                        }
-                        ?>
-                        <li>
-                            <a href="<?php echo dokan_get_store_url( $value->seller_id ); ?>">
-                                <?php echo $value->display_name; ?>
-                            </a><br />
-                            <i class='fa fa-star'></i> 
-                            <?php echo $display_rating; ?>
-                        </li>
+            if ( $seller ) {
 
-                        <?php
+                foreach ($seller as $key => $value) {
+                    $rating = dokan_get_seller_rating( $value->seller_id );
+                    $display_rating = $rating['rating'];
 
+                    if ( ! $rating['count'] ) {
+                        $display_rating = __( 'No ratings found yet!', 'dokan' );
                     }
+                    ?>
+                    <li>
+                        <a href="<?php echo dokan_get_store_url( $value->seller_id ); ?>">
+                            <?php echo $value->display_name; ?>
+                        </a><br />
+                        <i class='fa fa-star'></i>
+                        <?php echo $display_rating; ?>
+                    </li>
+
+                    <?php
                 }
-                ?>
-            </ul>
+            }
+            ?>
+        </ul>
         <?php
 
         echo $after_widget;
