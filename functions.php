@@ -33,6 +33,10 @@ if ( !defined( 'DOKAN_LOAD_SCRIPTS' ) ) {
     define( 'DOKAN_LOAD_SCRIPTS', true );
 }
 
+if ( !defined( 'DOKAN_LOAD_SIDEBARS' ) ) {
+    define( 'DOKAN_LOAD_SIDEBARS', true );
+}
+
 /**
  * Autoload class files on demand
  *
@@ -234,6 +238,10 @@ class WeDevs_Dokan {
      */
     function widgets_init() {
 
+        if ( DOKAN_LOAD_SIDEBARS === false ) {
+            return;
+        }
+
         $sidebars = array(
             array( 'name' => __( 'General Sidebar', 'dokan' ), 'id' => 'sidebar-1' ),
             array( 'name' => __( 'Home Sidebar', 'dokan' ), 'id' => 'sidebar-home' ),
@@ -247,15 +255,19 @@ class WeDevs_Dokan {
             array( 'name' => __( 'Footer Sidebar - 4', 'dokan' ), 'id' => 'footer-4' ),
         );
 
+        $args = apply_filters( 'dokan_widget_args', array(
+            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</aside>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+        ) );
+
         foreach ( $sidebars as $sidebar ) {
-            register_sidebar( array(
-                'name'          => $sidebar['name'],
-                'id'            => $sidebar['id'],
-                'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-                'after_widget'  => '</aside>',
-                'before_title'  => '<h3 class="widget-title">',
-                'after_title'   => '</h3>',
-            ) );
+
+            $args['name'] = $sidebar['name'];
+            $args['id'] = $sidebar['id'];
+
+            register_sidebar( $args );
         }
     }
 
