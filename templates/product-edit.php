@@ -101,7 +101,12 @@ dokan_frontend_dashboard_scripts();
                         <div class="tabbable"> <!-- Only required for left/right tabs -->
 
                             <ul class="nav nav-tabs">
-                                <?php $dokan_product_data_tabs = apply_filters( 'dokan_product_data_tabs', array(
+                                <?php 
+                                $terms = wp_get_object_terms( $post->ID, 'product_type' );
+                                $product_type = sanitize_title( current( $terms )->name );
+                                $shipping_class = ($product_type == 'simple' ) ? '' : 'dokan-hide'; 
+                                $variations_class = ($product_type == 'simple' ) ? 'dokan-hide' : ''; 
+                                $dokan_product_data_tabs = apply_filters( 'dokan_product_data_tabs', array(
 
                                     'edit' => array(
                                         'label'  => __( 'Edit', 'dokan' ),
@@ -121,7 +126,7 @@ dokan_frontend_dashboard_scripts();
                                     'shipping' => array(
                                         'label'  => __( 'Shipping', 'dokan' ),
                                         'target' => 'product-shipping',
-                                        'class'  => array( 'show_if_simple' ),
+                                        'class'  => array( 'show_if_simple', $shipping_class ),
                                     ),
                                     'attributes' => array(
                                         'label'  => __( 'Attributes', 'dokan' ),
@@ -131,7 +136,7 @@ dokan_frontend_dashboard_scripts();
                                     'variations' => array(
                                         'label'  => __( 'Variations', 'dokan' ),
                                         'target' => 'product-variations',
-                                        'class'  => array( 'show_if_variable' ),
+                                        'class'  => array( 'show_if_variable', $variations_class ),
                                     ),
 
                                 ) );
