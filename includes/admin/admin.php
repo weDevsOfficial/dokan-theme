@@ -147,6 +147,20 @@ class Dokan_Admin_Settings {
                         'pink.css' => __( 'Pink', 'dokan' ),
                     ) )
                 ),
+                'store_map' => array(
+                    'name' => 'store_map',
+                    'label' => __( 'Show Map on Store Page', 'dokan' ),
+                    'desc' => __( 'Enable showing Store location map on store left sidebar', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
+                'contact_seller' => array(
+                    'name' => 'contact_seller',
+                    'label' => __( 'Show Contact Form on Store Page', 'dokan' ),
+                    'desc' => __( 'Enable showing contact seller form on store left sidebar', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
                 'footer_text' => array(
                     'name' => 'footer_text',
                     'label' => __( 'Site footer text', 'dokan' ),
