@@ -1,4 +1,4 @@
-v1.0.4 -> June 9, 2014
+v1.0.5 -> June 9, 2014
 -----------------------
 - [new] Enable/disable scripts, styles, sidebars from child theme
 - [new] Better child theme support
