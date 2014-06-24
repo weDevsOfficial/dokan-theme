@@ -537,6 +537,7 @@ class Dokan_Slider {
 
                 $slide_html = apply_filters( 'dokan_slider_item_html', $slide_html, $slide );
                 echo $slide_html;
+                $slide_html = '';
             }
 
             echo "</ul>";
