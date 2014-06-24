@@ -472,7 +472,7 @@ class Dokan_Slider {
             $slides     = array_reverse( $slides );
 
             foreach ($slides as $slide) {
-                $slide_html .= '<li>';
+                $slide_html = '<li>';
                 $slide_html .= '<div class="slide-container">';
 
                 extract( $slide );
