@@ -538,7 +538,7 @@ class Dokan_Template_Coupons{
                 $args = array(
                     'post_type' => 'product',
                     'post_status' => array('publish', 'draft', 'pending'),
-                    'posts_per_page' => 10,
+                    'posts_per_page' => -1,
                     'author' => get_current_user_id(),
                     'paged' => $paged
                 );
