@@ -662,7 +662,7 @@ function dokan_process_product_meta( $post_id ) {
     // Stock Data
     if ( get_option('woocommerce_manage_stock') == 'yes' ) {
 
-        if ( ! empty( $_POST['_manage_stock'] ) ) {
+        if ( isset( $_POST['_manage_stock'] ) ) {
 
             // Manage stock
             update_post_meta( $post_id, '_stock', (int) $_POST['_stock'] );

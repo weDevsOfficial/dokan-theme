@@ -469,16 +469,13 @@ class Dokan_Slider {
             printf( '<div class="flexslider" id="flexslider-%d">', $slider_id );
             printf( '<ul class="slides">' );
 
-            $slide_html = '';
             $slides     = array_reverse( $slides );
 
             foreach ($slides as $slide) {
-                $slide_html .= '<li>';
+                $slide_html = '<li>';
                 $slide_html .= '<div class="slide-container">';
 
                 extract( $slide );
-
-                // var_dump($slide);
 
                 $link_content = sprintf('<a href="%s" class="button" target="%s">%s</a>', esc_url( $slide_link ), $slide_link_open, __( 'Read More...', 'wedevs' ) );
 
