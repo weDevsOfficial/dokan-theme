@@ -534,16 +534,14 @@ class Dokan_Template_Coupons{
             </div>
 
             <?php
-                $paged = (get_query_var( 'paged' )) ? get_query_var( 'paged' ) : 1;
                 $args = array(
-                    'post_type' => 'product',
-                    'post_status' => array('publish', 'draft', 'pending'),
+                    'post_type'      => 'product',
+                    'post_status'    => array('publish'),
                     'posts_per_page' => -1,
-                    'author' => get_current_user_id(),
-                    'paged' => $paged
+                    'author'         => get_current_user_id(),
                 );
 
-                $query = new WP_Query( $args );
+                $query       = new WP_Query( $args );
                 $products_id = str_replace( ' ', '', $products );
                 $products_id = explode( ',', $products_id );
             ?>
