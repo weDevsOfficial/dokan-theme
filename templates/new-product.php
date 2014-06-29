@@ -55,7 +55,12 @@ if ( isset( $_POST['add_product'] ) ) {
             update_post_meta( $product_id, '_regular_price', $price );
             update_post_meta( $product_id, '_sale_price', '' );
             update_post_meta( $product_id, '_price', $price );
-            update_post_meta( $product_id, '_visibility', 'visible' );
+            
+            if ( dokan_get_option( 'order_status_change', 'product_visibility' ) == 'on' ) {
+                update_post_meta( $product_id, '_visibility', 'visible' );
+            }else {
+                update_post_meta( $product_id, '_visibility', 'hidden' );
+            }
 
             do_action( 'dokan_new_product_added', $product_id, $post_data );
 

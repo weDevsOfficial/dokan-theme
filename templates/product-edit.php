@@ -96,8 +96,16 @@ dokan_frontend_dashboard_scripts();
                                     <a href="<?php echo get_permalink( $post_id ); ?>" target="_blank"><?php _e( 'View Product &rarr;', 'dokan' ); ?></a>
                                 <?php } ?>
                             </div>
-                        <?php } ?>
-
+                        <?php } 
+                        if ( $_visibility == 'hidden' ) { 
+                        ?>
+                            <div class="dokan-info">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong><?php _e( 'Info!', 'dokan' ); ?></strong> <?php _e( 'The product is not visible yet. Please update the option.', 'dokan' ); ?>
+                            </div>
+                        <?php
+                        }
+                        ?>
                         <div class="tabbable"> <!-- Only required for left/right tabs -->
 
                             <ul class="nav nav-tabs">

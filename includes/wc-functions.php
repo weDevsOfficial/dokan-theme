@@ -1407,6 +1407,32 @@ function dokan_get_featured_products( $per_page = 9) {
 
 
 /**
+ * Get latest products
+ *
+ * Shown on homepage
+ *
+ * @param int $per_page
+ * @return \WP_Query
+ */
+function dokan_get_latest_products( $per_page = 8) {
+    $latest_query = new WP_Query( apply_filters( 'dokan_get_latest_products', array(
+        'posts_per_page' => $per_page,
+        'post_type' => 'product',
+        'meta_query' => array(
+            array(
+                'key' => '_visibility',
+                'value' => array('catalog', 'visible'),
+                'compare' => 'IN'
+            ),
+        )
+    ) ) );
+
+    return $latest_query;
+}
+
+
+
+/**
  * Get best selling products
  *
  * Shown on homepage

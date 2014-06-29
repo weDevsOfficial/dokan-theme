@@ -180,13 +180,20 @@ class Dokan_Admin_Settings {
                 'product_status' => array(
                     'name' => 'product_status',
                     'label' => __( 'New Product Status', 'dokan' ),
-                    'desc' => __( 'Product status when a seller creates a product', 'dokan' ),
+                    'desc' => __( 'Product status when seller creates a product', 'dokan' ),
                     'type' => 'select',
                     'default' => 'pending',
                     'options' => array(
                         'publish' => __( 'Published', 'dokan' ),
                         'pending' => __( 'Pending Review', 'dokan' )
                     )
+                ),
+                'product_visibility' => array(
+                    'name' => 'product_visibility',
+                    'label' => __( 'New Product Visibility', 'dokan' ),
+                    'desc' => __( 'Product visibility (without update meta) when seller creates a product', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
                 ),
                 'seller_percentage' => array(
                     'name' => 'seller_percentage',

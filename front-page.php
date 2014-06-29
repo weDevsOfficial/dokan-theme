@@ -69,10 +69,7 @@ get_header();
                 <div class="product-sliders">
                     <ul class="slides">
                         <?php
-                        $latest_query = new WP_Query( array(
-                            'posts_per_page' => 8,
-                            'post_type' => 'product'
-                        ) );
+                        $latest_query = dokan_get_latest_products();
                         ?>
                         <?php while ( $latest_query->have_posts() ) : $latest_query->the_post(); ?>
 
