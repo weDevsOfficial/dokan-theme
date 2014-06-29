@@ -131,6 +131,13 @@ class Dokan_Admin_Settings {
                     'type' => 'checkbox',
                     'default' => 'on'
                 ),
+                'user_seller' => array(
+                    'name' => 'user_seller',
+                    'label' => __( 'User could be seller', 'dokan' ),
+                    'desc' => __( 'Customer or user could upgrade his/her account to seller', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
                 'color_skin' => array(
                     'name' => 'color_skin',
                     'label' => __( 'Color Skin', 'dokan' ),
