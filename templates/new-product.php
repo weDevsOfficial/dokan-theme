@@ -55,8 +55,9 @@ if ( isset( $_POST['add_product'] ) ) {
             update_post_meta( $product_id, '_regular_price', $price );
             update_post_meta( $product_id, '_sale_price', '' );
             update_post_meta( $product_id, '_price', $price );
-            
-            if ( dokan_get_option( 'order_status_change', 'product_visibility' ) == 'on' ) {
+
+
+            if ( dokan_get_option( 'product_visibility', 'dokan_selling', 'on' ) == 'on' ) {
                 update_post_meta( $product_id, '_visibility', 'visible' );
             }else {
                 update_post_meta( $product_id, '_visibility', 'hidden' );
@@ -77,7 +78,6 @@ dokan_frontend_dashboard_scripts();
 ?>
 
 <?php dokan_get_template( dirname(__FILE__) . '/dashboard-nav.php', array( 'active_menu' => 'product' ) ); ?>
-
 <div id="primary" class="content-area col-md-9 col-sm-9">
     <div id="content" class="site-content" role="main">
 
