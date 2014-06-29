@@ -131,13 +131,6 @@ class Dokan_Admin_Settings {
                     'type' => 'checkbox',
                     'default' => 'on'
                 ),
-                'user_seller' => array(
-                    'name' => 'user_seller',
-                    'label' => __( 'User could be seller', 'dokan' ),
-                    'desc' => __( 'Customer or user could upgrade his/her account to seller', 'dokan' ),
-                    'type' => 'checkbox',
-                    'default' => 'on'
-                ),
                 'color_skin' => array(
                     'name' => 'color_skin',
                     'label' => __( 'Color Skin', 'dokan' ),
@@ -177,10 +170,24 @@ class Dokan_Admin_Settings {
                 ),
             ),
             'dokan_selling' => array(
+                'user_seller' => array(
+                    'name' => 'user_seller',
+                    'label' => __( 'User could be seller', 'dokan' ),
+                    'desc' => __( 'Customer or user could upgrade his/her account to seller', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
                 'new_seller_enable_selling' => array(
                     'name' => 'new_seller_enable_selling',
                     'label' => __( 'New Seller Enable Selling', 'dokan' ),
                     'desc' => __( 'Make selling status enable for new registred seller', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
+                'product_visibility' => array(
+                    'name' => 'product_visibility',
+                    'label' => __( 'New Product Visibility', 'dokan' ),
+                    'desc' => __( 'Product visibility (without update meta) when seller creates a product', 'dokan' ),
                     'type' => 'checkbox',
                     'default' => 'on'
                 ),
@@ -194,13 +201,6 @@ class Dokan_Admin_Settings {
                         'publish' => __( 'Published', 'dokan' ),
                         'pending' => __( 'Pending Review', 'dokan' )
                     )
-                ),
-                'product_visibility' => array(
-                    'name' => 'product_visibility',
-                    'label' => __( 'New Product Visibility', 'dokan' ),
-                    'desc' => __( 'Product visibility (without update meta) when seller creates a product', 'dokan' ),
-                    'type' => 'checkbox',
-                    'default' => 'on'
                 ),
                 'seller_percentage' => array(
                     'name' => 'seller_percentage',
