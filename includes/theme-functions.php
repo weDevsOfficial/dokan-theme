@@ -1179,3 +1179,49 @@ function dokan_get_best_sellers( $limit = 5 ) {
 
     return $seller;
 }
+
+
+/**
+ * Get account update page url of a seller
+ *
+ * @param int $user_id
+ * @return string
+ */
+function dokan_get_account_update_url( $user_id ) {
+    $userdata = get_userdata( $user_id );
+
+    return sprintf( '%s/%s/', home_url( '/update' ), $userdata->user_nicename );
+}
+
+add_action( 'woocommerce_before_my_account', 'dokan_update_account_button', 1 );
+
+function dokan_update_account_button() {
+    if( dokan_is_user_customer() ) {
+        ?>
+        <a href="<?php echo dokan_get_account_update_url( get_current_user_id() ) ?>">Update your account to seller</a>
+        <?php
+    }
+}
+
+/**
+ * Returns the translated role of the current user. If that user has
+ * no role for the current blog, it returns false.
+ *
+ * @return string The name of the current role
+ **/
+function dokan_get_current_user_role() {
+    global $wp_roles;
+    $current_user = wp_get_current_user();
+    $roles = $current_user->roles;
+    $role = array_shift($roles);
+    return $role;
+    // return isset($wp_roles->role_names[$role]) ? translate_user_role($wp_roles->role_names[$role] ) : false;
+}
+
+function dokan_is_user_customer() {
+    if( dokan_get_current_user_role() == 'customer' ) {
+        return true;
+    }else {
+        return false;
+    }
+}

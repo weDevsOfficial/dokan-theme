@@ -59,6 +59,7 @@ class Dokan_Ajax {
 
 
         add_action( 'wp_ajax_nopriv_shop_url', array($this, 'shop_url_check') );
+        add_action( 'wp_ajax_shop_url', array($this, 'shop_url_check') );
     }
 
     /**

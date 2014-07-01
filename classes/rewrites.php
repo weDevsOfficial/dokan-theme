@@ -11,7 +11,8 @@ class Dokan_Rewrites {
         add_action( 'init', array($this, 'register_rule') );
         add_filter( 'template_include', array($this, 'store_template') );
         add_filter( 'template_include', array($this, 'product_edit_template'), 11 );
-        add_filter( 'template_include', array($this, 'store_review_template'), 11 );
+        add_filter( 'template_include', array($this, 'store_review_template'), 12 );
+        add_filter( 'template_include', array($this, 'account_update_template'), 13 );
         add_filter( 'query_vars', array($this, 'register_query_var') );
         add_filter( 'pre_get_posts', array($this, 'store_query_filter') );
     }
@@ -51,6 +52,8 @@ class Dokan_Rewrites {
 
         add_rewrite_rule( 'store/([^/]+)/section/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&term=$matches[2]&term_section=true', 'top' );
         add_rewrite_rule( 'store/([^/]+)/section/?([0-9]{1,})/page/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&term=$matches[2]&paged=$matches[3]&term_section=true', 'top' );
+    
+        add_rewrite_rule( 'update/([^/]+)/?$', 'index.php?update_account=$matches[1]', 'top' );
     }
 
     /**
@@ -64,6 +67,7 @@ class Dokan_Rewrites {
         $vars[] = 'store_review';
         $vars[] = 'edit';
         $vars[] = 'term_section';
+        $vars[] = 'update_account';
 
         return $vars;
     }
@@ -116,6 +120,16 @@ class Dokan_Rewrites {
         if ( $var = get_query_var( 'store_review' ) ) {
 
             return get_template_directory() . '/store-reviews.php';
+        }
+
+        return $template;
+    }
+
+    function account_update_template( $template ) {
+
+        if ( $var = get_query_var( 'update_account' ) ) {
+
+            return get_template_directory() . '/update-account.php';
         }
 
         return $template;

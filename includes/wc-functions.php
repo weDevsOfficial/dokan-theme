@@ -1376,6 +1376,52 @@ add_action( 'woocommerce_created_customer', 'dokan_on_create_seller', 10, 2);
 
 
 /**
+ * Adds default dokan store settings when a new seller registers
+ *
+ * @param int $user_id
+ * @param array $data
+ * @return void
+ */
+function dokan_user_update_to_seller( $user_id, $data ) {
+    if ( $data['role'] != 'customer' ) {
+        return;
+    }
+
+    var_dump($user_id, $data);die();
+
+    update_user_meta( $user_id, 'first_name', $data['fname'] );
+    update_user_meta( $user_id, 'last_name', $data['lname'] );
+
+    update_user_meta( $user_id, 'wp_capabilities', array(array( 'seller' => true ) ) );
+
+    if ( dokan_get_option( 'new_seller_enable_selling', 'dokan_selling' ) == 'off' ) {
+        update_user_meta( $user_id, 'dokan_enable_selling', 'no' );
+    } else {
+        update_user_meta( $user_id, 'dokan_enable_selling', 'yes' );
+    }
+
+    $dokan_settings = array(
+        'store_name' => $data['shopname'],
+        'social' => array(),
+        'payment' => array(),
+        'phone' => $data['phone'],
+        'show_email' => 'no',
+        'address' => $data['address'],
+        'location' => '',
+        'find_address' => '',
+        'dokan_category' => '',
+        'banner' => 0,
+    );
+
+    update_user_meta( $user_id, 'dokan_profile_settings', $dokan_settings );
+    update_user_meta( $user_id, 'dokan_publishing', $publishing );
+    update_user_meta( $user_id, 'dokan_seller_percentage', $percentage );
+
+    Dokan_Email::init()->new_seller_registered_mail( $user_id );
+}
+
+
+/**
  * Get featured products
  *
  * Shown on homepage
