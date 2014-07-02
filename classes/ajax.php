@@ -75,7 +75,6 @@ class Dokan_Ajax {
         }
 
         $url_slug = $_POST['url_slug'];
-
         $check = true;
 
         $user = get_user_by( 'slug', $url_slug );
@@ -85,8 +84,7 @@ class Dokan_Ajax {
         }
 
         echo $check;
-
-
+        exit;
     }
 
     /**

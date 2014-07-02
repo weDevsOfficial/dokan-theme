@@ -576,3 +576,18 @@ function dokan_header_user_menu() {
 }
 
 endif;
+
+function dokan_account_migration_button() {
+    $user = wp_get_current_user();
+
+    if ( dokan_is_user_customer( $user->ID ) ) {
+        ?>
+        <p>&nbsp;</p>
+        <p>
+            <a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>account-migration/seller/" class="button button-primary"><?php _e( 'Become a Seller', 'dokan' ); ?></a>
+        </p>
+        <?php
+    }
+}
+
+add_action( 'woocommerce_after_my_account', 'dokan_account_migration_button' );

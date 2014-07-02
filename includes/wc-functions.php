@@ -1383,11 +1383,11 @@ add_action( 'woocommerce_created_customer', 'dokan_on_create_seller', 10, 2);
  * @return void
  */
 function dokan_user_update_to_seller( $user, $data ) {
-    if ( $user->roles[0] != 'customer' ) {
+    if ( ! dokan_is_user_customer( $user->ID ) ) {
         return;
     }
 
-    $user_id = $user->data->ID;
+    $user_id = $user->ID;
 
     // Remove role
     $user->remove_role( 'customer' );
@@ -1398,7 +1398,7 @@ function dokan_user_update_to_seller( $user, $data ) {
     update_user_meta( $user_id, 'first_name', $data['fname'] );
     update_user_meta( $user_id, 'last_name', $data['lname'] );
 
-    if ( dokan_get_option( 'new_seller_enable_selling', 'dokan_selling' ) == 'off' ) {
+    if ( dokan_get_option( 'new_seller_enable_selling', 'dokan_selling', 'on' ) == 'off' ) {
         update_user_meta( $user_id, 'dokan_enable_selling', 'no' );
     } else {
         update_user_meta( $user_id, 'dokan_enable_selling', 'yes' );
