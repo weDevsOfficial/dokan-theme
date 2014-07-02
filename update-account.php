@@ -7,17 +7,19 @@
  */
 $user_id = get_current_user_id();
 $user = get_userdata( $user_id );
-var_dump($user);
+
+if ( $user->roles[0] != 'customer' ) {
+	wp_redirect( dokan_get_page_url( 'myaccount', 'woocommerce' ) );
+}
+
 if( isset( $_POST['update'] ) ) {
-	dokan_user_update_to_seller( $user_id, $user, $_POST );
+	dokan_user_update_to_seller( $user, $_POST );
 	wp_redirect( dokan_get_page_url( 'myaccount', 'woocommerce' ) );
 }
 
 
-$f_name = get_user_meta( $user_id, 'first_name' );
-$f_name = $f_name[0];
-$l_name = get_user_meta( $user_id, 'last_name' );
-$l_name = $l_name[0];
+$f_name = get_user_meta( $user_id, 'first_name', true );
+$l_name = get_user_meta( $user_id, 'last_name', true );
 
 if($f_name == '' ) {
 	if( isset($_POST['fname'] ) ) {
@@ -30,10 +32,6 @@ if($l_name == '' ) {
 		$l_name = $_POST['lname'];
 	}
 }
-
-var_dump(get_user_meta(2)); 
-var_dump(get_user_meta(3)); 
-// var_dump($user); , 'wp_capabilities'
 
 get_header();
 

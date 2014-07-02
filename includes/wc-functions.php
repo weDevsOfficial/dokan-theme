@@ -1382,17 +1382,21 @@ add_action( 'woocommerce_created_customer', 'dokan_on_create_seller', 10, 2);
  * @param array $data
  * @return void
  */
-function dokan_user_update_to_seller( $user_id, $data ) {
-    if ( $data['role'] != 'customer' ) {
+function dokan_user_update_to_seller( $user, $data ) {
+    if ( $user->roles[0] != 'customer' ) {
         return;
     }
 
-    var_dump($user_id, $data);die();
+    $user_id = $user->data->ID;
+
+    // Remove role
+    $user->remove_role( 'customer' );
+
+    // Add role
+    $user->add_role( 'seller' );
 
     update_user_meta( $user_id, 'first_name', $data['fname'] );
     update_user_meta( $user_id, 'last_name', $data['lname'] );
-
-    update_user_meta( $user_id, 'wp_capabilities', array(array( 'seller' => true ) ) );
 
     if ( dokan_get_option( 'new_seller_enable_selling', 'dokan_selling' ) == 'off' ) {
         update_user_meta( $user_id, 'dokan_enable_selling', 'no' );
@@ -1414,6 +1418,11 @@ function dokan_user_update_to_seller( $user_id, $data ) {
     );
 
     update_user_meta( $user_id, 'dokan_profile_settings', $dokan_settings );
+
+
+    $publishing = dokan_get_option( 'product_status', 'dokan_selling' );
+    $percentage = dokan_get_option( 'seller_percentage', 'dokan_selling' );
+
     update_user_meta( $user_id, 'dokan_publishing', $publishing );
     update_user_meta( $user_id, 'dokan_seller_percentage', $percentage );
 
