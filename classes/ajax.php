@@ -77,7 +77,16 @@ class Dokan_Ajax {
         $url_slug = $_POST['url_slug'];
         $check = true;
 
-        $user = get_user_by( 'slug', $url_slug );
+        if ( is_user_logged_in() ) {
+            $cu_slug = get_user_meta( get_current_user_id(), 'nickname', true );
+            if ( $cu_slug != $url_slug ) {
+                $user = get_user_by( 'slug', $url_slug );
+            }else {
+                $user = '';
+            }
+        }else {
+            $user = get_user_by( 'slug', $url_slug );
+        }
 
         if ( $user != '' ) {
             $check = false;

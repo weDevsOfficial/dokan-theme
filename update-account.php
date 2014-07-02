@@ -23,7 +23,7 @@ if($l_name == '' ) {
 		$l_name = $_POST['lname'];
 	}
 }
-
+$cu_slug = get_user_meta( get_current_user_id(), 'nickname', true );
 ?>
 
 
@@ -52,7 +52,7 @@ if($l_name == '' ) {
         <p class="form-row form-group form-row-wide">
             <label for="seller-url" class="pull-left"><?php _e( 'Shop URL', 'dokan' ); ?> <span class="required">*</span></label>
             <strong id="url-alart-mgs" class="pull-right"></strong>
-            <input type="text" class="input-text form-control" name="shopurl" id="seller-url" value="<?php if ( ! empty( $_POST['shopurl'] ) ) echo esc_attr($_POST['shopurl']); ?>" required="required" />
+            <input type="text" class="input-text form-control" name="shopurl" id="seller-url" value="<?php if ( empty ( $cu_slug ) ){ if ( ! empty( $_POST['shopurl'] ) ) echo esc_attr($_POST['shopurl']);}else echo esc_attr($cu_slug); ?>" required="required" />
             <small><?php echo home_url(); ?>/store/<strong id="url-alart"></strong></small>
         </p>
 
