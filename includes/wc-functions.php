@@ -1429,6 +1429,15 @@ function dokan_user_update_to_seller( $user, $data ) {
     Dokan_Email::init()->new_seller_registered_mail( $user_id );
 }
 
+add_action( 'template_redirect', 'tyu' );
+
+function tyu () {
+    if( isset( $_POST['dokan_migration'] ) && wp_verify_nonce( $_POST['dokan_nonce'], 'account_migration' ) ) {
+        $user = get_userdata( $_POST['user_id'] );
+        dokan_user_update_to_seller( $user, $_POST );
+        wp_redirect( dokan_get_page_url( 'myaccount', 'woocommerce' ) );
+    }
+}
 
 /**
  * Get featured products

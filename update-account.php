@@ -6,8 +6,6 @@
  * @package dokan - 2014 1.0
  */
 $user_id = get_current_user_id();
-$user = get_userdata( $user_id );
-
 
 $f_name = get_user_meta( $user_id, 'first_name', true );
 $l_name = get_user_meta( $user_id, 'last_name', true );
@@ -23,7 +21,7 @@ if($l_name == '' ) {
 		$l_name = $_POST['lname'];
 	}
 }
-$cu_slug = get_user_meta( get_current_user_id(), 'nickname', true );
+$cu_slug = get_user_meta( $user_id, 'nickname', true );
 ?>
 
 
@@ -67,7 +65,9 @@ $cu_slug = get_user_meta( get_current_user_id(), 'nickname', true );
         </p>
 
 	    <p class="form-row">
-        <input type="submit" class="btn btn-theme" name="update" value="<?php _e( 'Update', 'dokan' ); ?>" />
+	    <?php wp_nonce_field( 'account_migration', 'dokan_nonce' ); ?>
+	    <input type="hidden" name="user_id" value="<?php echo $user_id ?>">
+        <input type="submit" class="btn btn-theme" name="dokan_migration" value="<?php _e( 'Update', 'dokan' ); ?>" />
     	</p>
     </div>
 </form>
