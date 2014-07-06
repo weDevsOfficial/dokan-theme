@@ -43,7 +43,7 @@ if ( isset( $_POST['update_product']) ) {
     }
 
     $edit_url = dokan_edit_product_url( $post_id );
-    wp_redirect( add_query_arg( array( 'message' => 'success' ), $edit_url ) );
+    wp_redirect( add_query_arg( array( 'msg' => 'success' ), $edit_url ) );
 }
 
 $_regular_price = get_post_meta( $post_id, '_regular_price', true );
@@ -87,7 +87,7 @@ dokan_frontend_dashboard_scripts();
 
                     <div class="col-md-7">
 
-                        <?php if ( isset( $_GET['message'] ) && $_GET['message'] == 'success') { ?>
+                        <?php if ( isset( $_GET['msg'] ) && $_GET['msg'] == 'success') { ?>
                             <div class="dokan-message">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 <strong><?php _e( 'Success!', 'dokan' ); ?></strong> <?php _e( 'The product has been updated successfully.', 'dokan' ); ?>

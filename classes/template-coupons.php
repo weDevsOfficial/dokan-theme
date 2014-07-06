@@ -33,7 +33,7 @@ class Dokan_Template_Coupons{
 
         wp_delete_post( $_GET['post'], true );
 
-        wp_redirect( add_query_arg( array('message' => 'delete_succefully'), get_permalink() ) );
+        wp_redirect( add_query_arg( array('msg' => 'delete_succefully'), get_permalink() ) );
     }
 
     function validate() {
@@ -143,12 +143,12 @@ class Dokan_Template_Coupons{
         update_post_meta( $post_id, 'customer_email', $customer_email );
 
         if ( !defined( 'DOING_AJAX' ) ) {
-            wp_redirect( add_query_arg( array('message' => $message), get_permalink() ) );
+            wp_redirect( add_query_arg( array('msg' => $message), get_permalink() ) );
         }
     }
 
     function message() {
-        if ( isset( $_GET['message'] ) && $_GET['message'] == 'delete_succefully' ) {
+        if ( isset( $_GET['msg'] ) && $_GET['msg'] == 'delete_succefully' ) {
             ?>
             <div class="dokan-message">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -157,7 +157,7 @@ class Dokan_Template_Coupons{
             <?php
         }
 
-        if ( isset( $_GET['message'] ) && $_GET['message'] == 'coupon_saved' ) {
+        if ( isset( $_GET['msg'] ) && $_GET['msg'] == 'coupon_saved' ) {
             ?>
             <div class="dokan-message">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -166,7 +166,7 @@ class Dokan_Template_Coupons{
             <?php
         }
 
-        if ( isset( $_GET['message'] ) && $_GET['message'] == 'coupon_update' ) {
+        if ( isset( $_GET['msg'] ) && $_GET['msg'] == 'coupon_update' ) {
             ?>
             <div class="dokan-message">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>

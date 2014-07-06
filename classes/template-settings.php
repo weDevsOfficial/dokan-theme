@@ -133,14 +133,14 @@ class Dokan_Template_Settings{
         do_action( 'dokan_store_profile_saved', $store_id, $dokan_settings );
 
         if ( !defined('DOING_AJAX') && DOING_AJAX !== true ) {
-            wp_redirect( add_query_arg( array( 'message' => 'profile_saved' ), get_permalink() ) );
+            wp_redirect( add_query_arg( array( 'msg' => 'profile_saved' ), get_permalink() ) );
         }
     }
 
     function setting_field( $validate = '' ) {
         global $current_user;
 
-        if ( isset($_GET['message'])) {
+        if ( isset($_GET['msg'])) {
             ?>
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>

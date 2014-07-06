@@ -137,22 +137,22 @@ function dokan_delete_product_handler() {
         $product_id = isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : 0;
 
         if ( !$product_id ) {
-            wp_redirect( add_query_arg( array( 'message' => 'error' ), get_permalink() ) );
+            wp_redirect( add_query_arg( array( 'msg' => 'error' ), get_permalink() ) );
             return;
         }
 
         if ( !wp_verify_nonce( $_GET['_wpnonce'], 'dokan-delete-product' ) ) {
-            wp_redirect( add_query_arg( array( 'message' => 'error' ), get_permalink() ) );
+            wp_redirect( add_query_arg( array( 'msg' => 'error' ), get_permalink() ) );
             return;
         }
 
         if ( !dokan_is_product_author( $product_id ) ) {
-            wp_redirect( add_query_arg( array( 'message' => 'error' ), get_permalink() ) );
+            wp_redirect( add_query_arg( array( 'msg' => 'error' ), get_permalink() ) );
             return;
         }
 
         wp_delete_post( $product_id );
-        wp_redirect( add_query_arg( array( 'message' => 'product_deleted' ), get_permalink() ) );
+        wp_redirect( add_query_arg( array( 'msg' => 'product_deleted' ), get_permalink() ) );
         exit;
     }
 }

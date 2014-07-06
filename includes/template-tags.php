@@ -209,7 +209,7 @@ function dokan_page_navi( $before = '', $after = '', $wp_query ) {
 endif;
 
 function dokan_product_dashboard_errors() {
-    $type = isset( $_GET['message'] ) ? $_GET['message'] : '';
+    $type = isset( $_GET['msg'] ) ? $_GET['msg'] : '';
 
     switch ($type) {
         case 'product_deleted':
