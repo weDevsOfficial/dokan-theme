@@ -14,10 +14,10 @@ remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_ad
  */
 function dokan_product_seller_info( $item_data, $cart_item ) {
     $seller_info = get_userdata( $cart_item['data']->post->post_author );
-
+    $store_info = dokan_get_store_info( $seller_info->ID );
     $item_data[] = array(
         'name' => __( 'Seller', 'dokan' ),
-        'value' => $seller_info->display_name
+        'value' => $store_info['store_name']
     );
 
     return $item_data;
