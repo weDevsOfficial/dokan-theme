@@ -66,7 +66,8 @@ function dokan_product_seller_tab( $val ) {
             <li class="store-name">
                 <span><?php _e( 'Store Name:', 'dokan' ); ?></span>
                 <span class="details">
-                    <?php echo esc_html( $store_info['store_name'] ); ?>
+                    <?php printf( '<a href="%s">%s</a>', dokan_get_store_url( $author->ID ), esc_html( $store_info['store_name'] ) ); ?>
+                    <?php //echo esc_html( $store_info['store_name'] ); ?>
                 </span>
             </li>
         <?php } ?>
