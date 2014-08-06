@@ -1,5 +1,6 @@
 changelog for v1.0.6
 ---------------------
+- [new] Added hook and filter in product listing
 - [fix] Change seller name to store name in cart
 - [fix] Add store link to seller review tab 
 - [fix] change best seller name to store name in best seller widget
