@@ -248,6 +248,7 @@ function dokan_product_listing_status_filter() {
         <li<?php echo $status_class == 'draft' ? ' class="active"' : ''; ?>>
             <a href="<?php echo add_query_arg( array( 'post_status' => 'draft' ), $permalink ); ?>"><?php printf( __( 'Draft (%d)', 'dokan' ), $post_counts->draft ); ?></a>
         </li>
+        <?php do_action( 'dokan_product_listing_status_filter', $status_class, $post_counts ); ?>
     </ul> <!-- .post-statuses-filter -->
     <?php
 }

@@ -535,7 +535,7 @@ function dokan_get_post_status( $status ) {
             break;
 
         default:
-            return '';
+            return apply_filters( 'dokan_post_status_case', NULL, $status );
             break;
     }
 }
