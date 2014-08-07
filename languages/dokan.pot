@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Dokan\n"
-"POT-Creation-Date: 2014-07-15 12:40+0600\n"
-"PO-Revision-Date: 2014-07-15 12:41+0600\n"
+"POT-Creation-Date: 2014-08-07 19:20+0600\n"
+"PO-Revision-Date: 2014-08-07 19:20+0600\n"
 "Last-Translator: Tareq Hasan <tareq@wedevs.com>\n"
 "Language-Team: weDevs Team <info@wedevs.com>\n"
 "Language: English\n"
@@ -232,7 +232,7 @@ msgid "Dokan Dashboard"
 msgstr ""
 
 #: ../functions.php:466 ../classes/installer.php:122
-#: ../includes/template-tags.php:334 ../includes/admin/admin.php:59
+#: ../includes/template-tags.php:335 ../includes/admin/admin.php:59
 #: ../includes/admin/admin.php:67 ../includes/admin/admin.php:339
 #: ../includes/admin/dashboard.php:72
 msgid "Withdraw"
@@ -247,7 +247,7 @@ msgid "Earning Reports"
 msgstr ""
 
 #: ../functions.php:487 ../classes/installer.php:128
-#: ../includes/template-tags.php:339 ../includes/admin/admin.php:74
+#: ../includes/template-tags.php:340 ../includes/admin/admin.php:74
 #: ../includes/admin/admin.php:345
 msgid "Settings"
 msgstr ""
@@ -263,19 +263,19 @@ msgid ""
 "Please install <a href=\"%s\"><strong>WooCommerce</strong></a> plugin first"
 msgstr ""
 
-#: ../header.php:40 ../header.php:91
+#: ../header.php:41 ../header.php:92
 msgid "Toggle navigation"
 msgstr ""
 
-#: ../header.php:86
+#: ../header.php:87
 msgid "Menu"
 msgstr ""
 
-#: ../header.php:87
+#: ../header.php:88
 msgid "Skip to content"
 msgstr ""
 
-#: ../header.php:94
+#: ../header.php:95
 msgid "Home"
 msgstr ""
 
@@ -374,30 +374,30 @@ msgstr ""
 msgid "Update account to Seller"
 msgstr ""
 
-#: ../update-account.php:35 ../includes/template-tags.php:453
+#: ../update-account.php:35 ../includes/template-tags.php:454
 msgid "First Name"
 msgstr ""
 
-#: ../update-account.php:40 ../includes/template-tags.php:458
+#: ../update-account.php:40 ../includes/template-tags.php:459
 msgid "Last Name"
 msgstr ""
 
-#: ../update-account.php:46 ../includes/template-tags.php:464
+#: ../update-account.php:46 ../includes/template-tags.php:465
 #: ../includes/admin/sellers.php:17 ../includes/admin/sellers.php:92
 msgid "Shop Name"
 msgstr ""
 
-#: ../update-account.php:51 ../includes/template-tags.php:469
+#: ../update-account.php:51 ../includes/template-tags.php:470
 msgid "Shop URL"
 msgstr ""
 
 #: ../update-account.php:58 ../classes/admin-user-profile.php:85
-#: ../classes/template-settings.php:358 ../includes/template-tags.php:476
+#: ../classes/template-settings.php:358 ../includes/template-tags.php:477
 msgid "Address"
 msgstr ""
 
 #: ../update-account.php:63 ../classes/admin-user-profile.php:92
-#: ../includes/template-tags.php:481 ../includes/admin/sellers.php:21
+#: ../includes/template-tags.php:482 ../includes/admin/sellers.php:21
 #: ../includes/admin/sellers.php:96 ../templates/sellers.php:62
 msgid "Phone"
 msgstr ""
@@ -618,12 +618,12 @@ msgstr ""
 msgid "Seller"
 msgstr ""
 
-#: ../classes/installer.php:80 ../includes/template-tags.php:304
+#: ../classes/installer.php:80 ../includes/template-tags.php:305
 #: ../includes/admin/admin.php:66 ../includes/admin/admin.php:297
 msgid "Dashboard"
 msgstr ""
 
-#: ../classes/installer.php:86 ../includes/template-tags.php:309
+#: ../classes/installer.php:86 ../includes/template-tags.php:310
 #: ../includes/admin/sellers.php:19 ../includes/admin/sellers.php:55
 #: ../includes/admin/sellers.php:94 ../templates/dashboard.php:164
 msgid "Products"
@@ -633,27 +633,27 @@ msgstr ""
 msgid "Create Product"
 msgstr ""
 
-#: ../classes/installer.php:98 ../includes/template-tags.php:314
+#: ../classes/installer.php:98 ../includes/template-tags.php:315
 #: ../includes/admin/admin.php:315 ../includes/admin/sellers.php:56
 msgid "Orders"
 msgstr ""
 
-#: ../classes/installer.php:104 ../includes/template-tags.php:319
+#: ../classes/installer.php:104 ../includes/template-tags.php:320
 #: ../includes/admin/admin.php:321 ../templates/orders/order-details.php:85
 msgid "Coupons"
 msgstr ""
 
-#: ../classes/installer.php:110 ../includes/template-tags.php:324
+#: ../classes/installer.php:110 ../includes/template-tags.php:325
 #: ../includes/admin/admin.php:327 ../includes/admin/reports.php:7
 msgid "Reports"
 msgstr ""
 
-#: ../classes/installer.php:116 ../includes/template-tags.php:329
+#: ../classes/installer.php:116 ../includes/template-tags.php:330
 #: ../includes/admin/admin.php:333 ../templates/edit/options.php:10
 msgid "Reviews"
 msgstr ""
 
-#: ../classes/installer.php:136 ../includes/template-tags.php:559
+#: ../classes/installer.php:136 ../includes/template-tags.php:560
 #: ../includes/admin/admin.php:351
 msgid "My Orders"
 msgstr ""
@@ -1295,7 +1295,7 @@ msgstr ""
 
 #: ../classes/template-withdraw.php:356 ../classes/template-withdraw.php:370
 #: ../classes/template-withdraw.php:623 ../classes/template-withdraw.php:790
-#: ../includes/admin-functions.php:49 ../includes/wc-template.php:175
+#: ../includes/admin-functions.php:49 ../includes/wc-template.php:176
 #: ../templates/my-orders.php:41 ../templates/products-listing.php:39
 #: ../templates/orders/listing.php:21
 #: ../woocommerce/myaccount/my-orders.php:34
@@ -1361,7 +1361,7 @@ msgid "Cancel"
 msgstr ""
 
 #: ../classes/template-withdraw.php:625 ../includes/admin-functions.php:42
-#: ../includes/wc-template.php:176 ../includes/admin/reports.php:123
+#: ../includes/wc-template.php:177 ../includes/admin/reports.php:123
 #: ../includes/admin/reports.php:133 ../includes/admin/sellers.php:22
 #: ../includes/admin/sellers.php:97 ../templates/my-orders.php:42
 #: ../templates/products-listing.php:33 ../templates/orders/listing.php:19
@@ -1394,12 +1394,12 @@ msgid "Unknown error!"
 msgstr ""
 
 #: ../classes/template-withdraw.php:708
-msgid "You've already pending withdraw request(s)."
+msgid "You have a withdraw request that is pending."
 msgstr ""
 
 #: ../classes/template-withdraw.php:709
 msgid ""
-"Until it's been cancelled or approved, you can't submit any new request."
+"Until it's been cancelled or approved, you can not submit a new request."
 msgstr ""
 
 #: ../classes/template-withdraw.php:718
@@ -1497,7 +1497,7 @@ msgstr ""
 msgid "Delete License"
 msgstr ""
 
-#: ../includes/admin-functions.php:43 ../includes/wc-template.php:174
+#: ../includes/admin-functions.php:43 ../includes/wc-template.php:175
 #: ../includes/admin/reports.php:118 ../includes/admin/reports.php:128
 #: ../templates/dashboard.php:50 ../templates/my-orders.php:40
 #: ../templates/orders/listing.php:17
@@ -1522,7 +1522,7 @@ msgstr ""
 msgid "Order Notes"
 msgstr ""
 
-#: ../includes/admin-functions.php:50 ../includes/wc-template.php:177
+#: ../includes/admin-functions.php:50 ../includes/wc-template.php:178
 #: ../templates/dashboard.php:79 ../templates/dashboard.php:174
 #: ../templates/my-orders.php:43 ../templates/orders/order-fee-html.php:17
 #: ../woocommerce/myaccount/my-orders.php:36
@@ -1727,7 +1727,7 @@ msgstr ""
 msgid "Product has been deleted successfully!"
 msgstr ""
 
-#: ../includes/template-tags.php:240 ../includes/template-tags.php:264
+#: ../includes/template-tags.php:240 ../includes/template-tags.php:265
 #, php-format
 msgid "All (%d)"
 msgstr ""
@@ -1747,100 +1747,100 @@ msgstr ""
 msgid "Draft (%d)"
 msgstr ""
 
-#: ../includes/template-tags.php:269
+#: ../includes/template-tags.php:270
 #, php-format
 msgid "Completed (%d)"
 msgstr ""
 
-#: ../includes/template-tags.php:274
+#: ../includes/template-tags.php:275
 #, php-format
 msgid "Processing (%d)"
 msgstr ""
 
-#: ../includes/template-tags.php:279
+#: ../includes/template-tags.php:280
 #, php-format
 msgid "On-hold (%d)"
 msgstr ""
 
-#: ../includes/template-tags.php:284
+#: ../includes/template-tags.php:285
 #, php-format
 msgid "Pending (%d)"
 msgstr ""
 
-#: ../includes/template-tags.php:289
+#: ../includes/template-tags.php:290
 #, php-format
 msgid "Cancelled (%d)"
 msgstr ""
 
-#: ../includes/template-tags.php:294
+#: ../includes/template-tags.php:295
 #, php-format
 msgid "Refunded (%d)"
 msgstr ""
 
-#: ../includes/template-tags.php:370
+#: ../includes/template-tags.php:371
 msgid "Product Categories"
 msgstr ""
 
-#: ../includes/template-tags.php:393
+#: ../includes/template-tags.php:394
 msgid "Store Product Category"
 msgstr ""
 
-#: ../includes/template-tags.php:489
+#: ../includes/template-tags.php:490
 msgid "I am a customer"
 msgstr ""
 
-#: ../includes/template-tags.php:494
+#: ../includes/template-tags.php:495
 msgid "I am a seller"
 msgstr ""
 
-#: ../includes/template-tags.php:505
+#: ../includes/template-tags.php:506
 msgid "Error!"
 msgstr ""
 
-#: ../includes/template-tags.php:506
+#: ../includes/template-tags.php:507
 msgid "Your account is not enabled for selling, please contact the admin"
 msgstr ""
 
-#: ../includes/template-tags.php:522
+#: ../includes/template-tags.php:523
 #, php-format
 msgid "Cart %s"
 msgstr ""
 
-#: ../includes/template-tags.php:540
+#: ../includes/template-tags.php:541
 msgid "Seller Dashboard"
 msgstr ""
 
-#: ../includes/template-tags.php:543
+#: ../includes/template-tags.php:544
 msgid "Visit your store"
 msgstr ""
 
-#: ../includes/template-tags.php:560
+#: ../includes/template-tags.php:561
 msgid "My Account"
 msgstr ""
 
-#: ../includes/template-tags.php:561
+#: ../includes/template-tags.php:562
 msgid "Edit Account"
 msgstr ""
 
-#: ../includes/template-tags.php:563 ../templates/orders/order-details.php:110
+#: ../includes/template-tags.php:564 ../templates/orders/order-details.php:110
 #: ../woocommerce/order/order-details.php:123
 msgid "Billing Address"
 msgstr ""
 
-#: ../includes/template-tags.php:564 ../templates/orders/order-details.php:119
+#: ../includes/template-tags.php:565 ../templates/orders/order-details.php:119
 #: ../woocommerce/order/order-details.php:138
 msgid "Shipping Address"
 msgstr ""
 
-#: ../includes/template-tags.php:571
+#: ../includes/template-tags.php:572
 msgid "Log in"
 msgstr ""
 
-#: ../includes/template-tags.php:572
+#: ../includes/template-tags.php:573
 msgid "Sign Up"
 msgstr ""
 
-#: ../includes/template-tags.php:587
+#: ../includes/template-tags.php:588
 msgid "Become a Seller"
 msgstr ""
 
@@ -2026,35 +2026,35 @@ msgstr ""
 msgid "Store Name:"
 msgstr ""
 
-#: ../includes/wc-template.php:76
+#: ../includes/wc-template.php:77
 msgid "Seller:"
 msgstr ""
 
-#: ../includes/wc-template.php:85
+#: ../includes/wc-template.php:86
 msgid "Address:"
 msgstr ""
 
-#: ../includes/wc-template.php:137
+#: ../includes/wc-template.php:138
 msgctxt "breadcrumb"
 msgid "<i class=\"fa fa-home\"></i> Home"
 msgstr ""
 
-#: ../includes/wc-template.php:160
+#: ../includes/wc-template.php:161
 msgid "Sub Orders"
 msgstr ""
 
-#: ../includes/wc-template.php:164
+#: ../includes/wc-template.php:165
 msgid "Note:"
 msgstr ""
 
-#: ../includes/wc-template.php:165
+#: ../includes/wc-template.php:166
 msgid ""
 "This order has products from multiple vendors/sellers. So we divided this "
 "order into multiple seller orders.\n"
 "        Each order will be handled by their respective seller independently."
 msgstr ""
 
-#: ../includes/wc-template.php:201 ../templates/my-orders.php:70
+#: ../includes/wc-template.php:202 ../templates/my-orders.php:70
 #: ../woocommerce/myaccount/my-orders.php:63
 #, php-format
 msgid "%s for %s item"
@@ -2062,7 +2062,7 @@ msgid_plural "%s for %s items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../includes/wc-template.php:209 ../templates/my-orders.php:90
+#: ../includes/wc-template.php:210 ../templates/my-orders.php:90
 #: ../templates/products-listing.php:80 ../templates/orders/listing.php:107
 #: ../woocommerce/myaccount/my-orders.php:83
 msgid "View"

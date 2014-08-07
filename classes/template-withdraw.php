@@ -705,8 +705,8 @@ class Dokan_Template_Withdraw {
         if ( $this->has_pending_request( $current_user->ID ) ) {
             ?>
             <div class="alert alert-warning">
-                <p><strong><?php _e( 'You\'ve already pending withdraw request(s).', 'dokan' ); ?></strong></p>
-                <p><?php _e( 'Until it\'s been cancelled or approved, you can\'t submit any new request.', 'dokan' ) ?></p>
+                <p><strong><?php _e( 'You have a withdraw request that is pending.', 'dokan' ); ?></strong></p>
+                <p><?php _e( 'Until it\'s been cancelled or approved, you can not submit a new request.', 'dokan' ) ?></p>
             </div>
 
             <?php
