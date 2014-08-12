@@ -41,6 +41,7 @@ get_header();
                                     <th class="order-date"><span class="nobr"><?php _e( 'Date', 'dokan' ); ?></span></th>
                                     <th class="order-status"><span class="nobr"><?php _e( 'Status', 'dokan' ); ?></span></th>
                                     <th class="order-total"><span class="nobr"><?php _e( 'Total', 'dokan' ); ?></span></th>
+                                    <th class="order-total"><span class="nobr"><?php _e( 'Seller', 'dokan' ); ?></span></th>
                                     <th class="order-actions">&nbsp;</th>
                                 </tr>
                             </thead>
@@ -69,6 +70,19 @@ get_header();
                                         <td class="order-total">
                                             <?php echo sprintf( _n( '%s for %s item', '%s for %s items', $item_count, 'dokan' ), $order->get_formatted_order_total(), $item_count ); ?>
                                         </td>
+                                        
+                                        <td class="order-total">
+                                            <?php
+                                                $seller_id = dokan_get_seller_id_by_order( $order->id );
+                                                if ( $seller_id && $seller_id != 0 ) {
+                                                    $sellershop = dokan_get_store_info( $seller_id );
+                                                    echo '<a href="'. dokan_get_store_url( $seller_id ) .'">'. $sellershop['store_name'] .'</a>';
+                                                } else {
+                                                    _e( 'Multiple Seller', 'dokan' );
+                                                }
+                                            ?>
+                                        </td>
+
                                         <td class="order-actions">
                                             <?php
                                                 $actions = array();
