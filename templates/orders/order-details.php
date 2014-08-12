@@ -145,7 +145,7 @@ $order = new WC_Order( $order_id );
                         <ul class="list-unstyled order-status">
                             <li>
                                 <span><?php _e( 'Order Status:', 'dokan' ); ?></span>
-                                <label class="label label-<?php echo dokan_get_order_status_class( $order->status ); ?>"><?php echo $order->status; ?></label>
+                                <label class="label label-<?php echo dokan_get_order_status_class( $order->status ); ?>"><?php echo dokan_get_order_status( $order->status ); ?></label>
 
                                 <?php if ( dokan_get_option( 'order_status_change', 'dokan_selling', 'on' ) == 'on' ) {?>
                                     <a href="#" class="dokan-edit-status"><small><?php _e( '&nbsp; Edit', 'dokan' ); ?></small></a>
@@ -158,7 +158,7 @@ $order = new WC_Order( $order_id );
                                         <?php
                                             $statuses = (array) get_terms( 'shop_order_status', array( 'hide_empty' => 0, 'orderby' => 'id' ) );
                                             foreach ( $statuses as $status ) {
-                                                echo '<option value="' . esc_attr( $status->slug ) . '" ' . selected( $status->slug, $order->status, false ) . '>' . esc_html__( $status->name, 'woocommerce' ) . '</option>';
+                                                echo '<option value="' . esc_attr( $status->slug ) . '" ' . selected( $status->slug, $order->status, false ) . '>' . dokan_get_order_status( $status->name ) . '</option>';
                                             }
                                         ?>
                                     </select>
@@ -182,9 +182,14 @@ $order = new WC_Order( $order_id );
                                 <span><?php _e( 'Customer:', 'dokan' ); ?></span>
                                 <?php
                                 $customer_user = absint( get_post_meta( $order->id, '_customer_user', true ) );
-                                $customer_userdata = get_userdata( $customer_user );
+                                if ( $customer_user && $customer_user != 0 ) {
+                                    $customer_userdata = get_userdata( $customer_user );
+                                    $display_name =  $customer_userdata->display_name;
+                                } else {
+                                    $display_name = get_post_meta( $order->id, '_billing_first_name', true ). ' '. get_post_meta( $order->id, '_billing_last_name', true );
+                                }
                                 ?>
-                                <a href="#"><?php echo $customer_userdata->display_name; ?></a><br>
+                                <a href="#"><?php echo $display_name; ?></a><br>
                             </li>
                             <li>
                                 <span><?php _e( 'Email:', 'dokan' ); ?></span>

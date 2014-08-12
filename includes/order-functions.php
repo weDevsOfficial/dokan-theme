@@ -324,3 +324,41 @@ function dokan_get_order_status_class( $status ) {
             break;
     }
 }
+
+/**
+ * Get Translating text on order status
+ *
+ * @param string $status
+ * @return string
+ */
+function dokan_get_order_status( $status ) {
+    switch ( $status ) {
+        case 'completed':
+            return __( 'Completed' , 'dokan' );
+            break;
+
+        case 'pending':
+            return __( 'Pending', 'dokan' );
+            break;
+
+        case 'on-hold':
+            return __( 'On-hold', 'dokan' );
+            break;
+
+        case 'processing':
+            return __( 'Processing', 'dokan' );
+            break;
+
+        case 'refunded':
+            return __( 'Refunded', 'dokan' );
+            break;
+
+        case 'cancelled':
+            return __( 'Cancelled', 'dokan' );
+            break;
+
+        case 'failed':
+            return __( 'Failed', 'dokan' );
+            break;
+    }
+}

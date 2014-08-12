@@ -196,7 +196,7 @@ function dokan_order_show_suborders( $parent_order ) {
                         <time datetime="<?php echo date('Y-m-d', strtotime( $order->order_date ) ); ?>" title="<?php echo esc_attr( strtotime( $order->order_date ) ); ?>"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $order->order_date ) ); ?></time>
                     </td>
                     <td class="order-status" style="text-align:left; white-space:nowrap;">
-                        <?php echo ucfirst( __( $status->name, 'dokan' ) ); ?>
+                        <?php echo dokan_get_order_status( $status->name ); ?>
                     </td>
                     <td class="order-total">
                         <?php echo sprintf( _n( '%s for %s item', '%s for %s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ); ?>

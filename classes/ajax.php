@@ -474,7 +474,7 @@ class Dokan_Ajax {
         $order->update_status( $order_status );
 
         $status_class = dokan_get_order_status_class( $order_status );
-        echo '<label class="label label-' . $status_class . '">' . $order_status . '</label>';
+        echo '<label class="label label-' . $status_class . '">' . dokan_get_order_status( $order_status ). '</label>';
         exit;
     }
 
