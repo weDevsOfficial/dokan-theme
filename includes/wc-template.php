@@ -200,7 +200,7 @@ function dokan_order_show_suborders( $parent_order ) {
                         <?php echo dokan_get_order_status( $status->name ); ?>
                     </td>
                     <td class="order-total">
-                        <?php echo sprintf( _n( '%s for %s item', '%s for %s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ); ?>
+                        <?php echo sprintf( _n( '%s for %s item', '%s for %s items', $item_count, 'dokan' ), $order->get_formatted_order_total(), $item_count ); ?>
                     </td>
 
                     <td class="order-total">
