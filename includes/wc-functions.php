@@ -1727,3 +1727,33 @@ function dokan_get_readable_seller_rating( $seller_id ) {
 
     <?php
 }
+
+/**
+ * Removes order receipt email from the email queue
+ *
+ * @param  array $email_classes
+ * @return array
+ */
+function dokan_disable_order_emails() {
+    $woocommerce = WC();
+
+    remove_action( 'woocommerce_order_status_pending_to_processing', array( $woocommerce, 'send_transactional_email' ), 10, 10 );
+    remove_action( 'woocommerce_order_status_pending_to_completed', array( $woocommerce, 'send_transactional_email' ), 10, 10 );
+    remove_action( 'woocommerce_order_status_pending_to_on-hold', array( $woocommerce, 'send_transactional_email' ), 10, 10 );
+    remove_action( 'woocommerce_order_status_completed', array( $woocommerce, 'send_transactional_email' ), 10, 10 );
+}
+
+/**
+ * Removes order receipt email from the email queue
+ *
+ * @param  array $email_classes
+ * @return array
+ */
+function dokan_enable_order_emails() {
+    $woocommerce = WC();
+
+    add_action( 'woocommerce_order_status_pending_to_processing', array( $woocommerce, 'send_transactional_email' ), 10, 10 );
+    add_action( 'woocommerce_order_status_pending_to_completed', array( $woocommerce, 'send_transactional_email' ), 10, 10 );
+    add_action( 'woocommerce_order_status_pending_to_on-hold', array( $woocommerce, 'send_transactional_email' ), 10, 10 );
+    add_action( 'woocommerce_order_status_completed', array( $woocommerce, 'send_transactional_email' ), 10, 10 );
+}
