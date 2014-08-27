@@ -18,13 +18,13 @@
                 <ul class="list-unstyled ">
                     <li>
                         <label class="checkbox-inline">
-                            <input type="checkbox" class="checkbox" name="attribute_visibility[<%= row %>]" value="1" /> <?php _e( 'Visible on the product page', 'woocommerce' ); ?>
+                            <input type="checkbox" class="checkbox" name="attribute_visibility[<%= row %>]" value="1" /> <?php _e( 'Visible on the product page', 'dokan' ); ?>
                         </label>
                     </li>
 
                     <li class="enable_variation show_if_variable">
                         <label class="checkbox-inline">
-                            <input type="checkbox" class="checkbox" name="attribute_variation[<%= row %>]" value="1" /> <?php _e( 'Used for variations', 'woocommerce' ); ?>
+                            <input type="checkbox" class="checkbox" name="attribute_variation[<%= row %>]" value="1" /> <?php _e( 'Used for variations', 'dokan' ); ?>
                         </label>
                     </li>
                 </ul>
