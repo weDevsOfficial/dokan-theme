@@ -16,8 +16,8 @@ function dokan_product_seller_info( $item_data, $cart_item ) {
     $seller_info = get_userdata( $cart_item['data']->post->post_author );
     $store_info = dokan_get_store_info( $seller_info->ID );
     $item_data[] = array(
-        'name' => __( 'Seller', 'dokan' ),
-        'value' => $store_info['store_name']
+        'name'  => __( 'Seller', 'dokan' ),
+        'value' => empty( $store_info['store_name'] ) ? $seller_info->display_name : $store_info['store_name']
     );
 
     return $item_data;
@@ -36,7 +36,7 @@ add_filter( 'woocommerce_get_item_data', 'dokan_product_seller_info', 10, 2 );
 function dokan_seller_product_tab( $tabs) {
 
     $tabs['seller'] = array(
-        'title' => __( 'Seller Info', 'dokan' ),
+        'title'    => __( 'Seller Info', 'dokan' ),
         'priority' => 90,
         'callback' => 'dokan_product_seller_tab'
     );
@@ -56,9 +56,8 @@ add_filter( 'woocommerce_product_tabs', 'dokan_seller_product_tab' );
 function dokan_product_seller_tab( $val ) {
     global $product;
 
-    $author = get_user_by( 'id', $product->post->post_author );
+    $author     = get_user_by( 'id', $product->post->post_author );
     $store_info = dokan_get_store_info( $author->ID );
-//    var_dump( $store_info );
     ?>
     <ul class="list-unstyled">
 
@@ -67,7 +66,6 @@ function dokan_product_seller_tab( $val ) {
                 <span><?php _e( 'Store Name:', 'dokan' ); ?></span>
                 <span class="details">
                     <?php printf( '<a href="%s">%s</a>', dokan_get_store_url( $author->ID ), esc_html( $store_info['store_name'] ) ); ?>
-                    <?php //echo esc_html( $store_info['store_name'] ); ?>
                 </span>
             </li>
         <?php } ?>
@@ -81,6 +79,7 @@ function dokan_product_seller_tab( $val ) {
                 <?php printf( '<a href="%s">%s</a>', dokan_get_store_url( $author->ID ), $author->display_name ); ?>
             </span>
         </li>
+
         <?php if ( !empty( $store_info['address'] ) ) { ?>
             <li class="store-address">
                 <span><?php _e( 'Address:', 'dokan' ); ?></span>
