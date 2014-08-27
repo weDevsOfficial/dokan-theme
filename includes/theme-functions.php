@@ -829,13 +829,13 @@ function dokan_get_store_info( $seller_id ) {
 
     $defaults = array(
         'store_name' => '',
-        'social' => array(),
-        'payment' => array( 'paypal' => array( 'email' ), 'bank' => array() ),
-        'phone' => '',
+        'social'     => array(),
+        'payment'    => array( 'paypal' => array( 'email' ), 'bank' => array() ),
+        'phone'      => '',
         'show_email' => 'off',
-        'address' => '',
-        'location' => '',
-        'banner' => 0
+        'address'    => '',
+        'location'   => '',
+        'banner'     => 0
     );
 
     $info = wp_parse_args( $info, $defaults );
