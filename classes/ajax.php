@@ -53,13 +53,13 @@ class Dokan_Ajax {
 
         add_action( 'wp_ajax_dokan_add_variation', array( $this, 'add_variation' ) );
         add_action( 'wp_ajax_dokan_link_all_variations', array( $this, 'link_all_variations' ) );
+        add_action( 'wp_ajax_dokan_pre_define_attribute', array( $this, 'dokan_pre_define_attribute' ) );
         add_action( 'wp_ajax_dokan_save_attributes', array( $this, 'save_attributes' ) );
 
         add_action( 'wp_ajax_dokan_toggle_seller', array( $this, 'toggle_seller_status' ) );
 
 
         add_action( 'wp_ajax_nopriv_shop_url', array($this, 'shop_url_check') );
-        add_action( 'wp_ajax_shop_url', array($this, 'shop_url_check') );
     }
 
     /**
@@ -75,25 +75,18 @@ class Dokan_Ajax {
         }
 
         $url_slug = $_POST['url_slug'];
+
         $check = true;
 
-        if ( is_user_logged_in() ) {
-            $cu_slug = get_user_meta( get_current_user_id(), 'nickname', true );
-            if ( $cu_slug != $url_slug ) {
-                $user = get_user_by( 'slug', $url_slug );
-            }else {
-                $user = '';
-            }
-        }else {
-            $user = get_user_by( 'slug', $url_slug );
-        }
+        $user = get_user_by( 'slug', $url_slug );
 
         if ( $user != '' ) {
             $check = false;
         }
 
         echo $check;
-        exit;
+
+
     }
 
     /**
@@ -474,7 +467,7 @@ class Dokan_Ajax {
         $order->update_status( $order_status );
 
         $status_class = dokan_get_order_status_class( $order_status );
-        echo '<label class="label label-' . $status_class . '">' . dokan_get_order_status( $order_status ). '</label>';
+        echo '<label class="label label-' . $status_class . '">' . $order_status . '</label>';
         exit;
     }
 
@@ -503,6 +496,101 @@ class Dokan_Ajax {
         $success = sprintf( '<div class="alert alert-success">%s</div>', __( 'Email sent successfully!', 'dokan' ) );
         wp_send_json_success( $success );
         exit;
+    }
+
+
+    function dokan_pre_define_attribute() {
+        $attribute = $_POST;
+        $tax = get_taxonomy( 'pa_'.$attribute['name'] );
+
+        $attribute_name = $tax->labels->name;
+        $options = get_terms( 'pa_'.$attribute['name'], array('fields' => 'names') );
+        $i = $_POST['row'];
+        ob_start();
+        ?>
+        <div class="inputs-box woocommerce_attribute" data-count="<?php echo $i; ?>">
+
+            <div class="box-header">
+                <input type="text" disabled="disabled" value="<?php echo $attribute_name; ?>">
+
+                <input type="hidden" name="attribute_names[<?php echo $i; ?>]" value="<?php echo esc_attr( 'pa_'.$attribute['name'] ); ?>">
+                <input type="hidden" name="attribute_is_taxonomy[<?php echo $i; ?>]" value="1">
+
+                <input type="hidden" name="attribute_position[<?php echo $i; ?>]" class="attribute_position" value="<?php echo esc_attr( $i ); ?>" />
+
+
+                <span class="actions">
+                    <button class="row-remove btn pull-right btn-danger btn-sm"><?php _e( 'Remove', 'dokan' ); ?></button>
+                </span>
+            </div>
+
+            <div class="box-inside clearfix">
+
+                <div class="attribute-config">
+                    <ul class="list-unstyled ">
+                        <li>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" class="checkbox" <?php
+                                $tax = '';
+                                checked( apply_filters( 'default_attribute_visibility', false, $tax ), true );
+                                ?> name="attribute_visibility[<?php echo $i; ?>]" value="1" /> <?php _e( 'Visible on the product page', 'dokan' ); ?>
+                            </label>
+                        </li>
+
+                        <li class="enable_variation" <?php echo ( $_POST['type'] === 'simple' )? 'style="display:none;"' : ""; ?>>
+                            <label class="checkbox-inline">
+                            <input type="checkbox" class="checkbox" <?php
+                            checked( apply_filters( 'default_attribute_variation', false, $tax ), true );
+                        ?> name="attribute_variation[<?php echo $i; ?>]" value="1" /> <?php _e( 'Used for variations', 'dokan' ); ?></label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="attribute-options">
+                    <ul class="option-couplet list-unstyled ">
+                        <?php
+
+                        if ($options) {
+                            foreach ($options as $count => $option) {
+                                ?>
+
+                                <li>
+                                    <input type="text" class="option" placeholder="<?php _e( 'Option...', 'dokan' ); ?>" name="attribute_values[<?php echo $i; ?>][<?php echo $count; ?>]" value="<?php echo esc_attr( $option ); ?>">
+
+                                    <span class="item-action actions">
+                                        <a href="#" class="row-add">+</a>
+                                        <a href="#" class="row-remove">-</a>
+                                    </span>
+                                </li>
+
+                                <?php
+                            }
+                        } else {
+                            ?>
+
+                            <li>
+                                <input type="text" class="option" name="attribute_values[<?php echo $i; ?>][0]" placeholder="<?php _e( 'Option...', 'dokan' ); ?>">
+
+                                <span class="item-action actions">
+                                    <a href="#" class="row-add">+</a>
+                                    <a href="#" class="row-remove">-</a>
+                                </span>
+                            </li>
+
+                            <?php
+                        }
+                        ?>
+                    </ul>
+
+                </div> <!-- .attribute-options -->
+
+            </div> <!-- .box-inside -->
+
+        </div> <!-- .input-box -->
+
+        <?php
+        $response = ob_get_clean();
+        return wp_send_json_success( $response );
     }
 
     /**

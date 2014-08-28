@@ -14,8 +14,6 @@
 
     $i = -1;
 
-    // var_dump($attributes, $attribute_taxonomies);
-
     // Custom Attributes
     if ( ! empty( $attributes ) ) {
         foreach ( $attributes as $attribute ) {
@@ -23,7 +21,6 @@
 
             if ( $attribute['is_taxonomy'] ) {
                 $tax = get_taxonomy( $attribute['name'] );
-
                 $attribute_name = $tax->labels->name;
                 $options = wp_get_post_terms( $thepostid, $attribute['name'], array('fields' => 'names') );
             } else {
@@ -33,8 +30,6 @@
 
             $i++;
 
-            // var_dump($i);
-
             $position = empty( $attribute['position'] ) ? 0 : absint( $attribute['position'] );
             ?>
 
@@ -43,7 +38,7 @@
                 <div class="box-header">
                     <?php if ( $attribute['is_taxonomy'] ) { ?>
 
-                        <?php echo $attribute_name; ?>
+                        <input type="text" disabled="disabled" value="<?php echo $attribute_name; ?>">
 
                         <input type="hidden" name="attribute_names[<?php echo $i; ?>]" value="<?php echo esc_attr( $attribute['name'] ); ?>">
                         <input type="hidden" name="attribute_is_taxonomy[<?php echo $i; ?>]" value="1">
@@ -140,7 +135,16 @@
     <?php } ?>
 </div> <!-- #variants-holder -->
 
-<p class="toolbar">
+<p class="toolbar pull-right">
+    <select class="select-attribute" name="category_names" >
+        <option value="">Custom Attribute</option>
+        <?php
+        if ( !empty( $attribute_taxonomies ) ) { ?>
+            <?php foreach ( $attribute_taxonomies as $key => $value ) { ?>
+                <option value="<?php echo $value->attribute_name; ?>"><?php echo $value->attribute_label; ?></option>
+            <?php } 
+        }?>
+    </select>
     <button class="btn btn-success add-variant-category"><?php _e( '+ Add a category', 'dokan' ); ?></button>
     <button type="button" class="btn btn-default save_attributes" data-id="<?php echo $thepostid; ?>"><?php _e( 'Save attributes', 'dokan' ); ?></button>
 </p>
