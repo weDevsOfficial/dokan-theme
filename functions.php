@@ -249,6 +249,7 @@ class WeDevs_Dokan {
             array( 'name' => __( 'Header Sidebar', 'dokan' ), 'id' => 'sidebar-header' ),
             array( 'name' => __( 'Shop Archive', 'dokan' ), 'id' => 'sidebar-shop' ),
             array( 'name' => __( 'Single Product', 'dokan' ), 'id' => 'sidebar-single-product' ),
+            array( 'name' => __( 'Store', 'dokan' ), 'id' => 'sidebar-store' ),
             array( 'name' => __( 'Footer Sidebar - 1', 'dokan' ), 'id' => 'footer-1' ),
             array( 'name' => __( 'Footer Sidebar - 2', 'dokan' ), 'id' => 'footer-2' ),
             array( 'name' => __( 'Footer Sidebar - 3', 'dokan' ), 'id' => 'footer-3' ),
