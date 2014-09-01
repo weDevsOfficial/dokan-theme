@@ -1,3 +1,24 @@
+v1.0.6 -> September 2, 2014
+---------------------
+- [new] Added hook and filter in product listing
+- [fix] Change seller name to store name in cart
+- [fix] Add store link to seller review tab
+- [fix] change best seller name to store name in best seller widget
+- [new] Arabic translation added
+- [new] Customer migration to seller
+- [fix] Condition fix for new product visibility
+- [fix] Update url separator
+- [fix] Coupon product dropdown shows only 10 products
+- [fix] Repeted slide off
+- [fix] Change manage stock check
+- [new] Hooks added on settings form
+- [new] Pre-defined attribute feature
+- [fix] Review pagination in seller dashboard
+- [fix] Email notifications removed from child orders
+- [fix] Correct text domain updated
+- [fix] Order status localization
+
+
 v1.0.5 -> June 9, 2014
 -----------------------
 - [new] Enable/disable scripts, styles, sidebars from child theme
