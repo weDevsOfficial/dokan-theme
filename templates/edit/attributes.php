@@ -136,13 +136,13 @@
 </div> <!-- #variants-holder -->
 
 <p class="toolbar pull-right">
-    <select class="select-attribute" name="category_names" >
+    <select class="select-attribute form-control" name="category_names" >
         <option value="">Custom Attribute</option>
         <?php
         if ( !empty( $attribute_taxonomies ) ) { ?>
             <?php foreach ( $attribute_taxonomies as $key => $value ) { ?>
                 <option value="<?php echo $value->attribute_name; ?>"><?php echo $value->attribute_label; ?></option>
-            <?php } 
+            <?php }
         }?>
     </select>
     <button class="btn btn-success add-variant-category"><?php _e( '+ Add a category', 'dokan' ); ?></button>

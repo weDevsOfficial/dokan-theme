@@ -2388,6 +2388,10 @@ a:hover {
 .product-edit-container #product-attributes h4 {
   margin-bottom: 15px;
 }
+.product-edit-container #product-attributes .select-attribute.form-control {
+  display: inline;
+  width: auto;
+}
 .product-edit-container #variants-holder .inputs-box {
   background: #f5f5f5;
   margin-bottom: 20px;
@@ -3646,4 +3650,3 @@ span.error {
 .woocommerce-page #reviews #comments ol.commentlist li .comment-text {
   margin: 0 0 0 90px;
 }
-/*# sourceMappingURL=style.css.map */
