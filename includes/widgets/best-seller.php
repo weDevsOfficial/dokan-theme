@@ -47,6 +47,9 @@ class Dokan_Best_Seller_Widget extends WP_Widget {
                 foreach ($seller as $key => $value) {
                     $rating = dokan_get_seller_rating( $value->seller_id );
                     $display_rating = $rating['rating'];
+                    $store_info = dokan_get_store_info( $value->seller_id );
+                    $store_name = isset( $store_info['store_name'] ) ? esc_html( $store_info['store_name'] ) : esc_html( $value->display_name );
+                        
 
                     if ( ! $rating['count'] ) {
                         $display_rating = __( 'No ratings found yet!', 'dokan' );
@@ -54,7 +57,7 @@ class Dokan_Best_Seller_Widget extends WP_Widget {
                     ?>
                     <li>
                         <a href="<?php echo dokan_get_store_url( $value->seller_id ); ?>">
-                            <?php echo $value->display_name; ?>
+                            <?php echo $store_name; ?>
                         </a><br />
                         <i class='fa fa-star'></i>
                         <?php echo $display_rating; ?>

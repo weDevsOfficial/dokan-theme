@@ -9,11 +9,15 @@ class Dokan_Rewrites {
 
     function __construct() {
         add_action( 'init', array($this, 'register_rule') );
+        
         add_filter( 'template_include', array($this, 'store_template') );
         add_filter( 'template_include', array($this, 'product_edit_template'), 11 );
-        add_filter( 'template_include', array($this, 'store_review_template'), 11 );
+        add_filter( 'template_include', array($this, 'store_review_template'), 12 );
+
         add_filter( 'query_vars', array($this, 'register_query_var') );
         add_filter( 'pre_get_posts', array($this, 'store_query_filter') );
+
+        add_filter( 'woocommerce_locate_template', array($this, 'account_migration_template') );
     }
 
     /**
@@ -43,14 +47,20 @@ class Dokan_Rewrites {
             }
         }
 
+        // store page
         add_rewrite_rule( 'store/([^/]+)/?$', 'index.php?store=$matches[1]', 'top' );
         add_rewrite_rule( 'store/([^/]+)/page/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&paged=$matches[2]', 'top' );
 
+        // reviews
         add_rewrite_rule( 'store/([^/]+)/reviews?$', 'index.php?store=$matches[1]&store_review=true', 'top' );
         add_rewrite_rule( 'store/([^/]+)/reviews/page/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&paged=$matches[2]&store_review=true', 'top' );
 
+        // store category filtering
         add_rewrite_rule( 'store/([^/]+)/section/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&term=$matches[2]&term_section=true', 'top' );
         add_rewrite_rule( 'store/([^/]+)/section/?([0-9]{1,})/page/?([0-9]{1,})/?$', 'index.php?store=$matches[1]&term=$matches[2]&paged=$matches[3]&term_section=true', 'top' );
+    
+        // account migration page on my account
+        add_rewrite_endpoint( 'account-migration', EP_PAGES );
     }
 
     /**
@@ -64,6 +74,7 @@ class Dokan_Rewrites {
         $vars[] = 'store_review';
         $vars[] = 'edit';
         $vars[] = 'term_section';
+        $vars[] = 'account-migration';
 
         return $vars;
     }
@@ -111,10 +122,15 @@ class Dokan_Rewrites {
         return $template;
     }
 
+    /**
+     * Includes store review template
+     * 
+     * @param  string $template
+     * @return string
+     */
     function store_review_template( $template ) {
 
         if ( $var = get_query_var( 'store_review' ) ) {
-
             return get_template_directory() . '/store-reviews.php';
         }
 
@@ -142,5 +158,20 @@ class Dokan_Rewrites {
                 );
             }
         }
+    }
+
+    /**
+     * Account migration template on my account
+     * 
+     * @param  string $file path of the template
+     * @return string
+     */
+    function account_migration_template( $file ) {
+
+        if ( get_query_var( 'account-migration' ) && dokan_is_user_customer( get_current_user_id() ) ) {
+            return DOKAN_DIR . '/update-account.php';
+        }
+
+        return $file;
     }
 }

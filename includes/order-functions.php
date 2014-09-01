@@ -153,11 +153,16 @@ function dokan_on_order_status_change( $order_id, $old_status, $new_status ) {
 
     // if any child orders found, change the orders as well
     $sub_orders = get_children( array( 'post_parent' => $order_id, 'post_type' => 'shop_order' ) );
+
     if ( $sub_orders ) {
+        dokan_disable_order_emails();
+
         foreach ($sub_orders as $order_post) {
             $order = new WC_Order( $order_post->ID );
             $order->update_status( $new_status );
         }
+
+        dokan_enable_order_emails();
     }
 }
 
@@ -201,8 +206,12 @@ function dokan_on_child_order_status_change( $order_id, $old_status, $new_status
     // seems like all the child orders are completed
     // mark the parent order as complete
     if ( $all_complete ) {
+        dokan_disable_order_emails();
+
         $parent_order = new WC_Order( $parent_order_id );
         $parent_order->update_status( 'completed', __( 'Mark parent order completed as all child orders are completed.', 'dokan' ) );
+
+        dokan_enable_order_emails();
     }
 }
 
@@ -321,6 +330,44 @@ function dokan_get_order_status_class( $status ) {
 
         case 'failed':
             return 'danger';
+            break;
+    }
+}
+
+/**
+ * Get Translating text on order status
+ *
+ * @param string $status
+ * @return string
+ */
+function dokan_get_order_status( $status ) {
+    switch ( $status ) {
+        case 'completed':
+            return __( 'Completed' , 'dokan' );
+            break;
+
+        case 'pending':
+            return __( 'Pending', 'dokan' );
+            break;
+
+        case 'on-hold':
+            return __( 'On-hold', 'dokan' );
+            break;
+
+        case 'processing':
+            return __( 'Processing', 'dokan' );
+            break;
+
+        case 'refunded':
+            return __( 'Refunded', 'dokan' );
+            break;
+
+        case 'cancelled':
+            return __( 'Cancelled', 'dokan' );
+            break;
+
+        case 'failed':
+            return __( 'Failed', 'dokan' );
             break;
     }
 }

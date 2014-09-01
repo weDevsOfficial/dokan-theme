@@ -14,10 +14,10 @@ remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_ad
  */
 function dokan_product_seller_info( $item_data, $cart_item ) {
     $seller_info = get_userdata( $cart_item['data']->post->post_author );
-
+    $store_info = dokan_get_store_info( $seller_info->ID );
     $item_data[] = array(
-        'name' => __( 'Seller', 'dokan' ),
-        'value' => $seller_info->display_name
+        'name'  => __( 'Seller', 'dokan' ),
+        'value' => empty( $store_info['store_name'] ) ? $seller_info->display_name : $store_info['store_name']
     );
 
     return $item_data;
@@ -36,7 +36,7 @@ add_filter( 'woocommerce_get_item_data', 'dokan_product_seller_info', 10, 2 );
 function dokan_seller_product_tab( $tabs) {
 
     $tabs['seller'] = array(
-        'title' => __( 'Seller Info', 'dokan' ),
+        'title'    => __( 'Seller Info', 'dokan' ),
         'priority' => 90,
         'callback' => 'dokan_product_seller_tab'
     );
@@ -56,9 +56,8 @@ add_filter( 'woocommerce_product_tabs', 'dokan_seller_product_tab' );
 function dokan_product_seller_tab( $val ) {
     global $product;
 
-    $author = get_user_by( 'id', $product->post->post_author );
+    $author     = get_user_by( 'id', $product->post->post_author );
     $store_info = dokan_get_store_info( $author->ID );
-//    var_dump( $store_info );
     ?>
     <ul class="list-unstyled">
 
@@ -66,7 +65,7 @@ function dokan_product_seller_tab( $val ) {
             <li class="store-name">
                 <span><?php _e( 'Store Name:', 'dokan' ); ?></span>
                 <span class="details">
-                    <?php echo esc_html( $store_info['store_name'] ); ?>
+                    <?php printf( '<a href="%s">%s</a>', dokan_get_store_url( $author->ID ), esc_html( $store_info['store_name'] ) ); ?>
                 </span>
             </li>
         <?php } ?>
@@ -80,6 +79,7 @@ function dokan_product_seller_tab( $val ) {
                 <?php printf( '<a href="%s">%s</a>', dokan_get_store_url( $author->ID ), $author->display_name ); ?>
             </span>
         </li>
+
         <?php if ( !empty( $store_info['address'] ) ) { ?>
             <li class="store-address">
                 <span><?php _e( 'Address:', 'dokan' ); ?></span>
@@ -175,6 +175,7 @@ function dokan_order_show_suborders( $parent_order ) {
                 <th class="order-date"><span class="nobr"><?php _e( 'Date', 'dokan' ); ?></span></th>
                 <th class="order-status"><span class="nobr"><?php _e( 'Status', 'dokan' ); ?></span></th>
                 <th class="order-total"><span class="nobr"><?php _e( 'Total', 'dokan' ); ?></span></th>
+                <th class="order-total"><span class="nobr"><?php _e( 'Seller', 'dokan' ); ?></span></th>
                 <th class="order-actions">&nbsp;</th>
             </tr>
         </thead>
@@ -195,11 +196,22 @@ function dokan_order_show_suborders( $parent_order ) {
                         <time datetime="<?php echo date('Y-m-d', strtotime( $order->order_date ) ); ?>" title="<?php echo esc_attr( strtotime( $order->order_date ) ); ?>"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $order->order_date ) ); ?></time>
                     </td>
                     <td class="order-status" style="text-align:left; white-space:nowrap;">
-                        <?php echo ucfirst( __( $status->name, 'dokan' ) ); ?>
+                        <?php echo dokan_get_order_status( $status->name ); ?>
                     </td>
                     <td class="order-total">
-                        <?php echo sprintf( _n( '%s for %s item', '%s for %s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ); ?>
+                        <?php echo sprintf( _n( '%s for %s item', '%s for %s items', $item_count, 'dokan' ), $order->get_formatted_order_total(), $item_count ); ?>
                     </td>
+
+                    <td class="order-total">
+                        <?php
+                            $seller_id = dokan_get_seller_id_by_order( $order->id );
+                            if ( $seller_id && $seller_id != 0 ) {
+                                $sellershop = dokan_get_store_info( $seller_id );
+                                echo '<a href="'. dokan_get_store_url( $seller_id ) .'">'. $sellershop['store_name'] .'</a>';
+                            }
+                        ?>
+                    </td>
+
                     <td class="order-actions">
                         <?php
                             $actions = array();

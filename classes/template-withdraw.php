@@ -57,7 +57,7 @@ class Dokan_Template_Withdraw {
                     $this->delete_withdraw( $withdraw_id );
                 }
 
-                wp_redirect( admin_url( 'admin.php?page=dokan-withdraw&message=trashed&status=' . $status ) );
+                wp_redirect( admin_url( 'admin.php?page=dokan-withdraw&msg=trashed&status=' . $status ) );
                 die();
 
                 break;
@@ -74,7 +74,7 @@ class Dokan_Template_Withdraw {
                     $this->update_status( $withdraw_id, $user_id, 2 );
                 }
 
-                wp_redirect( admin_url( 'admin.php?page=dokan-withdraw&message=cancelled&status=' . $status ) );
+                wp_redirect( admin_url( 'admin.php?page=dokan-withdraw&msg=cancelled&status=' . $status ) );
                 die();
 
                 break;
@@ -90,7 +90,7 @@ class Dokan_Template_Withdraw {
                     $this->update_status( $withdraw_id, $user_id, 1 );
                 }
 
-                wp_redirect( admin_url( 'admin.php?page=dokan-withdraw&message=approved&status=' . $status ) );
+                wp_redirect( admin_url( 'admin.php?page=dokan-withdraw&msg=approved&status=' . $status ) );
 
                 break;
 
@@ -100,7 +100,7 @@ class Dokan_Template_Withdraw {
                     $this->update_status( $withdraw_id, $_POST['user_id'][$key], 0 );
                 }
 
-                wp_redirect( admin_url( 'admin.php?page=dokan-withdraw&message=pending&status=' . $status ) );
+                wp_redirect( admin_url( 'admin.php?page=dokan-withdraw&msg=pending&status=' . $status ) );
 
                 break;
         }
@@ -164,7 +164,7 @@ class Dokan_Template_Withdraw {
 
             $this->update_status( $row_id, $current_user->ID, 2 );
 
-            wp_redirect( add_query_arg( array( 'message' => 'request_cancelled' ), get_permalink() ) );
+            wp_redirect( add_query_arg( array( 'msg' => 'request_cancelled' ), get_permalink() ) );
         }
     }
 
@@ -254,7 +254,7 @@ class Dokan_Template_Withdraw {
         $update = $this->insert_withdraw( $data_info );
         Dokan_Email::init()->new_withdraw_request( $current_user, $amount, $method );
 
-        wp_redirect( add_query_arg( array( 'message' => 'request_success' ), get_permalink() ) );
+        wp_redirect( add_query_arg( array( 'msg' => 'request_success' ), get_permalink() ) );
     }
 
     function has_pending_request( $user_id ) {
@@ -315,8 +315,8 @@ class Dokan_Template_Withdraw {
         $result = $this->get_withdraw_requests( '', $this->get_status_code( $status ), $limit, $offset );
         ?>
 
-        <?php if ( isset( $_GET['message'] ) ) {
-            if ( $_GET['message'] == 'trashed' ) {
+        <?php if ( isset( $_GET['msg'] ) ) {
+            if ( $_GET['msg'] == 'trashed' ) {
                 ?>
                 <div class="updated">
                     <p><strong><?php _e( 'Requests deleted!', 'dokan' ); ?></strong></p>
@@ -324,7 +324,7 @@ class Dokan_Template_Withdraw {
                 <?php
             }
 
-            if ( $_GET['message'] == 'cancelled' ) {
+            if ( $_GET['msg'] == 'cancelled' ) {
                 ?>
                 <div class="updated">
                     <p><strong><?php _e( 'Requests cancelled!', 'dokan' ); ?></strong></p>
@@ -332,7 +332,7 @@ class Dokan_Template_Withdraw {
                 <?php
             }
 
-            if ( $_GET['message'] == 'approved' ) {
+            if ( $_GET['msg'] == 'approved' ) {
                 ?>
                 <div class="updated">
                     <p><strong><?php _e( 'Requests approved!', 'dokan' ); ?></strong></p>
@@ -665,7 +665,7 @@ class Dokan_Template_Withdraw {
     }
 
     function show_alert_messages() {
-        $type = isset( $_GET['message'] ) ? $_GET['message'] : '';
+        $type = isset( $_GET['msg'] ) ? $_GET['msg'] : '';
 
         switch ($type) {
             case 'request_cancelled':
@@ -705,8 +705,8 @@ class Dokan_Template_Withdraw {
         if ( $this->has_pending_request( $current_user->ID ) ) {
             ?>
             <div class="alert alert-warning">
-                <p><strong><?php _e( 'You\'ve already pending withdraw request(s).', 'dokan' ); ?></strong></p>
-                <p><?php _e( 'Until it\'s been cancelled or approved, you can\'t submit any new request.', 'dokan' ) ?></p>
+                <p><strong><?php _e( 'You have a withdraw request that is pending.', 'dokan' ); ?></strong></p>
+                <p><?php _e( 'Until it\'s been cancelled or approved, you can not submit a new request.', 'dokan' ) ?></p>
             </div>
 
             <?php

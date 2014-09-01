@@ -170,6 +170,13 @@ class Dokan_Admin_Settings {
                 ),
             ),
             'dokan_selling' => array(
+                'user_seller' => array(
+                    'name' => 'user_seller',
+                    'label' => __( 'User could be seller', 'dokan' ),
+                    'desc' => __( 'Customer or user could upgrade his/her account to seller', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
                 'new_seller_enable_selling' => array(
                     'name' => 'new_seller_enable_selling',
                     'label' => __( 'New Seller Enable Selling', 'dokan' ),
@@ -177,10 +184,17 @@ class Dokan_Admin_Settings {
                     'type' => 'checkbox',
                     'default' => 'on'
                 ),
+                'product_visibility' => array(
+                    'name' => 'product_visibility',
+                    'label' => __( 'New Product Visibility', 'dokan' ),
+                    'desc' => __( 'Product visibility (without update meta) when seller creates a product', 'dokan' ),
+                    'type' => 'checkbox',
+                    'default' => 'on'
+                ),
                 'product_status' => array(
                     'name' => 'product_status',
                     'label' => __( 'New Product Status', 'dokan' ),
-                    'desc' => __( 'Product status when a seller creates a product', 'dokan' ),
+                    'desc' => __( 'Product status when seller creates a product', 'dokan' ),
                     'type' => 'select',
                     'default' => 'pending',
                     'options' => array(

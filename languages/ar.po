@@ -1,143 +1,145 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Dokan\n"
-"POT-Creation-Date: 2014-08-07 19:20+0600\n"
-"PO-Revision-Date: 2014-08-07 19:20+0600\n"
-"Last-Translator: Tareq Hasan <tareq@wedevs.com>\n"
+"POT-Creation-Date: 2014-05-24 18:06+0600\n"
+"PO-Revision-Date: 2014-07-01 20:07+0300\n"
+"Last-Translator: Abdelhafid <webmaster@abdelhafid.com>\n"
 "Language-Team: weDevs Team <info@wedevs.com>\n"
-"Language: English\n"
+"Language: ar_SA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.6.5\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../404.php:16
 msgid "Oops! That page can&rsquo;t be found."
-msgstr ""
+msgstr "للأسف ! لا يمكن إيجاد تلك الصفحة"
 
 #: ../404.php:20
 msgid ""
 "It looks like nothing was found at this location. Maybe try one of the links "
 "below or a search?"
 msgstr ""
+"يبدو أنه لا يوجد شيئ عما تبحث عنه في هذا المكان . يمكنك محاولة البحث مرة أخرى"
 
 #: ../404.php:33
 msgid "Categories"
-msgstr ""
+msgstr "الأقسام"
 
 #: ../404.php:45
 #, php-format
 msgid "Try looking in the monthly archives. %1$s"
-msgstr ""
+msgstr "حاول البحث في الأرشيف لشهر %1$s"
 
 #: ../archive.php:22
 #, php-format
 msgid "Category Archives: %s"
-msgstr ""
+msgstr "أرشيف القسم : %s"
 
 #: ../archive.php:24
 #, php-format
 msgid "Tag Archives: %s"
-msgstr ""
+msgstr "أرشيف الوسوم : %s"
 
 #: ../archive.php:30
 #, php-format
 msgid "Author Archives: %s"
-msgstr ""
+msgstr "أرشيف الكاتب :  %s"
 
 #: ../archive.php:37
 #, php-format
 msgid "Daily Archives: %s"
-msgstr ""
+msgstr "الأرشيف اليومي :  %s"
 
 #: ../archive.php:39
 #, php-format
 msgid "Monthly Archives: %s"
-msgstr ""
+msgstr "الأرشيف الشهري :  %s"
 
 #: ../archive.php:41
 #, php-format
 msgid "Yearly Archives: %s"
-msgstr ""
+msgstr "الأرشيف السنوي :  %s"
 
 #: ../archive.php:43 ../sidebar-blog.php:26 ../sidebar-home.php:20
 #: ../sidebar-product-single.php:25 ../sidebar-shop.php:26 ../sidebar.php:26
 msgid "Archives"
-msgstr ""
+msgstr "الأرشيف"
 
 #: ../comments.php:32
 #, php-format
 msgid "One thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "تعليق واحد على  &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s thoughts on &ldquo;%2$s&rdquo;"
 
 #: ../comments.php:38 ../comments.php:58
 msgid "Comment navigation"
-msgstr ""
+msgstr "قائمة التعليقات"
 
 #: ../comments.php:39 ../comments.php:59
 msgid "&larr; Older Comments"
-msgstr ""
+msgstr "&larr; التعليقات الأقدم"
 
 #: ../comments.php:40 ../comments.php:60
 msgid "Newer Comments &rarr;"
-msgstr ""
+msgstr "التعليقات الاحدث &rarr;"
 
 #: ../comments.php:70
 msgid "Comments are closed."
-msgstr ""
+msgstr "التعليقات مغلقة"
 
 #: ../content-page.php:17 ../content-single.php:36 ../content.php:41
 msgid "Pages:"
-msgstr ""
+msgstr "الصفحات :"
 
 #: ../content-page.php:18 ../content-single.php:29 ../content.php:29
 #: ../classes/slider.php:84 ../classes/template-coupons.php:246
-#: ../templates/product-edit.php:120 ../templates/products-listing.php:78
-#: ../templates/edit/sidebar.php:15 ../templates/edit/sidebar.php:58
+#: ../templates/product-edit.php:105 ../templates/products-listing.php:78
+#: ../templates/edit/sidebar.php:15 ../templates/edit/sidebar.php:53
 msgid "Edit"
-msgstr ""
+msgstr "تعديل"
 
 #: ../content-single.php:15 ../content-single.php:42 ../content.php:15
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../content-single.php:20 ../content.php:20
 #, php-format
 msgid "%1$s"
-msgstr ""
+msgstr "%1$s "
 
 #: ../content-single.php:26 ../content.php:26
 msgid "Leave a comment"
-msgstr ""
+msgstr "اترك تعليقاً"
 
 #: ../content-single.php:26 ../content.php:26
 msgid "1 Comment"
-msgstr ""
+msgstr "تعليق واحد"
 
 #: ../content-single.php:26 ../content.php:26
 msgid "% Comments"
-msgstr ""
+msgstr "% تعليقات"
 
 #: ../content.php:3
 #, php-format
 msgid "Permalink to %s"
-msgstr ""
+msgstr "رابط إلى %s"
 
 #: ../content.php:40
 msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
-msgstr ""
+msgstr "متابعة القراءة <span class=\"meta-nav\">&rarr;</span>"
 
 #: ../footer.php:48
 #, php-format
 msgid "&copy; %d, %s. All rights are reserved."
-msgstr ""
+msgstr "&copy; %d, %s. جميع الحقوق محفوظة ."
 
 #: ../footer.php:49
 #, php-format
@@ -145,1547 +147,1573 @@ msgid ""
 "Powered <a href=\"%s\" target=\"_blank\">Dokan</a> - by <a href=\"%s\" "
 "target=\"_blank\">weDevs</a>"
 msgstr ""
+"نفذ بواسطة <a href=\"%s\" target=\"_blank\">Dokan</a> - by <a href=\"%s\" "
+"target=\"_blank\">weDevs</a>"
 
-#: ../front-page.php:46 ../includes/admin/admin.php:260
+#: ../front-page.php:46 ../includes/admin/admin.php:225
 msgid "Featured Products"
-msgstr ""
+msgstr "المنتجات المفضلة"
 
-#: ../front-page.php:67 ../includes/admin/admin.php:267
+#: ../front-page.php:67 ../includes/admin/admin.php:232
 msgid "Latest Products"
-msgstr ""
+msgstr "المنتجات المضافة حديثا"
 
-#: ../front-page.php:86 ../includes/admin/admin.php:274
+#: ../front-page.php:89 ../includes/admin/admin.php:239
 msgid "Best Selling Products"
-msgstr ""
+msgstr "أكثر المنتجات مبيعا"
 
-#: ../front-page.php:105 ../includes/admin/admin.php:281
+#: ../front-page.php:108 ../includes/admin/admin.php:246
 msgid "Top Rated Products"
-msgstr ""
+msgstr "أكثر المنتجات تقييما"
 
-#: ../functions.php:201
+#: ../functions.php:181
 msgid "Primary Menu"
-msgstr ""
+msgstr "القائمة الثانوية"
 
-#: ../functions.php:202
+#: ../functions.php:182
 msgid "Top Left"
-msgstr ""
+msgstr "أعلى يسار"
 
-#: ../functions.php:203
+#: ../functions.php:183
 msgid "Footer Menu"
-msgstr ""
+msgstr "قائمة الفوتر"
 
-#: ../functions.php:246
+#: ../functions.php:223
 msgid "General Sidebar"
-msgstr ""
+msgstr "السايد بار العام"
 
-#: ../functions.php:247
+#: ../functions.php:224
 msgid "Home Sidebar"
-msgstr ""
+msgstr "سايد بار الرئيسية"
 
-#: ../functions.php:248
+#: ../functions.php:225
 msgid "Blog Sidebar"
-msgstr ""
+msgstr "سايد بار البلوج"
 
-#: ../functions.php:249
+#: ../functions.php:226
 msgid "Header Sidebar"
-msgstr ""
+msgstr "سايد بار الهيدر"
 
-#: ../functions.php:250
+#: ../functions.php:227
 msgid "Shop Archive"
-msgstr ""
+msgstr "أرشيف المتجر"
 
-#: ../functions.php:251
+#: ../functions.php:228
 msgid "Single Product"
-msgstr ""
+msgstr "منتج واحد"
 
-#: ../functions.php:252
+#: ../functions.php:229
 msgid "Footer Sidebar - 1"
-msgstr ""
+msgstr "سايد بار الفوتر -1"
 
-#: ../functions.php:253
+#: ../functions.php:230
 msgid "Footer Sidebar - 2"
-msgstr ""
+msgstr "سايد بار الفوتر - 2"
 
-#: ../functions.php:254
+#: ../functions.php:231
 msgid "Footer Sidebar - 3"
-msgstr ""
+msgstr "سايد بار الفوتر - 3"
 
-#: ../functions.php:255
+#: ../functions.php:232
 msgid "Footer Sidebar - 4"
-msgstr ""
+msgstr "سايد بار الفوتر - 4"
 
-#: ../functions.php:343
+#: ../functions.php:310
 msgid "Available"
-msgstr ""
+msgstr "متاح"
 
-#: ../functions.php:344
+#: ../functions.php:311
 msgid "Not Available"
-msgstr ""
+msgstr "غير متاح"
 
-#: ../functions.php:450 ../includes/admin/admin.php:65
+#: ../functions.php:409 ../includes/admin/admin.php:65
 msgid "Dokan"
-msgstr ""
+msgstr "دكان"
 
-#: ../functions.php:459 ../includes/admin/admin.php:66
+#: ../functions.php:418 ../includes/admin/admin.php:66
 #: ../includes/admin/dashboard.php:96
 msgid "Dokan Dashboard"
-msgstr ""
+msgstr "لوحة دكان"
 
-#: ../functions.php:466 ../classes/installer.php:122
-#: ../includes/template-tags.php:335 ../includes/admin/admin.php:59
-#: ../includes/admin/admin.php:67 ../includes/admin/admin.php:339
+#: ../functions.php:425 ../classes/installer.php:122
+#: ../includes/template-tags.php:326 ../includes/admin/admin.php:59
+#: ../includes/admin/admin.php:67 ../includes/admin/admin.php:304
 #: ../includes/admin/dashboard.php:72
 msgid "Withdraw"
-msgstr ""
+msgstr "السحب"
 
-#: ../functions.php:473 ../includes/admin/admin.php:68
+#: ../functions.php:432 ../includes/admin/admin.php:68
 msgid "All Sellers"
-msgstr ""
+msgstr "كافة المشترين"
 
-#: ../functions.php:480 ../includes/admin/admin.php:69
+#: ../functions.php:439 ../includes/admin/admin.php:69
 msgid "Earning Reports"
-msgstr ""
+msgstr "تقارير الربح"
 
-#: ../functions.php:487 ../classes/installer.php:128
-#: ../includes/template-tags.php:340 ../includes/admin/admin.php:74
-#: ../includes/admin/admin.php:345
+#: ../functions.php:446 ../classes/installer.php:128
+#: ../includes/template-tags.php:331 ../includes/admin/admin.php:74
+#: ../includes/admin/admin.php:310
 msgid "Settings"
-msgstr ""
+msgstr "الإعدادات"
 
-#: ../functions.php:523
+#: ../functions.php:482
 #, php-format
 msgid "Page %s"
-msgstr ""
+msgstr "الصفحة %s"
 
 #: ../header.php:3
 #, php-format
 msgid ""
 "Please install <a href=\"%s\"><strong>WooCommerce</strong></a> plugin first"
-msgstr ""
+msgstr "الرجاء تحميل محلق <a href=\"%s\"><strong>WooCommerce</strong></a> أولا"
 
-#: ../header.php:41 ../header.php:92
+#: ../header.php:39 ../header.php:145
 msgid "Toggle navigation"
-msgstr ""
+msgstr "قائمة Toggle "
 
-#: ../header.php:87
+#: ../header.php:60
+#, php-format
+msgid "Cart %s"
+msgstr "سلة المشتريات %s"
+
+#: ../header.php:78
+msgid "Seller Dashboard"
+msgstr "لوحة البائع"
+
+#: ../header.php:81
+msgid "Visit your store"
+msgstr "معاينة متجرك"
+
+#: ../header.php:97 ../classes/installer.php:136
+#: ../includes/admin/admin.php:316
+msgid "My Orders"
+msgstr "طلباتي"
+
+#: ../header.php:98
+msgid "My Account"
+msgstr "حسابي"
+
+#: ../header.php:99
+msgid "Edit Account"
+msgstr "تعديل حسابي"
+
+#: ../header.php:101 ../templates/orders/order-details.php:110
+#: ../woocommerce/order/order-details.php:123
+msgid "Billing Address"
+msgstr "معلومات الدفع"
+
+#: ../header.php:102 ../templates/orders/order-details.php:119
+#: ../woocommerce/order/order-details.php:138
+msgid "Shipping Address"
+msgstr "معلومات الشحن"
+
+#: ../header.php:109
+msgid "Log in"
+msgstr "دخول"
+
+#: ../header.php:110
+msgid "Sign Up"
+msgstr "تسجيل"
+
+#: ../header.php:140
 msgid "Menu"
-msgstr ""
+msgstr "قائمة"
 
-#: ../header.php:88
+#: ../header.php:141
 msgid "Skip to content"
-msgstr ""
+msgstr "عودة إلى المحتوى"
 
-#: ../header.php:95
+#: ../header.php:148
 msgid "Home"
-msgstr ""
+msgstr "الرئيسية"
 
 #: ../no-results.php:14
 msgid "Nothing Found"
-msgstr ""
+msgstr "لم يتم العثور على شيئ"
 
 #: ../no-results.php:20
 #, php-format
 msgid ""
 "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr ""
+msgstr "هل انت مستعد لنشر مشاركاتك الأولى ؟ <a href=\"%1$s\">إبدأ من هنا</a>."
 
 #: ../no-results.php:24
 msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
 "different keywords."
 msgstr ""
+"نأسف , لا توجد مطابفات لنتائج عملية بحثك . الرجاء المحاولة مرة أخرى باستخدام "
+"كلمات أخرى ."
 
 #: ../no-results.php:34
 msgid ""
 "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
 "searching can help."
-msgstr ""
+msgstr "يبدو أننا لم نجد ما تبحث عنه , قد تكون عملية البحث مجدية لك"
 
 #: ../search.php:17
 #, php-format
 msgid "Search Results for: %s"
-msgstr ""
+msgstr "نتائج البحث عن : %s"
 
 #: ../searchform.php:11
 msgid "Search &hellip;"
-msgstr ""
+msgstr "بحث  &hellip;"
 
-#: ../searchform.php:14 ../includes/wc-functions.php:1665
+#: ../searchform.php:14 ../includes/wc-functions.php:1575
 #: ../templates/edit/options.php:23
 msgid "Search"
-msgstr ""
+msgstr "بحث"
 
 #: ../sidebar-blog.php:13 ../sidebar-product-single.php:12
 #: ../sidebar-shop.php:13 ../sidebar-store.php:10 ../sidebar.php:13
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "سايد بار Toggle "
 
 #: ../sidebar-blog.php:33 ../sidebar-home.php:27
 #: ../sidebar-product-single.php:32 ../sidebar-shop.php:33 ../sidebar.php:33
 msgid "Meta"
-msgstr ""
+msgstr "الوسوم"
 
-#: ../sidebar-store.php:24
+#: ../sidebar-store.php:21
 msgid "Store Location"
-msgstr ""
+msgstr "موقع المتجر"
+
+#: ../sidebar-store.php:58
+msgid "Contact Seller"
+msgstr "مراسلة البائع"
 
 #: ../sidebar-store.php:64
-msgid "Contact Seller"
-msgstr ""
+msgid "Your Name"
+msgstr "اسمك"
+
+#: ../sidebar-store.php:67
+msgid "you@example.com"
+msgstr "you@example.com"
 
 #: ../sidebar-store.php:70
-msgid "Your Name"
-msgstr ""
-
-#: ../sidebar-store.php:73
-msgid "you@example.com"
-msgstr ""
-
-#: ../sidebar-store.php:76
 msgid "Type your messsage..."
-msgstr ""
+msgstr "اكتب رسالتك ..."
 
-#: ../sidebar-store.php:83
+#: ../sidebar-store.php:77
 msgid "Send Message"
-msgstr ""
+msgstr "ارسال الرسالة"
 
 #: ../store-reviews.php:117
 msgid "Seller Review"
-msgstr ""
+msgstr "مراجعة البائع"
 
 #: ../store-reviews.php:122 ../classes/template-reviews.php:353
 msgid "No Result Found"
-msgstr ""
+msgstr "لا توجد نتائج"
 
 #: ../store-reviews.php:140 ../classes/template-reviews.php:434
 #, php-format
 msgid "Rated %d out of 5"
-msgstr ""
+msgstr "قيَم  %d من 5"
 
 #: ../store-reviews.php:141 ../classes/template-reviews.php:435
 msgid "out of 5"
-msgstr ""
+msgstr "من 5"
 
-#: ../store.php:127
+#: ../store.php:125
 msgid "No products were found of this seller!"
-msgstr ""
-
-#: ../update-account.php:28
-msgid "Update account to Seller"
-msgstr ""
-
-#: ../update-account.php:35 ../includes/template-tags.php:454
-msgid "First Name"
-msgstr ""
-
-#: ../update-account.php:40 ../includes/template-tags.php:459
-msgid "Last Name"
-msgstr ""
-
-#: ../update-account.php:46 ../includes/template-tags.php:465
-#: ../includes/admin/sellers.php:17 ../includes/admin/sellers.php:92
-msgid "Shop Name"
-msgstr ""
-
-#: ../update-account.php:51 ../includes/template-tags.php:470
-msgid "Shop URL"
-msgstr ""
-
-#: ../update-account.php:58 ../classes/admin-user-profile.php:85
-#: ../classes/template-settings.php:358 ../includes/template-tags.php:477
-msgid "Address"
-msgstr ""
-
-#: ../update-account.php:63 ../classes/admin-user-profile.php:92
-#: ../includes/template-tags.php:482 ../includes/admin/sellers.php:21
-#: ../includes/admin/sellers.php:96 ../templates/sellers.php:62
-msgid "Phone"
-msgstr ""
-
-#: ../update-account.php:70 ../templates/orders/order-details.php:169
-msgid "Update"
-msgstr ""
+msgstr "لا توجد منتجات لهذا البائع !"
 
 #: ../classes/admin-user-profile.php:53
 msgid "Dokan Options"
-msgstr ""
+msgstr "إعدادات دكان"
 
 #: ../classes/admin-user-profile.php:58
 msgid "Banner"
-msgstr ""
+msgstr "البانر"
 
-#: ../classes/admin-user-profile.php:70 ../classes/template-settings.php:212
+#: ../classes/admin-user-profile.php:70 ../classes/template-settings.php:210
 msgid "Upload banner"
-msgstr ""
+msgstr "تحميل بانر"
 
-#: ../classes/admin-user-profile.php:71 ../classes/template-settings.php:213
+#: ../classes/admin-user-profile.php:71 ../classes/template-settings.php:211
 msgid "(Upload a banner for your store. Banner size is (825x300) pixel. )"
-msgstr ""
+msgstr "(تحميل بانر لمتجرك . حجم البانر يجب أن يكون (825x300) بكسل)"
 
 #: ../classes/admin-user-profile.php:78
 msgid "Store name"
-msgstr ""
+msgstr "اسم المتجر"
+
+#: ../classes/admin-user-profile.php:85 ../classes/template-settings.php:355
+#: ../includes/template-tags.php:398
+msgid "Address"
+msgstr "العنوان"
+
+#: ../classes/admin-user-profile.php:92 ../includes/template-tags.php:403
+#: ../includes/admin/sellers.php:21 ../includes/admin/sellers.php:96
+#: ../templates/sellers.php:62
+msgid "Phone"
+msgstr "الهاتف"
 
 #: ../classes/admin-user-profile.php:99
 msgid "Twitter Profile"
-msgstr ""
+msgstr "حساب تويتر"
 
 #: ../classes/admin-user-profile.php:106
 msgid "Facebook Profile"
-msgstr ""
+msgstr "حساب فيس بوك"
 
 #: ../classes/admin-user-profile.php:113
 msgid "Google Plus Profile"
-msgstr ""
+msgstr "حساب جوجل بلس"
 
 #: ../classes/admin-user-profile.php:120
 msgid "Linkedin Profile"
-msgstr ""
+msgstr "حساب لينكد ان"
 
 #: ../classes/admin-user-profile.php:127
 msgid "YouTube Profile"
-msgstr ""
+msgstr "حساب يوتيوب"
 
 #: ../classes/admin-user-profile.php:134
 msgid "Selling"
-msgstr ""
+msgstr "المبيعات"
 
 #: ../classes/admin-user-profile.php:139
 msgid "Enable Selling"
-msgstr ""
+msgstr "تفعيل المبيعات"
 
 #: ../classes/admin-user-profile.php:142
 msgid "Enable or disable product selling capability"
-msgstr ""
+msgstr "تمكين أو تعطيل قدرة بيع المنتج"
 
 #: ../classes/admin-user-profile.php:147
 msgid "Publishing"
-msgstr ""
+msgstr "النشر"
 
 #: ../classes/admin-user-profile.php:152
 msgid "Publish product directly"
-msgstr ""
+msgstr "نشر المنتج مباشرة"
 
 #: ../classes/admin-user-profile.php:155
 msgid "Instead going pending, products will be published directly"
-msgstr ""
+msgstr "بدلا من تعليق المنتجات , سيتم نشر المنتجات مباشرة"
 
-#: ../classes/admin-user-profile.php:160 ../includes/admin/admin.php:207
+#: ../classes/admin-user-profile.php:160 ../includes/admin/admin.php:172
 msgid "Seller Percentage"
-msgstr ""
+msgstr "نسبة البائع"
 
 #: ../classes/admin-user-profile.php:164
 msgid "How much amount (%) will get from each order"
-msgstr ""
+msgstr "(%) المبلغ الذي سيحصل عليه من عملية طلب "
 
-#: ../classes/ajax.php:110 ../classes/ajax.php:144
+#: ../classes/ajax.php:102 ../classes/ajax.php:136
 msgid "You do not have sufficient permissions to access this page."
-msgstr ""
+msgstr "لا توجد لديك صلاحيات لمعاينة هذه الصفحة ."
 
-#: ../classes/ajax.php:114 ../classes/ajax.php:148
+#: ../classes/ajax.php:106 ../classes/ajax.php:140
 msgid "You have taken too long. Please go back and retry."
-msgstr ""
+msgstr " قد أخذت وقتا طويلا. يرجى العودة وإعادة المحاولة."
 
-#: ../classes/ajax.php:123 ../classes/ajax.php:157
+#: ../classes/ajax.php:115 ../classes/ajax.php:149
 msgid "You do not have permission to change this order"
-msgstr ""
+msgstr "ليس لديك صلاحية لتعديل هذا الطلب"
 
-#: ../classes/ajax.php:208
+#: ../classes/ajax.php:200
 #, php-format
 msgid "File %d"
-msgstr ""
+msgstr "ملف %d"
 
-#: ../classes/ajax.php:258 ../includes/woo-views/variation-admin-html.php:120
+#: ../classes/ajax.php:250 ../includes/woo-views/variation-admin-html.php:120
 #: ../includes/woo-views/variation-admin-html.php:133
 msgid "Same as parent"
-msgstr ""
+msgstr "نفس الأصل"
 
-#: ../classes/ajax.php:259 ../includes/wc-functions.php:26
+#: ../classes/ajax.php:251 ../includes/wc-functions.php:26
 msgid "Standard"
-msgstr ""
+msgstr "نموذج"
 
-#: ../classes/ajax.php:495 ../includes/template-tags.php:226
+#: ../classes/ajax.php:487 ../includes/template-tags.php:218
 msgid "Something went wrong!"
-msgstr ""
+msgstr "يبدو أن هناك خطأ ما"
 
-#: ../classes/ajax.php:503
+#: ../classes/ajax.php:495
 msgid "Email sent successfully!"
-msgstr ""
+msgstr "تم إرسال البريد بنجاح"
 
 #: ../classes/customizer.php:19
 msgid "Theme Logo"
-msgstr ""
+msgstr "الشعار"
 
 #: ../classes/customizer.php:21
 msgid "Upload your logo to replace the default Logo (dimension : 180 X 50)"
-msgstr ""
+msgstr "قم برفع شعار للموقع لإستبداله بالإفتراضي بمقاسات 180X 50"
 
 #: ../classes/customizer.php:27
 msgid "Upload Logo"
-msgstr ""
+msgstr "رفع الشعار"
 
 #: ../classes/customizer.php:39
 msgid "Link"
-msgstr ""
+msgstr "الرابط"
 
 #: ../classes/customizer.php:52
 msgid "Link hover"
-msgstr ""
+msgstr "تظليل الرابط"
 
 #: ../classes/customizer.php:65
 msgid "Header Background"
-msgstr ""
+msgstr "خلفية الهيدر"
 
 #: ../classes/customizer.php:78
 msgid "Navigation Background"
-msgstr ""
+msgstr "خلفية القوائم"
 
 #: ../classes/customizer.php:91
 msgid "Navigation Link"
-msgstr ""
+msgstr "رابط القوائم"
 
 #: ../classes/customizer.php:103
 msgid "Navigation Link Hover"
-msgstr ""
+msgstr "تظليل رابط القوائم"
 
 #: ../classes/customizer.php:116
 msgid "Footer Background"
-msgstr ""
+msgstr "خلفية الفوتر"
 
 #: ../classes/customizer.php:129
 msgid "Copy Container Background"
-msgstr ""
+msgstr "نسخ محتوى الخلفية"
 
 #: ../classes/customizer.php:142
 msgid "Footer text"
-msgstr ""
+msgstr "نص الفوتر"
 
 #: ../classes/customizer.php:155
 msgid "Sidebar widget header"
-msgstr ""
+msgstr "عنوان جوانب الهيدر"
 
 #: ../classes/customizer.php:168
 msgid "Footer widget header"
-msgstr ""
+msgstr "عنوان جوانب الفوتر"
 
 #: ../classes/customizer.php:182
 msgid "Footer Widget link"
-msgstr ""
+msgstr "رابط جوانب الفوتر"
 
 #: ../classes/customizer.php:194
 msgid "Footer Widget link hover"
-msgstr ""
+msgstr "هوفر رابط جوانب الفوتر"
 
 #: ../classes/email.php:107
 #, php-format
 msgid "\"%s\" sent you a message from your \"%s\" store"
-msgstr ""
+msgstr "\"%s\" أرسل لك رسالة من متجر \"%s\" "
 
 #: ../classes/email.php:167
 #, php-format
 msgid "[%s] New Withdraw Request"
-msgstr ""
+msgstr "[%s] طلب سحب جديد"
 
 #: ../classes/email.php:188
 #, php-format
 msgid "[%s] Your Withdraw Request has been approved"
-msgstr ""
+msgstr "[%s] تم الموافقة على طلب السحب الخاص بك"
 
 #: ../classes/email.php:210
 #, php-format
 msgid "[%s] Your Withdraw Request has been cancelled"
-msgstr ""
+msgstr "[%s] تم إلغاء طلب السحب الخاص بك"
 
 #: ../classes/email.php:248
 #, php-format
 msgid "[%s] New Seller Registered"
-msgstr ""
+msgstr "[%s] تسجيل بائع جديد"
 
 #: ../classes/email.php:300
 #, php-format
 msgid "[%s] New Product Added"
-msgstr ""
+msgstr "[%s] أضاف منتج جديد"
 
 #: ../classes/email.php:341
 #, php-format
 msgid "[%s] Your product has been approved!"
-msgstr ""
+msgstr "[%s] تم الموافقة على المنتج الخاص بك"
 
 #: ../classes/installer.php:51 ../includes/admin-functions.php:52
 #: ../includes/admin-functions.php:545 ../includes/admin-functions.php:558
 #: ../includes/wc-template.php:19 ../includes/admin/reports.php:119
 #: ../includes/admin/reports.php:129
 msgid "Seller"
-msgstr ""
+msgstr "بائع"
 
-#: ../classes/installer.php:80 ../includes/template-tags.php:305
-#: ../includes/admin/admin.php:66 ../includes/admin/admin.php:297
+#: ../classes/installer.php:80 ../includes/template-tags.php:296
+#: ../includes/admin/admin.php:66 ../includes/admin/admin.php:262
 msgid "Dashboard"
-msgstr ""
+msgstr "لوحة التحكم"
 
-#: ../classes/installer.php:86 ../includes/template-tags.php:310
+#: ../classes/installer.php:86 ../includes/template-tags.php:301
 #: ../includes/admin/sellers.php:19 ../includes/admin/sellers.php:55
 #: ../includes/admin/sellers.php:94 ../templates/dashboard.php:164
 msgid "Products"
-msgstr ""
+msgstr "المنتجات"
 
 #: ../classes/installer.php:92
 msgid "Create Product"
-msgstr ""
+msgstr "إضافة منتج جديد"
 
-#: ../classes/installer.php:98 ../includes/template-tags.php:315
-#: ../includes/admin/admin.php:315 ../includes/admin/sellers.php:56
+#: ../classes/installer.php:98 ../includes/template-tags.php:306
+#: ../includes/admin/admin.php:280 ../includes/admin/sellers.php:56
 msgid "Orders"
-msgstr ""
+msgstr "الطلبات"
 
-#: ../classes/installer.php:104 ../includes/template-tags.php:320
-#: ../includes/admin/admin.php:321 ../templates/orders/order-details.php:85
+#: ../classes/installer.php:104 ../includes/template-tags.php:311
+#: ../includes/admin/admin.php:286 ../templates/orders/order-details.php:85
 msgid "Coupons"
-msgstr ""
+msgstr "كبونات الخصم"
 
-#: ../classes/installer.php:110 ../includes/template-tags.php:325
-#: ../includes/admin/admin.php:327 ../includes/admin/reports.php:7
+#: ../classes/installer.php:110 ../includes/template-tags.php:316
+#: ../includes/admin/admin.php:292 ../includes/admin/reports.php:7
 msgid "Reports"
-msgstr ""
+msgstr "التقارير"
 
-#: ../classes/installer.php:116 ../includes/template-tags.php:330
-#: ../includes/admin/admin.php:333 ../templates/edit/options.php:10
+#: ../classes/installer.php:116 ../includes/template-tags.php:321
+#: ../includes/admin/admin.php:298 ../templates/edit/options.php:10
 msgid "Reviews"
-msgstr ""
-
-#: ../classes/installer.php:136 ../includes/template-tags.php:560
-#: ../includes/admin/admin.php:351
-msgid "My Orders"
-msgstr ""
+msgstr "المراجعات"
 
 #: ../classes/slider.php:47
 msgid "Slides"
-msgstr ""
+msgstr "السلايدات"
 
 #: ../classes/slider.php:48
 msgid "Slider Options"
-msgstr ""
+msgstr "إعدادات السلايدر"
 
 #: ../classes/slider.php:68 ../classes/slider.php:79 ../classes/slider.php:80
-#: ../includes/admin/admin.php:70 ../includes/admin/admin.php:246
+#: ../includes/admin/admin.php:70 ../includes/admin/admin.php:211
 msgid "Slider"
-msgstr ""
+msgstr "السلايدر"
 
 #: ../classes/slider.php:81
 msgid "Dokan Slider"
-msgstr ""
+msgstr "سلايدر الدكان"
 
 #: ../classes/slider.php:82
 msgid "Add Slider"
-msgstr ""
+msgstr "إضافة سلايدر"
 
 #: ../classes/slider.php:83
 msgid "Add New Slider"
-msgstr ""
+msgstr "إضافة سلايدر جديد"
 
 #: ../classes/slider.php:85
 msgid "Edit Slider"
-msgstr ""
+msgstr "تعديل سلايدر"
 
 #: ../classes/slider.php:86
 msgid "New Slider"
-msgstr ""
+msgstr "سلايدر جديد"
 
 #: ../classes/slider.php:87 ../classes/slider.php:88
 msgid "View Slider"
-msgstr ""
+msgstr "عرض السلايدرات"
 
 #: ../classes/slider.php:89
 msgid "Search Slider"
-msgstr ""
+msgstr "بحث عن سلايدر"
 
 #: ../classes/slider.php:90
 msgid "No Slider Found"
-msgstr ""
+msgstr "لا توجد سلايدرات"
 
 #: ../classes/slider.php:91
 msgid "No Slider found in trash"
-msgstr ""
+msgstr "لا توجد سلايدرات في شلة المهملات"
 
 #: ../classes/slider.php:92
 msgid "Parent Slider"
-msgstr ""
+msgstr "سلايدرات فرعية"
 
 #: ../classes/slider.php:110
 msgid "Effect"
-msgstr ""
+msgstr "تأثير"
 
 #: ../classes/slider.php:119
 msgid "Slide Speed"
-msgstr ""
+msgstr "سرعة السلايدر"
 
 #: ../classes/slider.php:123
 msgid "Pagination"
-msgstr ""
+msgstr "الصفحات"
 
 #: ../classes/slider.php:126 ../classes/slider.php:135
 #: ../includes/reports.php:333 ../includes/reports.php:700
 #: ../includes/reports.php:804 ../includes/admin/reports.php:49
 #: ../includes/admin/reports.php:63
 msgid "Show"
-msgstr ""
+msgstr "إظهار"
 
 #: ../classes/slider.php:127 ../classes/slider.php:136
 msgid "Hide"
-msgstr ""
+msgstr "إخفاء"
 
 #: ../classes/slider.php:132
 msgid "Direction Navigation"
-msgstr ""
+msgstr "إتجاه القائمة"
 
 #: ../classes/slider.php:141
 msgid "Sliding Direction"
-msgstr ""
+msgstr "إتجاه السلايد"
 
 #: ../classes/slider.php:144
 msgid "horizontal"
-msgstr ""
+msgstr "أفقي"
 
 #: ../classes/slider.php:145
 msgid "vertical"
-msgstr ""
+msgstr "رأسي"
 
 #: ../classes/slider.php:150
 msgid "Touch Swipe"
-msgstr ""
+msgstr "تلمس انتقاد"
 
 #: ../classes/slider.php:153 ../classes/slider.php:163
 #: ../classes/slider.php:172 ../classes/slider.php:181
 msgid "Yes"
-msgstr ""
+msgstr "نعم"
 
 #: ../classes/slider.php:154 ../classes/slider.php:162
 #: ../classes/slider.php:171 ../classes/slider.php:180
 msgid "No"
-msgstr ""
+msgstr "لا"
 
 #: ../classes/slider.php:159
 msgid "Randomize"
-msgstr ""
+msgstr "عشوائي"
 
 #: ../classes/slider.php:168
 msgid "Pause on Hover"
-msgstr ""
+msgstr "توقف عند التأشير"
 
 #: ../classes/slider.php:177
 msgid "Pause/Play"
-msgstr ""
+msgstr "إيقاف/تشغيل"
 
 #: ../classes/slider.php:195
 msgid "Add Slide"
-msgstr ""
+msgstr "إضافة سلايد"
 
 #: ../classes/slider.php:339
 msgid "Slide"
-msgstr ""
+msgstr "السلايد"
 
 #: ../classes/slider.php:342
 msgid "Slide Type"
-msgstr ""
+msgstr "نوع السلايد"
 
 #: ../classes/slider.php:345
 msgid "Text with Image"
-msgstr ""
+msgstr "النص مع الصورة"
 
 #: ../classes/slider.php:346
 msgid "Full Image"
-msgstr ""
+msgstr "صورة كاملة"
 
 #: ../classes/slider.php:347
 msgid "Full Video"
-msgstr ""
+msgstr "فيديو "
 
 #: ../classes/slider.php:352
 msgid "Title Text"
-msgstr ""
+msgstr "نص العنوان"
 
 #: ../classes/slider.php:358
 msgid "Detail Text"
-msgstr ""
+msgstr "نص التفاصيل"
 
 #: ../classes/slider.php:364
 msgid "Slide Image"
-msgstr ""
+msgstr "صورة السلايد"
 
 #: ../classes/slider.php:376
 msgid "Video Embed Code"
-msgstr ""
+msgstr "كود إدراج الفيديو"
 
 #: ../classes/slider.php:382
 msgid "Slide Link Url"
-msgstr ""
+msgstr "رابط السلايد"
 
 #: ../classes/slider.php:388
 msgid "Open Link"
-msgstr ""
+msgstr "فتح الرابط"
 
 #: ../classes/slider.php:391
 msgid "Open link in same window"
-msgstr ""
+msgstr "في نس النافذة"
 
 #: ../classes/slider.php:392
 msgid "Open link in new window"
-msgstr ""
+msgstr "في نافذة جديدة"
 
 #: ../classes/slider.php:398 ../includes/woo-views/variation-admin-html.php:6
 #: ../templates/edit/attributes.php:62
 msgid "Remove"
-msgstr ""
+msgstr "إزالة"
 
-#: ../classes/slider.php:480
+#: ../classes/slider.php:479
 msgid "Read More..."
-msgstr ""
+msgstr "قراءة المزيد.."
 
 #: ../classes/template-coupons.php:31 ../classes/template-coupons.php:46
 #: ../classes/template-coupons.php:76 ../classes/template-coupons.php:351
 #: ../classes/template-settings.php:24 ../classes/template-settings.php:49
 #: ../classes/template-withdraw.php:158 ../classes/template-withdraw.php:178
 msgid "Are you cheating?"
-msgstr ""
+msgstr "هل انت غشاش ؟"
 
 #: ../classes/template-coupons.php:52
 msgid "Please enter the coupon title"
-msgstr ""
+msgstr "الرجاء إدخال عنوان الكوبون"
 
 #: ../classes/template-coupons.php:56
 msgid "Please enter the amount"
-msgstr ""
+msgstr "الرجاء إدخال القيمة"
 
 #: ../classes/template-coupons.php:60
 msgid "Please specify any products"
-msgstr ""
+msgstr "الرجاء تحديد أي منتج"
 
 #: ../classes/template-coupons.php:155
 msgid "Coupon has been deleted successfully!"
-msgstr ""
+msgstr "تم حذف الكوبون بنجاح"
 
 #: ../classes/template-coupons.php:164
 msgid "Coupon has been saved successfully!"
-msgstr ""
+msgstr "تم إضافة الكووبن بنجاح"
 
 #: ../classes/template-coupons.php:173
 msgid "Coupon has been updated successfully!"
-msgstr ""
+msgstr "تم تحديث الكوبون بنجاح"
 
 #: ../classes/template-coupons.php:222
 msgid "Code"
-msgstr ""
+msgstr "الكود"
 
 #: ../classes/template-coupons.php:223
 msgid "Coupon type"
-msgstr ""
+msgstr "نوع الكوبون"
 
 #: ../classes/template-coupons.php:224
 msgid "Coupon amount"
-msgstr ""
+msgstr "قيمة الكوبون"
 
 #: ../classes/template-coupons.php:225
 msgid "Product IDs"
-msgstr ""
+msgstr "آي دي المنتج"
 
 #: ../classes/template-coupons.php:226
 msgid "Usage / Limit"
-msgstr ""
+msgstr "الإستخدام / الحد"
 
 #: ../classes/template-coupons.php:227
 msgid "Expiry date"
-msgstr ""
+msgstr "تاريخ الإنتهاء"
 
 #: ../classes/template-coupons.php:247
 msgid "Are you sure want to delete"
-msgstr ""
+msgstr "هل أنت متأكد من أنك تريد حذف"
 
 #: ../classes/template-coupons.php:247
 msgid "delete"
-msgstr ""
+msgstr "حذف"
 
 #: ../classes/template-coupons.php:257
 msgid "Fixed Amount"
-msgstr ""
+msgstr "مبلغ ثابت"
 
 #: ../classes/template-coupons.php:259
 msgid "Percent"
-msgstr ""
+msgstr "نسبة"
 
 #: ../classes/template-coupons.php:289
 #, php-format
 msgid "%s / %s"
-msgstr ""
+msgstr "%s / %s"
 
 #: ../classes/template-coupons.php:291
 #, php-format
 msgid "%s / &infin;"
-msgstr ""
+msgstr "%s / &infin;"
 
 #: ../classes/template-coupons.php:314
 msgid "No coupons found!"
-msgstr ""
+msgstr "لم يتم العثور على الكوبون"
 
 #: ../classes/template-coupons.php:327 ../classes/template-reviews.php:216
 #: ../classes/template-reviews.php:263 ../classes/template-withdraw.php:480
 #: ../includes/admin/reports.php:183
 msgid "&laquo;"
-msgstr ""
+msgstr "&laquo;"
 
 #: ../classes/template-coupons.php:328 ../classes/template-reviews.php:217
 #: ../classes/template-reviews.php:264 ../classes/template-withdraw.php:481
 #: ../includes/admin/reports.php:184
 msgid "&raquo;"
-msgstr ""
+msgstr "&raquo;"
 
 #: ../classes/template-coupons.php:347
 msgid "Create Coupon"
-msgstr ""
+msgstr "إنشاء كوبون"
 
 #: ../classes/template-coupons.php:355
 msgid "Update Coupon"
-msgstr ""
+msgstr "تحديث كوبون"
 
 #: ../classes/template-coupons.php:484
 msgid "Coupon Title"
-msgstr ""
+msgstr "عنوان الكوبون"
 
 #: ../classes/template-coupons.php:491
 msgid "Description"
-msgstr ""
+msgstr "الوصف"
 
 #: ../classes/template-coupons.php:498
 msgid "Discount Type"
-msgstr ""
+msgstr "نوع الخصم"
 
 #: ../classes/template-coupons.php:502
 msgid "Product Discount"
-msgstr ""
+msgstr "المنتج المراد تنفيذ الخصم عليه"
 
 #: ../classes/template-coupons.php:503
 msgid "Product % Discount"
-msgstr ""
+msgstr "المنتج  %  الخصم"
 
 #: ../classes/template-coupons.php:509 ../classes/template-withdraw.php:351
 #: ../classes/template-withdraw.php:365 ../classes/template-withdraw.php:621
 #: ../classes/template-withdraw.php:788
 msgid "Amount"
-msgstr ""
+msgstr "القيمة"
 
 #: ../classes/template-coupons.php:516
 msgid "Email Restrictions"
-msgstr ""
+msgstr "قيود البريد الإلكتروني"
 
 #: ../classes/template-coupons.php:518
 msgid "Email restrictions"
-msgstr ""
+msgstr "قيود البريد الإلكتروني"
 
 #: ../classes/template-coupons.php:523 ../classes/template-coupons.php:525
 msgid "Usage Limit"
-msgstr ""
+msgstr "حد الإستخدام"
 
 #: ../classes/template-coupons.php:530 ../classes/template-coupons.php:532
 msgid "Expire Date"
-msgstr ""
+msgstr "تاريخ الإنتهاء"
 
-#: ../classes/template-coupons.php:550 ../includes/reports.php:707
+#: ../classes/template-coupons.php:552 ../includes/reports.php:707
 #: ../includes/reports.php:810 ../woocommerce/order/order-details.php:24
 msgid "Product"
-msgstr ""
+msgstr "المنتج"
 
-#: ../classes/template-coupons.php:571
+#: ../classes/template-coupons.php:573
 msgid "Enable Free Shipping"
-msgstr ""
+msgstr "إتاحة الشحن المجاني"
 
-#: ../classes/template-coupons.php:576
+#: ../classes/template-coupons.php:578
 msgid "Check this box if the coupon grants free shipping."
-msgstr ""
+msgstr "حدد هذا الخيار إن كانت عملية الشحن مجانية"
 
-#: ../classes/template-coupons.php:583
+#: ../classes/template-coupons.php:585
 msgid "Exclude Sale Items"
-msgstr ""
+msgstr "استبعاد عناصر بيع"
 
-#: ../classes/template-coupons.php:588
+#: ../classes/template-coupons.php:590
 msgid ""
 "Check this box if the coupon should not apply to items on sale. Per-item "
 "coupons will only work if the item is not on sale. Per-cart coupons will "
 "only work if there are no sale items in the cart."
 msgstr ""
+"التحقق من هذا المربع إذا لا ينبغي أن تنطبق القسيمة إلى البنود للبيع. ولكل "
+"بند كوبونات العمل إلا إذا كان العنصر ليس للبيع. ولكل عربة كوبونات تعمل فقط "
+"إذا لم تكن هناك بيع سلع في عربة."
 
-#: ../classes/template-coupons.php:595 ../classes/template-coupons.php:597
+#: ../classes/template-coupons.php:597 ../classes/template-coupons.php:599
 msgid "Minimum Amount"
-msgstr ""
+msgstr "الحد الأدنى للمبلغ"
 
-#: ../classes/template-coupons.php:606
+#: ../classes/template-coupons.php:608
 msgid "Exclude products"
-msgstr ""
+msgstr "استبعاد منتجات"
 
-#: ../classes/template-reviews.php:122 ../includes/theme-functions.php:659
+#: ../classes/template-reviews.php:122 ../includes/theme-functions.php:641
 msgid "Author"
-msgstr ""
+msgstr "الكاتب"
 
 #: ../classes/template-reviews.php:123
 msgid "Comment"
-msgstr ""
+msgstr "تعليق"
 
 #: ../classes/template-reviews.php:124
 msgid "Link To"
-msgstr ""
+msgstr "رابط إلى"
 
 #: ../classes/template-reviews.php:125
 msgid "Rating"
-msgstr ""
+msgstr "تقييم"
 
 #: ../classes/template-reviews.php:139
 msgid "Submit"
-msgstr ""
+msgstr "إضافة"
 
 #: ../classes/template-reviews.php:148 ../includes/admin/sellers.php:16
 #: ../includes/admin/sellers.php:91
 #: ../includes/woo-views/variation-admin-html.php:148
 #: ../templates/products-listing.php:32
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #: ../classes/template-reviews.php:152 ../includes/withdraw-functions.php:109
 #: ../includes/withdraw-functions.php:133 ../includes/admin/sellers.php:18
 #: ../includes/admin/sellers.php:93
 msgid "E-mail"
-msgstr ""
+msgstr "البريد الإلكتروني"
 
 #: ../classes/template-reviews.php:156
 msgid "URL"
-msgstr ""
+msgstr "الرابط"
 
 #: ../classes/template-reviews.php:170
 msgid "Close"
-msgstr ""
+msgstr "إغلاق"
 
 #: ../classes/template-reviews.php:171
 msgid "Update Comment"
-msgstr ""
+msgstr "تحديث التعليق"
 
 #: ../classes/template-reviews.php:284 ../classes/template-reviews.php:289
 #: ../classes/template-reviews.php:293 ../classes/template-reviews.php:297
 msgid "-None-"
-msgstr ""
+msgstr "- لا يوجد -"
 
 #: ../classes/template-reviews.php:285
 msgid "Mark Approve"
-msgstr ""
+msgstr "تحديد كمقبول"
 
 #: ../classes/template-reviews.php:286 ../classes/template-reviews.php:299
 msgid "Mark Spam"
-msgstr ""
+msgstr "تحديد كسبام"
 
 #: ../classes/template-reviews.php:287 ../classes/template-reviews.php:300
 msgid "Mark Trash"
-msgstr ""
+msgstr "تحديد إلى سلة المهملات"
 
 #: ../classes/template-reviews.php:290
 msgid "Mark Not Spam"
-msgstr ""
+msgstr "تحديد غير سبام"
 
 #: ../classes/template-reviews.php:291 ../classes/template-reviews.php:295
 msgid "Delete permanently"
-msgstr ""
+msgstr "حذف بشكل نهائي"
 
 #: ../classes/template-reviews.php:294
 msgid "Resore"
-msgstr ""
+msgstr "إستعادة"
 
 #: ../classes/template-reviews.php:298 ../classes/template-withdraw.php:455
 #: ../classes/template-withdraw.php:460
 msgid "Mark Pending"
-msgstr ""
+msgstr "تحديد في إنتظار المراجعة"
 
 #: ../classes/template-reviews.php:408
 msgid "Submitted on "
-msgstr ""
+msgstr "إضافة إلى"
 
 #: ../classes/template-reviews.php:418
 msgid "View Comment"
-msgstr ""
+msgstr "مشاهدة التعليق"
 
 #: ../classes/template-reviews.php:451 ../classes/template-reviews.php:470
 msgid "Approve"
-msgstr ""
+msgstr "قبول"
 
 #: ../classes/template-reviews.php:452 ../classes/template-reviews.php:474
 #: ../templates/dashboard.php:137
 msgid "Spam"
-msgstr ""
+msgstr "سبام"
 
 #: ../classes/template-reviews.php:453 ../classes/template-reviews.php:475
 #: ../templates/dashboard.php:142
 msgid "Trash"
-msgstr ""
+msgstr "سلة المهملات"
 
 #: ../classes/template-reviews.php:457
 msgid "Not Spam"
-msgstr ""
+msgstr "ليس بريد مزعج"
 
 #: ../classes/template-reviews.php:458 ../classes/template-reviews.php:463
 #: ../templates/products-listing.php:79
 msgid "Delete Permanently"
-msgstr ""
+msgstr "حذف بشكل دائم"
 
 #: ../classes/template-reviews.php:462
 msgid "Restore"
-msgstr ""
+msgstr "استعادة"
 
 #: ../classes/template-reviews.php:468
 msgid "Unapprove"
-msgstr ""
+msgstr "لم تتم الموافقة عليه"
 
 #: ../classes/template-reviews.php:473
 msgid "Quick Edit"
-msgstr ""
+msgstr "تعديل سريع"
 
 #: ../classes/template-reviews.php:556 ../templates/dashboard.php:127
 msgid "All"
-msgstr ""
+msgstr "الكل"
 
 #: ../classes/template-reviews.php:558
 msgid "Pending ("
-msgstr ""
+msgstr "في انتظار ("
 
 #: ../classes/template-reviews.php:558 ../classes/template-reviews.php:561
 #: ../classes/template-reviews.php:564
 msgid ")"
-msgstr ""
+msgstr ")"
 
 #: ../classes/template-reviews.php:561
 msgid "Spam ("
-msgstr ""
+msgstr "سبام ("
 
 #: ../classes/template-reviews.php:564
 msgid "Trash ("
-msgstr ""
+msgstr "سلة المهملات ("
 
 #: ../classes/template-settings.php:38
 msgid "Your information has been saved successfully"
-msgstr ""
+msgstr "تم حفظ معلوماتك بنجاح"
 
 #: ../classes/template-settings.php:57
 msgid "Dokan name required"
-msgstr ""
+msgstr "اسم الدكان مطلوب"
 
 #: ../classes/template-settings.php:63
 msgid "Dokan type required"
-msgstr ""
+msgstr "نوع الدكان مطلوب"
 
 #: ../classes/template-settings.php:70
 msgid "Invalid email"
-msgstr ""
+msgstr "بريد خاطئ"
 
 #: ../classes/template-settings.php:147
 msgid "Your profile has been updated successfully!"
-msgstr ""
+msgstr "تم تحديث الملف الشخصي  بنجاح"
 
-#: ../classes/template-settings.php:220
+#: ../classes/template-settings.php:217
 msgid "Store Name"
-msgstr ""
+msgstr "اسم المتجر"
 
-#: ../classes/template-settings.php:228
+#: ../classes/template-settings.php:225
 msgid "Profile Picture"
-msgstr ""
+msgstr "صورة الملف الشخصي"
 
-#: ../classes/template-settings.php:240
+#: ../classes/template-settings.php:237
 msgid "Upload Photo"
-msgstr ""
+msgstr "رفع صورة"
 
-#: ../classes/template-settings.php:246
+#: ../classes/template-settings.php:243
 msgid "Social Profile"
-msgstr ""
+msgstr "الملف الاجتماعي"
 
-#: ../classes/template-settings.php:298 ../classes/template-withdraw.php:756
+#: ../classes/template-settings.php:295 ../classes/template-withdraw.php:756
 msgid "Payment Method"
-msgstr ""
+msgstr "طرق الدفع"
 
-#: ../classes/template-settings.php:339
+#: ../classes/template-settings.php:336
 msgid "Phone No"
-msgstr ""
+msgstr "رقم الهاتف"
 
-#: ../classes/template-settings.php:346
+#: ../classes/template-settings.php:343
 msgid "Email"
-msgstr ""
+msgstr "البريد الإلكتروني"
 
-#: ../classes/template-settings.php:351
+#: ../classes/template-settings.php:348
 msgid "Show email address in store"
-msgstr ""
+msgstr "عرض البريد في المتجر"
 
-#: ../classes/template-settings.php:365
+#: ../classes/template-settings.php:362
 msgid "Map"
-msgstr ""
+msgstr "الخريطة"
 
-#: ../classes/template-settings.php:372
+#: ../classes/template-settings.php:369
 msgid "Type an address to find"
-msgstr ""
+msgstr "ضع عنوان للبحث"
 
-#: ../classes/template-settings.php:373
+#: ../classes/template-settings.php:370
 msgid "Find Address"
-msgstr ""
+msgstr "بحث عن العنوان"
 
-#: ../classes/template-settings.php:387
+#: ../classes/template-settings.php:382
 msgid "Update Settings"
-msgstr ""
+msgstr "تحديث الإعدادات"
 
-#: ../classes/template-settings.php:529
+#: ../classes/template-settings.php:522
 msgid "Book"
-msgstr ""
+msgstr "كتب"
 
-#: ../classes/template-settings.php:530
+#: ../classes/template-settings.php:523
 msgid "Dress"
-msgstr ""
+msgstr "ملابس"
 
-#: ../classes/template-settings.php:531
+#: ../classes/template-settings.php:524
 msgid "Electronic"
-msgstr ""
+msgstr "إلكترونيات"
 
 #: ../classes/template-withdraw.php:187
 msgid "Withdraw amount required "
-msgstr ""
+msgstr "قيمة السحب مطلوبة"
 
 #: ../classes/template-withdraw.php:190
 msgid "You don't have enough balance for this request"
-msgstr ""
+msgstr "لا يوجد لديك رصيد لهذا الطلب"
 
 #: ../classes/template-withdraw.php:192
 #, php-format
 msgid "Withdraw amount must be greater than %d"
-msgstr ""
+msgstr "مبلغ السحب يجب أن يكون أعلى من  %d"
 
 #: ../classes/template-withdraw.php:196
 msgid "withdraw method required"
-msgstr ""
+msgstr "طريقة السحب مطلوبة"
 
 #: ../classes/template-withdraw.php:322
 msgid "Requests deleted!"
-msgstr ""
+msgstr "تم حذف الطلبات"
 
 #: ../classes/template-withdraw.php:330
 msgid "Requests cancelled!"
-msgstr ""
+msgstr "تم إلغاء الطلبات"
 
 #: ../classes/template-withdraw.php:338
 msgid "Requests approved!"
-msgstr ""
+msgstr "تمت الموافقة على الطلبات"
 
 #: ../classes/template-withdraw.php:350 ../classes/template-withdraw.php:364
 msgid "User Name"
-msgstr ""
+msgstr "اسم المستخدم"
 
 #: ../classes/template-withdraw.php:352 ../classes/template-withdraw.php:366
 #: ../classes/template-withdraw.php:622 ../classes/template-withdraw.php:789
 msgid "Method"
-msgstr ""
+msgstr "الطريقة"
 
 #: ../classes/template-withdraw.php:353 ../classes/template-withdraw.php:367
 msgid "Method Details"
-msgstr ""
+msgstr "تفاصيل الطريقة"
 
 #: ../classes/template-withdraw.php:354 ../classes/template-withdraw.php:368
 msgid "Note"
-msgstr ""
+msgstr "ملاحظة"
 
 #: ../classes/template-withdraw.php:355 ../classes/template-withdraw.php:369
 msgid "IP"
-msgstr ""
+msgstr "الآي بي"
 
 #: ../classes/template-withdraw.php:356 ../classes/template-withdraw.php:370
 #: ../classes/template-withdraw.php:623 ../classes/template-withdraw.php:790
-#: ../includes/admin-functions.php:49 ../includes/wc-template.php:176
+#: ../includes/admin-functions.php:49 ../includes/wc-template.php:175
 #: ../templates/my-orders.php:41 ../templates/products-listing.php:39
 #: ../templates/orders/listing.php:21
 #: ../woocommerce/myaccount/my-orders.php:34
 msgid "Date"
-msgstr ""
+msgstr "التاريخ"
 
 #: ../classes/template-withdraw.php:410
 #: ../templates/orders/order-details.php:259
 msgid "Add note"
-msgstr ""
+msgstr "إضافة ملاحظة"
 
 #: ../classes/template-withdraw.php:416
 msgid "Save"
-msgstr ""
+msgstr "حفظ"
 
 #: ../classes/template-withdraw.php:417
 msgid "cancel"
-msgstr ""
+msgstr "إلغاء"
 
 #: ../classes/template-withdraw.php:433
 msgid "No result found"
-msgstr ""
+msgstr "لا توجد نتائج"
 
 #: ../classes/template-withdraw.php:445 ../includes/admin/sellers.php:105
 msgid "Bulk Actions"
-msgstr ""
+msgstr "اكبر التطبيقات"
 
 #: ../classes/template-withdraw.php:449 ../classes/template-withdraw.php:459
 msgid "Approve Requests"
-msgstr ""
+msgstr "قبول الطلبات"
 
 #: ../classes/template-withdraw.php:450 ../classes/template-withdraw.php:454
 msgid "Mark as Cancelled"
-msgstr ""
+msgstr "تحديد كملغى"
 
 #: ../classes/template-withdraw.php:465 ../includes/admin/sellers.php:106
 #: ../includes/woo-views/html-product-download.php:15
 #: ../includes/woo-views/html-product-variation-download.php:5
-#: ../templates/edit/sidebar.php:163
+#: ../templates/edit/sidebar.php:154
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 #: ../classes/template-withdraw.php:466
 msgid "Download PayPal mass payment file"
-msgstr ""
+msgstr "تحميل ملف باي بال الدفع الشامل"
 
 #: ../classes/template-withdraw.php:471 ../includes/admin/sellers.php:109
 msgid "Apply"
-msgstr ""
+msgstr "تنفيذ"
 
 #: ../classes/template-withdraw.php:605
 msgid "Pending Reivew"
-msgstr ""
+msgstr "بانتظار المراجعة"
 
 #: ../classes/template-withdraw.php:609
 msgid "Accepted"
-msgstr ""
+msgstr "مقبول"
 
 #: ../classes/template-withdraw.php:624 ../classes/template-withdraw.php:642
 #: ../templates/my-orders.php:85 ../templates/edit/sidebar.php:31
-#: ../templates/edit/sidebar.php:71 ../woocommerce/myaccount/my-orders.php:78
+#: ../templates/edit/sidebar.php:62 ../woocommerce/myaccount/my-orders.php:78
 msgid "Cancel"
-msgstr ""
+msgstr "ملغى"
 
 #: ../classes/template-withdraw.php:625 ../includes/admin-functions.php:42
-#: ../includes/wc-template.php:177 ../includes/admin/reports.php:123
+#: ../includes/wc-template.php:176 ../includes/admin/reports.php:123
 #: ../includes/admin/reports.php:133 ../includes/admin/sellers.php:22
 #: ../includes/admin/sellers.php:97 ../templates/my-orders.php:42
 #: ../templates/products-listing.php:33 ../templates/orders/listing.php:19
 #: ../woocommerce/myaccount/my-orders.php:35
 msgid "Status"
-msgstr ""
+msgstr "الحالة"
 
 #: ../classes/template-withdraw.php:657
 msgid "- Select Method -"
-msgstr ""
+msgstr "- تحديد طريقة -"
 
 #: ../classes/template-withdraw.php:658
 msgid "Paypal"
-msgstr ""
+msgstr "بي بال"
 
 #: ../classes/template-withdraw.php:659 ../includes/withdraw-functions.php:15
 msgid "Bank Transfer"
-msgstr ""
+msgstr "تحويل بنكي"
 
 #: ../classes/template-withdraw.php:675
 msgid "Your request has been cancelled successfully!"
-msgstr ""
+msgstr "تم إلغاء طلبك بنجاح!"
 
 #: ../classes/template-withdraw.php:684
 msgid "Your request has been received successfully and is under review!"
-msgstr ""
+msgstr "تم استلام طلبك بنجاح والآن هو قيد المراجعة!"
 
 #: ../classes/template-withdraw.php:692
 msgid "Unknown error!"
-msgstr ""
+msgstr "خطأ غير معروف"
 
 #: ../classes/template-withdraw.php:708
-msgid "You have a withdraw request that is pending."
-msgstr ""
+msgid "You've already pending withdraw request(s)."
+msgstr "لديك طلبات سحب معلقة"
 
 #: ../classes/template-withdraw.php:709
 msgid ""
-"Until it's been cancelled or approved, you can not submit a new request."
-msgstr ""
+"Until it's been cancelled or approved, you can't submit any new request."
+msgstr "لحين إلغائها او قبولها , لا يمكنك عمل طلب جديد."
 
 #: ../classes/template-withdraw.php:718
 msgid "You don't have sufficient balance for a withdraw request!"
-msgstr ""
+msgstr "ليس لديك رصيد كاف لطلب سحب!"
 
 #: ../classes/template-withdraw.php:742
 msgid "Withdraw Amount"
-msgstr ""
+msgstr "قيمة السحب"
 
 #: ../classes/template-withdraw.php:771
 msgid "Submit Request"
-msgstr ""
+msgstr "إضافة طلب"
 
 #: ../classes/template-withdraw.php:808
 msgid "Err!"
-msgstr ""
+msgstr "خطأ"
 
 #: ../classes/template-withdraw.php:808
 msgid "Sorry, no transactions found!"
-msgstr ""
+msgstr "نأسف, لا توجد ترجمة متاحة"
 
-#: ../classes/update.php:26
+#: ../classes/update.php:33
 msgid "Updates"
-msgstr ""
+msgstr "تحديثات"
 
-#: ../classes/update.php:49
+#: ../classes/update.php:56
 #, php-format
 msgid ""
 "Please <a href=\"%s\">enter</a> your <strong>Dokan</strong> theme license "
 "key to get regular update and support."
 msgstr ""
+"Please <a href=\"%s\">enter</a> your <strong>Dokan</strong> theme license "
+"key to get regular update and support."
 
-#: ../classes/update.php:64
+#: ../classes/update.php:71
 msgid "Pleae activate your copy"
-msgstr ""
+msgstr "الرجاء تفعيل نسختك"
 
-#: ../classes/update.php:91
+#: ../classes/update.php:98
 msgid "Dokan Error:"
-msgstr ""
+msgstr "خطأ دكان :"
 
-#: ../classes/update.php:230
+#: ../classes/update.php:237
 msgid "Empty email address"
-msgstr ""
+msgstr "البريد الإلكتروني فارغ"
 
-#: ../classes/update.php:234
+#: ../classes/update.php:241
 msgid "Empty license key"
-msgstr ""
+msgstr "مفتاح التفعيل فارغ"
 
-#: ../classes/update.php:252
+#: ../classes/update.php:259
 msgid "Settings Saved"
-msgstr ""
+msgstr "تم حفظ الإعدادات"
 
-#: ../classes/update.php:268
+#: ../classes/update.php:275
 msgid "Theme Activation"
-msgstr ""
+msgstr "تفعيل القالب"
 
-#: ../classes/update.php:271
+#: ../classes/update.php:278
 msgid ""
 "Enter the E-mail address that was used for purchasing the theme and the "
 "license key."
 msgstr ""
+"أدخل عنوان البريد الإلكتروني الذي تم استخدامه لشراء القالب ومفتاح الترخيص."
 
-#: ../classes/update.php:272
+#: ../classes/update.php:279
 msgid ""
 "We recommend you to enter those details to get regular <strong>theme update "
 "and support</strong>."
 msgstr ""
-
-#: ../classes/update.php:291
-msgid "E-mail Address"
-msgstr ""
-
-#: ../classes/update.php:294
-msgid "Enter your purchase Email address"
-msgstr ""
+"نحن نوصي بإدخال هذه التفاصيل للحصول على <strong>تحديثات دعم للقالب</strong> "
+"بانتظام."
 
 #: ../classes/update.php:298
-msgid "License Key"
-msgstr ""
+msgid "E-mail Address"
+msgstr "البريد الإكلتروني"
 
 #: ../classes/update.php:301
+msgid "Enter your purchase Email address"
+msgstr "ضع بريد الشراء"
+
+#: ../classes/update.php:305
+msgid "License Key"
+msgstr "مفتاح التفعيل"
+
+#: ../classes/update.php:308
 msgid "Enter your license key"
-msgstr ""
+msgstr "ضع مفتاح التسجيل"
 
-#: ../classes/update.php:306
+#: ../classes/update.php:313
 msgid "Save & Activate"
-msgstr ""
+msgstr "حفظ & تنشيط"
 
-#: ../classes/update.php:311
+#: ../classes/update.php:318
 msgid "Theme is activated"
-msgstr ""
+msgstr "القالب مفعل"
 
-#: ../classes/update.php:315
+#: ../classes/update.php:322
 msgid "Delete License"
-msgstr ""
+msgstr "حذف المفتاح"
 
-#: ../includes/admin-functions.php:43 ../includes/wc-template.php:175
+#: ../includes/admin-functions.php:43 ../includes/wc-template.php:174
 #: ../includes/admin/reports.php:118 ../includes/admin/reports.php:128
 #: ../templates/dashboard.php:50 ../templates/my-orders.php:40
 #: ../templates/orders/listing.php:17
 #: ../woocommerce/myaccount/my-orders.php:33
 msgid "Order"
-msgstr ""
+msgstr "طلب"
 
 #: ../includes/admin-functions.php:44
 msgid "Purchased"
-msgstr ""
+msgstr "مشتريات"
 
 #: ../includes/admin-functions.php:45
 msgid "Ship to"
-msgstr ""
+msgstr "عودة إلى"
 
 #: ../includes/admin-functions.php:47
 msgid "Customer Message"
-msgstr ""
+msgstr "رسالة الزبون"
 
 #: ../includes/admin-functions.php:48
 #: ../templates/orders/order-details.php:221
 msgid "Order Notes"
-msgstr ""
+msgstr "ملاحظات الطلب"
 
-#: ../includes/admin-functions.php:50 ../includes/wc-template.php:178
+#: ../includes/admin-functions.php:50 ../includes/wc-template.php:177
 #: ../templates/dashboard.php:79 ../templates/dashboard.php:174
 #: ../templates/my-orders.php:43 ../templates/orders/order-fee-html.php:17
 #: ../woocommerce/myaccount/my-orders.php:36
 #: ../woocommerce/order/order-details.php:25
 msgid "Total"
-msgstr ""
+msgstr "الإجمالي"
 
 #: ../includes/admin-functions.php:51
 msgid "Actions"
-msgstr ""
+msgstr "الحالات"
 
 #: ../includes/admin-functions.php:53
 msgid "Sub Order"
-msgstr ""
+msgstr "طلب فرعي"
 
 #: ../includes/admin-functions.php:79
 msgid "Sub Order of"
-msgstr ""
+msgstr "طلب فرعي ل"
 
 #: ../includes/admin-functions.php:89
 msgid "Show Sub-Orders"
-msgstr ""
+msgstr "إظهار الطلبات الفرعية"
 
 #: ../includes/admin-functions.php:89
 msgid "Hide Sub-Orders"
-msgstr ""
+msgstr "إخفاء الطلبات الفرعية"
 
 #: ../includes/admin-functions.php:246
 msgid "Toggle Sub-orders"
-msgstr ""
+msgstr "جمع الطلبات الفرعية"
 
 #: ../includes/admin-functions.php:367
 msgid "Total Sales"
-msgstr ""
+msgstr "إجمالي المبيعات"
 
 #: ../includes/admin-functions.php:374
 msgid "Total: "
-msgstr ""
+msgstr "الإجمالي :"
 
 #: ../includes/admin-functions.php:377 ../includes/reports.php:562
 msgid "Number of orders"
-msgstr ""
+msgstr "عدد الطلبات"
 
 #: ../includes/admin-functions.php:384 ../includes/reports.php:569
 msgid "sales"
-msgstr ""
+msgstr "المبيعات"
 
 #: ../includes/admin-functions.php:387 ../includes/admin/reports.php:122
 #: ../includes/admin/reports.php:132
 msgid "Commision"
-msgstr ""
+msgstr "العمولات"
 
 #: ../includes/admin-functions.php:394
 msgid "Commision: "
-msgstr ""
+msgstr "العمولات :"
 
 #: ../includes/order-functions.php:205
 msgid "Mark parent order completed as all child orders are completed."
-msgstr ""
+msgstr "تحديد الطلبات الرئيسية كمكتملة مثل كافة الطلبات الفرعية المكتملة"
 
 #: ../includes/reports.php:11 ../includes/reports.php:708
 #: ../includes/reports.php:811 ../templates/dashboard.php:54
 #: ../templates/dashboard.php:152
 msgid "Sales"
-msgstr ""
+msgstr "المبيعات"
 
 #: ../includes/reports.php:14 ../includes/admin/dashboard.php:110
 msgid "Overview"
-msgstr ""
+msgstr "مراجعة"
 
 #: ../includes/reports.php:20
 msgid "Sales by day"
-msgstr ""
+msgstr "مبيعات حسب اليوم"
 
 #: ../includes/reports.php:25
 msgid "Top sellers"
-msgstr ""
+msgstr "أعلى البائعين"
 
 #: ../includes/reports.php:30
 msgid "Top earners"
-msgstr ""
+msgstr "أعلى الرابحين"
 
 #: ../includes/reports.php:288
 msgid "This month's sales"
-msgstr ""
+msgstr "مبيعات الشهر الحالي"
 
 #: ../includes/reports.php:326 ../includes/reports.php:691
 #: ../includes/reports.php:795 ../includes/admin/reports.php:42
 msgid "From:"
-msgstr ""
+msgstr "من : "
 
 #: ../includes/reports.php:330 ../includes/reports.php:696
 #: ../includes/reports.php:800 ../includes/admin/reports.php:46
 msgid "To:"
-msgstr ""
+msgstr "إلى :"
 
 #: ../includes/reports.php:338
 msgid "Sales in this period"
-msgstr ""
+msgstr "المبيعات في هذه الفترة"
 
 #: ../includes/reports.php:424
 #, php-format
 msgid "%s sales in this period"
-msgstr ""
+msgstr "%s مبيعات في هذه الفترة"
 
 #: ../includes/reports.php:428
 #, php-format
 msgid "%s average daily sales"
-msgstr ""
+msgstr "%s معدل المبيعات اليومي"
 
 #: ../includes/reports.php:432
 #, php-format
 msgid "%s orders placed"
-msgstr ""
+msgstr "%s أوامر مضافة"
 
 #: ../includes/reports.php:436
 #, php-format
 msgid "%s items purchased"
-msgstr ""
+msgstr "%s عناصر مشتراة"
 
 #: ../includes/reports.php:440
 #, php-format
 msgid "%s charged for shipping"
-msgstr ""
+msgstr "%s مضافة للشحن"
 
 #: ../includes/reports.php:444
 #, php-format
 msgid "%s worth of coupons used"
-msgstr ""
+msgstr "%s تم استخدام كوبون فيها"
 
 #: ../includes/reports.php:552
 msgid "Number of items sold"
-msgstr ""
+msgstr "عدد العناصر المباعة"
 
 #: ../includes/reports.php:722
 msgid "Product does not exist"
-msgstr ""
+msgstr "المنتج غير موجود"
 
 #: ../includes/reports.php:826
 msgid "Product no longer exists"
-msgstr ""
+msgstr "المنتج لم يعد متاحا"
 
 #: ../includes/template-tags.php:26
 msgid "Pingback:"
-msgstr ""
+msgstr "التنبيهات :"
 
 #: ../includes/template-tags.php:26 ../includes/template-tags.php:47
 msgid "(Edit)"
-msgstr ""
+msgstr "(تعديل)"
 
 #: ../includes/template-tags.php:38
 #, php-format
 msgid "%s <span class=\"says\">says:</span>"
-msgstr ""
+msgstr "%s <span class=\"says\">يقول:</span>"
 
 #: ../includes/template-tags.php:43
 #, php-format
 msgid "%1$s at %2$s"
-msgstr ""
+msgstr "%1$s في %2$s"
 
 #: ../includes/template-tags.php:51
 msgid "Your comment is awaiting moderation."
-msgstr ""
+msgstr "تعليقك في انتظار تفعيل الإدارة"
 
 #: ../includes/template-tags.php:76
 #, php-format
@@ -1693,237 +1721,210 @@ msgid ""
 "<a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time class=\"entry-date\" "
 "datetime=\"%3$s\" pubdate>%4$s</time></a><span class=\"byline\"></span>"
 msgstr ""
+"<a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time class=\"entry-date\" "
+"datetime=\"%3$s\" pubdate>%4$s</time></a><span class=\"byline\"></span>"
 
 #: ../includes/template-tags.php:82
 #, php-format
 msgid "View all posts by %s"
-msgstr ""
+msgstr "عرض كافة التدوينات بواسطة  %s"
 
-#: ../includes/template-tags.php:118
+#: ../includes/template-tags.php:117
 msgid "Post navigation"
-msgstr ""
+msgstr "قائمة البوست"
 
-#: ../includes/template-tags.php:124
+#: ../includes/template-tags.php:123
 msgctxt "Previous post link"
 msgid "&larr;"
-msgstr ""
+msgstr "&larr;"
 
-#: ../includes/template-tags.php:127
+#: ../includes/template-tags.php:126
 msgctxt "Next post link"
 msgid "&rarr;"
-msgstr ""
+msgstr "&rarr;"
 
-#: ../includes/template-tags.php:189 ../includes/admin/sellers.php:122
+#: ../includes/template-tags.php:183 ../includes/admin/sellers.php:122
 #: ../templates/sellers.php:89
 msgid "&larr; Previous"
-msgstr ""
+msgstr "&larr; السابق"
 
-#: ../includes/template-tags.php:200 ../includes/admin/sellers.php:123
+#: ../includes/template-tags.php:194 ../includes/admin/sellers.php:123
 #: ../templates/sellers.php:90
 msgid "Next &rarr;"
-msgstr ""
+msgstr "التالي &rarr;"
 
-#: ../includes/template-tags.php:218
+#: ../includes/template-tags.php:210
 msgid "Product has been deleted successfully!"
-msgstr ""
+msgstr "تم حذف المنتج بنجاح"
 
-#: ../includes/template-tags.php:240 ../includes/template-tags.php:265
+#: ../includes/template-tags.php:232 ../includes/template-tags.php:256
 #, php-format
 msgid "All (%d)"
-msgstr ""
+msgstr "الجميع  (%d)"
 
-#: ../includes/template-tags.php:243
+#: ../includes/template-tags.php:235
 #, php-format
 msgid "Online (%d)"
-msgstr ""
+msgstr "المتصلون (%d)"
 
-#: ../includes/template-tags.php:246
+#: ../includes/template-tags.php:238
 #, php-format
 msgid "Pending Review (%d)"
-msgstr ""
+msgstr "بانتظار المراجعة (%d)"
 
-#: ../includes/template-tags.php:249
+#: ../includes/template-tags.php:241
 #, php-format
 msgid "Draft (%d)"
-msgstr ""
+msgstr "Draft (%d)"
 
-#: ../includes/template-tags.php:270
+#: ../includes/template-tags.php:261
 #, php-format
 msgid "Completed (%d)"
-msgstr ""
+msgstr "المنجزة (%d)"
 
-#: ../includes/template-tags.php:275
+#: ../includes/template-tags.php:266
 #, php-format
 msgid "Processing (%d)"
-msgstr ""
+msgstr "قيد الإنجاز (%d)"
 
-#: ../includes/template-tags.php:280
+#: ../includes/template-tags.php:271
 #, php-format
 msgid "On-hold (%d)"
-msgstr ""
+msgstr "متوقفة (%d)"
 
-#: ../includes/template-tags.php:285
+#: ../includes/template-tags.php:276
 #, php-format
 msgid "Pending (%d)"
-msgstr ""
+msgstr "في الإنتظار (%d)"
 
-#: ../includes/template-tags.php:290
+#: ../includes/template-tags.php:281
 #, php-format
 msgid "Cancelled (%d)"
-msgstr ""
+msgstr "الملغاة  (%d)"
 
-#: ../includes/template-tags.php:295
+#: ../includes/template-tags.php:286
 #, php-format
 msgid "Refunded (%d)"
-msgstr ""
+msgstr "المرجعة (%d)"
 
-#: ../includes/template-tags.php:371
+#: ../includes/template-tags.php:355
 msgid "Product Categories"
-msgstr ""
+msgstr "أقسام المنتجات"
 
-#: ../includes/template-tags.php:394
-msgid "Store Product Category"
-msgstr ""
+#: ../includes/template-tags.php:375
+msgid "First Name"
+msgstr "الاسم الاول"
 
-#: ../includes/template-tags.php:490
+#: ../includes/template-tags.php:380
+msgid "Last Name"
+msgstr "الإسم الأاخير"
+
+#: ../includes/template-tags.php:386 ../includes/admin/sellers.php:17
+#: ../includes/admin/sellers.php:92
+msgid "Shop Name"
+msgstr "اسم المتجر"
+
+#: ../includes/template-tags.php:391
+msgid "Shop URL"
+msgstr "رابط المتجر"
+
+#: ../includes/template-tags.php:411
 msgid "I am a customer"
-msgstr ""
+msgstr "أنا زبون"
 
-#: ../includes/template-tags.php:495
+#: ../includes/template-tags.php:416
 msgid "I am a seller"
-msgstr ""
+msgstr "أنا بائع"
 
-#: ../includes/template-tags.php:506
+#: ../includes/template-tags.php:427
 msgid "Error!"
-msgstr ""
+msgstr "خطأ!"
 
-#: ../includes/template-tags.php:507
+#: ../includes/template-tags.php:428
 msgid "Your account is not enabled for selling, please contact the admin"
-msgstr ""
+msgstr "لم يتم تفعيل حسابك للبيع، يرجى الاتصال المشرف"
 
-#: ../includes/template-tags.php:523
-#, php-format
-msgid "Cart %s"
-msgstr ""
-
-#: ../includes/template-tags.php:541
-msgid "Seller Dashboard"
-msgstr ""
-
-#: ../includes/template-tags.php:544
-msgid "Visit your store"
-msgstr ""
-
-#: ../includes/template-tags.php:561
-msgid "My Account"
-msgstr ""
-
-#: ../includes/template-tags.php:562
-msgid "Edit Account"
-msgstr ""
-
-#: ../includes/template-tags.php:564 ../templates/orders/order-details.php:110
-#: ../woocommerce/order/order-details.php:123
-msgid "Billing Address"
-msgstr ""
-
-#: ../includes/template-tags.php:565 ../templates/orders/order-details.php:119
-#: ../woocommerce/order/order-details.php:138
-msgid "Shipping Address"
-msgstr ""
-
-#: ../includes/template-tags.php:572
-msgid "Log in"
-msgstr ""
-
-#: ../includes/template-tags.php:573
-msgid "Sign Up"
-msgstr ""
-
-#: ../includes/template-tags.php:588
-msgid "Become a Seller"
-msgstr ""
-
-#: ../includes/theme-functions.php:522 ../templates/edit/sidebar.php:20
+#: ../includes/theme-functions.php:506 ../templates/edit/sidebar.php:20
 msgid "Online"
-msgstr ""
+msgstr "متصل"
 
-#: ../includes/theme-functions.php:526 ../templates/edit/sidebar.php:21
+#: ../includes/theme-functions.php:510 ../templates/edit/sidebar.php:21
 msgid "Draft"
-msgstr ""
+msgstr "مسودة"
 
-#: ../includes/theme-functions.php:530 ../includes/admin/admin.php:202
+#: ../includes/theme-functions.php:514 ../includes/admin/admin.php:167
 #: ../templates/dashboard.php:189
 msgid "Pending Review"
-msgstr ""
+msgstr "بانتظار المراجعة"
 
-#: ../includes/theme-functions.php:534 ../includes/theme-functions.php:565
+#: ../includes/theme-functions.php:518 ../includes/theme-functions.php:549
 #: ../templates/products-listing.php:171
 msgid "Scheduled"
-msgstr ""
+msgstr "مجدول"
 
-#: ../includes/theme-functions.php:553
+#: ../includes/theme-functions.php:537 ../templates/edit/sidebar.php:57
 msgid "Simple Product"
-msgstr ""
+msgstr "منتج بسيط"
 
-#: ../includes/theme-functions.php:557
+#: ../includes/theme-functions.php:541 ../templates/edit/sidebar.php:58
 msgid "Variable Product"
-msgstr ""
+msgstr "منتج متغير"
 
-#: ../includes/theme-functions.php:561
+#: ../includes/theme-functions.php:545
 msgid "Grouped Product"
-msgstr ""
+msgstr "منتج مجمع"
 
-#: ../includes/theme-functions.php:879
+#: ../includes/theme-functions.php:857
 #, php-format
 msgid "Account Name: %s"
-msgstr ""
+msgstr "اسم الحساب : %s"
 
-#: ../includes/theme-functions.php:882
+#: ../includes/theme-functions.php:860
 #, php-format
 msgid "Account Number: %s"
-msgstr ""
+msgstr "رقم الحساب : %s"
 
-#: ../includes/theme-functions.php:885
+#: ../includes/theme-functions.php:863
 #, php-format
 msgid "Bank Name: %s"
-msgstr ""
+msgstr "اسم البنك : %s"
 
-#: ../includes/theme-functions.php:888
+#: ../includes/theme-functions.php:866
 #, php-format
 msgid "Address: %s"
-msgstr ""
+msgstr "العنوان : %s"
 
-#: ../includes/theme-functions.php:891
+#: ../includes/theme-functions.php:869
 #, php-format
 msgid "SWIFT: %s"
-msgstr ""
+msgstr "SWIFT: %s"
 
 #: ../includes/wc-functions.php:42
 msgid ""
 "Before adding variations, add and save some attributes on the "
 "<strong>Attributes</strong> tab."
 msgstr ""
+"قبل إضافة الإختلافات, أضف واحفظ بعض السمات قسم  <strong>السمات</strong>."
 
 #: ../includes/wc-functions.php:44
 msgid "Learn more"
-msgstr ""
+msgstr "معرفة المزيد"
 
 #: ../includes/wc-functions.php:146
 msgid "Add Variation"
-msgstr ""
+msgstr "إضافة تغيير"
 
 #: ../includes/wc-functions.php:148
 msgid "Link all variations"
-msgstr ""
+msgstr "عرض كافة التغييرات"
 
 #: ../includes/wc-functions.php:150
 msgid "Default selections:"
-msgstr ""
+msgstr "تحديد عشوائي :"
 
 #: ../includes/wc-functions.php:163
 msgid "No default"
-msgstr ""
+msgstr "لا يوجد افتراضي"
 
 #: ../includes/wc-functions.php:248
 msgid ""
@@ -1931,609 +1932,574 @@ msgid ""
 "variation for each and every possible combination of variation attributes "
 "(max 50 per run)."
 msgstr ""
+"هل أنت متأكد أنك تريد ربط جميع الاختلافات؟ وهذا خلق صيغة جديدة لكل تركيبة "
+"ممكنة من التباين سمات (حد أقصى 50 في المدى)."
 
 #: ../includes/wc-functions.php:265
 msgid "variation added"
-msgstr ""
+msgstr "تمت الاضافة لمجال التغييرات"
 
 #: ../includes/wc-functions.php:267
 msgid "variations added"
-msgstr ""
+msgstr "تم إضافة التغيير"
 
 #: ../includes/wc-functions.php:269
 msgid "No variations added"
-msgstr ""
+msgstr "لا توجد تغييرات للإضافة"
 
 #: ../includes/wc-functions.php:292
 msgid "Are you sure you want to remove this variation?"
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد إزالة هذا الاختلاف؟"
 
 #: ../includes/wc-functions.php:402
 msgid "Choose an image"
-msgstr ""
+msgstr "اختيار صورة"
 
 #: ../includes/wc-functions.php:404
 msgid "Set variation image"
-msgstr ""
+msgstr "تعيين صورة التباين"
 
 #: ../includes/wc-functions.php:510
 msgid "Product SKU must be unique."
-msgstr ""
+msgstr "يجب أن يكون المنتج SKU فريدة من نوعها."
 
 #: ../includes/wc-functions.php:819
 #, php-format
 msgid "Variation #%s of %s"
-msgstr ""
+msgstr "الإختلاف #%s من %s"
 
 #: ../includes/wc-functions.php:1041
 #, php-format
 msgid "Order &ndash; %s"
-msgstr ""
+msgstr "طلب &ndash; %s"
 
 #: ../includes/wc-functions.php:1041
 msgctxt "Order date parsed by strftime"
 msgid "%b %d, %Y @ %I:%M %p"
-msgstr ""
+msgstr "%b %d, %Y @ %I:%M %p"
 
 #: ../includes/wc-functions.php:1283
 msgid "Cheating, eh?"
-msgstr ""
+msgstr "مخادع ؟"
 
 #: ../includes/wc-functions.php:1292
 msgid "Please enter your first name."
-msgstr ""
+msgstr "الراجء كتابة اسمك الأول"
 
 #: ../includes/wc-functions.php:1297
 msgid "Please enter your last name."
-msgstr ""
+msgstr "الرجاء كتابة اسمك الأخير"
 
 #: ../includes/wc-functions.php:1302
 msgid "Please enter your address."
-msgstr ""
+msgstr "الرجاء كتابة عنوانك"
 
 #: ../includes/wc-functions.php:1307
 msgid "Please enter your phone number."
-msgstr ""
+msgstr "الرجاء كتابة رقم هاتفك"
 
-#: ../includes/wc-functions.php:1662
+#: ../includes/wc-functions.php:1572
 msgid "Search for products"
-msgstr ""
+msgstr "البحث عن منتجات"
 
-#: ../includes/wc-functions.php:1711 ../includes/widgets/best-seller.php:55
+#: ../includes/wc-functions.php:1621
 msgid "No ratings found yet!"
-msgstr ""
+msgstr "لم يتم العثور على تقييمات بعد"
 
-#: ../includes/wc-functions.php:1715
+#: ../includes/wc-functions.php:1625
 #, php-format
 msgid "%s rating from %d review"
-msgstr ""
+msgstr "%s تقييم من  %d مراجعة"
 
-#: ../includes/wc-functions.php:1715
+#: ../includes/wc-functions.php:1625
 #, php-format
 msgid "%s rating from %d reviews"
-msgstr ""
+msgstr "%s تقييم من %d مراجعات"
 
-#: ../includes/wc-functions.php:1716
+#: ../includes/wc-functions.php:1626
 #, php-format
 msgid "Rated %s out of %d"
-msgstr ""
+msgstr "قيّم %s من إجمالي %d"
 
 #: ../includes/wc-template.php:39
 msgid "Seller Info"
-msgstr ""
+msgstr "معلومات البائع"
 
 #: ../includes/wc-template.php:67
 msgid "Store Name:"
-msgstr ""
+msgstr "اسم المتجر"
 
-#: ../includes/wc-template.php:77
+#: ../includes/wc-template.php:76
 msgid "Seller:"
-msgstr ""
+msgstr "البائع :"
 
-#: ../includes/wc-template.php:86
+#: ../includes/wc-template.php:85
 msgid "Address:"
-msgstr ""
+msgstr "العنوان :"
 
-#: ../includes/wc-template.php:138
+#: ../includes/wc-template.php:137
 msgctxt "breadcrumb"
 msgid "<i class=\"fa fa-home\"></i> Home"
-msgstr ""
+msgstr "<i class=\"fa fa-home\"></i> الرئيسية"
 
-#: ../includes/wc-template.php:161
+#: ../includes/wc-template.php:160
 msgid "Sub Orders"
-msgstr ""
+msgstr "طلبات فرعية"
+
+#: ../includes/wc-template.php:164
+msgid "Note:"
+msgstr "ملاحظة :"
 
 #: ../includes/wc-template.php:165
-msgid "Note:"
-msgstr ""
-
-#: ../includes/wc-template.php:166
 msgid ""
 "This order has products from multiple vendors/sellers. So we divided this "
 "order into multiple seller orders.\n"
 "        Each order will be handled by their respective seller independently."
 msgstr ""
+"هذا النظام لديها منتجات من بائعين متعددين / البائعين. لذلك سنوصي هذا الأوامر "
+"بيع متعددة. /n         وسيتم التعامل مع كل أمر من قبل البائع كل منها بشكل "
+"مستقل."
 
-#: ../includes/wc-template.php:202 ../templates/my-orders.php:70
+#: ../includes/wc-template.php:201 ../templates/my-orders.php:70
 #: ../woocommerce/myaccount/my-orders.php:63
 #, php-format
 msgid "%s for %s item"
 msgid_plural "%s for %s items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s ل %s عنصر"
+msgstr[1] "%s ل %s عناصر"
 
-#: ../includes/wc-template.php:210 ../templates/my-orders.php:90
+#: ../includes/wc-template.php:209 ../templates/my-orders.php:90
 #: ../templates/products-listing.php:80 ../templates/orders/listing.php:107
 #: ../woocommerce/myaccount/my-orders.php:83
 msgid "View"
-msgstr ""
+msgstr "معاينة"
 
 #: ../includes/withdraw-functions.php:11
 msgid "PayPal"
-msgstr ""
+msgstr "باي بال"
 
 #: ../includes/withdraw-functions.php:19
 msgid "Skrill"
-msgstr ""
+msgstr "من المقرر"
 
 #: ../includes/withdraw-functions.php:158
 msgid "Your bank account name"
-msgstr ""
+msgstr "اسمك البنك الخاص بك"
 
 #: ../includes/withdraw-functions.php:164
 msgid "Your bank account number"
-msgstr ""
+msgstr "رقم حسابك البنك الخاص بك"
 
 #: ../includes/withdraw-functions.php:170
 msgid "Name of bank"
-msgstr ""
+msgstr "اسم البنك"
 
 #: ../includes/withdraw-functions.php:176
 msgid "Address of your bank"
-msgstr ""
+msgstr "عنوان البنك الخاص بك"
 
 #: ../includes/withdraw-functions.php:182
 msgid "Swift code"
-msgstr ""
+msgstr "رمز سويفت"
 
 #: ../includes/admin/add-on.php:2
 msgid "Dokan - Add-ons"
-msgstr ""
+msgstr "إضافات - دكان"
 
 #: ../includes/admin/admin.php:62
 #, php-format
 msgid "Withdraw %s"
-msgstr ""
+msgstr "السحب %s"
 
 #: ../includes/admin/admin.php:68
 msgid "Sellers Listing"
-msgstr ""
+msgstr "قائمة البائعين"
 
 #: ../includes/admin/admin.php:75
 msgid "Add Ons"
-msgstr ""
+msgstr "الإضافات"
 
 #: ../includes/admin/admin.php:75
 msgid "Add-ons"
-msgstr ""
+msgstr "الإضافات"
 
 #: ../includes/admin/admin.php:85
 msgid "General"
-msgstr ""
+msgstr "عام"
 
 #: ../includes/admin/admin.php:89
 msgid "Home Page"
-msgstr ""
+msgstr "الصفحة الرئيسية"
 
 #: ../includes/admin/admin.php:93
 msgid "Selling Options"
-msgstr ""
+msgstr "إعدادات الشراء"
 
 #: ../includes/admin/admin.php:97
 msgid "Page Settings"
-msgstr ""
+msgstr "إعدادات الصفحة"
 
 #: ../includes/admin/admin.php:104
 msgid "- select -"
-msgstr ""
+msgstr "- اختيار-"
 
 #: ../includes/admin/admin.php:129
 msgid "Admin area access"
-msgstr ""
+msgstr "لوحة تحكم الإدارة"
 
 #: ../includes/admin/admin.php:130
 msgid "Disable sellers and customers from accessing wp-admin area"
-msgstr ""
+msgstr "تعطيل البائعين والعملاء من الوصول إلى منطقة الادارة"
 
 #: ../includes/admin/admin.php:136
 msgid "Color Skin"
-msgstr ""
+msgstr "اللون"
 
 #: ../includes/admin/admin.php:137
 msgid "Choose the color skin of the theme"
-msgstr ""
+msgstr "حدد لون القالب"
 
 #: ../includes/admin/admin.php:141
 msgid "Orange"
-msgstr ""
+msgstr "برتقالي"
 
 #: ../includes/admin/admin.php:142
 msgid "Sky"
-msgstr ""
+msgstr "سماوي"
 
 #: ../includes/admin/admin.php:143
 msgid "Blue"
-msgstr ""
+msgstr "أزرق"
 
 #: ../includes/admin/admin.php:144
 msgid "Green"
-msgstr ""
+msgstr "أخضر"
 
 #: ../includes/admin/admin.php:145
 msgid "Purple"
-msgstr ""
+msgstr "ارجواني"
 
 #: ../includes/admin/admin.php:146
 msgid "Red"
-msgstr ""
+msgstr "أحمر"
 
 #: ../includes/admin/admin.php:147
 msgid "Pink"
-msgstr ""
+msgstr "وردي"
 
 #: ../includes/admin/admin.php:152
-msgid "Show Map on Store Page"
-msgstr ""
-
-#: ../includes/admin/admin.php:153
-msgid "Enable showing Store location map on store left sidebar"
-msgstr ""
-
-#: ../includes/admin/admin.php:159
-msgid "Show Contact Form on Store Page"
-msgstr ""
-
-#: ../includes/admin/admin.php:160
-msgid "Enable showing contact seller form on store left sidebar"
-msgstr ""
-
-#: ../includes/admin/admin.php:166
 msgid "Site footer text"
-msgstr ""
+msgstr "نص الفوتر"
 
-#: ../includes/admin/admin.php:168
+#: ../includes/admin/admin.php:154
 #, php-format
 msgid "&copy; %d. All rights are reserved"
-msgstr ""
+msgstr "&copy; %d. جميع الحقوق محفوظة"
 
-#: ../includes/admin/admin.php:175
-msgid "User could be seller"
-msgstr ""
-
-#: ../includes/admin/admin.php:176
-msgid "Customer or user could upgrade his/her account to seller"
-msgstr ""
-
-#: ../includes/admin/admin.php:182
-msgid "New Seller Enable Selling"
-msgstr ""
-
-#: ../includes/admin/admin.php:183
-msgid "Make selling status enable for new registred seller"
-msgstr ""
-
-#: ../includes/admin/admin.php:189
-msgid "New Product Visibility"
-msgstr ""
-
-#: ../includes/admin/admin.php:190
-msgid "Product visibility (without update meta) when seller creates a product"
-msgstr ""
-
-#: ../includes/admin/admin.php:196
+#: ../includes/admin/admin.php:161
 msgid "New Product Status"
-msgstr ""
+msgstr "حالة المنتج الجديد"
 
-#: ../includes/admin/admin.php:197
-msgid "Product status when seller creates a product"
-msgstr ""
+#: ../includes/admin/admin.php:162
+msgid "Product status when a seller creates a product"
+msgstr "حالة المنتج عندما يقوم البائع بإنشاء المنتج"
 
-#: ../includes/admin/admin.php:201 ../templates/products-listing.php:166
+#: ../includes/admin/admin.php:166 ../templates/products-listing.php:166
 msgid "Published"
-msgstr ""
+msgstr "منشور"
 
-#: ../includes/admin/admin.php:208
+#: ../includes/admin/admin.php:173
 msgid "How much amount (%) a seller will get from each order"
-msgstr ""
+msgstr "قيمة المبلغ (%) الذي سيحصل عليه البائع عند كل طلب"
 
-#: ../includes/admin/admin.php:214
+#: ../includes/admin/admin.php:179
 msgid "Order Status Change"
-msgstr ""
+msgstr "تغيير حالة الطلب"
 
-#: ../includes/admin/admin.php:215
+#: ../includes/admin/admin.php:180
 msgid "Seller Could Change Order Status"
-msgstr ""
+msgstr "البائع يسطيع تغيير حالة الطلب"
 
-#: ../includes/admin/admin.php:221
+#: ../includes/admin/admin.php:186
 msgid "Withdraw Methods"
-msgstr ""
+msgstr "طرق السحب"
 
-#: ../includes/admin/admin.php:222
+#: ../includes/admin/admin.php:187
 msgid "Withdraw methods for sellers"
-msgstr ""
+msgstr "طرق السحب للبائعين"
 
-#: ../includes/admin/admin.php:229
+#: ../includes/admin/admin.php:194
 msgid "Order Status for Withdraw"
-msgstr ""
+msgstr "حالة الطلب للسحب"
 
-#: ../includes/admin/admin.php:230
+#: ../includes/admin/admin.php:195
 msgid "Order status for which seller can make a withdraw request."
-msgstr ""
+msgstr "حالة الطلب التي تتيح للبائع لتقديم طلب سحب"
 
-#: ../includes/admin/admin.php:232 ../includes/admin/admin.php:233
+#: ../includes/admin/admin.php:197 ../includes/admin/admin.php:198
 #: ../templates/dashboard.php:84
 msgid "Completed"
-msgstr ""
+msgstr "منتهية"
 
-#: ../includes/admin/admin.php:232 ../includes/admin/admin.php:233
+#: ../includes/admin/admin.php:197 ../includes/admin/admin.php:198
 #: ../templates/dashboard.php:94 ../templates/orders/listing.php:90
 msgid "Processing"
-msgstr ""
+msgstr "قيد الإنجاز"
 
-#: ../includes/admin/admin.php:232 ../includes/admin/admin.php:233
+#: ../includes/admin/admin.php:197 ../includes/admin/admin.php:198
 msgid "On-hold"
-msgstr ""
+msgstr "متوقفة"
 
-#: ../includes/admin/admin.php:237
+#: ../includes/admin/admin.php:202
 msgid "Minimum Withdraw Limit"
-msgstr ""
+msgstr "الحد الادنى للسحب"
 
-#: ../includes/admin/admin.php:238
+#: ../includes/admin/admin.php:203
 msgid "Minimum balance required to make a withdraw request"
-msgstr ""
+msgstr "الحد الأدنى للرصيد المطلوب لتقديم طلب سحب"
+
+#: ../includes/admin/admin.php:212
+msgid "Show Slider"
+msgstr "عرض السلايدر"
+
+#: ../includes/admin/admin.php:218
+msgid "Select Slider"
+msgstr "تحديد سلايدر"
+
+#: ../includes/admin/admin.php:219
+msgid "Select which slider to show on homepage"
+msgstr "تحديد السلايدر المراد عرضه بالرئيسية"
+
+#: ../includes/admin/admin.php:226
+msgid "Show Featured Products"
+msgstr "عرض المنتجات المفضلة"
+
+#: ../includes/admin/admin.php:233
+msgid "Show Latest Products"
+msgstr "عرض المنتجات الآخيرة"
+
+#: ../includes/admin/admin.php:240
+msgid "Show Best Selling Products"
+msgstr "عرض المنتجات الاكثر مبيعا"
 
 #: ../includes/admin/admin.php:247
-msgid "Show Slider"
-msgstr ""
+msgid "Show Top Rated Products"
+msgstr "عرض المنتجات الأكثر تقييما"
 
 #: ../includes/admin/admin.php:253
-msgid "Select Slider"
-msgstr ""
+msgid "On Sale Products"
+msgstr "على بيع المنتجات"
 
 #: ../includes/admin/admin.php:254
-msgid "Select which slider to show on homepage"
-msgstr ""
-
-#: ../includes/admin/admin.php:261
-msgid "Show Featured Products"
-msgstr ""
+msgid "Show On Sale Products"
+msgstr "عرض على بيع المنتجات"
 
 #: ../includes/admin/admin.php:268
-msgid "Show Latest Products"
-msgstr ""
-
-#: ../includes/admin/admin.php:275
-msgid "Show Best Selling Products"
-msgstr ""
-
-#: ../includes/admin/admin.php:282
-msgid "Show Top Rated Products"
-msgstr ""
-
-#: ../includes/admin/admin.php:288
-msgid "On Sale Products"
-msgstr ""
-
-#: ../includes/admin/admin.php:289
-msgid "Show On Sale Products"
-msgstr ""
-
-#: ../includes/admin/admin.php:303
 msgid "Products Listing"
-msgstr ""
+msgstr "قائمة المنتجات"
 
-#: ../includes/admin/admin.php:309
+#: ../includes/admin/admin.php:274
 msgid "Create Product Page"
-msgstr ""
+msgstr "إنشاء صفحة منتج"
 
 #: ../includes/admin/dashboard.php:39
 msgid "Sellers"
-msgstr ""
+msgstr "البائعين"
 
 #: ../includes/admin/dashboard.php:44
 #, php-format
 msgid "%d Total Seller"
-msgstr ""
+msgstr "%d  إجمالي البائع"
 
 #: ../includes/admin/dashboard.php:44
 #, php-format
 msgid "%d Total Sellers"
-msgstr ""
+msgstr "%d إجمالي البائعين"
 
 #: ../includes/admin/dashboard.php:51
 #, php-format
 msgid "%d Active Seller"
-msgstr ""
+msgstr "%d أنشط بائع"
 
 #: ../includes/admin/dashboard.php:51
 #, php-format
 msgid "%d Active Sellers"
-msgstr ""
+msgstr "%d  أنشط بائعين"
 
 #: ../includes/admin/dashboard.php:53
 msgid "No Active Seller"
-msgstr ""
+msgstr "لا يوجد بائع نشط"
 
 #: ../includes/admin/dashboard.php:62
 #, php-format
 msgid "%d Pending Seller"
-msgstr ""
+msgstr "%d بائع في الإنتظار"
 
 #: ../includes/admin/dashboard.php:62
 #, php-format
 msgid "%d Pending Sellers"
-msgstr ""
+msgstr "%d بائعون في الإنتظار"
 
 #: ../includes/admin/dashboard.php:64
 msgid "No Pending Seller"
-msgstr ""
+msgstr "لا يوجد بائع في الإنتظار"
 
 #: ../includes/admin/dashboard.php:77
 #, php-format
 msgid "%d Pending Withdraw"
-msgstr ""
+msgstr "%d عمليات سحب في الإنتظار"
 
 #: ../includes/admin/dashboard.php:81
 #, php-format
 msgid "%d Completed Withdraw"
-msgstr ""
+msgstr "%d عمليات سحب منتهية"
 
 #: ../includes/admin/dashboard.php:85
 #, php-format
 msgid "%d Cancelled Withdraw"
-msgstr ""
+msgstr "%d عمليات سحب ملغاة"
 
 #: ../includes/admin/dashboard.php:101
 msgid "At a Glance"
-msgstr ""
+msgstr "في لمحة"
 
 #: ../includes/admin/dashboard.php:102
 msgid "Dokan News Updates"
-msgstr ""
+msgstr "أخبار تحديثات الدكان"
 
 #: ../includes/admin/reports.php:8
 msgid "All Logs"
-msgstr ""
+msgstr "سجل الدخول"
 
 #: ../includes/admin/reports.php:15
 msgid "By Day"
-msgstr ""
+msgstr "باليوم"
 
 #: ../includes/admin/reports.php:20
 msgid "By Month"
-msgstr ""
+msgstr "بالشهر"
 
 #: ../includes/admin/reports.php:55
 msgid "Year:"
-msgstr ""
+msgstr "السنة :"
 
 #: ../includes/admin/reports.php:90
 msgid "Total Earning"
-msgstr ""
+msgstr "إجمالي الأرباح"
 
 #: ../includes/admin/reports.php:94
 msgid "Total Earning in this period"
-msgstr ""
+msgstr "إجمالي الأرباح في هذه الفترة"
 
 #: ../includes/admin/reports.php:98
 msgid "Order total in this period"
-msgstr ""
+msgstr "إجمالي الطلبات في هذه الفترة"
 
 #: ../includes/admin/reports.php:102
 msgid "orders placed in this period"
-msgstr ""
+msgstr "إجمالي الإضافات في هذه الفترة"
 
 #: ../includes/admin/reports.php:120 ../includes/admin/reports.php:130
 #: ../templates/orders/listing.php:18
 msgid "Order Total"
-msgstr ""
+msgstr "إجمالي الطلب"
 
 #: ../includes/admin/reports.php:121 ../includes/admin/reports.php:131
 msgid "Seller Earning"
-msgstr ""
+msgstr "أرباع البائع"
 
 #: ../includes/admin/reports.php:159
 msgid "edit"
-msgstr ""
+msgstr "تعديل"
 
 #: ../includes/admin/sellers.php:2
 msgid "Seller Listing"
-msgstr ""
+msgstr "قائمة البائع"
 
 #: ../includes/admin/sellers.php:15 ../includes/admin/sellers.php:90
 #: ../woocommerce/myaccount/form-login.php:74
 msgid "Username"
-msgstr ""
+msgstr "اسم المستخدم"
 
 #: ../includes/admin/sellers.php:20 ../includes/admin/sellers.php:95
 msgid "Balance"
-msgstr ""
+msgstr "القيمة"
 
 #: ../includes/admin/sellers.php:50
 msgid "Activate Selling"
-msgstr ""
+msgstr "تفعيل البيع"
 
 #: ../includes/admin/sellers.php:52
 msgid "Make Inactivate"
-msgstr ""
+msgstr "إلغاء تنشيط"
 
 #: ../includes/admin/sellers.php:71
 msgid "Active"
-msgstr ""
+msgstr "نشط"
 
 #: ../includes/admin/sellers.php:73
 msgid "Inactive"
-msgstr ""
+msgstr "غير نشط"
 
 #: ../includes/admin/sellers.php:81
 msgid "No users found!"
-msgstr ""
+msgstr "لا يوجد أعضاء"
 
 #: ../includes/admin/withdraw.php:8
 msgid "Withdraw Requests"
-msgstr ""
+msgstr "طلبات السحب"
 
 #: ../includes/admin/withdraw.php:13 ../templates/dashboard.php:89
 #: ../templates/dashboard.php:132
 msgid "Pending"
-msgstr ""
+msgstr "في الإنتظار"
 
 #: ../includes/admin/withdraw.php:18
 msgid "Approved"
-msgstr ""
+msgstr "مقبولة"
 
 #: ../includes/admin/withdraw.php:23 ../templates/dashboard.php:99
 msgid "Cancelled"
-msgstr ""
+msgstr "ملغاة"
 
-#: ../includes/widgets/best-seller.php:99
+#: ../includes/widgets/best-seller.php:110
 msgid "Best Seller"
-msgstr ""
-
-#: ../includes/widgets/best-seller.php:100
-msgid "3"
-msgstr ""
-
-#: ../includes/widgets/best-seller.php:107
-#: ../includes/widgets/menu-category.php:147
-msgid "Title:"
-msgstr ""
+msgstr "أفضل بائع"
 
 #: ../includes/widgets/best-seller.php:111
-msgid "No of Seller:"
-msgstr ""
+msgid "3"
+msgstr "3"
 
-#: ../includes/widgets/menu-category.php:141
+#: ../includes/widgets/best-seller.php:118
+#: ../includes/widgets/menu-category.php:145
+msgid "Title:"
+msgstr "العنوان :"
+
+#: ../includes/widgets/best-seller.php:122
+msgid "No of Seller:"
+msgstr "رقم البائع :"
+
+#: ../includes/widgets/menu-category.php:139
 msgid "Product Category"
-msgstr ""
+msgstr "قسم المنتج"
 
 #: ../includes/woo-views/html-product-download.php:4
 msgid "File Name:"
-msgstr ""
+msgstr "اسم الملف :"
 
 #: ../includes/woo-views/html-product-download.php:4
 #: ../includes/woo-views/variation-admin-html.php:148
 msgid "This is the name of the download shown to the customer."
-msgstr ""
+msgstr "اسم التحميل الذي سيظهر للزبون"
 
 #: ../includes/woo-views/html-product-download.php:5
 #: ../includes/woo-views/html-product-variation-download.php:2
 msgid "File Name"
-msgstr ""
+msgstr "اسم الملف"
 
 #: ../includes/woo-views/html-product-download.php:9
 msgid "File URL:"
-msgstr ""
+msgstr "رابط الملف :"
 
 #: ../includes/woo-views/html-product-download.php:9
 #: ../includes/woo-views/variation-admin-html.php:149
@@ -2541,837 +2507,831 @@ msgid ""
 "This is the URL or absolute path to the file which customers will get access "
 "to."
 msgstr ""
+"هذا هو عنوان URL أو المسار المطلق لملف العملاء الذي سيحصل على الوصول إليها."
 
 #: ../includes/woo-views/html-product-download.php:10
 #: ../includes/woo-views/html-product-variation-download.php:3
 msgid "http://"
-msgstr ""
+msgstr "http://"
 
 #: ../includes/woo-views/html-product-download.php:14
 #: ../includes/woo-views/html-product-variation-download.php:4
 msgid "Choose file"
-msgstr ""
+msgstr "تحديد ملف"
 
 #: ../includes/woo-views/html-product-download.php:14
 #: ../includes/woo-views/html-product-variation-download.php:4
 msgid "Insert file URL"
-msgstr ""
+msgstr "ضع رابط الملف"
 
 #: ../includes/woo-views/variation-admin-html.php:7
 msgid "Click to toggle"
-msgstr ""
+msgstr "انقر للتبديل"
 
 #: ../includes/woo-views/variation-admin-html.php:21
 msgid "Any"
-msgstr ""
+msgstr "أي"
 
 #: ../includes/woo-views/variation-admin-html.php:53
 #: ../templates/products-listing.php:34 ../templates/edit/inventory.php:3
 msgid "SKU"
-msgstr ""
+msgstr "SKU"
 
 #: ../includes/woo-views/variation-admin-html.php:53
 msgid ""
 "Enter a SKU for this variation or leave blank to use the parent product SKU."
-msgstr ""
+msgstr "في الإدخال SKU لهذا الاختلاف أو اتركه فارغا لاستخدام المنتج SKU الأم."
 
 #: ../includes/woo-views/variation-admin-html.php:64
 msgid "Stock Qty:"
-msgstr ""
+msgstr "كمية المخزون:"
 
 #: ../includes/woo-views/variation-admin-html.php:64
 msgid ""
 "Enter a quantity to enable stock management at variation level, or leave "
 "blank to use the parent product's options."
 msgstr ""
+"إدخال كمية لتمكين إدارة المخزون على مستوى الاختلاف، أو ترك فارغا لاستخدام "
+"خيارات المنتج الأصل."
 
 #: ../includes/woo-views/variation-admin-html.php:73
 msgid "Regular Price:"
-msgstr ""
+msgstr "سعر عادي:"
 
 #: ../includes/woo-views/variation-admin-html.php:74
 msgid "Variation price (required)"
-msgstr ""
+msgstr "سعر الاختلاف (مطلوب)"
 
 #: ../includes/woo-views/variation-admin-html.php:77
 msgid "Sale Price:"
-msgstr ""
+msgstr "سعر البيع :"
 
 #: ../includes/woo-views/variation-admin-html.php:77
-#: ../templates/product-edit.php:235
+#: ../templates/product-edit.php:183
 msgid "Schedule"
-msgstr ""
+msgstr "مجدول"
 
 #: ../includes/woo-views/variation-admin-html.php:77
 msgid "Cancel schedule"
-msgstr ""
+msgstr "إلغاء الجدولة"
 
 #: ../includes/woo-views/variation-admin-html.php:84
 msgid "Sale start date:"
-msgstr ""
+msgstr "تاريخ بداية البيع"
 
 #: ../includes/woo-views/variation-admin-html.php:85
 msgctxt "placeholder"
 msgid "From&hellip;"
-msgstr ""
+msgstr "من&hellip;"
 
 #: ../includes/woo-views/variation-admin-html.php:88
 msgid "Sale end date:"
-msgstr ""
+msgstr "تاريخ انتهاء البيع:"
 
 #: ../includes/woo-views/variation-admin-html.php:89
 msgctxt "placeholder"
 msgid "To&hellip;"
-msgstr ""
+msgstr "إلى&hellip;"
 
 #: ../includes/woo-views/variation-admin-html.php:97
 msgid "Weight"
-msgstr ""
+msgstr "الوزن"
 
 #: ../includes/woo-views/variation-admin-html.php:97
 msgid ""
 "Enter a weight for this variation or leave blank to use the parent product "
 "weight."
-msgstr ""
+msgstr "إدخال الوزن لهذا الاختلاف أو ترك فارغا لاستخدام وزن المنتج الأصل."
 
 #: ../includes/woo-views/variation-admin-html.php:105
 msgid "Dimensions (L&times;W&times;H)"
-msgstr ""
+msgstr "الأبعاد L&times;W&times;H)"
 
 #: ../includes/woo-views/variation-admin-html.php:116
 msgid "Shipping class:"
-msgstr ""
+msgstr "كلاس الشحن :"
 
 #: ../includes/woo-views/variation-admin-html.php:131
 msgid "Tax class:"
-msgstr ""
+msgstr "كلاس الضرائب :"
 
 #: ../includes/woo-views/variation-admin-html.php:144
 msgid "Downloadable Files"
-msgstr ""
+msgstr "ملفات التنزيل"
 
 #: ../includes/woo-views/variation-admin-html.php:149
 msgid "File URL"
-msgstr ""
+msgstr "رابط الملف"
 
 #: ../includes/woo-views/variation-admin-html.php:164
-#: ../templates/edit/sidebar.php:103
+#: ../templates/edit/sidebar.php:94
 msgid "Add File"
-msgstr ""
+msgstr "إضافة ملف"
 
 #: ../includes/woo-views/variation-admin-html.php:190
 msgid "Download Limit:"
-msgstr ""
+msgstr "حد التنزيل :"
 
 #: ../includes/woo-views/variation-admin-html.php:190
 msgid "Leave blank for unlimited re-downloads."
-msgstr ""
+msgstr "اتركه فارغا لجعل التنزيلات غير محدودة"
 
 #: ../includes/woo-views/variation-admin-html.php:191
 #: ../includes/woo-views/variation-admin-html.php:197
 #: ../templates/orders/order-download-permission-html.php:28
 msgid "Unlimited"
-msgstr ""
+msgstr "غير محدود"
 
 #: ../includes/woo-views/variation-admin-html.php:196
 msgid "Download Expiry:"
-msgstr ""
+msgstr "انتهاء التحميل :"
 
 #: ../includes/woo-views/variation-admin-html.php:196
 msgid ""
 "Enter the number of days before a download link expires, or leave blank."
-msgstr ""
+msgstr "أدخل عدد الأيام قبل انتهاء صلاحية رابط التحميل، أو ترك فارغا."
 
 #: ../includes/woo-views/variation-admin-html.php:210
 msgid "Enabled"
-msgstr ""
+msgstr "مفعل"
 
 #: ../includes/woo-views/variation-admin-html.php:212
 #: ../templates/products-listing.php:128
 msgid "Downloadable"
-msgstr ""
+msgstr "للتحميل"
 
 #: ../includes/woo-views/variation-admin-html.php:212
 msgid ""
 "Enable this option if access is given to a downloadable file upon purchase "
 "of a product"
 msgstr ""
+"تمكين هذا الخيار في حال عدم إعطاء الوصول إلى ملف للتحميل عند الشراء من منتج"
 
 #: ../includes/woo-views/variation-admin-html.php:214
 #: ../templates/products-listing.php:126
 msgid "Virtual"
-msgstr ""
+msgstr "الظاهري"
 
 #: ../includes/woo-views/variation-admin-html.php:214
 msgid ""
 "Enable this option if a product is not shipped or there is no shipping cost"
-msgstr ""
+msgstr "تمكين هذا الخيار إذا لم يتم شحن المنتج أو عدم وجود تكلفة الشحن"
 
 #: ../templates/coupons.php:41
 msgid "Edit Coupon"
-msgstr ""
+msgstr "تعدل الكوبون"
 
 #: ../templates/coupons.php:48
 msgid "Add new Coupon"
-msgstr ""
+msgstr "إضافة كوبون جديد"
 
 #: ../templates/dashboard.php:46
 msgid "Pageview"
-msgstr ""
+msgstr "مشاهدة الصفحة"
 
 #: ../templates/dashboard.php:104
 msgid "Refunded"
-msgstr ""
+msgstr "مرجعة"
 
 #: ../templates/dashboard.php:109
 msgid "On hold"
-msgstr ""
+msgstr "متوقف"
 
 #: ../templates/dashboard.php:167
 msgid "+ Add new product"
-msgstr ""
+msgstr "+ إضافة منتج جديد"
 
 #: ../templates/dashboard.php:179
 msgid "Live"
-msgstr ""
+msgstr "اون لاين"
 
 #: ../templates/dashboard.php:184
 msgid "Offline"
-msgstr ""
+msgstr "معطل"
 
 #: ../templates/my-orders.php:34 ../woocommerce/myaccount/my-orders.php:27
 msgid "Recent Orders"
-msgstr ""
+msgstr "آخر الطلبات"
 
 #: ../templates/my-orders.php:79 ../woocommerce/myaccount/my-orders.php:72
 msgid "Pay"
-msgstr ""
+msgstr "دفع"
 
 #: ../templates/my-orders.php:108
 msgid "No orders found!"
-msgstr ""
+msgstr "لا توجد طلبات"
 
 #: ../templates/new-product.php:11
 msgid "Details about your product..."
-msgstr ""
+msgstr "تفاصيل حول المنتج الخاص بك ..."
 
 #: ../templates/new-product.php:22
 msgid "Please enter product title"
-msgstr ""
+msgstr "يرجى إدخال عنوان المنتج"
 
 #: ../templates/new-product.php:26
 msgid "Please select a category"
-msgstr ""
+msgstr "الرجاء تحديد القسم"
 
-#: ../templates/new-product.php:112 ../templates/product-edit.php:189
+#: ../templates/new-product.php:107 ../templates/product-edit.php:137
 msgid "Upload a product cover image"
-msgstr ""
+msgstr "تحميل صورة الغلاف للمنتج"
 
-#: ../templates/new-product.php:123
+#: ../templates/new-product.php:118
 msgid "Product name.."
-msgstr ""
+msgstr "اسم المنتج .."
 
-#: ../templates/new-product.php:134
+#: ../templates/new-product.php:129
 msgid "Short description about the product..."
-msgstr ""
+msgstr "وصف قصير عن هذا المنتج ..."
 
-#: ../templates/new-product.php:140 ../templates/product-edit.php:275
+#: ../templates/new-product.php:135 ../templates/product-edit.php:223
 msgid "- Select a category -"
-msgstr ""
+msgstr "- تحديد قسم -"
 
-#: ../templates/new-product.php:164
+#: ../templates/new-product.php:159
 msgid "Add Product"
-msgstr ""
+msgstr "إضافة متاج"
 
 #: ../templates/orders.php:23
 msgid "&larr; Orders"
-msgstr ""
+msgstr "&larr; طلبات"
 
 #: ../templates/product-edit.php:18
 msgid "Access Denied"
-msgstr ""
+msgstr "غير مسموح"
 
 #: ../templates/product-edit.php:93
 msgid "Success!"
-msgstr ""
+msgstr "نجاح"
 
 #: ../templates/product-edit.php:93
 msgid "The product has been updated successfully."
-msgstr ""
+msgstr "تم تحديث هذا المنتج بنجاح"
 
 #: ../templates/product-edit.php:96
 msgid "View Product &rarr;"
-msgstr ""
+msgstr "عرض المنتج &rarr;"
 
-#: ../templates/product-edit.php:104
-msgid "Info!"
-msgstr ""
-
-#: ../templates/product-edit.php:104
-msgid "The product is not visible yet. Please update the option."
-msgstr ""
-
-#: ../templates/product-edit.php:125
+#: ../templates/product-edit.php:107
 msgid "Options"
-msgstr ""
+msgstr "خيارات"
 
-#: ../templates/product-edit.php:130
+#: ../templates/product-edit.php:108
 msgid "Inventory"
-msgstr ""
+msgstr "جرد"
 
-#: ../templates/product-edit.php:135
+#: ../templates/product-edit.php:109
 msgid "Shipping"
-msgstr ""
+msgstr "الشحن"
 
-#: ../templates/product-edit.php:140 ../templates/edit/attributes.php:1
+#: ../templates/product-edit.php:110 ../templates/edit/attributes.php:1
 msgid "Attributes"
-msgstr ""
+msgstr "مميزات"
 
-#: ../templates/product-edit.php:145
+#: ../templates/product-edit.php:111
 msgid "Variations"
-msgstr ""
+msgstr "الاختلافات"
 
-#: ../templates/product-edit.php:221
+#: ../templates/product-edit.php:169
 msgid "Discounted Price"
-msgstr ""
+msgstr "سعر الخصم"
 
-#: ../templates/product-edit.php:231
+#: ../templates/product-edit.php:179
 msgid "Special Price"
-msgstr ""
+msgstr "سعر خاص"
 
-#: ../templates/product-edit.php:243
+#: ../templates/product-edit.php:191
 msgid "From"
-msgstr ""
+msgstr "من"
 
-#: ../templates/product-edit.php:251
+#: ../templates/product-edit.php:199
 msgid "To"
-msgstr ""
+msgstr "إلى"
 
 #: ../templates/products-listing.php:22
 msgid "Add new product"
-msgstr ""
+msgstr "إضافة منتج جديد"
 
 #: ../templates/products-listing.php:31
 msgid "Image"
-msgstr ""
+msgstr "الصورة"
 
 #: ../templates/products-listing.php:35
 msgid "Stock"
-msgstr ""
+msgstr "الكمية"
 
 #: ../templates/products-listing.php:36
 msgid "Price"
-msgstr ""
+msgstr "السعر"
 
 #: ../templates/products-listing.php:37
 msgid "Type"
-msgstr ""
+msgstr "النوع"
 
 #: ../templates/products-listing.php:38
 msgid "Views"
-msgstr ""
+msgstr "مشاهدات"
 
 #: ../templates/products-listing.php:98
 msgid "In stock"
-msgstr ""
+msgstr "في المخزن"
 
 #: ../templates/products-listing.php:100
 msgid "Out of stock"
-msgstr ""
+msgstr "غير متاح"
 
 #: ../templates/products-listing.php:120
 msgid "Grouped"
-msgstr ""
+msgstr "تجميع"
 
 #: ../templates/products-listing.php:122
 msgid "External/Affiliate"
-msgstr ""
+msgstr "الخارجية / التابعة لها"
 
 #: ../templates/products-listing.php:130
 msgid "Simple"
-msgstr ""
+msgstr "بسيط"
 
 #: ../templates/products-listing.php:134
 msgid "Variable"
-msgstr ""
+msgstr "ظاهر"
 
 #: ../templates/products-listing.php:147 ../templates/orders/listing.php:63
 msgid "Unpublished"
-msgstr ""
+msgstr "غير منشور"
 
 #: ../templates/products-listing.php:150 ../templates/orders/listing.php:65
 msgid "Y/m/d g:i:s A"
-msgstr ""
+msgstr "Y/m/d g:i:s A"
 
 #: ../templates/products-listing.php:157 ../templates/orders/listing.php:71
 #, php-format
 msgid "%s ago"
-msgstr ""
+msgstr "%s مضت"
 
 #: ../templates/products-listing.php:159 ../templates/orders/listing.php:73
 msgid "Y/m/d"
-msgstr ""
+msgstr "Y/m/d"
 
 #: ../templates/products-listing.php:169
 msgid "Missed schedule"
-msgstr ""
+msgstr "جدول متروك او فارغ"
 
 #: ../templates/products-listing.php:174
 msgid "Last Modified"
-msgstr ""
+msgstr "آخر تعديل"
 
 #: ../templates/products-listing.php:184
 msgid "No product found"
-msgstr ""
+msgstr "لم يتم العثور على أي منتج"
 
 #: ../templates/products-listing.php:202
 msgid "&laquo; Previous"
-msgstr ""
+msgstr "السابق &raquo; "
 
 #: ../templates/products-listing.php:203
 msgid "Next &raquo;"
-msgstr ""
+msgstr "&laquo; التالي  "
 
 #: ../templates/sellers.php:34 ../templates/orders/order-tax-html.php:8
 #: ../woocommerce/order/order-details.php:127
 #: ../woocommerce/order/order-details.php:142
 msgid "N/A"
-msgstr ""
+msgstr "غير محدد"
 
 #: ../templates/sellers.php:47
 msgid "No Image"
-msgstr ""
+msgstr "بدون صورة"
 
 #: ../templates/sellers.php:62
 msgid "P:"
-msgstr ""
+msgstr "P:"
 
 #: ../templates/sellers.php:67 ../templates/settings.php:36
 msgid "Visit Store"
-msgstr ""
+msgstr "زيارة المتجر"
 
 #: ../templates/sellers.php:104
 msgid "No seller found!"
-msgstr ""
+msgstr "لا يوجد بائع"
 
 #: ../templates/withdraw.php:57
 msgid "Withdraw Request"
-msgstr ""
+msgstr "طلب سحب "
 
 #: ../templates/withdraw.php:60
 msgid "Approved Requests"
-msgstr ""
+msgstr "الطلبات المقبولة"
 
 #: ../templates/withdraw.php:65
 #, php-format
 msgid "Current Balance: %s"
-msgstr ""
+msgstr "الرصيد الحالي : %s"
 
 #: ../templates/edit/attributes.php:1
 msgid "Different types of this product (e.g. size, color)"
-msgstr ""
+msgstr "أنواع مختلفة من هذا المنتج (مثل الحجم واللون)"
 
 #: ../templates/edit/attributes.php:80 ../templates/edit/templates-js.php:21
 msgid "Visible on the product page"
-msgstr ""
+msgstr "تظهر على صفحة المنتج"
 
 #: ../templates/edit/attributes.php:93 ../templates/edit/templates-js.php:27
 msgid "Used for variations"
-msgstr ""
+msgstr "تستخدم للإختلافات"
 
 #: ../templates/edit/attributes.php:107 ../templates/edit/attributes.php:121
 msgid "Option..."
-msgstr ""
+msgstr "إعداد.."
 
 #: ../templates/edit/attributes.php:144
 msgid "+ Add a category"
-msgstr ""
+msgstr "+ إضافة قسم"
 
 #: ../templates/edit/attributes.php:145
 msgid "Save attributes"
-msgstr ""
+msgstr "حفظ سمات"
 
 #: ../templates/edit/inventory.php:10
 msgid "Manage Stock?"
-msgstr ""
+msgstr "إدارة المخزون؟"
 
 #: ../templates/edit/inventory.php:12
 msgid "Enable stock management at product level"
-msgstr ""
+msgstr "تمكين إدارة المخزون على مستوى المنتج"
 
 #: ../templates/edit/inventory.php:17
 msgid "Stock Qty"
-msgstr ""
+msgstr "كمية المخزون"
 
 #: ../templates/edit/inventory.php:24
 msgid "Stock Status"
-msgstr ""
+msgstr "حالة المخزن"
 
 #: ../templates/edit/inventory.php:27
 msgid "In Stock"
-msgstr ""
+msgstr "في المخزن"
 
 #: ../templates/edit/inventory.php:28
 msgid "Out of Stock"
-msgstr ""
+msgstr "من المخزون"
 
 #: ../templates/edit/inventory.php:35
 msgid "Allow Backorders"
-msgstr ""
+msgstr "السماح بالطلب المتأخر"
 
 #: ../templates/edit/inventory.php:38
 msgid "Do not allow"
-msgstr ""
+msgstr "عدم السماح"
 
 #: ../templates/edit/inventory.php:39
 msgid "Allow but notify customer"
-msgstr ""
+msgstr "سماح ولكن مع إعلام الزبون"
 
 #: ../templates/edit/inventory.php:40
 msgid "Allow"
-msgstr ""
+msgstr "السماح"
 
 #: ../templates/edit/options.php:3
 msgid "Purchase Note"
-msgstr ""
+msgstr "ملاحظة الشراء"
 
 #: ../templates/edit/options.php:13
 msgid "Enable Reviews"
-msgstr ""
+msgstr "تفعيل المراجعات"
 
 #: ../templates/edit/options.php:18
 msgid "Visibility"
-msgstr ""
+msgstr "الوصول"
 
 #: ../templates/edit/options.php:21
 msgid "Catalog or Search"
-msgstr ""
+msgstr "كتالوج أو البحث"
 
 #: ../templates/edit/options.php:22
 msgid "Catalog"
-msgstr ""
+msgstr "سجل الدخول"
 
 #: ../templates/edit/options.php:24
 msgid "Hidden"
-msgstr ""
+msgstr "مخفي"
 
 #: ../templates/edit/options.php:30
 msgid "Sold Individually"
-msgstr ""
+msgstr "تباع بشكل فردي"
 
 #: ../templates/edit/options.php:32
 msgid "Allow one of this item to be bought in a single order"
-msgstr ""
+msgstr "تسمح لأحد في هذا البند ليتم شراؤها في أمر واحد"
 
 #: ../templates/edit/shipping.php:5
 msgid "Weight (kg)"
-msgstr ""
+msgstr "الوزن بالكيلو جرام"
 
 #: ../templates/edit/shipping.php:12
 msgid "Dimensions (cm)"
-msgstr ""
+msgstr "الأبعاد (سم)"
 
 #: ../templates/edit/shipping.php:14
 msgid "length"
-msgstr ""
+msgstr "الوزن"
 
 #: ../templates/edit/shipping.php:15
 msgid "width"
-msgstr ""
+msgstr "العرض"
 
 #: ../templates/edit/shipping.php:16
 msgid "height"
-msgstr ""
+msgstr "الإرتفاع"
 
 #: ../templates/edit/shipping.php:21
 msgid "Shipping Class"
-msgstr ""
+msgstr "كلاس الشحن"
 
 #: ../templates/edit/shipping.php:35
 msgid "No shipping class"
-msgstr ""
+msgstr "لا يوجد كلاس شحن"
 
 #: ../templates/edit/shipping.php:44
 msgid ""
 "Shipping classes are used by certain shipping methods to group similar "
 "products."
 msgstr ""
+"وتستخدم الطبقات الشحن عن طريق وسائل النقل البحري معينة لمنتجات مماثلة "
+"المجموعة."
 
 #: ../templates/edit/sidebar.php:3
 msgid "Update Product"
-msgstr ""
+msgstr "تحديث المنتج"
 
 #: ../templates/edit/sidebar.php:9
 msgid "Product Status:"
-msgstr ""
+msgstr "حالة المنتج :"
 
-#: ../templates/edit/sidebar.php:30 ../templates/edit/sidebar.php:70
+#: ../templates/edit/sidebar.php:30 ../templates/edit/sidebar.php:61
 msgid "OK"
-msgstr ""
+msgstr "نعم"
 
 #: ../templates/edit/sidebar.php:37
 msgid "Product Type:"
-msgstr ""
+msgstr "نوع المنتج :"
 
-#: ../templates/edit/sidebar.php:41
-msgid "Simple product"
-msgstr ""
-
-#: ../templates/edit/sidebar.php:42
-msgid "Variable product"
-msgstr ""
-
-#: ../templates/edit/sidebar.php:83
+#: ../templates/edit/sidebar.php:74
 msgid "Downloadable Product"
-msgstr ""
+msgstr "تحميل المنتج :"
 
-#: ../templates/edit/sidebar.php:123
+#: ../templates/edit/sidebar.php:114
 msgid "Limit"
-msgstr ""
+msgstr "الحد"
 
-#: ../templates/edit/sidebar.php:124
+#: ../templates/edit/sidebar.php:115
 msgid "Download Limit. e.g: 4"
-msgstr ""
+msgstr "حد التحميل (مثال: 4)"
 
-#: ../templates/edit/sidebar.php:130
+#: ../templates/edit/sidebar.php:121
 msgid "Number of days"
-msgstr ""
+msgstr "عدد الأيام"
 
-#: ../templates/edit/sidebar.php:141
+#: ../templates/edit/sidebar.php:132
 msgid "Image Gallery"
-msgstr ""
+msgstr "الصورة"
 
-#: ../templates/edit/sidebar.php:163
+#: ../templates/edit/sidebar.php:154
 msgid "Delete image"
-msgstr ""
+msgstr "حذف الصور"
 
-#: ../templates/edit/sidebar.php:175
+#: ../templates/edit/sidebar.php:166
 msgid "+ Add product images"
-msgstr ""
+msgstr "+ إضافة صور المنتج"
 
 #: ../templates/orders/downloadable.php:36
 msgid "Choose a downloadable product&hellip;"
-msgstr ""
+msgstr "اختيار منتج للتحميل &hellip;"
 
 #: ../templates/orders/downloadable.php:69
 msgid "Grant Access"
-msgstr ""
+msgstr "منح الوصول"
 
 #: ../templates/orders/listing.php:20
 msgid "Customer"
-msgstr ""
+msgstr "زبون"
 
 #: ../templates/orders/listing.php:22
 msgid "Action"
-msgstr ""
+msgstr "الحالة"
 
 #: ../templates/orders/listing.php:32
 #, php-format
 msgid "Order %s"
-msgstr ""
+msgstr "طلب %s"
 
 #: ../templates/orders/listing.php:54
 msgid "Guest"
-msgstr ""
+msgstr "زائر"
 
 #: ../templates/orders/listing.php:98
 msgid "Complete"
-msgstr ""
+msgstr "إنهاء"
 
 #: ../templates/orders/listing.php:153
 msgid "No orders found"
-msgstr ""
+msgstr "لا توجد طلبات"
 
 #: ../templates/orders/order-details.php:7
 msgid "This is not yours, I swear!"
-msgstr ""
+msgstr "هذه ليست لك، أقسم!"
 
 #: ../templates/orders/order-details.php:20
 msgid "Order Items"
-msgstr ""
+msgstr "عناصر الطلب"
 
 #: ../templates/orders/order-details.php:26
 msgid "Item"
-msgstr ""
+msgstr "عنصر"
 
 #: ../templates/orders/order-details.php:30
 msgid "Qty"
-msgstr ""
+msgstr "الكمية"
 
 #: ../templates/orders/order-details.php:32
 msgid "Totals"
-msgstr ""
+msgstr "المجموع"
 
 #: ../templates/orders/order-details.php:130
 msgid "Downloadable Product Permission"
-msgstr ""
+msgstr "صلاحيات تحميل المنتج"
 
 #: ../templates/orders/order-details.php:143
 msgid "General Details"
-msgstr ""
+msgstr "تفاصيل عامة"
 
 #: ../templates/orders/order-details.php:147
 msgid "Order Status:"
-msgstr ""
+msgstr "حالة الطلب :"
 
 #: ../templates/orders/order-details.php:151
 msgid "&nbsp; Edit"
-msgstr ""
+msgstr "&nbsp; تعديل"
+
+#: ../templates/orders/order-details.php:169
+msgid "Update"
+msgstr "تحديث"
 
 #: ../templates/orders/order-details.php:175
 msgid "Order Date:"
-msgstr ""
+msgstr "تاريخ الطلب :"
 
 #: ../templates/orders/order-details.php:182
 msgid "Customer:"
-msgstr ""
+msgstr "الزبون :"
 
 #: ../templates/orders/order-details.php:190
 #: ../woocommerce/order/order-details.php:106
 msgid "Email:"
-msgstr ""
+msgstr "البريد الإلكتروني :"
 
 #: ../templates/orders/order-details.php:194
 msgid "Phone:"
-msgstr ""
+msgstr "رقم الهاتف :"
 
 #: ../templates/orders/order-details.php:198
 msgid "Customer IP:"
-msgstr ""
+msgstr "عنوان الأي بي للزبون :"
 
 #: ../templates/orders/order-details.php:210
 msgid "Customer Note:"
-msgstr ""
+msgstr "ملاحظة الزبون :"
 
 #: ../templates/orders/order-details.php:245
 #, php-format
 msgid "added %s ago"
-msgstr ""
+msgstr "أضيف منذ  %s "
 
 #: ../templates/orders/order-details.php:245
 msgid "Delete note"
-msgstr ""
+msgstr "حذف ملاحظة"
 
 #: ../templates/orders/order-details.php:251
 msgid "There are no notes for this order yet."
-msgstr ""
+msgstr "لا توجد ملاحظات حول هذا الطلب حتى الآن"
 
 #: ../templates/orders/order-details.php:267
 msgid "Customer note"
-msgstr ""
+msgstr "ملاحظة الزبون"
 
 #: ../templates/orders/order-details.php:268
 msgid "Private note"
-msgstr ""
+msgstr "ملاحظة خاصة"
 
 #: ../templates/orders/order-details.php:276
 msgid "Add Note"
-msgstr ""
+msgstr "إضافة ملاحظة"
 
 #: ../templates/orders/order-download-permission-html.php:7
 #, php-format
 msgid "File %d: %s"
-msgstr ""
+msgstr "ملف %d: %s"
 
 #: ../templates/orders/order-download-permission-html.php:10
 msgid "Revoke Access"
-msgstr ""
+msgstr "إلغاء الوصول"
 
 #: ../templates/orders/order-download-permission-html.php:20
 msgid "Downloaded"
-msgstr ""
+msgstr "تم التحميل"
 
 #: ../templates/orders/order-download-permission-html.php:22
 #, php-format
 msgid "%s time"
 msgid_plural "%s times"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s مرة"
+msgstr[1] "%s مرات"
 
 #: ../templates/orders/order-download-permission-html.php:25
 msgid "Downloads Remaining"
-msgstr ""
+msgstr "التنزيلات المتبقية"
 
 #: ../templates/orders/order-download-permission-html.php:31
 msgid "Access Expires"
-msgstr ""
+msgstr "انتهاء صلاحية الوصول"
 
 #: ../templates/orders/order-download-permission-html.php:32
 msgid "Never"
-msgstr ""
+msgstr "للأبد"
 
 #: ../templates/orders/order-fee-html.php:10
 msgid "Fee Name"
-msgstr ""
+msgstr "الاسم"
 
 #: ../templates/orders/order-tax-html.php:6
 msgid "Tax Rate:"
-msgstr ""
+msgstr "معدل الضريبة:"
 
 #: ../templates/orders/order-tax-html.php:16
 msgid "Sales Tax:"
-msgstr ""
+msgstr "ضريبة المبيعات :"
 
 #: ../templates/orders/order-tax-html.php:20
 msgid "Shipping Tax:"
-msgstr ""
+msgstr "ضريبة الشحن :"
 
 #: ../woocommerce/global/form-login.php:22
 msgid "Username or email"
-msgstr ""
+msgstr "اسم المستخدم أو البريد الإلكتروني"
 
 #: ../woocommerce/global/form-login.php:26
 #: ../woocommerce/myaccount/form-login.php:36
 #: ../woocommerce/myaccount/form-login.php:86
 msgid "Password"
-msgstr ""
+msgstr "كلمة المرور"
 
 #: ../woocommerce/global/form-login.php:35
 #: ../woocommerce/myaccount/form-login.php:25
 #: ../woocommerce/myaccount/form-login.php:50
 msgid "Login"
-msgstr ""
+msgstr "دخول"
 
 #: ../woocommerce/global/form-login.php:38
 #: ../woocommerce/myaccount/form-login.php:44
 msgid "Remember me"
-msgstr ""
+msgstr "تذكر معلوماتي"
 
 #: ../woocommerce/global/form-login.php:42
 #: ../woocommerce/myaccount/form-login.php:53
 msgid "Lost your password?"
-msgstr ""
+msgstr "نسيت كلمة مرورك ؟"
 
 #: ../woocommerce/myaccount/form-login.php:32
 msgid "Username or email address"
-msgstr ""
+msgstr "اسم المستخدم أو البريد الإلكتروني"
 
 #: ../woocommerce/myaccount/form-login.php:66
 #: ../woocommerce/myaccount/form-login.php:98
 msgid "Register"
-msgstr ""
+msgstr "تسجيل"
 
 #: ../woocommerce/myaccount/form-login.php:81
 msgid "Email address"
-msgstr ""
+msgstr "البريد الإلكتروني"
 
 #: ../woocommerce/myaccount/form-login.php:91
 msgid "Anti-spam"
-msgstr ""
+msgstr "كود التحقق"
 
 #: ../woocommerce/order/order-details.php:20
 msgid "Order Details"
-msgstr ""
+msgstr "تفاصيل الطلب"
 
 #: ../woocommerce/order/order-details.php:70
 #, php-format
 msgid "Download file%s"
-msgstr ""
+msgstr "تحميل الملف %s"
 
 #: ../woocommerce/order/order-details.php:102
 msgid "Customer details"
-msgstr ""
+msgstr "تفاصيل الزبون"
 
 #: ../woocommerce/order/order-details.php:107
 msgid "Telephone:"
-msgstr ""
+msgstr "رقم الهاتف"

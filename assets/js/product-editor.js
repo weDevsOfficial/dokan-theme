@@ -121,11 +121,31 @@
         variants: {
             addCategory: function (e) {
                 e.preventDefault();
+                var product_types = $('#_product_type').val();
+                var check = $(this).siblings('select.select-attribute').val();
 
-                var row = $('.inputs-box').length ;
-                var category = _.template( $('#tmpl-sc-category').html(), { row: row } );
+                var row = $('.inputs-box').length;
+                if ( check == '' ) {
+                    var category = _.template( $('#tmpl-sc-category').html(), { row: row } );
+                    variantsHolder.append(category).children(':last').hide().fadeIn();
+                } else {
+                    var data = {
+                        row: row,
+                        name: check,
+                        type: product_types,
+                        action: 'dokan_pre_define_attribute',
+                    };
 
-                variantsHolder.append(category).children(':last').hide().fadeIn();
+                    $('#product-attributes .toolbar').block({ message: null, overlayCSS: { background: '#fff', opacity: 0.6 } });
+
+                    $.post( ajaxurl, data, function(resp) {
+                        if ( resp.success ) {
+                            variantsHolder.append(resp.data).children(':last').hide().fadeIn();
+                        }
+
+                        $('#product-attributes .toolbar').unblock();
+                    });
+                }
 
                 if ( product_type === 'simple' ) {
                     variantsHolder.find('.show_if_variable').hide();

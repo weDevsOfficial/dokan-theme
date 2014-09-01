@@ -5,7 +5,7 @@
             <input type="text" class="category-name" placeholder="Category name" name="attribute_names[<%= row %>]" value="">
 
             <input type="hidden" name="attribute_is_taxonomy[<%= row %>]" value="0">
-            <input type="hidden" name="attribute_position[<%= row %>]]" class="attribute_position" value="<%= row %>" />
+            <input type="hidden" name="attribute_position[<%= row %>]" class="attribute_position" value="<%= row %>" />
 
             <span class="actions">
                 <button class="row-remove btn pull-right btn-danger btn-sm">Remove</button>
@@ -18,13 +18,13 @@
                 <ul class="list-unstyled ">
                     <li>
                         <label class="checkbox-inline">
-                            <input type="checkbox" class="checkbox" name="attribute_visibility[<%= row %>]" value="1" /> <?php _e( 'Visible on the product page', 'woocommerce' ); ?>
+                            <input type="checkbox" class="checkbox" name="attribute_visibility[<%= row %>]" value="1" /> <?php _e( 'Visible on the product page', 'dokan' ); ?>
                         </label>
                     </li>
 
                     <li class="enable_variation show_if_variable">
                         <label class="checkbox-inline">
-                            <input type="checkbox" class="checkbox" name="attribute_variation[<%= row %>]" value="1" /> <?php _e( 'Used for variations', 'woocommerce' ); ?>
+                            <input type="checkbox" class="checkbox" name="attribute_variation[<%= row %>]" value="1" /> <?php _e( 'Used for variations', 'dokan' ); ?>
                         </label>
                     </li>
                 </ul>

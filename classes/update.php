@@ -112,7 +112,7 @@ class Dokan_Update {
         );
 
         $base_url = add_query_arg( 'wc-api', 'software-api', self::base_url );
-        $target_url = $base_url . '&' . http_build_query( $args );
+        $target_url = $base_url . '&' . http_build_query( $args, '', '&' );
         $response = wp_remote_get( $target_url, array( 'timeout' => 15 ) );
         $update = wp_remote_retrieve_body( $response );
 

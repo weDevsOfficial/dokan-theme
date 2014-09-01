@@ -52,13 +52,26 @@ function dokan_frontend_dashboard_scripts() {
  * @return boolean
  */
 function dokan_is_user_seller( $user_id ) {
-    if ( !user_can( $user_id, 'dokandar' ) ) {
+    if ( ! user_can( $user_id, 'dokandar' ) ) {
         return false;
     }
 
     return true;
 }
 
+/**
+ * Check if a user is customer
+ *
+ * @param int $user_id
+ * @return boolean
+ */
+function dokan_is_user_customer( $user_id ) {
+    if ( ! user_can( $user_id, 'customer' ) ) {
+        return false;
+    }
+
+    return true;
+}
 
 /**
  * Check if current user is the product author
@@ -91,7 +104,7 @@ function dokan_is_product_author( $product_id = 0 ) {
  */
 function dokan_redirect_login() {
     if ( ! is_user_logged_in() ) {
-        wp_redirect( dokan_get_page_url( 'myaccount', 'woocommerce' ) );
+        wp_redirect( dokan_get_page_url( 'myaccount', 'dokan' ) );
         exit;
     }
 }
@@ -124,22 +137,22 @@ function dokan_delete_product_handler() {
         $product_id = isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : 0;
 
         if ( !$product_id ) {
-            wp_redirect( add_query_arg( array( 'message' => 'error' ), get_permalink() ) );
+            wp_redirect( add_query_arg( array( 'msg' => 'error' ), get_permalink() ) );
             return;
         }
 
         if ( !wp_verify_nonce( $_GET['_wpnonce'], 'dokan-delete-product' ) ) {
-            wp_redirect( add_query_arg( array( 'message' => 'error' ), get_permalink() ) );
+            wp_redirect( add_query_arg( array( 'msg' => 'error' ), get_permalink() ) );
             return;
         }
 
         if ( !dokan_is_product_author( $product_id ) ) {
-            wp_redirect( add_query_arg( array( 'message' => 'error' ), get_permalink() ) );
+            wp_redirect( add_query_arg( array( 'msg' => 'error' ), get_permalink() ) );
             return;
         }
 
         wp_delete_post( $product_id );
-        wp_redirect( add_query_arg( array( 'message' => 'product_deleted' ), get_permalink() ) );
+        wp_redirect( add_query_arg( array( 'msg' => 'product_deleted' ), get_permalink() ) );
         exit;
     }
 }
@@ -522,7 +535,7 @@ function dokan_get_post_status( $status ) {
             break;
 
         default:
-            return '';
+            return apply_filters( 'dokan_post_status_case', NULL, $status );
             break;
     }
 }
@@ -682,7 +695,7 @@ function dokan_redirect_to_register(){
     global $action;
 
     if ( $action == 'register' ) {
-        wp_redirect( dokan_get_page_url( 'myaccount', 'woocommerce' ) );
+        wp_redirect( dokan_get_page_url( 'myaccount', 'dokan' ) );
         exit;
     }
 }
@@ -816,13 +829,13 @@ function dokan_get_store_info( $seller_id ) {
 
     $defaults = array(
         'store_name' => '',
-        'social' => array(),
-        'payment' => array( 'paypal' => array( 'email' ), 'bank' => array() ),
-        'phone' => '',
+        'social'     => array(),
+        'payment'    => array( 'paypal' => array( 'email' ), 'bank' => array() ),
+        'phone'      => '',
         'show_email' => 'off',
-        'address' => '',
-        'location' => '',
-        'banner' => 0
+        'address'    => '',
+        'location'   => '',
+        'banner'     => 0
     );
 
     $info = wp_parse_args( $info, $defaults );

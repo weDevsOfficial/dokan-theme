@@ -23,13 +23,13 @@ $order = new WC_Order( $order_id );
                         <table cellpadding="0" cellspacing="0" class="table order-items">
                             <thead>
                                 <tr>
-                                    <th class="item" colspan="2"><?php _e( 'Item', 'woocommerce' ); ?></th>
+                                    <th class="item" colspan="2"><?php _e( 'Item', 'dokan' ); ?></th>
 
                                     <?php do_action( 'woocommerce_admin_order_item_headers' ); ?>
 
-                                    <th class="quantity"><?php _e( 'Qty', 'woocommerce' ); ?></th>
+                                    <th class="quantity"><?php _e( 'Qty', 'dokan' ); ?></th>
 
-                                    <th class="line_cost"><?php _e( 'Totals', 'woocommerce' ); ?></th>
+                                    <th class="line_cost"><?php _e( 'Totals', 'dokan' ); ?></th>
                                 </tr>
                             </thead>
                             <tbody id="order_items_list">
@@ -145,7 +145,7 @@ $order = new WC_Order( $order_id );
                         <ul class="list-unstyled order-status">
                             <li>
                                 <span><?php _e( 'Order Status:', 'dokan' ); ?></span>
-                                <label class="label label-<?php echo dokan_get_order_status_class( $order->status ); ?>"><?php echo $order->status; ?></label>
+                                <label class="label label-<?php echo dokan_get_order_status_class( $order->status ); ?>"><?php echo dokan_get_order_status( $order->status ); ?></label>
 
                                 <?php if ( dokan_get_option( 'order_status_change', 'dokan_selling', 'on' ) == 'on' ) {?>
                                     <a href="#" class="dokan-edit-status"><small><?php _e( '&nbsp; Edit', 'dokan' ); ?></small></a>
@@ -158,7 +158,7 @@ $order = new WC_Order( $order_id );
                                         <?php
                                             $statuses = (array) get_terms( 'shop_order_status', array( 'hide_empty' => 0, 'orderby' => 'id' ) );
                                             foreach ( $statuses as $status ) {
-                                                echo '<option value="' . esc_attr( $status->slug ) . '" ' . selected( $status->slug, $order->status, false ) . '>' . esc_html__( $status->name, 'woocommerce' ) . '</option>';
+                                                echo '<option value="' . esc_attr( $status->slug ) . '" ' . selected( $status->slug, $order->status, false ) . '>' . dokan_get_order_status( $status->name ) . '</option>';
                                             }
                                         ?>
                                     </select>
@@ -182,9 +182,14 @@ $order = new WC_Order( $order_id );
                                 <span><?php _e( 'Customer:', 'dokan' ); ?></span>
                                 <?php
                                 $customer_user = absint( get_post_meta( $order->id, '_customer_user', true ) );
-                                $customer_userdata = get_userdata( $customer_user );
+                                if ( $customer_user && $customer_user != 0 ) {
+                                    $customer_userdata = get_userdata( $customer_user );
+                                    $display_name =  $customer_userdata->display_name;
+                                } else {
+                                    $display_name = get_post_meta( $order->id, '_billing_first_name', true ). ' '. get_post_meta( $order->id, '_billing_last_name', true );
+                                }
                                 ?>
-                                <a href="#"><?php echo $customer_userdata->display_name; ?></a><br>
+                                <a href="#"><?php echo $display_name; ?></a><br>
                             </li>
                             <li>
                                 <span><?php _e( 'Email:', 'dokan' ); ?></span>
@@ -242,13 +247,13 @@ $order = new WC_Order( $order_id );
                                         <?php echo wpautop( wptexturize( wp_kses_post( $note->comment_content ) ) ); ?>
                                     </div>
                                     <p class="meta">
-                                        <?php printf( __( 'added %s ago', 'woocommerce' ), human_time_diff( strtotime( $note->comment_date_gmt ), current_time( 'timestamp', 1 ) ) ); ?> <a href="#" class="delete_note"><?php _e( 'Delete note', 'woocommerce' ); ?></a>
+                                        <?php printf( __( 'added %s ago', 'dokan' ), human_time_diff( strtotime( $note->comment_date_gmt ), current_time( 'timestamp', 1 ) ) ); ?> <a href="#" class="delete_note"><?php _e( 'Delete note', 'dokan' ); ?></a>
                                     </p>
                                 </li>
                                 <?php
                             }
                         } else {
-                            echo '<li>' . __( 'There are no notes for this order yet.', 'woocommerce' ) . '</li>';
+                            echo '<li>' . __( 'There are no notes for this order yet.', 'dokan' ) . '</li>';
                         }
 
                         echo '</ul>';
@@ -256,7 +261,7 @@ $order = new WC_Order( $order_id );
                         add_filter( 'comments_clauses', array( 'WC_Comments', 'exclude_order_comments' ), 10, 1 );
                         ?>
                         <div class="add_note">
-                            <h4><?php _e( 'Add note', 'woocommerce' ); ?></h4>
+                            <h4><?php _e( 'Add note', 'dokan' ); ?></h4>
                             <form class="form-inline" id="add-order-note" role="form" method="post">
                                 <p>
                                     <textarea type="text" id="add-note-content" name="note" class="form-control" cols="20" rows="3"></textarea>

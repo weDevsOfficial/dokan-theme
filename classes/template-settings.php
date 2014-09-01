@@ -133,14 +133,14 @@ class Dokan_Template_Settings{
         do_action( 'dokan_store_profile_saved', $store_id, $dokan_settings );
 
         if ( !defined('DOING_AJAX') && DOING_AJAX !== true ) {
-            wp_redirect( add_query_arg( array( 'message' => 'profile_saved' ), get_permalink() ) );
+            wp_redirect( add_query_arg( array( 'msg' => 'profile_saved' ), get_permalink() ) );
         }
     }
 
     function setting_field( $validate = '' ) {
         global $current_user;
 
-        if ( isset($_GET['message'])) {
+        if ( isset($_GET['msg'])) {
             ?>
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -190,6 +190,8 @@ class Dokan_Template_Settings{
 
             <div class="dokan-ajax-response"></div>
 
+            <?php do_action( 'dokan_settings_before_form', $current_user, $profile_info ); ?>
+
             <form method="post" id="settings-form"  action="" class="form-horizontal">
 
                 <?php wp_nonce_field( 'dokan_settings_nonce' ); ?>
@@ -212,6 +214,7 @@ class Dokan_Template_Settings{
                     </div>
                 </div> <!-- .dokan-banner -->
 
+                <?php do_action( 'dokan_settings_after_banner', $current_user, $profile_info ); ?>
 
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="dokan_store_name"><?php _e( 'Store Name', 'dokan' ); ?></label>
@@ -375,6 +378,8 @@ class Dokan_Template_Settings{
                     </div> <!-- col.md-4 -->
                 </div> <!-- .form-group -->
 
+                <?php do_action( 'dokan_settings_form_bottom', $current_user, $profile_info ); ?>
+
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="dokan_setting"></label>
 
@@ -384,6 +389,8 @@ class Dokan_Template_Settings{
                 </div>
 
             </form>
+
+            <?php do_action( 'dokan_settings_before_form', $current_user, $profile_info ); ?>
 
                 <script type="text/javascript">
 
