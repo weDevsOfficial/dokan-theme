@@ -4,7 +4,7 @@ Theme URI: http://wedevs.com/theme/dokan/
 Author: Tareq Hasan
 Author URI: http://tareq.weDevs.com
 Description: An e-commerce marketplace theme for WordPress. Powered by WooCommerce and weDevs.
-Version: 1.0.5
+Version: 1.0.6
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -2388,6 +2388,10 @@ a:hover {
 .product-edit-container #product-attributes h4 {
   margin-bottom: 15px;
 }
+.product-edit-container #product-attributes .select-attribute.form-control {
+  display: inline;
+  width: auto;
+}
 .product-edit-container #variants-holder .inputs-box {
   background: #f5f5f5;
   margin-bottom: 20px;
@@ -3646,4 +3650,3 @@ span.error {
 .woocommerce-page #reviews #comments ol.commentlist li .comment-text {
   margin: 0 0 0 90px;
 }
-/*# sourceMappingURL=style.css.map */

@@ -123,7 +123,7 @@
                 e.preventDefault();
                 var product_types = $('#_product_type').val();
                 var check = $(this).siblings('select.select-attribute').val();
-                
+
                 var row = $('.inputs-box').length;
                 if ( check == '' ) {
                     var category = _.template( $('#tmpl-sc-category').html(), { row: row } );
@@ -135,10 +135,15 @@
                         type: product_types,
                         action: 'dokan_pre_define_attribute',
                     };
+
+                    $('#product-attributes .toolbar').block({ message: null, overlayCSS: { background: '#fff', opacity: 0.6 } });
+
                     $.post( ajaxurl, data, function(resp) {
-                        if( resp.success ) {
-                            variantsHolder.append(resp.data).children(':last').hide().fadeIn();  
+                        if ( resp.success ) {
+                            variantsHolder.append(resp.data).children(':last').hide().fadeIn();
                         }
+
+                        $('#product-attributes .toolbar').unblock();
                     });
                 }
 
