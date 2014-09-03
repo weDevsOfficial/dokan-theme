@@ -569,8 +569,8 @@ function dokan_header_user_menu() {
             <li><?php wp_loginout( home_url() ); ?></li>
 
         <?php } else { ?>
-            <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'dokan' ); ?>"><?php _e( 'Log in', 'dokan' ); ?></a></li>
-            <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'dokan' ); ?>"><?php _e( 'Sign Up', 'dokan' ); ?></a></li>
+            <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'Log in', 'dokan' ); ?></a></li>
+            <li><a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>"><?php _e( 'Sign Up', 'dokan' ); ?></a></li>
         <?php } ?>
     </ul>
     <?php
@@ -585,7 +585,7 @@ function dokan_account_migration_button() {
         ?>
         <p>&nbsp;</p>
         <p>
-            <a href="<?php echo dokan_get_page_url( 'myaccount', 'dokan' ); ?>account-migration/seller/" class="button button-primary"><?php _e( 'Become a Seller', 'dokan' ); ?></a>
+            <a href="<?php echo dokan_get_page_url( 'myaccount', 'woocommerce' ); ?>account-migration/seller/" class="button button-primary"><?php _e( 'Become a Seller', 'dokan' ); ?></a>
         </p>
         <?php
     }
