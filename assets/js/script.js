@@ -18,8 +18,11 @@ jQuery(function($) {
     var dashboardMenu = $('ul.dokan-dashboard-menu'),
         contentArea = $('#content article');
 
+    console.log($(window).width());
     if ( contentArea.height() > dashboardMenu.height() ) {
-        dashboardMenu.css({ height: contentArea.height() });
+        if ( $(window).width() > 767) {
+            dashboardMenu.css({ height: contentArea.height() });
+        }
     }
 
     // cat drop stack, disable parent anchors if has children
