@@ -18,7 +18,6 @@ jQuery(function($) {
     var dashboardMenu = $('ul.dokan-dashboard-menu'),
         contentArea = $('#content article');
 
-    console.log($(window).width());
     if ( contentArea.height() > dashboardMenu.height() ) {
         if ( $(window).width() > 767) {
             dashboardMenu.css({ height: contentArea.height() });
