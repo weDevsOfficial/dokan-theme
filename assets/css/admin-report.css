@@ -1,8 +1,0 @@
-
-.admin-report-container{margin-top:10px}.admin-report-container:before,.admin-report-container:after{content:" ";display:table}
-.admin-report-container:after{clear:both}
-.admin-report-container .dokan-reports-sidebar{width:20%;float:left;margin-right:20px}
-.admin-report-container ul.chart-legend{background:#fff;list-style:none;margin:12px 0 0 0;padding:0;border:1px solid #ededed}.admin-report-container ul.chart-legend li{color:#aaa;padding:13px 18px;margin:0;border-bottom:1px solid #ededed;font-weight:normal;font-size:13px}.admin-report-container ul.chart-legend li strong{display:block;color:#464646;font-size:24px;line-height:30px;font-weight:normal}
-.admin-report-container .chart-container{float:left;width:75%}
-.admin-report-container .chart-placeholder.main{width:100%;height:450px}
-.chart-tooltip{position:absolute;display:none;line-height:1;background:#333;color:#fff;padding:3px 5px;font-size:11px;border-radius:3px}
