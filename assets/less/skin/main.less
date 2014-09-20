@@ -1,18 +1,17 @@
+@import "../mixins.less";
+
 @borderColor: #DDD;
 
 a {
     color: @skinColor;
 }
 
-.btn-theme {
-    background: @skinColor;
-    color: #fff;
-
-    &:hover {
-        background: darken(@skinColor, 5%);
-        color: #fff;
-    }
+input[type="submit"].dokan-btn-theme,
+a.dokan-btn-theme,
+.dokan-btn-theme {
+    .button-variant( #fff; @skinColor; @skinColor);
 }
+
 
 mark {
     color: #fff;
@@ -34,6 +33,14 @@ mark {
 
     &:before {
         background-color:@skinColor;
+    }
+}
+
+.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li {
+    &.active,
+    &:hover,
+    &.active {
+        background: @skinColor;
     }
 }
 
@@ -168,7 +175,7 @@ mark {
     }
 
     a.button, button.button, input.button, #respond input#submit, #content input.button {
-        .btn-theme;
+        .button-variant( #fff; @skinColor; @skinColor);
     }
 
     ul.products li.product {
