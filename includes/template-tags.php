@@ -280,7 +280,6 @@ function dokan_header_user_menu() {
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo esc_html( $current_user->display_name ); ?> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="<?php echo get_permalink( wc_get_page_id( 'my_orders' ) ); ?>"><?php _e( 'My Orders', 'dokan' ); ?></a></li>
                     <li><a href="<?php echo get_permalink( wc_get_page_id( 'myaccount' ) ); ?>"><?php _e( 'My Account', 'dokan' ); ?></a></li>
                     <li><a href="<?php echo wc_customer_edit_account_url(); ?>"><?php _e( 'Edit Account', 'dokan' ); ?></a></li>
                     <li class="divider"></li>
