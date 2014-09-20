@@ -178,7 +178,7 @@ class WeDevs_Dokan_Theme {
 
         $protocol           = is_ssl() ? 'https' : 'http';
         $template_directory = get_template_directory_uri();
-        // $skin               = dokan_get_option( 'color_skin', 'dokan_general', 'orange.css' );
+        $skin               = get_theme_mod( 'color_skin', 'orange.css' );
 
         // register styles
         wp_enqueue_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.css', false, null );
@@ -186,7 +186,7 @@ class WeDevs_Dokan_Theme {
         wp_enqueue_style( 'fontawesome' );
         wp_enqueue_style( 'dokan-opensans', $protocol . '://fonts.googleapis.com/css?family=Open+Sans:400,700' );
         wp_enqueue_style( 'dokan-theme', $template_directory . '/style.css', false, null );
-        wp_enqueue_style( 'dokan-theme-skin', $template_directory . '/assets/css/skins/blue.css', false, null );
+        wp_enqueue_style( 'dokan-theme-skin', $template_directory . '/assets/css/skins/' . $skin, false, null );
 
         /****** Scripts ******/
         if ( is_single() && comments_open() && get_option( 'thread_comments' ) ) {
