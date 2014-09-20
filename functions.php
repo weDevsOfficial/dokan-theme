@@ -181,7 +181,7 @@ class WeDevs_Dokan_Theme {
         // $skin               = dokan_get_option( 'color_skin', 'dokan_general', 'orange.css' );
 
         // register styles
-        wp_enqueue_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.min.css', false, null );
+        wp_enqueue_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.css', false, null );
         wp_enqueue_style( 'flexslider', $template_directory . '/assets/css/flexslider.css', false, null );
         wp_enqueue_style( 'fontawesome' );
         wp_enqueue_style( 'dokan-opensans', $protocol . '://fonts.googleapis.com/css?family=Open+Sans:400,700' );
