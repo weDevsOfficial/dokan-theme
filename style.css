@@ -1107,6 +1107,9 @@ a:hover {
   vertical-align: top;
   border-top: 1px solid #ededed;
 }
+.dokan-dashboard header.entry-header {
+  display: none;
+}
 /*--------------------------------------------------
 :: Sidebars
 -------------------------------------------------- */
