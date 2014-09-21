@@ -42,11 +42,11 @@
                     <div class="footer-copy">
                         <div class="col-md-6 site-info">
                             <?php
-                            $footer_text = dokan_get_option( 'footer_text', 'dokan_general' );
+                            $footer_text = get_theme_mod( 'footer_text' );
 
                             if ( empty( $footer_text ) ) {
                                 printf( __( '&copy; %d, %s. All rights are reserved.', 'dokan' ), date( 'Y' ), get_bloginfo( 'name' ) );
-                                printf( __( 'Powered <a href="%s" target="_blank">Dokan</a> - by <a href="%s" target="_blank">weDevs</a>', 'dokan' ), esc_url( 'http://wedevs.com/theme/dokan/?utm_source=dokan&utm_medium=theme_footer&utm_campaign=product' ), esc_url( 'http://wedevs.com/?utm_source=dokan&utm_medium=theme_footer&utm_campaign=product' ) );
+                                printf( __( 'Powered by <a href="%s" target="_blank">Dokan</a> from <a href="%s" target="_blank">weDevs</a>', 'dokan' ), esc_url( 'http://wedevs.com/theme/dokan/?utm_source=dokan&utm_medium=theme_footer&utm_campaign=product' ), esc_url( 'http://wedevs.com/?utm_source=dokan&utm_medium=theme_footer&utm_campaign=product' ) );
                             } else {
                                 echo $footer_text;
                             }
@@ -56,10 +56,10 @@
                         <div class="col-md-6 footer-gateway">
                             <?php
                                 wp_nav_menu( array(
-                                    'theme_location' => 'footer',
-                                    'depth' => 1,
+                                    'theme_location'  => 'footer',
+                                    'depth'           => 1,
                                     'container_class' => 'footer-menu-container clearfix',
-                                    'menu_class' => 'menu list-inline pull-right',
+                                    'menu_class'      => 'menu list-inline pull-right',
                                 ) );
                             ?>
                         </div>

@@ -1,8 +1,8 @@
 <?php
 /**
- * A full width page template
+ * The Template for displaying a full width page.
  *
- * Template Name: Full width
+ * Template Name: Full-width Page
  *
  * @package dokan
  * @package dokan - 2013 1.0

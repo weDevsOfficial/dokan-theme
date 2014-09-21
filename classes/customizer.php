@@ -12,22 +12,123 @@ class Dokan_Customizer {
         add_action( 'customize_preview_init', array($this, 'customizer_scripts' ) );
     }
 
+    function get_post_type( $post_type ) {
+        $pages_array = array( '-1' => __( '- select -', 'dokan' ) );
+        $pages = get_posts( array('post_type' => $post_type, 'numberposts' => -1) );
+
+        if ( $pages ) {
+            foreach ($pages as $page) {
+                $pages_array[$page->ID] = $page->post_title;
+            }
+        }
+
+        return $pages_array;
+    }
+
     function register_control( $wp_customize ) {
 
         // logo
         $wp_customize->add_section( 'dokan_logo_section', array(
-            'title' => __( 'Theme Logo', 'dokan' ),
-            'priority' => 9,
+            'title'       => __( 'Site Logo', 'dokan' ),
             'description' => __( 'Upload your logo to replace the default Logo (dimension : 180 X 50)', 'dokan' ),
         ) );
 
         $wp_customize->add_setting( 'dokan_logo' );
 
         $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'dokan_logo', array(
-            'label' => __( 'Upload Logo', 'dokan' ),
-            'section' => 'dokan_logo_section',
+            'label'    => __( 'Upload Logo', 'dokan' ),
+            'section'  => 'dokan_logo_section',
             'settings' => 'dokan_logo',
         ) ) );
+
+        // theme settings
+        $wp_customize->add_section( 'dokan_theme_section', array(
+            'title' => __( 'Theme Settings', 'dokan' )
+        ) );
+
+        // skin chooser
+        $wp_customize->add_setting( 'color_skin', array( 'default' => 'orange.css' ) );
+        $wp_customize->add_control( 'color_skin', array(
+            'label'   => __( 'Color Skin', 'dokan' ),
+            'section' => 'dokan_theme_section',
+            'type'    => 'select',
+            'choices' => array(
+                'orange.css' => __( 'Orange', 'dokan' ),
+                'sky.css'    => __( 'Sky', 'dokan' ),
+                'blue.css'   => __( 'Blue', 'dokan' ),
+                'green.css'  => __( 'Green', 'dokan' ),
+                'purple.css' => __( 'Purple', 'dokan' ),
+                'red.css'    => __( 'Red', 'dokan' ),
+                'pink.css'   => __( 'Pink', 'dokan' ),
+            )
+        ) );
+
+        // show slider
+        $wp_customize->add_setting( 'show_slider' );
+        $wp_customize->add_control( 'show_slider', array(
+                'type'    => 'checkbox',
+                'label'   => __( 'Show Slider on home page', 'dokan' ),
+                'section' => 'dokan_theme_section',
+            )
+        );
+
+        // select slider
+        $wp_customize->add_setting( 'slider_id', array( 'default' => '-1' ) );
+        $wp_customize->add_control( 'slider_id', array(
+            'label'   => __( 'Select Slider', 'dokan' ),
+            'section' => 'dokan_theme_section',
+            'type'    => 'select',
+            'choices' => $this->get_post_type( 'dokan_slider' )
+        ) );
+
+        // show featured
+        $wp_customize->add_setting( 'show_featured', array( 'default' => 'on' ) );
+        $wp_customize->add_control( 'show_featured', array(
+                'type'    => 'checkbox',
+                'label'   => __( 'Show featured products on homepage', 'dokan' ),
+                'section' => 'dokan_theme_section',
+            )
+        );
+
+        // show latest
+        $wp_customize->add_setting( 'show_latest_pro', array( 'default' => 'on' ) );
+        $wp_customize->add_control( 'show_latest_pro', array(
+                'type'    => 'checkbox',
+                'label'   => __( 'Show latest products on homepage', 'dokan' ),
+                'section' => 'dokan_theme_section',
+            )
+        );
+
+        // show best selling
+        $wp_customize->add_setting( 'show_best_selling', array( 'default' => 'on' ) );
+        $wp_customize->add_control( 'show_best_selling', array(
+                'type'    => 'checkbox',
+                'label'   => __( 'Show best selling products on homepage', 'dokan' ),
+                'section' => 'dokan_theme_section',
+            )
+        );
+
+        // show top rated
+        $wp_customize->add_setting( 'show_top_rated', array( 'default' => 'on' ) );
+        $wp_customize->add_control( 'show_top_rated', array(
+                'type'    => 'checkbox',
+                'label'   => __( 'Show top rated products on homepage', 'dokan' ),
+                'section' => 'dokan_theme_section',
+            )
+        );
+
+        // footer text
+        $wp_customize->add_setting( 'footer_text', array(
+            'capability' => 'edit_theme_options',
+            'default'    => sprintf( __( '&copy; %d. All rights are reserved.', 'wedocs' ), date( 'Y' ) )
+        ));
+
+        $wp_customize->add_control( 'footer_text' , array(
+            'label'   => __( 'Footer Text', 'wedocs' ),
+            'section' => 'dokan_theme_section',
+            'type'    => 'text'
+        ));
+
 
         // link color
         $wp_customize->add_setting( 'dokan_link_color', array(

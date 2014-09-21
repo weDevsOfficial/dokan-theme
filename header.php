@@ -1,7 +1,4 @@
 <?php
-if ( !function_exists( 'WC' ) ) {
-    wp_die( sprintf( __( 'Please install <a href="%s"><strong>WooCommerce</strong></a> plugin first', 'dokan' ), 'http://wordpress.org/plugins/woocommerce/' ) );
-}
 /**
  * The Header for our theme.
  *
@@ -28,7 +25,7 @@ if ( !function_exists( 'WC' ) ) {
 </head>
 
 <body <?php body_class(); ?>>
-    
+
     <div id="page" class="hfeed site">
         <?php do_action( 'before' ); ?>
 
