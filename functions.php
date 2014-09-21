@@ -42,7 +42,6 @@ class WeDevs_Dokan_Theme {
      * @return void
      */
     function init_filters() {
-        // add_filter( 'posts_where', array( $this, 'hide_others_uploads' ) );
         add_filter( 'wp_title', array( $this, 'wp_title' ), 10, 2 );
     }
 
@@ -56,6 +55,7 @@ class WeDevs_Dokan_Theme {
         add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 
         add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ) );
+        add_action( 'dokan_admin_menu', array( $this, 'slider_page' ) );
     }
 
     public function init_classes() {
@@ -238,6 +238,10 @@ class WeDevs_Dokan_Theme {
         }
 
         return $title;
+    }
+
+    public function slider_page() {
+        add_submenu_page( 'dokan', __( 'Slider', 'dokan' ), __( 'Slider', 'dokan' ), 'manage_options', 'edit.php?post_type=dokan_slider' );
     }
 
 }
