@@ -9,6 +9,9 @@
 $store_user = get_userdata( get_query_var( 'author' ) );
 $store_info = dokan_get_store_info( $store_user->ID );
 
+$scheme = is_ssl() ? 'https' : 'http';
+wp_enqueue_script( 'google-maps', $scheme . '://maps.google.com/maps/api/js?sensor=true' );
+
 get_header();
 ?>
 
