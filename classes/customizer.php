@@ -120,11 +120,11 @@ class Dokan_Customizer {
         // footer text
         $wp_customize->add_setting( 'footer_text', array(
             'capability' => 'edit_theme_options',
-            'default'    => sprintf( __( '&copy; %d. All rights are reserved.', 'wedocs' ), date( 'Y' ) )
+            'default'    => sprintf( __( '&copy; %d. All rights are reserved.', 'dokan' ), date( 'Y' ) )
         ));
 
         $wp_customize->add_control( 'footer_text' , array(
-            'label'   => __( 'Footer Text', 'wedocs' ),
+            'label'   => __( 'Footer Text', 'dokan' ),
             'section' => 'dokan_theme_section',
             'type'    => 'text'
         ));
