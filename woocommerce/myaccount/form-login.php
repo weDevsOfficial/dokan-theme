@@ -94,7 +94,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
             <?php do_action( 'register_form' ); ?>
 
             <p class="form-row">
-                <?php wp_nonce_field( 'woocommerce-register', 'register' ); ?>
+                <?php wp_nonce_field( 'woocommerce-register', '_wpnonce' ); ?>
                 <input type="submit" class="btn btn-theme" name="register" value="<?php _e( 'Register', 'dokan' ); ?>" />
             </p>
 
