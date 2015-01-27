@@ -4,7 +4,7 @@
  *
  * @author      WooThemes
  * @package     WooCommerce/Templates
- * @version     2.1.0
+ * @version     2.2.6
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -81,16 +81,16 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                 <label for="reg_email"><?php _e( 'Email address', 'dokan' ); ?> <span class="required">*</span></label>
                 <input type="email" class="input-text form-control" name="email" id="reg_email" value="<?php if ( ! empty( $_POST['email'] ) ) esc_attr_e($_POST['email']); ?>" required="required" />
             </p>
-            
+
             <?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
-                
+
                 <p class="form-row form-group form-row-wide">
                     <label for="reg_password"><?php _e( 'Password', 'dokan' ); ?> <span class="required">*</span></label>
                     <input type="password" class="input-text form-control" name="password" id="reg_password" value="<?php if ( ! empty( $_POST['password'] ) ) esc_attr_e( $_POST['password'] ); ?>" required="required" minlength="6" />
                 </p>
 
-            <?php endif; ?>     
-            
+            <?php endif; ?>
+
             <!-- Spam Trap -->
             <div style="left:-999em; position:absolute;"><label for="trap"><?php _e( 'Anti-spam', 'dokan' ); ?></label><input type="text" name="email_2" id="trap" tabindex="-1" /></div>
 
