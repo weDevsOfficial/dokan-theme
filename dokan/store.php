@@ -97,6 +97,19 @@ get_header();
                                 <a href="<?php echo esc_url( $store_info['social']['youtube'] ); ?>" target="_blank"><i class="fa fa-youtube-square"></i></a>
                             </li>
                         <?php } ?>
+
+                        <?php if ( isset( $store_info['social']['flickr'] ) && !empty( $store_info['social']['flickr'] ) ) { ?>
+                            <li>
+                                <a href="<?php echo esc_url( $store_info['social']['flickr'] ); ?>" target="_blank"><i class="fa fa-flickr"></i></a>
+                            </li>
+                        <?php } ?>
+
+                        <?php if ( isset( $store_info['social']['instagram'] ) && !empty( $store_info['social']['instagram'] ) ) { ?>
+                            <li>
+                                <a href="<?php echo esc_url( $store_info['social']['instagram'] ); ?>" target="_blank"><i class="fa fa-instagram"></i></a>
+                            </li>
+                        <?php } ?>
+
                     </ul>
                 </div> <!-- .profile-info -->
             </div> <!-- .profile-info-box -->
