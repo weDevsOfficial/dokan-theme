@@ -353,6 +353,10 @@ a:hover {
 .navbar-top-area .dokan-cart-amount-top {
   color: #aaa;
 }
+.navbar-top-area li.open .dokan-cart-amount-top{
+  color: #fff;
+}
+
 .navbar-default {
   background-color: #fff;
   border: none;
