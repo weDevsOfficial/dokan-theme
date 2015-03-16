@@ -40,7 +40,7 @@ function dokan_woo_breadcrumb( $args ) {
         'wrap_after'  => '</nav>',
         'before'      => '<li>',
         'after'       => '</li>',
-        'home'        => _x( '<i class="fa fa-home"></i> Home', 'breadcrumb', 'dokan' ),
+        'home'        => _x( 'Home', 'breadcrumb', 'dokan' ),
     );
 }
 
