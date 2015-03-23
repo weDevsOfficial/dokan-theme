@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Dokan 2.0.1\n"
+"Project-Id-Version: Dokan 2.1.1\n"
 "Report-Msgid-Bugs-To: http://wedevs.com/support/forum/theme-support/dokan/\n"
-"POT-Creation-Date: 2015-01-27 07:52:07+00:00\n"
+"POT-Creation-Date: 2015-03-16 10:42:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -206,7 +206,7 @@ msgid "Slider Options"
 msgstr ""
 
 #: classes/slider.php:68 classes/slider.php:79 classes/slider.php:80
-#: functions.php:244
+#: functions.php:210
 msgid "Slider"
 msgstr ""
 
@@ -452,7 +452,7 @@ msgstr ""
 msgid "out of 5"
 msgstr ""
 
-#: dokan/store.php:127
+#: dokan/store.php:140
 msgid "No products were found of this seller!"
 msgstr ""
 
@@ -536,10 +536,6 @@ msgstr ""
 
 #: functions.php:153
 msgid "Footer Sidebar - 4"
-msgstr ""
-
-#: functions.php:237
-msgid "Page %s"
 msgstr ""
 
 #: header.php:38 header.php:89
@@ -778,5 +774,5 @@ msgstr ""
 
 #: includes/wc-template.php:43
 msgctxt "breadcrumb"
-msgid "<i class=\"fa fa-home\"></i> Home"
+msgid "Home"
 msgstr ""
