@@ -2,6 +2,43 @@
 module.exports = function(grunt) {
 
     grunt.initConfig({
+
+        // setting folder templates
+        dirs: {
+            css: 'assets/css',
+            less: 'assets/less',
+            fonts: 'assets/fonts',
+            images: 'assets/images',
+            js: 'assets/js'
+        },
+
+        // Compile all .less files.
+        less: {
+
+            // one to one
+            core: {
+                options: {
+                    sourceMap: true,
+                    sourceMapFilename: 'style.css.map',
+                    sourceMapURL: 'style.css.map',
+                    sourceMapRootpath: '../../'
+                },
+                files: {
+                    'style.css': '<%= dirs.less %>/style.less'
+                }
+            },
+        },
+
+        watch: {
+            less: {
+                files: ['<%= dirs.less %>/*.less'],
+                tasks: ['less:core'],
+                options: {
+                    livereload: true
+                }
+            }
+        },
+
         // Generate POT files.
         makepot: {
             target: {
@@ -70,6 +107,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks( 'grunt-contrib-clean' );
     grunt.loadNpmTasks( 'grunt-contrib-copy' );
     grunt.loadNpmTasks( 'grunt-contrib-compress' );
+    grunt.loadNpmTasks( 'grunt-contrib-less' );
 
 
     grunt.registerTask('release', [
