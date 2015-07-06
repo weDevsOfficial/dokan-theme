@@ -11,7 +11,7 @@ $map_location = isset( $store_info['location'] ) ? esc_attr( $store_info['locati
     </button>
 
     <div class="widget-area collapse widget-collapse">
-
+       <?php do_action( 'dokan_sidebar_store_before', $store_user, $store_info ); ?>
         <?php
         if ( ! dynamic_sidebar( 'sidebar-store' ) ) {
 
