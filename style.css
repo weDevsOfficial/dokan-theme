@@ -4,7 +4,7 @@ Theme URI: http://wedevs.com/theme/dokan/
 Author: Tareq Hasan
 Author URI: http://tareq.weDevs.com
 Description: An e-commerce theme for Dokan
-Version: 2.1.0
+Version: 2.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -353,10 +353,6 @@ a:hover {
 .navbar-top-area .dokan-cart-amount-top {
   color: #aaa;
 }
-.navbar-top-area li.open .dokan-cart-amount-top{
-  color: #fff;
-}
-
 .navbar-default {
   background-color: #fff;
   border: none;
@@ -2579,3 +2575,4 @@ span.error {
 .woocommerce-page #reviews #comments ol.commentlist li .comment-text {
   margin: 0 0 0 90px;
 }
+/*# sourceMappingURL=style.css.map */

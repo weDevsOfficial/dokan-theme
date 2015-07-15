@@ -29,7 +29,7 @@ class WeDevs_Dokan_Theme {
         $this->includes();
 
         // init actions and filter
-        // $this->init_filters();
+        $this->init_filters();
         $this->init_actions();
 
         // initialize classes
@@ -41,9 +41,9 @@ class WeDevs_Dokan_Theme {
      *
      * @return void
      */
-    // function init_filters() {
-        
-    // }
+    function init_filters() {
+        add_filter( 'wp_title', array( $this, 'wp_title' ), 10, 2 );
+    }
 
     /**
      * Init action hooks
@@ -204,6 +204,40 @@ class WeDevs_Dokan_Theme {
         wp_enqueue_script( 'flexslider', $template_directory . '/assets/js/jquery.flexslider-min.js', array( 'jquery' ) );
 
         wp_enqueue_script( 'dokan-theme-scripts', $template_directory . '/assets/js/script.js', false, null, true );
+    }
+
+    /**
+     * Create a nicely formatted and more specific title element text for output
+     * in head of document, based on current view.
+     *
+     * @since Dokan 1.0.4
+     *
+     * @param string  $title Default title text for current view.
+     * @param string  $sep   Optional separator.
+     * @return string The filtered title.
+     */
+    function wp_title( $title, $sep ) {
+        global $paged, $page;
+
+        if ( is_feed() ) {
+            return $title;
+        }
+
+        // Add the site name.
+        $title .= get_bloginfo( 'name' );
+
+        // Add the site description for the home/front page.
+        $site_description = get_bloginfo( 'description', 'display' );
+        if ( $site_description && ( is_home() || is_front_page() ) ) {
+            $title = "$title $sep $site_description";
+        }
+
+        // Add a page number if necessary.
+        if ( $paged >= 2 || $page >= 2 ) {
+            $title = "$title $sep " . sprintf( __( 'Page %s', 'dokan' ), max( $paged, $page ) );
+        }
+
+        return $title;
     }
 
     public function slider_page() {
