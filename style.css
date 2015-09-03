@@ -2364,6 +2364,7 @@ span.error {
     left: auto;
     top: auto;
     box-shadow: none;
+    min-width: 100% !important;
   }
   .widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block {
     width: 100%;
@@ -2376,6 +2377,18 @@ span.error {
   }
 }
 @media (max-width: 767px) {
+  #dokan-primary {
+    width: 100%;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  #dokan-secondary {
+    width: 100%;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   .navbar-top-area .navbar-nav {
     background: #fff;
   }
@@ -2469,9 +2482,10 @@ span.error {
     left: auto;
     top: auto;
     box-shadow: none;
+    min-width: 100% !important;
   }
   .widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block {
-    width: 100%;
+    width: 96%;
     float: left;
     margin-bottom: 15px;
     padding: 0;
@@ -2574,20 +2588,5 @@ span.error {
 .woocommerce #reviews #comments ol.commentlist li .comment-text,
 .woocommerce-page #reviews #comments ol.commentlist li .comment-text {
   margin: 0 0 0 90px;
-}
-@media (max-width: 767px) {
-  #dokan-primary {
-    width: 100%;
-    float: left;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
-  #dokan-secondary {
-    width: 100%;
-    float: left;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
 }
 /*# sourceMappingURL=style.css.map */
