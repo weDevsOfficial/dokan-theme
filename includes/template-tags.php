@@ -217,16 +217,17 @@ if ( ! function_exists( 'dokan_category_widget' ) ) :
  * @return void
  */
 function dokan_category_widget() {
-     the_widget( 'Dokan_Category_Widget', array(
-        'title' => __( 'Product Categories', 'dokan' )
-        ),
-        array(
-            'before_widget' => '<aside class="widget dokan-category-menu">',
-            'after_widget' => '</aside>',
-            'before_title' => '<h3 class="widget-title">',
-            'after_title' => '</h3>',
-        )
-    );
+        if ( class_exists( 'Dokan_Category_Widget' ) ) {
+            the_widget( 'Dokan_Category_Widget', array(
+                'title' => __( 'Product Categories', 'dokan' )
+            ), array(
+                'before_widget' => '<aside class="widget dokan-category-menu">',
+                'after_widget'  => '</aside>',
+                'before_title'  => '<h3 class="widget-title">',
+                'after_title'   => '</h3>',
+            )
+            );
+        }
 }
 
 endif;
@@ -256,9 +257,16 @@ function dokan_header_user_menu() {
 
             <?php
             global $current_user;
+            
+            
+            $is_seller = false;
+            
+            if(  function_exists( 'dokan_is_user_seller' )){
+                $is_seller = dokan_is_user_seller( $user_id );
+            }
 
             $user_id = $current_user->ID;
-            if ( dokan_is_user_seller( $user_id ) ) {
+            if ( $is_seller ) {
                 ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php _e( 'Seller Dashboard', 'dokan' ); ?> <b class="caret"></b></a>
