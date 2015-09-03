@@ -2575,4 +2575,19 @@ span.error {
 .woocommerce-page #reviews #comments ol.commentlist li .comment-text {
   margin: 0 0 0 90px;
 }
+@media (max-width: 767px) {
+  #dokan-primary {
+    width: 100%;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  #dokan-secondary {
+    width: 100%;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
 /*# sourceMappingURL=style.css.map */
