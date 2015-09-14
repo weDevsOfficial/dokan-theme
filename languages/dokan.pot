@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Dokan 2.1.1\n"
+"Project-Id-Version: Dokan 2.2.1\n"
 "Report-Msgid-Bugs-To: http://wedevs.com/support/forum/theme-support/dokan/\n"
-"POT-Creation-Date: 2015-03-16 10:42:01+00:00\n"
+"POT-Creation-Date: 2015-09-14 13:35:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -206,7 +206,7 @@ msgid "Slider Options"
 msgstr ""
 
 #: classes/slider.php:68 classes/slider.php:79 classes/slider.php:80
-#: functions.php:210
+#: functions.php:244
 msgid "Slider"
 msgstr ""
 
@@ -436,26 +436,6 @@ msgstr ""
 msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
-#: dokan/store-reviews.php:37
-msgid "Seller Review"
-msgstr ""
-
-#: dokan/store-reviews.php:42
-msgid "No Result Found"
-msgstr ""
-
-#: dokan/store-reviews.php:61
-msgid "Rated %d out of 5"
-msgstr ""
-
-#: dokan/store-reviews.php:62
-msgid "out of 5"
-msgstr ""
-
-#: dokan/store.php:140
-msgid "No products were found of this seller!"
-msgstr ""
-
 #: footer.php:48
 msgid "&copy; %d, %s. All rights are reserved."
 msgstr ""
@@ -538,6 +518,10 @@ msgstr ""
 msgid "Footer Sidebar - 4"
 msgstr ""
 
+#: functions.php:237
+msgid "Page %s"
+msgstr ""
+
 #: header.php:38 header.php:89
 msgid "Toggle navigation"
 msgstr ""
@@ -597,43 +581,43 @@ msgstr ""
 msgid "Next &rarr;"
 msgstr ""
 
-#: includes/template-tags.php:221
+#: includes/template-tags.php:222
 msgid "Product Categories"
 msgstr ""
 
-#: includes/template-tags.php:246
+#: includes/template-tags.php:247
 msgid "Cart %s"
 msgstr ""
 
-#: includes/template-tags.php:264
+#: includes/template-tags.php:272
 msgid "Seller Dashboard"
 msgstr ""
 
-#: includes/template-tags.php:267
+#: includes/template-tags.php:275
 msgid "Visit your store"
 msgstr ""
 
-#: includes/template-tags.php:283
+#: includes/template-tags.php:291
 msgid "My Account"
 msgstr ""
 
-#: includes/template-tags.php:284
+#: includes/template-tags.php:292
 msgid "Edit Account"
 msgstr ""
 
-#: includes/template-tags.php:286
+#: includes/template-tags.php:294
 msgid "Billing Address"
 msgstr ""
 
-#: includes/template-tags.php:287
+#: includes/template-tags.php:295
 msgid "Shipping Address"
 msgstr ""
 
-#: includes/template-tags.php:294
+#: includes/template-tags.php:302
 msgid "Log in"
 msgstr ""
 
-#: includes/template-tags.php:295
+#: includes/template-tags.php:303
 msgid "Sign Up"
 msgstr ""
 
@@ -687,11 +671,11 @@ msgstr ""
 msgid "Store Category"
 msgstr ""
 
-#: sidebar-store.php:27
+#: sidebar-store.php:28
 msgid "Store Location"
 msgstr ""
 
-#: sidebar-store.php:28
+#: sidebar-store.php:31
 msgid "Contact Seller"
 msgstr ""
 
