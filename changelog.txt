@@ -1,3 +1,10 @@
+v2.2.1 -> September 14, 2015
+---------------------
+- [fix] Delete Dokan templating folder
+- [fix] fix store page style issue on mobile device
+- [fix] Errors fixed on Dokan deactivation
+- [improved] Responsive CSS updated
+
 v1.0.6 -> September 2, 2014
 ---------------------
 - [new] Added hook and filter in product listing
