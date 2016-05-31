@@ -64,9 +64,9 @@ class WeDevs_Dokan_Theme {
 
 
     function includes() {
-        $lib_dir     = __DIR__ . '/lib/';
-        $inc_dir     = __DIR__ . '/includes/';
-        $classes_dir = __DIR__ . '/classes/';
+        $lib_dir     = dirname( __FILE__ ) . '/lib/';
+        $inc_dir     = dirname( __FILE__ ) . '/includes/';
+        $classes_dir = dirname( __FILE__ ) . '/classes/';
 
         require_once $classes_dir . 'slider.php';
 
