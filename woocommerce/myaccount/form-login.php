@@ -4,7 +4,7 @@
  *
  * @author      WooThemes
  * @package     WooCommerce/Templates
- * @version     2.2.6
+ * @version     2.6.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -12,9 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 <?php wc_print_notices(); ?>
 
-<?php do_action('woocommerce_before_customer_login_form'); ?>
+<?php do_action( 'woocommerce_before_customer_login_form' ); ?>
 
-<?php if (get_option('woocommerce_enable_myaccount_registration') == 'yes') : ?>
+<?php if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) : ?>
 
 <div class="row" id="customer_login">
 
@@ -57,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
         </form>
 
-<?php if ( get_option('woocommerce_enable_myaccount_registration') == 'yes' && get_option( 'users_can_register' ) == '1' ) : ?>
+<?php if ( get_option('woocommerce_enable_myaccount_registration') === 'yes' && get_option( 'users_can_register' ) == '1' ) : ?>
 
     </div>
 
@@ -68,7 +68,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
         <form id="register" method="post" class="register">
             <?php do_action( 'woocommerce_register_form_start' ); ?>
 
-            <?php if ( get_option( 'woocommerce_registration_generate_username' ) == 'no' ) : ?>
+            <?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
 
                 <p class="form-row form-group form-row-wide">
                     <label for="reg_username"><?php _e( 'Username', 'dokan' ); ?> <span class="required">*</span></label>
@@ -112,4 +112,4 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 <?php endif; ?>
 
-<?php do_action('woocommerce_after_customer_login_form'); ?>
+<?php do_action( 'woocommerce_after_customer_login_form' ); ?>
