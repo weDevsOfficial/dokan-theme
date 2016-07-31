@@ -12,7 +12,7 @@ remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_ad
 function dokan_product_loop_price() {
     global $product;
     ?>
-    <span class="item-bar">
+    <span class="item-bar dokan-clearfix">
 
         <?php woocommerce_template_loop_price(); ?>
 
