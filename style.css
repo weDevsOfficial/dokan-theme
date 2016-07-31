@@ -2642,4 +2642,10 @@ span.error {
 .woocommerce ul.products li.product .button{
   margin-top: 0px;
 }
+
+span.item-button a.button.loading:after,
+span.item-button button.button.loading:after,
+span.item-button input.button.loading:after{
+  content: '';
+}
 /*# sourceMappingURL=style.css.map */
