@@ -4,7 +4,7 @@ Theme URI: http://wedevs.com/theme/dokan/
 Author: Tareq Hasan
 Author URI: http://tareq.weDevs.com
 Description: An e-commerce theme for Dokan
-Version: 2.2.1
+Version: 2.2.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -2588,5 +2588,64 @@ span.error {
 .woocommerce #reviews #comments ol.commentlist li .comment-text,
 .woocommerce-page #reviews #comments ol.commentlist li .comment-text {
   margin: 0 0 0 90px;
+}
+
+.woocommerce-MyAccount-navigation ul li
+{
+    list-style: none;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    position: relative;
+}
+.woocommerce-MyAccount-navigation ul li a {
+    padding: 4px 8px;
+    display: block;
+}
+.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--dashboard a:before {
+    content: "\f0e4";
+}
+.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--orders a:before {
+    content: "\f07a";
+}
+.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--edit-address a:before {
+    content: "\f015";
+}
+.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--edit-account a:before {
+    content: "\f007";
+}
+.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--customer-logout a:before {
+    content: "\f08b";
+}
+.woocommerce-MyAccount-navigation ul{
+    padding-left: 0px;
+}
+.woocommerce-account .woocommerce-MyAccount-navigation{
+    width: 25%;
+}
+.woocommerce-MyAccount-navigation ul li a:before {
+    display: inline-block;
+    font: normal normal normal 1em/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\f0f6";
+    line-height: 1.618;
+    margin-left: .53em;
+    width: 1.387em;
+    text-align: right;
+    float: right;
+    opacity: .25;
+}
+.woocommerce-MyAccount-navigation ul li.is-active a:before{
+    opacity: 1;
+}
+.woocommerce ul.products li.product .button{
+  margin-top: 0px;
+}
+
+span.item-button a.button.loading:after,
+span.item-button button.button.loading:after,
+span.item-button input.button.loading:after{
+  content: '';
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,3 +1,12 @@
+v2.2.2 -> November 14, 2016
+---------------------
+- [fix] php 5.2 Backward compatibility added for DIR path
+- [fix] Add to cart icon fixed
+- [fix] Product thumbnail styles fixed
+- [fix] WooCommerce loader icon removed
+- [update] Updated overridden woocommerce templates to version 2.6.3
+- [new] added styles for My Account - Dashboard Navigation for woocommerce 2.6.3
+
 v2.2.1 -> September 14, 2015
 ---------------------
 - [fix] Delete Dokan templating folder

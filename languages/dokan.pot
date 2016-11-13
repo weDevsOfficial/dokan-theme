@@ -1,17 +1,17 @@
-# Copyright (C) 2015 Tareq Hasan
+# Copyright (C) 2016 Tareq Hasan
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Dokan 2.2.1\n"
+"Project-Id-Version: Dokan 2.2.2\n"
 "Report-Msgid-Bugs-To: http://wedevs.com/support/forum/theme-support/dokan/\n"
-"POT-Creation-Date: 2015-09-14 13:35:39+00:00\n"
+"POT-Creation-Date: 2016-11-13 18:02:21+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
-"X-Generator: grunt-wp-i18n 0.4.8\n"
+"X-Generator: grunt-wp-i18n 0.4.9\n"
 
 #: 404.php:16
 msgid "Oops! That page can&rsquo;t be found."
@@ -683,42 +683,42 @@ msgstr ""
 msgid "Username or email"
 msgstr ""
 
-#: woocommerce/global/form-login.php:26 woocommerce/myaccount/form-login.php:36
-#: woocommerce/myaccount/form-login.php:88
+#: woocommerce/global/form-login.php:26 woocommerce/myaccount/form-login.php:47
+#: woocommerce/myaccount/form-login.php:99
 msgid "Password"
 msgstr ""
 
-#: woocommerce/global/form-login.php:35 woocommerce/myaccount/form-login.php:25
-#: woocommerce/myaccount/form-login.php:50
+#: woocommerce/global/form-login.php:35 woocommerce/myaccount/form-login.php:36
+#: woocommerce/myaccount/form-login.php:61
 msgid "Login"
 msgstr ""
 
-#: woocommerce/global/form-login.php:38 woocommerce/myaccount/form-login.php:44
+#: woocommerce/global/form-login.php:38 woocommerce/myaccount/form-login.php:55
 msgid "Remember me"
 msgstr ""
 
-#: woocommerce/global/form-login.php:42 woocommerce/myaccount/form-login.php:53
+#: woocommerce/global/form-login.php:42 woocommerce/myaccount/form-login.php:64
 msgid "Lost your password?"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:32
+#: woocommerce/myaccount/form-login.php:43
 msgid "Username or email address"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:66
-#: woocommerce/myaccount/form-login.php:102
+#: woocommerce/myaccount/form-login.php:77
+#: woocommerce/myaccount/form-login.php:113
 msgid "Register"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:74
+#: woocommerce/myaccount/form-login.php:85
 msgid "Username"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:81
+#: woocommerce/myaccount/form-login.php:92
 msgid "Email address"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:95
+#: woocommerce/myaccount/form-login.php:106
 msgid "Anti-spam"
 msgstr ""
 
