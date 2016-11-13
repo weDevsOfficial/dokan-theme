@@ -1,8 +1,11 @@
-v2.2.2 -> September 14, 2015
+v2.2.2 -> November 14, 2016
 ---------------------
-- [update] Updated overridden woocommerce templates to version 2.6.0
 - [fix] php 5.2 Backward compatibility added for DIR path
-- [new] added styles for My Account - Dashboard Navigation for woocommerce 2.6
+- [fix] Add to cart icon fixed
+- [fix] Product thumbnail styles fixed
+- [fix] WooCommerce loader icon removed
+- [update] Updated overridden woocommerce templates to version 2.6.3
+- [new] added styles for My Account - Dashboard Navigation for woocommerce 2.6.3
 
 v2.2.1 -> September 14, 2015
 ---------------------
