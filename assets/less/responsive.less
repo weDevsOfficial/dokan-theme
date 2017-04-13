@@ -1,0 +1,278 @@
+/*--------------------------------------------------
+:: Responsive Menubar
+-------------------------------------------------- */
+@media (max-width: 991px) {
+    .widget.dokan-category-menu {
+        #cat-drop-stack > ul > li {
+            .sub-category {
+                position: relative;
+                left: auto;
+                top: auto;
+                box-shadow: none;
+                min-width: 100% !important;
+
+                .sub-block {
+                    width: 100%;
+                    float: left;
+                    margin-bottom: 15px;
+                    padding: 0;
+                }
+            }
+
+            &:hover .sub-category {
+                display: none;
+            }
+        }
+    }
+}
+@media (max-width: 767px) {
+    
+    #dokan-primary {
+        width: 100%;
+        float: left;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    #dokan-secondary {
+        width: 100%;
+        float: left;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .navbar-top-area {
+
+        .navbar-nav {
+            background: #fff;
+        }
+
+        .navbar-toggle .icon-bar {
+            background-color: #BABABA;
+        }
+
+        .navbar-collapse {
+            padding-left: 15px;
+        }
+
+        .navbar-nav > li {
+            border: none;
+        }
+
+        .navbar-nav .open .dropdown-menu > li > a {
+            color: #625D5D;
+        }
+    }
+
+    .navbar-toggle {
+        color: #BABABA;
+        border-color: #BABABA;
+        padding: 4px 10px;
+        margin-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    .navbar-inverse .navbar-toggle {
+        border-color: #BABABA;
+    }
+
+    .navbar-inverse .navbar-collapse {
+        border: none;
+    }
+
+    .menu-toggle {
+        color: #FFFFFF;
+        font-size: 22px;
+        line-height: 36px;
+        margin: 0;
+        padding: 0 0 0 5px;
+
+        i.icon-reorder {
+            padding: 0 5px 0 0;
+            margin-top: 5px;
+        }
+    }
+
+    .site-header {
+        #navigation {
+            background: @mainColor;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .cart-area-top {
+            float: none;
+            margin-top: 0;
+        }
+    }
+
+    #navigation .menu {
+        display: none;
+    }
+
+    .site-header ul, .site-header li {
+        float: none
+        overflow: hidden;
+    }
+
+    .site-header #navigation > ul {
+        padding-left: 0;
+        float: none;
+        overflow: hidden;
+    }
+
+    .site-header #navigation li a {
+        background: @mainColor;
+    }
+
+    .site-header #navigation > ul > li {
+        border-left: none;
+        border-right: none;
+    }
+
+    #navigation ul li {
+        float: none;
+        display: block;
+    }
+
+    #navigation ul li ul {
+        position: inherit;
+        visibility: visible;
+    }
+
+    .site-header #navigation li ul.sub-menu li {
+        height: auto;
+        opacity: 1;
+    }
+
+    .site-header #navigation li ul.sub-menu {
+        opacity: 1;
+        margin-left: 15px;
+        float: none;
+    }
+
+    .widget-area.widget-collapse.collapse {
+        display: none;
+    }
+
+    .widget.dokan-category-menu {
+        #cat-drop-stack > ul > li {
+            .sub-category {
+                position: relative;
+                left: auto;
+                top: auto;
+                box-shadow: none;
+                min-width: 100% !important;
+
+                .sub-block {
+                    width: 96%;
+                    float: left;
+                    margin-bottom: 15px;
+                    padding: 0;
+                }
+            }
+
+            &:hover .sub-category {
+                display: none;
+            }
+        }
+    }
+
+    .navbar-toggle.widget-area-toggle {
+        border: 1px solid @borderColor;
+        float: none;
+        margin: 0px 0 15px 0;
+        .clearfix;
+
+        .fa-bars {
+            color: darken(@borderColor, 20%);
+        }
+
+        .bar-title {
+            color: darken(@borderColor, 20%);
+            font-size: 14px;
+            line-height: 14px;
+            padding-left: 10px;
+        }
+    }
+
+    .store-page-wrap .profile-frame {
+        background-size: auto 100%;
+    }
+
+    .woocommerce,
+    .woocommerce-page {
+        &.single-product {
+            .related ul.products li.product,
+            .upsells.products ul.products li.product {
+                width: 45%;
+            }
+        }
+
+        #reviews {
+            #respond {
+
+                .comment-form-rating {
+
+                    label {
+                        float: none;
+                    }
+                    p.stars {
+                        float: none;
+                    }
+                }
+
+                .comment-form-comment {
+                    width: 80%;
+                }
+            }
+        }
+
+
+        .archive-title {
+
+            h1.page-title {
+                float: none;
+                width: 100%;
+            }
+
+            .woocommerce-ordering,
+            .woocommerce-result-count {
+                width: 100%;
+            }
+        }
+    }
+
+    .site-footer .footer-copy {
+        padding-bottom: 15px;
+
+        ul.pull-right {
+            float: none !important;
+        }
+    }
+}
+
+@media (max-width: 430px) {
+    .woocommerce,
+    .woocommerce-page {
+        #reviews #respond .comment-form-comment {
+            margin-top: 40px;
+        }
+
+        #content div.product .woocommerce-tabs ul.tabs {
+            padding: 0;
+        }
+
+        #content div.product .woocommerce-tabs ul.tabs li,
+        #content div.product .woocommerce-tabs ul.tabs li.active {
+            padding: 2px 5px;
+            margin: 0;
+            .border-radius(0);
+            box-shadow: none;
+
+            a {
+                font-weight: normal;
+            }
+        }
+    }
+}

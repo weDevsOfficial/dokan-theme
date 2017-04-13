@@ -1,0 +1,322 @@
+@import "../mixins.less";
+
+@borderColor: #DDD;
+
+a {
+    color: @skinColor;
+}
+
+input[type="submit"].dokan-btn-theme,
+a.dokan-btn-theme,
+.dokan-btn-theme {
+    .button-variant( #fff; @skinColor; @skinColor);
+}
+
+
+mark {
+    color: #fff;
+    background: @skinColor;
+    border-radius: 3px;
+    padding: 0 3px;
+}
+
+.pagination {
+    > li > span.current,
+    > li > a:hover {
+        background-color: @skinColor;
+        color: #fff;
+    }
+}
+
+.dokan-info {
+    border-top:3px solid @skinColor;
+
+    &:before {
+        background-color:@skinColor;
+    }
+}
+
+.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li {
+    &.active,
+    &:hover,
+    &.active {
+        background: @skinColor;
+    }
+}
+
+.site-header .navbar-collapse ul.navbar-nav > li > ul.dropdown-menu > li.active > a {
+    background: @skinColor;
+    color: #fff;
+}
+
+.navbar-top-area.navbar-inverse {
+    .navbar-nav > .open > a,
+    .navbar-nav > .open > a:hover,
+    .navbar-nav > .open > a:focus {
+        background-color: @skinColor;
+        color: #fff;
+    }
+
+    .dropdown-menu > .active a,
+    .dropdown-menu > .active a:hover,
+    .dropdown-menu > .active a:focus {
+        background-color: @skinColor;
+        color: #fff;
+    }
+
+    .widget_shopping_cart_content a.button {
+        background: @skinColor;
+        color: #fff;
+        border: 1px solid @skinColor;
+    }
+}
+
+// home
+.home {
+    .slider-container {
+        h2.slider-heading {
+            border-left: 5px solid @skinColor;
+        }
+    }
+
+    .product-sliders {
+        .flex-direction-nav {
+            a {
+                background: @skinColor;
+            }
+        }
+
+        li {
+            .item-button {
+                a.add_to_cart_button {
+                    background: @skinColor;
+                    border-color: @skinColor;
+
+                    &:hover {
+                        color: @skinColor;
+                        background: #fff;
+                        border-color: @borderColor;
+                    }
+                }
+
+                a.fav {
+                    background: #fff;
+
+                    &:hover {
+                        color: #fff;
+                        background: @skinColor;
+                        border-color: @skinColor;
+                    }
+                }
+
+                .added_to_cart {
+                    background: @skinColor;
+                }
+            }
+
+
+            span.onsale {
+                background: @skinColor;
+            }
+        }
+    }
+}
+
+
+// widget
+.widget {
+    .widget-title {
+        border-left: 3px solid @skinColor;
+        margin-left: -10px;
+        padding-left: 6px;
+    }
+
+    &.widget_search, &.widget_product_search {
+        .btn-primary {
+            background-color: @skinColor;
+            border-color: @skinColor;
+        }
+    }
+
+    &.dokan-category-menu {
+        #cat-drop-stack {
+            > ul > li > a:hover {
+                background: @skinColor;
+            }
+
+            > ul > li .sub-block ul a:hover,
+            > ul > li .sub-block h3 a:hover {
+                color: @skinColor;
+            }
+        }
+    }
+}
+
+// dashboard
+.dokan-dash-sidebar {
+    ul.dokan-dashboard-menu {
+        li {
+            &.active {
+                background: @skinColor;
+            }
+
+            &:hover {
+                background: @skinColor;
+            }
+        }
+    }
+}
+
+.woocommerce,
+.woocommerce-page {
+
+    span.onsale {
+        background: @skinColor;
+    }
+
+    a.button, button.button, input.button, #respond input#submit, #content input.button {
+        .button-variant( #fff; @skinColor; @skinColor);
+    }
+
+    ul.products li.product {
+        .item-button {
+            a.add_to_cart_button {
+                background: @skinColor;
+                border-color: @skinColor;
+
+                &:hover {
+                    color: @skinColor;
+                    background: #fff;
+                    border-color: @borderColor;
+                }
+            }
+
+            a.fav {
+                background: #fff;
+
+                &:hover {
+                    color: #fff;
+                    background: @skinColor;
+                    border-color: @skinColor;
+                }
+            }
+
+            .added_to_cart {
+                background: @skinColor;
+            }
+        }
+    }
+
+    div.product .woocommerce-tabs ul.tabs li.active,
+    div.product .woocommerce-tabs ul.tabs li.active,
+    #content div.product .woocommerce-tabs ul.tabs li.active,
+    #content div.product .woocommerce-tabs ul.tabs li.active {
+        box-shadow: inset 0px 4px 0px @skinColor;
+    }
+
+
+    #reviews #respond input[type=submit]{
+        background-color: @skinColor;
+        border-color: @skinColor;
+        color: #fff;
+
+        &:hover {
+            background-color: darken(@skinColor, 5%);
+            border-color: darken(@skinColor, 5%);
+        }
+    }
+
+    nav.woocommerce-pagination, #content nav.woocommerce-pagination {
+        ul {
+            li {
+                span.current, a:hover, a:focus {
+                    background: @skinColor;
+                }
+            }
+        }
+    }
+
+    a.button, button.button, input.button, #respond input#submit, #content input.button {
+
+        &.alt {
+            border: 1px solid @skinColor;
+            background: @skinColor;
+
+            &:hover {
+                border: 1px solid darken(@skinColor, 10);
+                background: darken(@skinColor, 10);
+            }
+        }
+    }
+
+    .woocommerce-message, .woocommerce-error, .woocommerce-info {
+       background: #fff;
+       box-shadow: none;
+       border-left: 1px solid #F1F1F1;
+       border-right: 1px solid #F1F1F1;
+       border-bottom: 1px solid #F1F1F1;
+
+        &:before {
+
+        }
+    }
+
+    .woocommerce-info {
+        border-top:3px solid @skinColor;
+
+        &:before {
+            background-color:@skinColor;
+        }
+    }
+
+}
+
+.pagination > .active > a,
+.pagination > .active > a:hover {
+    background-color: @skinColor;
+    border-color: @skinColor;
+}
+
+.store-page-wrap .profile-frame {
+    background-color: @skinColor;
+}
+
+/* WooCommerce override
+-----------------------------------*/
+
+.woocommerce,
+.woocommerce-page {
+    &.single-product {
+        .entry-summary {
+            form.cart {
+                .button {
+                    background: @skinColor;
+                }
+            }
+
+            a.button.alt {
+                background: @skinColor;
+            }
+        }
+    }
+}
+
+#comments {
+    #respond {
+        #cancel-comment-reply-link {
+            background: @skinColor;
+        }
+
+        input[type=submit] {
+            background: @skinColor;
+            border: 1px solid @skinColor;
+            padding: 3px 10px;
+        }
+    }
+
+    ol.commentlist {
+        .reply a.comment-reply-link {
+            background: @skinColor;
+        }
+    }
+}

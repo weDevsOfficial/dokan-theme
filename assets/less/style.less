@@ -1,0 +1,67 @@
+/*
+Theme Name: Dokan
+Theme URI: http://wedevs.com/theme/dokan/
+Author: Tareq Hasan
+Author URI: http://tareq.weDevs.com
+Description: An e-commerce theme for Dokan
+Version: 2.2.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+@import "mixins.less";
+//@import "responsive-1040.less";
+
+//CSS Variables
+@bodyColor: #fafafa;
+@borderColor: #EDEDED;
+@mainColor: #ccc; // #ef4423; //#41B7D8;
+@iconColor: #B8261C;
+@orange: #f05025;
+
+
+h1, h2, h3 { color: #222; }
+h1 { font-size: 28px; }
+h2 { font-size: 24px; }
+h3 { font-size: 18px; }
+
+body {
+    // font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 150%;
+    color: #444;
+    background: @bodyColor;
+
+    .container {
+        max-width: 1140px;
+    }
+}
+
+h1, h2, h3, h4, h5, select {
+    font-family: 'Open Sans', sans-serif;
+}
+
+a:hover { text-decoration: none; }
+
+@import "wordpress.less";
+@import "header.less";
+@import "menu.less";
+@import "contents.less";
+@import "template-specific.less";
+@import "widgets.less";
+@import "comments.less";
+@import "footer.less";
+@import "extra.less";
+@import "utility.less";
+@import "retina.less";
+@import "responsive.less";
+
+.woocommerce #reviews #comments ol.commentlist li img.avatar,
+.woocommerce-page #reviews #comments ol.commentlist li img.avatar {
+    width: 80px;
+}
+.woocommerce #reviews #comments ol.commentlist li .comment-text,
+.woocommerce-page #reviews #comments ol.commentlist li .comment-text{
+    margin:0 0 0 90px;
+}

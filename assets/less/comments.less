@@ -1,0 +1,207 @@
+/*--------------------------------------------------
+:: Comments
+-------------------------------------------------- */
+#comments {
+    background: #fff;
+    margin-bottom: 15px;
+
+    .comments-title {
+        border-bottom: 1px solid @borderColor;
+        padding-bottom: 10px;
+        margin: 0;
+    }
+
+    .comments-title {
+        padding: 15px;
+    }
+
+    .nocomments {
+        color: #c09853;
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+        margin: 10px;
+        padding: 15px;
+    }
+
+    #respond {
+
+        padding: 20px;
+        // .border-radius(5px);
+        margin-bottom: 10px;
+        background: #F0F0F0;
+
+        #cancel-comment-reply-link {
+            color: #fff;
+            padding: 5px 15px;
+            margin-left: 20px;
+        }
+
+        label {
+            display: inline-block;
+        }
+
+        .required {
+            color: #E44400;
+        }
+
+        input, textarea {
+            display: block;
+            .box-shadow(inset 0 1px 5px rgba(0,0,0,0.15));
+            border: 1px solid #ccc;
+
+            &:focus {
+                .box-shadow(inset 0 1px 5px rgba(0,0,0,0.25));
+                border-color: #ccc;
+            }
+        }
+
+        input[type=submit] {
+            border: none;
+            color: #fff;
+            .box-shadow(none);
+        }
+
+        input[type=text] {
+            width: 43%;
+            padding: 5px 10px;
+        }
+
+        textarea#comment {
+            width: 80%;
+            padding: 10px;
+        }
+
+        .form-submit {
+            margin: 15px 0;
+        }
+
+        .form-allowed-tags {
+            font-size: 12px;
+        }
+
+        code {
+            display: block;
+            white-space: normal;
+            font-size: 11px;
+        }
+    }
+
+    ol.commentlist {
+        margin: 10px 0;
+        list-style: none;
+        padding: 0 10px 0 0;
+
+
+        #respond {
+            // background: #F0F0F0;
+            border-top: 1px solid #fff;
+            .border-radius(0);
+        }
+
+        li {
+
+            &.pingback {
+                padding: 0 10px;
+            }
+
+            article.comment {
+                position: relative;
+                border-bottom: 1px solid @borderColor;
+                padding: 10px;
+                margin: 0px;
+                overflow: hidden;
+                clear: left;
+
+                .comment-avatar {
+                    background: @borderColor;
+                    .border-radius(500px);
+                    float: left;
+                    padding: 3px;
+                    height: 81px;
+                    width: 81px;
+                    margin: 0 10px 0 0;
+
+                    img.avatar{
+                        .border-radius(500px);
+                        background: #fff;
+                    }
+                }
+
+                footer {
+                    font-size: 13px;
+                    padding-bottom: 5px;
+                }
+
+                cite.fn {
+                    font-style: italic;
+                }
+
+                .reply {
+                    position: absolute;
+                    top: 10px;
+                    right: 0;
+
+                    a.comment-reply-link {
+                        color: #fff;
+                        padding: 3px 10px;
+                        font-size: 13px;
+                    }
+                }
+            }
+
+            .comment-content {
+                line-height: 150%;
+                padding: 10px 0;
+
+                ul {
+                    list-style: disc inside none;
+                    margin: 4px 0 5px 30px;
+                }
+
+                li {
+                    border: none;
+                    padding: 0;
+                }
+
+            }
+
+        //     &.post{
+        //         border: none;
+        //         margin: 0;
+        //     }
+
+            ul.children{
+                list-style: none;
+                overflow: hidden;
+                margin: 0;
+                clear: left;
+
+                .depth-2, .depth-3, .depth-4, .depth-5 {
+                    padding-left: 40px;
+                    border-left: 1px solid @borderColor;
+                    background:url('assets/images/comment-nav.png') 0 45px no-repeat;
+                    clear: left;
+                }
+            }
+        }
+
+        .nocomments {
+            padding: 15px;
+            color: #c09853;
+            background-color: #fcf8e3;
+            border-color: #fbeed5;
+        }
+
+
+        > li:last-child {
+            article.comment {
+                border-bottom: none;
+            }
+        }
+
+        li.bypostauthor > article {
+            background: lighten(@mainColor, 50%);
+        }
+
+    }
+}

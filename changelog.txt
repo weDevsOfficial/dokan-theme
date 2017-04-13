@@ -1,0 +1,100 @@
+v2.2.2 -> November 14, 2016
+---------------------
+- [fix] php 5.2 Backward compatibility added for DIR path
+- [fix] Add to cart icon fixed
+- [fix] Product thumbnail styles fixed
+- [fix] WooCommerce loader icon removed
+- [update] Updated overridden woocommerce templates to version 2.6.3
+- [new] added styles for My Account - Dashboard Navigation for woocommerce 2.6.3
+
+v2.2.1 -> September 14, 2015
+---------------------
+- [fix] Delete Dokan templating folder
+- [fix] fix store page style issue on mobile device
+- [fix] Errors fixed on Dokan deactivation
+- [improved] Responsive CSS updated
+
+v1.0.6 -> September 2, 2014
+---------------------
+- [new] Added hook and filter in product listing
+- [fix] Change seller name to store name in cart
+- [fix] Add store link to seller review tab
+- [fix] change best seller name to store name in best seller widget
+- [new] Arabic translation added
+- [new] Customer migration to seller
+- [fix] Condition fix for new product visibility
+- [fix] Update url separator
+- [fix] Coupon product dropdown shows only 10 products
+- [fix] Repeted slide off
+- [fix] Change manage stock check
+- [new] Hooks added on settings form
+- [new] Pre-defined attribute feature
+- [fix] Review pagination in seller dashboard
+- [fix] Email notifications removed from child orders
+- [fix] Correct text domain updated
+- [fix] Order status localization
+
+
+v1.0.5 -> June 9, 2014
+-----------------------
+- [new] Enable/disable scripts, styles, sidebars from child theme
+- [new] Better child theme support
+- [new] Responsive seller dashboard
+- [new] Filters added slider
+- [fix] Multisite collisions
+- [new] Seller enable/disable feature on registration
+- [fix] Language file updated with missing strings
+- [new] Store only category menu on store pages
+- [new] Turn on/off store sidebar location/contact widgets
+
+v1.0.4 -> May 9, 2014
+-----------------------
+- [new] RTL support
+- [fix] Responsive style problems
+- [fix] page title fix for homepage
+- [fix] category dropdown widget width with many categories
+- [fix] clicking category dropdown widget on mobile
+- [improve] child categories in main navigation are clickable now
+- [fix] main dropdown selected color fix
+- [fix] coupon expire date formatting fix
+- [fix] style.css is the main stylesheet now
+- [fix] duplicate phone number in admin edit profile removed
+- [fix] missing translation strings
+- [fix] small problem in seller listing
+
+v1.0.3 -> April 7, 2014
+-----------------------
+- [new] Profile settings can be updated from admin area
+- [new] Per user seller percentage
+- [new] Some new hooks added.
+- [bugfix] Product category won't update
+- [bugfix] Menu parameter removed from wp_nav_menu
+- [bugfix] Currency entity fix in withdraw email
+- [bugfix] Downloadable file upload directory
+- [bugfix] Price validation removed from new product page.
+- [improve] Demo store notice compatibility
+- [improve] Edit permalink support for category base
+
+
+v1.0.2 -> Mar 24, 2014
+-----------------------
+- [buxfix] Withdraw request balance float
+
+v1.0.1 -> Mar 24, 2014
+-----------------------
+- Sold individually option added
+- New action hooks and filters
+- PHP 5.2 support with replacing __DIR__
+- Seller shop url customization choice
+- Seller order status change enable/disable option added
+- Seller reviews shown on store page
+- Withdraw balance control -> order status choice option
+- Avatar upload feature
+- New seller notification mail
+- New product visibility to visible
+- Best seller widget
+
+
+v1.0 -> Feb 17, 2014
+-----------------------
+- Initial Release

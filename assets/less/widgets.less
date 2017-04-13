@@ -1,0 +1,277 @@
+/*--------------------------------------------------
+:: Sidebars
+-------------------------------------------------- */
+.widget-area.widget-collapse.collapse {
+    display: block;
+}
+
+@widgetBorder: #EDEDED;
+
+.widget {
+    margin-bottom: 25px;
+    background: #fff;
+    border: 1px solid @widgetBorder;
+    padding: 10px;
+    .border-radius(2px);
+
+    select {
+        max-width: 98%;
+    }
+
+    caption {
+        padding: 0 0 5px 0;
+    }
+
+    table {
+        width: 100%;
+        margin-bottom: 20px;
+
+        td, th {
+            padding: 8px;
+            line-height: 20px;
+            text-align: left;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+
+        td#today {
+            background: #ccc;
+            color: #fff;
+        }
+    }
+
+    .widget-title {
+        margin: 0 0 15px 0;
+        font-weight: lighter;
+        border: none;
+        font-size: 18px;
+        line-height: 18px;
+    }
+
+    ul {
+        margin-left: 0;
+        padding-left: 0;
+        list-style: none;
+
+        li {
+            // margin-bottom: 8px;
+            clear: left;
+            // overflow: hidden;
+            // background: url("assets/images/arrow-bullet.png") no-repeat 0 5px;
+            padding: 5px 0;
+            border-bottom: 1px solid #EEE;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        ul.children {
+            padding-left: 15px;
+        }
+    }
+
+    #dokan-store-location {
+        width: 100%;
+        height: 250px;
+    }
+
+    .avatar {
+        float: left;
+        margin-right: 5px;
+        .border-radius(3px);
+
+        img {
+            border: 1px solid #ccc;
+            background: #fff;
+        }
+    }
+
+    &.widget_search, &.widget_product_search {
+        // padding: 0;
+        // border: none;
+
+        input[type=text] {
+            border: 1px solid @widgetBorder;
+            box-shadow: none;
+        }
+    }
+
+    &.widget-on-sale {
+        ul.products {
+
+            li.product {
+                width: 100%;
+
+                a img {
+                    max-width: 60%;
+                    text-align: center;
+                }
+
+                span.onsale {
+                    background: @orange;
+                    .border-radius(0);
+                    font-weight: normal;
+                    padding: 0;
+                    top: 0;
+                    right: 0;
+                    min-height: auto;
+                    min-width: auto;
+                    text-shadow: none;
+                    .box-shadow(none);
+                    margin: 0;
+                    padding: 0 10px;
+                }
+
+                .deal-time-bar {
+                    // position: absolute;
+                    top: 20%;
+                    right: 0;
+                    width: 35%;
+                    background: #fff;
+
+                    .d-time-title {
+                        font-size: 11px;
+                    }
+                }
+            }
+        }
+    }
+
+    &.store-contact {
+        .form-group {
+            margin-bottom: 0;
+
+            label.error {
+                display: inline;
+                color: #b94a48;
+                font-weight: normal;
+            }
+
+            input.valid, textarea.valid {
+                border-color: #65CA67;
+            }
+
+            input[type=text] {
+                padding: 6px 12px;
+            }
+        }
+
+        ul li {
+            border-bottom: none;
+        }
+    }
+
+    &.dokan-category-menu {
+        padding: 0;
+        border: none;
+
+        h3.widget-title {
+            margin: 0;
+            padding: 10px 10px 10px 20px;
+            background: #eee;
+            border: 1px solid #eee;
+            color: #444;
+        }
+
+        #cat-drop-stack {
+            border: 1px solid #eee;
+            border-top: none;
+            padding: 0;
+            margin: 0;
+            background: #fff;
+            position: relative;
+
+            > ul {
+                margin-bottom: 0px;
+
+                > li {
+                    list-style: none;
+                    // font-weight: bold;
+                    padding: 0;
+                    position: relative;
+
+                    .caret {
+                        border-bottom: 4px solid transparent;
+                        border-top: 4px solid transparent;
+                        border-left: 4px solid #000000;
+                        display: inline-block;
+                        height: 0;
+                        opacity: 0.3;
+                        vertical-align: middle;
+                        width: 0;
+                        // float: right;
+                    }
+
+                    .sub-category {
+                        display: none;
+                        background: none repeat scroll 0 0 #FFFFFF;
+                        border: 1px solid #E3E3E3;
+                        box-shadow: 5px 0px 10px rgba(108, 108, 108, 0.3);
+                        min-height: 250px;
+                        padding: 20px;
+                        position: absolute;
+                        left: 90%;
+                        top: -50px;
+                        // white-space: nowrap;
+                        min-width: 200%;
+                        z-index: 99;
+
+                        .sub-block {
+                            position: relative;
+                            z-index: 1;
+                            display: inline-block;
+                            zoom: 1;
+                            vertical-align: top;
+                            padding-right: 20px;
+                            padding-bottom: 20px;
+                            width: 200px;
+                            font-size: 12px;
+
+                            h3 {
+                                font-weight: bold;
+                                font-size: 14px;
+                                border-bottom: 1px solid #ccc;
+                                padding: 0 0 7px 0;
+                                margin: 0 0 7px 0;
+
+                                a {
+                                    text-decoration: none;
+                                    color: #555;
+                                }
+                            }
+
+                            ul {
+                                a {
+                                    color: #777;
+                                }
+                            }
+                        }
+
+                        li {
+                            font-weight: normal;
+                            padding: 0;
+                            border-bottom: none;
+                        }
+                    }
+
+                    &:hover {
+                        .sub-category {
+                            display: block;
+                        }
+                    }
+
+                    > a {
+                        padding: 7px 0px 8px 20px;
+                        color: #5C5B52;
+                        display: block;
+
+                        &:hover {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

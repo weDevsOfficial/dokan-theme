@@ -1,0 +1,762 @@
+# Copyright (C) 2016 Tareq Hasan
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Dokan 2.2.2\n"
+"Report-Msgid-Bugs-To: http://wedevs.com/support/forum/theme-support/dokan/\n"
+"POT-Creation-Date: 2016-11-13 18:02:21+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"X-Generator: grunt-wp-i18n 0.4.9\n"
+
+#: 404.php:16
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: 404.php:20
+msgid ""
+"It looks like nothing was found at this location. Maybe try one of the "
+"links below or a search?"
+msgstr ""
+
+#: 404.php:33
+msgid "Categories"
+msgstr ""
+
+#: 404.php:45
+#. translators: %1$s: smilie
+msgid "Try looking in the monthly archives. %1$s"
+msgstr ""
+
+#: archive.php:22
+msgid "Category Archives: %s"
+msgstr ""
+
+#: archive.php:24
+msgid "Tag Archives: %s"
+msgstr ""
+
+#: archive.php:30
+msgid "Author Archives: %s"
+msgstr ""
+
+#: archive.php:37
+msgid "Daily Archives: %s"
+msgstr ""
+
+#: archive.php:39
+msgid "Monthly Archives: %s"
+msgstr ""
+
+#: archive.php:41
+msgid "Yearly Archives: %s"
+msgstr ""
+
+#: archive.php:43 sidebar-blog.php:26 sidebar-home.php:20
+#: sidebar-product-single.php:25 sidebar-shop.php:26 sidebar.php:26
+msgid "Archives"
+msgstr ""
+
+#: classes/customizer.php:16
+msgid "- select -"
+msgstr ""
+
+#: classes/customizer.php:32
+msgid "Site Logo"
+msgstr ""
+
+#: classes/customizer.php:33
+msgid "Upload your logo to replace the default Logo (dimension : 180 X 50)"
+msgstr ""
+
+#: classes/customizer.php:39
+msgid "Upload Logo"
+msgstr ""
+
+#: classes/customizer.php:46
+msgid "Theme Settings"
+msgstr ""
+
+#: classes/customizer.php:52
+msgid "Color Skin"
+msgstr ""
+
+#: classes/customizer.php:56
+msgid "Orange"
+msgstr ""
+
+#: classes/customizer.php:57
+msgid "Sky"
+msgstr ""
+
+#: classes/customizer.php:58
+msgid "Blue"
+msgstr ""
+
+#: classes/customizer.php:59
+msgid "Green"
+msgstr ""
+
+#: classes/customizer.php:60
+msgid "Purple"
+msgstr ""
+
+#: classes/customizer.php:61
+msgid "Red"
+msgstr ""
+
+#: classes/customizer.php:62
+msgid "Pink"
+msgstr ""
+
+#: classes/customizer.php:70
+msgid "Show Slider on home page"
+msgstr ""
+
+#: classes/customizer.php:78
+msgid "Select Slider"
+msgstr ""
+
+#: classes/customizer.php:88
+msgid "Show featured products on homepage"
+msgstr ""
+
+#: classes/customizer.php:97
+msgid "Show latest products on homepage"
+msgstr ""
+
+#: classes/customizer.php:106
+msgid "Show best selling products on homepage"
+msgstr ""
+
+#: classes/customizer.php:115
+msgid "Show top rated products on homepage"
+msgstr ""
+
+#: classes/customizer.php:123
+msgid "&copy; %d. All rights are reserved."
+msgstr ""
+
+#: classes/customizer.php:127
+msgid "Footer Text"
+msgstr ""
+
+#: classes/customizer.php:140
+msgid "Link"
+msgstr ""
+
+#: classes/customizer.php:153
+msgid "Link hover"
+msgstr ""
+
+#: classes/customizer.php:166
+msgid "Header Background"
+msgstr ""
+
+#: classes/customizer.php:179
+msgid "Navigation Background"
+msgstr ""
+
+#: classes/customizer.php:192
+msgid "Navigation Link"
+msgstr ""
+
+#: classes/customizer.php:204
+msgid "Navigation Link Hover"
+msgstr ""
+
+#: classes/customizer.php:217
+msgid "Footer Background"
+msgstr ""
+
+#: classes/customizer.php:230
+msgid "Copy Container Background"
+msgstr ""
+
+#: classes/customizer.php:243
+msgid "Footer text"
+msgstr ""
+
+#: classes/customizer.php:256
+msgid "Sidebar widget header"
+msgstr ""
+
+#: classes/customizer.php:269
+msgid "Footer widget header"
+msgstr ""
+
+#: classes/customizer.php:283
+msgid "Footer Widget link"
+msgstr ""
+
+#: classes/customizer.php:295
+msgid "Footer Widget link hover"
+msgstr ""
+
+#: classes/slider.php:47
+msgid "Slides"
+msgstr ""
+
+#: classes/slider.php:48
+msgid "Slider Options"
+msgstr ""
+
+#: classes/slider.php:68 classes/slider.php:79 classes/slider.php:80
+#: functions.php:244
+msgid "Slider"
+msgstr ""
+
+#: classes/slider.php:81
+msgid "Dokan Slider"
+msgstr ""
+
+#: classes/slider.php:82
+msgid "Add Slider"
+msgstr ""
+
+#: classes/slider.php:83
+msgid "Add New Slider"
+msgstr ""
+
+#: classes/slider.php:84 content-page.php:18 content-single.php:29
+#: content.php:29
+msgid "Edit"
+msgstr ""
+
+#: classes/slider.php:85
+msgid "Edit Slider"
+msgstr ""
+
+#: classes/slider.php:86
+msgid "New Slider"
+msgstr ""
+
+#: classes/slider.php:87 classes/slider.php:88
+msgid "View Slider"
+msgstr ""
+
+#: classes/slider.php:89
+msgid "Search Slider"
+msgstr ""
+
+#: classes/slider.php:90
+msgid "No Slider Found"
+msgstr ""
+
+#: classes/slider.php:91
+msgid "No Slider found in trash"
+msgstr ""
+
+#: classes/slider.php:92
+msgid "Parent Slider"
+msgstr ""
+
+#: classes/slider.php:110
+msgid "Effect"
+msgstr ""
+
+#: classes/slider.php:119
+msgid "Slide Speed"
+msgstr ""
+
+#: classes/slider.php:123
+msgid "Pagination"
+msgstr ""
+
+#: classes/slider.php:126 classes/slider.php:135
+msgid "Show"
+msgstr ""
+
+#: classes/slider.php:127 classes/slider.php:136
+msgid "Hide"
+msgstr ""
+
+#: classes/slider.php:132
+msgid "Direction Navigation"
+msgstr ""
+
+#: classes/slider.php:141
+msgid "Sliding Direction"
+msgstr ""
+
+#: classes/slider.php:144
+msgid "horizontal"
+msgstr ""
+
+#: classes/slider.php:145
+msgid "vertical"
+msgstr ""
+
+#: classes/slider.php:150
+msgid "Touch Swipe"
+msgstr ""
+
+#: classes/slider.php:153 classes/slider.php:163 classes/slider.php:172
+#: classes/slider.php:181
+msgid "Yes"
+msgstr ""
+
+#: classes/slider.php:154 classes/slider.php:162 classes/slider.php:171
+#: classes/slider.php:180
+msgid "No"
+msgstr ""
+
+#: classes/slider.php:159
+msgid "Randomize"
+msgstr ""
+
+#: classes/slider.php:168
+msgid "Pause on Hover"
+msgstr ""
+
+#: classes/slider.php:177
+msgid "Pause/Play"
+msgstr ""
+
+#: classes/slider.php:195
+msgid "Add Slide"
+msgstr ""
+
+#: classes/slider.php:339
+msgid "Slide"
+msgstr ""
+
+#: classes/slider.php:342
+msgid "Slide Type"
+msgstr ""
+
+#: classes/slider.php:345
+msgid "Text with Image"
+msgstr ""
+
+#: classes/slider.php:346
+msgid "Full Image"
+msgstr ""
+
+#: classes/slider.php:347
+msgid "Full Video"
+msgstr ""
+
+#: classes/slider.php:352
+msgid "Title Text"
+msgstr ""
+
+#: classes/slider.php:358
+msgid "Detail Text"
+msgstr ""
+
+#: classes/slider.php:364
+msgid "Slide Image"
+msgstr ""
+
+#: classes/slider.php:376
+msgid "Video Embed Code"
+msgstr ""
+
+#: classes/slider.php:382
+msgid "Slide Link Url"
+msgstr ""
+
+#: classes/slider.php:388
+msgid "Open Link"
+msgstr ""
+
+#: classes/slider.php:391
+msgid "Open link in same window"
+msgstr ""
+
+#: classes/slider.php:392
+msgid "Open link in new window"
+msgstr ""
+
+#: classes/slider.php:398
+msgid "Remove"
+msgstr ""
+
+#: classes/slider.php:480
+msgid "Read More..."
+msgstr ""
+
+#: comments.php:32
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:38 comments.php:58
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:39 comments.php:59
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: comments.php:40 comments.php:60
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#: comments.php:70
+msgid "Comments are closed."
+msgstr ""
+
+#: content-page.php:17 content-single.php:36 content.php:41
+msgid "Pages:"
+msgstr ""
+
+#: content-single.php:15 content-single.php:42 content.php:15
+#. translators: used between list items, there is a space after the comma
+msgid ", "
+msgstr ""
+
+#: content-single.php:20 content.php:20
+msgid "%1$s"
+msgstr ""
+
+#: content-single.php:26 content.php:26
+msgid "Leave a comment"
+msgstr ""
+
+#: content-single.php:26 content.php:26
+msgid "1 Comment"
+msgstr ""
+
+#: content-single.php:26 content.php:26
+msgid "% Comments"
+msgstr ""
+
+#: content.php:3
+msgid "Permalink to %s"
+msgstr ""
+
+#: content.php:40
+msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: footer.php:48
+msgid "&copy; %d, %s. All rights are reserved."
+msgstr ""
+
+#: footer.php:49
+msgid ""
+"Powered by <a href=\"%s\" target=\"_blank\">Dokan</a> from <a href=\"%s\" "
+"target=\"_blank\">weDevs</a>"
+msgstr ""
+
+#: front-page.php:47
+msgid "Featured Products"
+msgstr ""
+
+#: front-page.php:72
+msgid "Latest Products"
+msgstr ""
+
+#: front-page.php:94
+msgid "Best Selling Products"
+msgstr ""
+
+#: front-page.php:115
+msgid "Top Rated Products"
+msgstr ""
+
+#: functions.php:117
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:118
+msgid "Top Left"
+msgstr ""
+
+#: functions.php:119
+msgid "Footer Menu"
+msgstr ""
+
+#: functions.php:143
+msgid "General Sidebar"
+msgstr ""
+
+#: functions.php:144
+msgid "Home Sidebar"
+msgstr ""
+
+#: functions.php:145
+msgid "Blog Sidebar"
+msgstr ""
+
+#: functions.php:146
+msgid "Header Sidebar"
+msgstr ""
+
+#: functions.php:147
+msgid "Shop Archive"
+msgstr ""
+
+#: functions.php:148
+msgid "Single Product"
+msgstr ""
+
+#: functions.php:149
+msgid "Store"
+msgstr ""
+
+#: functions.php:150
+msgid "Footer Sidebar - 1"
+msgstr ""
+
+#: functions.php:151
+msgid "Footer Sidebar - 2"
+msgstr ""
+
+#: functions.php:152
+msgid "Footer Sidebar - 3"
+msgstr ""
+
+#: functions.php:153
+msgid "Footer Sidebar - 4"
+msgstr ""
+
+#: functions.php:237
+msgid "Page %s"
+msgstr ""
+
+#: header.php:38 header.php:89
+msgid "Toggle navigation"
+msgstr ""
+
+#: header.php:84
+msgid "Menu"
+msgstr ""
+
+#: header.php:85
+msgid "Skip to content"
+msgstr ""
+
+#: header.php:92
+msgid "Home"
+msgstr ""
+
+#: includes/template-tags.php:26
+msgid "Pingback:"
+msgstr ""
+
+#: includes/template-tags.php:26 includes/template-tags.php:47
+msgid "(Edit)"
+msgstr ""
+
+#: includes/template-tags.php:38
+msgid "%s <span class=\"says\">says:</span>"
+msgstr ""
+
+#: includes/template-tags.php:43
+#. translators: 1: date, 2: time
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: includes/template-tags.php:51
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: includes/template-tags.php:76
+msgid ""
+"<a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time class=\"entry-date\" "
+"datetime=\"%3$s\" pubdate>%4$s</time></a><span class=\"byline\"></span>"
+msgstr ""
+
+#: includes/template-tags.php:82
+msgid "View all posts by %s"
+msgstr ""
+
+#: includes/template-tags.php:118
+msgid "Post navigation"
+msgstr ""
+
+#: includes/template-tags.php:189
+msgid "&larr; Previous"
+msgstr ""
+
+#: includes/template-tags.php:200
+msgid "Next &rarr;"
+msgstr ""
+
+#: includes/template-tags.php:222
+msgid "Product Categories"
+msgstr ""
+
+#: includes/template-tags.php:247
+msgid "Cart %s"
+msgstr ""
+
+#: includes/template-tags.php:272
+msgid "Seller Dashboard"
+msgstr ""
+
+#: includes/template-tags.php:275
+msgid "Visit your store"
+msgstr ""
+
+#: includes/template-tags.php:291
+msgid "My Account"
+msgstr ""
+
+#: includes/template-tags.php:292
+msgid "Edit Account"
+msgstr ""
+
+#: includes/template-tags.php:294
+msgid "Billing Address"
+msgstr ""
+
+#: includes/template-tags.php:295
+msgid "Shipping Address"
+msgstr ""
+
+#: includes/template-tags.php:302
+msgid "Log in"
+msgstr ""
+
+#: includes/template-tags.php:303
+msgid "Sign Up"
+msgstr ""
+
+#: includes/wc-functions.php:22
+msgid "Search for products"
+msgstr ""
+
+#: includes/wc-functions.php:25 searchform.php:14
+msgid "Search"
+msgstr ""
+
+#: no-results.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#: no-results.php:20
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: no-results.php:24
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: no-results.php:34
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: search.php:17
+msgid "Search Results for: %s"
+msgstr ""
+
+#: searchform.php:11
+msgid "Search &hellip;"
+msgstr ""
+
+#: sidebar-blog.php:13 sidebar-product-single.php:12 sidebar-shop.php:13
+#: sidebar-store.php:10 sidebar.php:13
+msgid "Toggle Sidebar"
+msgstr ""
+
+#: sidebar-blog.php:33 sidebar-home.php:27 sidebar-product-single.php:32
+#: sidebar-shop.php:33 sidebar.php:33
+msgid "Meta"
+msgstr ""
+
+#: sidebar-store.php:26
+msgid "Store Category"
+msgstr ""
+
+#: sidebar-store.php:28
+msgid "Store Location"
+msgstr ""
+
+#: sidebar-store.php:31
+msgid "Contact Seller"
+msgstr ""
+
+#: woocommerce/global/form-login.php:22
+msgid "Username or email"
+msgstr ""
+
+#: woocommerce/global/form-login.php:26 woocommerce/myaccount/form-login.php:47
+#: woocommerce/myaccount/form-login.php:99
+msgid "Password"
+msgstr ""
+
+#: woocommerce/global/form-login.php:35 woocommerce/myaccount/form-login.php:36
+#: woocommerce/myaccount/form-login.php:61
+msgid "Login"
+msgstr ""
+
+#: woocommerce/global/form-login.php:38 woocommerce/myaccount/form-login.php:55
+msgid "Remember me"
+msgstr ""
+
+#: woocommerce/global/form-login.php:42 woocommerce/myaccount/form-login.php:64
+msgid "Lost your password?"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:43
+msgid "Username or email address"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:77
+#: woocommerce/myaccount/form-login.php:113
+msgid "Register"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:85
+msgid "Username"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:92
+msgid "Email address"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:106
+msgid "Anti-spam"
+msgstr ""
+
+#. Theme Name of the plugin/theme
+msgid "Dokan"
+msgstr ""
+
+#. Theme URI of the plugin/theme
+msgid "http://wedevs.com/theme/dokan/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "An e-commerce theme for Dokan"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Tareq Hasan"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://tareq.weDevs.com"
+msgstr ""
+
+#. Template Name of the plugin/theme
+msgid "Full-width Page"
+msgstr ""
+
+#: includes/template-tags.php:124
+msgctxt "Previous post link"
+msgid "&larr;"
+msgstr ""
+
+#: includes/template-tags.php:127
+msgctxt "Next post link"
+msgid "&rarr;"
+msgstr ""
+
+#: includes/wc-template.php:43
+msgctxt "breadcrumb"
+msgid "Home"
+msgstr ""

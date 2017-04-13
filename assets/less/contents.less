@@ -1,0 +1,113 @@
+
+/*--------------------------------------------------
+:: Content
+-------------------------------------------------- */
+
+.site-content {
+    min-height: 250px;
+
+    article {
+        // margin-bottom: 25px;
+        // padding-bottom: 15px;
+        position: relative;
+
+        li {
+            line-height: 25px;
+        }
+
+        &.error404 {
+            text-align: center;
+
+            form {
+                margin: 30px auto 30px auto;
+                max-width: 50%;
+            }
+        }
+    }
+
+    .entry-header {
+
+        .entry-title {
+            border-bottom: 1px solid @borderColor;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            margin-top: 0;
+
+            a {
+                color: #222;
+
+                &:hover {
+                    text-decoration: none;
+                    color: #5aabd6;
+                }
+            }
+        }
+    }
+
+    .entry-content {
+        margin-bottom: 15px;
+
+        h3 {
+            // border-bottom: 1px solid darken(@borderColor, 10%);
+        }
+    }
+
+    .entry-meta {
+        margin-bottom: 15px;
+        font-size: 13px;
+
+        .sep {
+            color: darken(@borderColor, 10%);
+        }
+    }
+
+    footer.entry-meta {
+        padding-top: 10px;
+        // border-top: 1px solid @borderColor;
+    }
+
+    .pagination-container {
+        text-align: center;
+    }
+}
+
+.single {
+    .site-content {
+        article {
+            padding-bottom: 0;
+        }
+    }
+}
+
+
+/*--------------------------------------------------
+:: Navigation
+-------------------------------------------------- */
+
+#content nav {
+    clear: both;
+    overflow: hidden;
+    padding: 0 0 1.625em;
+}
+
+#nav-above {
+    padding: 0 0 1.625em;
+}
+#nav-above {
+    display: none;
+}
+.paged #nav-above {
+    display: block;
+}
+.nav-previous {
+    float: left;
+    width: 50%;
+}
+.nav-next {
+    float: right;
+    text-align: right;
+    width: 50%;
+}
+#content nav .meta-nav {
+    font-weight: normal;
+}
