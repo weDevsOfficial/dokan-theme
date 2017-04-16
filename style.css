@@ -4,7 +4,7 @@ Theme URI: http://wedevs.com/theme/dokan/
 Author: Tareq Hasan
 Author URI: http://tareq.weDevs.com
 Description: An e-commerce theme for Dokan
-Version: 2.2.2
+Version: 2.2.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -71,7 +71,7 @@ a:hover {
   clear: both;
 }
 .wp-caption {
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   max-width: 100%;
 }
 .wp-caption.aligncenter,
@@ -126,7 +126,7 @@ a:hover {
   margin-top: 10px;
 }
 .site-header h1.site-title a {
-  color: #cccccc;
+  color: #ccc;
   background: url('assets/images/logo.png') no-repeat 0% 0%;
   width: 300px;
   height: 60px;
@@ -154,7 +154,7 @@ a:hover {
 }
 .site-header .site-navigation {
   position: relative;
-  background: #cccccc;
+  background: #ccc;
 }
 .site-header .menu-container {
   margin-bottom: 20px;
@@ -180,7 +180,7 @@ a:hover {
   border-right: 0;
 }
 .site-header .cart-area-top li.nav-cart-link .cart-link-price {
-  color: #cccccc;
+  color: #ccc;
 }
 .site-header .cart-area-top li.nav-cart-link .cart-items {
   display: none;
@@ -228,7 +228,7 @@ a:hover {
   padding: 0 3px;
 }
 .site-header .cart-area-top li.nav-cart-link table td.product-name a {
-  color: #cccccc;
+  color: #ccc;
 }
 .site-header .cart-area-top li.nav-cart-link table td.product-price {
   width: 30%;
@@ -317,7 +317,7 @@ a:hover {
   padding: 0;
 }
 .navbar-top-area .widget_shopping_cart_content ul li {
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid #EDEDED;
   padding: 3px 0;
 }
 .navbar-top-area .widget_shopping_cart_content ul li:before,
@@ -336,7 +336,7 @@ a:hover {
   margin: 0;
 }
 .navbar-top-area .widget_shopping_cart_content ul img {
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   border-radius: 3px;
   box-shadow: none;
   padding: 2px;
@@ -346,7 +346,7 @@ a:hover {
   margin-left: 4px;
 }
 .navbar-top-area .widget_shopping_cart_content a.button {
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   box-shadow: none;
   padding: 3px 8px;
 }
@@ -487,7 +487,7 @@ a:hover {
   opacity: 1;
 }
 .site-header #navigation li:hover ul.sub-menu li {
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid #EDEDED;
   -webkit-transition: opacity .25s ease .1s;
   -moz-transition: opacity .25s ease .1s;
   -o-transition: opacity .25s ease .1s;
@@ -497,7 +497,7 @@ a:hover {
 }
 .site-header #navigation li:hover ul.sub-menu li a {
   background: #fff;
-  color: #cccccc;
+  color: #ccc;
 }
 .site-header #navigation li:hover ul.sub-menu li a:hover {
   text-shadow: 0 1px 0 #fff;
@@ -556,7 +556,7 @@ a:hover {
   max-width: 50%;
 }
 .site-content .entry-header .entry-title {
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid #EDEDED;
   padding-bottom: 10px;
   margin-bottom: 10px;
   margin-top: 0;
@@ -656,6 +656,14 @@ a:hover {
   margin: 0;
   font-size: 1em;
 }
+.home .product-sliders li h2.woocommerce-loop-product__title {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  padding: 5px 5px 5px 10px;
+  color: #fff;
+  margin: 0;
+  font-size: 1em;
+}
 .home .product-sliders li .item-bar {
   background: white;
   display: block;
@@ -678,6 +686,10 @@ a:hover {
   color: #fff;
   float: right;
 }
+.home .product-sliders li .item-button a.add_to_cart_button:after {
+  content: '';
+  margin-left: 0px;
+}
 .home .product-sliders li .item-button a.fav {
   background: #fff;
   float: right;
@@ -688,14 +700,13 @@ a:hover {
   border-radius: 2px;
   border-color: #d3d3d3;
   display: inline-block;
-  margin-right: 5px;
+  margin-right: 7px;
 }
 .home .product-sliders li .item-button a.added_to_cart {
-  position: absolute;
-  right: 0;
   color: #fff;
-  padding: 1px 10px;
+  padding: 0.5px 9px;
   font-size: 12px;
+  margin-top: 1.2em;
 }
 .home .product-sliders li .item-button a span {
   font-size: 16px;
@@ -1085,7 +1096,7 @@ a:hover {
 .blog .sticky {
   background: #fff;
   padding: 10px 15px;
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
@@ -1105,7 +1116,7 @@ a:hover {
   padding: 8px;
   line-height: 1.428571429;
   vertical-align: top;
-  border-top: 1px solid #ededed;
+  border-top: 1px solid #EDEDED;
 }
 .dokan-dashboard header.entry-header {
   display: none;
@@ -1122,7 +1133,7 @@ a:hover {
 .widget {
   margin-bottom: 25px;
   background: #fff;
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   padding: 10px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
@@ -1190,7 +1201,7 @@ a:hover {
 }
 .widget.widget_search input[type=text],
 .widget.widget_product_search input[type=text] {
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   box-shadow: none;
 }
 .widget.widget-on-sale ul.products li.product {
@@ -1343,7 +1354,7 @@ a:hover {
   margin-bottom: 15px;
 }
 #comments .comments-title {
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid #EDEDED;
   padding-bottom: 10px;
   margin: 0;
 }
@@ -1427,14 +1438,14 @@ a:hover {
 }
 #comments ol.commentlist li article.comment {
   position: relative;
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid #EDEDED;
   padding: 10px;
   margin: 0px;
   overflow: hidden;
   clear: left;
 }
 #comments ol.commentlist li article.comment .comment-avatar {
-  background: #ededed;
+  background: #EDEDED;
   -moz-border-radius: 500px;
   -webkit-border-radius: 500px;
   border-radius: 500px;
@@ -1490,7 +1501,7 @@ a:hover {
 #comments ol.commentlist li ul.children .depth-4,
 #comments ol.commentlist li ul.children .depth-5 {
   padding-left: 40px;
-  border-left: 1px solid #ededed;
+  border-left: 1px solid #EDEDED;
   background: url('assets/images/comment-nav.png') 0 45px no-repeat;
   clear: left;
 }
@@ -1661,14 +1672,14 @@ a:hover {
 /* without this, the menu expands to 100% in IE6 */
 ul.subsubsub {
   font-size: 12px;
-  color: #ededed;
+  color: #EDEDED;
   margin: 0 0 10px 0;
   padding: 0;
 }
 ul.subsubsub li {
   line-height: 13px;
   padding: 0 5px;
-  border-right: 1px solid #ededed;
+  border-right: 1px solid #EDEDED;
 }
 ul.subsubsub li:last-child {
   border-right: none;
@@ -1677,7 +1688,7 @@ ul.subsubsub li.active a {
   color: #999;
 }
 .wp-editor-wrap {
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
 }
 .dokan-message,
 .dokan-info,
@@ -1686,9 +1697,9 @@ ul.subsubsub li.active a {
   margin: 5px 0 15px 0;
   position: relative;
   background: #fff;
-  border-bottom: 1px solid #ededed;
-  border-left: 1px solid #ededed;
-  border-right: 1px solid #ededed;
+  border-bottom: 1px solid #EDEDED;
+  border-left: 1px solid #EDEDED;
+  border-right: 1px solid #EDEDED;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -1741,9 +1752,9 @@ ul.subsubsub li.active a {
   padding: 0;
   width: 100%;
   background: #fff;
-  border-bottom: 1px solid #ededed;
-  border-left: 1px solid #ededed;
-  border-right: 1px solid #ededed;
+  border-bottom: 1px solid #EDEDED;
+  border-left: 1px solid #EDEDED;
+  border-right: 1px solid #EDEDED;
 }
 .ui-menu .ui-menu-item a {
   text-decoration: none;
@@ -1803,7 +1814,7 @@ ul.subsubsub li.active a {
 .woocommerce .archive-title,
 .woocommerce-page .archive-title {
   margin-bottom: 20px;
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid #EDEDED;
 }
 .woocommerce .archive-title h1.page-title,
 .woocommerce-page .archive-title h1.page-title {
@@ -1823,7 +1834,7 @@ ul.subsubsub li.active a {
 .woocommerce-page .archive-title .woocommerce-ordering select,
 .woocommerce .archive-title .woocommerce-result-count select,
 .woocommerce-page .archive-title .woocommerce-result-count select {
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   margin: 0;
   padding: 6px 40px 8px 10px;
   width: 100%;
@@ -1847,6 +1858,15 @@ ul.subsubsub li.active a {
 }
 .woocommerce ul.products li.product h3,
 .woocommerce-page ul.products li.product h3 {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  padding: 5px 5px 5px 10px;
+  color: #fff;
+  margin: 0;
+  font-size: 1em;
+}
+.woocommerce ul.products li.product h2.woocommerce-loop-product__title,
+.woocommerce-page ul.products li.product h2.woocommerce-loop-product__title {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
   padding: 5px 5px 5px 10px;
@@ -1880,6 +1900,11 @@ ul.subsubsub li.active a {
   color: #fff;
   float: right;
 }
+.woocommerce ul.products li.product .item-button a.add_to_cart_button:after,
+.woocommerce-page ul.products li.product .item-button a.add_to_cart_button:after {
+  content: '';
+  margin-left: 0px;
+}
 .woocommerce ul.products li.product .item-button a.fav,
 .woocommerce-page ul.products li.product .item-button a.fav {
   background: #fff;
@@ -1892,15 +1917,14 @@ ul.subsubsub li.active a {
   border-radius: 2px;
   border-color: #d3d3d3;
   display: inline-block;
-  margin-right: 5px;
+  margin-right: 7px;
 }
 .woocommerce ul.products li.product .item-button a.added_to_cart,
 .woocommerce-page ul.products li.product .item-button a.added_to_cart {
-  position: absolute;
-  right: 0;
   color: #fff;
-  padding: 1px 10px;
+  padding: 0.5px 9px;
   font-size: 12px;
+  margin-top: 1.2em;
 }
 .woocommerce ul.products li.product .item-button a span,
 .woocommerce-page ul.products li.product .item-button a span {
@@ -1993,7 +2017,7 @@ ul.subsubsub li.active a {
 }
 .woocommerce.single-product #content div.product form.cart table.variations select,
 .woocommerce-page.single-product #content div.product form.cart table.variations select {
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   padding: 5px 8px;
   border-radius: 3px;
   font-size: 14px;
@@ -2117,7 +2141,7 @@ ul.subsubsub li.active a {
 .woocommerce .login-form,
 .woocommerce-page .login-form {
   padding-top: 20px;
-  border-right: 1px solid #ededed;
+  border-right: 1px solid #EDEDED;
 }
 .woocommerce .login-form form,
 .woocommerce-page .login-form form {
@@ -2136,7 +2160,7 @@ ul.subsubsub li.active a {
 .woocommerce-page .quantity input.qty,
 .woocommerce #content .quantity input.qty,
 .woocommerce-page #content .quantity input.qty {
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   border-right: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -2151,7 +2175,7 @@ ul.subsubsub li.active a {
 .woocommerce-page #content .quantity .minus {
   text-shadow: none;
   background: #fff;
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -2231,7 +2255,7 @@ ul.subsubsub li.active a {
 }
 .woocommerce form.checkout input[type=text],
 .woocommerce-page form.checkout input[type=text] {
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   box-shadow: none;
   padding: 5px 10px;
 }
@@ -2260,7 +2284,7 @@ ul.subsubsub li.active a {
   width: 50px;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   padding: 2px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -2274,7 +2298,7 @@ ul.subsubsub li.active a {
 .woocommerce-page .addresses .address {
   background: #fff;
   padding: 10px;
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
 }
 .woocommerce .addresses .title h3,
 .woocommerce-page .addresses .title h3 {
@@ -2283,7 +2307,7 @@ ul.subsubsub li.active a {
 }
 .woocommerce .addresses .title .edit,
 .woocommerce-page .addresses .title .edit {
-  border: 1px solid #ededed;
+  border: 1px solid #EDEDED;
   padding: 2px 8px;
   background: #F5F5F5;
 }
@@ -2429,7 +2453,7 @@ span.error {
     margin-top: 5px;
   }
   .site-header #navigation {
-    background: #cccccc;
+    background: #ccc;
     width: 100%;
     overflow: hidden;
   }
@@ -2451,7 +2475,7 @@ span.error {
     overflow: hidden;
   }
   .site-header #navigation li a {
-    background: #cccccc;
+    background: #ccc;
   }
   .site-header #navigation > ul > li {
     border-left: none;
@@ -2494,7 +2518,7 @@ span.error {
     display: none;
   }
   .navbar-toggle.widget-area-toggle {
-    border: 1px solid #ededed;
+    border: 1px solid #EDEDED;
     float: none;
     margin: 0px 0 15px 0;
   }
@@ -2588,64 +2612,5 @@ span.error {
 .woocommerce #reviews #comments ol.commentlist li .comment-text,
 .woocommerce-page #reviews #comments ol.commentlist li .comment-text {
   margin: 0 0 0 90px;
-}
-
-.woocommerce-MyAccount-navigation ul li
-{
-    list-style: none;
-    border-bottom: 1px solid rgba(0,0,0,.05);
-    position: relative;
-}
-.woocommerce-MyAccount-navigation ul li a {
-    padding: 4px 8px;
-    display: block;
-}
-.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--dashboard a:before {
-    content: "\f0e4";
-}
-.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--orders a:before {
-    content: "\f07a";
-}
-.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--edit-address a:before {
-    content: "\f015";
-}
-.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--edit-account a:before {
-    content: "\f007";
-}
-.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--customer-logout a:before {
-    content: "\f08b";
-}
-.woocommerce-MyAccount-navigation ul{
-    padding-left: 0px;
-}
-.woocommerce-account .woocommerce-MyAccount-navigation{
-    width: 25%;
-}
-.woocommerce-MyAccount-navigation ul li a:before {
-    display: inline-block;
-    font: normal normal normal 1em/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    content: "\f0f6";
-    line-height: 1.618;
-    margin-left: .53em;
-    width: 1.387em;
-    text-align: right;
-    float: right;
-    opacity: .25;
-}
-.woocommerce-MyAccount-navigation ul li.is-active a:before{
-    opacity: 1;
-}
-.woocommerce ul.products li.product .button{
-  margin-top: 0px;
-}
-
-span.item-button a.button.loading:after,
-span.item-button button.button.loading:after,
-span.item-button input.button.loading:after{
-  content: '';
 }
 /*# sourceMappingURL=style.css.map */

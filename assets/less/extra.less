@@ -93,6 +93,15 @@ ul.subsubsub {
         font-size: 1em;
     }
 
+    h2.woocommerce-loop-product__title {
+        background: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        padding: 5px 5px 5px 10px;
+        color: #fff;
+        margin: 0;
+        font-size: 1em;
+    }
+
     .item-bar {
         background: white;
         display:block;
@@ -116,6 +125,11 @@ ul.subsubsub {
         a.add_to_cart_button {
             color: #fff;
             float: right;
+
+            &:after {
+                content: '';
+                margin-left: 0px;
+            }
         }
 
         a.fav {
@@ -130,14 +144,15 @@ ul.subsubsub {
         border-radius: 2px;
         border-color: #d3d3d3;
         display: inline-block;
-        margin-right: 5px;
+        margin-right: 7px;
 
         &.added_to_cart {
-            position: absolute;
-            right: 0;
+            // position: absolute;
+            // right: 0;
             color: #fff;
-            padding: 1px 10px;
+            padding: 0.5px 9px;
             font-size: 12px;
+            margin-top: 1.2em;
         }
     }
 

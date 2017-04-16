@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 
         watch: {
             less: {
-                files: ['<%= dirs.less %>/*.less'],
+                files: ['<%= dirs.less %>/*.less', '<%= dirs.less %>/skin/*.less' ],
                 tasks: ['less:core'],
                 options: {
                     livereload: true
@@ -108,6 +108,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks( 'grunt-contrib-copy' );
     grunt.loadNpmTasks( 'grunt-contrib-compress' );
     grunt.loadNpmTasks( 'grunt-contrib-less' );
+    grunt.loadNpmTasks( 'grunt-contrib-watch' );
+
+    grunt.registerTask( 'default', [
+        'watch',
+    ]);
 
 
     grunt.registerTask('release', [

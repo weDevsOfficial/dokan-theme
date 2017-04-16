@@ -8,6 +8,7 @@ jQuery(function($) {
         $(this).removeClass('open');
     });
 
+    $('[data-toggle="tooltip"]').tooltip();
 
     // set dashboard menu height
     var dashboardMenu = $('ul.dokan-dashboard-menu'),
@@ -55,7 +56,11 @@ jQuery(function($) {
     });
 
     $('body').on('added_to_cart', function(event, data) {
+        var viewCartText = $('a.added_to_cart.wc-forward').text();
+
         $('i.fa-shopping-cart').removeClass('fa-spin');
+        $('a.added_to_cart.wc-forward').html('<i class="fa fa-eye" data-toggle="tooltip" data-placement="top" title="' + viewCartText + '" aria-hidden="true"></i>');
+        $('[data-toggle="tooltip"]').tooltip();
 
         $('.dokan-cart-amount-top > .amount').fadeOut( 'fast', function(){
             $('.dokan-cart-amount-top > .amount').html(data.amount).fadeIn('fast');
