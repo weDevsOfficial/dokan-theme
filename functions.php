@@ -180,10 +180,12 @@ class WeDevs_Dokan_Theme {
         $template_directory = get_template_directory_uri();
         $skin               = get_theme_mod( 'color_skin', 'orange.css' );
 
+        wp_register_style( 'dokan-fontawesome', $template_directory . '/assets/css/font-awesome.min.css', false, null );
+
         // register styles
         wp_enqueue_style( 'bootstrap', $template_directory . '/assets/css/bootstrap.css', false, null );
         wp_enqueue_style( 'flexslider', $template_directory . '/assets/css/flexslider.css', false, null );
-        wp_enqueue_style( 'fontawesome' );
+        wp_enqueue_style( 'dokan-fontawesome' );
         wp_enqueue_style( 'dokan-opensans', $protocol . '://fonts.googleapis.com/css?family=Open+Sans:400,700' );
         wp_enqueue_style( 'dokan-theme', $template_directory . '/style.css', false, null );
         wp_enqueue_style( 'dokan-theme-skin', $template_directory . '/assets/css/skins/' . $skin, false, null );
