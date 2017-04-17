@@ -24,7 +24,7 @@
 <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class( 'woocommerce' ); ?>>
 
     <div id="page" class="hfeed site">
         <?php do_action( 'before' ); ?>

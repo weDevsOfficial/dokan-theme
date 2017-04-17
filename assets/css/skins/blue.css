@@ -4,7 +4,7 @@ a {
 input[type="submit"].dokan-btn-theme,
 a.dokan-btn-theme,
 .dokan-btn-theme {
-  color: #ffffff;
+  color: #fff;
   background-color: #2980b9;
   border-color: #2980b9;
 }
@@ -23,7 +23,7 @@ a.dokan-btn-theme.active,
 .open .dropdown-toggleinput[type="submit"].dokan-btn-theme,
 .open .dropdown-togglea.dokan-btn-theme,
 .open .dropdown-toggle.dokan-btn-theme {
-  color: #ffffff;
+  color: #fff;
   background-color: #226998;
   border-color: #1e5d87;
 }
@@ -148,7 +148,7 @@ mark {
 .home .product-sliders li .item-button a.add_to_cart_button:hover {
   color: #2980b9;
   background: #fff;
-  border-color: #dddddd;
+  border-color: #DDD;
 }
 .home .product-sliders li .item-button a.fav {
   background: #fff;
@@ -201,7 +201,7 @@ mark {
 .woocommerce-page #respond input#submit,
 .woocommerce #content input.button,
 .woocommerce-page #content input.button {
-  color: #ffffff;
+  color: #fff;
   background-color: #2980b9;
   border-color: #2980b9;
 }
@@ -255,7 +255,7 @@ mark {
 .open .dropdown-toggle.woocommerce-page #respond input#submit,
 .open .dropdown-toggle.woocommerce #content input.button,
 .open .dropdown-toggle.woocommerce-page #content input.button {
-  color: #ffffff;
+  color: #fff;
   background-color: #226998;
   border-color: #1e5d87;
 }
@@ -462,11 +462,15 @@ fieldset[disabled] .woocommerce-page #content input.button.active {
   background: #2980b9;
   border-color: #2980b9;
 }
+.woocommerce ul.products li.product .item-button a.add_to_cart_button:after,
+.woocommerce-page ul.products li.product .item-button a.add_to_cart_button:after {
+  content: '';
+}
 .woocommerce ul.products li.product .item-button a.add_to_cart_button:hover,
 .woocommerce-page ul.products li.product .item-button a.add_to_cart_button:hover {
   color: #2980b9;
   background: #fff;
-  border-color: #dddddd;
+  border-color: #DDD;
 }
 .woocommerce ul.products li.product .item-button a.fav,
 .woocommerce-page ul.products li.product .item-button a.fav {
@@ -561,7 +565,7 @@ fieldset[disabled] .woocommerce-page #content input.button.active {
 }
 .woocommerce .woocommerce-info:before,
 .woocommerce-page .woocommerce-info:before {
-  background-color: #2980b9;
+  color: #2980b9;
 }
 .pagination > .active > a,
 .pagination > .active > a:hover {
@@ -592,3 +596,4 @@ fieldset[disabled] .woocommerce-page #content input.button.active {
 #comments ol.commentlist .reply a.comment-reply-link {
   background: #2980b9;
 }
+/*# sourceMappingURL=style.css.map */

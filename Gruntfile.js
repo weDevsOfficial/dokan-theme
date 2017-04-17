@@ -24,7 +24,14 @@ module.exports = function(grunt) {
                     sourceMapRootpath: '../../'
                 },
                 files: {
-                    'style.css': '<%= dirs.less %>/style.less'
+                    'style.css': '<%= dirs.less %>/style.less',
+                    '<%= dirs.css %>/skins/blue.css': '<%= dirs.less %>/skin/blue.less',
+                    '<%= dirs.css %>/skins/green.css': '<%= dirs.less %>/skin/green.less',
+                    '<%= dirs.css %>/skins/orange.css': '<%= dirs.less %>/skin/orange.less',
+                    '<%= dirs.css %>/skins/pink.css': '<%= dirs.less %>/skin/pink.less',
+                    '<%= dirs.css %>/skins/purple.css': '<%= dirs.less %>/skin/purple.less',
+                    '<%= dirs.css %>/skins/red.css': '<%= dirs.less %>/skin/red.less',
+                    '<%= dirs.css %>/skins/sky.css': '<%= dirs.less %>/skin/sky.less'
                 }
             },
         },

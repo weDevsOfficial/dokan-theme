@@ -87,17 +87,80 @@
 
     .widget_shopping_cart_content {
         padding: 5px 10px;
-        min-width: 250px;
+        min-width: 300px;
+
+        p.total {
+            text-align: right;
+            padding: 0px 3px 6px 0px;
+            font-size: 15px;
+        }
+
+        p.buttons {
+            width: 100%;
+            margin-bottom: 1px;
+
+            a.button {
+                width: 48%;
+                border-radius: 0px;
+                height: 33px;
+                line-height: 26px;
+
+                &:first-child {
+                    float: left;
+                }
+
+                &:last-child {
+                    float: right;
+                }
+            }
+
+
+        }
 
         ul {
             list-style: none;
-            margin: 0;
+            margin: 0 0 15px 0;
             padding: 0;
 
             li {
                 .clearfix;
                 border-bottom: 1px solid @borderColor;
-                padding: 3px 0;
+                padding: 8px 0;
+
+                .cart-remove-icon {
+                    float: left;
+                    width: 8%;
+                    margin-right: 10px;
+                    height: 70px;
+                    vertical-align: middle;
+                    position: relative;
+
+                    a {
+                        position: relative;
+                        top: 32%;
+                    }
+                }
+
+                .mini-cart-content {
+                    float: left;
+                    width: 88%;
+
+                    dl {
+                        margin: 0;
+                        padding-left: 0px;
+                        border-left: none;
+
+                        dt,dd {
+                            font-weight: normal;
+                            padding: 0 0 .25em;
+                            margin: 0 4px 0 0;
+                            clear: left;
+                            font-style: italic;
+                            color: #aaa;
+                            float: none;
+                        }
+                    }
+                }
 
                 &.empty {
                     border-bottom: none;
