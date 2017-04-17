@@ -115,16 +115,27 @@ ul.subsubsub {
             padding: 0px 0 0 10px;
             display: inline-block;
             margin: 0;
+            color: #444;
+
+            del {
+                color: #adadad;
+                display: inline-block;
+            }
+
+            ins {
+                font-weight: normal;
+            }
         }
     }
 
     .item-button {
         float: right;
-        width: 75px;
+        width: 71px;
 
         a.add_to_cart_button {
             color: #fff;
             float: right;
+            margin-top: 0px;
 
             &:after {
                 content: '';
@@ -144,7 +155,7 @@ ul.subsubsub {
         border-radius: 2px;
         border-color: #d3d3d3;
         display: inline-block;
-        margin-right: 7px;
+        margin-right: 5px;
 
         &.added_to_cart {
             // position: absolute;
@@ -152,7 +163,7 @@ ul.subsubsub {
             color: #fff;
             padding: 0.5px 9px;
             font-size: 12px;
-            margin-top: 1.2em;
+            margin-right: 0px;
         }
     }
 

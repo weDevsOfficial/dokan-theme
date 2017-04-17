@@ -677,14 +677,23 @@ a:hover {
   padding: 0px 0 0 10px;
   display: inline-block;
   margin: 0;
+  color: #444;
+}
+.home .product-sliders li .item-bar .price del {
+  color: #adadad;
+  display: inline-block;
+}
+.home .product-sliders li .item-bar .price ins {
+  font-weight: normal;
 }
 .home .product-sliders li .item-button {
   float: right;
-  width: 75px;
+  width: 71px;
 }
 .home .product-sliders li .item-button a.add_to_cart_button {
   color: #fff;
   float: right;
+  margin-top: 0px;
 }
 .home .product-sliders li .item-button a.add_to_cart_button:after {
   content: '';
@@ -700,13 +709,13 @@ a:hover {
   border-radius: 2px;
   border-color: #d3d3d3;
   display: inline-block;
-  margin-right: 7px;
+  margin-right: 5px;
 }
 .home .product-sliders li .item-button a.added_to_cart {
   color: #fff;
   padding: 0.5px 9px;
   font-size: 12px;
-  margin-top: 1.2em;
+  margin-right: 0px;
 }
 .home .product-sliders li .item-button a span {
   font-size: 16px;
@@ -1889,16 +1898,27 @@ ul.subsubsub li.active a {
   padding: 0px 0 0 10px;
   display: inline-block;
   margin: 0;
+  color: #444;
+}
+.woocommerce ul.products li.product .item-bar .price del,
+.woocommerce-page ul.products li.product .item-bar .price del {
+  color: #adadad;
+  display: inline-block;
+}
+.woocommerce ul.products li.product .item-bar .price ins,
+.woocommerce-page ul.products li.product .item-bar .price ins {
+  font-weight: normal;
 }
 .woocommerce ul.products li.product .item-button,
 .woocommerce-page ul.products li.product .item-button {
   float: right;
-  width: 75px;
+  width: 71px;
 }
 .woocommerce ul.products li.product .item-button a.add_to_cart_button,
 .woocommerce-page ul.products li.product .item-button a.add_to_cart_button {
   color: #fff;
   float: right;
+  margin-top: 0px;
 }
 .woocommerce ul.products li.product .item-button a.add_to_cart_button:after,
 .woocommerce-page ul.products li.product .item-button a.add_to_cart_button:after {
@@ -1917,14 +1937,14 @@ ul.subsubsub li.active a {
   border-radius: 2px;
   border-color: #d3d3d3;
   display: inline-block;
-  margin-right: 7px;
+  margin-right: 5px;
 }
 .woocommerce ul.products li.product .item-button a.added_to_cart,
 .woocommerce-page ul.products li.product .item-button a.added_to_cart {
   color: #fff;
   padding: 0.5px 9px;
   font-size: 12px;
-  margin-top: 1.2em;
+  margin-right: 0px;
 }
 .woocommerce ul.products li.product .item-button a span,
 .woocommerce-page ul.products li.product .item-button a span {
