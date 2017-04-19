@@ -1,3 +1,12 @@
+v2.2.3 -> April 19, 2017
+---------------------
+- [new]   Flat UI design 
+- [fix]   WC 3.0+ compatible
+- [fix]   Add-to cart not working
+- [fix]   Cart page not working
+- [tweak] WooCommerce templates updated
+- [tweak] updated alert styles
+
 v2.2.2 -> November 14, 2016
 ---------------------
 - [fix] php 5.2 Backward compatibility added for DIR path
