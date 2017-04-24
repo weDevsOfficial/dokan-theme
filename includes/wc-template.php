@@ -59,4 +59,3 @@ function dokan_add_to_cart_fragments( $fragment ) {
 }
 
 add_filter( 'woocommerce_add_to_cart_fragments', 'dokan_add_to_cart_fragments' );
-add_filter( 'add_to_cart_fragments', 'dokan_add_to_cart_fragments' );
