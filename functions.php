@@ -121,6 +121,11 @@ class WeDevs_Dokan_Theme {
 
         add_theme_support( 'woocommerce' );
 
+        // Support gallery image for single product page
+        add_theme_support( 'wc-product-gallery-zoom' );
+        add_theme_support( 'wc-product-gallery-lightbox' );
+        add_theme_support( 'wc-product-gallery-slider' );
+
         /*
          * This theme supports custom background color and image,
          * and here we also set up the default background color.
