@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(grunt) {
-
+    var pkg = grunt.file.readJSON('package.json');
     grunt.initConfig({
 
         // setting folder templates
@@ -99,7 +99,7 @@ module.exports = function(grunt) {
             main: {
                 options: {
                     mode: 'zip',
-                    archive: './build/dokan-theme.zip'
+                    archive: './build/dokan-theme-v'+ pkg.version + '.zip'
                 },
                 expand: true,
                 cwd: 'build/',
