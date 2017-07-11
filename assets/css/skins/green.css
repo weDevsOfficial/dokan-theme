@@ -175,13 +175,6 @@ mark {
   background-color: #27ae60;
   border-color: #27ae60;
 }
-.widget.dokan-category-menu #cat-drop-stack > ul > li > a:hover {
-  background: #27ae60;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-block ul a:hover,
-.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-block h3 a:hover {
-  color: #27ae60;
-}
 .dokan-dash-sidebar ul.dokan-dashboard-menu li.active {
   background: #27ae60;
 }
