@@ -603,4 +603,7 @@ fieldset[disabled] .woocommerce-page #content input.button.active {
 #comments ol.commentlist .reply a.comment-reply-link {
   background: #AF93A0;
 }
+.woocommerce .star-rating {
+  color: #AF93A0;
+}
 /*# sourceMappingURL=style.css.map */

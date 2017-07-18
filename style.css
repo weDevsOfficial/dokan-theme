@@ -2388,6 +2388,15 @@ ul.subsubsub li.active a {
 .woocommerce-Message:before {
   background: none;
 }
+.woocommerce div.product div.images .flex-control-thumbs li {
+  border: 2px solid #eee;
+  padding: 5px;
+  margin-right: 5px;
+}
+.woocommerce div.product div.images.woocommerce-product-gallery {
+  border: 2px solid #eee;
+  padding: 5px;
+}
 .dokan-hide {
   display: none;
 }
