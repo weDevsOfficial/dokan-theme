@@ -1316,66 +1316,6 @@ a:hover {
 .widget.store-contact ul li {
   border-bottom: none;
 }
-.widget.dokan-category-menu {
-  padding: 0;
-  border: 1px solid #ece7e7;
-}
-.widget.dokan-category-menu h3.widget-title {
-  margin: 0;
-  padding: 10px 10px 10px 15px;
-  background: #eee;
-  border: 1px solid #eee;
-  color: #444;
-}
-.widget.dokan-category-menu ul li {
-  border-bottom: none;
-}
-.widget.dokan-category-menu #cat-drop-stack ul .children {
-  display: none;
-}
-.widget.dokan-category-menu #cat-drop-stack ul li:last-child a {
-  border-bottom: none !important;
-}
-.widget.dokan-category-menu #cat-drop-stack ul li:last-child.has-children a {
-  border-bottom: 1px solid #eee !important;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul {
-  padding: 0px;
-  margin: 0px;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul li {
-  padding: 0;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul li.parent-cat-wrap {
-  background: #fff;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul li.parent-cat-wrap a {
-  border-bottom: 1px solid #eee;
-  margin: 0px 15px;
-  text-decoration: none;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul li.parent-cat-wrap ul.level-0 {
-  background: #fafafa;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul li.parent-cat-wrap ul.level-0 li.has-children {
-  border-bottom: none;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul li a {
-  padding: 9px 0px;
-  display: block;
-  color: #3C3C3C;
-  position: relative;
-  font-size: 13px;
-  text-decoration: none;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul li a .caret-icon {
-  position: absolute;
-  right: -2px;
-  display: inline-block;
-  width: 20px;
-  vertical-align: middle;
-  text-align: center;
-}
 /*--------------------------------------------------
 :: Comments
 -------------------------------------------------- */
@@ -2492,7 +2432,7 @@ span.error {
     display: none;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   #dokan-primary {
     width: 100%;
     float: left;
@@ -2669,6 +2609,9 @@ span.error {
   .site-footer .footer-copy ul.pull-right {
     float: none !important;
   }
+  .dokan-seller-listing .dokan-seller-search-form input#search {
+    width: 100%;
+  }
 }
 @media (max-width: 430px) {
   .woocommerce #reviews #respond .comment-form-comment,
@@ -2695,6 +2638,9 @@ span.error {
   .woocommerce #content div.product .woocommerce-tabs ul.tabs li.active a,
   .woocommerce-page #content div.product .woocommerce-tabs ul.tabs li.active a {
     font-weight: normal;
+  }
+  .dokan-seller-listing .dokan-seller-search-form input#search {
+    width: 100%;
   }
 }
 .woocommerce #reviews #comments ol.commentlist li img.avatar,
