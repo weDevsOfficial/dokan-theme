@@ -18,7 +18,7 @@ module.exports = function(grunt) {
             // one to one
             core: {
                 options: {
-                    sourceMap: true,
+                    sourceMap: false,
                     sourceMapFilename: 'style.css.map',
                     sourceMapURL: 'style.css.map',
                     sourceMapRootpath: '../../'

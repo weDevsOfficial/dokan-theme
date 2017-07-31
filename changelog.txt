@@ -1,4 +1,4 @@
-v2.3 -> July 31, 2017
+v2.3.0 -> July 31, 2017
 ---------------------
 - [new]   Rose Quartz Color scheme added
 - [new]   Category Sidebar design updated on homepage and Store page
@@ -9,7 +9,7 @@ v2.3 -> July 31, 2017
 
 v2.2.3 -> April 19, 2017
 ---------------------
-- [new]   Flat UI design 
+- [new]   Flat UI design
 - [fix]   WC 3.0+ compatible
 - [fix]   Add-to cart not working
 - [fix]   Cart page not working
