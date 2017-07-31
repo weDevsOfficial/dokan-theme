@@ -55,7 +55,7 @@ jQuery(function($) {
         maxItems: getGridSize()
     });
 
-    $('body').on('added_to_cart', function(event, data) {
+    $('body').on('added_to_cart wc_cart_button_updated', function( data ) {
         var viewCartText = $('a.added_to_cart.wc-forward').text();
 
         $('i.fa-shopping-cart').removeClass('fa-spin');
@@ -70,5 +70,4 @@ jQuery(function($) {
     $('body').on('adding_to_cart', function(e, button) {
         $(button).children('i').addClass('fa-spin');
     });
-
 });

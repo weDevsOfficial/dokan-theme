@@ -4,7 +4,7 @@ Theme URI: http://wedevs.com/theme/dokan/
 Author: Tareq Hasan
 Author URI: http://tareq.weDevs.com
 Description: An e-commerce theme for Dokan
-Version: 2.2.3
+Version: 2.3.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -1316,97 +1316,6 @@ a:hover {
 .widget.store-contact ul li {
   border-bottom: none;
 }
-.widget.dokan-category-menu {
-  padding: 0;
-  border: none;
-}
-.widget.dokan-category-menu h3.widget-title {
-  margin: 0;
-  padding: 10px 10px 10px 20px;
-  background: #eee;
-  border: 1px solid #eee;
-  color: #444;
-}
-.widget.dokan-category-menu #cat-drop-stack {
-  border: 1px solid #eee;
-  border-top: none;
-  padding: 0;
-  margin: 0;
-  background: #fff;
-  position: relative;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul {
-  margin-bottom: 0px;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul > li {
-  list-style: none;
-  padding: 0;
-  position: relative;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul > li .caret {
-  border-bottom: 4px solid transparent;
-  border-top: 4px solid transparent;
-  border-left: 4px solid #000000;
-  display: inline-block;
-  height: 0;
-  opacity: 0.3;
-  vertical-align: middle;
-  width: 0;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category {
-  display: none;
-  background: none repeat scroll 0 0 #FFFFFF;
-  border: 1px solid #E3E3E3;
-  box-shadow: 5px 0px 10px rgba(108, 108, 108, 0.3);
-  min-height: 250px;
-  padding: 20px;
-  position: absolute;
-  left: 90%;
-  top: -50px;
-  min-width: 200%;
-  z-index: 99;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block {
-  position: relative;
-  z-index: 1;
-  display: inline-block;
-  zoom: 1;
-  vertical-align: top;
-  padding-right: 20px;
-  padding-bottom: 20px;
-  width: 200px;
-  font-size: 12px;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block h3 {
-  font-weight: bold;
-  font-size: 14px;
-  border-bottom: 1px solid #ccc;
-  padding: 0 0 7px 0;
-  margin: 0 0 7px 0;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block h3 a {
-  text-decoration: none;
-  color: #555;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category .sub-block ul a {
-  color: #777;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul > li .sub-category li {
-  font-weight: normal;
-  padding: 0;
-  border-bottom: none;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul > li:hover .sub-category {
-  display: block;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul > li > a {
-  padding: 7px 0px 8px 20px;
-  color: #5C5B52;
-  display: block;
-}
-.widget.dokan-category-menu #cat-drop-stack > ul > li > a:hover {
-  color: #fff;
-}
 /*--------------------------------------------------
 :: Comments
 -------------------------------------------------- */
@@ -2479,6 +2388,75 @@ ul.subsubsub li.active a {
 .woocommerce-Message:before {
   background: none;
 }
+.woocommerce div.product div.images .flex-control-thumbs li {
+  border: 2px solid #eee;
+  padding: 5px;
+  margin-right: 5px;
+}
+.woocommerce div.product div.images.woocommerce-product-gallery {
+  border: 2px solid #eee;
+  padding: 5px;
+}
+.dokan-category-menu {
+  padding: 0;
+  border: 1px solid #ece7e7;
+}
+.dokan-category-menu h3.widget-title {
+  margin: 0;
+  padding: 10px 10px 10px 15px;
+  background: #eee;
+  border: 1px solid #eee;
+  color: #444;
+}
+.dokan-category-menu ul li {
+  border-bottom: none;
+}
+.dokan-category-menu #cat-drop-stack ul .children {
+  display: none;
+}
+.dokan-category-menu #cat-drop-stack ul li:last-child a {
+  border-bottom: none !important;
+}
+.dokan-category-menu #cat-drop-stack ul li:last-child.has-children a {
+  border-bottom: 1px solid #eee !important;
+}
+.dokan-category-menu #cat-drop-stack > ul {
+  padding: 0px;
+  margin: 0px;
+}
+.dokan-category-menu #cat-drop-stack > ul li {
+  padding: 0;
+}
+.dokan-category-menu #cat-drop-stack > ul li.parent-cat-wrap {
+  background: #fff;
+}
+.dokan-category-menu #cat-drop-stack > ul li.parent-cat-wrap a {
+  border-bottom: 1px solid #eee;
+  margin: 0px 15px;
+  text-decoration: none;
+}
+.dokan-category-menu #cat-drop-stack > ul li.parent-cat-wrap ul.level-0 {
+  background: #fafafa;
+}
+.dokan-category-menu #cat-drop-stack > ul li.parent-cat-wrap ul.level-0 li.has-children {
+  border-bottom: none;
+}
+.dokan-category-menu #cat-drop-stack > ul li a {
+  padding: 9px 0px;
+  display: block;
+  color: #3C3C3C;
+  position: relative;
+  font-size: 13px;
+  text-decoration: none;
+}
+.dokan-category-menu #cat-drop-stack > ul li a .caret-icon {
+  position: absolute;
+  right: -2px;
+  display: inline-block;
+  width: 20px;
+  vertical-align: middle;
+  text-align: center;
+}
 .dokan-hide {
   display: none;
 }
@@ -2523,7 +2501,7 @@ span.error {
     display: none;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   #dokan-primary {
     width: 100%;
     float: left;
@@ -2700,6 +2678,9 @@ span.error {
   .site-footer .footer-copy ul.pull-right {
     float: none !important;
   }
+  .dokan-seller-listing .dokan-seller-search-form input#search {
+    width: 100%;
+  }
 }
 @media (max-width: 430px) {
   .woocommerce #reviews #respond .comment-form-comment,
@@ -2727,6 +2708,9 @@ span.error {
   .woocommerce-page #content div.product .woocommerce-tabs ul.tabs li.active a {
     font-weight: normal;
   }
+  .dokan-seller-listing .dokan-seller-search-form input#search {
+    width: 100%;
+  }
 }
 .woocommerce #reviews #comments ol.commentlist li img.avatar,
 .woocommerce-page #reviews #comments ol.commentlist li img.avatar {
@@ -2735,5 +2719,12 @@ span.error {
 .woocommerce #reviews #comments ol.commentlist li .comment-text,
 .woocommerce-page #reviews #comments ol.commentlist li .comment-text {
   margin: 0 0 0 90px;
+}
+input,
+textarea {
+  color: #767676;
+  padding: 3px 12px;
+  background-color: #fdfdfd;
+  border: 1px solid #e3e3e3;
 }
 /*# sourceMappingURL=style.css.map */

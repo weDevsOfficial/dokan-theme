@@ -134,5 +134,6 @@ get_header();
 </div><!-- #primary .content-area -->
 
 
-<?php get_sidebar( 'home' ); ?>
-<?php get_footer(); ?>
+<?php get_sidebar( 'home' ); 
+
+get_footer();

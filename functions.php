@@ -121,6 +121,11 @@ class WeDevs_Dokan_Theme {
 
         add_theme_support( 'woocommerce' );
 
+        // Support gallery image for single product page
+        add_theme_support( 'wc-product-gallery-zoom' );
+        add_theme_support( 'wc-product-gallery-lightbox' );
+        add_theme_support( 'wc-product-gallery-slider' );
+
         /*
          * This theme supports custom background color and image,
          * and here we also set up the default background color.
@@ -146,7 +151,6 @@ class WeDevs_Dokan_Theme {
             array( 'name' => __( 'Header Sidebar', 'dokan' ), 'id' => 'sidebar-header' ),
             array( 'name' => __( 'Shop Archive', 'dokan' ), 'id' => 'sidebar-shop' ),
             array( 'name' => __( 'Single Product', 'dokan' ), 'id' => 'sidebar-single-product' ),
-            array( 'name' => __( 'Store', 'dokan' ), 'id' => 'sidebar-store' ),
             array( 'name' => __( 'Footer Sidebar - 1', 'dokan' ), 'id' => 'footer-1' ),
             array( 'name' => __( 'Footer Sidebar - 2', 'dokan' ), 'id' => 'footer-2' ),
             array( 'name' => __( 'Footer Sidebar - 3', 'dokan' ), 'id' => 'footer-3' ),

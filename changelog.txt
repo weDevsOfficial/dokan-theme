@@ -1,6 +1,15 @@
+v2.3.0 -> July 31, 2017
+---------------------
+- [new]   Rose Quartz Color scheme added
+- [new]   Category Sidebar design updated on homepage and Store page
+- [fix]   Cart Icon not showing on view cart button for mini cart
+- [tweak] Responsive styles updated
+- [tweak] Rating styles updated
+- [tweak] Updated outdated template for mini-cart.php
+
 v2.2.3 -> April 19, 2017
 ---------------------
-- [new]   Flat UI design 
+- [new]   Flat UI design
 - [fix]   WC 3.0+ compatible
 - [fix]   Add-to cart not working
 - [fix]   Cart page not working

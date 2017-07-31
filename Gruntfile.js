@@ -18,7 +18,7 @@ module.exports = function(grunt) {
             // one to one
             core: {
                 options: {
-                    sourceMap: true,
+                    sourceMap: false,
                     sourceMapFilename: 'style.css.map',
                     sourceMapURL: 'style.css.map',
                     sourceMapRootpath: '../../'
@@ -31,7 +31,8 @@ module.exports = function(grunt) {
                     '<%= dirs.css %>/skins/pink.css': '<%= dirs.less %>/skin/pink.less',
                     '<%= dirs.css %>/skins/purple.css': '<%= dirs.less %>/skin/purple.less',
                     '<%= dirs.css %>/skins/red.css': '<%= dirs.less %>/skin/red.less',
-                    '<%= dirs.css %>/skins/sky.css': '<%= dirs.less %>/skin/sky.less'
+                    '<%= dirs.css %>/skins/sky.css': '<%= dirs.less %>/skin/sky.less',
+                    '<%= dirs.css %>/skins/rose-quartz.css': '<%= dirs.less %>/skin/rose-quartz.less'
                 }
             },
         },

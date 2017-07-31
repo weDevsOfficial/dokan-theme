@@ -53,13 +53,14 @@ class Dokan_Customizer {
             'section' => 'dokan_theme_section',
             'type'    => 'select',
             'choices' => array(
-                'orange.css' => __( 'Orange', 'dokan' ),
-                'sky.css'    => __( 'Sky', 'dokan' ),
-                'blue.css'   => __( 'Blue', 'dokan' ),
-                'green.css'  => __( 'Green', 'dokan' ),
-                'purple.css' => __( 'Purple', 'dokan' ),
-                'red.css'    => __( 'Red', 'dokan' ),
-                'pink.css'   => __( 'Pink', 'dokan' ),
+                'orange.css'      => __( 'Orange', 'dokan' ),
+                'sky.css'         => __( 'Sky', 'dokan' ),
+                'blue.css'        => __( 'Blue', 'dokan' ),
+                'green.css'       => __( 'Green', 'dokan' ),
+                'purple.css'      => __( 'Purple', 'dokan' ),
+                'red.css'         => __( 'Red', 'dokan' ),
+                'rose-quartz.css' => __( 'Rose Quartz', 'dokan' ),
+                'pink.css'        => __( 'Pink', 'dokan' ),
             )
         ) );
 
