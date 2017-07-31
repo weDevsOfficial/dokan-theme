@@ -2720,4 +2720,11 @@ span.error {
 .woocommerce-page #reviews #comments ol.commentlist li .comment-text {
   margin: 0 0 0 90px;
 }
+input,
+textarea {
+  color: #767676;
+  padding: 3px 12px;
+  background-color: #fdfdfd;
+  border: 1px solid #e3e3e3;
+}
 /*# sourceMappingURL=style.css.map */
