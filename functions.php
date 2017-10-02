@@ -43,6 +43,7 @@ class WeDevs_Dokan_Theme {
      */
     function init_filters() {
         add_filter( 'wp_title', array( $this, 'wp_title' ), 10, 2 );
+        add_filter( 'dokan_ls_theme_tags', array( $this, 'live_search_support' ), 10, 2 );
     }
 
     /**
@@ -135,6 +136,18 @@ class WeDevs_Dokan_Theme {
         ) );
 
         add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list' ) );
+    }
+
+    /**
+    * Live search module on support
+    *
+    * @since 2.3.1
+    *
+    * @return void
+    **/
+    public function live_search_support( $themes ) {
+        $themes['dokan-theme'] = '#primary';
+        return $themes;
     }
 
     /**
