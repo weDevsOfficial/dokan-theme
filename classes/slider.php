@@ -61,6 +61,14 @@ class Dokan_Slider {
 
             wp_enqueue_style( 'thickbox' );
         }
+        $help_text = sprintf( __( 'Learn More: <a target="_blank" href="%s">How to Create Slider in Dokan</a>', 'dokan' ), 'https://wedevs.com/docs/dokan/tutorials/how-to-create-a-slider-for-homepage-using-dokan/' );
+        ?>
+        <script>
+            jQuery(function($) {
+                $( '.wp-header-end' ).before( '<p><?php echo $help_text ?></p>' );
+            });
+        </script>
+        <?php
     }
 
     function post_types() {
