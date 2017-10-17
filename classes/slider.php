@@ -49,26 +49,22 @@ class Dokan_Slider {
 	}
 
     function enqueue_scripts() {
-        global $post;
+        global $wp;
 
-        if( !$post ) {
-            return;
-        }
-
-        if( $post->post_type == $this->post_type ) {
+        if ( isset( $wp->query_vars['post_type'] ) && $wp->query_vars['post_type'] == 'dokan_slider' ) {
             wp_enqueue_script( 'media-upload' );
             wp_enqueue_script( 'thickbox' );
 
             wp_enqueue_style( 'thickbox' );
+            $help_text = sprintf( __( 'Learn More: <a target="_blank" href="%s">How to Create Slider in Dokan</a>', 'dokan' ), 'https://wedevs.com/docs/dokan/tutorials/how-to-create-a-slider-for-homepage-using-dokan/' );
+            ?>
+            <script>
+                jQuery(function($) {
+                    $( '.wp-header-end' ).before( '<p><?php echo $help_text ?></p>' );
+                });
+            </script>
+            <?php
         }
-        $help_text = sprintf( __( 'Learn More: <a target="_blank" href="%s">How to Create Slider in Dokan</a>', 'dokan' ), 'https://wedevs.com/docs/dokan/tutorials/how-to-create-a-slider-for-homepage-using-dokan/' );
-        ?>
-        <script>
-            jQuery(function($) {
-                $( '.wp-header-end' ).before( '<p><?php echo $help_text ?></p>' );
-            });
-        </script>
-        <?php
     }
 
     function post_types() {
