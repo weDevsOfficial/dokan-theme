@@ -13,12 +13,13 @@
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 2.6.0
+ * @version 3.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
+
 ?>
 
 <?php wc_print_notices(); ?>
@@ -120,7 +121,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
 
 </div>
-
 <?php endif; ?>
 
 <?php do_action( 'woocommerce_after_customer_login_form' ); ?>
