@@ -99,7 +99,7 @@ class WeDevs_Dokan_Theme {
          * Make theme available for translation
          * Translations can be filed in the /languages/ directory
          */
-        load_theme_textdomain( 'dokan', get_template_directory() . '/languages' );
+        load_theme_textdomain( 'dokan-theme', get_template_directory() . '/languages' );
 
         /**
          * Add default posts and comments RSS feed links to head
@@ -115,9 +115,9 @@ class WeDevs_Dokan_Theme {
          * This theme uses wp_nav_menu() in one location.
          */
         register_nav_menus( array(
-            'primary'  => __( 'Primary Menu', 'dokan' ),
-            'top-left' => __( 'Top Left', 'dokan' ),
-            'footer'   => __( 'Footer Menu', 'dokan' ),
+            'primary'  => __( 'Primary Menu', 'dokan-theme' ),
+            'top-left' => __( 'Top Left', 'dokan-theme' ),
+            'footer'   => __( 'Footer Menu', 'dokan-theme' ),
         ) );
 
         add_theme_support( 'woocommerce' );
@@ -158,16 +158,16 @@ class WeDevs_Dokan_Theme {
     function widgets_init() {
 
         $sidebars = array(
-            array( 'name' => __( 'General Sidebar', 'dokan' ), 'id' => 'sidebar-1' ),
-            array( 'name' => __( 'Home Sidebar', 'dokan' ), 'id' => 'sidebar-home' ),
-            array( 'name' => __( 'Blog Sidebar', 'dokan' ), 'id' => 'sidebar-blog' ),
-            array( 'name' => __( 'Header Sidebar', 'dokan' ), 'id' => 'sidebar-header' ),
-            array( 'name' => __( 'Shop Archive', 'dokan' ), 'id' => 'sidebar-shop' ),
-            array( 'name' => __( 'Single Product', 'dokan' ), 'id' => 'sidebar-single-product' ),
-            array( 'name' => __( 'Footer Sidebar - 1', 'dokan' ), 'id' => 'footer-1' ),
-            array( 'name' => __( 'Footer Sidebar - 2', 'dokan' ), 'id' => 'footer-2' ),
-            array( 'name' => __( 'Footer Sidebar - 3', 'dokan' ), 'id' => 'footer-3' ),
-            array( 'name' => __( 'Footer Sidebar - 4', 'dokan' ), 'id' => 'footer-4' ),
+            array( 'name' => __( 'General Sidebar', 'dokan-theme' ), 'id' => 'sidebar-1' ),
+            array( 'name' => __( 'Home Sidebar', 'dokan-theme' ), 'id' => 'sidebar-home' ),
+            array( 'name' => __( 'Blog Sidebar', 'dokan-theme' ), 'id' => 'sidebar-blog' ),
+            array( 'name' => __( 'Header Sidebar', 'dokan-theme' ), 'id' => 'sidebar-header' ),
+            array( 'name' => __( 'Shop Archive', 'dokan-theme' ), 'id' => 'sidebar-shop' ),
+            array( 'name' => __( 'Single Product', 'dokan-theme' ), 'id' => 'sidebar-single-product' ),
+            array( 'name' => __( 'Footer Sidebar - 1', 'dokan-theme' ), 'id' => 'footer-1' ),
+            array( 'name' => __( 'Footer Sidebar - 2', 'dokan-theme' ), 'id' => 'footer-2' ),
+            array( 'name' => __( 'Footer Sidebar - 3', 'dokan-theme' ), 'id' => 'footer-3' ),
+            array( 'name' => __( 'Footer Sidebar - 4', 'dokan-theme' ), 'id' => 'footer-4' ),
         );
 
         $args = apply_filters( 'dokan_widget_args', array(
@@ -253,14 +253,14 @@ class WeDevs_Dokan_Theme {
 
         // Add a page number if necessary.
         if ( $paged >= 2 || $page >= 2 ) {
-            $title = "$title $sep " . sprintf( __( 'Page %s', 'dokan' ), max( $paged, $page ) );
+            $title = "$title $sep " . sprintf( __( 'Page %s', 'dokan-theme' ), max( $paged, $page ) );
         }
 
         return $title;
     }
 
     public function slider_page() {
-        add_submenu_page( 'dokan', __( 'Slider', 'dokan' ), __( 'Slider', 'dokan' ), 'manage_options', 'edit.php?post_type=dokan_slider' );
+        add_submenu_page( 'dokan-theme', __( 'Slider', 'dokan-theme' ), __( 'Slider', 'dokan-theme' ), 'manage_options', 'edit.php?post_type=dokan_slider' );
     }
 
 }

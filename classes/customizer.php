@@ -13,7 +13,7 @@ class Dokan_Customizer {
     }
 
     function get_post_type( $post_type ) {
-        $pages_array = array( '-1' => __( '- select -', 'dokan' ) );
+        $pages_array = array( '-1' => __( '- select -', 'dokan-theme' ) );
         $pages = get_posts( array('post_type' => $post_type, 'numberposts' => -1) );
 
         if ( $pages ) {
@@ -29,38 +29,38 @@ class Dokan_Customizer {
 
         // logo
         $wp_customize->add_section( 'dokan_logo_section', array(
-            'title'       => __( 'Site Logo', 'dokan' ),
-            'description' => __( 'Upload your logo to replace the default Logo (dimension : 180 X 50)', 'dokan' ),
+            'title'       => __( 'Site Logo', 'dokan-theme' ),
+            'description' => __( 'Upload your logo to replace the default Logo (dimension : 180 X 50)', 'dokan-theme' ),
         ) );
 
         $wp_customize->add_setting( 'dokan_logo' );
 
         $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'dokan_logo', array(
-            'label'    => __( 'Upload Logo', 'dokan' ),
+            'label'    => __( 'Upload Logo', 'dokan-theme' ),
             'section'  => 'dokan_logo_section',
             'settings' => 'dokan_logo',
         ) ) );
 
         // theme settings
         $wp_customize->add_section( 'dokan_theme_section', array(
-            'title' => __( 'Theme Settings', 'dokan' )
+            'title' => __( 'Theme Settings', 'dokan-theme' )
         ) );
 
         // skin chooser
         $wp_customize->add_setting( 'color_skin', array( 'default' => 'orange.css' ) );
         $wp_customize->add_control( 'color_skin', array(
-            'label'   => __( 'Color Skin', 'dokan' ),
+            'label'   => __( 'Color Skin', 'dokan-theme' ),
             'section' => 'dokan_theme_section',
             'type'    => 'select',
             'choices' => array(
-                'orange.css'      => __( 'Orange', 'dokan' ),
-                'sky.css'         => __( 'Sky', 'dokan' ),
-                'blue.css'        => __( 'Blue', 'dokan' ),
-                'green.css'       => __( 'Green', 'dokan' ),
-                'purple.css'      => __( 'Purple', 'dokan' ),
-                'red.css'         => __( 'Red', 'dokan' ),
-                'rose-quartz.css' => __( 'Rose Quartz', 'dokan' ),
-                'pink.css'        => __( 'Pink', 'dokan' ),
+                'orange.css'      => __( 'Orange', 'dokan-theme' ),
+                'sky.css'         => __( 'Sky', 'dokan-theme' ),
+                'blue.css'        => __( 'Blue', 'dokan-theme' ),
+                'green.css'       => __( 'Green', 'dokan-theme' ),
+                'purple.css'      => __( 'Purple', 'dokan-theme' ),
+                'red.css'         => __( 'Red', 'dokan-theme' ),
+                'rose-quartz.css' => __( 'Rose Quartz', 'dokan-theme' ),
+                'pink.css'        => __( 'Pink', 'dokan-theme' ),
             )
         ) );
 
@@ -68,7 +68,7 @@ class Dokan_Customizer {
         $wp_customize->add_setting( 'show_slider' );
         $wp_customize->add_control( 'show_slider', array(
                 'type'    => 'checkbox',
-                'label'   => __( 'Show Slider on home page', 'dokan' ),
+                'label'   => __( 'Show Slider on home page', 'dokan-theme' ),
                 'section' => 'dokan_theme_section',
             )
         );
@@ -76,7 +76,7 @@ class Dokan_Customizer {
         // select slider
         $wp_customize->add_setting( 'slider_id', array( 'default' => '-1' ) );
         $wp_customize->add_control( 'slider_id', array(
-            'label'   => __( 'Select Slider', 'dokan' ),
+            'label'   => __( 'Select Slider', 'dokan-theme' ),
             'section' => 'dokan_theme_section',
             'type'    => 'select',
             'choices' => $this->get_post_type( 'dokan_slider' )
@@ -86,7 +86,7 @@ class Dokan_Customizer {
         $wp_customize->add_setting( 'show_featured', array( 'default' => 'on' ) );
         $wp_customize->add_control( 'show_featured', array(
                 'type'    => 'checkbox',
-                'label'   => __( 'Show featured products on homepage', 'dokan' ),
+                'label'   => __( 'Show featured products on homepage', 'dokan-theme' ),
                 'section' => 'dokan_theme_section',
             )
         );
@@ -95,7 +95,7 @@ class Dokan_Customizer {
         $wp_customize->add_setting( 'show_latest_pro', array( 'default' => 'on' ) );
         $wp_customize->add_control( 'show_latest_pro', array(
                 'type'    => 'checkbox',
-                'label'   => __( 'Show latest products on homepage', 'dokan' ),
+                'label'   => __( 'Show latest products on homepage', 'dokan-theme' ),
                 'section' => 'dokan_theme_section',
             )
         );
@@ -104,7 +104,7 @@ class Dokan_Customizer {
         $wp_customize->add_setting( 'show_best_selling', array( 'default' => 'on' ) );
         $wp_customize->add_control( 'show_best_selling', array(
                 'type'    => 'checkbox',
-                'label'   => __( 'Show best selling products on homepage', 'dokan' ),
+                'label'   => __( 'Show best selling products on homepage', 'dokan-theme' ),
                 'section' => 'dokan_theme_section',
             )
         );
@@ -113,7 +113,7 @@ class Dokan_Customizer {
         $wp_customize->add_setting( 'show_top_rated', array( 'default' => 'on' ) );
         $wp_customize->add_control( 'show_top_rated', array(
                 'type'    => 'checkbox',
-                'label'   => __( 'Show top rated products on homepage', 'dokan' ),
+                'label'   => __( 'Show top rated products on homepage', 'dokan-theme' ),
                 'section' => 'dokan_theme_section',
             )
         );
@@ -121,11 +121,11 @@ class Dokan_Customizer {
         // footer text
         $wp_customize->add_setting( 'footer_text', array(
             'capability' => 'edit_theme_options',
-            'default'    => sprintf( __( '&copy; %d. All rights are reserved.', 'dokan' ), date( 'Y' ) )
+            'default'    => sprintf( __( '&copy; %d. All rights are reserved.', 'dokan-theme' ), date( 'Y' ) )
         ));
 
         $wp_customize->add_control( 'footer_text' , array(
-            'label'   => __( 'Footer Text', 'dokan' ),
+            'label'   => __( 'Footer Text', 'dokan-theme' ),
             'section' => 'dokan_theme_section',
             'type'    => 'text'
         ));
@@ -138,7 +138,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_link_color', array(
-            'label' => __( 'Link', 'dokan' ),
+            'label' => __( 'Link', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'dokan_link_color',
             'priority' => 20
@@ -151,7 +151,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_link_hover_color', array(
-            'label' => __( 'Link hover', 'dokan' ),
+            'label' => __( 'Link hover', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'dokan_link_hover_color',
             'priority' => 25
@@ -164,7 +164,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_header_bg', array(
-            'label' => __( 'Header Background', 'dokan' ),
+            'label' => __( 'Header Background', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'dokan_header_bg',
             'priority' => 30
@@ -177,7 +177,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_nav_bg', array(
-            'label' => __( 'Navigation Background', 'dokan' ),
+            'label' => __( 'Navigation Background', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'dokan_nav_bg',
             'priority' => 33
@@ -190,7 +190,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_nav_color', array(
-            'label' => __( 'Navigation Link', 'dokan' ),
+            'label' => __( 'Navigation Link', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'dokan_nav_color',
             'priority' => 35
@@ -202,7 +202,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_nav_hover', array(
-            'label' => __( 'Navigation Link Hover', 'dokan' ),
+            'label' => __( 'Navigation Link Hover', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'dokan_nav_hover',
             'priority' => 40
@@ -215,7 +215,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_footer_bg', array(
-            'label' => __( 'Footer Background', 'dokan' ),
+            'label' => __( 'Footer Background', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'dokan_footer_bg',
             'priority' => 50
@@ -228,7 +228,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_footer_bottom_bar_bg_color', array(
-            'label' => __( 'Copy Container Background', 'dokan' ),
+            'label' => __( 'Copy Container Background', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'dokan_footer_bottom_bar_bg_color',
             'priority' => 50
@@ -241,7 +241,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_footer_text', array(
-            'label' => __( 'Footer text', 'dokan' ),
+            'label' => __( 'Footer text', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'dokan_footer_text',
             'priority' => 55
@@ -254,7 +254,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'sidebar_widget_header', array(
-            'label' => __( 'Sidebar widget header', 'dokan' ),
+            'label' => __( 'Sidebar widget header', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'sidebar_widget_header',
             'priority' => 56
@@ -267,7 +267,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_widget_header', array(
-            'label' => __( 'Footer widget header', 'dokan' ),
+            'label' => __( 'Footer widget header', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'footer_widget_header',
             'priority' => 60
@@ -281,7 +281,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_footer_widget_link', array(
-            'label' => __( 'Footer Widget link', 'dokan' ),
+            'label' => __( 'Footer Widget link', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'dokan_footer_widget_link',
             'priority' => 65
@@ -293,7 +293,7 @@ class Dokan_Customizer {
         ) );
 
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'dokan_footer_link_hover', array(
-            'label' => __( 'Footer Widget link hover', 'dokan' ),
+            'label' => __( 'Footer Widget link hover', 'dokan-theme' ),
             'section' => 'colors',
             'settings' => 'dokan_footer_link_hover',
             'priority' => 70

@@ -23,7 +23,7 @@ function dokan_comment( $comment, $args, $depth ) {
         case 'trackback' :
     ?>
     <li class="post pingback">
-        <p><?php _e( 'Pingback:', 'dokan' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'dokan' ), ' ' ); ?></p>
+        <p><?php _e( 'Pingback:', 'dokan-theme' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'dokan-theme' ), ' ' ); ?></p>
     <?php
             break;
         default :
@@ -35,20 +35,20 @@ function dokan_comment( $comment, $args, $depth ) {
                     <div class="comment-avatar">
                         <?php echo get_avatar( $comment, 75 ); ?>
                     </div>
-                    <?php printf( __( '%s <span class="says">says:</span>', 'dokan' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
+                    <?php printf( __( '%s <span class="says">says:</span>', 'dokan-theme' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
 
                     <a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time pubdate datetime="<?php comment_time( 'c' ); ?>">
                         <?php
                         /* translators: 1: date, 2: time */
-                        printf( __( '%1$s at %2$s', 'dokan' ), get_comment_date(), get_comment_time() );
+                        printf( __( '%1$s at %2$s', 'dokan-theme' ), get_comment_date(), get_comment_time() );
                         ?>
                         </time>
                     </a>
-                    <?php edit_comment_link( __( '(Edit)', 'dokan' ), ' ' );
+                    <?php edit_comment_link( __( '(Edit)', 'dokan-theme' ), ' ' );
                     ?>
                 </div><!-- .comment-author .vcard -->
                 <?php if ( $comment->comment_approved == '0' ) : ?>
-                    <em><?php _e( 'Your comment is awaiting moderation.', 'dokan' ); ?></em>
+                    <em><?php _e( 'Your comment is awaiting moderation.', 'dokan-theme' ); ?></em>
                     <br />
                 <?php endif; ?>
             </footer>
@@ -73,13 +73,13 @@ if ( ! function_exists( 'dokan_posted_on' ) ) :
  * @package dokan - 2014 1.0
  */
 function dokan_posted_on() {
-    printf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="byline"></span>', 'dokan' ),
+    printf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="byline"></span>', 'dokan-theme' ),
         esc_url( get_permalink() ),
         esc_attr( get_the_time() ),
         esc_attr( get_the_date( 'c' ) ),
         esc_html( get_the_date() ),
         esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-        esc_attr( sprintf( __( 'View all posts by %s', 'dokan' ), get_the_author() ) ),
+        esc_attr( sprintf( __( 'View all posts by %s', 'dokan-theme' ), get_the_author() ) ),
         esc_html( get_the_author() )
     );
 }
@@ -115,16 +115,16 @@ function dokan_content_nav( $nav_id, $query = null ) {
         $nav_class = 'site-navigation post-navigation';
     ?>
     <nav role="navigation" id="<?php echo $nav_id; ?>" class="<?php echo $nav_class; ?>">
-        <h1 class="assistive-text"><?php _e( 'Post navigation', 'dokan' ); ?></h1>
+        <h1 class="assistive-text"><?php _e( 'Post navigation', 'dokan-theme' ); ?></h1>
 
         <ul class="pager">
         <?php if ( is_single() ) : // navigation links for single posts  ?>
 
             <li class="previous">
-                <?php previous_post_link( '%link', _x( '&larr;', 'Previous post link', 'dokan' ) . ' %title' ); ?>
+                <?php previous_post_link( '%link', _x( '&larr;', 'Previous post link', 'dokan-theme' ) . ' %title' ); ?>
             </li>
             <li class="next">
-                <?php next_post_link( '%link', '%title ' . _x( '&rarr;', 'Next post link', 'dokan' ) ); ?>
+                <?php next_post_link( '%link', '%title ' . _x( '&rarr;', 'Next post link', 'dokan-theme' ) ); ?>
             </li>
 
         <?php endif; ?>
@@ -186,7 +186,7 @@ function dokan_page_navi( $before = '', $after = '', $wp_query ) {
     if ( $prevposts ) {
         echo '<li>' . $prevposts . '</li>';
     } else {
-        echo '<li class="disabled"><a href="#">' . __( '&larr; Previous', 'dokan' ) . '</a></li>';
+        echo '<li class="disabled"><a href="#">' . __( '&larr; Previous', 'dokan-theme' ) . '</a></li>';
     }
 
     for ($i = $start_page; $i <= $end_page; $i++) {
@@ -197,7 +197,7 @@ function dokan_page_navi( $before = '', $after = '', $wp_query ) {
         }
     }
     echo '<li class="">';
-    next_posts_link( __('Next &rarr;', 'dokan') );
+    next_posts_link( __('Next &rarr;', 'dokan-theme') );
     echo '</li>';
     if ( $end_page < $max_page ) {
         $last_page_text = "&larr;";
@@ -219,7 +219,7 @@ if ( ! function_exists( 'dokan_category_widget' ) ) :
 function dokan_category_widget() {
         if ( class_exists( 'Dokan_Category_Widget' ) ) {
             the_widget( 'Dokan_Category_Widget', array(
-                'title' => __( 'Product Categories', 'dokan' )
+                'title' => __( 'Product Categories', 'dokan-theme' )
             ), array(
                 'before_widget' => '<aside class="widget dokan-category-menu">',
                 'after_widget'  => '</aside>',
@@ -244,7 +244,7 @@ function dokan_header_user_menu() {
     ?>
     <ul class="nav navbar-nav navbar-right">
         <li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php printf( __( 'Cart %s', 'dokan' ), '<span class="dokan-cart-amount-top">(' . WC()->cart->get_cart_total() . ')</span>' ); ?> <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php printf( __( 'Cart %s', 'dokan-theme' ), '<span class="dokan-cart-amount-top">(' . WC()->cart->get_cart_total() . ')</span>' ); ?> <b class="caret"></b></a>
 
             <ul class="dropdown-menu">
                 <li>
@@ -269,10 +269,10 @@ function dokan_header_user_menu() {
             if ( $is_seller ) {
                 ?>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php _e( 'Seller Dashboard', 'dokan' ); ?> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php _e( 'Seller Dashboard', 'dokan-theme' ); ?> <b class="caret"></b></a>
 
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo dokan_get_store_url( $user_id ); ?>" target="_blank"><?php _e( 'Visit your store', 'dokan' ); ?> <i class="fa fa-external-link"></i></a></li>
+                        <li><a href="<?php echo dokan_get_store_url( $user_id ); ?>" target="_blank"><?php _e( 'Visit your store', 'dokan-theme' ); ?> <i class="fa fa-external-link"></i></a></li>
                         <li class="divider"></li>
                         <?php
                         $nav_urls = dokan_get_dashboard_nav();
@@ -288,19 +288,19 @@ function dokan_header_user_menu() {
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo esc_html( $current_user->display_name ); ?> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="<?php echo get_permalink( wc_get_page_id( 'myaccount' ) ); ?>"><?php _e( 'My Account', 'dokan' ); ?></a></li>
-                    <li><a href="<?php echo wc_customer_edit_account_url(); ?>"><?php _e( 'Edit Account', 'dokan' ); ?></a></li>
+                    <li><a href="<?php echo get_permalink( wc_get_page_id( 'myaccount' ) ); ?>"><?php _e( 'My Account', 'dokan-theme' ); ?></a></li>
+                    <li><a href="<?php echo wc_customer_edit_account_url(); ?>"><?php _e( 'Edit Account', 'dokan-theme' ); ?></a></li>
                     <li class="divider"></li>
-                    <li><a href="<?php echo wc_get_endpoint_url( 'edit-address', 'billing', get_permalink( wc_get_page_id( 'myaccount' ) ) ); ?>"><?php _e( 'Billing Address', 'dokan' ); ?></a></li>
-                    <li><a href="<?php echo wc_get_endpoint_url( 'edit-address', 'shipping', get_permalink( wc_get_page_id( 'myaccount' ) ) ); ?>"><?php _e( 'Shipping Address', 'dokan' ); ?></a></li>
+                    <li><a href="<?php echo wc_get_endpoint_url( 'edit-address', 'billing', get_permalink( wc_get_page_id( 'myaccount' ) ) ); ?>"><?php _e( 'Billing Address', 'dokan-theme' ); ?></a></li>
+                    <li><a href="<?php echo wc_get_endpoint_url( 'edit-address', 'shipping', get_permalink( wc_get_page_id( 'myaccount' ) ) ); ?>"><?php _e( 'Shipping Address', 'dokan-theme' ); ?></a></li>
                 </ul>
             </li>
 
             <li><?php wp_loginout( home_url() ); ?></li>
 
         <?php } else { ?>
-            <li><a href="<?php echo get_permalink( wc_get_page_id( 'myaccount' ) ); ?>"><?php _e( 'Log in', 'dokan' ); ?></a></li>
-            <li><a href="<?php echo get_permalink( wc_get_page_id( 'myaccount' ) ); ?>"><?php _e( 'Sign Up', 'dokan' ); ?></a></li>
+            <li><a href="<?php echo get_permalink( wc_get_page_id( 'myaccount' ) ); ?>"><?php _e( 'Log in', 'dokan-theme' ); ?></a></li>
+            <li><a href="<?php echo get_permalink( wc_get_page_id( 'myaccount' ) ); ?>"><?php _e( 'Sign Up', 'dokan-theme' ); ?></a></li>
         <?php } ?>
     </ul>
     <?php
