@@ -35,7 +35,7 @@
                     <div class="col-md-6 col-sm-5">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-top-collapse">
-                                <span class="sr-only"><?php _e( 'Toggle navigation', 'dokan' ); ?></span>
+                                <span class="sr-only"><?php _e( 'Toggle navigation', 'dokan-theme' ); ?></span>
                                 <i class="fa fa-bars"></i>
                             </button>
                         </div>
@@ -81,15 +81,15 @@
                     <div class="row">
                         <div class="col-md-12">
                             <nav role="navigation" class="site-navigation main-navigation clearfix">
-                                <h1 class="assistive-text"><i class="icon-reorder"></i> <?php _e( 'Menu', 'dokan' ); ?></h1>
-                                <div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'dokan' ); ?>"><?php _e( 'Skip to content', 'dokan' ); ?></a></div>
+                                <h1 class="assistive-text"><i class="icon-reorder"></i> <?php _e( 'Menu', 'dokan-theme' ); ?></h1>
+                                <div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'dokan-theme' ); ?>"><?php _e( 'Skip to content', 'dokan-theme' ); ?></a></div>
                                     <nav class="navbar navbar-default" role="navigation">
                                         <div class="navbar-header">
                                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                                                <span class="sr-only"><?php _e( 'Toggle navigation', 'dokan' ); ?></span>
+                                                <span class="sr-only"><?php _e( 'Toggle navigation', 'dokan-theme' ); ?></span>
                                                 <i class="fa fa-bars"></i>
                                             </button>
-                                            <a class="navbar-brand" href="<?php echo home_url(); ?>"><i class="fa fa-home"></i> <?php _e( 'Home', 'dokan' ); ?></a>
+                                            <a class="navbar-brand" href="<?php echo home_url(); ?>"><i class="fa fa-home"></i> <?php _e( 'Home', 'dokan-theme' ); ?></a>
                                         </div>
                                         <div class="collapse navbar-collapse navbar-main-collapse">
                                             <?php

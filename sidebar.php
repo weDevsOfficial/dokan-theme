@@ -10,7 +10,7 @@
 
     <button type="button" class="navbar-toggle widget-area-toggle" data-toggle="collapse" data-target=".widget-area">
         <i class="fa fa-bars"></i>
-        <span class="bar-title"><?php _e( 'Toggle Sidebar', 'dokan' ); ?></span>
+        <span class="bar-title"><?php _e( 'Toggle Sidebar', 'dokan-theme' ); ?></span>
     </button>
 
     <div class="widget-area collapse widget-collapse">
@@ -23,14 +23,14 @@
             </aside>
 
             <aside id="archives" class="widget">
-                <h1 class="widget-title"><?php _e( 'Archives', 'dokan' ); ?></h1>
+                <h1 class="widget-title"><?php _e( 'Archives', 'dokan-theme' ); ?></h1>
                 <ul>
                     <?php wp_get_archives( array('type' => 'monthly') ); ?>
                 </ul>
             </aside>
 
             <aside id="meta" class="widget">
-                <h1 class="widget-title"><?php _e( 'Meta', 'dokan' ); ?></h1>
+                <h1 class="widget-title"><?php _e( 'Meta', 'dokan-theme' ); ?></h1>
                 <ul>
                     <?php wp_register(); ?>
                     <li><?php wp_loginout(); ?></li>
