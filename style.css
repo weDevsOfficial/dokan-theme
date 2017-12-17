@@ -2727,4 +2727,10 @@ textarea {
   background-color: #fdfdfd;
   border: 1px solid #e3e3e3;
 }
-/*# sourceMappingURL=style.css.map */
+
+/* woocommerce auction */
+.auction_form .input-text.qty.bid.text {
+  padding-left: 0;
+  padding-right: 0;
+  width: 80px;
+}
