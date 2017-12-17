@@ -53,7 +53,7 @@ add_filter( 'woocommerce_breadcrumb_defaults', 'dokan_woo_breadcrumb' );
  * @return array
  */
 function dokan_add_to_cart_fragments( $fragment ) {
-    $fragment['.amount'] = WC()->cart->get_cart_total();
+    $fragment['dokan_cart_amount'] = WC()->cart->get_cart_total();
 
     return $fragment;
 }
