@@ -44,8 +44,8 @@ class Dokan_Slider {
     }
 
 	function do_metaboxes() {
-        add_meta_box( 'slider-meta-box', __('Slides', 'wedevs'), array($this, 'meta_boxes'), $this->post_type );
-        add_meta_box( 'slider-options-box', __('Slider Options', 'wedevs'), array($this, 'meta_boxes_option'), $this->post_type, 'side' );
+        add_meta_box( 'slider-meta-box', __( 'Slides', 'dokan-theme' ), array( $this, 'meta_boxes' ), $this->post_type );
+        add_meta_box( 'slider-options-box', __('Slider Options', 'dokan-theme' ), array( $this, 'meta_boxes_option' ), $this->post_type, 'side' );
 	}
 
     function enqueue_scripts() {
@@ -481,7 +481,7 @@ class Dokan_Slider {
 
                 extract( $slide );
 
-                $link_content = sprintf('<a href="%s" class="button" target="%s">%s</a>', esc_url( $slide_link ), $slide_link_open, __( 'Read More...', 'wedevs' ) );
+                $link_content = sprintf('<a href="%s" class="button" target="%s">%s</a>', esc_url( $slide_link ), $slide_link_open, __( 'Read More...', 'dokan-theme' ) );
 
                 $text_content = '<div class="slide-textarea">';
                 $text_content .= '<h2>' . $slide_title . '</h2>';

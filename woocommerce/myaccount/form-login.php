@@ -84,21 +84,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                 <p class="form-row form-group form-row-wide">
                     <label for="reg_username"><?php _e( 'Username', 'dokan-theme' ); ?> <span class="required">*</span></label>
-                    <input type="text" class="input-text form-control" name="username" id="reg_username" value="<?php if ( ! empty( $_POST['username'] ) ) esc_attr_e($_POST['username']); ?>" required="required" />
+                    <input type="text" class="input-text form-control" name="username" id="reg_username" value="<?php if ( ! empty( $_POST['username'] ) ) esc_attr( $_POST['username'] ); ?>" required="required" />
                 </p>
 
             <?php endif; ?>
 
             <p class="form-row form-group form-row-wide">
                 <label for="reg_email"><?php _e( 'Email address', 'dokan-theme' ); ?> <span class="required">*</span></label>
-                <input type="email" class="input-text form-control" name="email" id="reg_email" value="<?php if ( ! empty( $_POST['email'] ) ) esc_attr_e($_POST['email']); ?>" required="required" />
+                <input type="email" class="input-text form-control" name="email" id="reg_email" value="<?php if ( ! empty( $_POST['email'] ) ) esc_attr($_POST['email']); ?>" required="required" />
             </p>
 
             <?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
 
                 <p class="form-row form-group form-row-wide">
                     <label for="reg_password"><?php _e( 'Password', 'dokan-theme' ); ?> <span class="required">*</span></label>
-                    <input type="password" class="input-text form-control" name="password" id="reg_password" value="<?php if ( ! empty( $_POST['password'] ) ) esc_attr_e( $_POST['password'] ); ?>" required="required" minlength="6" />
+                    <input type="password" class="input-text form-control" name="password" id="reg_password" value="<?php if ( ! empty( $_POST['password'] ) ) esc_attr( $_POST['password'] ); ?>" required="required" minlength="6" />
                 </p>
 
             <?php endif; ?>
