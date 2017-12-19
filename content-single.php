@@ -12,34 +12,34 @@
 
             <?php
             /* translators: used between list items, there is a space after the comma */
-            $categories_list = get_the_category_list( __( ', ', 'dokan' ) );
+            $categories_list = get_the_category_list( __( ', ', 'dokan-theme' ) );
             if ( $categories_list ) :
                 ?>
                 <span class="cat-links">
                     <i class="icon-folder-open"></i>
-                    <?php printf( __( '%1$s', 'dokan' ), $categories_list ); ?>
+                    <?php printf( __( '%1$s', 'dokan-theme' ), $categories_list ); ?>
                 </span>
             <?php endif; // End if categories ?>
 
             <?php if ( !post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
                 <span class="sep"> | </span>
-                <span class="comments-link"><i class="icon-comment-alt"></i> <?php comments_popup_link( __( 'Leave a comment', 'dokan' ), __( '1 Comment', 'dokan' ), __( '% Comments', 'dokan' ) ); ?></span>
+                <span class="comments-link"><i class="icon-comment-alt"></i> <?php comments_popup_link( __( 'Leave a comment', 'dokan-theme' ), __( '1 Comment', 'dokan-theme' ), __( '% Comments', 'dokan-theme' ) ); ?></span>
             <?php endif; ?>
 
-            <?php edit_post_link( __( 'Edit', 'dokan' ), '<span class="sep"> | </span><span class="edit-link"><i class="icon-edit"></i> ', '</span>' ); ?>
+            <?php edit_post_link( __( 'Edit', 'dokan-theme' ), '<span class="sep"> | </span><span class="edit-link"><i class="icon-edit"></i> ', '</span>' ); ?>
 
         <?php endif; // End if 'post' == get_post_type() ?>
     </div><!-- .entry-meta -->
 
     <div class="entry-content">
         <?php the_content(); ?>
-        <?php wp_link_pages( array('before' => '<div class="page-links">' . __( 'Pages:', 'dokan' ), 'after' => '</div>') ); ?>
+        <?php wp_link_pages( array('before' => '<div class="page-links">' . __( 'Pages:', 'dokan-theme' ), 'after' => '</div>') ); ?>
     </div><!-- .entry-content -->
 
     <footer class="entry-meta">
         <?php
         /* translators: used between list items, there is a space after the comma */
-        $tag_list = get_the_tag_list( '', __( ', ', 'dokan' ) );
+        $tag_list = get_the_tag_list( '', __( ', ', 'dokan-theme' ) );
 
         if ( '' != $tag_list ) {
             printf( '<span class="tags"><i class="icon-tags"></i> Tagged: %s</span>', $tag_list );

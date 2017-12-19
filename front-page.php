@@ -44,7 +44,7 @@ get_header();
         <?php if ( function_exists( 'dokan_get_featured_products' ) ) { ?>
             <?php if ( get_theme_mod( 'show_featured', 'on' ) == 'on' ) { ?>
                 <div class="slider-container woocommerce">
-                    <h2 class="slider-heading"><?php _e( 'Featured Products', 'dokan' ); ?></h2>
+                    <h2 class="slider-heading"><?php _e( 'Featured Products', 'dokan-theme' ); ?></h2>
 
                     <div class="product-sliders">
                         <ul class="slides">
@@ -69,7 +69,7 @@ get_header();
             if ( $show_latest === true || $show_latest == 'on' ) {
                 ?>
                 <div class="slider-container woocommerce">
-                    <h2 class="slider-heading"><?php _e( 'Latest Products', 'dokan' ); ?></h2>
+                    <h2 class="slider-heading"><?php _e( 'Latest Products', 'dokan-theme' ); ?></h2>
 
                     <div class="product-sliders">
                         <ul class="slides">
@@ -91,7 +91,7 @@ get_header();
         <?php if ( function_exists( 'dokan_get_best_selling_products' ) ) { ?>
             <?php if ( get_theme_mod( 'show_best_selling', 'on' ) == 'on' ) { ?>
                 <div class="slider-container woocommerce">
-                    <h2 class="slider-heading"><?php _e( 'Best Selling Products', 'dokan' ); ?></h2>
+                    <h2 class="slider-heading"><?php _e( 'Best Selling Products', 'dokan-theme' ); ?></h2>
 
                     <div class="product-sliders">
                         <ul class="slides">
@@ -112,7 +112,7 @@ get_header();
         <?php if ( function_exists( 'dokan_get_top_rated_products' ) ) { ?>
             <?php if ( get_theme_mod( 'show_top_rated', 'on' ) == 'on' ) { ?>
                 <div class="slider-container woocommerce">
-                    <h2 class="slider-heading"><?php _e( 'Top Rated Products', 'dokan' ); ?></h2>
+                    <h2 class="slider-heading"><?php _e( 'Top Rated Products', 'dokan-theme' ); ?></h2>
 
                     <div class="product-sliders">
                         <ul class="slides">
