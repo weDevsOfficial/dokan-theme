@@ -1,3 +1,9 @@
+v2.3.2 -> February 11, 2018
+---------------------
+- [fix]   Slider menu not showing
+- [fix]   Updated outdated templates and depricated functions
+- [fix]   Fix some styling issue
+
 v2.3.1 -> December 19, 2017
 ---------------------
 - [new]   Help link added on Slider menu
