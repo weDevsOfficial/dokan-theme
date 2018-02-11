@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <p class="form-row">
                 <?php wp_nonce_field( 'woocommerce-login' ); ?>
-                <button type="submit" class="btn btn-theme" name="login" value="<?php _e( 'Login', 'dokan-theme' ); ?>"> <?php _e( 'Login', 'dokan-theme' ); ?> </button>
+                <button type="submit" class="dokan-btn dokan-btn-theme" name="login" value="<?php _e( 'Login', 'dokan-theme' ); ?>"> <?php _e( 'Login', 'dokan-theme' ); ?> </button>
             </p>
             <p class="lost_password">
                 <a href="<?php echo esc_url( wc_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'dokan-theme' ); ?></a>
@@ -111,7 +111,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <p class="form-row">
                 <?php wp_nonce_field( 'woocommerce-register', '_wpnonce' ); ?>
-                <button type="submit" class="btn btn-theme" name="register" value="<?php _e( 'Register', 'dokan-theme' ); ?>"> <?php _e( 'Register', 'dokan-theme' ); ?> </button>
+                <button type="submit" class="dokan-btn dokan-btn-theme" name="register" value="<?php _e( 'Register', 'dokan-theme' ); ?>"> <?php _e( 'Register', 'dokan-theme' ); ?> </button>
             </p>
 
             <?php do_action( 'woocommerce_register_form_end' ); ?>
