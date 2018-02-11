@@ -1,14 +1,14 @@
-# <!=Copyright (C) 2017 Tareq Hasan
+# <!=Copyright (C) 2018 Tareq Hasan
 # This file is distributed under the GNU General Public License v2 or later.=!>
 msgid ""
 msgstr ""
-"Project-Id-Version: Dokan 2.3.0\n"
+"Project-Id-Version: Dokan 2.3.2\n"
 "Report-Msgid-Bugs-To: http://wedevs.com/support/forum/theme-support/dokan/\n"
-"POT-Creation-Date: 2017-07-31 18:06:10+00:00\n"
+"POT-Creation-Date: 2018-02-11 04:45:14+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "X-Generator: grunt-wp-i18n1.0.0\n"
@@ -213,187 +213,187 @@ msgid "Slider Options"
 msgstr ""
 
 #: build/classes/slider.php:68 build/classes/slider.php:79
-#: build/classes/slider.php:80 build/functions.php:250 classes/slider.php:68
-#: classes/slider.php:79 classes/slider.php:80 functions.php:250
+#: build/classes/slider.php:80 build/functions.php:250 classes/slider.php:72
+#: classes/slider.php:83 classes/slider.php:84 functions.php:263
 msgid "Slider"
 msgstr ""
 
-#: build/classes/slider.php:81 classes/slider.php:81
+#: build/classes/slider.php:81 classes/slider.php:85
 msgid "Dokan Slider"
 msgstr ""
 
-#: build/classes/slider.php:82 classes/slider.php:82
+#: build/classes/slider.php:82 classes/slider.php:86
 msgid "Add Slider"
 msgstr ""
 
-#: build/classes/slider.php:83 classes/slider.php:83
+#: build/classes/slider.php:83 classes/slider.php:87
 msgid "Add New Slider"
 msgstr ""
 
 #: build/classes/slider.php:84 build/content-page.php:18
-#: build/content-single.php:29 build/content.php:29 classes/slider.php:84
+#: build/content-single.php:29 build/content.php:29 classes/slider.php:88
 #: content-page.php:18 content-single.php:29 content.php:29
 msgid "Edit"
 msgstr ""
 
-#: build/classes/slider.php:85 classes/slider.php:85
+#: build/classes/slider.php:85 classes/slider.php:89
 msgid "Edit Slider"
 msgstr ""
 
-#: build/classes/slider.php:86 classes/slider.php:86
+#: build/classes/slider.php:86 classes/slider.php:90
 msgid "New Slider"
 msgstr ""
 
 #: build/classes/slider.php:87 build/classes/slider.php:88
-#: classes/slider.php:87 classes/slider.php:88
+#: classes/slider.php:91 classes/slider.php:92
 msgid "View Slider"
 msgstr ""
 
-#: build/classes/slider.php:89 classes/slider.php:89
+#: build/classes/slider.php:89 classes/slider.php:93
 msgid "Search Slider"
 msgstr ""
 
-#: build/classes/slider.php:90 classes/slider.php:90
+#: build/classes/slider.php:90 classes/slider.php:94
 msgid "No Slider Found"
 msgstr ""
 
-#: build/classes/slider.php:91 classes/slider.php:91
+#: build/classes/slider.php:91 classes/slider.php:95
 msgid "No Slider found in trash"
 msgstr ""
 
-#: build/classes/slider.php:92 classes/slider.php:92
+#: build/classes/slider.php:92 classes/slider.php:96
 msgid "Parent Slider"
 msgstr ""
 
-#: build/classes/slider.php:110 classes/slider.php:110
+#: build/classes/slider.php:110 classes/slider.php:114
 msgid "Effect"
 msgstr ""
 
-#: build/classes/slider.php:119 classes/slider.php:119
+#: build/classes/slider.php:119 classes/slider.php:123
 msgid "Slide Speed"
 msgstr ""
 
-#: build/classes/slider.php:123 classes/slider.php:123
+#: build/classes/slider.php:123 classes/slider.php:127
 msgid "Pagination"
 msgstr ""
 
 #: build/classes/slider.php:126 build/classes/slider.php:135
-#: classes/slider.php:126 classes/slider.php:135
+#: classes/slider.php:130 classes/slider.php:139
 msgid "Show"
 msgstr ""
 
 #: build/classes/slider.php:127 build/classes/slider.php:136
-#: classes/slider.php:127 classes/slider.php:136
+#: classes/slider.php:131 classes/slider.php:140
 msgid "Hide"
 msgstr ""
 
-#: build/classes/slider.php:132 classes/slider.php:132
+#: build/classes/slider.php:132 classes/slider.php:136
 msgid "Direction Navigation"
 msgstr ""
 
-#: build/classes/slider.php:141 classes/slider.php:141
+#: build/classes/slider.php:141 classes/slider.php:145
 msgid "Sliding Direction"
 msgstr ""
 
-#: build/classes/slider.php:144 classes/slider.php:144
+#: build/classes/slider.php:144 classes/slider.php:148
 msgid "horizontal"
 msgstr ""
 
-#: build/classes/slider.php:145 classes/slider.php:145
+#: build/classes/slider.php:145 classes/slider.php:149
 msgid "vertical"
 msgstr ""
 
-#: build/classes/slider.php:150 classes/slider.php:150
+#: build/classes/slider.php:150 classes/slider.php:154
 msgid "Touch Swipe"
 msgstr ""
 
 #: build/classes/slider.php:153 build/classes/slider.php:163
 #: build/classes/slider.php:172 build/classes/slider.php:181
-#: classes/slider.php:153 classes/slider.php:163 classes/slider.php:172
-#: classes/slider.php:181
+#: classes/slider.php:157 classes/slider.php:167 classes/slider.php:176
+#: classes/slider.php:185
 msgid "Yes"
 msgstr ""
 
 #: build/classes/slider.php:154 build/classes/slider.php:162
 #: build/classes/slider.php:171 build/classes/slider.php:180
-#: classes/slider.php:154 classes/slider.php:162 classes/slider.php:171
-#: classes/slider.php:180
+#: classes/slider.php:158 classes/slider.php:166 classes/slider.php:175
+#: classes/slider.php:184
 msgid "No"
 msgstr ""
 
-#: build/classes/slider.php:159 classes/slider.php:159
+#: build/classes/slider.php:159 classes/slider.php:163
 msgid "Randomize"
 msgstr ""
 
-#: build/classes/slider.php:168 classes/slider.php:168
+#: build/classes/slider.php:168 classes/slider.php:172
 msgid "Pause on Hover"
 msgstr ""
 
-#: build/classes/slider.php:177 classes/slider.php:177
+#: build/classes/slider.php:177 classes/slider.php:181
 msgid "Pause/Play"
 msgstr ""
 
-#: build/classes/slider.php:195 classes/slider.php:195
+#: build/classes/slider.php:195 classes/slider.php:199
 msgid "Add Slide"
 msgstr ""
 
-#: build/classes/slider.php:339 classes/slider.php:339
+#: build/classes/slider.php:339 classes/slider.php:343
 msgid "Slide"
 msgstr ""
 
-#: build/classes/slider.php:342 classes/slider.php:342
+#: build/classes/slider.php:342 classes/slider.php:346
 msgid "Slide Type"
 msgstr ""
 
-#: build/classes/slider.php:345 classes/slider.php:345
+#: build/classes/slider.php:345 classes/slider.php:349
 msgid "Text with Image"
 msgstr ""
 
-#: build/classes/slider.php:346 classes/slider.php:346
+#: build/classes/slider.php:346 classes/slider.php:350
 msgid "Full Image"
 msgstr ""
 
-#: build/classes/slider.php:347 classes/slider.php:347
+#: build/classes/slider.php:347 classes/slider.php:351
 msgid "Full Video"
 msgstr ""
 
-#: build/classes/slider.php:352 classes/slider.php:352
+#: build/classes/slider.php:352 classes/slider.php:356
 msgid "Title Text"
 msgstr ""
 
-#: build/classes/slider.php:358 classes/slider.php:358
+#: build/classes/slider.php:358 classes/slider.php:362
 msgid "Detail Text"
 msgstr ""
 
-#: build/classes/slider.php:364 classes/slider.php:364
+#: build/classes/slider.php:364 classes/slider.php:368
 msgid "Slide Image"
 msgstr ""
 
-#: build/classes/slider.php:376 classes/slider.php:376
+#: build/classes/slider.php:376 classes/slider.php:380
 msgid "Video Embed Code"
 msgstr ""
 
-#: build/classes/slider.php:382 classes/slider.php:382
+#: build/classes/slider.php:382 classes/slider.php:386
 msgid "Slide Link Url"
 msgstr ""
 
-#: build/classes/slider.php:388 classes/slider.php:388
+#: build/classes/slider.php:388 classes/slider.php:392
 msgid "Open Link"
 msgstr ""
 
-#: build/classes/slider.php:391 classes/slider.php:391
+#: build/classes/slider.php:391 classes/slider.php:395
 msgid "Open link in same window"
 msgstr ""
 
-#: build/classes/slider.php:392 classes/slider.php:392
+#: build/classes/slider.php:392 classes/slider.php:396
 msgid "Open link in new window"
 msgstr ""
 
-#: build/classes/slider.php:398 classes/slider.php:398
+#: build/classes/slider.php:398 classes/slider.php:402
 msgid "Remove"
 msgstr ""
 
-#: build/classes/slider.php:480 classes/slider.php:480
+#: build/classes/slider.php:480 classes/slider.php:484
 msgid "Read More..."
 msgstr ""
 
@@ -484,59 +484,59 @@ msgstr ""
 msgid "Top Rated Products"
 msgstr ""
 
-#: build/functions.php:117 functions.php:117
+#: build/functions.php:117 functions.php:118
 msgid "Primary Menu"
 msgstr ""
 
-#: build/functions.php:118 functions.php:118
+#: build/functions.php:118 functions.php:119
 msgid "Top Left"
 msgstr ""
 
-#: build/functions.php:119 functions.php:119
+#: build/functions.php:119 functions.php:120
 msgid "Footer Menu"
 msgstr ""
 
-#: build/functions.php:148 functions.php:148
+#: build/functions.php:148 functions.php:161
 msgid "General Sidebar"
 msgstr ""
 
-#: build/functions.php:149 functions.php:149
+#: build/functions.php:149 functions.php:162
 msgid "Home Sidebar"
 msgstr ""
 
-#: build/functions.php:150 functions.php:150
+#: build/functions.php:150 functions.php:163
 msgid "Blog Sidebar"
 msgstr ""
 
-#: build/functions.php:151 functions.php:151
+#: build/functions.php:151 functions.php:164
 msgid "Header Sidebar"
 msgstr ""
 
-#: build/functions.php:152 functions.php:152
+#: build/functions.php:152 functions.php:165
 msgid "Shop Archive"
 msgstr ""
 
-#: build/functions.php:153 functions.php:153
+#: build/functions.php:153 functions.php:166
 msgid "Single Product"
 msgstr ""
 
-#: build/functions.php:154 functions.php:154
+#: build/functions.php:154 functions.php:167
 msgid "Footer Sidebar - 1"
 msgstr ""
 
-#: build/functions.php:155 functions.php:155
+#: build/functions.php:155 functions.php:168
 msgid "Footer Sidebar - 2"
 msgstr ""
 
-#: build/functions.php:156 functions.php:156
+#: build/functions.php:156 functions.php:169
 msgid "Footer Sidebar - 3"
 msgstr ""
 
-#: build/functions.php:157 functions.php:157
+#: build/functions.php:157 functions.php:170
 msgid "Footer Sidebar - 4"
 msgstr ""
 
-#: build/functions.php:243 functions.php:243
+#: build/functions.php:243 functions.php:256
 msgid "Page %s"
 msgstr ""
 
@@ -739,15 +739,14 @@ msgstr ""
 #: build/woocommerce/global/form-login.php:56
 #: build/woocommerce/myaccount/form-login.php:36
 #: build/woocommerce/myaccount/form-login.php:61
-#: woocommerce/global/form-login.php:37 woocommerce/global/form-login.php:56
-#: woocommerce/myaccount/form-login.php:36
-#: woocommerce/myaccount/form-login.php:61
+#: woocommerce/myaccount/form-login.php:37
+#: woocommerce/myaccount/form-login.php:62
 msgid "Login"
 msgstr ""
 
 #: build/woocommerce/global/form-login.php:44
 #: build/woocommerce/myaccount/form-login.php:43
-#: woocommerce/global/form-login.php:44 woocommerce/myaccount/form-login.php:43
+#: woocommerce/myaccount/form-login.php:44
 msgid "Username or email address"
 msgstr ""
 
@@ -755,21 +754,20 @@ msgstr ""
 #: build/woocommerce/global/form-login.php:98
 #: build/woocommerce/myaccount/form-login.php:47
 #: build/woocommerce/myaccount/form-login.php:99
-#: woocommerce/global/form-login.php:48 woocommerce/global/form-login.php:98
-#: woocommerce/myaccount/form-login.php:47
-#: woocommerce/myaccount/form-login.php:99
+#: woocommerce/myaccount/form-login.php:48
+#: woocommerce/myaccount/form-login.php:100
 msgid "Password"
 msgstr ""
 
 #: build/woocommerce/global/form-login.php:58
 #: build/woocommerce/myaccount/form-login.php:55
-#: woocommerce/global/form-login.php:58 woocommerce/myaccount/form-login.php:55
+#: woocommerce/myaccount/form-login.php:56
 msgid "Remember me"
 msgstr ""
 
 #: build/woocommerce/global/form-login.php:62
 #: build/woocommerce/myaccount/form-login.php:64
-#: woocommerce/global/form-login.php:62 woocommerce/myaccount/form-login.php:64
+#: woocommerce/myaccount/form-login.php:65
 msgid "Lost your password?"
 msgstr ""
 
@@ -777,29 +775,33 @@ msgstr ""
 #: build/woocommerce/global/form-login.php:111
 #: build/woocommerce/myaccount/form-login.php:77
 #: build/woocommerce/myaccount/form-login.php:113
-#: woocommerce/global/form-login.php:75 woocommerce/global/form-login.php:111
-#: woocommerce/myaccount/form-login.php:77
-#: woocommerce/myaccount/form-login.php:113
+#: woocommerce/myaccount/form-login.php:78
+#: woocommerce/myaccount/form-login.php:114
 msgid "Register"
 msgstr ""
 
 #: build/woocommerce/global/form-login.php:84
 #: build/woocommerce/myaccount/form-login.php:85
-#: woocommerce/global/form-login.php:84 woocommerce/myaccount/form-login.php:85
+#: woocommerce/myaccount/form-login.php:86
 msgid "Username"
 msgstr ""
 
 #: build/woocommerce/global/form-login.php:91
 #: build/woocommerce/myaccount/form-login.php:92
-#: woocommerce/global/form-login.php:91 woocommerce/myaccount/form-login.php:92
+#: woocommerce/myaccount/form-login.php:93
 msgid "Email address"
 msgstr ""
 
 #: build/woocommerce/global/form-login.php:105
 #: build/woocommerce/myaccount/form-login.php:106
-#: woocommerce/global/form-login.php:105
-#: woocommerce/myaccount/form-login.php:106
+#: woocommerce/myaccount/form-login.php:107
 msgid "Anti-spam"
+msgstr ""
+
+#: classes/slider.php:59
+msgid ""
+"Learn More: <a target=\"_blank\" href=\"%s\">How to Create Slider in "
+"Dokan</a>"
 msgstr ""
 
 #. Theme Name of the plugin/theme

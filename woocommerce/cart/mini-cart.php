@@ -15,7 +15,7 @@
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 3.1.0
+ * @version 3.3.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -52,8 +52,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php
 							echo apply_filters( 'woocommerce_cart_item_remove_link', sprintf(
 								'<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
-								esc_url( WC()->cart->get_remove_url( $cart_item_key ) ),
-								__( 'Remove this item', 'dokan' ),
+								esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
+								__( 'Remove this item', 'dokan-theme' ),
 								esc_attr( $product_id ),
 								esc_attr( $_product->get_sku() )
 							), $cart_item_key );
@@ -67,7 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<?php echo str_replace( array( 'http:', 'https:' ), '', $thumbnail ) . $product_name . '&nbsp;'; ?>
 								</a>
 							<?php endif; ?>
-							<?php echo WC()->cart->get_item_data( $cart_item ); ?>
+							<?php echo wc_get_formatted_cart_item_data( $cart_item ); ?>
 
 							<?php echo apply_filters( 'woocommerce_widget_cart_item_quantity', '<span class="quantity">' . sprintf( '%s &times; %s', $cart_item['quantity'], $product_price ) . '</span>', $cart_item, $cart_item_key ); ?>
 						</div>
@@ -81,7 +81,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php else : ?>
 
-		<li class="empty"><?php _e( 'No products in the cart.', 'dokan' ); ?></li>
+		<li class="empty"><?php _e( 'No products in the cart.', 'dokan-theme' ); ?></li>
 
 	<?php endif; ?>
 
@@ -89,7 +89,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if ( ! WC()->cart->is_empty() ) : ?>
 
-	<p class="total"><strong><?php _e( 'Subtotal', 'dokan' ); ?>:</strong> <?php echo WC()->cart->get_cart_subtotal(); ?></p>
+	<p class="total"><strong><?php _e( 'Subtotal', 'dokan-theme' ); ?>:</strong> <?php echo WC()->cart->get_cart_subtotal(); ?></p>
 
 	<?php do_action( 'woocommerce_widget_shopping_cart_before_buttons' ); ?>
 

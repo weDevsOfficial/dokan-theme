@@ -7,7 +7,7 @@ $map_location = isset( $store_info['location'] ) ? esc_attr( $store_info['locati
 <div id="secondary" class="col-md-3 clearfix" role="complementary">
     <button type="button" class="navbar-toggle widget-area-toggle" data-toggle="collapse" data-target=".widget-area">
         <i class="fa fa-bars"></i>
-        <span class="bar-title"><?php _e( 'Toggle Sidebar', 'dokan' ); ?></span>
+        <span class="bar-title"><?php _e( 'Toggle Sidebar', 'dokan-theme' ); ?></span>
     </button>
 
     <div class="widget-area collapse widget-collapse">
@@ -23,12 +23,12 @@ $map_location = isset( $store_info['location'] ) ? esc_attr( $store_info['locati
             );
 
             if ( class_exists( 'Dokan_Store_Location' ) ) {
-                the_widget( 'Dokan_Store_Category_Menu', array( 'title' => __( 'Store Category', 'dokan' ) ), $args );
+                the_widget( 'Dokan_Store_Category_Menu', array( 'title' => __( 'Store Category', 'dokan-theme' ) ), $args );
                 if( dokan_get_option( 'store_map', 'dokan_general', 'on' ) == 'on' ) {
-                    the_widget( 'Dokan_Store_Location', array( 'title' => __( 'Store Location', 'dokan' ) ), $args );
+                    the_widget( 'Dokan_Store_Location', array( 'title' => __( 'Store Location', 'dokan-theme' ) ), $args );
                 }
                 if( dokan_get_option( 'contact_seller', 'dokan_general', 'on' ) == 'on' ) {
-                    the_widget( 'Dokan_Store_Contact_Form', array( 'title' => __( 'Contact Seller', 'dokan' ) ), $args );
+                    the_widget( 'Dokan_Store_Contact_Form', array( 'title' => __( 'Contact Seller', 'dokan-theme' ) ), $args );
                 }
             }
 

@@ -1,3 +1,18 @@
+v2.3.2 -> February 11, 2018
+---------------------
+- [fix]   Slider menu not showing
+- [fix]   Updated outdated templates and depricated functions
+- [fix]   Fix some styling issue
+
+v2.3.1 -> December 19, 2017
+---------------------
+- [new]   Help link added on Slider menu
+- [new]   Made compatible with Dokan Live Search module
+- [fix]   Mini cart not updating live
+- [fix]   Showing My account page inside Checkout page
+- [tweak] Updated outdated template versions
+- [tweak] Updated missing text domains
+
 v2.3.0 -> July 31, 2017
 ---------------------
 - [new]   Rose Quartz Color scheme added

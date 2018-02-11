@@ -40,7 +40,7 @@ function dokan_woo_breadcrumb( $args ) {
         'wrap_after'  => '</nav>',
         'before'      => '<li>',
         'after'       => '</li>',
-        'home'        => _x( 'Home', 'breadcrumb', 'dokan' ),
+        'home'        => _x( 'Home', 'breadcrumb', 'dokan-theme' ),
     );
 }
 
@@ -53,7 +53,7 @@ add_filter( 'woocommerce_breadcrumb_defaults', 'dokan_woo_breadcrumb' );
  * @return array
  */
 function dokan_add_to_cart_fragments( $fragment ) {
-    $fragment['amount'] = WC()->cart->get_cart_total();
+    $fragment['dokan_cart_amount'] = WC()->cart->get_cart_total();
 
     return $fragment;
 }
@@ -134,7 +134,7 @@ if ( !class_exists( 'Dokan_Category_Widget' ) ) :
          * @return void
          * */
         public function __construct() {
-            $widget_ops = array( 'classname' => 'dokan-category-menu', 'description' => __( 'Dokan product category menu', 'dokan-lite' ) );
+            $widget_ops = array( 'classname' => 'dokan-category-menu', 'description' => __( 'Dokan product category menu', 'dokan-theme' ) );
             parent::__construct( 'dokan-category-menu', 'Dokan: Product Category', $widget_ops );
         }
 
@@ -230,13 +230,13 @@ if ( !class_exists( 'Dokan_Category_Widget' ) ) :
          * */
         function form( $instance ) {
             $instance = wp_parse_args( (array) $instance, array(
-                'title' => __( 'Product Category', 'dokan-lite' )
+                'title' => __( 'Product Category', 'dokan-theme' )
             ) );
 
             $title = $instance['title'];
             ?>
             <p>
-                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'dokan-lite' ); ?></label>
+                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'dokan-theme' ); ?></label>
                 <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
             </p>
             <?php

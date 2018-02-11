@@ -55,7 +55,7 @@ jQuery(function($) {
         maxItems: getGridSize()
     });
 
-    $('body').on('added_to_cart wc_cart_button_updated', function( data ) {
+    $('body').on('added_to_cart wc_cart_button_updated', function( fragment, data ) {
         var viewCartText = $('a.added_to_cart.wc-forward').text();
 
         $('i.fa-shopping-cart').removeClass('fa-spin');
@@ -63,7 +63,7 @@ jQuery(function($) {
         $('[data-toggle="tooltip"]').tooltip();
 
         $('.dokan-cart-amount-top > .amount').fadeOut( 'fast', function(){
-            $('.dokan-cart-amount-top > .amount').html(data.amount).fadeIn('fast');
+            $('.dokan-cart-amount-top > .amount').html( data.dokan_cart_amount ).fadeIn('fast');
         });
     });
 
