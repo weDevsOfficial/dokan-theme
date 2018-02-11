@@ -1,14 +1,14 @@
-# <!=Copyright (C) 2017 Tareq Hasan
+# <!=Copyright (C) 2018 Tareq Hasan
 # This file is distributed under the GNU General Public License v2 or later.=!>
 msgid ""
 msgstr ""
-"Project-Id-Version: Dokan 2.3.0\n"
+"Project-Id-Version: Dokan 2.3.2\n"
 "Report-Msgid-Bugs-To: http://wedevs.com/support/forum/theme-support/dokan/\n"
-"POT-Creation-Date: 2017-12-19 05:24:26+00:00\n"
+"POT-Creation-Date: 2018-02-11 04:45:14+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "X-Generator: grunt-wp-i18n1.0.0\n"
@@ -657,8 +657,7 @@ msgstr ""
 msgid "Product Category"
 msgstr ""
 
-#: build/includes/wc-template.php:239
-#: build/woocommerce/emails/new-product.php:8 includes/wc-template.php:239
+#: build/includes/wc-template.php:239 includes/wc-template.php:239
 msgid "Title:"
 msgstr ""
 
@@ -680,22 +679,6 @@ msgstr ""
 msgid ""
 "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
 "searching can help."
-msgstr ""
-
-#: build/page-restaurant.php:41 build/sidebar-store.php:26 sidebar-store.php:26
-msgid "Store Category"
-msgstr ""
-
-#: build/page-restaurant.php:44 build/sidebar-store.php:28 sidebar-store.php:28
-msgid "Store Location"
-msgstr ""
-
-#: build/page-restaurant.php:48
-msgid "Contact Vendor"
-msgstr ""
-
-#: build/page-restaurant.php:91
-msgid "No products were found of this vendor!"
 msgstr ""
 
 #: build/search.php:17 search.php:17
@@ -720,6 +703,14 @@ msgstr ""
 msgid "Meta"
 msgstr ""
 
+#: build/sidebar-store.php:26 sidebar-store.php:26
+msgid "Store Category"
+msgstr ""
+
+#: build/sidebar-store.php:28 sidebar-store.php:28
+msgid "Store Location"
+msgstr ""
+
 #: build/sidebar-store.php:31 sidebar-store.php:31
 msgid "Contact Seller"
 msgstr ""
@@ -742,40 +733,6 @@ msgstr ""
 
 #: build/woocommerce/cart/mini-cart.php:102 woocommerce/cart/mini-cart.php:102
 msgid "Checkout"
-msgstr ""
-
-#: build/woocommerce/emails/new-product.php:1
-msgid "Hello there,"
-msgstr ""
-
-#: build/woocommerce/emails/new-product.php:3
-msgid "A new product has been submitted to your site"
-msgstr ""
-
-#: build/woocommerce/emails/new-product.php:5
-msgid "Summary of the product:"
-msgstr ""
-
-#: build/woocommerce/emails/new-product.php:9
-msgid "Price:"
-msgstr ""
-
-#: build/woocommerce/emails/new-product.php:10
-msgid "Vendor:"
-msgstr ""
-
-#: build/woocommerce/emails/new-product.php:11
-msgid "Category:"
-msgstr ""
-
-#: build/woocommerce/emails/new-product.php:13
-msgid ""
-"The product is currently in \"publish\" state. So everyone can view the "
-"product."
-msgstr ""
-
-#: build/woocommerce/emails/new-product.php:15
-msgid "In case it needs to be moderated:"
 msgstr ""
 
 #: build/woocommerce/global/form-login.php:37
@@ -841,64 +798,6 @@ msgstr ""
 msgid "Anti-spam"
 msgstr ""
 
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:13
-msgid "Hello %s"
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:16
-msgid ""
-"Your booking has been confirmed. The details of your booking are shown "
-"below."
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:21
-msgid "Booked Product"
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:25
-msgid "Booking ID"
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:30
-msgid "Booking Type"
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:35
-msgid "Booking Start Date"
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:39
-msgid "Booking End Date"
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:49
-msgid "Person(s)"
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:63
-msgid "To pay for this booking please use the following link: %s"
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:63
-msgid "Pay for booking"
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:77
-msgid "Order"
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:82
-msgid "Product"
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:83
-msgid "Quantity"
-msgstr ""
-
-#: build/woocommerce-bookings/emails/customer-booking-confirmed.php:84
-msgid "Price"
-msgstr ""
-
 #: classes/slider.php:59
 msgid ""
 "Learn More: <a target=\"_blank\" href=\"%s\">How to Create Slider in "
@@ -923,10 +822,6 @@ msgstr ""
 
 #. Author URI of the plugin/theme
 msgid "http://tareq.weDevs.com"
-msgstr ""
-
-#. Template Name of the plugin/theme
-msgid "Store Template */"
 msgstr ""
 
 #. Template Name of the plugin/theme
