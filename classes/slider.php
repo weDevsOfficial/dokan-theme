@@ -222,8 +222,8 @@ class Dokan_Slider {
                         $('#slider-table').on('click', 'a.add-slide', this.addSlide);
                         $('#slider-table').on('click', '.slide-hndle', this.toggleSlide);
                         $('#slider-table').on('click', '.submitdelete', this.removeSlide);
-                        $('#slider-table').on('click', 'a.image_upload', WeDevs_Admin.imageUpload);
-                        $('#slider-table').on('click', 'a.remove-image', WeDevs_Admin.removeImage);
+                        $('#slider-table').on('click', 'a.image_upload', this.imageUpload);
+                        $('#slider-table').on('click', 'a.remove-image', this.removeImage);
                         $('ul.slide-holder').sortable();
                     },
 
@@ -277,7 +277,41 @@ class Dokan_Slider {
                     toggleSlide: function (e) {
                         e.preventDefault();
                         $(this).next('.form-table').toggle();
+                    },
+
+                    imageUpload: function (e) {
+                        e.preventDefault();
+
+                        var self = $(this),
+                            inputField = self.siblings('input.image_url');
+
+                        tb_show('', 'media-upload.php?post_id=0&amp;type=image&amp;TB_iframe=true');
+
+                        window.send_to_editor = function (html) {
+                            var url = $(html).attr('src');
+                            //if we find an image, get the src
+                            if($(html).find('img').length > 0) {
+                                url = $(html).find('img').attr('src');
+                            }
+
+                            inputField.val(url);
+
+                            var image = '<img src="' + url + '" alt="image" />';
+                                image += '<a href="#" class="remove-image"><span>Remove</span></a>';
+
+                            self.siblings('.image_placeholder').empty().append(image);
+                            tb_remove();
+                        }
+                    },
+
+                    removeImage: function (e) {
+                        e.preventDefault();
+                        var self = $(this);
+
+                        self.parent('.image_placeholder').siblings('input.image_url').val('');
+                        self.parent('.image_placeholder').empty();
                     }
+
                 };
 
                 $(function() {
@@ -317,7 +351,7 @@ class Dokan_Slider {
             }
 
             .image_placeholder a.remove-image span{
-                background: url('<?php echo ''; ?>/images/ico-delete.png') no-repeat;
+                background: url('<?php echo ''; ?>/assets/images/ico-delete.png') no-repeat;
                 width: 16px;
                 height: 16px;
                 display: inline-block;
