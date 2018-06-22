@@ -260,7 +260,7 @@ class WeDevs_Dokan_Theme {
     }
 
     public function slider_page() {
-        add_submenu_page( 'dokan', __( 'Slider', 'dokan-theme' ), __( 'Slider', 'dokan-theme' ), 'manage_options', 'edit.php?post_type=dokan_slider' );
+        add_submenu_page( 'themes.php', __( 'Slider', 'dokan-theme' ), __( 'Slider', 'dokan-theme' ), 'manage_options', 'edit.php?post_type=dokan_slider' );
     }
 
 }
