@@ -2,806 +2,758 @@
 # This file is distributed under the GNU General Public License v2 or later.=!>
 msgid ""
 msgstr ""
-"Project-Id-Version: Dokan 2.3.2\n"
+"Project-Id-Version: Dokan 2.3.3\n"
 "Report-Msgid-Bugs-To: http://wedevs.com/support/forum/theme-support/dokan/\n"
-"POT-Creation-Date: 2018-02-11 04:45:14+00:00\n"
+"POT-Creation-Date: 2018-07-12 10:03:26+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
-"X-Generator: grunt-wp-i18n1.0.0\n"
+"X-Generator: grunt-wp-i18n1.0.2\n"
 
-#: 404.php:16 build/404.php:16
+#: 404.php:16
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: 404.php:20 build/404.php:20
+#: 404.php:20
 msgid ""
 "It looks like nothing was found at this location. Maybe try one of the "
 "links below or a search?"
 msgstr ""
 
-#: 404.php:33 build/404.php:33
+#: 404.php:33
 msgid "Categories"
 msgstr ""
 
-#: 404.php:45 build/404.php:45
+#: 404.php:45
 #. translators: %1$s: smilie
 msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
-#: archive.php:22 build/archive.php:22
+#: archive.php:22
 msgid "Category Archives: %s"
 msgstr ""
 
-#: archive.php:24 build/archive.php:24
+#: archive.php:24
 msgid "Tag Archives: %s"
 msgstr ""
 
-#: archive.php:30 build/archive.php:30
+#: archive.php:30
 msgid "Author Archives: %s"
 msgstr ""
 
-#: archive.php:37 build/archive.php:37
+#: archive.php:37
 msgid "Daily Archives: %s"
 msgstr ""
 
-#: archive.php:39 build/archive.php:39
+#: archive.php:39
 msgid "Monthly Archives: %s"
 msgstr ""
 
-#: archive.php:41 build/archive.php:41
+#: archive.php:41
 msgid "Yearly Archives: %s"
 msgstr ""
 
-#: archive.php:43 build/archive.php:43 build/sidebar-blog.php:26
-#: build/sidebar-home.php:20 build/sidebar-product-single.php:25
-#: build/sidebar-shop.php:26 build/sidebar.php:26 sidebar-blog.php:26
-#: sidebar-home.php:20 sidebar-product-single.php:25 sidebar-shop.php:26
-#: sidebar.php:26
+#: archive.php:43 sidebar-blog.php:26 sidebar-home.php:20
+#: sidebar-product-single.php:25 sidebar-shop.php:26 sidebar.php:26
 msgid "Archives"
 msgstr ""
 
-#: build/classes/customizer.php:16 classes/customizer.php:16
+#: classes/customizer.php:16
 msgid "- select -"
 msgstr ""
 
-#: build/classes/customizer.php:32 classes/customizer.php:32
+#: classes/customizer.php:32
 msgid "Site Logo"
 msgstr ""
 
-#: build/classes/customizer.php:33 classes/customizer.php:33
+#: classes/customizer.php:33
 msgid "Upload your logo to replace the default Logo (dimension : 180 X 50)"
 msgstr ""
 
-#: build/classes/customizer.php:39 classes/customizer.php:39
+#: classes/customizer.php:39
 msgid "Upload Logo"
 msgstr ""
 
-#: build/classes/customizer.php:46 classes/customizer.php:46
+#: classes/customizer.php:46
 msgid "Theme Settings"
 msgstr ""
 
-#: build/classes/customizer.php:52 classes/customizer.php:52
+#: classes/customizer.php:52
 msgid "Color Skin"
 msgstr ""
 
-#: build/classes/customizer.php:56 classes/customizer.php:56
+#: classes/customizer.php:56
 msgid "Orange"
 msgstr ""
 
-#: build/classes/customizer.php:57 classes/customizer.php:57
+#: classes/customizer.php:57
 msgid "Sky"
 msgstr ""
 
-#: build/classes/customizer.php:58 classes/customizer.php:58
+#: classes/customizer.php:58
 msgid "Blue"
 msgstr ""
 
-#: build/classes/customizer.php:59 classes/customizer.php:59
+#: classes/customizer.php:59
 msgid "Green"
 msgstr ""
 
-#: build/classes/customizer.php:60 classes/customizer.php:60
+#: classes/customizer.php:60
 msgid "Purple"
 msgstr ""
 
-#: build/classes/customizer.php:61 classes/customizer.php:61
+#: classes/customizer.php:61
 msgid "Red"
 msgstr ""
 
-#: build/classes/customizer.php:62 classes/customizer.php:62
+#: classes/customizer.php:62
 msgid "Rose Quartz"
 msgstr ""
 
-#: build/classes/customizer.php:63 classes/customizer.php:63
+#: classes/customizer.php:63
 msgid "Pink"
 msgstr ""
 
-#: build/classes/customizer.php:71 classes/customizer.php:71
+#: classes/customizer.php:71
 msgid "Show Slider on home page"
 msgstr ""
 
-#: build/classes/customizer.php:79 classes/customizer.php:79
+#: classes/customizer.php:79
 msgid "Select Slider"
 msgstr ""
 
-#: build/classes/customizer.php:89 classes/customizer.php:89
+#: classes/customizer.php:89
 msgid "Show featured products on homepage"
 msgstr ""
 
-#: build/classes/customizer.php:98 classes/customizer.php:98
+#: classes/customizer.php:98
 msgid "Show latest products on homepage"
 msgstr ""
 
-#: build/classes/customizer.php:107 classes/customizer.php:107
+#: classes/customizer.php:107
 msgid "Show best selling products on homepage"
 msgstr ""
 
-#: build/classes/customizer.php:116 classes/customizer.php:116
+#: classes/customizer.php:116
 msgid "Show top rated products on homepage"
 msgstr ""
 
-#: build/classes/customizer.php:124 classes/customizer.php:124
+#: classes/customizer.php:124
 msgid "&copy; %d. All rights are reserved."
 msgstr ""
 
-#: build/classes/customizer.php:128 classes/customizer.php:128
+#: classes/customizer.php:128
 msgid "Footer Text"
 msgstr ""
 
-#: build/classes/customizer.php:141 classes/customizer.php:141
+#: classes/customizer.php:141
 msgid "Link"
 msgstr ""
 
-#: build/classes/customizer.php:154 classes/customizer.php:154
+#: classes/customizer.php:154
 msgid "Link hover"
 msgstr ""
 
-#: build/classes/customizer.php:167 classes/customizer.php:167
+#: classes/customizer.php:167
 msgid "Header Background"
 msgstr ""
 
-#: build/classes/customizer.php:180 classes/customizer.php:180
+#: classes/customizer.php:180
 msgid "Navigation Background"
 msgstr ""
 
-#: build/classes/customizer.php:193 classes/customizer.php:193
+#: classes/customizer.php:193
 msgid "Navigation Link"
 msgstr ""
 
-#: build/classes/customizer.php:205 classes/customizer.php:205
+#: classes/customizer.php:205
 msgid "Navigation Link Hover"
 msgstr ""
 
-#: build/classes/customizer.php:218 classes/customizer.php:218
+#: classes/customizer.php:218
 msgid "Footer Background"
 msgstr ""
 
-#: build/classes/customizer.php:231 classes/customizer.php:231
+#: classes/customizer.php:231
 msgid "Copy Container Background"
 msgstr ""
 
-#: build/classes/customizer.php:244 classes/customizer.php:244
+#: classes/customizer.php:244
 msgid "Footer text"
 msgstr ""
 
-#: build/classes/customizer.php:257 classes/customizer.php:257
+#: classes/customizer.php:257
 msgid "Sidebar widget header"
 msgstr ""
 
-#: build/classes/customizer.php:270 classes/customizer.php:270
+#: classes/customizer.php:270
 msgid "Footer widget header"
 msgstr ""
 
-#: build/classes/customizer.php:284 classes/customizer.php:284
+#: classes/customizer.php:284
 msgid "Footer Widget link"
 msgstr ""
 
-#: build/classes/customizer.php:296 classes/customizer.php:296
+#: classes/customizer.php:296
 msgid "Footer Widget link hover"
 msgstr ""
 
-#: build/classes/slider.php:47 classes/slider.php:47
+#: classes/slider.php:47
 msgid "Slides"
 msgstr ""
 
-#: build/classes/slider.php:48 classes/slider.php:48
+#: classes/slider.php:48
 msgid "Slider Options"
-msgstr ""
-
-#: build/classes/slider.php:68 build/classes/slider.php:79
-#: build/classes/slider.php:80 build/functions.php:250 classes/slider.php:72
-#: classes/slider.php:83 classes/slider.php:84 functions.php:263
-msgid "Slider"
-msgstr ""
-
-#: build/classes/slider.php:81 classes/slider.php:85
-msgid "Dokan Slider"
-msgstr ""
-
-#: build/classes/slider.php:82 classes/slider.php:86
-msgid "Add Slider"
-msgstr ""
-
-#: build/classes/slider.php:83 classes/slider.php:87
-msgid "Add New Slider"
-msgstr ""
-
-#: build/classes/slider.php:84 build/content-page.php:18
-#: build/content-single.php:29 build/content.php:29 classes/slider.php:88
-#: content-page.php:18 content-single.php:29 content.php:29
-msgid "Edit"
-msgstr ""
-
-#: build/classes/slider.php:85 classes/slider.php:89
-msgid "Edit Slider"
-msgstr ""
-
-#: build/classes/slider.php:86 classes/slider.php:90
-msgid "New Slider"
-msgstr ""
-
-#: build/classes/slider.php:87 build/classes/slider.php:88
-#: classes/slider.php:91 classes/slider.php:92
-msgid "View Slider"
-msgstr ""
-
-#: build/classes/slider.php:89 classes/slider.php:93
-msgid "Search Slider"
-msgstr ""
-
-#: build/classes/slider.php:90 classes/slider.php:94
-msgid "No Slider Found"
-msgstr ""
-
-#: build/classes/slider.php:91 classes/slider.php:95
-msgid "No Slider found in trash"
-msgstr ""
-
-#: build/classes/slider.php:92 classes/slider.php:96
-msgid "Parent Slider"
-msgstr ""
-
-#: build/classes/slider.php:110 classes/slider.php:114
-msgid "Effect"
-msgstr ""
-
-#: build/classes/slider.php:119 classes/slider.php:123
-msgid "Slide Speed"
-msgstr ""
-
-#: build/classes/slider.php:123 classes/slider.php:127
-msgid "Pagination"
-msgstr ""
-
-#: build/classes/slider.php:126 build/classes/slider.php:135
-#: classes/slider.php:130 classes/slider.php:139
-msgid "Show"
-msgstr ""
-
-#: build/classes/slider.php:127 build/classes/slider.php:136
-#: classes/slider.php:131 classes/slider.php:140
-msgid "Hide"
-msgstr ""
-
-#: build/classes/slider.php:132 classes/slider.php:136
-msgid "Direction Navigation"
-msgstr ""
-
-#: build/classes/slider.php:141 classes/slider.php:145
-msgid "Sliding Direction"
-msgstr ""
-
-#: build/classes/slider.php:144 classes/slider.php:148
-msgid "horizontal"
-msgstr ""
-
-#: build/classes/slider.php:145 classes/slider.php:149
-msgid "vertical"
-msgstr ""
-
-#: build/classes/slider.php:150 classes/slider.php:154
-msgid "Touch Swipe"
-msgstr ""
-
-#: build/classes/slider.php:153 build/classes/slider.php:163
-#: build/classes/slider.php:172 build/classes/slider.php:181
-#: classes/slider.php:157 classes/slider.php:167 classes/slider.php:176
-#: classes/slider.php:185
-msgid "Yes"
-msgstr ""
-
-#: build/classes/slider.php:154 build/classes/slider.php:162
-#: build/classes/slider.php:171 build/classes/slider.php:180
-#: classes/slider.php:158 classes/slider.php:166 classes/slider.php:175
-#: classes/slider.php:184
-msgid "No"
-msgstr ""
-
-#: build/classes/slider.php:159 classes/slider.php:163
-msgid "Randomize"
-msgstr ""
-
-#: build/classes/slider.php:168 classes/slider.php:172
-msgid "Pause on Hover"
-msgstr ""
-
-#: build/classes/slider.php:177 classes/slider.php:181
-msgid "Pause/Play"
-msgstr ""
-
-#: build/classes/slider.php:195 classes/slider.php:199
-msgid "Add Slide"
-msgstr ""
-
-#: build/classes/slider.php:339 classes/slider.php:343
-msgid "Slide"
-msgstr ""
-
-#: build/classes/slider.php:342 classes/slider.php:346
-msgid "Slide Type"
-msgstr ""
-
-#: build/classes/slider.php:345 classes/slider.php:349
-msgid "Text with Image"
-msgstr ""
-
-#: build/classes/slider.php:346 classes/slider.php:350
-msgid "Full Image"
-msgstr ""
-
-#: build/classes/slider.php:347 classes/slider.php:351
-msgid "Full Video"
-msgstr ""
-
-#: build/classes/slider.php:352 classes/slider.php:356
-msgid "Title Text"
-msgstr ""
-
-#: build/classes/slider.php:358 classes/slider.php:362
-msgid "Detail Text"
-msgstr ""
-
-#: build/classes/slider.php:364 classes/slider.php:368
-msgid "Slide Image"
-msgstr ""
-
-#: build/classes/slider.php:376 classes/slider.php:380
-msgid "Video Embed Code"
-msgstr ""
-
-#: build/classes/slider.php:382 classes/slider.php:386
-msgid "Slide Link Url"
-msgstr ""
-
-#: build/classes/slider.php:388 classes/slider.php:392
-msgid "Open Link"
-msgstr ""
-
-#: build/classes/slider.php:391 classes/slider.php:395
-msgid "Open link in same window"
-msgstr ""
-
-#: build/classes/slider.php:392 classes/slider.php:396
-msgid "Open link in new window"
-msgstr ""
-
-#: build/classes/slider.php:398 classes/slider.php:402
-msgid "Remove"
-msgstr ""
-
-#: build/classes/slider.php:480 classes/slider.php:484
-msgid "Read More..."
-msgstr ""
-
-#: build/comments.php:32 comments.php:32
-msgid "One thought on &ldquo;%2$s&rdquo;"
-msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
-msgstr[0] ""
-msgstr[1] ""
-
-#: build/comments.php:38 build/comments.php:58 comments.php:38 comments.php:58
-msgid "Comment navigation"
-msgstr ""
-
-#: build/comments.php:39 build/comments.php:59 comments.php:39 comments.php:59
-msgid "&larr; Older Comments"
-msgstr ""
-
-#: build/comments.php:40 build/comments.php:60 comments.php:40 comments.php:60
-msgid "Newer Comments &rarr;"
-msgstr ""
-
-#: build/comments.php:70 comments.php:70
-msgid "Comments are closed."
-msgstr ""
-
-#: build/content-page.php:17 build/content-single.php:36 build/content.php:41
-#: content-page.php:17 content-single.php:36 content.php:41
-msgid "Pages:"
-msgstr ""
-
-#: build/content-single.php:15 build/content-single.php:42 build/content.php:15
-#: content-single.php:15 content-single.php:42 content.php:15
-#. translators: used between list items, there is a space after the comma
-msgid ", "
-msgstr ""
-
-#: build/content-single.php:20 build/content.php:20 content-single.php:20
-#: content.php:20
-msgid "%1$s"
-msgstr ""
-
-#: build/content-single.php:26 build/content.php:26 content-single.php:26
-#: content.php:26
-msgid "Leave a comment"
-msgstr ""
-
-#: build/content-single.php:26 build/content.php:26 content-single.php:26
-#: content.php:26
-msgid "1 Comment"
-msgstr ""
-
-#: build/content-single.php:26 build/content.php:26 content-single.php:26
-#: content.php:26
-msgid "% Comments"
-msgstr ""
-
-#: build/content.php:3 content.php:3
-msgid "Permalink to %s"
-msgstr ""
-
-#: build/content.php:40 content.php:40
-msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
-msgstr ""
-
-#: build/footer.php:48 footer.php:48
-msgid "&copy; %d, %s. All rights are reserved."
-msgstr ""
-
-#: build/footer.php:49 footer.php:49
-msgid ""
-"Powered by <a href=\"%s\" target=\"_blank\">Dokan</a> from <a href=\"%s\" "
-"target=\"_blank\">weDevs</a>"
-msgstr ""
-
-#: build/front-page.php:47 front-page.php:47
-msgid "Featured Products"
-msgstr ""
-
-#: build/front-page.php:72 front-page.php:72
-msgid "Latest Products"
-msgstr ""
-
-#: build/front-page.php:94 front-page.php:94
-msgid "Best Selling Products"
-msgstr ""
-
-#: build/front-page.php:115 front-page.php:115
-msgid "Top Rated Products"
-msgstr ""
-
-#: build/functions.php:117 functions.php:118
-msgid "Primary Menu"
-msgstr ""
-
-#: build/functions.php:118 functions.php:119
-msgid "Top Left"
-msgstr ""
-
-#: build/functions.php:119 functions.php:120
-msgid "Footer Menu"
-msgstr ""
-
-#: build/functions.php:148 functions.php:161
-msgid "General Sidebar"
-msgstr ""
-
-#: build/functions.php:149 functions.php:162
-msgid "Home Sidebar"
-msgstr ""
-
-#: build/functions.php:150 functions.php:163
-msgid "Blog Sidebar"
-msgstr ""
-
-#: build/functions.php:151 functions.php:164
-msgid "Header Sidebar"
-msgstr ""
-
-#: build/functions.php:152 functions.php:165
-msgid "Shop Archive"
-msgstr ""
-
-#: build/functions.php:153 functions.php:166
-msgid "Single Product"
-msgstr ""
-
-#: build/functions.php:154 functions.php:167
-msgid "Footer Sidebar - 1"
-msgstr ""
-
-#: build/functions.php:155 functions.php:168
-msgid "Footer Sidebar - 2"
-msgstr ""
-
-#: build/functions.php:156 functions.php:169
-msgid "Footer Sidebar - 3"
-msgstr ""
-
-#: build/functions.php:157 functions.php:170
-msgid "Footer Sidebar - 4"
-msgstr ""
-
-#: build/functions.php:243 functions.php:256
-msgid "Page %s"
-msgstr ""
-
-#: build/header.php:38 build/header.php:89 header.php:38 header.php:89
-msgid "Toggle navigation"
-msgstr ""
-
-#: build/header.php:84 header.php:84
-msgid "Menu"
-msgstr ""
-
-#: build/header.php:85 header.php:85
-msgid "Skip to content"
-msgstr ""
-
-#: build/header.php:92 header.php:92
-msgid "Home"
-msgstr ""
-
-#: build/includes/template-tags.php:26 includes/template-tags.php:26
-msgid "Pingback:"
-msgstr ""
-
-#: build/includes/template-tags.php:26 build/includes/template-tags.php:47
-#: includes/template-tags.php:26 includes/template-tags.php:47
-msgid "(Edit)"
-msgstr ""
-
-#: build/includes/template-tags.php:38 includes/template-tags.php:38
-msgid "%s <span class=\"says\">says:</span>"
-msgstr ""
-
-#: build/includes/template-tags.php:43 includes/template-tags.php:43
-#. translators: 1: date, 2: time
-msgid "%1$s at %2$s"
-msgstr ""
-
-#: build/includes/template-tags.php:51 includes/template-tags.php:51
-msgid "Your comment is awaiting moderation."
-msgstr ""
-
-#: build/includes/template-tags.php:76 includes/template-tags.php:76
-msgid ""
-"<a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time class=\"entry-date\" "
-"datetime=\"%3$s\" pubdate>%4$s</time></a><span class=\"byline\"></span>"
-msgstr ""
-
-#: build/includes/template-tags.php:82 includes/template-tags.php:82
-msgid "View all posts by %s"
-msgstr ""
-
-#: build/includes/template-tags.php:118 includes/template-tags.php:118
-msgid "Post navigation"
-msgstr ""
-
-#: build/includes/template-tags.php:189 includes/template-tags.php:189
-msgid "&larr; Previous"
-msgstr ""
-
-#: build/includes/template-tags.php:200 includes/template-tags.php:200
-msgid "Next &rarr;"
-msgstr ""
-
-#: build/includes/template-tags.php:222 includes/template-tags.php:222
-msgid "Product Categories"
-msgstr ""
-
-#: build/includes/template-tags.php:247 includes/template-tags.php:247
-msgid "Cart %s"
-msgstr ""
-
-#: build/includes/template-tags.php:272 includes/template-tags.php:272
-msgid "Seller Dashboard"
-msgstr ""
-
-#: build/includes/template-tags.php:275 includes/template-tags.php:275
-msgid "Visit your store"
-msgstr ""
-
-#: build/includes/template-tags.php:291 includes/template-tags.php:291
-msgid "My Account"
-msgstr ""
-
-#: build/includes/template-tags.php:292 includes/template-tags.php:292
-msgid "Edit Account"
-msgstr ""
-
-#: build/includes/template-tags.php:294 includes/template-tags.php:294
-msgid "Billing Address"
-msgstr ""
-
-#: build/includes/template-tags.php:295 includes/template-tags.php:295
-msgid "Shipping Address"
-msgstr ""
-
-#: build/includes/template-tags.php:302 includes/template-tags.php:302
-msgid "Log in"
-msgstr ""
-
-#: build/includes/template-tags.php:303 includes/template-tags.php:303
-msgid "Sign Up"
-msgstr ""
-
-#: build/includes/wc-functions.php:22 includes/wc-functions.php:22
-msgid "Search for products"
-msgstr ""
-
-#: build/includes/wc-functions.php:25 build/searchform.php:14
-#: includes/wc-functions.php:25 searchform.php:14
-msgid "Search"
-msgstr ""
-
-#: build/includes/wc-template.php:137 includes/wc-template.php:137
-msgid "Dokan product category menu"
-msgstr ""
-
-#: build/includes/wc-template.php:233 includes/wc-template.php:233
-msgid "Product Category"
-msgstr ""
-
-#: build/includes/wc-template.php:239 includes/wc-template.php:239
-msgid "Title:"
-msgstr ""
-
-#: build/no-results.php:14 no-results.php:14
-msgid "Nothing Found"
-msgstr ""
-
-#: build/no-results.php:20 no-results.php:20
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr ""
-
-#: build/no-results.php:24 no-results.php:24
-msgid ""
-"Sorry, but nothing matched your search terms. Please try again with some "
-"different keywords."
-msgstr ""
-
-#: build/no-results.php:34 no-results.php:34
-msgid ""
-"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
-"searching can help."
-msgstr ""
-
-#: build/search.php:17 search.php:17
-msgid "Search Results for: %s"
-msgstr ""
-
-#: build/searchform.php:11 searchform.php:11
-msgid "Search &hellip;"
-msgstr ""
-
-#: build/sidebar-blog.php:13 build/sidebar-product-single.php:12
-#: build/sidebar-shop.php:13 build/sidebar-store.php:10 build/sidebar.php:13
-#: sidebar-blog.php:13 sidebar-product-single.php:12 sidebar-shop.php:13
-#: sidebar-store.php:10 sidebar.php:13
-msgid "Toggle Sidebar"
-msgstr ""
-
-#: build/sidebar-blog.php:33 build/sidebar-home.php:27
-#: build/sidebar-product-single.php:32 build/sidebar-shop.php:33
-#: build/sidebar.php:33 sidebar-blog.php:33 sidebar-home.php:27
-#: sidebar-product-single.php:32 sidebar-shop.php:33 sidebar.php:33
-msgid "Meta"
-msgstr ""
-
-#: build/sidebar-store.php:26 sidebar-store.php:26
-msgid "Store Category"
-msgstr ""
-
-#: build/sidebar-store.php:28 sidebar-store.php:28
-msgid "Store Location"
-msgstr ""
-
-#: build/sidebar-store.php:31 sidebar-store.php:31
-msgid "Contact Seller"
-msgstr ""
-
-#: build/woocommerce/cart/mini-cart.php:56 woocommerce/cart/mini-cart.php:56
-msgid "Remove this item"
-msgstr ""
-
-#: build/woocommerce/cart/mini-cart.php:84 woocommerce/cart/mini-cart.php:84
-msgid "No products in the cart."
-msgstr ""
-
-#: build/woocommerce/cart/mini-cart.php:92 woocommerce/cart/mini-cart.php:92
-msgid "Subtotal"
-msgstr ""
-
-#: build/woocommerce/cart/mini-cart.php:101 woocommerce/cart/mini-cart.php:101
-msgid "View Cart"
-msgstr ""
-
-#: build/woocommerce/cart/mini-cart.php:102 woocommerce/cart/mini-cart.php:102
-msgid "Checkout"
-msgstr ""
-
-#: build/woocommerce/global/form-login.php:37
-#: build/woocommerce/global/form-login.php:56
-#: build/woocommerce/myaccount/form-login.php:36
-#: build/woocommerce/myaccount/form-login.php:61
-#: woocommerce/myaccount/form-login.php:37
-#: woocommerce/myaccount/form-login.php:62
-msgid "Login"
-msgstr ""
-
-#: build/woocommerce/global/form-login.php:44
-#: build/woocommerce/myaccount/form-login.php:43
-#: woocommerce/myaccount/form-login.php:44
-msgid "Username or email address"
-msgstr ""
-
-#: build/woocommerce/global/form-login.php:48
-#: build/woocommerce/global/form-login.php:98
-#: build/woocommerce/myaccount/form-login.php:47
-#: build/woocommerce/myaccount/form-login.php:99
-#: woocommerce/myaccount/form-login.php:48
-#: woocommerce/myaccount/form-login.php:100
-msgid "Password"
-msgstr ""
-
-#: build/woocommerce/global/form-login.php:58
-#: build/woocommerce/myaccount/form-login.php:55
-#: woocommerce/myaccount/form-login.php:56
-msgid "Remember me"
-msgstr ""
-
-#: build/woocommerce/global/form-login.php:62
-#: build/woocommerce/myaccount/form-login.php:64
-#: woocommerce/myaccount/form-login.php:65
-msgid "Lost your password?"
-msgstr ""
-
-#: build/woocommerce/global/form-login.php:75
-#: build/woocommerce/global/form-login.php:111
-#: build/woocommerce/myaccount/form-login.php:77
-#: build/woocommerce/myaccount/form-login.php:113
-#: woocommerce/myaccount/form-login.php:78
-#: woocommerce/myaccount/form-login.php:114
-msgid "Register"
-msgstr ""
-
-#: build/woocommerce/global/form-login.php:84
-#: build/woocommerce/myaccount/form-login.php:85
-#: woocommerce/myaccount/form-login.php:86
-msgid "Username"
-msgstr ""
-
-#: build/woocommerce/global/form-login.php:91
-#: build/woocommerce/myaccount/form-login.php:92
-#: woocommerce/myaccount/form-login.php:93
-msgid "Email address"
-msgstr ""
-
-#: build/woocommerce/global/form-login.php:105
-#: build/woocommerce/myaccount/form-login.php:106
-#: woocommerce/myaccount/form-login.php:107
-msgid "Anti-spam"
 msgstr ""
 
 #: classes/slider.php:59
 msgid ""
 "Learn More: <a target=\"_blank\" href=\"%s\">How to Create Slider in "
 "Dokan</a>"
+msgstr ""
+
+#: classes/slider.php:72 classes/slider.php:83 classes/slider.php:84
+#: functions.php:263
+msgid "Slider"
+msgstr ""
+
+#: classes/slider.php:85
+msgid "Dokan Slider"
+msgstr ""
+
+#: classes/slider.php:86
+msgid "Add Slider"
+msgstr ""
+
+#: classes/slider.php:87
+msgid "Add New Slider"
+msgstr ""
+
+#: classes/slider.php:88 content-page.php:18 content-single.php:29
+#: content.php:29
+msgid "Edit"
+msgstr ""
+
+#: classes/slider.php:89
+msgid "Edit Slider"
+msgstr ""
+
+#: classes/slider.php:90
+msgid "New Slider"
+msgstr ""
+
+#: classes/slider.php:91 classes/slider.php:92
+msgid "View Slider"
+msgstr ""
+
+#: classes/slider.php:93
+msgid "Search Slider"
+msgstr ""
+
+#: classes/slider.php:94
+msgid "No Slider Found"
+msgstr ""
+
+#: classes/slider.php:95
+msgid "No Slider found in trash"
+msgstr ""
+
+#: classes/slider.php:96
+msgid "Parent Slider"
+msgstr ""
+
+#: classes/slider.php:114
+msgid "Effect"
+msgstr ""
+
+#: classes/slider.php:123
+msgid "Slide Speed"
+msgstr ""
+
+#: classes/slider.php:127
+msgid "Pagination"
+msgstr ""
+
+#: classes/slider.php:130 classes/slider.php:139
+msgid "Show"
+msgstr ""
+
+#: classes/slider.php:131 classes/slider.php:140
+msgid "Hide"
+msgstr ""
+
+#: classes/slider.php:136
+msgid "Direction Navigation"
+msgstr ""
+
+#: classes/slider.php:145
+msgid "Sliding Direction"
+msgstr ""
+
+#: classes/slider.php:148
+msgid "horizontal"
+msgstr ""
+
+#: classes/slider.php:149
+msgid "vertical"
+msgstr ""
+
+#: classes/slider.php:154
+msgid "Touch Swipe"
+msgstr ""
+
+#: classes/slider.php:157 classes/slider.php:167 classes/slider.php:176
+#: classes/slider.php:185
+msgid "Yes"
+msgstr ""
+
+#: classes/slider.php:158 classes/slider.php:166 classes/slider.php:175
+#: classes/slider.php:184
+msgid "No"
+msgstr ""
+
+#: classes/slider.php:163
+msgid "Randomize"
+msgstr ""
+
+#: classes/slider.php:172
+msgid "Pause on Hover"
+msgstr ""
+
+#: classes/slider.php:181
+msgid "Pause/Play"
+msgstr ""
+
+#: classes/slider.php:199
+msgid "Add Slide"
+msgstr ""
+
+#: classes/slider.php:377
+msgid "Slide"
+msgstr ""
+
+#: classes/slider.php:380
+msgid "Slide Type"
+msgstr ""
+
+#: classes/slider.php:383
+msgid "Text with Image"
+msgstr ""
+
+#: classes/slider.php:384
+msgid "Full Image"
+msgstr ""
+
+#: classes/slider.php:385
+msgid "Full Video"
+msgstr ""
+
+#: classes/slider.php:390
+msgid "Title Text"
+msgstr ""
+
+#: classes/slider.php:396
+msgid "Detail Text"
+msgstr ""
+
+#: classes/slider.php:402
+msgid "Slide Image"
+msgstr ""
+
+#: classes/slider.php:414
+msgid "Video Embed Code"
+msgstr ""
+
+#: classes/slider.php:420
+msgid "Slide Link Url"
+msgstr ""
+
+#: classes/slider.php:426
+msgid "Open Link"
+msgstr ""
+
+#: classes/slider.php:429
+msgid "Open link in same window"
+msgstr ""
+
+#: classes/slider.php:430
+msgid "Open link in new window"
+msgstr ""
+
+#: classes/slider.php:436
+msgid "Remove"
+msgstr ""
+
+#: classes/slider.php:518
+msgid "Read More..."
+msgstr ""
+
+#: comments.php:32
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:38 comments.php:58
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:39 comments.php:59
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: comments.php:40 comments.php:60
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#: comments.php:70
+msgid "Comments are closed."
+msgstr ""
+
+#: content-page.php:17 content-single.php:36 content.php:41
+msgid "Pages:"
+msgstr ""
+
+#: content-single.php:15 content-single.php:42 content.php:15
+#. translators: used between list items, there is a space after the comma
+msgid ", "
+msgstr ""
+
+#: content-single.php:20 content.php:20
+msgid "%1$s"
+msgstr ""
+
+#: content-single.php:26 content.php:26
+msgid "Leave a comment"
+msgstr ""
+
+#: content-single.php:26 content.php:26
+msgid "1 Comment"
+msgstr ""
+
+#: content-single.php:26 content.php:26
+msgid "% Comments"
+msgstr ""
+
+#: content.php:3
+msgid "Permalink to %s"
+msgstr ""
+
+#: content.php:40
+msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: footer.php:48
+msgid "&copy; %d, %s. All rights are reserved."
+msgstr ""
+
+#: footer.php:49
+msgid ""
+"Powered by <a href=\"%s\" target=\"_blank\">Dokan</a> from <a href=\"%s\" "
+"target=\"_blank\">weDevs</a>"
+msgstr ""
+
+#: front-page.php:47
+msgid "Featured Products"
+msgstr ""
+
+#: front-page.php:72
+msgid "Latest Products"
+msgstr ""
+
+#: front-page.php:94
+msgid "Best Selling Products"
+msgstr ""
+
+#: front-page.php:115
+msgid "Top Rated Products"
+msgstr ""
+
+#: functions.php:118
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:119
+msgid "Top Left"
+msgstr ""
+
+#: functions.php:120
+msgid "Footer Menu"
+msgstr ""
+
+#: functions.php:161
+msgid "General Sidebar"
+msgstr ""
+
+#: functions.php:162
+msgid "Home Sidebar"
+msgstr ""
+
+#: functions.php:163
+msgid "Blog Sidebar"
+msgstr ""
+
+#: functions.php:164
+msgid "Header Sidebar"
+msgstr ""
+
+#: functions.php:165
+msgid "Shop Archive"
+msgstr ""
+
+#: functions.php:166
+msgid "Single Product"
+msgstr ""
+
+#: functions.php:167
+msgid "Footer Sidebar - 1"
+msgstr ""
+
+#: functions.php:168
+msgid "Footer Sidebar - 2"
+msgstr ""
+
+#: functions.php:169
+msgid "Footer Sidebar - 3"
+msgstr ""
+
+#: functions.php:170
+msgid "Footer Sidebar - 4"
+msgstr ""
+
+#: functions.php:256
+msgid "Page %s"
+msgstr ""
+
+#: header.php:38 header.php:89
+msgid "Toggle navigation"
+msgstr ""
+
+#: header.php:84
+msgid "Menu"
+msgstr ""
+
+#: header.php:85
+msgid "Skip to content"
+msgstr ""
+
+#: header.php:92
+msgid "Home"
+msgstr ""
+
+#: includes/template-tags.php:26
+msgid "Pingback:"
+msgstr ""
+
+#: includes/template-tags.php:26 includes/template-tags.php:47
+msgid "(Edit)"
+msgstr ""
+
+#: includes/template-tags.php:38
+msgid "%s <span class=\"says\">says:</span>"
+msgstr ""
+
+#: includes/template-tags.php:43
+#. translators: 1: date, 2: time
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: includes/template-tags.php:51
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: includes/template-tags.php:76
+msgid ""
+"<a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time class=\"entry-date\" "
+"datetime=\"%3$s\" pubdate>%4$s</time></a><span class=\"byline\"></span>"
+msgstr ""
+
+#: includes/template-tags.php:82
+msgid "View all posts by %s"
+msgstr ""
+
+#: includes/template-tags.php:118
+msgid "Post navigation"
+msgstr ""
+
+#: includes/template-tags.php:189
+msgid "&larr; Previous"
+msgstr ""
+
+#: includes/template-tags.php:200
+msgid "Next &rarr;"
+msgstr ""
+
+#: includes/template-tags.php:222
+msgid "Product Categories"
+msgstr ""
+
+#: includes/template-tags.php:247
+msgid "Cart %s"
+msgstr ""
+
+#: includes/template-tags.php:272
+msgid "Seller Dashboard"
+msgstr ""
+
+#: includes/template-tags.php:275
+msgid "Visit your store"
+msgstr ""
+
+#: includes/template-tags.php:291
+msgid "My Account"
+msgstr ""
+
+#: includes/template-tags.php:292
+msgid "Edit Account"
+msgstr ""
+
+#: includes/template-tags.php:294
+msgid "Billing Address"
+msgstr ""
+
+#: includes/template-tags.php:295
+msgid "Shipping Address"
+msgstr ""
+
+#: includes/template-tags.php:302
+msgid "Log in"
+msgstr ""
+
+#: includes/template-tags.php:303
+msgid "Sign Up"
+msgstr ""
+
+#: includes/wc-functions.php:22
+msgid "Search for products"
+msgstr ""
+
+#: includes/wc-functions.php:25 searchform.php:14
+msgid "Search"
+msgstr ""
+
+#: includes/wc-template.php:137
+msgid "Dokan product category menu"
+msgstr ""
+
+#: includes/wc-template.php:233
+msgid "Product Category"
+msgstr ""
+
+#: includes/wc-template.php:239
+msgid "Title:"
+msgstr ""
+
+#: no-results.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#: no-results.php:20
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: no-results.php:24
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: no-results.php:34
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: search.php:17
+msgid "Search Results for: %s"
+msgstr ""
+
+#: searchform.php:11
+msgid "Search &hellip;"
+msgstr ""
+
+#: sidebar-blog.php:13 sidebar-product-single.php:12 sidebar-shop.php:13
+#: sidebar-store.php:10 sidebar.php:13
+msgid "Toggle Sidebar"
+msgstr ""
+
+#: sidebar-blog.php:33 sidebar-home.php:27 sidebar-product-single.php:32
+#: sidebar-shop.php:33 sidebar.php:33
+msgid "Meta"
+msgstr ""
+
+#: sidebar-store.php:26
+msgid "Store Category"
+msgstr ""
+
+#: sidebar-store.php:28
+msgid "Store Location"
+msgstr ""
+
+#: sidebar-store.php:31
+msgid "Contact Seller"
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:56
+msgid "Remove this item"
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:84
+msgid "No products in the cart."
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:92
+msgid "Subtotal"
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:101
+msgid "View Cart"
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:102
+msgid "Checkout"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:37
+#: woocommerce/myaccount/form-login.php:62
+msgid "Login"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:44
+msgid "Username or email address"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:48
+#: woocommerce/myaccount/form-login.php:100
+msgid "Password"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:56
+msgid "Remember me"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:65
+msgid "Lost your password?"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:78
+#: woocommerce/myaccount/form-login.php:114
+msgid "Register"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:86
+msgid "Username"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:93
+msgid "Email address"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:107
+msgid "Anti-spam"
 msgstr ""
 
 #. Theme Name of the plugin/theme
@@ -828,17 +780,17 @@ msgstr ""
 msgid "Full-width Page"
 msgstr ""
 
-#: build/includes/template-tags.php:124 includes/template-tags.php:124
+#: includes/template-tags.php:124
 msgctxt "Previous post link"
 msgid "&larr;"
 msgstr ""
 
-#: build/includes/template-tags.php:127 includes/template-tags.php:127
+#: includes/template-tags.php:127
 msgctxt "Next post link"
 msgid "&rarr;"
 msgstr ""
 
-#: build/includes/wc-template.php:43 includes/wc-template.php:43
+#: includes/wc-template.php:43
 msgctxt "breadcrumb"
 msgid "Home"
 msgstr ""
