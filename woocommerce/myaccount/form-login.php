@@ -11,9 +11,8 @@
  * the readme will list any important changes.
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
- * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 3.4.0
+ * @version 3.5.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -34,19 +33,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php endif; ?>
 
-        <h2><?php _e( 'Login', 'dokan-theme' ); ?></h2>
+        <h2><?php esc_html_e( 'Login', 'dokan-theme' ); ?></h2>
 
         <form method="post" class="login">
 
             <?php do_action( 'woocommerce_login_form_start' ); ?>
 
             <p class="form-row form-row-wide">
-                <label for="username"><?php _e( 'Username or email address', 'dokan-theme' ); ?> <span class="required">*</span></label>
-                <input type="text" class="input-text form-control" name="username" id="username" />
+                <label for="username"><?php esc_html_e( 'Username or email address', 'dokan-theme' ); ?> <span class="required">*</span></label>
+                <input type="text" class="input-text form-control" name="username" id="username" autocomplete="username"/>
             </p>
             <p class="form-row form-row-wide">
-                <label for="password"><?php _e( 'Password', 'dokan-theme' ); ?> <span class="required">*</span></label>
-                <input class="input-text form-control" type="password" name="password" id="password" />
+                <label for="password"><?php esc_html_e( 'Password', 'dokan-theme' ); ?> <span class="required">*</span></label>
+                <input class="input-text form-control" type="password" name="password" id="password" autocomplete="current-password" />
             </p>
 
             <?php do_action( 'woocommerce_login_form' ); ?>
@@ -59,10 +58,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <p class="form-row">
                 <?php wp_nonce_field( 'woocommerce-login' ); ?>
-                <button type="submit" class="dokan-btn dokan-btn-theme" name="login" value="<?php _e( 'Login', 'dokan-theme' ); ?>"> <?php _e( 'Login', 'dokan-theme' ); ?> </button>
+                <button type="submit" class="dokan-btn dokan-btn-theme" name="login" value="<?php esc_attr_e( 'Login', 'dokan-theme' ); ?>"> <?php _e( 'Login', 'dokan-theme' ); ?> </button>
             </p>
             <p class="lost_password">
-                <a href="<?php echo esc_url( wc_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'dokan-theme' ); ?></a>
+                <a href="<?php echo esc_url( wc_lostpassword_url() ); ?>"><?php esc_html_e( 'Lost your password?', 'dokan-theme' ); ?></a>
             </p>
 
             <?php do_action( 'woocommerce_login_form_end' ); ?>
@@ -75,7 +74,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <div class="col-md-6 reg-form">
 
-        <h2><?php _e( 'Register', 'dokan-theme' ); ?></h2>
+        <h2><?php esc_html_e( 'Register', 'dokan-theme' ); ?></h2>
 
         <form id="register" method="post" class="register">
             <?php do_action( 'woocommerce_register_form_start' ); ?>
@@ -83,35 +82,35 @@ if ( ! defined( 'ABSPATH' ) ) {
             <?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
 
                 <p class="form-row form-group form-row-wide">
-                    <label for="reg_username"><?php _e( 'Username', 'dokan-theme' ); ?> <span class="required">*</span></label>
+                    <label for="reg_username"><?php esc_html_e( 'Username', 'dokan-theme' ); ?> <span class="required">*</span></label>
                     <input type="text" class="input-text form-control" name="username" id="reg_username" value="<?php if ( ! empty( $_POST['username'] ) ) esc_attr( $_POST['username'] ); ?>" required="required" />
                 </p>
 
             <?php endif; ?>
 
             <p class="form-row form-group form-row-wide">
-                <label for="reg_email"><?php _e( 'Email address', 'dokan-theme' ); ?> <span class="required">*</span></label>
+                <label for="reg_email"><?php esc_html_e( 'Email address', 'dokan-theme' ); ?> <span class="required">*</span></label>
                 <input type="email" class="input-text form-control" name="email" id="reg_email" value="<?php if ( ! empty( $_POST['email'] ) ) esc_attr($_POST['email']); ?>" required="required" />
             </p>
 
             <?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
 
                 <p class="form-row form-group form-row-wide">
-                    <label for="reg_password"><?php _e( 'Password', 'dokan-theme' ); ?> <span class="required">*</span></label>
+                    <label for="reg_password"><?php esc_html_e( 'Password', 'dokan-theme' ); ?> <span class="required">*</span></label>
                     <input type="password" class="input-text form-control" name="password" id="reg_password" value="<?php if ( ! empty( $_POST['password'] ) ) esc_attr( $_POST['password'] ); ?>" required="required" minlength="6" />
                 </p>
 
             <?php endif; ?>
 
             <!-- Spam Trap -->
-            <div style="left:-999em; position:absolute;"><label for="trap"><?php _e( 'Anti-spam', 'dokan-theme' ); ?></label><input type="text" name="email_2" id="trap" tabindex="-1" /></div>
+            <div style="left:-999em; position:absolute;"><label for="trap"><?php esc_html_e( 'Anti-spam', 'dokan-theme' ); ?></label><input type="text" name="email_2" id="trap" tabindex="-1" /></div>
 
             <?php do_action( 'woocommerce_register_form' ); ?>
             <?php do_action( 'register_form' ); ?>
 
             <p class="form-row">
                 <?php wp_nonce_field( 'woocommerce-register', '_wpnonce' ); ?>
-                <button type="submit" class="dokan-btn dokan-btn-theme" name="register" value="<?php _e( 'Register', 'dokan-theme' ); ?>"> <?php _e( 'Register', 'dokan-theme' ); ?> </button>
+                <button type="submit" class="dokan-btn dokan-btn-theme" name="register" value="<?php esc_attr_e( 'Register', 'dokan-theme' ); ?>"> <?php _e( 'Register', 'dokan-theme' ); ?> </button>
             </p>
 
             <?php do_action( 'woocommerce_register_form_end' ); ?>

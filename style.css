@@ -4,7 +4,7 @@ Theme URI: http://wedevs.com/theme/dokan/
 Author: Tareq Hasan
 Author URI: http://tareq.weDevs.com
 Description: An e-commerce theme for Dokan
-Version: 2.3.3
+Version: 2.3.4
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -1809,6 +1809,16 @@ ul.subsubsub li.active a {
   padding: 6px 40px 8px 10px;
   width: 100%;
   vertical-align: middle;
+}
+.woocommerce .archive-title .dokan-geolocation-location-filters,
+.woocommerce-page .archive-title .dokan-geolocation-location-filters,
+.woocommerce .archive-title .dokan-geolocation-locations-map-top,
+.woocommerce-page .archive-title .dokan-geolocation-locations-map-top {
+  clear: both;
+}
+.woocommerce .archive-title .dokan-geolocation-location-filters,
+.woocommerce-page .archive-title .dokan-geolocation-location-filters {
+  padding-top: 15px;
 }
 .woocommerce ul#shipping_method,
 .woocommerce-page ul#shipping_method {
