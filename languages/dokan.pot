@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2 or later.=!>
 msgid ""
 msgstr ""
-"Project-Id-Version: Dokan 2.3.3\n"
+"Project-Id-Version: Dokan 2.3.4\n"
 "Report-Msgid-Bugs-To: http://wedevs.com/support/forum/theme-support/dokan/\n"
-"POT-Creation-Date: 2018-07-12 10:03:26+00:00\n"
+"POT-Creation-Date: 2018-11-12 05:12:31+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,746 +13,782 @@ msgstr ""
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "X-Generator: grunt-wp-i18n1.0.2\n"
 
-#: 404.php:16
+#: 404.php:16 build/404.php:16
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: 404.php:20
+#: 404.php:20 build/404.php:20
 msgid ""
 "It looks like nothing was found at this location. Maybe try one of the "
 "links below or a search?"
 msgstr ""
 
-#: 404.php:33
+#: 404.php:33 build/404.php:33
 msgid "Categories"
 msgstr ""
 
-#: 404.php:45
+#: 404.php:45 build/404.php:45
 #. translators: %1$s: smilie
 msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
-#: archive.php:22
+#: archive.php:22 build/archive.php:22
 msgid "Category Archives: %s"
 msgstr ""
 
-#: archive.php:24
+#: archive.php:24 build/archive.php:24
 msgid "Tag Archives: %s"
 msgstr ""
 
-#: archive.php:30
+#: archive.php:30 build/archive.php:30
 msgid "Author Archives: %s"
 msgstr ""
 
-#: archive.php:37
+#: archive.php:37 build/archive.php:37
 msgid "Daily Archives: %s"
 msgstr ""
 
-#: archive.php:39
+#: archive.php:39 build/archive.php:39
 msgid "Monthly Archives: %s"
 msgstr ""
 
-#: archive.php:41
+#: archive.php:41 build/archive.php:41
 msgid "Yearly Archives: %s"
 msgstr ""
 
-#: archive.php:43 sidebar-blog.php:26 sidebar-home.php:20
-#: sidebar-product-single.php:25 sidebar-shop.php:26 sidebar.php:26
+#: archive.php:43 build/archive.php:43 build/sidebar-blog.php:26
+#: build/sidebar-home.php:20 build/sidebar-product-single.php:25
+#: build/sidebar-shop.php:26 build/sidebar.php:26 sidebar-blog.php:26
+#: sidebar-home.php:20 sidebar-product-single.php:25 sidebar-shop.php:26
+#: sidebar.php:26
 msgid "Archives"
 msgstr ""
 
-#: classes/customizer.php:16
+#: build/classes/customizer.php:16 classes/customizer.php:16
 msgid "- select -"
 msgstr ""
 
-#: classes/customizer.php:32
+#: build/classes/customizer.php:32 classes/customizer.php:32
 msgid "Site Logo"
 msgstr ""
 
-#: classes/customizer.php:33
+#: build/classes/customizer.php:33 classes/customizer.php:33
 msgid "Upload your logo to replace the default Logo (dimension : 180 X 50)"
 msgstr ""
 
-#: classes/customizer.php:39
+#: build/classes/customizer.php:39 classes/customizer.php:39
 msgid "Upload Logo"
 msgstr ""
 
-#: classes/customizer.php:46
+#: build/classes/customizer.php:46 classes/customizer.php:46
 msgid "Theme Settings"
 msgstr ""
 
-#: classes/customizer.php:52
+#: build/classes/customizer.php:52 classes/customizer.php:52
 msgid "Color Skin"
 msgstr ""
 
-#: classes/customizer.php:56
+#: build/classes/customizer.php:56 classes/customizer.php:56
 msgid "Orange"
 msgstr ""
 
-#: classes/customizer.php:57
+#: build/classes/customizer.php:57 classes/customizer.php:57
 msgid "Sky"
 msgstr ""
 
-#: classes/customizer.php:58
+#: build/classes/customizer.php:58 classes/customizer.php:58
 msgid "Blue"
 msgstr ""
 
-#: classes/customizer.php:59
+#: build/classes/customizer.php:59 classes/customizer.php:59
 msgid "Green"
 msgstr ""
 
-#: classes/customizer.php:60
+#: build/classes/customizer.php:60 classes/customizer.php:60
 msgid "Purple"
 msgstr ""
 
-#: classes/customizer.php:61
+#: build/classes/customizer.php:61 classes/customizer.php:61
 msgid "Red"
 msgstr ""
 
-#: classes/customizer.php:62
+#: build/classes/customizer.php:62 classes/customizer.php:62
 msgid "Rose Quartz"
 msgstr ""
 
-#: classes/customizer.php:63
+#: build/classes/customizer.php:63 classes/customizer.php:63
 msgid "Pink"
 msgstr ""
 
-#: classes/customizer.php:71
+#: build/classes/customizer.php:71 classes/customizer.php:71
 msgid "Show Slider on home page"
 msgstr ""
 
-#: classes/customizer.php:79
+#: build/classes/customizer.php:79 classes/customizer.php:79
 msgid "Select Slider"
 msgstr ""
 
-#: classes/customizer.php:89
+#: build/classes/customizer.php:89 classes/customizer.php:89
 msgid "Show featured products on homepage"
 msgstr ""
 
-#: classes/customizer.php:98
+#: build/classes/customizer.php:98 classes/customizer.php:98
 msgid "Show latest products on homepage"
 msgstr ""
 
-#: classes/customizer.php:107
+#: build/classes/customizer.php:107 classes/customizer.php:107
 msgid "Show best selling products on homepage"
 msgstr ""
 
-#: classes/customizer.php:116
+#: build/classes/customizer.php:116 classes/customizer.php:116
 msgid "Show top rated products on homepage"
 msgstr ""
 
-#: classes/customizer.php:124
+#: build/classes/customizer.php:124 classes/customizer.php:124
 msgid "&copy; %d. All rights are reserved."
 msgstr ""
 
-#: classes/customizer.php:128
+#: build/classes/customizer.php:128 classes/customizer.php:128
 msgid "Footer Text"
 msgstr ""
 
-#: classes/customizer.php:141
+#: build/classes/customizer.php:141 classes/customizer.php:141
 msgid "Link"
 msgstr ""
 
-#: classes/customizer.php:154
+#: build/classes/customizer.php:154 classes/customizer.php:154
 msgid "Link hover"
 msgstr ""
 
-#: classes/customizer.php:167
+#: build/classes/customizer.php:167 classes/customizer.php:167
 msgid "Header Background"
 msgstr ""
 
-#: classes/customizer.php:180
+#: build/classes/customizer.php:180 classes/customizer.php:180
 msgid "Navigation Background"
 msgstr ""
 
-#: classes/customizer.php:193
+#: build/classes/customizer.php:193 classes/customizer.php:193
 msgid "Navigation Link"
 msgstr ""
 
-#: classes/customizer.php:205
+#: build/classes/customizer.php:205 classes/customizer.php:205
 msgid "Navigation Link Hover"
 msgstr ""
 
-#: classes/customizer.php:218
+#: build/classes/customizer.php:218 classes/customizer.php:218
 msgid "Footer Background"
 msgstr ""
 
-#: classes/customizer.php:231
+#: build/classes/customizer.php:231 classes/customizer.php:231
 msgid "Copy Container Background"
 msgstr ""
 
-#: classes/customizer.php:244
+#: build/classes/customizer.php:244 classes/customizer.php:244
 msgid "Footer text"
 msgstr ""
 
-#: classes/customizer.php:257
+#: build/classes/customizer.php:257 classes/customizer.php:257
 msgid "Sidebar widget header"
 msgstr ""
 
-#: classes/customizer.php:270
+#: build/classes/customizer.php:270 classes/customizer.php:270
 msgid "Footer widget header"
 msgstr ""
 
-#: classes/customizer.php:284
+#: build/classes/customizer.php:284 classes/customizer.php:284
 msgid "Footer Widget link"
 msgstr ""
 
-#: classes/customizer.php:296
+#: build/classes/customizer.php:296 classes/customizer.php:296
 msgid "Footer Widget link hover"
 msgstr ""
 
-#: classes/slider.php:47
+#: build/classes/slider.php:47 classes/slider.php:47
 msgid "Slides"
 msgstr ""
 
-#: classes/slider.php:48
+#: build/classes/slider.php:48 classes/slider.php:48
 msgid "Slider Options"
 msgstr ""
 
-#: classes/slider.php:59
+#: build/classes/slider.php:59 classes/slider.php:59
 msgid ""
 "Learn More: <a target=\"_blank\" href=\"%s\">How to Create Slider in "
 "Dokan</a>"
 msgstr ""
 
-#: classes/slider.php:72 classes/slider.php:83 classes/slider.php:84
-#: functions.php:263
+#: build/classes/slider.php:72 build/classes/slider.php:83
+#: build/classes/slider.php:84 build/functions.php:263 classes/slider.php:72
+#: classes/slider.php:83 classes/slider.php:84 functions.php:263
 msgid "Slider"
 msgstr ""
 
-#: classes/slider.php:85
+#: build/classes/slider.php:85 classes/slider.php:85
 msgid "Dokan Slider"
 msgstr ""
 
-#: classes/slider.php:86
+#: build/classes/slider.php:86 classes/slider.php:86
 msgid "Add Slider"
 msgstr ""
 
-#: classes/slider.php:87
+#: build/classes/slider.php:87 classes/slider.php:87
 msgid "Add New Slider"
 msgstr ""
 
-#: classes/slider.php:88 content-page.php:18 content-single.php:29
-#: content.php:29
+#: build/classes/slider.php:88 build/content-page.php:18
+#: build/content-single.php:29 build/content.php:29 classes/slider.php:88
+#: content-page.php:18 content-single.php:29 content.php:29
 msgid "Edit"
 msgstr ""
 
-#: classes/slider.php:89
+#: build/classes/slider.php:89 classes/slider.php:89
 msgid "Edit Slider"
 msgstr ""
 
-#: classes/slider.php:90
+#: build/classes/slider.php:90 classes/slider.php:90
 msgid "New Slider"
 msgstr ""
 
+#: build/classes/slider.php:91 build/classes/slider.php:92
 #: classes/slider.php:91 classes/slider.php:92
 msgid "View Slider"
 msgstr ""
 
-#: classes/slider.php:93
+#: build/classes/slider.php:93 classes/slider.php:93
 msgid "Search Slider"
 msgstr ""
 
-#: classes/slider.php:94
+#: build/classes/slider.php:94 classes/slider.php:94
 msgid "No Slider Found"
 msgstr ""
 
-#: classes/slider.php:95
+#: build/classes/slider.php:95 classes/slider.php:95
 msgid "No Slider found in trash"
 msgstr ""
 
-#: classes/slider.php:96
+#: build/classes/slider.php:96 classes/slider.php:96
 msgid "Parent Slider"
 msgstr ""
 
-#: classes/slider.php:114
+#: build/classes/slider.php:114 classes/slider.php:114
 msgid "Effect"
 msgstr ""
 
-#: classes/slider.php:123
+#: build/classes/slider.php:123 classes/slider.php:123
 msgid "Slide Speed"
 msgstr ""
 
-#: classes/slider.php:127
+#: build/classes/slider.php:127 classes/slider.php:127
 msgid "Pagination"
 msgstr ""
 
+#: build/classes/slider.php:130 build/classes/slider.php:139
 #: classes/slider.php:130 classes/slider.php:139
 msgid "Show"
 msgstr ""
 
+#: build/classes/slider.php:131 build/classes/slider.php:140
 #: classes/slider.php:131 classes/slider.php:140
 msgid "Hide"
 msgstr ""
 
-#: classes/slider.php:136
+#: build/classes/slider.php:136 classes/slider.php:136
 msgid "Direction Navigation"
 msgstr ""
 
-#: classes/slider.php:145
+#: build/classes/slider.php:145 classes/slider.php:145
 msgid "Sliding Direction"
 msgstr ""
 
-#: classes/slider.php:148
+#: build/classes/slider.php:148 classes/slider.php:148
 msgid "horizontal"
 msgstr ""
 
-#: classes/slider.php:149
+#: build/classes/slider.php:149 classes/slider.php:149
 msgid "vertical"
 msgstr ""
 
-#: classes/slider.php:154
+#: build/classes/slider.php:154 classes/slider.php:154
 msgid "Touch Swipe"
 msgstr ""
 
+#: build/classes/slider.php:157 build/classes/slider.php:167
+#: build/classes/slider.php:176 build/classes/slider.php:185
 #: classes/slider.php:157 classes/slider.php:167 classes/slider.php:176
 #: classes/slider.php:185
 msgid "Yes"
 msgstr ""
 
+#: build/classes/slider.php:158 build/classes/slider.php:166
+#: build/classes/slider.php:175 build/classes/slider.php:184
 #: classes/slider.php:158 classes/slider.php:166 classes/slider.php:175
 #: classes/slider.php:184
 msgid "No"
 msgstr ""
 
-#: classes/slider.php:163
+#: build/classes/slider.php:163 classes/slider.php:163
 msgid "Randomize"
 msgstr ""
 
-#: classes/slider.php:172
+#: build/classes/slider.php:172 classes/slider.php:172
 msgid "Pause on Hover"
 msgstr ""
 
-#: classes/slider.php:181
+#: build/classes/slider.php:181 classes/slider.php:181
 msgid "Pause/Play"
 msgstr ""
 
-#: classes/slider.php:199
+#: build/classes/slider.php:199 classes/slider.php:199
 msgid "Add Slide"
 msgstr ""
 
-#: classes/slider.php:377
+#: build/classes/slider.php:377 classes/slider.php:377
 msgid "Slide"
 msgstr ""
 
-#: classes/slider.php:380
+#: build/classes/slider.php:380 classes/slider.php:380
 msgid "Slide Type"
 msgstr ""
 
-#: classes/slider.php:383
+#: build/classes/slider.php:383 classes/slider.php:383
 msgid "Text with Image"
 msgstr ""
 
-#: classes/slider.php:384
+#: build/classes/slider.php:384 classes/slider.php:384
 msgid "Full Image"
 msgstr ""
 
-#: classes/slider.php:385
+#: build/classes/slider.php:385 classes/slider.php:385
 msgid "Full Video"
 msgstr ""
 
-#: classes/slider.php:390
+#: build/classes/slider.php:390 classes/slider.php:390
 msgid "Title Text"
 msgstr ""
 
-#: classes/slider.php:396
+#: build/classes/slider.php:396 classes/slider.php:396
 msgid "Detail Text"
 msgstr ""
 
-#: classes/slider.php:402
+#: build/classes/slider.php:402 classes/slider.php:402
 msgid "Slide Image"
 msgstr ""
 
-#: classes/slider.php:414
+#: build/classes/slider.php:414 classes/slider.php:414
 msgid "Video Embed Code"
 msgstr ""
 
-#: classes/slider.php:420
+#: build/classes/slider.php:420 classes/slider.php:420
 msgid "Slide Link Url"
 msgstr ""
 
-#: classes/slider.php:426
+#: build/classes/slider.php:426 classes/slider.php:426
 msgid "Open Link"
 msgstr ""
 
-#: classes/slider.php:429
+#: build/classes/slider.php:429 classes/slider.php:429
 msgid "Open link in same window"
 msgstr ""
 
-#: classes/slider.php:430
+#: build/classes/slider.php:430 classes/slider.php:430
 msgid "Open link in new window"
 msgstr ""
 
-#: classes/slider.php:436
+#: build/classes/slider.php:436 classes/slider.php:436
 msgid "Remove"
 msgstr ""
 
-#: classes/slider.php:518
+#: build/classes/slider.php:518 classes/slider.php:518
 msgid "Read More..."
 msgstr ""
 
-#: comments.php:32
+#: build/comments.php:32 comments.php:32
 msgid "One thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: comments.php:38 comments.php:58
+#: build/comments.php:38 build/comments.php:58 comments.php:38 comments.php:58
 msgid "Comment navigation"
 msgstr ""
 
-#: comments.php:39 comments.php:59
+#: build/comments.php:39 build/comments.php:59 comments.php:39 comments.php:59
 msgid "&larr; Older Comments"
 msgstr ""
 
-#: comments.php:40 comments.php:60
+#: build/comments.php:40 build/comments.php:60 comments.php:40 comments.php:60
 msgid "Newer Comments &rarr;"
 msgstr ""
 
-#: comments.php:70
+#: build/comments.php:70 comments.php:70
 msgid "Comments are closed."
 msgstr ""
 
+#: build/content-page.php:17 build/content-single.php:36 build/content.php:41
 #: content-page.php:17 content-single.php:36 content.php:41
 msgid "Pages:"
 msgstr ""
 
+#: build/content-single.php:15 build/content-single.php:42 build/content.php:15
 #: content-single.php:15 content-single.php:42 content.php:15
 #. translators: used between list items, there is a space after the comma
 msgid ", "
 msgstr ""
 
-#: content-single.php:20 content.php:20
+#: build/content-single.php:20 build/content.php:20 content-single.php:20
+#: content.php:20
 msgid "%1$s"
 msgstr ""
 
-#: content-single.php:26 content.php:26
+#: build/content-single.php:26 build/content.php:26 content-single.php:26
+#: content.php:26
 msgid "Leave a comment"
 msgstr ""
 
-#: content-single.php:26 content.php:26
+#: build/content-single.php:26 build/content.php:26 content-single.php:26
+#: content.php:26
 msgid "1 Comment"
 msgstr ""
 
-#: content-single.php:26 content.php:26
+#: build/content-single.php:26 build/content.php:26 content-single.php:26
+#: content.php:26
 msgid "% Comments"
 msgstr ""
 
-#: content.php:3
+#: build/content.php:3 content.php:3
 msgid "Permalink to %s"
 msgstr ""
 
-#: content.php:40
+#: build/content.php:40 content.php:40
 msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
-#: footer.php:48
+#: build/footer.php:48 footer.php:48
 msgid "&copy; %d, %s. All rights are reserved."
 msgstr ""
 
-#: footer.php:49
+#: build/footer.php:49 footer.php:49
 msgid ""
 "Powered by <a href=\"%s\" target=\"_blank\">Dokan</a> from <a href=\"%s\" "
 "target=\"_blank\">weDevs</a>"
 msgstr ""
 
-#: front-page.php:47
+#: build/front-page.php:47 front-page.php:47
 msgid "Featured Products"
 msgstr ""
 
-#: front-page.php:72
+#: build/front-page.php:72 front-page.php:72
 msgid "Latest Products"
 msgstr ""
 
-#: front-page.php:94
+#: build/front-page.php:94 front-page.php:94
 msgid "Best Selling Products"
 msgstr ""
 
-#: front-page.php:115
+#: build/front-page.php:115 front-page.php:115
 msgid "Top Rated Products"
 msgstr ""
 
-#: functions.php:118
+#: build/functions.php:118 functions.php:118
 msgid "Primary Menu"
 msgstr ""
 
-#: functions.php:119
+#: build/functions.php:119 functions.php:119
 msgid "Top Left"
 msgstr ""
 
-#: functions.php:120
+#: build/functions.php:120 functions.php:120
 msgid "Footer Menu"
 msgstr ""
 
-#: functions.php:161
+#: build/functions.php:161 functions.php:161
 msgid "General Sidebar"
 msgstr ""
 
-#: functions.php:162
+#: build/functions.php:162 functions.php:162
 msgid "Home Sidebar"
 msgstr ""
 
-#: functions.php:163
+#: build/functions.php:163 functions.php:163
 msgid "Blog Sidebar"
 msgstr ""
 
-#: functions.php:164
+#: build/functions.php:164 functions.php:164
 msgid "Header Sidebar"
 msgstr ""
 
-#: functions.php:165
+#: build/functions.php:165 functions.php:165
 msgid "Shop Archive"
 msgstr ""
 
-#: functions.php:166
+#: build/functions.php:166 functions.php:166
 msgid "Single Product"
 msgstr ""
 
-#: functions.php:167
+#: build/functions.php:167 functions.php:167
 msgid "Footer Sidebar - 1"
 msgstr ""
 
-#: functions.php:168
+#: build/functions.php:168 functions.php:168
 msgid "Footer Sidebar - 2"
 msgstr ""
 
-#: functions.php:169
+#: build/functions.php:169 functions.php:169
 msgid "Footer Sidebar - 3"
 msgstr ""
 
-#: functions.php:170
+#: build/functions.php:170 functions.php:170
 msgid "Footer Sidebar - 4"
 msgstr ""
 
-#: functions.php:256
+#: build/functions.php:256 functions.php:256
 msgid "Page %s"
 msgstr ""
 
-#: header.php:38 header.php:89
+#: build/header.php:38 build/header.php:89 header.php:38 header.php:89
 msgid "Toggle navigation"
 msgstr ""
 
-#: header.php:84
+#: build/header.php:84 header.php:84
 msgid "Menu"
 msgstr ""
 
-#: header.php:85
+#: build/header.php:85 header.php:85
 msgid "Skip to content"
 msgstr ""
 
-#: header.php:92
+#: build/header.php:92 header.php:92
 msgid "Home"
 msgstr ""
 
-#: includes/template-tags.php:26
+#: build/includes/template-tags.php:26 includes/template-tags.php:26
 msgid "Pingback:"
 msgstr ""
 
+#: build/includes/template-tags.php:26 build/includes/template-tags.php:47
 #: includes/template-tags.php:26 includes/template-tags.php:47
 msgid "(Edit)"
 msgstr ""
 
-#: includes/template-tags.php:38
+#: build/includes/template-tags.php:38 includes/template-tags.php:38
 msgid "%s <span class=\"says\">says:</span>"
 msgstr ""
 
-#: includes/template-tags.php:43
+#: build/includes/template-tags.php:43 includes/template-tags.php:43
 #. translators: 1: date, 2: time
 msgid "%1$s at %2$s"
 msgstr ""
 
-#: includes/template-tags.php:51
+#: build/includes/template-tags.php:51 includes/template-tags.php:51
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: includes/template-tags.php:76
+#: build/includes/template-tags.php:76 includes/template-tags.php:76
 msgid ""
 "<a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time class=\"entry-date\" "
 "datetime=\"%3$s\" pubdate>%4$s</time></a><span class=\"byline\"></span>"
 msgstr ""
 
-#: includes/template-tags.php:82
+#: build/includes/template-tags.php:82 includes/template-tags.php:82
 msgid "View all posts by %s"
 msgstr ""
 
-#: includes/template-tags.php:118
+#: build/includes/template-tags.php:118 includes/template-tags.php:118
 msgid "Post navigation"
 msgstr ""
 
-#: includes/template-tags.php:189
+#: build/includes/template-tags.php:189 includes/template-tags.php:189
 msgid "&larr; Previous"
 msgstr ""
 
-#: includes/template-tags.php:200
+#: build/includes/template-tags.php:200 includes/template-tags.php:200
 msgid "Next &rarr;"
 msgstr ""
 
-#: includes/template-tags.php:222
+#: build/includes/template-tags.php:222 includes/template-tags.php:222
 msgid "Product Categories"
 msgstr ""
 
-#: includes/template-tags.php:247
+#: build/includes/template-tags.php:247 includes/template-tags.php:247
 msgid "Cart %s"
 msgstr ""
 
-#: includes/template-tags.php:272
+#: build/includes/template-tags.php:272 includes/template-tags.php:272
 msgid "Seller Dashboard"
 msgstr ""
 
-#: includes/template-tags.php:275
+#: build/includes/template-tags.php:275 includes/template-tags.php:275
 msgid "Visit your store"
 msgstr ""
 
-#: includes/template-tags.php:291
+#: build/includes/template-tags.php:291 includes/template-tags.php:291
 msgid "My Account"
 msgstr ""
 
-#: includes/template-tags.php:292
+#: build/includes/template-tags.php:292 includes/template-tags.php:292
 msgid "Edit Account"
 msgstr ""
 
-#: includes/template-tags.php:294
+#: build/includes/template-tags.php:294 includes/template-tags.php:294
 msgid "Billing Address"
 msgstr ""
 
-#: includes/template-tags.php:295
+#: build/includes/template-tags.php:295 includes/template-tags.php:295
 msgid "Shipping Address"
 msgstr ""
 
-#: includes/template-tags.php:302
+#: build/includes/template-tags.php:302 includes/template-tags.php:302
 msgid "Log in"
 msgstr ""
 
-#: includes/template-tags.php:303
+#: build/includes/template-tags.php:303 includes/template-tags.php:303
 msgid "Sign Up"
 msgstr ""
 
-#: includes/wc-functions.php:22
+#: build/includes/wc-functions.php:22 includes/wc-functions.php:22
 msgid "Search for products"
 msgstr ""
 
+#: build/includes/wc-functions.php:25 build/searchform.php:14
 #: includes/wc-functions.php:25 searchform.php:14
 msgid "Search"
 msgstr ""
 
-#: includes/wc-template.php:137
+#: build/includes/wc-template.php:137 includes/wc-template.php:137
 msgid "Dokan product category menu"
 msgstr ""
 
-#: includes/wc-template.php:233
+#: build/includes/wc-template.php:233 includes/wc-template.php:233
 msgid "Product Category"
 msgstr ""
 
-#: includes/wc-template.php:239
+#: build/includes/wc-template.php:239 includes/wc-template.php:239
 msgid "Title:"
 msgstr ""
 
-#: no-results.php:14
+#: build/no-results.php:14 no-results.php:14
 msgid "Nothing Found"
 msgstr ""
 
-#: no-results.php:20
+#: build/no-results.php:20 no-results.php:20
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
 
-#: no-results.php:24
+#: build/no-results.php:24 no-results.php:24
 msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
 "different keywords."
 msgstr ""
 
-#: no-results.php:34
+#: build/no-results.php:34 no-results.php:34
 msgid ""
 "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
 "searching can help."
 msgstr ""
 
-#: search.php:17
+#: build/search.php:17 search.php:17
 msgid "Search Results for: %s"
 msgstr ""
 
-#: searchform.php:11
+#: build/searchform.php:11 searchform.php:11
 msgid "Search &hellip;"
 msgstr ""
 
+#: build/sidebar-blog.php:13 build/sidebar-product-single.php:12
+#: build/sidebar-shop.php:13 build/sidebar-store.php:10 build/sidebar.php:13
 #: sidebar-blog.php:13 sidebar-product-single.php:12 sidebar-shop.php:13
 #: sidebar-store.php:10 sidebar.php:13
 msgid "Toggle Sidebar"
 msgstr ""
 
-#: sidebar-blog.php:33 sidebar-home.php:27 sidebar-product-single.php:32
-#: sidebar-shop.php:33 sidebar.php:33
+#: build/sidebar-blog.php:33 build/sidebar-home.php:27
+#: build/sidebar-product-single.php:32 build/sidebar-shop.php:33
+#: build/sidebar.php:33 sidebar-blog.php:33 sidebar-home.php:27
+#: sidebar-product-single.php:32 sidebar-shop.php:33 sidebar.php:33
 msgid "Meta"
 msgstr ""
 
-#: sidebar-store.php:26
+#: build/sidebar-store.php:26 sidebar-store.php:26
 msgid "Store Category"
 msgstr ""
 
-#: sidebar-store.php:28
+#: build/sidebar-store.php:28 sidebar-store.php:28
 msgid "Store Location"
 msgstr ""
 
-#: sidebar-store.php:31
+#: build/sidebar-store.php:31 sidebar-store.php:31
 msgid "Contact Seller"
 msgstr ""
 
-#: woocommerce/cart/mini-cart.php:56
+#: build/woocommerce/cart/mini-cart.php:56 woocommerce/cart/mini-cart.php:56
 msgid "Remove this item"
 msgstr ""
 
-#: woocommerce/cart/mini-cart.php:84
+#: build/woocommerce/cart/mini-cart.php:84 woocommerce/cart/mini-cart.php:84
 msgid "No products in the cart."
 msgstr ""
 
-#: woocommerce/cart/mini-cart.php:92
+#: build/woocommerce/cart/mini-cart.php:92 woocommerce/cart/mini-cart.php:92
 msgid "Subtotal"
 msgstr ""
 
-#: woocommerce/cart/mini-cart.php:101
+#: build/woocommerce/cart/mini-cart.php:101 woocommerce/cart/mini-cart.php:101
 msgid "View Cart"
 msgstr ""
 
-#: woocommerce/cart/mini-cart.php:102
+#: build/woocommerce/cart/mini-cart.php:102 woocommerce/cart/mini-cart.php:102
 msgid "Checkout"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:37
-#: woocommerce/myaccount/form-login.php:62
+#: build/woocommerce/myaccount/form-login.php:37
+#: build/woocommerce/myaccount/form-login.php:62
+#: woocommerce/myaccount/form-login.php:36
+#: woocommerce/myaccount/form-login.php:61
 msgid "Login"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:44
+#: build/woocommerce/myaccount/form-login.php:44
+#: woocommerce/myaccount/form-login.php:43
 msgid "Username or email address"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:48
-#: woocommerce/myaccount/form-login.php:100
+#: build/woocommerce/myaccount/form-login.php:48
+#: build/woocommerce/myaccount/form-login.php:100
+#: woocommerce/myaccount/form-login.php:47
+#: woocommerce/myaccount/form-login.php:99
 msgid "Password"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:56
+#: build/woocommerce/myaccount/form-login.php:56
+#: woocommerce/myaccount/form-login.php:55
 msgid "Remember me"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:65
+#: build/woocommerce/myaccount/form-login.php:65
+#: woocommerce/myaccount/form-login.php:64
 msgid "Lost your password?"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:78
-#: woocommerce/myaccount/form-login.php:114
+#: build/woocommerce/myaccount/form-login.php:78
+#: build/woocommerce/myaccount/form-login.php:114
+#: woocommerce/myaccount/form-login.php:77
+#: woocommerce/myaccount/form-login.php:113
 msgid "Register"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:86
+#: build/woocommerce/myaccount/form-login.php:86
+#: woocommerce/myaccount/form-login.php:85
 msgid "Username"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:93
+#: build/woocommerce/myaccount/form-login.php:93
+#: woocommerce/myaccount/form-login.php:92
 msgid "Email address"
 msgstr ""
 
-#: woocommerce/myaccount/form-login.php:107
+#: build/woocommerce/myaccount/form-login.php:107
+#: woocommerce/myaccount/form-login.php:106
 msgid "Anti-spam"
 msgstr ""
 
@@ -780,17 +816,17 @@ msgstr ""
 msgid "Full-width Page"
 msgstr ""
 
-#: includes/template-tags.php:124
+#: build/includes/template-tags.php:124 includes/template-tags.php:124
 msgctxt "Previous post link"
 msgid "&larr;"
 msgstr ""
 
-#: includes/template-tags.php:127
+#: build/includes/template-tags.php:127 includes/template-tags.php:127
 msgctxt "Next post link"
 msgid "&rarr;"
 msgstr ""
 
-#: includes/wc-template.php:43
+#: build/includes/wc-template.php:43 includes/wc-template.php:43
 msgctxt "breadcrumb"
 msgid "Home"
 msgstr ""
