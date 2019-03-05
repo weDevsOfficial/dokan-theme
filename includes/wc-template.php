@@ -244,6 +244,10 @@ if ( !class_exists( 'Dokan_Category_Widget' ) ) :
 
     }
 
-    add_action( 'widgets_init', create_function( '', "register_widget( 'Dokan_Category_Widget' );" ) );
+    add_action( 'widgets_init', 'dokan_theme_register_widget' );
+
+    function dokan_theme_register_widget() {
+        register_widget( 'Dokan_Category_Widget' );
+    }
 
 endif;
