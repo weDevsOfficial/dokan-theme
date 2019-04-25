@@ -12,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 3.5.0
+ * @version 3.6.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -99,6 +99,10 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <label for="reg_password"><?php esc_html_e( 'Password', 'dokan-theme' ); ?> <span class="required">*</span></label>
                     <input type="password" class="input-text form-control" name="password" id="reg_password" value="<?php if ( ! empty( $_POST['password'] ) ) esc_attr( $_POST['password'] ); ?>" required="required" minlength="6" />
                 </p>
+
+            <?php else : ?>
+
+                <p><?php esc_html_e( 'A password will be sent to your email address.', 'dokan-theme' ); ?></p>
 
             <?php endif; ?>
 
