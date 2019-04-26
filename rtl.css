@@ -41,7 +41,7 @@ img.alignright,
   margin: 0 2.4rem 2.4rem 0;
 }
 .product-sliders {
-  direction: ltr;
+  direction: rtl;
 }
 /* Bootstrap Grid
 --------------------------------------------- */
