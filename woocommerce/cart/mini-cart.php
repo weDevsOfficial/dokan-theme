@@ -15,7 +15,7 @@
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 3.5.0
+ * @version 3.7.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -28,8 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if ( ! WC()->cart->is_empty() ) : ?>
 
-<ul class="woocommerce-mini-cart cart_list product_list_widget <?php echo esc_attr( $args['list_class'] ); ?>">
-	
+	<ul class="woocommerce-mini-cart cart_list product_list_widget <?php echo esc_attr( $args['list_class'] ); ?>">
 		<?php do_action( 'woocommerce_before_mini_cart_contents' ); ?>
 
 		<?php
@@ -40,9 +39,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_widget_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 					if ( version_compare( WC_VERSION, '2.7', '>' ) ) {
 						$product_name      = apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key );
-     			  	} else {
+	 			  	} else {
 						$product_name      = apply_filters( 'woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key );
-     			  	}
+	 			  	}
 					$thumbnail         = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 					$product_price     = apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key );
 					$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
@@ -78,30 +77,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 
 		<?php do_action( 'woocommerce_mini_cart_contents' ); ?>
+	</ul><!-- end product list -->
 
-	<?php else : ?>
-
-		<li class="empty"><?php _e( 'No products in the cart.', 'dokan-theme' ); ?></li>
-
-	<?php endif; ?>
-
-</ul><!-- end product list -->
-
-<?php if ( ! WC()->cart->is_empty() ) : ?>
-
-	<p class="total"><strong><?php _e( 'Subtotal', 'dokan-theme' ); ?>:</strong> <?php echo WC()->cart->get_cart_subtotal(); ?></p>
+	<p class="woocommerce-mini-cart__total total">
+		<?php
+		/**
+		 * Woocommerce_widget_shopping_cart_total hook.
+		 *
+		 * @hooked woocommerce_widget_shopping_cart_subtotal - 10
+		 */
+		do_action( 'woocommerce_widget_shopping_cart_total' );
+		?>
+	</p>
 
 	<?php do_action( 'woocommerce_widget_shopping_cart_before_buttons' ); ?>
 
+	<p class="woocommerce-mini-cart__buttons buttons"><?php do_action( 'woocommerce_widget_shopping_cart_buttons' ); ?></p>
 
-	<p class="buttons clearfix">
-		<?php if ( version_compare( WC_VERSION, '2.7', '>' ) ) : ?>
-			<?php do_action( 'woocommerce_widget_shopping_cart_buttons' ); ?>
-		<?php else: ?>
-			<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="button wc-forward"><?php _e( 'View Cart', 'woocommerce' ); ?></a>
-			<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="button checkout wc-forward"><?php _e( 'Checkout', 'woocommerce' ); ?></a>
-		<?php endif; ?>
-	</p>
+	<?php do_action( 'woocommerce_widget_shopping_cart_after_buttons' ); ?>
+
+<?php else : ?>
+
+	<p class="woocommerce-mini-cart__empty-message"><?php esc_html_e( 'No products in the cart.', 'dokan-theme' ); ?></p>
 
 <?php endif; ?>
 
