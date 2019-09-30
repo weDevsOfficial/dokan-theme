@@ -1,3 +1,7 @@
+v2.3.6 -> September 30, 2019
+---------------------
+- [fix]   Updated outdated templates
+
 v2.3.4 -> November 12, 2018
 ---------------------
 - [fix]   Updated outdated templates
