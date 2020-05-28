@@ -4,7 +4,7 @@ Theme URI: http://wedevs.com/theme/dokan/
 Author: Tareq Hasan
 Author URI: http://tareq.weDevs.com
 Description: An e-commerce theme for Dokan
-Version: 2.3.6
+Version: 2.3.7
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -2401,7 +2401,7 @@ ul.subsubsub li.active a {
 .woocommerce div.product div.images .flex-control-thumbs li {
   border: 2px solid #eee;
   padding: 5px;
-  margin-right: 5px;
+  margin-top: 5px;
 }
 .woocommerce div.product div.images.woocommerce-product-gallery {
   border: 2px solid #eee;
