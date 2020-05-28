@@ -1,3 +1,8 @@
+v2.3.7 -> May 28, 2020
+---------------------
+- [fix]   Updated outdated templates
+- [fix]   Single product gallery image margin issue #7
+
 v2.3.6 -> September 30, 2019
 ---------------------
 - [fix]   Updated outdated templates
