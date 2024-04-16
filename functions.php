@@ -223,6 +223,8 @@ class WeDevs_Dokan_Theme {
         wp_enqueue_script( 'flexslider', $template_directory . '/assets/js/jquery.flexslider-min.js', array( 'jquery' ) );
 
         wp_enqueue_script( 'dokan-theme-scripts', $template_directory . '/assets/js/script.js', false, null, true );
+
+        wp_enqueue_script('wc-cart-fragments');
     }
 
     /**
