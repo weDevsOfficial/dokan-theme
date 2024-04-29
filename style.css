@@ -4,7 +4,7 @@ Theme URI: http://wedevs.com/theme/dokan/
 Author: Tareq Hasan
 Author URI: http://tareq.weDevs.com
 Description: An e-commerce theme for Dokan
-Version: 2.3.7
+Version: 2.3.9
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -298,7 +298,8 @@ a:hover {
   line-height: 15px;
   color: #555;
 }
-.navbar-top-area .navbar-nav > li > a:hover {
+.navbar-top-area .navbar-nav > li > a:hover,
+.navbar-top-area .navbar-nav > li > a:focus {
   color: #111;
 }
 .navbar-top-area .navbar-nav > li.active > a,
@@ -331,6 +332,11 @@ a:hover {
 }
 .navbar-top-area .widget_shopping_cart_content p.buttons a.button:last-child {
   float: right;
+}
+.navbar-top-area .widget_shopping_cart_content p.buttons:after {
+  display: table;
+  content: "";
+  clear: both;
 }
 .navbar-top-area .widget_shopping_cart_content ul {
   list-style: none;
@@ -373,7 +379,7 @@ a:hover {
 .navbar-top-area .widget_shopping_cart_content ul li .mini-cart-content dl dt,
 .navbar-top-area .widget_shopping_cart_content ul li .mini-cart-content dl dd {
   font-weight: normal;
-  padding: 0 0 .25em;
+  padding: 0 0 0.25em;
   margin: 0 4px 0 0;
   clear: left;
   font-style: italic;
@@ -404,6 +410,9 @@ a:hover {
 }
 .navbar-top-area .dokan-cart-amount-top {
   color: #aaa;
+}
+.navbar-top-area li.open .dokan-cart-amount-top {
+  color: #fff;
 }
 .navbar-default {
   background-color: #fff;
@@ -531,20 +540,20 @@ a:hover {
 .site-header #navigation li:hover ul.sub-menu {
   background: #ffffff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  -webkit-transition: opacity .25s ease .1s;
-  -moz-transition: opacity .25s ease .1s;
-  -o-transition: opacity .25s ease .1s;
-  -ms-transition: opacity .25s ease .1s;
-  transition: opacity .25s ease .1s;
+  -webkit-transition: opacity 0.25s ease 0.1s;
+  -moz-transition: opacity 0.25s ease 0.1s;
+  -o-transition: opacity 0.25s ease 0.1s;
+  -ms-transition: opacity 0.25s ease 0.1s;
+  transition: opacity 0.25s ease 0.1s;
   opacity: 1;
 }
 .site-header #navigation li:hover ul.sub-menu li {
   border-bottom: 1px solid #EDEDED;
-  -webkit-transition: opacity .25s ease .1s;
-  -moz-transition: opacity .25s ease .1s;
-  -o-transition: opacity .25s ease .1s;
-  -ms-transition: opacity .25s ease .1s;
-  transition: opacity .25s ease .1s;
+  -webkit-transition: opacity 0.25s ease 0.1s;
+  -moz-transition: opacity 0.25s ease 0.1s;
+  -o-transition: opacity 0.25s ease 0.1s;
+  -ms-transition: opacity 0.25s ease 0.1s;
+  transition: opacity 0.25s ease 0.1s;
   height: auto;
 }
 .site-header #navigation li:hover ul.sub-menu li a {
@@ -857,7 +866,7 @@ a:hover {
 }
 .home #brand-showcase .nav-tabs > li > a {
   margin-right: 2px;
-  line-height: 1.428571429;
+  line-height: 1.42857143;
   border: 1px solid transparent;
   border-radius: 0px 0px 0 0;
 }
@@ -1175,7 +1184,7 @@ a:hover {
 .blog table tbody > tr > th,
 .blog table tfoot > tr > th {
   padding: 8px;
-  line-height: 1.428571429;
+  line-height: 1.42857143;
   vertical-align: top;
   border-top: 1px solid #EDEDED;
 }
@@ -1729,7 +1738,7 @@ ul.subsubsub li.active a {
 .ui-menu .ui-menu-item a {
   text-decoration: none;
   display: block;
-  padding: .2em .4em;
+  padding: 0.2em 0.4em;
   line-height: 1.5;
   zoom: 1;
   color: #333;
@@ -2211,7 +2220,7 @@ ul.subsubsub li.active a {
   display: inline-block;
   padding: 4px 10px;
   margin-bottom: 0;
-  line-height: 1.428571429;
+  line-height: 1.42857143;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -2386,11 +2395,11 @@ ul.subsubsub li.active a {
   -moz-osx-font-smoothing: grayscale;
   content: "\f0f6";
   line-height: 1.618;
-  margin-left: .53em;
+  margin-left: 0.53em;
   width: 1.387em;
   text-align: right;
   float: right;
-  opacity: .25;
+  opacity: 0.25;
 }
 .woocommerce-MyAccount-navigation ul li.is-active a:before {
   opacity: 1;
@@ -2577,8 +2586,8 @@ span.error {
   }
   .site-header ul,
   .site-header li {
-    float: none
-        overflow: hidden;
+    float: none;
+    overflow: hidden;
   }
   .site-header #navigation > ul {
     padding-left: 0;

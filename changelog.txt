@@ -1,3 +1,13 @@
+v2.3.9 -> Apr 29, 2024
+---------------------
+- [fix]     Enqueue wc-cart-fragments scripts for mini cart rendering issue.
+- [update]  Product archive page template updated.
+
+v2.3.8 -> Sep 05, 2022
+---------------------
+- [fix]   Updated outdated templates
+- [fix]   Nav area cart button price focus color
+
 v2.3.7 -> May 28, 2020
 ---------------------
 - [fix]   Updated outdated templates

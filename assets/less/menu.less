@@ -73,7 +73,8 @@
         // color: #ccc;
         color: #555;
 
-        &:hover {
+        &:hover,
+        &:focus {
             color: #111;
         }
     }
@@ -112,6 +113,12 @@
                 &:last-child {
                     float: right;
                 }
+            }
+
+            &:after {
+                display: table;
+                content: "";
+                clear: both;
             }
 
 
@@ -193,6 +200,13 @@
 
     .dokan-cart-amount-top {
         color: #aaa;
+    }
+
+    li.open {
+
+        .dokan-cart-amount-top {
+            color: #fff;
+        }
     }
 }
 
