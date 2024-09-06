@@ -1,3 +1,7 @@
+v2.3.10 -> Sep 06, 2024
+---------------------
+- [enhance]  Add theme body open hook support.
+
 v2.3.9 -> Apr 29, 2024
 ---------------------
 - [fix]     Enqueue wc-cart-fragments scripts for mini cart rendering issue.
